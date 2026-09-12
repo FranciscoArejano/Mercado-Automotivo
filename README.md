@@ -91,6 +91,30 @@ Nao ha' casamento aproximado de nome em lugar nenhum, por decisao da sec.5:
 na base anterior produziu 204 pares, quase todos falsos, e nao encontrou
 Prisma -> Onix Plus.
 
+## O que a execucao de 2014-01 a 2026-08 produziu
+
+152 informes baixados, 151 meses no painel, 29.079 linhas, 29,5 milhoes de
+unidades, 648 modelos (marca x modelo x segmento). Numeros que valem como
+retrato do estado atual, nao como promessa:
+
+- **Cobertura (D5):** 98,4% a 99,2% do total publicado em automoveis, 99,9% em
+  comerciais leves. O que falta e' a cauda que as tabelas da fonte truncam.
+- **HHI por marca**, contra a planilha de controle da sec.7: 1.317 x 1.297
+  (2014), 1.069 x 1.055 (2016), 1.165 x 1.146 (2020), 1.227 x 1.208 (2022) --
+  cerca de 1,5% acima, exatamente o efeito de faltar a cauda.
+- **Uma lacuna:** set/2023, cujo informe e' um PDF digitalizado. O OCR foi
+  implementado (`--ocr`) e o proprio teste de ranking o rejeitou, com 21,6% do
+  volume divergente. O mes fica como lacuna declarada, nao como dado ruim.
+- **Seis informes** trazem fonte embutida sem ToUnicode; o texto foi recuperado
+  pela ordem padrao de glifos, sem OCR (`saidas/arquivos_com_fonte_sem_tounicode.csv`).
+- **819 pares candidatos** para adjudicacao humana. No topo por volume em jogo:
+  Palio -> Argo, Prisma -> Onix Plus, Punto -> Argo, Cobalt -> Onix Plus,
+  Etios -> Corolla Cross.
+- **Dez questoes em aberto**, em [`QUESTOES_ABERTAS.md`](QUESTOES_ABERTAS.md).
+  Duas merecem leitura antes de usar o painel: a leitura de "pico movel de 12
+  meses" (Q1) e o fato de que "julho de 2023 e' o maior mes desde 2019" **nao se
+  confirma** no total que a propria Fenabrave publica (Q8).
+
 ## Rastreabilidade
 
 Todo numero do painel se reconstitui a partir de tres coisas versionadas: os

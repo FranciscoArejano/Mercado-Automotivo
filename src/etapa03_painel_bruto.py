@@ -35,7 +35,7 @@ COLUNAS = [
     "mes_ref", "ano", "mes", "data", "segmento_fonte", "sub_segmento_fonte",
     "origem_tabela", "posicao_fonte", "marca_fonte", "modelo_fonte",
     "nome_completo_fonte", "metodo_separacao", "marca_conhecida", "unidades",
-    "arquivo_origem", "pagina_origem",
+    "metodo_extracao", "arquivo_origem", "pagina_origem",
 ]
 
 
@@ -102,7 +102,7 @@ def montar(meses: list[str], logger) -> tuple[pd.DataFrame, pd.DataFrame]:
     return painel, nao_mapeadas
 
 
-def executar(inicio: str, fim: str, recriar: bool) -> int:
+def executar(inicio: str, fim: str, recriar: bool = False) -> int:
     logger = log.preparar(ETAPA)
     meses = periodo.intervalo(inicio, fim)
     painel, nao_mapeadas = montar(meses, logger)

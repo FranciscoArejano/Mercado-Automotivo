@@ -51,7 +51,19 @@ def _hhi(bloco: pd.DataFrame, chave: str) -> float:
     return float((partes.pow(2).sum()) * 10_000)
 
 
-def _coerencia_entre_meses(meses_uteis: set[str]) -> tuple[pd.DataFrame, pd.DataFrame]:
+def _total_publicado_por_mes() -> pd.Series | None:
+    """Soma mensal dos totais que o proprio informe publica (autos + leves)."""
+    caminho = config.DIR_PROCESSADO / "extracao_totais.csv"
+    if not caminho.exists():
+        return None
+    totais = pd.read_csv(caminho)
+    totais = totais[totais["total_publicado"].notna()]
+    if totais.empty:
+        return None
+    return totais.groupby("mes")["total_publicado"].sum()
+
+
+def _coerencia_entre_meses(meses_uteis: set[str]) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     """Usa a redundancia da propria fonte para conferir a leitura.
 
     Cada linha das tabelas de sub-segmento traz tres numeros: o mes anterior, o
@@ -67,13 +79,13 @@ def _coerencia_entre_meses(meses_uteis: set[str]) -> tuple[pd.DataFrame, pd.Data
     """
     arquivos = sorted(config.DIR_EXTRACAO.glob("*.csv"))
     if not arquivos:
-        return pd.DataFrame(), pd.DataFrame()
+        return pd.DataFrame(), pd.DataFrame(), {}
     bruto = pd.concat(
         [pd.read_csv(a, dtype=str, keep_default_na=False) for a in arquivos], ignore_index=True
     )
     bruto = bruto[bruto["origem_tabela"] == "sub_segmento"]
     if bruto.empty:
-        return pd.DataFrame(), pd.DataFrame()
+        return pd.DataFrame(), pd.DataFrame(), {}
     for coluna in ("unidades_mes", "unidades_mes_anterior", "unidades_acumulado"):
         bruto[coluna] = pd.to_numeric(bruto[coluna], errors="coerce")
     chave = ["mes", "segmento", "nome_completo_fonte"]
@@ -94,6 +106,10 @@ def _coerencia_entre_meses(meses_uteis: set[str]) -> tuple[pd.DataFrame, pd.Data
     # So' faz sentido comparar quando os dois meses foram extraidos.
     junto = junto[junto["mes_anterior"].isin(meses_uteis) & junto["mes"].isin(meses_uteis)]
 
+    comparados = {
+        "mes_anterior": int(junto["mes_anterior_observado"].notna().sum()),
+        "acumulado": int(junto["acumulado_anterior"].notna().sum()),
+    }
     coluna = junto[junto["mes_anterior_observado"].notna()].copy()
     coluna["diferenca"] = coluna["unidades_mes_anterior"] - coluna["mes_anterior_observado"]
     coluna = coluna[coluna["diferenca"] != 0][
@@ -112,7 +128,7 @@ def _coerencia_entre_meses(meses_uteis: set[str]) -> tuple[pd.DataFrame, pd.Data
         ["mes", "segmento", "nome_completo_fonte", "unidades_acumulado",
          "acumulado_esperado", "diferenca"]
     ].sort_values("diferenca", key=abs, ascending=False)
-    return coluna, acumulado
+    return coluna, acumulado, comparados
 
 
 def _ciclos(painel: pd.DataFrame, meses: list[str], limiar: float) -> pd.DataFrame:
@@ -204,28 +220,67 @@ def executar() -> int:
 
     # -------------------------------------------------- sanidade temporal
     mensal = painel.groupby("mes_ref")["unidades"].sum()
-    partes.append("\n## 2. Sanidade temporal\n\n"
-                  "Dois fatos conhecidos do mercado brasileiro. Se falharem, a atribuicao "
-                  "de mes esta' errada -- provavelmente por leitura de cabecalho (sec.7).\n\n")
+    publicado_mensal = _total_publicado_por_mes()
+    partes.append(
+        "\n## 2. Sanidade temporal\n\n"
+        "Dois fatos que a sec.6 da' como conhecidos. O teste roda duas vezes: no "
+        "painel e no **total que a propria fonte publica**. E' a segunda rodada que "
+        "diz de quem e' o erro. Painel discordando da fonte e' bug nosso -- "
+        "provavelmente atribuicao de mes, por leitura de cabecalho (sec.7) -- e falha a "
+        "execucao. Painel e fonte concordando entre si e discordando da premissa e' "
+        "premissa nao confirmada: reportada, nao corrigida (sec.9.4).\n\n"
+    )
 
-    faixa = [m for m in meses if "2014-01" <= m <= "2023-12"]
-    if faixa:
-        menor = mensal.loc[faixa].idxmin()
-        ok = menor == "2020-04"
-        partes.append(f"- Menor mes de 2014-2023: **{menor}** "
-                      f"({int(mensal.loc[menor]):,} unidades) -- esperado `2020-04`: "
-                      f"{'OK' if ok else 'FALHOU'}\n")
-        if not ok:
-            falhas.append(f"menor mes de 2014-2023 e' {menor}, nao 2020-04")
-    desde = [m for m in meses if m >= "2019-01"]
-    if desde:
-        maior = mensal.loc[desde].idxmax()
-        ok = maior == "2023-07"
-        partes.append(f"- Maior mes desde 2019: **{maior}** "
-                      f"({int(mensal.loc[maior]):,} unidades) -- esperado `2023-07`: "
-                      f"{'OK' if ok else 'FALHOU'}\n")
-        if not ok:
-            falhas.append(f"maior mes desde 2019 e' {maior}, nao 2023-07")
+    def conferir(rotulo, meses_alvo, esperado, extremo):
+        disponiveis = [m for m in meses_alvo if m in mensal.index]
+        if not disponiveis:
+            return
+        obtido = getattr(mensal.loc[disponiveis], extremo)()
+        na_fonte = None
+        if publicado_mensal is not None:
+            comuns = [m for m in disponiveis if m in publicado_mensal.index]
+            if comuns:
+                na_fonte = getattr(publicado_mensal.loc[comuns], extremo)()
+        if obtido == esperado:
+            situacao, detalhe = "OK", ""
+        elif na_fonte is not None and na_fonte != obtido:
+            situacao = "FALHOU"
+            detalhe = (f" -- e o total publicado pela fonte aponta `{na_fonte}`, "
+                       "entao a divergencia e' do painel")
+            falhas.append(f"{rotulo}: painel diz {obtido}, fonte diz {na_fonte}")
+        else:
+            situacao = "PREMISSA NAO CONFIRMADA"
+            detalhe = (f" -- o total publicado pela fonte tambem aponta `{na_fonte}`, "
+                       "entao painel e fonte concordam e quem nao se confirma e' a "
+                       "premissa (ver QUESTOES_ABERTAS.md, Q8)")
+        partes.append(f"- {rotulo}: **{obtido}** ({int(mensal.loc[obtido]):,} unidades) "
+                      f"-- esperado `{esperado}`: {situacao}{detalhe}\n")
+
+    conferir("Menor mes de 2014-2023",
+             [m for m in meses if "2014-01" <= m <= "2023-12"], "2020-04", "idxmin")
+    conferir("Maior mes desde 2019",
+             [m for m in meses if m >= "2019-01"], "2023-07", "idxmax")
+
+    if publicado_mensal is not None:
+        janelas = []
+        for inicio in ("2019-01", "2020-01", "2021-01", "2022-01"):
+            recorte = publicado_mensal[
+                (publicado_mensal.index >= inicio) & (publicado_mensal.index <= "2023-08")
+            ]
+            if "2023-07" not in recorte.index:
+                continue
+            janelas.append({
+                "janela": f"{inicio}..2023-08",
+                "maior_mes_na_fonte": recorte.idxmax(),
+                "unidades": int(recorte.max()),
+                "posicao_de_2023_07": int((recorte > recorte.loc["2023-07"]).sum()) + 1,
+                "meses": len(recorte),
+            })
+        if janelas:
+            partes.append(
+                "\nA partir de que janela julho de 2023 e' de fato o maior mes, segundo o "
+                "total publicado pela fonte:\n\n" + _tabela(pd.DataFrame(janelas))
+            )
 
     # --------------------------------------------------------- cobertura (D5)
     partes.append("\n## 3. Cobertura da fonte (D5)\n\n"
@@ -242,6 +297,10 @@ def executar() -> int:
             .rename(columns={"mes_ref": "mes", "unidades": "total_painel"})
         )
         cobertura = totais.merge(painel_seg, on=["mes", "segmento"], how="outer")
+        # Mes sem total publicado nao entra nos agregados: entraria como zero no
+        # denominador e produziria "cobertura" acima de 100%.
+        sem_total = cobertura[cobertura["total_publicado"].isna()]
+        cobertura = cobertura[cobertura["total_publicado"].notna()]
         cobertura["diferenca"] = cobertura["total_painel"] - cobertura["total_publicado"]
         cobertura["cobertura_pct"] = (
             100 * cobertura["total_painel"] / cobertura["total_publicado"]
@@ -266,6 +325,12 @@ def executar() -> int:
         partes.append("\nPor ano:\n\n")
         partes.append(_tabela(por_ano))
         partes.append(f"\nTabela mes a mes completa em `{log.caminho_relativo(config.COBERTURA)}`.\n")
+        partes.append(
+            f"\nMeses-segmento sem total publicado legivel no informe (excluidos dos "
+            f"agregados acima): **{len(sem_total)}**"
+            + (f" -- {', '.join(sorted(sem_total['mes'].unique()))}" if len(sem_total) else "")
+            + "\n"
+        )
     else:
         partes.append("_Totais publicados nao disponiveis: rode a etapa 02._\n")
 
@@ -315,8 +380,13 @@ def executar() -> int:
         falhas.append(f"{len(negativos)} linhas com unidades negativas")
     soma_modelo = painel.groupby(["marca", "modelo", "segmento"])["unidades"].sum()
     nulos = soma_modelo[soma_modelo == 0]
-    partes.append(f"- Modelos com serie integralmente nula: **{len(nulos)}** "
-                  f"({'OK' if nulos.empty else 'revisar'})\n")
+    partes.append(
+        f"- Modelos com serie integralmente nula: **{len(nulos)}** "
+        f"({'OK' if nulos.empty else 'revisar'})"
+        + (": " + ", ".join(f"`{marca}/{modelo}` ({seg})" for marca, modelo, seg in nulos.index)
+           if not nulos.empty else "")
+        + "\n"
+    )
     nao_resolvidos = bruto[bruto["metodo_separacao"] == "nao_resolvido"]
     partes.append(f"- Nomes sem marca resolvida: **{len(nao_resolvidos)}** linhas\n")
     fora_da_lista = bruto[~bruto["marca_conhecida"]]["marca_fonte"].dropna().unique()
@@ -336,12 +406,13 @@ def executar() -> int:
         pendentes.to_csv(config.DIR_SAIDAS / "grupos_nao_mapeados.csv", index=False)
         partes.append("\n" + _tabela(pendentes, 25))
 
-    partes.append("\n### Lacunas de mes\n\n")
-    if config.LACUNAS.exists():
-        lacunas = pd.read_csv(config.LACUNAS)
-        partes.append(f"{len(lacunas)} lacunas registradas.\n\n" + _tabela(lacunas, 40))
-    else:
-        partes.append("_Arquivo `dados/bruto/lacunas.csv` ausente._\n")
+    partes.append("\n### Lacunas de mes\n\n"
+                  "Mes sem informe baixado, e mes cujo informe nao rendeu nenhuma linha. "
+                  "Lacuna e' lacuna: nao se preenche, nao se interpola, nao se estima "
+                  "(sec.9.2). Nas series de D3 estes meses entram como ausentes, nunca "
+                  "como zero.\n\n")
+    lacunas = pd.DataFrame(mod_meses.lacunas())
+    partes.append(f"{len(lacunas)} lacunas.\n\n" + _tabela(lacunas, 40))
 
     esperados = periodo.intervalo(meses[0], meses[-1])
     faltantes = [m for m in esperados if m not in set(meses)]
@@ -383,21 +454,29 @@ def executar() -> int:
                   "interpretacao nossa: a coluna de mes anterior de M tem de repetir o mes "
                   "de M-1, e a diferenca de acumulados tem de dar o mes. E' a conferencia "
                   "que independe de cabecalho.\n\n")
-    coluna_anterior, acumulados = _coerencia_entre_meses(mod_meses.uteis())
+    coluna_anterior, acumulados, comparados = _coerencia_entre_meses(mod_meses.uteis())
     if coluna_anterior.empty and acumulados.empty:
         partes.append("_Sem dados de extracao para conferir._\n")
     else:
-        pares_comparados = len(pd.concat([coluna_anterior, acumulados])) if not (
-            coluna_anterior.empty and acumulados.empty) else 0
         coluna_anterior.to_csv(config.DIR_SAIDAS / "coerencia_mes_anterior.csv", index=False)
         acumulados.to_csv(config.DIR_SAIDAS / "coerencia_acumulado.csv", index=False)
+        base_a = comparados.get("mes_anterior", 0) or 1
+        base_b = comparados.get("acumulado", 0) or 1
         partes.append(
-            f"- Coluna de mes anterior divergente do mes observado: **{len(coluna_anterior)}** "
-            "pares (mes x modelo)\n"
+            f"- Coluna de mes anterior divergente do mes observado: "
+            f"**{len(coluna_anterior)}** de {comparados.get('mes_anterior', 0):,} pares "
+            f"(mes x modelo) comparados ({100 * len(coluna_anterior) / base_a:.2f}%)\n"
             f"- Acumulado divergente da soma do mes com o acumulado anterior: "
-            f"**{len(acumulados)}** pares\n\n"
-            f"_({pares_comparados} divergencias no total; listas completas em "
-            "`saidas/coerencia_mes_anterior.csv` e `saidas/coerencia_acumulado.csv`.)_\n\n"
+            f"**{len(acumulados)}** de {comparados.get('acumulado', 0):,} "
+            f"({100 * len(acumulados) / base_b:.2f}%)\n\n"
+            "A fonte revisa meses ja publicados, e e' isso que a maior parte destas "
+            "linhas mostra: o informe de M traz, para M-1, numero diferente do que "
+            "publicou no proprio M-1. Serve de mapa de onde a serie foi revista e de "
+            "alerta para quem precisar de valores definitivos. Casos em que duas linhas "
+            "do mesmo mes se compensam -- VW/GOL -676 e VW/VOYAGE +676 em Ago/2016 -- sao "
+            "remanejamento de unidades entre modelos, candidatos naturais a "
+            "`reclassificacao` em regras.csv. Listas completas em "
+            "`saidas/coerencia_mes_anterior.csv` e `saidas/coerencia_acumulado.csv`.\n\n"
         )
         partes.append("Maiores divergencias na coluna de mes anterior:\n\n")
         partes.append(_tabela(coluna_anterior, 15))

@@ -174,3 +174,83 @@ tabela de sub-segmento e a divergencia vai para `saidas/divergencias_fonte.csv`
 
 **Opcoes.** (a) manter; (b) usar so' as tabelas de sub-segmento, perdendo
 cobertura; (c) dar precedencia ao ranking onde houver conflito.
+
+---
+
+## Q8. "Julho de 2023 e' o maior mes desde 2019" nao se confirma na fonte
+
+**O caso.** A sec.6 pede dois testes de sanidade temporal. O primeiro passa:
+abril de 2020 e' de fato o menor mes de 2014-2023. O segundo nao passa -- e o
+problema nao esta' no painel.
+
+Medido no **total que a propria Fenabrave publica** em cada informe, nao no
+painel, para automoveis + comerciais leves:
+
+| janela | maior mes na fonte | unidades | posicao de 2023-07 |
+|---|---|---:|---:|
+| 2019-01..2023-08 | 2019-12 | 251.973 | 10 de 56 |
+| 2020-01..2023-08 | 2020-12 | 232.814 | 2 de 44 |
+| 2021-01..2023-08 | **2023-07** | 215.711 | 1 de 32 |
+| 2022-01..2023-08 | **2023-07** | 215.711 | 1 de 20 |
+
+Julho de 2023 (215.711) foi de fato um pico -- o maior mes **desde janeiro de
+2021**, e um salto de 20% sobre junho, coerente com o programa de incentivo
+daquele mes. Mas dezembro de 2019 (251.973) e dezembro de 2020 (232.814) sao
+maiores. Estendida a amostra ate' 2026-08, o maior mes da serie e' dezembro de
+2025 (267.117).
+
+Como painel e fonte concordam entre si e a atribuicao de mes passa no teste de
+abril de 2020, isto **nao** e' erro de leitura de cabecalho. E' a premissa que
+nao se confirma neste escopo.
+
+**Provisorio.** A etapa 06 roda o teste duas vezes -- no painel e no total
+publicado -- e classifica: `FALHOU` (e a execucao falha) so' quando o painel
+discorda da fonte; `PREMISSA NAO CONFIRMADA` quando os dois concordam e a
+premissa e' que nao se sustenta. A tabela de janelas acima e' reproduzida em
+`saidas/validacao.md`.
+
+**Opcoes.** (a) trocar a premissa por "maior mes desde 2021", que se confirma;
+(b) manter "desde 2019" e verificar se ela vale para outro escopo -- total com
+motos, ou a serie da planilha de controle, que termina em ago/2023; (c)
+abandonar o segundo teste e ficar so' com abril de 2020, que e' robusto.
+
+---
+
+## Q9. O detector de queda abrupta dispara em choque de mercado
+
+**O caso.** O segundo detector da sec.5 marca perda superior a 80% num unico
+mes sem declinio previo. Em abril de 2020 o mercado inteiro caiu 73% num mes:
+praticamente todo modelo satisfaz o criterio, e o relatorio se enche de pares
+em que nada aconteceu com o produto. O mesmo vale, em menor grau, para janeiro
+de todo ano (sazonalidade) e para os meses de escassez de semicondutores.
+
+**Provisorio.** O detector segue exatamente como a ESPEC o define -- nao ha'
+filtro escondido. Cada par ganhou a coluna `variacao_mercado_no_mes`, com a
+variacao do total do segmento naquele mes: quando ela esta' em -0,73, a queda
+do modelo e' a queda do mercado. A ordenacao por volume em jogo, que a sec.5
+manda, ja' empurra os casos reais para o topo.
+
+**Opcoes.** (a) manter e filtrar na planilha; (b) exigir que a queda do modelo
+supere a do mercado por uma margem -- por exemplo, queda relativa acima de 80%
+depois de descontada a variacao do segmento; (c) exigir volume minimo do modelo
+antes da queda, para nao marcar serie de tres unidades.
+
+---
+
+## Q10. A janela de +-6 meses e a censura a' esquerda de quem sai
+
+**O caso.** Vale registrar como o teste de passagem de bastao foi lido, porque
+a leitura decide se o caso mais importante aparece ou nao. A sec.5 manda
+"excluir do teste qualquer entrada que coincida com o primeiro mes da amostra,
+e qualquer saida no ultimo". Sao duas exclusoes com alvos diferentes: a censura
+a' esquerda invalida a **entrada**, entao descarta o modelo no papel de
+*sucessor*; a censura a' direita invalida a **saida**, entao descarta o modelo
+no papel de *quem sai*.
+
+Descartar quem sai por censura a' esquerda esconderia exatamente Prisma ->
+Onix Plus: o Prisma esta' vivo em 2014-01, o primeiro mes da amostra, mas sua
+saida em 2020-01 e' evento real. Com a leitura acima, o par aparece em segundo
+lugar por volume em jogo (889.618 unidades, razao de picos 0,93, defasagem de
+-4 meses). O teste `testes/test_candidatos.py` fixa esse comportamento.
+
+**Provisorio.** A leitura descrita acima, com teste que a trava.

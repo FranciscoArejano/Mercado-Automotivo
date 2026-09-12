@@ -120,7 +120,7 @@ def ler_planilha(caminho: Path, logger) -> tuple[pd.DataFrame, list[str]]:
     return pd.DataFrame(registros), observacoes
 
 
-def executar(caminho: Path) -> int:
+def executar(caminho: Path = config.VENDAS_GERAL) -> int:
     logger = log.preparar(ETAPA)
     config.DIR_SAIDAS.mkdir(parents=True, exist_ok=True)
     cabecalho = (

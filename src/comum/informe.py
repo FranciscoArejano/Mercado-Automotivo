@@ -27,6 +27,7 @@ from pathlib import Path
 
 import pdfplumber
 
+from . import sub_segmentos
 from .texto import eh_numero_br, normalizar_tipografia, numero_br
 
 # ------------------------------------------------------- fontes sem ToUnicode
@@ -157,6 +158,9 @@ class Extracao:
     paginas_sem_texto: list[int] = field(default_factory=list)
     paginas_com_cid: list[int] = field(default_factory=list)
     paginas_com_ocr: list[int] = field(default_factory=list)
+    sub_segmentos_novos: list[str] = field(default_factory=list)
+    divergencias_de_secao: list[str] = field(default_factory=list)
+    sem_segmento: list[str] = field(default_factory=list)
     total_publicado: dict[str, float] = field(default_factory=dict)
     subtotal_publicado: dict[tuple[str, str], float] = field(default_factory=dict)
     modelos: list[LinhaModelo] = field(default_factory=list)
@@ -165,6 +169,21 @@ class Extracao:
 
 
 # -------------------------------------------------------------------- leitura
+def _desdobrar(linha: str) -> str:
+    """Desfaz o desenho duplicado de caractere ("DDeezz JJaann" -> "Dez Jan").
+
+    Alguns informes desenham a mesma linha duas vezes com meio ponto de
+    deslocamento, e o extrator devolve cada caractere em dobro. Observado no
+    cabecalho de coluna de Jan/2022, que sem isto viraria nome de sub-segmento.
+    So' age quando **todos** os tokens da linha estao dobrados, para nao
+    estragar nome legitimo.
+    """
+    tokens = [t for t in linha.split(" ") if t]
+    if len(tokens) < 2 or any(len(t) < 4 or len(t) % 2 or t[0::2] != t[1::2] for t in tokens):
+        return linha
+    return " ".join(t[0::2] for t in tokens)
+
+
 def _linha_modelo(
     linha: str, tolerar_glifo_solto: bool = False
 ) -> tuple[int, str, float, float, float, float] | None:
@@ -249,9 +268,14 @@ def _mes_do_titulo(titulo: str) -> str | None:
 
 
 def _totais_do_resumo(linhas: list[str]) -> dict[str, float]:
-    """Primeira coluna numerica de 'A) Autos' e 'B) Com. Leves' = mes de referencia."""
+    """Primeira coluna numerica de 'A) Autos' e 'B) Com. Leves' = mes de referencia.
+
+    Em algumas edicoes (Abr, Nov e Dez/2017, Jan e Fev/2018) o extrator devolve a
+    linha de numeros **antes** do rotulo. Por isso, rotulo sem numeros procura na
+    linha imediatamente anterior, desde que ela seja so' numeros.
+    """
     totais: dict[str, float] = {}
-    for linha in linhas:
+    for posicao, linha in enumerate(linhas):
         alvo = None
         if RE_LINHA_AUTOS.match(linha):
             alvo = "automoveis"
@@ -260,6 +284,10 @@ def _totais_do_resumo(linhas: list[str]) -> dict[str, float]:
         if alvo is None or alvo in totais:
             continue
         numeros = [t for t in linha.split(" ") if eh_numero_br(t)]
+        if not numeros and posicao:
+            anterior = [t for t in linhas[posicao - 1].split(" ") if t]
+            if anterior and all(eh_numero_br(t) for t in anterior):
+                numeros = anterior
         if numeros:
             totais[alvo] = numero_br(numeros[0])
     return totais
@@ -388,7 +416,7 @@ def ler(caminho: Path, usar_ocr: bool = False) -> Extracao:
             if not texto.strip():
                 extracao.paginas_sem_texto.append(numero)
                 continue
-            linhas = [normalizar_tipografia(l) for l in texto.split("\n")]
+            linhas = [_desdobrar(normalizar_tipografia(l)) for l in texto.split("\n")]
 
             for linha in linhas:
                 marcador = _sem_acento(linha).upper().strip()
@@ -430,6 +458,7 @@ def ler(caminho: Path, usar_ocr: bool = False) -> Extracao:
                 continue
 
             sub_segmento = ""
+            segmento_do_bloco = segmento_corrente
             de_ocr = numero in extracao.paginas_com_ocr
             metodo = ("ocr" if de_ocr
                       else "texto_glifos" if numero in extracao.paginas_com_cid
@@ -442,8 +471,16 @@ def ler(caminho: Path, usar_ocr: bool = False) -> Extracao:
                         extracao.avisos.append(
                             f"p{numero}: linha de modelo sem sub-segmento identificado: {linha!r}"
                         )
+                    if segmento_do_bloco is None:
+                        extracao.sem_segmento.append(f"p{numero} '{sub_segmento}': {nome}")
+                        continue
+                    if (sub_segmentos.segmento_de(sub_segmento) is None
+                            and sub_segmento not in extracao.sub_segmentos_novos):
+                        # Nome fora de config/sub_segmentos.csv que de fato carrega
+                        # modelos: caso para curadoria humana, nao para adivinhacao.
+                        extracao.sub_segmentos_novos.append(sub_segmento)
                     extracao.modelos.append(LinhaModelo(
-                        segmento=segmento_corrente,
+                        segmento=segmento_do_bloco,
                         sub_segmento_fonte=sub_segmento,
                         posicao_fonte=posicao,
                         nome_completo_fonte=nome,
@@ -457,12 +494,25 @@ def ler(caminho: Path, usar_ocr: bool = False) -> Extracao:
                     continue
                 subtotal = _subtotal(linha)
                 if subtotal is not None:
-                    if sub_segmento:
-                        extracao.subtotal_publicado[(segmento_corrente, sub_segmento)] = subtotal
+                    if sub_segmento and segmento_do_bloco:
+                        extracao.subtotal_publicado[(segmento_do_bloco, sub_segmento)] = subtotal
                     continue
                 marcador = _sem_acento(linha).upper().strip()
                 if marcador in SEGMENTO_POR_MARCADOR or _eh_ruido(linha):
                     continue
                 sub_segmento = linha
+                # O nome do sub-segmento manda; o marcador de secao e' alternativa.
+                # Em Abr-Jun/2020 o marcador vem corrompido pela fonte sem
+                # ToUnicode e mandaria os automoveis inteiros para comerciais leves.
+                pelo_nome = sub_segmentos.segmento_de(sub_segmento)
+                if pelo_nome is None:
+                    segmento_do_bloco = segmento_corrente
+                else:
+                    if segmento_corrente is not None and pelo_nome != segmento_corrente:
+                        extracao.divergencias_de_secao.append(
+                            f"p{numero}: '{sub_segmento}' e' de {pelo_nome}, mas o marcador "
+                            f"da secao dizia {segmento_corrente}"
+                        )
+                    segmento_do_bloco = pelo_nome
 
     return extracao

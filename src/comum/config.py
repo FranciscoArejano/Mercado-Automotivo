@@ -35,6 +35,7 @@ PAINEL = DIR_PROCESSADO / "painel.parquet"
 REGRAS = RAIZ / "regras.csv"
 MAPA_GRUPOS = DIR_CONFIG / "mapa_grupos.csv"
 MARCAS = DIR_CONFIG / "marcas.csv"
+SUB_SEGMENTOS = DIR_CONFIG / "sub_segmentos.csv"
 
 CANDIDATOS = DIR_SAIDAS / "candidatos.xlsx"
 VALIDACAO = DIR_SAIDAS / "validacao.md"

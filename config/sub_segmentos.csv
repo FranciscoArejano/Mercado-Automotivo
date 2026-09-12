@@ -1,0 +1,20 @@
+sub_segmento_fonte,segmento,observacao
+Veículos de Entrada,automoveis,
+Hatch Pequenos,automoveis,
+Hatch Médios,automoveis,
+Sedans Pequenos,automoveis,
+Sedans Compactos,automoveis,
+Sedans médios,automoveis,"grafia da fonte: 'médios' em minuscula"
+Sedans Grandes,automoveis,
+Sw Médios,automoveis,
+Sw Grandes,automoveis,
+Monocab,automoveis,
+Grandcab,automoveis,
+Sports,automoveis,
+Suv's,automoveis,
+Pick-up's Pequenas,comerciais_leves,
+Pick-up's Grandes,comerciais_leves,
+Pickup's Pequenas,comerciais_leves,"variante de grafia observada em 2017-04"
+Pickup's Grandes,comerciais_leves,"variante de grafia observada em 2017-04"
+Furgões,comerciais_leves,
+Furgões Pequenos,comerciais_leves,

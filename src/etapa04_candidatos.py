@@ -69,6 +69,26 @@ def _fichas(largo: pd.DataFrame, meses: list[str], limiar: float) -> pd.DataFram
     return pd.DataFrame(registros)
 
 
+def _variacao_do_mercado(bruto: pd.DataFrame, meses: list[str]) -> dict[tuple[str, str], float]:
+    """Variacao do total do segmento de um mes para o outro, em fracao.
+
+    Serve de contexto para o detector de queda abrupta: em Abr/2020 o mercado
+    inteiro caiu mais de 70% num mes, e praticamente todo modelo dispara o
+    detector. A coluna nao filtra nada -- deixa visivel que a queda foi do
+    mercado, nao do produto.
+    """
+    total = bruto.pivot_table(
+        index="mes_ref", columns="segmento", values="unidades", aggfunc="sum", fill_value=0
+    ).reindex(meses)
+    variacao = total.pct_change()
+    return {
+        (segmento, mes): float(valor)
+        for segmento in variacao.columns
+        for mes, valor in variacao[segmento].items()
+        if pd.notna(valor)
+    }
+
+
 def _correlacao(serie_a: pd.Series, serie_b: pd.Series, centro: str, meses: list[str]) -> float:
     indice = periodo.para_indice(centro)
     janela = [
@@ -83,18 +103,24 @@ def _correlacao(serie_a: pd.Series, serie_b: pd.Series, centro: str, meses: list
     return float(np.corrcoef(a[valido], b[valido])[0, 1])
 
 
-def _passagem_de_bastao(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[str]) -> list[dict]:
+def _passagem_de_bastao(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[str],
+                        mercado: dict[tuple[str, str], float]) -> list[dict]:
     pares = []
     por_marca = {marca: bloco for marca, bloco in fichas.groupby("marca")}
     for _, saindo in fichas.iterrows():
-        if saindo["censura_direita"] or saindo["censura_esquerda"]:
+        # A censura que descarta o modelo que SAI e' a da direita: saida no
+        # ultimo mes da amostra nao e' saida, e' fim de janela. A censura a'
+        # esquerda vale para o modelo que ENTRA, e e' aplicada no laco de baixo.
+        if saindo["censura_direita"]:
             continue
         saida = periodo.para_indice(saindo["saida"])
         candidatos = por_marca.get(saindo["marca"])
         if candidatos is None:
             continue
         for _, entrando in candidatos.iterrows():
-            if (entrando["modelo"], entrando["segmento"]) == (saindo["modelo"], saindo["segmento"]):
+            if entrando["modelo"] == saindo["modelo"]:
+                # Mesmo nome comercial nos dois segmentos nao e' sucessao: e' o
+                # caso da QUESTOES_ABERTAS.md Q4, reportado em aba propria.
                 continue
             if entrando["censura_esquerda"]:
                 continue  # entrada no primeiro mes da amostra e' artefato
@@ -127,6 +153,8 @@ def _passagem_de_bastao(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[s
                 "pico_destino": entrando["pico"],
                 "razao_picos": razao,
                 "correlacao_12m": correlacao,
+                "variacao_mercado_no_mes": mercado.get(
+                    (saindo["segmento"], saindo["saida"]), float("nan")),
                 "unidades_origem": saindo["unidades_totais"],
                 "unidades_destino": entrando["unidades_totais"],
                 "volume_em_jogo": saindo["unidades_totais"] + entrando["unidades_totais"],
@@ -136,8 +164,35 @@ def _passagem_de_bastao(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[s
     return pares
 
 
-def _queda_abrupta(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[str]) -> list[dict]:
-    """Perda > 80% num unico mes, sem declinio previo, com entrada adjacente."""
+def _quedas_abruptas(largo: pd.DataFrame, meses: list[str]) -> dict[tuple, list[str]]:
+    """Meses em que a serie perde mais de 80% de um mes para o outro, sem
+    declinio previo. Calculado de uma vez para todos os modelos."""
+    valores = largo[meses].to_numpy(dtype="float64")
+    atual = valores[:, 2:]
+    antes = valores[:, 1:-1]
+    antes_de_antes = valores[:, :-2]
+    with np.errstate(invalid="ignore", divide="ignore"):
+        queda = (antes - atual) / antes
+        vinha_caindo = antes < antes_de_antes * 0.9
+    sinalizado = (
+        np.isfinite(antes) & np.isfinite(atual) & (antes > 0)
+        & (queda > config.QUEDA_ABRUPTA)
+        & ~(np.isfinite(antes_de_antes) & (antes_de_antes > 0) & vinha_caindo)
+    )
+    achados: dict[tuple, list[str]] = {}
+    linhas, colunas = np.nonzero(sinalizado)
+    for linha, coluna in zip(linhas, colunas):
+        achados.setdefault(largo.index[linha], []).append(meses[coluna + 2])
+    return achados
+
+
+def _queda_abrupta(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[str],
+                   mercado: dict[tuple[str, str], float]) -> list[dict]:
+    """Perda > 80% num unico mes, sem declinio previo, com entrada adjacente.
+
+    E' o detector de rebatismo puro: o nome antigo desaparece de um mes para o
+    outro e um nome novo da mesma marca aparece ao lado.
+    """
     pares = []
     entradas_por_marca: dict[str, list] = {}
     for _, ficha in fichas.iterrows():
@@ -145,24 +200,13 @@ def _queda_abrupta(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[str]) 
             continue
         entradas_por_marca.setdefault(ficha["marca"], []).append(ficha)
 
+    quedas = _quedas_abruptas(largo, meses)
     for _, saindo in fichas.iterrows():
-        if saindo["censura_esquerda"]:
-            continue
-        serie = largo.loc[(saindo["marca"], saindo["modelo"], saindo["segmento"])]
-        valores = serie.astype("float64")
-        for posicao in range(2, len(meses)):
-            anterior, atual = valores.iloc[posicao - 1], valores.iloc[posicao]
-            se_antes = valores.iloc[posicao - 2]
-            if not np.isfinite(anterior) or not np.isfinite(atual) or anterior <= 0:
-                continue
-            if (anterior - atual) / anterior <= config.QUEDA_ABRUPTA:
-                continue
-            # "sem declinio previo": o mes anterior nao vinha ja' caindo
-            if np.isfinite(se_antes) and se_antes > 0 and anterior < se_antes * 0.9:
-                continue
-            mes_queda = meses[posicao]
+        chave = (saindo["marca"], saindo["modelo"], saindo["segmento"])
+        serie = largo.loc[chave]
+        for mes_queda in quedas.get(chave, []):
             for entrando in entradas_por_marca.get(saindo["marca"], []):
-                if (entrando["modelo"], entrando["segmento"]) == (saindo["modelo"], saindo["segmento"]):
+                if entrando["modelo"] == saindo["modelo"]:
                     continue
                 if abs(periodo.distancia(mes_queda, entrando["entrada"])) > 1:
                     continue
@@ -185,6 +229,8 @@ def _queda_abrupta(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[str]) 
                     "pico_destino": entrando["pico"],
                     "razao_picos": (entrando["pico"] / saindo["pico"]) if saindo["pico"] else np.nan,
                     "correlacao_12m": correlacao,
+                    "variacao_mercado_no_mes": mercado.get(
+                        (saindo["segmento"], mes_queda), float("nan")),
                     "unidades_origem": saindo["unidades_totais"],
                     "unidades_destino": entrando["unidades_totais"],
                     "volume_em_jogo": saindo["unidades_totais"] + entrando["unidades_totais"],
@@ -208,6 +254,14 @@ LEIA_ME = [
     ("Censura a' esquerda",
      "Entradas no primeiro mes da amostra e saidas no ultimo foram excluidas dos "
      "detectores; elas sao artefato do recorte, nao evento de mercado."),
+    ("Aba mesmo_nome_dois_segmentos",
+     "Nome comercial que a fonte publica em automoveis e em comerciais leves. "
+     "Nao e' sucessao: e' a questao de unidade de observacao (QUESTOES_ABERTAS.md Q4). "
+     "Estes pares foram deliberadamente mantidos fora da aba 'pares'."),
+    ("Coluna variacao_mercado_no_mes",
+     "Variacao do total do segmento no mes do evento. Em Abr/2020 o mercado inteiro "
+     "caiu mais de 70% num mes e quase todo modelo dispara o detector de queda "
+     "abrupta; a coluna mostra isso sem filtrar nada."),
     ("Similaridade de nome",
      "Nao usada, por decisao da ESPEC sec.5: produz falsos pares e nao encontra "
      "Prisma -> Onix Plus."),
@@ -217,7 +271,7 @@ LEIA_ME = [
 ]
 
 
-def executar(limiar: float) -> int:
+def executar(limiar: float = config.LIMIAR_SAIDA) -> int:
     logger = log.preparar(ETAPA)
     if not config.PAINEL_BRUTO.exists():
         raise log.ErroDeParsing(
@@ -234,7 +288,9 @@ def executar(limiar: float) -> int:
     fichas = _fichas(largo, meses, limiar)
     logger.info("fichas montadas: %d modelos com serie nao vazia", len(fichas))
 
-    pares = _passagem_de_bastao(fichas, largo, meses) + _queda_abrupta(fichas, largo, meses)
+    mercado = _variacao_do_mercado(bruto, meses)
+    pares = (_passagem_de_bastao(fichas, largo, meses, mercado)
+             + _queda_abrupta(fichas, largo, meses, mercado))
     quadro_pares = pd.DataFrame(pares)
     if not quadro_pares.empty:
         quadro_pares = (
@@ -253,6 +309,19 @@ def executar(limiar: float) -> int:
             envolvidos.add((par["marca"], par["modelo_destino"], par["segmento_destino"]))
     series = largo.loc[largo.index.isin(envolvidos)].reset_index() if envolvidos else pd.DataFrame()
 
+    # Mesmo nome comercial publicado nos dois segmentos: nao e' sucessao, e' a
+    # questao de unidade de observacao (QUESTOES_ABERTAS.md, Q4). Vai em aba
+    # propria para que o pesquisador decida a chave, nao como par candidato.
+    dois_segmentos = pd.DataFrame()
+    if not fichas.empty:
+        contagem = fichas.groupby(["marca", "modelo"])["segmento"].nunique()
+        repetidos = contagem[contagem > 1].index
+        if len(repetidos):
+            dois_segmentos = (
+                fichas.set_index(["marca", "modelo"]).loc[repetidos].reset_index()
+                .sort_values("unidades_totais", ascending=False)
+            )
+
     config.DIR_SAIDAS.mkdir(parents=True, exist_ok=True)
     with pd.ExcelWriter(config.CANDIDATOS, engine="xlsxwriter") as escritor:
         pd.DataFrame(LEIA_ME, columns=["topico", "texto"]).to_excel(
@@ -262,6 +331,9 @@ def executar(limiar: float) -> int:
          ).to_excel(escritor, sheet_name="pares", index=False)
         fichas.sort_values("unidades_totais", ascending=False).to_excel(
             escritor, sheet_name="fichas", index=False)
+        (dois_segmentos if not dois_segmentos.empty
+         else pd.DataFrame(columns=["marca", "modelo", "segmento"])
+         ).to_excel(escritor, sheet_name="mesmo_nome_dois_segmentos", index=False)
         (series if not series.empty else pd.DataFrame(columns=["marca", "modelo", "segmento"])
          ).to_excel(escritor, sheet_name="series", index=False)
 

@@ -110,6 +110,23 @@ def processar_arquivo(mes: str, caminho: Path, tolerancia_total: float | None,
     else:
         registrar("mes_declarado", mes, None, None, "ok", extracao.mes_declarado)
 
+    if extracao.sem_segmento:
+        raise log.ErroMetodologico(
+            f"{caminho.name}: {len(extracao.sem_segmento)} linhas de modelo em bloco cujo "
+            "segmento nao pode ser determinado -- nem o nome do sub-segmento consta de "
+            "config/sub_segmentos.csv, nem o marcador de secao foi reconhecido. "
+            f"Primeiros casos: {extracao.sem_segmento[:5]}"
+        )
+    if extracao.sub_segmentos_novos:
+        registrar("sub_segmento_novo", mes, None, None, "revisar",
+                  "; ".join(extracao.sub_segmentos_novos[:5]))
+    if extracao.divergencias_de_secao:
+        # O nome do sub-segmento venceu o marcador da secao. Em Abr-Jun/2020 e'
+        # o que impede o mes inteiro de automoveis virar comerciais leves.
+        registrar("marcador_de_secao", mes, None, None, "corrigido_pelo_sub_segmento",
+                  f"{len(extracao.divergencias_de_secao)} blocos; "
+                  + extracao.divergencias_de_secao[0])
+
     if not extracao.modelos and not extracao.ranking:
         # Extracao de texto falhou: candidato a OCR (sec.8). Nao inventar nada.
         registrar("extracao_de_texto", mes, None, None, "falhou",

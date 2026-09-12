@@ -1,0 +1,8 @@
+# Versoes travadas (ESPEC.md sec.8). Ambiente de referencia: Python 3.11.
+pandas==3.0.5
+pyarrow==25.0.1
+pdfplumber==0.11.10
+openpyxl==3.1.5
+XlsxWriter==3.2.9
+requests==2.34.2
+pytest==9.1.1

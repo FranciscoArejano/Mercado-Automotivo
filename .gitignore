@@ -1,0 +1,17 @@
+# Ambiente
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Dados brutos: pesados e reconstituiveis pelo etapa01_aquisicao.py.
+# O manifesto (hash + data de download) e as lacunas SAO versionados,
+# porque sao eles que tornam a aquisicao auditavel.
+dados/bruto/pdf/
+!dados/bruto/manifesto.csv
+!dados/bruto/lacunas.csv
+
+# Artefatos derivados: reconstituiveis a partir de bruto/ + regras.csv
+dados/processado/
+saidas/
+logs/

@@ -29,6 +29,55 @@ import pdfplumber
 
 from .texto import eh_numero_br, normalizar_tipografia, numero_br
 
+# ------------------------------------------------------- fontes sem ToUnicode
+# Alguns informes (2020-04 a 2020-06, 2023-09, 2024-01, 2024-05) trazem fontes
+# embutidas sem mapa ToUnicode. O pdfplumber devolve o codigo do glifo, no
+# formato "(cid:82)", em vez do caractere. A estrutura do texto esta' intacta:
+# falta so' a tabela de traducao. Os codigos seguem a ordem padrao de glifos
+# TrueType (os 258 nomes padrao do Macintosh), em que o indice 3 e' o espaco e
+# 3..97 correspondem a ASCII 32..126.
+#
+# Isto **nao** e' OCR: e' a mesma extracao de texto do pdfplumber, com o mapa
+# que o arquivo omitiu. As tres verificacoes da etapa 02 (mes declarado,
+# subtotais, ranking x sub-segmento) valem igual e denunciariam um mapa errado.
+_GLIFOS_NAO_ASCII = (
+    "\u00c4\u00c5\u00c7\u00c9\u00d1\u00d6\u00dc\u00e1\u00e0\u00e2\u00e4\u00e3\u00e5"
+    "\u00e7\u00e9\u00e8\u00ea\u00eb\u00ed\u00ec\u00ee\u00ef\u00f1\u00f3\u00f2\u00f4"
+    "\u00f6\u00f5\u00fa\u00f9\u00fb\u00fc\u2020\u00b0\u00a2\u00a3\u00a7\u2022\u00b6"
+    "\u00df\u00ae\u00a9\u2122\u00b4\u00a8\u2260\u00c6\u00d8\u221e\u00b1\u2264\u2265"
+    "\u00a5\u00b5\u2202\u2211\u220f\u03c0\u222b\u00aa\u00ba\u03a9\u00e6\u00f8\u00bf"
+    "\u00a1\u00ac\u221a\u0192\u2248\u2206\u00ab\u00bb\u2026\u00a0\u00c0\u00c3\u00d5"
+    "\u0152\u0153\u2013\u2014\u201c\u201d\u2018\u2019\u00f7\u25ca\u00ff\u0178\u2044"
+    "\u00a4\u2039\u203a\ufb01\ufb02\u2021\u00b7\u201a\u201e\u2030\u00c2\u00ca\u00c1"
+    "\u00cb\u00c8\u00cd\u00ce\u00cf\u00cc\u00d3\u00d4\uf8ff\u00d2\u00da\u00db\u00d9"
+    "\u0131\u02c6\u02dc\u00af\u02d8\u02d9\u02da\u00b8\u02dd\u02db\u02c7\u0141\u0142"
+    "\u0160\u0161\u017d\u017e\u00a6\u00d0\u00f0\u00dd\u00fd\u00de\u00fe\u2212\u00d7"
+    "\u00b9\u00b2\u00b3\u00bd\u00bc\u00be\u20a3\u011e\u011f\u0130\u015e\u015f\u0106"
+    "\u0107\u010c\u010d\u0111"
+)
+RE_CID = re.compile(r"\(cid:(\d+)\)")
+
+
+def _glifo(codigo: int) -> str:
+    if 3 <= codigo <= 97:
+        return chr(codigo + 29)
+    if 98 <= codigo < 98 + len(_GLIFOS_NAO_ASCII):
+        return _GLIFOS_NAO_ASCII[codigo - 98]
+    return ""
+
+
+def decodificar_cids(texto: str) -> str:
+    """Traduz '(cid:N)' pela ordem padrao de glifos. Devolve o texto inalterado
+    quando nao ha' nenhum."""
+    if "(cid:" not in texto:
+        return texto
+    return RE_CID.sub(lambda a: _glifo(int(a.group(1))), texto)
+
+
+def tem_cids(texto: str) -> bool:
+    return "(cid:" in texto
+
+
 # --------------------------------------------------------------------- padroes
 RE_ORDINAL = re.compile(r"^(\d{1,3})[º°]\s+(.*)$")
 RE_ORDINAL_INTERNO = re.compile(r"(\d{1,3})[º°]\s+")
@@ -86,6 +135,7 @@ class LinhaModelo:
     unidades_acumulado: float
     participacao_pct: float
     pagina: int
+    metodo_extracao: str = "texto"
 
 
 @dataclass
@@ -95,6 +145,7 @@ class LinhaRanking:
     nome_completo_fonte: str
     unidades_mes: float
     pagina: int
+    metodo_extracao: str = "texto"
 
 
 @dataclass
@@ -104,6 +155,8 @@ class Extracao:
     edicao: str | None = None
     paginas: int = 0
     paginas_sem_texto: list[int] = field(default_factory=list)
+    paginas_com_cid: list[int] = field(default_factory=list)
+    paginas_com_ocr: list[int] = field(default_factory=list)
     total_publicado: dict[str, float] = field(default_factory=dict)
     subtotal_publicado: dict[tuple[str, str], float] = field(default_factory=dict)
     modelos: list[LinhaModelo] = field(default_factory=list)
@@ -112,12 +165,22 @@ class Extracao:
 
 
 # -------------------------------------------------------------------- leitura
-def _linha_modelo(linha: str) -> tuple[int, str, float, float, float, float] | None:
-    """Le uma linha de modelo pela posicao dos campos, da direita para a esquerda."""
+def _linha_modelo(
+    linha: str, tolerar_glifo_solto: bool = False
+) -> tuple[int, str, float, float, float, float] | None:
+    """Le uma linha de modelo pela posicao dos campos, da direita para a esquerda.
+
+    `tolerar_glifo_solto` vale para paginas vindas de OCR, em que a seta de
+    variacao entre as colunas e' reconhecida como uma letra avulsa ("A", "v",
+    "W"). Fora do OCR nao se descarta nada: uma letra solta ali seria sinal de
+    leitura errada.
+    """
     achado = RE_ORDINAL.match(linha)
     if not achado:
         return None
     tokens = [t for t in achado.group(2).split(" ") if t and t not in MARCADORES]
+    if tolerar_glifo_solto and len(tokens) > 4:
+        tokens = tokens[:1] + [t for t in tokens[1:] if not (len(t) == 1 and t.isalpha())]
     if len(tokens) < 4 or not tokens[-1].endswith("%"):
         return None
     percentual, valores = tokens[-1][:-1], tokens[-4:-1]
@@ -219,9 +282,9 @@ def _ranking_da_pagina(pagina, numero_pagina: int) -> list[LinhaRanking]:
     linhas: list[LinhaRanking] = []
     for segmento, mapa in colunas.items():
         for topo in sorted(mapa):
-            texto = normalizar_tipografia(
+            texto = normalizar_tipografia(decodificar_cids(
                 " ".join(p["text"] for p in sorted(mapa[topo], key=lambda p: p["x0"]))
-            )
+            ))
             achado = RE_ORDINAL.match(texto)
             if not achado:
                 continue
@@ -241,15 +304,87 @@ def _ranking_da_pagina(pagina, numero_pagina: int) -> list[LinhaRanking]:
     return linhas
 
 
-def ler(caminho: Path) -> Extracao:
+def _ranking_do_texto(linhas: list[str], numero_pagina: int) -> list[LinhaRanking]:
+    """Ranking a partir de texto, com as duas colunas concatenadas na mesma linha.
+
+    Cada linha traz "<n>o <NOME> <valor>" de automoveis seguido do mesmo de
+    comerciais leves. Sem coordenadas, o segmento e' atribuido pela posicao
+    esperada: cada coluna sabe qual e' o proximo lugar do seu ranking, e uma
+    linha com um unico ordinal vai para a coluna que o esperava.
+    """
+    achados: list[LinhaRanking] = []
+    proxima = {"automoveis": 1, "comerciais_leves": 1}
+    for linha in linhas:
+        cortes = [achado.start() for achado in RE_ORDINAL_INTERNO.finditer(linha)]
+        if not cortes:
+            continue
+        pedacos = [linha[i:j].strip() for i, j in zip(cortes, cortes[1:] + [len(linha)])]
+        for pedaco in pedacos:
+            achado = RE_ORDINAL.match(pedaco)
+            if not achado:
+                continue
+            posicao = int(achado.group(1))
+            tokens = [t for t in achado.group(2).split(" ") if t and t not in MARCADORES]
+            if len(tokens) < 2 or not eh_numero_br(tokens[-1]):
+                continue
+            nome = " ".join(tokens[:-1]).strip()
+            if "/" not in nome:
+                continue
+            segmento = next(
+                (s for s in ("automoveis", "comerciais_leves") if proxima[s] == posicao), None
+            )
+            if segmento is None:
+                continue
+            proxima[segmento] = posicao + 1
+            achados.append(LinhaRanking(
+                segmento=segmento, posicao_fonte=posicao, nome_completo_fonte=nome,
+                unidades_mes=numero_br(tokens[-1]), pagina=numero_pagina,
+                metodo_extracao="ocr",
+            ))
+    return achados
+
+
+def _ocr_das_paginas_sem_texto(caminho: Path, extracao: Extracao) -> dict[int, str]:
+    """Roda OCR so' nas paginas em que a extracao de texto nao devolveu nada."""
+    from . import ocr as mod_ocr
+
+    disponivel, detalhe = mod_ocr.disponivel()
+    if not disponivel:
+        extracao.avisos.append(f"OCR pedido mas indisponivel ({detalhe})")
+        return {}
+    with pdfplumber.open(caminho) as pdf:
+        vazias = [
+            numero for numero, pagina in enumerate(pdf.pages, start=1)
+            if not (pagina.extract_text() or "").strip()
+        ]
+    if not vazias:
+        return {}
+    textos = mod_ocr.texto_das_paginas(caminho, vazias)
+    limpos = {numero: mod_ocr.limpar(texto) for numero, texto in textos.items() if texto.strip()}
+    extracao.paginas_com_ocr.extend(sorted(limpos))
+    extracao.avisos.append(f"OCR aplicado em {len(limpos)} paginas ({detalhe})")
+    return limpos
+
+
+def ler(caminho: Path, usar_ocr: bool = False) -> Extracao:
     """Extrai de um informe tudo o que as etapas seguintes precisam."""
     extracao = Extracao(arquivo=caminho.name)
     segmento_corrente: str | None = None
+    textos_ocr: dict[int, str] = {}
+
+    if usar_ocr:
+        textos_ocr = _ocr_das_paginas_sem_texto(caminho, extracao)
 
     with pdfplumber.open(caminho) as pdf:
         extracao.paginas = len(pdf.pages)
         for numero, pagina in enumerate(pdf.pages, start=1):
             texto = pagina.extract_text() or ""
+            if tem_cids(texto):
+                if numero not in extracao.paginas_com_cid:
+                    extracao.paginas_com_cid.append(numero)
+                texto = decodificar_cids(texto)
+            if not texto.strip() and numero in textos_ocr:
+                texto = textos_ocr[numero]
             if not texto.strip():
                 extracao.paginas_sem_texto.append(numero)
                 continue
@@ -281,7 +416,12 @@ def ler(caminho: Path) -> Extracao:
                 continue
 
             if RE_TITULO_RANKING.match(_sem_acento(titulo)):
-                extracao.ranking.extend(_ranking_da_pagina(pagina, numero))
+                if numero in extracao.paginas_com_ocr:
+                    # Pagina de ranking vinda de OCR: as duas colunas ja' chegam
+                    # coladas na mesma linha, sem coordenadas para separar.
+                    extracao.ranking.extend(_ranking_do_texto(linhas, numero))
+                else:
+                    extracao.ranking.extend(_ranking_da_pagina(pagina, numero))
                 continue
 
             if not RE_TITULO_SUBSEGMENTO.match(_sem_acento(titulo)):
@@ -290,8 +430,12 @@ def ler(caminho: Path) -> Extracao:
                 continue
 
             sub_segmento = ""
+            de_ocr = numero in extracao.paginas_com_ocr
+            metodo = ("ocr" if de_ocr
+                      else "texto_glifos" if numero in extracao.paginas_com_cid
+                      else "texto")
             for linha in linhas:
-                lido = _linha_modelo(linha)
+                lido = _linha_modelo(linha, tolerar_glifo_solto=de_ocr)
                 if lido is not None:
                     posicao, nome, anterior, mes, acumulado, percentual = lido
                     if not sub_segmento:
@@ -308,6 +452,7 @@ def ler(caminho: Path) -> Extracao:
                         unidades_acumulado=acumulado,
                         participacao_pct=percentual,
                         pagina=numero,
+                        metodo_extracao=metodo,
                     ))
                     continue
                 subtotal = _subtotal(linha)

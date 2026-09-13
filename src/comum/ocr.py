@@ -23,7 +23,6 @@ CONFIANCA_MINIMA = 20
 
 def disponivel() -> tuple[bool, str]:
     try:
-        import pypdfium2  # noqa: F401
         import pytesseract
     except ImportError as erro:
         return False, f"dependencia ausente: {erro.name}"

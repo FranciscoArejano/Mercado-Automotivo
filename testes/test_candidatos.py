@@ -90,9 +90,52 @@ def test_queda_abrupta_exige_queda_sem_declinio_previo():
              4.0, 3.0, 2.0, 1.0]
     largo = _grade({("X", "ABRUPTA", "automoveis"): abrupta,
                     ("X", "SUAVE", "automoveis"): suave}, meses)
-    quedas = etapa._quedas_abruptas(largo, meses)
+    quedas = etapa._quedas_abruptas(largo, meses, {})
     assert quedas.get(("X", "ABRUPTA", "automoveis")) == ["2015-01"]
     assert ("X", "SUAVE", "automoveis") not in quedas
+
+
+def test_queda_do_mercado_inteiro_nao_e_queda_do_produto():
+    """Abr/2020: o segmento caiu 73% num mes e quase todo modelo disparava (Q9)."""
+    meses = _meses(24)
+    # o modelo cai 75% no mes 13, exatamente como o mercado
+    serie = [1000.0] * 12 + [250.0] + [1000.0] * 11
+    largo = _grade({("X", "ACOMPANHA", "automoveis"): serie}, meses)
+    sem_contexto = etapa._quedas_abruptas(largo, meses, {})
+    assert ("X", "ACOMPANHA", "automoveis") not in sem_contexto  # 75% < 80%
+
+    # e um que cai muito mais que o mercado continua sendo marcado
+    forte = [1000.0] * 12 + [10.0] + [10.0] * 11
+    largo2 = _grade({("X", "DESABA", "automoveis"): forte}, meses)
+    mercado = {("automoveis", meses[12]): -0.73}
+    com_contexto = etapa._quedas_abruptas(largo2, meses, mercado)
+    assert ("X", "DESABA", "automoveis") in com_contexto
+
+
+def test_queda_abrupta_ignora_serie_minuscula():
+    """Volume minimo antes da queda, para nao marcar serie de tres unidades (Q9)."""
+    meses = _meses(24)
+    minuscula = [3.0] * 12 + [0.0] * 12
+    largo = _grade({("X", "TRES", "automoveis"): minuscula}, meses)
+    assert etapa._quedas_abruptas(largo, meses, {}) == {}
+
+
+def test_volume_em_jogo_e_o_menor_dos_dois():
+    """O que limita a substituicao e' o menor, nao a soma (B3)."""
+    meses = _meses(36)
+    grande = [3000.0] * 24 + [10.0] * 12
+    minusculo = [0.0] * 22 + [2.0] * 14
+    parceiro = [0.0] * 22 + [2000.0] * 14
+    largo = _grade({("GM", "GRANDE", "automoveis"): grande,
+                    ("GM", "MINUSCULO", "automoveis"): minusculo,
+                    ("GM", "PARCEIRO", "automoveis"): parceiro}, meses)
+    fichas = etapa._fichas(largo, meses, 0.05)
+    pares = etapa._passagem_de_bastao(fichas, largo, meses, {})
+    por_destino = {p["modelo_destino"]: p for p in pares if p["modelo_origem"] == "GRANDE"}
+    assert "PARCEIRO" in por_destino
+    real = por_destino["PARCEIRO"]
+    assert real["volume_em_jogo"] == min(real["unidades_origem"], real["unidades_destino"])
+    assert real["volume_somado"] > real["volume_em_jogo"]
 
 
 def test_similaridade_de_nome_nao_e_usada():

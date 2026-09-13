@@ -1,256 +1,238 @@
-# Questoes abertas
+# Questões abertas — registro de decisões
 
-ESPEC.md sec.9.6: "Ao encontrar ambiguidade nao coberta por este documento:
-parar, descrever o caso, propor as opcoes e esperar decisao. Nao escolher
-sozinho."
+ESPEC.md §9.6: "Ao encontrar ambiguidade não coberta por este documento: parar,
+descrever o caso, propor as opções e esperar decisão."
 
-Este arquivo e' o cumprimento dessa regra. Cada questao traz o caso, a
-evidencia, o que o codigo faz **provisoriamente** para que o pipeline rode, e
-as opcoes. Nenhuma delas esta' fechada. Onde ha' um padrao provisorio, ele e'
-um parametro em `src/comum/config.py`, trocavel sem tocar em logica.
+Este arquivo é o cumprimento dessa regra e o registro do que já foi decidido.
+As dez questões levantadas na primeira rodada foram respondidas pelo
+pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
+**continua aberto**.
 
----
+## Estado, num relance
 
-## Q1. Como se le' "pico movel de 12 meses" (D3)
-
-**O caso.** D3 define a data de saida como o ultimo mes em que o modelo atinge
->= 5% do seu "pico movel de 12 meses". A expressao admite duas leituras que
-nao dao a mesma data:
-
-- `media_movel`: pico = `max_t( media das unidades em [t-11, t] )`. Trata
-  "movel" como suavizacao: um unico mes excepcional nao define o patamar. Fica
-  em escala mensal, comparavel com `unidades(t)`.
-- `max_movel`: pico = `max_t( maior valor em [t-11, t] )`, que para uma serie
-  completa e' o pico global do modelo.
-
-A diferenca importa em modelos com um mes isolado de pico (lote de venda
-direta, por exemplo): com `max_movel` o patamar sobe, o corte de 5% sobe junto
-e a saida e' declarada **mais cedo**.
-
-**Provisorio.** `config.PICO_MOVEL_MODO = "media_movel"`. As duas leituras
-estao implementadas e testadas (`testes/test_ciclo_vida.py`).
-
-**Opcoes.** (a) manter `media_movel`; (b) trocar para `max_movel`; (c) uma
-terceira leitura -- por exemplo pico da soma movel de 12 meses dividida por 12,
-que e' igual a (a) em janela cheia mas difere no inicio da serie.
-
-**Como decidir.** `saidas/validacao.md` sec.7 ja' traz as taxas de entrada e
-saida nos tres limiares (3%, 5%, 10%). Rodar a etapa 06 com
-`PICO_MOVEL_MODO=max_movel` produz a tabela concorrente; se a ordenacao dos
-anos nao mudar, a escolha e' inocua e a questao morre.
+| # | Assunto | Situação |
+|---|---|---|
+| Parte 0 | `regras.csv` vazio nesta rodada | decidido e aplicado |
+| B1 | HHI de grupo menor que HHI de marca em 2014 | **causa encontrada e corrigida** |
+| B2 | Buraco de 2023-09 | **recuperado da fonte** |
+| B3 | `volume_em_jogo` ordenando errado | corrigido |
+| I1 | Cauda mais rasa que a planilha de controle | **parcial — falta a planilha** |
+| I2 | Taxa de entrada não responde ao limiar | confirmado: é desenho, documentado |
+| I3 | O corte de publicação fabrica a alta recente? | **testado: não fabrica** |
+| Q1 | Leitura de "pico móvel de 12 meses" | **continua aberta — a escolha importa** |
+| Q2 | Tolerância de 0,5% e piso de cobertura | decidido; piso medido, não aplicado |
+| Q3 | Mapa de grupos econômicos | decidido; variante de robustez disponível |
+| Q4 | Chave do painel e sub-segmento | decidido e aplicado |
+| Q5 | O que significa "zero" | decidido; sinalização entregue |
+| Q6 | Retroagir a 2003 | diagnóstico rodado; extensão **não** feita |
+| Q7 | Ranking completando sub-segmento | decidido, mantido |
+| Q8 | "Julho de 2023, maior mês desde 2019" | premissa corrigida na ESPEC |
+| Q9 | Detector de queda abrupta | decidido e aplicado |
+| Q10 | Censura à esquerda | formulação transportada para a ESPEC §5 |
 
 ---
 
-## Q2. A tolerancia de 0,5% da sec.4 nao se aplica ao total do informe
+## Parte 0 — A base primeiro, a harmonização depois
 
-**O caso.** A sec.4 manda conferir que "a soma dos modelos bate com o total que
-o proprio informe publica" e tratar divergencia acima de 0,5% como erro de
-parsing. Medido: **a divergencia e' estrutural, nao de leitura**. As tabelas
-por modelo do informe tem numero fixo de linhas por sub-segmento e truncam a
-cauda. O proprio documento denuncia isso: em Jun/2016 o sub-segmento "Hatch
-Medios" lista 6 modelos que somam 2.085 unidades e publica, na linha `Total`
-logo abaixo, 2.510. A diferenca de 425 unidades e' cauda nao publicada, e nao
-ha' leitura possivel que a recupere.
+**Decidido.** `regras.csv` fica **vazio** nesta rodada. `saidas/candidatos.xlsx`
+é evidência arquivada, não adjudicada. Nada é fundido.
 
-Aplicada ao pe' da letra, a regra pararia em todos os 152 arquivos.
+A consequência foi explorada: as taxas de entrada e saída em
+`saidas/validacao.md` §8 são o **limite superior** dessas taxas — o cenário em
+que todo rebatismo conta como morte e nascimento. Quando a adjudicação vier,
+teremos os dois extremos e saberemos quanto a harmonização move o resultado.
+O relatório e o dicionário de dados dizem isso em texto, para que ninguém leia
+essas taxas como se fossem o número final.
 
-**Provisorio.** A verificacao de parsing foi ancorada no que o documento
-permite conferir de fato:
-
-1. soma dos modelos listados x linha `Total` do proprio sub-segmento -- e' erro
-   de parsing se a soma **exceder** o total (leitura pegou linha alheia);
-2. top-50 do ranking mensal x tabela de sub-segmento, modelo a modelo, com
-   tolerancia de 0,5% **do volume conferido** -- e' esta que pega leitura de
-   coluna errada, que deslocaria o volume inteiro;
-3. mes declarado no titulo do PDF x mes atribuido pelo catalogo da fonte.
-
-O confronto entre o total do painel e o total publicado virou **medida de
-cobertura (D5)**, entregue em `saidas/cobertura.csv` e resumida em
-`saidas/validacao.md`. `dados/processado/extracao_subtotais.csv` quantifica a
-cauda nao publicada sub-segmento a sub-segmento.
-
-**Opcoes.** (a) manter; (b) exigir a leitura literal com
-`--tolerancia-total 0.005` na etapa 02 -- ja' implementado, e o pipeline vai
-parar no primeiro arquivo; (c) fixar um piso de cobertura como criterio de
-aceitacao por mes, agora que ha' a medida (e' o que D5 pede: "medir primeiro").
+Quando a adjudicação vier, será em duas camadas — canônica (o que é fato em
+qualquer artigo) e sobreposição por artigo (o que é leitura). O pipeline já
+suporta as duas: a camada canônica é `regras.csv`, e uma sobreposição por
+artigo é outro arquivo de regras passado à etapa 5.
 
 ---
 
-## Q3. O mapa de grupo economico e' rascunho, nao dado
+## Os três defeitos
 
-**O caso.** D4 fixa a regra (mapa datado, Stellantis so' a partir de 2021-01,
-nada retroativo) mas nao fornece o mapa. `config/mapa_grupos.csv` foi montado
-com os eventos societarios documentados e traz coluna `fonte`. Ele **precisa de
-revisao**; ha' pelo menos quatro casos que sao decisao do pesquisador, nao
-fato:
+### B1. HHI de grupo menor que HHI de marca em 2014 — causa encontrada
 
-1. **Alianca Renault-Nissan-Mitsubishi.** Participacao cruzada nao e' controle.
-   O mapa mantem Renault, Nissan e Mitsubishi como grupos separados e registra
-   a alianca em `observacao`. Tratar como grupo unico muda concentracao e
-   margens de entrada/saida.
-2. **Hyundai e Kia.** Tratados como um grupo (`HYUNDAI`), pela participacao
-   cruzada desde 1998. E' a convencao usual, mas e' convencao.
-3. **CAOA Chery.** Joint venture desde 11/2017, controle compartilhado. Esta'
-   como grupo proprio, separado de `CHERY`. Alternativa: acumular em `CHERY`.
-4. **Sub-marcas chinesas recentes** -- `OMODA JAECOO`, `JETOUR` -- atribuidas ao
-   grupo `CHERY`. Se o interesse for a marca comercial, elas deveriam ficar
-   separadas.
+O diagnóstico do pesquisador estava certo no princípio e a causa era outra:
+não era denominador nem balde `NAO_MAPEADO`. **A identidade
+`hhi_grupo ≥ hhi_marca` exige partição fixa**, e num agregado *anual* com mapa
+datado ela não é fixa. Em 2014 a Fiat está no grupo `FIAT` até setembro e em
+`FCA` de outubro em diante: o volume anual da marca **se parte em dois grupos**,
+e o HHI de grupo cai. Os únicos três casos são FIAT, JEEP e DODGE, cuja
+propriedade muda em outubro de 2014 — exatamente o único ano que invertia.
 
-**Provisorio.** O mapa como esta'. Marca sem linha vigente recebe
-`NAO_MAPEADO`, nunca um chute; `saidas/grupos_nao_mapeados.csv` lista as
-pendentes por volume.
+Três consequências no código:
 
----
+1. A identidade é exigida **por mês**, onde a partição é fixa. Vale nos 152
+   meses, e agora é verificação com falha de execução.
+2. O agregado anual ganhou a coluna `hhi_grupo_particao_fixa`, que usa o grupo
+   vigente num **mês de referência declarado** (o último mês do ano no painel).
+   Com ela 2014 passa de 1.169,5 para **1.349,0**, acima dos 1.317,4 de marca,
+   como a identidade manda. A coluna `hhi_grupo_datado` fica ao lado, e os anos
+   de transição são listados.
+3. Marca sem grupo vigente entra como **grupo unitário com o próprio nome** —
+   nunca excluída, nunca num balde comum. São 19 marcas e 1.906 unidades
+   (0,006% do painel), contadas em `saidas/validacao.md` §6.
 
-## Q4. O mesmo nome comercial em dois segmentos e em dois sub-segmentos
+### B2. O buraco de 2023-09 — recuperado
 
-**O caso.** Dois fatos medidos na fonte:
+O informe de setembro de 2023 é um PDF inteiramente digitalizado. O OCR foi
+tentado e **rejeitado pela própria verificação**: 21,6% do volume divergia
+entre o ranking e as tabelas de sub-segmento do mesmo arquivo.
 
-- **Dois segmentos.** Em Ago/2026 `RENAULT/KWID` aparece em automoveis (4.357)
-  e em comerciais leves (80). Sao produtos diferentes com o mesmo nome.
-- **Dois sub-segmentos.** No mesmo informe, `NISSAN/VERSA` aparece em "Sedans
-  Pequenos" (geracao antiga, 0 unidades) e em "Sedans Compactos" (geracao nova,
-  533). Aqui sao o mesmo nome comercial em geracoes diferentes -- e a ESPEC ja'
-  declara que troca de geracao e' invisivel na fonte.
+A recuperação veio pelo caminho que o pesquisador apontou: **o informe de
+2023-10 republica setembro inteiro**, na coluna de mês anterior, modelo a
+modelo, e também no Resumo Mensal. Isso não é interpolação nem estimativa — é
+uma segunda publicação do mesmo número pela mesma fonte.
 
-**Provisorio.** A chave do painel e' `(marca, modelo, segmento)`: o segmento
-entra, os sub-segmentos somam. Migracao de segmento ao longo do tempo aparece
-como saida em um segmento e entrada no outro, e vai para o relatorio de
-candidatos como caso a decidir -- e' exatamente o que `reclassificacao` cobre.
+- 167 linhas recuperadas, 184.624 unidades (143.965 automóveis, 40.659 leves).
+- Total publicado de setembro também recuperado: 145.676 e 41.754.
+- **Confirmação independente pelo acumulado** — `acum(out) − mês(out) −
+  acum(ago)` — bate em 122 de 151 modelos, com 39 unidades de diferença
+  absoluta e 37 líquidas. As duas rotas concordam.
+- Toda linha sai com `origem_tabela='mes_anterior'` e
+  `metodo_extracao='reconstruido'`; o mês fica como `ok_reconstruido`.
 
-**Opcoes.** (a) manter; (b) chave `(marca, modelo)`, somando os segmentos, o
-que junta a picape e o hatch de mesmo nome; (c) chave incluindo sub-segmento,
-o que separaria geracoes -- mas so' onde a fonte por acaso as separa, criando
-serie descontinua sem criterio.
+A série não tem mais buracos: 152 meses, nenhuma lacuna.
 
----
+### B3. `volume_em_jogo` — corrigido
 
-## Q5. O que significa "zero" num mes
-
-**O caso.** Um modelo ausente das tabelas de um mes nao esta' necessariamente
-com zero emplacamentos: pode estar abaixo do corte de publicacao daquele mes.
-`saidas/validacao.md` sec.4 traz o corte medido por ano e segmento.
-
-**Provisorio.** Para o calculo de D3, mes com informe em que o modelo nao
-aparece entra como **zero**; mes sem informe (lacuna) entra como **ausente** e
-sai da janela -- lacuna nunca vira zero (sec.9.2). O efeito pratico e' pequeno
-porque o corte e' baixo perto do pico de qualquer modelo com serie relevante,
-mas nao e' nulo para modelos de cauda.
-
-**Opcoes.** (a) manter; (b) tratar como ausente tambem o mes em que o modelo
-nao aparece, o que encurta as series e complica a leitura de "ultimo mes acima
-do limiar"; (c) restringir o painel aos modelos que nunca somem entre entrada e
-saida.
+Passou a ser `min(unidades_origem, unidades_destino)`: é o menor que limita
+quanta substituição o par pode explicar. A soma continua disponível em
+`volume_somado`. Com a correção, `VW/GOL → VW/BRASILIA` some do topo e a lista
+começa por Prisma → Onix Plus (440.598) e Palio → Argo (390.713).
 
 ---
 
-## Q6. Retroagir a 2003
+## As três investigações
 
-**O caso.** A sec.2 manda validar 2014-01..2026-08 primeiro e so' entao
-estender para tras, parando e reportando se a qualidade dos informes antigos
-nao sustentar extracao confiavel. O catalogo da fonte lista os 284 meses de
-2003-01 a 2026-08, e a etapa 01 ja' sabe baixa-los
-(`--inicio 2003-01`).
+### I1. Cauda mais rasa que a planilha de controle — **parcial**
 
-**Provisorio.** O pipeline roda 2014-01..2026-08. A extensao nao foi executada.
+**O que falta:** `Vendas_Geral.xlsx` não está no repositório. Sem ela não dá
+para listar os modelos presentes na planilha e ausentes do painel em 2014, que
+é metade da investigação. A etapa 7 está pronta e roda no instante em que o
+arquivo aparecer em `dados/referencia/Vendas_Geral.xlsx`.
 
-**Como decidir.** Rodar `python src/pipeline.py --inicio 2003-01 --ate 2` e ler
-`saidas/arquivos_sem_texto.csv` e `dados/processado/extracao_verificacao.csv`:
-eles dizem, arquivo a arquivo, a partir de que ano a extracao degrada.
+**O que já foi medido**, pelo outro lado da mesma pergunta: a contagem de
+linhas com nome composto (`MARCA/A/B`) por ano, em `saidas/validacao.md` §5 e
+em `saidas/nomes_compostos.csv`. É a medida da hipótese de **agregação da
+fonte** — `VW/FOX/CROSS FOX` como registro único para o que a planilha tratava
+como dois. Quanto maior esse número, menos a diferença de contagem é perda de
+cobertura e mais é a unidade de observação sendo definida pela fonte.
 
----
+### I2. A taxa de entrada não responde ao limiar — confirmado, é desenho
 
-## Q7. O ranking completa a tabela de sub-segmento
+Confirmado: **a entrada é o primeiro mês com unidades positivas e não usa o
+limiar**; só a saída aplica D3, que foi o que a ESPEC especificou. Por isso as
+três colunas de entrada são idênticas nos treze anos.
 
-**O caso.** O top-50 mensal publica modelos que as tabelas de sub-segmento
-truncam. Em Ago/2026 isso e' 27 modelos e 3.022 unidades so' em comerciais
-leves -- a cobertura do segmento passa de 93,84% para 99,87%.
+A assimetria está agora declarada em três lugares: no dicionário de dados, na
+seção 8 do relatório de validação, e aqui. Ela entra direto em qualquer
+decomposição de margens, e quem for usar essas margens precisa decidir se quer
+um critério simétrico — a decisão continua sendo do pesquisador.
 
-**Provisorio.** O painel bruto usa a tabela de sub-segmento e completa com o
-ranking apenas para modelos que ela nao lista (coluna `origem_tabela` diz
-qual). Quando as duas trazem numeros diferentes para o mesmo modelo, vale a
-tabela de sub-segmento e a divergencia vai para `saidas/divergencias_fonte.csv`
--- reportar e seguir (sec.9.4), nunca corrigir.
+### I3. O corte de publicação fabrica a alta recente? — **não fabrica**
 
-**Opcoes.** (a) manter; (b) usar so' as tabelas de sub-segmento, perdendo
-cobertura; (c) dar precedencia ao ranking onde houver conflito.
+Teste feito como proposto: restringir a taxa de saída aos modelos cujo limiar
+de D3 supera o corte de publicação em **todo mês** da própria janela — aqueles
+em que o corte não morde. São 310 dos 647 modelos, e cada taxa usa o seu
+próprio denominador, para que o nível seja comparável e não só a forma.
 
----
+No subconjunto imune, a taxa de saída vai de **0,074 em 2022 a 0,143 em 2025**
+— quase dobra, mais do que na série cheia. **A subida persiste, então não é
+artefato do corte.** A tabela sem o ano parcial de 2026 vai ao lado, como
+pedido.
 
-## Q8. "Julho de 2023 e' o maior mes desde 2019" nao se confirma na fonte
-
-**O caso.** A sec.6 pede dois testes de sanidade temporal. O primeiro passa:
-abril de 2020 e' de fato o menor mes de 2014-2023. O segundo nao passa -- e o
-problema nao esta' no painel.
-
-Medido no **total que a propria Fenabrave publica** em cada informe, nao no
-painel, para automoveis + comerciais leves:
-
-| janela | maior mes na fonte | unidades | posicao de 2023-07 |
-|---|---|---:|---:|
-| 2019-01..2023-08 | 2019-12 | 251.973 | 10 de 56 |
-| 2020-01..2023-08 | 2020-12 | 232.814 | 2 de 44 |
-| 2021-01..2023-08 | **2023-07** | 215.711 | 1 de 32 |
-| 2022-01..2023-08 | **2023-07** | 215.711 | 1 de 20 |
-
-Julho de 2023 (215.711) foi de fato um pico -- o maior mes **desde janeiro de
-2021**, e um salto de 20% sobre junho, coerente com o programa de incentivo
-daquele mes. Mas dezembro de 2019 (251.973) e dezembro de 2020 (232.814) sao
-maiores. Estendida a amostra ate' 2026-08, o maior mes da serie e' dezembro de
-2025 (267.117).
-
-Como painel e fonte concordam entre si e a atribuicao de mes passa no teste de
-abril de 2020, isto **nao** e' erro de leitura de cabecalho. E' a premissa que
-nao se confirma neste escopo.
-
-**Provisorio.** A etapa 06 roda o teste duas vezes -- no painel e no total
-publicado -- e classifica: `FALHOU` (e a execucao falha) so' quando o painel
-discorda da fonte; `PREMISSA NAO CONFIRMADA` quando os dois concordam e a
-premissa e' que nao se sustenta. A tabela de janelas acima e' reproduzida em
-`saidas/validacao.md`.
-
-**Opcoes.** (a) trocar a premissa por "maior mes desde 2021", que se confirma;
-(b) manter "desde 2019" e verificar se ela vale para outro escopo -- total com
-motos, ou a serie da planilha de controle, que termina em ago/2023; (c)
-abandonar o segundo teste e ficar so' com abril de 2020, que e' robusto.
+Isso não anula o risco de cobertura: `saidas/validacao.md` §3 registra que a
+cobertura de automóveis anda −2,63 pontos percentuais entre 2014 e 2026, e o
+alerta continua no relatório.
 
 ---
 
-## Q9. O detector de queda abrupta dispara em choque de mercado
+## As dez questões
 
-**O caso.** O segundo detector da sec.5 marca perda superior a 80% num unico
-mes sem declinio previo. Em abril de 2020 o mercado inteiro caiu 73% num mes:
-praticamente todo modelo satisfaz o criterio, e o relatorio se enche de pares
-em que nada aconteceu com o produto. O mesmo vale, em menor grau, para janeiro
-de todo ano (sazonalidade) e para os meses de escassez de semicondutores.
+**Q1 — pico móvel. Mantido `media_movel`, mas a questão CONTINUA ABERTA.**
+A comparação foi rodada, como pedido, e o resultado não permite encerrar:
+**5 dos 13 anos mudam de posição** no ranking de taxa de saída entre
+`media_movel` e `max_movel` (2019, 2020, 2023, 2024, 2025). A escolha não é
+inócua. Qualquer resultado sobre em que anos houve mais saída depende dela e
+precisa declarar qual leitura usou. A tabela lado a lado está em
+`saidas/validacao.md` §8.
 
-**Provisorio.** O detector segue exatamente como a ESPEC o define -- nao ha'
-filtro escondido. Cada par ganhou a coluna `variacao_mercado_no_mes`, com a
-variacao do total do segmento naquele mes: quando ela esta' em -0,73, a queda
-do modelo e' a queda do mercado. A ordenacao por volume em jogo, que a sec.5
-manda, ja' empurra os casos reais para o topo.
+**Q2 — tolerância e piso. Adotado.** As três verificações internas ao documento
+estão no lugar. Sobre D5: **o piso não é aplicado ao painel.** O que a rodada
+entrega é a medida — cobertura por ano e segmento, corte de publicação por mês
+— e uma recomendação: **piso de 300 unidades por modelo e mês**, que reduz a
+amplitude da cobertura anual de 2,70 para 1,17 pontos percentuais e descartaria
+1.073.128 unidades (3,6% do painel). A tabela inteira de pisos candidatos está
+em `saidas/piso_recomendado.csv`. Parâmetro, não dado.
 
-**Opcoes.** (a) manter e filtrar na planilha; (b) exigir que a queda do modelo
-supere a do mercado por uma margem -- por exemplo, queda relativa acima de 80%
-depois de descontada a variacao do segmento; (c) exigir volume minimo do modelo
-antes da queda, para nao marcar serie de tres unidades.
+**Q3 — mapa de grupos. Adotado, com as quatro escolhas confirmadas.**
+Renault-Nissan-Mitsubishi separados, Hyundai e Kia juntos, CAOA Chery como
+grupo próprio, Omoda/Jaecoo e Jetour no grupo Chery. Verificado: as 14 linhas
+da Stellantis vigoram a partir de 2021-01, e **todas as 141 linhas do mapa têm
+`fonte` preenchida**. A variante de robustez pedida está em
+`src/ferramentas/robustez_grupos.py`, que roda Kia separada por padrão e aceita
+qualquer outro remapeamento na linha de comando. **Resultado: separar Kia de
+Hyundai move o HHI de grupo em no máximo 10,3 pontos (0,87%), em 2014-2016, e
+menos de 3 pontos de 2023 em diante.** A convenção não é consequente para
+concentração; `saidas/robustez_grupos.csv` traz a tabela ano a ano.
+
+**Q4 — chave do painel. Adotado, com a emenda.** A chave é
+`(marca, modelo, segmento)`, e **o sub-segmento passou a ser atributo da
+linha, fora da chave**. Onde a fonte publica o mesmo modelo em dois
+sub-segmentos no mesmo mês, as duas linhas ficam separadas no painel; a soma
+por modelo virou uma *visão* (`comum/visoes.py`), não o esquema. A ESPEC foi
+corrigida: geração é invisível na maior parte dos casos, não em todos.
+
+**Q5 — o que é "zero". Adotado, com a sinalização.** Mês com informe em que o
+modelo não aparece é zero; lacuna é ausente. O painel ganhou a coluna
+`corte_publicacao` (menor valor listado naquele mês e segmento), e
+`saidas/zeros_frageis.csv` lista os pares modelo × mês em que o corte está
+**acima** do limiar de D3 do próprio modelo — onde o zero pode estar
+escondendo valor relevante. São 5.609 pares em 189 modelos.
+
+**Q6 — retroagir a 2003. Diagnóstico rodado; extensão não feita.**
+Ver `saidas/diagnostico_retroacao.md`. O painel continua em 2014-01..2026-08.
+
+**Q7 — ranking completando sub-segmento. Mantido.** Tabela de sub-segmento como
+base, ranking preenchendo o que ela não lista, `origem_tabela` registrando a
+procedência, divergências reportadas sem correção.
+
+**Q8 — julho de 2023. Premissa corrigida.** A ESPEC §6 passou a dizer "maior
+mês desde janeiro de 2021", que se confirma, e ganhou o segundo teste: julho de
+2023 supera junho em pelo menos 15% — medido, **+20,0%** tanto no painel quanto
+no total publicado. Registrados: máximo da série inteira em dezembro de 2014
+(353.567 unidades, quando o mercado era muito maior) e máximo desde 2019 em
+dezembro de 2025 (267.117). A rotina que roda cada teste duas vezes, no painel
+e na fonte, e separa "bug nosso" de "premissa não confirmada", ficou e vale
+para todo teste de sanidade.
+
+**Q9 — queda abrupta. Adotado (b) mais (c).** A queda passou a ser medida
+**depois de descontada a variação do próprio segmento no mês**, e a série
+precisa ter ao menos 100 unidades antes da queda. A coluna
+`variacao_mercado_no_mes` ficou, documentando o filtro. Efeito: os pares caem
+de 819 para **212** (175 por passagem de bastão, 37 por queda abrupta), e os
+que sobram são casos de verdade — Punto → Argo, BYD Song Plus → King,
+Iveco Daily 3514 → Daily 35S14 (correlação −0,95).
+
+**Q10 — censura. Nada a decidir; formulação transportada.** A ESPEC §5 agora
+distingue as duas exclusões: censura à esquerda invalida a **entrada** e
+descarta o modelo como *sucessor*; censura à direita invalida a **saída** e o
+descarta como *quem sai*. Um modelo vivo no primeiro mês continua podendo sair
+— é o caso do Prisma. `testes/test_candidatos.py` trava o comportamento.
 
 ---
 
-## Q10. A janela de +-6 meses e a censura a' esquerda de quem sai
+## O que continua aberto
 
-**O caso.** Vale registrar como o teste de passagem de bastao foi lido, porque
-a leitura decide se o caso mais importante aparece ou nao. A sec.5 manda
-"excluir do teste qualquer entrada que coincida com o primeiro mes da amostra,
-e qualquer saida no ultimo". Sao duas exclusoes com alvos diferentes: a censura
-a' esquerda invalida a **entrada**, entao descarta o modelo no papel de
-*sucessor*; a censura a' direita invalida a **saida**, entao descarta o modelo
-no papel de *quem sai*.
-
-Descartar quem sai por censura a' esquerda esconderia exatamente Prisma ->
-Onix Plus: o Prisma esta' vivo em 2014-01, o primeiro mes da amostra, mas sua
-saida em 2020-01 e' evento real. Com a leitura acima, o par aparece em segundo
-lugar por volume em jogo (889.618 unidades, razao de picos 0,93, defasagem de
--4 meses). O teste `testes/test_candidatos.py` fixa esse comportamento.
-
-**Provisorio.** A leitura descrita acima, com teste que a trava.
+1. **Q1** — a leitura de "pico móvel" muda a ordenação de 5 dos 13 anos. Não dá
+   para encerrar sem uma decisão explícita, e ela precisa constar de qualquer
+   artigo que use taxas de saída.
+2. **I1** — falta `Vendas_Geral.xlsx` para separar truncamento de agregação.
+3. **Q3** — o mapa de grupos é rascunho revisado, não fato. As quatro convenções
+   discutíveis continuam sendo convenções.
+4. **Adjudicação de `regras.csv`** — por decisão da Parte 0, para quando o
+   desenho do artigo de escopo de produto estiver fechado.

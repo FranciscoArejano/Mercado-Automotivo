@@ -36,6 +36,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from comum import config, informe, log, meses as mod_meses, periodo  # noqa: E402
+from comum import reconstrucao as mod_reconstrucao  # noqa: E402
 
 ETAPA = "etapa02_parsing"
 
@@ -45,7 +46,8 @@ CAMPOS_EXTRACAO = [
     "unidades_acumulado", "participacao_pct", "pagina", "metodo_extracao",
     "arquivo_origem",
 ]
-CAMPOS_TOTAIS = ["mes", "segmento", "total_publicado", "arquivo_origem", "edicao"]
+CAMPOS_TOTAIS = ["mes", "segmento", "total_publicado", "total_publicado_mes_anterior",
+                 "origem", "arquivo_origem", "edicao"]
 CAMPOS_VERIFICACAO = [
     "mes", "verificacao", "escopo", "esperado", "obtido", "diferenca",
     "diferenca_pct", "situacao", "detalhe",
@@ -247,9 +249,12 @@ def processar_arquivo(mes: str, caminho: Path, tolerancia_total: float | None,
     totais: list[dict] = []
     for segmento in config.SEGMENTOS:
         publicado = extracao.total_publicado.get(segmento)
+        anterior = extracao.total_publicado_anterior.get(segmento)
         totais.append({
             "mes": mes, "segmento": segmento,
             "total_publicado": "" if publicado is None else f"{publicado:.0f}",
+            "total_publicado_mes_anterior": "" if anterior is None else f"{anterior:.0f}",
+            "origem": "resumo_mensal",
             "arquivo_origem": caminho.name, "edicao": extracao.edicao or "",
         })
         obtido = sum(
@@ -282,7 +287,8 @@ def _agregar(subdir: str, campos: list[str]) -> list[dict]:
 
 
 def executar(inicio: str, fim: str, tolerancia_total: float | None = None,
-             forcar: bool = False, usar_ocr: bool = False) -> int:
+             forcar: bool = False, usar_ocr: bool = False,
+             reconstruir_lacunas: bool = True) -> int:
     logger = log.preparar(ETAPA)
     manifesto = _ler_manifesto()
     pedidos = periodo.intervalo(inicio, fim)
@@ -337,6 +343,34 @@ def executar(inicio: str, fim: str, tolerancia_total: float | None = None,
         processados += 1
         logger.info("%s: %d linhas, %d paginas", mes, len(linhas), extracao.paginas)
 
+    # Mes ilegivel recuperado pela coluna de mes anterior do informe seguinte --
+    # segunda publicacao do mesmo numero pela mesma fonte, nunca estimativa.
+    reconstruidos: list[dict] = []
+    if reconstruir_lacunas:
+        for mes in meses:
+            destino = config.DIR_EXTRACAO / f"{mes}.csv"
+            with destino.open(encoding="utf-8", newline="") as fluxo:
+                if any(csv.DictReader(fluxo)):
+                    continue
+            recuperado = mod_reconstrucao.reconstruir(mes)
+            if recuperado is None or not recuperado.linhas:
+                logger.warning("%s: sem informe seguinte para recuperar o mes", mes)
+                continue
+            _escrever(destino, CAMPOS_EXTRACAO, recuperado.linhas)
+            _escrever(config.DIR_PROCESSADO / "totais" / f"{mes}.csv",
+                      CAMPOS_TOTAIS, recuperado.totais)
+            reconstruidos.append({
+                "mes": mes, "mes_fonte": recuperado.mes_fonte,
+                "linhas": len(recuperado.linhas),
+                "modelos_conferidos_pelo_acumulado": recuperado.conferidos,
+                "modelos_divergentes": recuperado.divergentes,
+                "divergencia_absoluta": f"{recuperado.divergencia_absoluta:.0f}",
+                "divergencia_liquida": f"{recuperado.divergencia_liquida:+.0f}",
+                "observacao": "; ".join(recuperado.observacoes),
+            })
+            for observacao in recuperado.observacoes:
+                logger.info("%s: %s", mes, observacao)
+
     # Registro de quais meses tem dado utilizavel: e' o que separa zero de
     # lacuna nas etapas seguintes.
     registro = []
@@ -351,7 +385,9 @@ def executar(inicio: str, fim: str, tolerancia_total: float | None = None,
         arquivo = Path(manifesto[mes]["arquivo_local"]).name
         registro.append({
             "mes": mes, "linhas": len(linhas_mes),
-            "situacao": "ok" if linhas_mes else "sem_linha_extraida",
+            "situacao": ("sem_linha_extraida" if not linhas_mes
+                         else "ok_reconstruido" if set(metodos) == {"reconstruido"}
+                         else "ok"),
             "metodo_predominante": max(set(metodos), key=metodos.count) if metodos else "",
             "arquivo_origem": manifesto[mes]["arquivo_local"],
         })
@@ -389,6 +425,10 @@ def executar(inicio: str, fim: str, tolerancia_total: float | None = None,
               ["mes", "arquivo", "linhas_recuperadas", "tratamento"], com_cid)
     _escrever(config.DIR_SAIDAS / "arquivos_com_ocr.csv",
               ["mes", "arquivo", "linhas_por_ocr", "aviso"], com_ocr)
+    _escrever(config.DIR_SAIDAS / "meses_reconstruidos.csv",
+              ["mes", "mes_fonte", "linhas", "modelos_conferidos_pelo_acumulado",
+               "modelos_divergentes", "divergencia_absoluta", "divergencia_liquida",
+               "observacao"], reconstruidos)
 
     linhas_extraidas = sum(
         1 for _ in _agregar("extracao", CAMPOS_EXTRACAO)
@@ -398,7 +438,7 @@ def executar(inicio: str, fim: str, tolerancia_total: float | None = None,
                  linhas_extraidas=linhas_extraidas,
                  divergencias_fonte=len(agregados["divergencias"]),
                  sem_texto=len(sem_texto), fonte_sem_tounicode=len(com_cid),
-                 com_ocr=len(com_ocr))
+                 com_ocr=len(com_ocr), reconstruidos=len(reconstruidos))
     if sem_texto:
         logger.warning("%d informes precisam de OCR -- ver saidas/arquivos_sem_texto.csv",
                        len(sem_texto))
@@ -415,11 +455,15 @@ def main() -> int:
                             help="ultimo recurso (sec.8): reconhece por OCR as paginas sem "
                                  "texto extraivel. As linhas ficam marcadas com "
                                  "metodo_extracao=ocr ate o painel bruto.")
+    analisador.add_argument("--sem-reconstrucao", action="store_true",
+                            help="nao recupera mes ilegivel pela coluna de mes anterior "
+                                 "do informe seguinte; a lacuna fica como esta'")
     analisador.add_argument("--tolerancia-total", type=float, default=None,
                             help="aplica a leitura literal da sec.4 ao total do informe "
                                  "(ex.: 0.005); por padrao o desvio e' medido como cobertura")
     args = analisador.parse_args()
-    return executar(args.inicio, args.fim, args.tolerancia_total, args.forcar, args.ocr)
+    return executar(args.inicio, args.fim, args.tolerancia_total, args.forcar, args.ocr,
+                    not args.sem_reconstrucao)
 
 
 if __name__ == "__main__":

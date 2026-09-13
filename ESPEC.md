@@ -1,5 +1,11 @@
 # Construção do painel de vendas de veículos 0 km no Brasil
 
+> **Emendas de 2026-09.** Três pontos deste documento foram corrigidos depois da
+> primeira execução completa, e estão marcados no texto: a limitação sobre troca
+> de geração (§0), a formulação da censura no teste de sucessão (§5) e a premissa
+> de sanidade temporal de julho de 2023 (§6). O registro das decisões está em
+> `QUESTOES_ABERTAS.md`.
+
 > Cole este documento inteiro no Claude Code como primeira mensagem do projeto,
 > ou salve-o na raiz do repositório como `ESPEC.md` e peça ao Code que o siga.
 
@@ -19,9 +25,14 @@ substitui por heurística automática.
 | D4 | Vendedor | **Duas chaves**: `marca` e `grupo_economico`. O mapa de propriedade é **datado** — Stellantis só existe a partir de 2021-01; antes disso FCA e PSA são grupos separados. Nunca aplicar propriedade retroativamente. |
 | D5 | Piso de cobertura | **Medir primeiro.** Confrontar o total do painel contra o total publicado pela fonte, mês a mês, e só então fixar o piso. Entregar a comparação como produto. |
 
-**Limitação declarada, não é regra:** troca de geração é invisível na fonte.
-"Sobrevivência do modelo" significa sobrevivência do **nome comercial**, não do
-produto físico. Registrar isso no dicionário de dados.
+**Limitação declarada, não é regra:** troca de geração é invisível na fonte *na
+maior parte dos casos* — não em todos. Onde a fonte separa gerações em
+sub-segmentos diferentes (`NISSAN/VERSA` aparece em "Sedans Pequenos" com a
+geração antiga e em "Sedans Compactos" com a nova, no mesmo informe), a pista
+existe e é preservada: o sub-segmento é atributo da linha, fora da chave, e não
+pode ser somado fora. Fora desses casos, "sobrevivência do modelo" significa
+sobrevivência do **nome comercial**, não do produto físico. Registrar isso no
+dicionário de dados.
 
 ---
 
@@ -117,11 +128,18 @@ candidatos a sucessor encontrados pelo **teste de passagem de bastão**:
 - excluindo B cuja série já existia antes de `saída(A) − 12` (não é sucessor novo);
 - reportando a correlação das duas séries mensais na janela de ±12 meses.
 
-**Armadilha obrigatória de tratar — censura à esquerda.** Todo modelo vivo no
-primeiro mês da amostra tem "entrada" nesse mês, e todo modelo que sai perto do
-início casa falsamente com dezenas de candidatos. Excluir do teste qualquer
-entrada que coincida com o primeiro mês da amostra, e qualquer saída no último.
-Na base atual isso produzia 14 candidatos falsos só para o Chevrolet Agile.
+**Armadilha obrigatória de tratar — censura.** São **duas exclusões com alvos
+diferentes**, e confundi-las esconde o caso que mais importa:
+
+- censura à esquerda invalida a **entrada**, então descarta o modelo no papel de
+  *sucessor* — todo modelo vivo no primeiro mês da amostra tem "entrada" nesse
+  mês, e casaria falsamente com dezenas de pares;
+- censura à direita invalida a **saída**, então descarta o modelo no papel de
+  *quem sai* — saída no último mês da amostra é fim de janela, não evento.
+
+Um modelo vivo no primeiro mês **continua podendo sair**. É o caso do Prisma:
+excluí-lo por censura à esquerda apagaria Prisma → Onix Plus. Na base atual a
+confusão produzia 14 candidatos falsos só para o Chevrolet Agile.
 
 **Segundo detector, para rebatismo puro:** modelo cuja queda é abrupta (perda
 superior a 80% num único mês, sem declínio prévio) pareado com uma entrada na
@@ -160,8 +178,15 @@ não cria nem destrói unidades. Qualquer diferença é bug — falhar a execuç
 Além dele:
 
 - **Teste de sanidade temporal.** Abril de 2020 tem de ser o menor mês do período
-  2014-2023. Julho de 2023 tem de ser o maior mês desde 2019. Se não for, a
-  atribuição de mês está errada — provavelmente pelo cabeçalho (§7).
+  2014-2023. Julho de 2023 tem de ser o maior mês **desde janeiro de 2021** — a
+  redação anterior dizia "desde 2019" e não sobrevive à fonte: dezembro de 2019
+  fez 252 mil e dezembro de 2020 fez 233 mil, contra 216 mil de julho de 2023.
+  Acrescentar um segundo teste, mais informativo: julho de 2023 supera junho de
+  2023 em pelo menos 15%, que é o salto que interessa ao estudo de choque
+  tributário. Rodar todo teste de sanidade **duas vezes**, no painel e no total
+  publicado pela fonte: painel discordando da fonte é erro de atribuição de mês,
+  provavelmente pelo cabeçalho (§7); painel e fonte concordando entre si e
+  discordando da premissa é premissa não confirmada, e se reporta sem corrigir.
 - **Cobertura (D5).** Tabela mês a mês: total do painel, total publicado pela
   fonte, diferença absoluta e percentual. É este produto que fecha D5.
 - **Contagem de modelos** por ano, comparada com a contagem no informe.

@@ -29,7 +29,10 @@ def uteis() -> set[str]:
     caminho = config.DIR_PROCESSADO / "meses_extraidos.csv"
     if caminho.exists():
         with caminho.open(encoding="utf-8", newline="") as fluxo:
-            return {l["mes"] for l in csv.DictReader(fluxo) if l["situacao"] == "ok"}
+            return {
+                l["mes"] for l in csv.DictReader(fluxo)
+                if l["situacao"] in ("ok", "ok_reconstruido")
+            }
     # Sem o registro da etapa 02, cai para o que foi baixado.
     if config.MANIFESTO.exists():
         with config.MANIFESTO.open(encoding="utf-8", newline="") as fluxo:
@@ -43,7 +46,10 @@ def lacunas() -> list[dict]:
     registros: list[dict] = []
     if caminho.exists():
         with caminho.open(encoding="utf-8", newline="") as fluxo:
-            registros = [l for l in csv.DictReader(fluxo) if l["situacao"] != "ok"]
+            registros = [
+                l for l in csv.DictReader(fluxo)
+                if l["situacao"] not in ("ok", "ok_reconstruido")
+            ]
     if config.LACUNAS.exists():
         with config.LACUNAS.open(encoding="utf-8", newline="") as fluxo:
             for linha in csv.DictReader(fluxo):

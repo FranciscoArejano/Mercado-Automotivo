@@ -162,6 +162,9 @@ class Extracao:
     divergencias_de_secao: list[str] = field(default_factory=list)
     sem_segmento: list[str] = field(default_factory=list)
     total_publicado: dict[str, float] = field(default_factory=dict)
+    # Coluna (B) do Resumo Mensal: o total do mes anterior, republicado. E'
+    # ela que permite recuperar o total de um mes cujo informe nao e' legivel.
+    total_publicado_anterior: dict[str, float] = field(default_factory=dict)
     subtotal_publicado: dict[tuple[str, str], float] = field(default_factory=dict)
     modelos: list[LinhaModelo] = field(default_factory=list)
     ranking: list[LinhaRanking] = field(default_factory=list)
@@ -267,14 +270,19 @@ def _mes_do_titulo(titulo: str) -> str | None:
     return None
 
 
-def _totais_do_resumo(linhas: list[str]) -> dict[str, float]:
-    """Primeira coluna numerica de 'A) Autos' e 'B) Com. Leves' = mes de referencia.
+def _totais_do_resumo(linhas: list[str]) -> dict[str, list[float]]:
+    """Colunas numericas de 'A) Autos' e 'B) Com. Leves' no Resumo Mensal.
+
+    A ordem e' posicional: (A) mes de referencia, (B) mes anterior, (C) acumulado
+    do ano, (D) mesmo mes do ano anterior, (E) acumulado do ano anterior. Devolve
+    a lista inteira; quem chama escolhe a coluna. A (B) importa porque permite
+    recuperar o total publicado de um mes cujo proprio informe nao e' legivel.
 
     Em algumas edicoes (Abr, Nov e Dez/2017, Jan e Fev/2018) o extrator devolve a
     linha de numeros **antes** do rotulo. Por isso, rotulo sem numeros procura na
     linha imediatamente anterior, desde que ela seja so' numeros.
     """
-    totais: dict[str, float] = {}
+    totais: dict[str, list[float]] = {}
     for posicao, linha in enumerate(linhas):
         alvo = None
         if RE_LINHA_AUTOS.match(linha):
@@ -289,7 +297,7 @@ def _totais_do_resumo(linhas: list[str]) -> dict[str, float]:
             if anterior and all(eh_numero_br(t) for t in anterior):
                 numeros = anterior
         if numeros:
-            totais[alvo] = numero_br(numeros[0])
+            totais[alvo] = [numero_br(t) for t in numeros]
     return totais
 
 
@@ -439,8 +447,10 @@ def ler(caminho: Path, usar_ocr: bool = False) -> Extracao:
             if RE_TITULO_RESUMO.match(_sem_acento(titulo)):
                 if extracao.mes_declarado is None:
                     extracao.mes_declarado = _mes_do_titulo(titulo)
-                for chave, valor in _totais_do_resumo(linhas).items():
-                    extracao.total_publicado.setdefault(chave, valor)
+                for chave, colunas in _totais_do_resumo(linhas).items():
+                    extracao.total_publicado.setdefault(chave, colunas[0])
+                    if len(colunas) > 1:
+                        extracao.total_publicado_anterior.setdefault(chave, colunas[1])
                 continue
 
             if RE_TITULO_RANKING.match(_sem_acento(titulo)):

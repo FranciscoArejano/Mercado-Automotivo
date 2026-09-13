@@ -50,6 +50,7 @@ Parametros ficam em `src/comum/config.py` e aceitam variavel de ambiente
 | `regras.csv` | Uma linha por decisao de fusao/classificacao. O codigo le'; o humano escreve. Ausente, e' criado vazio e nada e' fundido. |
 | `config/mapa_grupos.csv` | Mapa **datado** de marca para grupo economico (D4). Rascunho -- ver Q3. |
 | `config/marcas.csv` | Lista curada de marcas conhecidas. Marca observada e fora dela e' reportada, nunca adivinhada. |
+| `config/sub_segmentos.csv` | Mapa explicito de sub-segmento para segmento. E' ele, e nao o titulo da secao, que decide o segmento -- o titulo vem corrompido em tres meses de 2020. |
 
 `saidas/candidatos.xlsx` e' o insumo de `regras.csv`: a aba `pares` traz uma
 coluna `decisao` vazia para preencher e transportar.
@@ -75,6 +76,16 @@ numero fixo de linhas por sub-segmento. Quanto falta, medido mes a mes contra o
 total que o proprio informe publica, esta' em `saidas/cobertura.csv`. E' o
 produto que fecha D5.
 
+## Ferramentas de apoio
+
+Nao fazem parte do pipeline; rodam sob demanda.
+
+| Script | Para que |
+|---|---|
+| `src/ferramentas/inventario_marcas.py` | Lista as marcas observadas na fonte, com volume e periodo, para curar `config/marcas.csv` com evidencia. |
+| `src/ferramentas/robustez_grupos.py` | Recalcula a concentracao com outra convencao de grupo (por padrao Kia separada da Hyundai). |
+| `src/ferramentas/diagnostico_retroacao.py` | Le os informes de 2003-2013 **sem escrever no painel** e reporta, ano a ano, onde a extracao degrada e como a agregacao da fonte deriva. |
+
 ## O que o pipeline nunca faz
 
 Traducao direta da sec.9 da ESPEC:
@@ -91,29 +102,59 @@ Nao ha' casamento aproximado de nome em lugar nenhum, por decisao da sec.5:
 na base anterior produziu 204 pares, quase todos falsos, e nao encontrou
 Prisma -> Onix Plus.
 
+E quatro decisoes desta rodada, que valem enquanto nao forem revistas:
+
+1. **`regras.csv` fica vazio.** Nada e' fundido; a planilha de candidatos e'
+   evidencia arquivada, nao adjudicada.
+2. **O piso de cobertura nao e' aplicado ao painel.** Medido e recomendado, nao
+   gravado -- filtrar destroi informacao de forma irreversivel.
+3. **A serie nao e' estendida para tras** antes de o diagnostico de retroacao ser
+   lido (`saidas/diagnostico_retroacao.md`).
+4. **O sub-segmento nao e' descartado em nenhuma etapa.** E' a unica pista de
+   geracao que a fonte oferece.
+
 ## O que a execucao de 2014-01 a 2026-08 produziu
 
-152 informes baixados, 151 meses no painel, 29.079 linhas, 29,5 milhoes de
-unidades, 648 modelos (marca x modelo x segmento). Numeros que valem como
-retrato do estado atual, nao como promessa:
+152 informes, **152 meses no painel, sem nenhuma lacuna**, 29.246 linhas, 29,7
+milhoes de unidades, 648 modelos (marca x modelo x segmento). Retrato do estado
+atual, nao promessa:
 
 - **Cobertura (D5):** 98,4% a 99,2% do total publicado em automoveis, 99,9% em
   comerciais leves. O que falta e' a cauda que as tabelas da fonte truncam.
+  **Nenhum piso foi aplicado ao painel**; a recomendacao (300 unidades por
+  modelo e mes) esta' em `saidas/piso_recomendado.csv`.
 - **HHI por marca**, contra a planilha de controle da sec.7: 1.317 x 1.297
   (2014), 1.069 x 1.055 (2016), 1.165 x 1.146 (2020), 1.227 x 1.208 (2022) --
   cerca de 1,5% acima, exatamente o efeito de faltar a cauda.
-- **Uma lacuna:** set/2023, cujo informe e' um PDF digitalizado. O OCR foi
-  implementado (`--ocr`) e o proprio teste de ranking o rejeitou, com 21,6% do
-  volume divergente. O mes fica como lacuna declarada, nao como dado ruim.
+- **Setembro de 2023 recuperado.** O informe do mes e' um PDF digitalizado e o
+  OCR foi rejeitado pela propria verificacao (21,6% do volume divergente). O mes
+  veio da coluna de mes anterior do informe de outubro -- segunda publicacao do
+  mesmo numero pela mesma fonte -- e a rota do acumulado confirma em 122 de 151
+  modelos, com 39 unidades de diferenca.
 - **Seis informes** trazem fonte embutida sem ToUnicode; o texto foi recuperado
-  pela ordem padrao de glifos, sem OCR (`saidas/arquivos_com_fonte_sem_tounicode.csv`).
-- **819 pares candidatos** para adjudicacao humana. No topo por volume em jogo:
-  Palio -> Argo, Prisma -> Onix Plus, Punto -> Argo, Cobalt -> Onix Plus,
-  Etios -> Corolla Cross.
-- **Dez questoes em aberto**, em [`QUESTOES_ABERTAS.md`](QUESTOES_ABERTAS.md).
-  Duas merecem leitura antes de usar o painel: a leitura de "pico movel de 12
-  meses" (Q1) e o fato de que "julho de 2023 e' o maior mes desde 2019" **nao se
-  confirma** no total que a propria Fenabrave publica (Q8).
+  pela ordem padrao de glifos, sem OCR.
+- **212 pares candidatos** para adjudicacao humana, ordenados pelo **menor** das
+  duas series. No topo: Prisma -> Onix Plus, Palio -> Argo, Etios -> Corolla
+  Cross, Cobalt -> Onix Plus.
+- **`regras.csv` vazio por decisao.** As taxas de entrada e saida sao, portanto,
+  o **limite superior** dessas taxas: o cenario em que todo rebatismo conta como
+  morte e nascimento.
+
+Tres achados que mudam como o painel se le':
+
+1. **A escolha entre as duas leituras de "pico movel de 12 meses" nao e' inocua:**
+   5 dos 13 anos mudam de posicao no ranking de taxa de saida. Qualquer resultado
+   sobre em que anos houve mais saida precisa declarar qual leitura usou.
+2. **A alta recente da taxa de saida nao e' artefato do corte de publicacao.**
+   Restrita aos 310 modelos em que o corte nao morde, ela vai de 0,074 (2022) a
+   0,143 (2025) -- sobe mais, nao menos.
+3. **Entrada e saida sao assimetricas:** a entrada e' o primeiro mes com unidades
+   positivas e nao usa limiar; so' a saida aplica D3. E' desenho, esta' declarado
+   no dicionario, e entra direto em decomposicao de margens.
+
+Leia antes de usar o painel: [`saidas/validacao.md`](saidas/validacao.md),
+[`saidas/painel_dicionario.md`](saidas/painel_dicionario.md) e
+[`QUESTOES_ABERTAS.md`](QUESTOES_ABERTAS.md).
 
 ## Rastreabilidade
 

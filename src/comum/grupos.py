@@ -62,3 +62,18 @@ def grupo_de(marca: str, mes: str) -> str:
 
 def marcas_mapeadas() -> set[str]:
     return {linha["marca"] for linha in carregar()}
+
+
+def grupo_vigente(marca: str, mes: str) -> tuple[str, bool]:
+    """Grupo economico do mes, com marca nao mapeada virando grupo unitario.
+
+    Para indice de concentracao, marca sem linha vigente **nao** pode cair num
+    balde `NAO_MAPEADO` comum nem sumir do calculo: as duas coisas distorcem o
+    HHI em direcoes opostas. Ela entra como grupo de uma marca so', com o
+    proprio nome. O segundo valor devolvido diz se o mapa cobria o caso, para
+    que o relatorio conte quantas sao e quanto volume representam.
+    """
+    grupo = grupo_de(marca, mes)
+    if grupo == NAO_MAPEADO:
+        return normalizar_tipografia(marca).upper(), False
+    return grupo, True

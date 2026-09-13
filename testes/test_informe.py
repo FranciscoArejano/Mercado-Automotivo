@@ -49,9 +49,26 @@ def test_mes_do_titulo():
     assert _mes_do_titulo("Resumo Mensal") is None
 
 
-def test_total_publicado_e_a_primeira_coluna():
+def test_totais_do_resumo_devolvem_as_colunas_na_ordem():
+    """(A) mes de referencia, (B) mes anterior -- e' a (B) que recupera mes ilegivel."""
     linhas = [
         "A) Autos 255.437 287.567 255.437 253.429 253.429 -11,17 0,79 0,79",
         "B) Com. Leves 44.300 48.359 44.300 43.423 43.423 -8,39 2,02 2,02",
     ]
-    assert _totais_do_resumo(linhas) == {"automoveis": 255437.0, "comerciais_leves": 44300.0}
+    lido = _totais_do_resumo(linhas)
+    assert lido["automoveis"][:2] == [255437.0, 287567.0]
+    assert lido["comerciais_leves"][:2] == [44300.0, 48359.0]
+
+
+def test_numeros_antes_do_rotulo_tambem_sao_lidos():
+    """Abr, Nov e Dez/2017 e Jan e Fev/2018 desenham a linha de numeros antes."""
+    linhas = [
+        "Segmentos Abr Mar Acumulado Abr Acumulado",
+        "131.516 158.068 523.342 131.961 533.582 -16,80 -0,34 -1,92",
+        "A) Autos",
+        "20.867 25.764 88.825 25.547 88.952 -19,01 -18,32 -0,14",
+        "B) Com. Leves",
+    ]
+    lido = _totais_do_resumo(linhas)
+    assert lido["automoveis"][0] == 131516.0
+    assert lido["comerciais_leves"][0] == 20867.0

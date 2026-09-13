@@ -34,17 +34,23 @@ ETAPA = "etapa05_painel"
 
 COLUNAS = [
     "mes_ref", "ano", "mes", "data", "segmento", "marca", "modelo",
-    "grupo_economico", "unidades", "modelo_fonte", "nome_completo_fonte",
+    "sub_segmento_fonte", "grupo_economico", "grupo_mapeado", "unidades",
+    "corte_publicacao", "modelo_fonte", "nome_completo_fonte",
     "houve_rebatismo", "data_rebatismo", "cadeia_rebatismo",
     "reclassificacao", "conta_entrada_saida", "origem_tabela", "arquivos_origem",
 ]
 
 
 def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tuple[pd.DataFrame, pd.DataFrame]:
-    # 1. Uma linha por (mes, segmento, marca, modelo). A fonte pode listar o
-    #    mesmo nome em dois sub-segmentos (NISSAN/VERSA em 2026); sao veiculos
-    #    distintos e somam.
-    chaves = ["mes_ref", "ano", "mes", "data", "segmento_fonte", "marca_fonte", "modelo_fonte"]
+    # 1. Uma linha por (mes, segmento, marca, modelo, sub-segmento). O
+    #    sub-segmento fica **na linha, fora da chave** (QUESTOES_ABERTAS.md Q4):
+    #    quando a fonte publica o mesmo nome em dois sub-segmentos no mesmo mes
+    #    -- NISSAN/VERSA em "Sedans Pequenos" com a geracao antiga e em "Sedans
+    #    Compactos" com a nova -- as duas linhas ficam separadas. E' a unica
+    #    pista de geracao que a fonte da'. A soma por modelo e' visao
+    #    (comum/visoes.py), nao esquema.
+    chaves = ["mes_ref", "ano", "mes", "data", "segmento_fonte", "marca_fonte",
+              "modelo_fonte", "sub_segmento_fonte"]
     agregado = (
         bruto.groupby(chaves, as_index=False)
         .agg(
@@ -86,17 +92,24 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
     ]
     agregado["conta_entrada_saida"] = ~agregado["reclassificacao"]
 
-    # 4. Grupo economico datado (D4). Nunca retroativo, nunca adivinhado.
-    agregado["grupo_economico"] = [
-        grupos.grupo_de(marca, mes) for marca, mes in zip(agregado["marca"], agregado["mes_ref"])
+    # 4. Grupo economico datado (D4). Nunca retroativo, nunca adivinhado. Marca
+    #    sem linha vigente vira grupo unitario com o proprio nome, para nao
+    #    distorcer o indice de concentracao; `grupo_mapeado` guarda o aviso.
+    vigentes = [
+        grupos.grupo_vigente(marca, mes)
+        for marca, mes in zip(agregado["marca"], agregado["mes_ref"])
     ]
+    agregado["grupo_economico"] = [g for g, _ in vigentes]
+    agregado["grupo_mapeado"] = [m for _, m in vigentes]
 
     painel = (
         agregado.groupby(
-            ["mes_ref", "ano", "mes", "data", "segmento", "marca", "modelo"], as_index=False
+            ["mes_ref", "ano", "mes", "data", "segmento", "marca", "modelo",
+             "sub_segmento_fonte"], as_index=False
         )
         .agg(
             grupo_economico=("grupo_economico", "first"),
+            grupo_mapeado=("grupo_mapeado", "min"),
             unidades=("unidades", "sum"),
             modelo_fonte=("modelo_fonte", lambda s: "+".join(sorted(set(s)))),
             nome_completo_fonte=("nome_completo_fonte", lambda s: "+".join(sorted(set(s)))),
@@ -109,6 +122,17 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
             arquivos_origem=("arquivos_origem", lambda s: "+".join(sorted(set(s)))),
         )
     )
+    # 5. Corte de publicacao do mes (QUESTOES_ABERTAS.md Q5): menor valor que a
+    #    fonte listou naquele mes e segmento. E' a referencia para saber quando
+    #    um zero e' zero e quando e' "abaixo do corte".
+    cortes = (
+        painel[painel["unidades"] > 0]
+        .groupby(["mes_ref", "segmento"])["unidades"].min()
+        .rename("corte_publicacao")
+    )
+    painel = painel.merge(cortes, on=["mes_ref", "segmento"], how="left")
+    painel["corte_publicacao"] = painel["corte_publicacao"].fillna(0).astype("int64")
+
     logger.info(
         "regras aplicadas: %d rebatismos, %d reclassificacoes, %d substituicoes, %d ignorar",
         sum(1 for r in regras if r.tipo == "rebatismo"),
@@ -160,7 +184,7 @@ def executar() -> int:
         logger, linhas_lidas=len(bruto), linhas_escritas=len(painel),
         modelos=painel[["marca", "modelo", "segmento"]].drop_duplicates().shape[0],
         unidades=int(painel["unidades"].sum()),
-        grupos_nao_mapeados=int((painel["grupo_economico"] == grupos.NAO_MAPEADO).sum()),
+        linhas_sem_grupo_no_mapa=int((~painel["grupo_mapeado"]).sum()),
     )
     logger.info("gravado %s", log.caminho_relativo(config.PAINEL))
     return 0

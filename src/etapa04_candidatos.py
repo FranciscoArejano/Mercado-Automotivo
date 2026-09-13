@@ -157,25 +157,52 @@ def _passagem_de_bastao(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[s
                     (saindo["segmento"], saindo["saida"]), float("nan")),
                 "unidades_origem": saindo["unidades_totais"],
                 "unidades_destino": entrando["unidades_totais"],
-                "volume_em_jogo": saindo["unidades_totais"] + entrando["unidades_totais"],
+                "volume_em_jogo": min(saindo["unidades_totais"], entrando["unidades_totais"]),
+                "volume_somado": saindo["unidades_totais"] + entrando["unidades_totais"],
                 "decisao": "",
                 "observacao_humana": "",
             })
     return pares
 
 
-def _quedas_abruptas(largo: pd.DataFrame, meses: list[str]) -> dict[tuple, list[str]]:
-    """Meses em que a serie perde mais de 80% de um mes para o outro, sem
-    declinio previo. Calculado de uma vez para todos os modelos."""
+def _quedas_abruptas(
+    largo: pd.DataFrame, meses: list[str], mercado: dict[tuple[str, str], float]
+) -> dict[tuple, list[str]]:
+    """Meses em que a serie cai abruptamente **mais do que o mercado**.
+
+    Tres condicoes, todas necessarias (QUESTOES_ABERTAS.md Q9):
+
+    1. a queda supera 80% depois de descontada a variacao do proprio segmento no
+       mes -- em Abr/2020 o segmento caiu 73% e sem o desconto quase todo modelo
+       disparava o detector;
+    2. o mes anterior nao vinha ja' caindo, senao e' declinio, nao ruptura;
+    3. a serie tinha ao menos `config.QUEDA_VOLUME_MINIMO` unidades antes da
+       queda, para nao marcar serie de tres unidades.
+
+    Calculado de uma vez para todos os modelos.
+    """
     valores = largo[meses].to_numpy(dtype="float64")
     atual = valores[:, 2:]
     antes = valores[:, 1:-1]
     antes_de_antes = valores[:, :-2]
+
+    # Quanto o mercado sozinho ja' explicaria da queda, mes a mes e por segmento.
+    segmentos = [chave[2] for chave in largo.index]
+    fator = np.ones_like(atual)
+    if config.QUEDA_DESCONTAR_MERCADO:
+        for coluna, mes in enumerate(meses[2:]):
+            variacao = np.array(
+                [mercado.get((segmento, mes), 0.0) for segmento in segmentos], dtype="float64"
+            )
+            fator[:, coluna] = np.clip(1.0 + variacao, 0.05, None)
+
     with np.errstate(invalid="ignore", divide="ignore"):
-        queda = (antes - atual) / antes
+        esperado = antes * fator
+        queda = (esperado - atual) / esperado
         vinha_caindo = antes < antes_de_antes * 0.9
     sinalizado = (
-        np.isfinite(antes) & np.isfinite(atual) & (antes > 0)
+        np.isfinite(antes) & np.isfinite(atual)
+        & (antes >= config.QUEDA_VOLUME_MINIMO)
         & (queda > config.QUEDA_ABRUPTA)
         & ~(np.isfinite(antes_de_antes) & (antes_de_antes > 0) & vinha_caindo)
     )
@@ -200,7 +227,7 @@ def _queda_abrupta(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[str],
             continue
         entradas_por_marca.setdefault(ficha["marca"], []).append(ficha)
 
-    quedas = _quedas_abruptas(largo, meses)
+    quedas = _quedas_abruptas(largo, meses, mercado)
     for _, saindo in fichas.iterrows():
         chave = (saindo["marca"], saindo["modelo"], saindo["segmento"])
         serie = largo.loc[chave]
@@ -233,7 +260,9 @@ def _queda_abrupta(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[str],
                         (saindo["segmento"], mes_queda), float("nan")),
                     "unidades_origem": saindo["unidades_totais"],
                     "unidades_destino": entrando["unidades_totais"],
-                    "volume_em_jogo": saindo["unidades_totais"] + entrando["unidades_totais"],
+                    "volume_em_jogo": min(saindo["unidades_totais"],
+                                          entrando["unidades_totais"]),
+                    "volume_somado": saindo["unidades_totais"] + entrando["unidades_totais"],
                     "decisao": "",
                     "observacao_humana": "",
                 })
@@ -242,32 +271,50 @@ def _queda_abrupta(fichas: pd.DataFrame, largo: pd.DataFrame, meses: list[str],
 
 LEIA_ME = [
     ("O que e' este arquivo",
-     "Evidencia para adjudicacao humana (ESPEC.md sec.5). Nada aqui foi fundido."),
+     "Evidencia para adjudicacao humana (ESPEC.md sec.5). Nada aqui foi fundido, e "
+     "nesta rodada regras.csv fica vazio de proposito: a base vem primeiro, a "
+     "harmonizacao depois."),
     ("Como usar",
      "Preencha a coluna 'decisao' da aba 'pares' com um de: rebatismo, "
      "reclassificacao, substituicao, ignorar. Depois transcreva as linhas "
      "decididas para regras.csv na raiz do repositorio."),
     ("regras.csv",
      "Colunas: tipo, marca, modelo_origem, modelo_destino, data_evento, observacao. "
-     "data_evento e' obrigatoria para rebatismo (AAAA-MM) -- e' o campo que D2 manda registrar."),
-    ("Ordenacao", "A aba 'pares' vem ordenada por volume_em_jogo (origem + destino)."),
-    ("Censura a' esquerda",
-     "Entradas no primeiro mes da amostra e saidas no ultimo foram excluidas dos "
-     "detectores; elas sao artefato do recorte, nao evento de mercado."),
+     "data_evento e' obrigatoria para rebatismo (AAAA-MM) -- e' o campo que D2 manda "
+     "registrar."),
+    ("Ordenacao",
+     "A aba 'pares' vem ordenada por volume_em_jogo = MENOR das duas series, nao pela "
+     "soma. E' o menor que limita quanta substituicao o par pode explicar: um Gol de "
+     "775 mil unidades pareado com um destino de duas nao e' um par grande, e a soma "
+     "o colocaria no topo. A soma continua na coluna volume_somado."),
+    ("Sinal esperado da correlacao",
+     "NEGATIVO. Sucessao e' um caindo enquanto o outro sobe, entao correlacao_12m "
+     "negativa e' o sinal a favor do par, nao contra. Quem filtrar por correlacao "
+     "positiva descarta justamente os casos reais -- Palio->Argo tem -0,81, "
+     "Prisma->Onix Plus tem -0,75."),
+    ("Censura",
+     "Sao duas exclusoes com alvos diferentes. Entrada no primeiro mes da amostra "
+     "invalida a ENTRADA, entao descarta o modelo no papel de sucessor. Saida no "
+     "ultimo mes invalida a SAIDA, entao descarta o modelo no papel de quem sai. Um "
+     "modelo vivo no primeiro mes continua podendo sair: e' o caso do Prisma."),
+    ("Detector de queda abrupta",
+     "Exige que a queda supere 80% DEPOIS de descontada a variacao do proprio "
+     "segmento no mes, e que a serie tivesse ao menos 100 unidades antes da queda. "
+     "Sem o desconto, Abr/2020 -- quando o mercado caiu 73% num mes -- enchia a lista "
+     "de pares em que nada aconteceu com o produto."),
     ("Aba mesmo_nome_dois_segmentos",
      "Nome comercial que a fonte publica em automoveis e em comerciais leves. "
      "Nao e' sucessao: e' a questao de unidade de observacao (QUESTOES_ABERTAS.md Q4). "
      "Estes pares foram deliberadamente mantidos fora da aba 'pares'."),
-    ("Coluna variacao_mercado_no_mes",
-     "Variacao do total do segmento no mes do evento. Em Abr/2020 o mercado inteiro "
-     "caiu mais de 70% num mes e quase todo modelo dispara o detector de queda "
-     "abrupta; a coluna mostra isso sem filtrar nada."),
     ("Similaridade de nome",
      "Nao usada, por decisao da ESPEC sec.5: produz falsos pares e nao encontra "
      "Prisma -> Onix Plus."),
     ("Limitacao declarada",
-     "Troca de geracao e' invisivel na fonte. 'Sobrevivencia do modelo' significa "
-     "sobrevivencia do nome comercial, nao do produto fisico."),
+     "Troca de geracao e' invisivel na fonte na maior parte dos casos -- nao em "
+     "todos. Onde a fonte separa geracoes em sub-segmentos diferentes (NISSAN/VERSA "
+     "em 'Sedans Pequenos' e 'Sedans Compactos' no mesmo mes), o painel preserva as "
+     "linhas separadas. Fora desses casos, 'sobrevivencia do modelo' significa "
+     "sobrevivencia do nome comercial."),
 ]
 
 

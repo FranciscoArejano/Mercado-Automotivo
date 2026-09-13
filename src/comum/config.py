@@ -92,6 +92,12 @@ RAZAO_PICO_MAX = 3.0
 PRE_EXISTENCIA_MESES = 12
 JANELA_CORRELACAO_MESES = 12
 QUEDA_ABRUPTA = 0.80
+# QUESTOES_ABERTAS.md Q9: a queda tem de ser do produto, nao do mercado. Em
+# Abr/2020 o segmento inteiro caiu 73% num mes e quase todo modelo disparava o
+# detector. A queda passa a ser medida contra o que o mercado ja explica, e a
+# serie precisa ter tamanho antes da queda para nao marcar tres unidades.
+QUEDA_DESCONTAR_MERCADO = True
+QUEDA_VOLUME_MINIMO = int(os.environ.get("QUEDA_VOLUME_MINIMO", "100"))
 
 # ------------------------------------------------------------------- geral
 SEMENTE = 20240101

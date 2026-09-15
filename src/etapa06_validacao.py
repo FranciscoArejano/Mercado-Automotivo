@@ -25,7 +25,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from comum import (  # noqa: E402
     ciclo_vida, cobertura as mod_cobertura, concentracao, config, log,
-    meses as mod_meses, periodo, visoes,
+    meses as mod_meses, periodo, truncamento, visoes,
 )
 
 ETAPA = "etapa06_validacao"
@@ -383,18 +383,19 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
 
     # -------------------------------------------- 4. corte de publicacao
     partes.append(
-        "\n## 4. Corte de publicacao e zeros frageis\n\n"
-        "Menor valor que a fonte lista em cada mes. Modelo ausente do painel naquele mes "
-        "esta' abaixo deste corte -- nao necessariamente em zero.\n\n"
+        "\n## 4. Onde a fonte corta a cauda\n\n"
+        "A truncagem da Fenabrave **nao e' um piso de unidades**: e' numero fixo de linhas "
+        "por sub-segmento. \"Suv's\" traz exatamente 40 modelos nos 152 meses; \"Furgoes\", 7; "
+        "\"Sedans Grandes\", 12. Sub-segmento com menos modelos que o teto nao trunca nada. "
+        "Logo o corte que vale para um modelo e' o do **bloco** em que ele seria listado, "
+        "quando aquele bloco esta' no teto -- e nao o menor valor publicado no mes inteiro, "
+        "que mede o tamanho do menor modelo da fonte, nao a truncagem.\n\n"
     )
-    corte_por_mes = (
-        painel[painel["unidades"] > 0].groupby(["mes_ref", "segmento"])["unidades"].min()
-    )
-    corte_anual = (
-        painel[painel["unidades"] > 0].groupby(["ano", "segmento"], as_index=False)["unidades"]
-        .agg(corte_min="min", corte_mediano="median")
-    )
+    blocos = truncamento.por_bloco(bruto)
+    blocos.to_csv(config.DIR_SAIDAS / "truncamento_por_bloco.csv", index=False)
+    corte_anual = truncamento.resumo_anual(blocos)
     partes.append(_tabela(corte_anual))
+    cortes_modelo = truncamento.por_modelo_e_mes(bruto, meses)
 
     # ------------------------------------------------- 5. contagem de modelos
     partes.append(
@@ -613,16 +614,18 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
     # I3: o corte de publicacao pode estar fabricando a alta recente.
     partes.append(
         "\n### O corte de publicacao esta' fabricando a alta recente? (I3)\n\n"
-        "O corte quase quadruplica entre 2022 e 2026 e a taxa de saida sobe junto. O "
-        "mecanismo seria este: o limiar de D3 de um modelo de pico 5.000/mes e' 250 "
-        "unidades, **abaixo** do corte mediano de 2026 -- modelos de porte medio sumiriam "
-        "da fonte antes de cruzar o proprio limiar, e a data de saida passaria a ser "
-        "pratica editorial. O teste isola os modelos em que o corte nao morde: aqueles cujo "
-        "limiar de D3 supera o corte em **todo mes** da propria janela.\n\n"
+        "A taxa de saida sobe nos ultimos anos, e o corte de publicacao poderia explica-la: "
+        "se o limiar de D3 de um modelo ficar **abaixo** do corte do bloco em que ele e' "
+        "listado, ele some da fonte antes de cruzar o proprio limiar, e a data de saida "
+        "passa a ser pratica editorial. Medido o corte corretamente (sec.4), ele nao sobe "
+        "em automoveis mas **sobe muito em comerciais leves** -- a mediana vai de 25 "
+        "unidades em 2014 para 172 em 2026. O teste isola os modelos em que o corte nao "
+        "morde: aqueles cujo limiar de D3 supera, em **todo mes** da propria janela, o corte "
+        "do bloco em que estariam.\n\n"
     )
     ciclos_5 = ciclos_por_limiar[config.LIMIAR_SAIDA]
     com_imunidade = mod_cobertura.imunes_ao_corte(
-        largo, ciclos_5, corte_por_mes, config.LIMIAR_SAIDA)
+        ciclos_5, cortes_modelo, config.LIMIAR_SAIDA)
     if "imune_ao_corte" in com_imunidade.columns and com_imunidade["imune_ao_corte"].any():
         imunes = com_imunidade[com_imunidade["imune_ao_corte"]]
         # Denominador proprio: quantos modelos imunes estavam ativos em cada ano.
@@ -642,17 +645,49 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
             "para que o nivel, e nao so' a forma, seja comparavel.\n\n"
             + _tabela(lado_a_lado)
         )
-        recentes = [a for a in lado_a_lado["ano"] if a >= 2022]
+        # A comparacao so' vale entre anos completos: o ultimo ano da amostra
+        # termina no meio e infla a taxa de saida por conta propria.
+        ultimo_completo = int(meses[-1][:4]) - 1
+        recentes = [a for a in lado_a_lado["ano"] if 2022 <= a <= ultimo_completo]
         if len(recentes) >= 2:
-            coluna_imune = f"taxa_saida_{config.LIMIAR_SAIDA:.0%}_imunes"
-            serie = lado_a_lado.set_index("ano")[coluna_imune]
-            subiu = serie.loc[recentes].iloc[-1] > serie.loc[recentes].iloc[0]
+            indexado = lado_a_lado.set_index("ano")
+            cheia = indexado[f"taxa_saida_{config.LIMIAR_SAIDA:.0%}"]
+            imune = indexado[f"taxa_saida_{config.LIMIAR_SAIDA:.0%}_imunes"]
+            saidas_imunes = indexado[f"saidas_{config.LIMIAR_SAIDA:.0%}_imunes"]
+            inicio_, fim_ = recentes[0], recentes[-1]
+            variacao_cheia = cheia.loc[fim_] - cheia.loc[inicio_]
+            variacao_imune = imune.loc[fim_] - imune.loc[inicio_]
+            proporcao = (variacao_imune / variacao_cheia) if variacao_cheia else float("nan")
+            if variacao_cheia <= 0:
+                veredito = ("a serie cheia nao sobe nesta janela, entao nao ha' o que "
+                            "atribuir ao corte")
+                ressalva = "fica sem objeto enquanto a serie cheia nao subir"
+            elif variacao_imune <= 0:
+                veredito = ("a subida **desaparece** no subconjunto imune, o que aponta "
+                            "para artefato do corte de publicacao")
+                ressalva = ("aponta na direcao do artefato sem demonstra-lo, porque com "
+                            "tao poucas saidas o desaparecimento tambem cabe no acaso")
+            elif proporcao >= 0.5:
+                veredito = ("a subida **persiste** no subconjunto imune, entao nao e' "
+                            "artefato do corte")
+                ressalva = ("descarta a hipotese forte -- a de que a alta seja "
+                            "**inteiramente** artefato do corte --, nao a fraca")
+            else:
+                veredito = ("a subida **atenua** no subconjunto imune -- parte do movimento "
+                            "pode ser do corte, parte nao")
+                ressalva = ("a atenuacao e' compativel tanto com artefato parcial quanto "
+                            "com ruido de amostra pequena")
+            mediana_saidas = float(saidas_imunes.loc[recentes].median())
             partes.append(
-                f"\nNo subconjunto imune, a taxa de saida vai de {serie.loc[recentes].iloc[0]:.3f} "
-                f"({recentes[0]}) a {serie.loc[recentes].iloc[-1]:.3f} ({recentes[-1]}): "
-                + ("a subida **persiste**, entao nao e' artefato do corte.\n" if subiu else
-                   "a subida **desaparece**, o que aponta para artefato do corte de "
-                   "publicacao.\n")
+                f"\nEntre {inicio_} e {fim_} (o ultimo ano completo), a taxa de saida vai de "
+                f"{cheia.loc[inicio_]:.3f} a {cheia.loc[fim_]:.3f} na serie cheia "
+                f"({variacao_cheia:+.3f}) e de {imune.loc[inicio_]:.3f} a "
+                f"{imune.loc[fim_]:.3f} no subconjunto imune ({variacao_imune:+.3f}): "
+                f"{veredito}.\n\n"
+                f"**Ressalva de tamanho:** o subconjunto imune tem so' {len(imunes)} modelos "
+                f"e mediana de {mediana_saidas:.0f} saidas por ano na janela recente. Com "
+                "contagens assim, uma diferenca de duas ou tres saidas move a taxa em varios "
+                f"pontos, e o teste **nao tem poder** para concluir com seguranca: {ressalva}.\n"
             )
     else:
         partes.append("_Nenhum modelo imune ao corte no periodo._\n")
@@ -671,7 +706,7 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
         "de D3 do proprio modelo: ali o zero pode estar escondendo valor relevante, e a data "
         "de saida fica a merce da pratica editorial.\n\n"
     )
-    fragil = mod_cobertura.zeros_fragis(largo, ciclos_5, corte_por_mes, config.LIMIAR_SAIDA)
+    fragil = mod_cobertura.zeros_fragis(largo, ciclos_5, cortes_modelo, config.LIMIAR_SAIDA)
     if fragil.empty:
         partes.append("Nenhum zero fragil no periodo.\n")
     else:

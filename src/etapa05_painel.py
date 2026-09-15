@@ -28,7 +28,8 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from comum import config, dicionario, grupos, log, regras as mod_regras  # noqa: E402
+from comum import config, dicionario, grupos, log, truncamento  # noqa: E402
+from comum import regras as mod_regras  # noqa: E402
 
 ETAPA = "etapa05_painel"
 
@@ -122,15 +123,15 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
             arquivos_origem=("arquivos_origem", lambda s: "+".join(sorted(set(s)))),
         )
     )
-    # 5. Corte de publicacao do mes (QUESTOES_ABERTAS.md Q5): menor valor que a
-    #    fonte listou naquele mes e segmento. E' a referencia para saber quando
-    #    um zero e' zero e quando e' "abaixo do corte".
-    cortes = (
-        painel[painel["unidades"] > 0]
-        .groupby(["mes_ref", "segmento"])["unidades"].min()
-        .rename("corte_publicacao")
-    )
-    painel = painel.merge(cortes, on=["mes_ref", "segmento"], how="left")
+    # 5. Corte de publicacao (QUESTOES_ABERTAS.md Q5). Nao e' o menor valor do
+    #    mes: a fonte trunca por **numero fixo de linhas por sub-segmento**, e o
+    #    corte que vale para uma linha e' o do bloco em que ela esta', quando o
+    #    bloco esta' no teto. Ver comum/truncamento.py.
+    blocos = truncamento.por_bloco(bruto)[
+        ["mes_ref", "segmento", "sub_segmento_fonte", "corte"]
+    ].rename(columns={"corte": "corte_publicacao"})
+    painel = painel.merge(
+        blocos, on=["mes_ref", "segmento", "sub_segmento_fonte"], how="left")
     painel["corte_publicacao"] = painel["corte_publicacao"].fillna(0).astype("int64")
 
     logger.info(

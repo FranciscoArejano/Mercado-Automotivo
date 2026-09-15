@@ -145,9 +145,13 @@ Tres achados que mudam como o painel se le':
 1. **A escolha entre as duas leituras de "pico movel de 12 meses" nao e' inocua:**
    5 dos 13 anos mudam de posicao no ranking de taxa de saida. Qualquer resultado
    sobre em que anos houve mais saida precisa declarar qual leitura usou.
-2. **A alta recente da taxa de saida nao e' artefato do corte de publicacao.**
-   Restrita aos 310 modelos em que o corte nao morde, ela vai de 0,074 (2022) a
-   0,143 (2025) -- sobe mais, nao menos.
+2. **A alta recente da taxa de saida pode ser artefato da fonte, e o teste nao
+   tem poder para descartar.** A truncagem da Fenabrave e' numero fixo de linhas
+   por sub-segmento, nao piso de unidades; medida assim, ela nao sobe em
+   automoveis e sobe muito em comerciais leves (25 unidades em 2014, 172 em
+   2026). Restrita aos 98 modelos em que o corte nao morde, a taxa de saida vai
+   de 0,149 (2022) a 0,133 (2025) -- a subida some. Mas sao 6 saidas por ano no
+   subconjunto: aponta o artefato sem demonstra-lo.
 3. **Entrada e saida sao assimetricas:** a entrada e' o primeiro mes com unidades
    positivas e nao usa limiar; so' a saida aplica D3. E' desenho, esta' declarado
    no dicionario, e entra direto em decomposicao de margens.

@@ -84,6 +84,40 @@ def baixar_catalogo(sessao: requests.Session, anos: list[int], logger) -> dict[s
     return catalogo
 
 
+def aplicar_correcoes(catalogo: dict[str, dict], logger) -> list[dict]:
+    """Sobrepoe ao catalogo as correcoes curadas em config/correcoes_catalogo.csv.
+
+    O catalogo da fonte tem erro conhecido: em 2005-04 ele aponta para o informe
+    de maio. O arquivo de abril existe e e' alcancavel, mas nao esta' listado.
+    A correcao e' **dado curado, nao heuristica** -- o codigo le', o humano
+    escreve, cada linha traz motivo e evidencia, e o teste de mes declarado da
+    etapa 02 confere o resultado.
+    """
+    if not config.CORRECOES_CATALOGO.exists():
+        return []
+    aplicadas = []
+    with config.CORRECOES_CATALOGO.open(encoding="utf-8", newline="") as fluxo:
+        for linha in csv.DictReader(fluxo):
+            mes = (linha.get("mes") or "").strip()
+            arquivo = (linha.get("arquivo_fonte") or "").strip()
+            if not mes or not arquivo:
+                continue
+            anterior = (catalogo.get(mes) or {}).get("arquivo_fonte", "")
+            if anterior == arquivo:
+                continue
+            catalogo[mes] = {
+                "mes": mes,
+                "arquivo_fonte": arquivo,
+                "url": config.BASE_ARQUIVOS + arquivo,
+                "descricao_fonte": f"corrigido: {linha.get('motivo', '').strip()}",
+                "data_consulta": _agora(),
+            }
+            aplicadas.append({"mes": mes, "antes": anterior, "depois": arquivo})
+            logger.warning("%s: catalogo corrigido, %s -> %s", mes, anterior or "(ausente)",
+                           arquivo)
+    return aplicadas
+
+
 def _com_tentativas(chamada, logger, rotulo: str):
     """Repete apenas falhas de rede, com espera exponencial (2s, 4s, 8s, 16s)."""
     espera = 2.0
@@ -137,6 +171,9 @@ def executar(inicio: str, fim: str, so_catalogo: bool = False) -> int:
     sessao = _sessao()
 
     catalogo = baixar_catalogo(sessao, anos, logger)
+    correcoes = aplicar_correcoes(catalogo, logger)
+    if correcoes:
+        logger.info("%d correcoes de catalogo aplicadas", len(correcoes))
     _escrever(config.CATALOGO, CAMPOS_CATALOGO, list(catalogo.values()))
     logger.info("catalogo gravado em %s (%d meses)", log.caminho_relativo(config.CATALOGO), len(catalogo))
     if so_catalogo:
@@ -158,6 +195,25 @@ def executar(inicio: str, fim: str, so_catalogo: bool = False) -> int:
             continue
 
         destino = config.DIR_PDF / f"{mes}.pdf"
+        registro_antigo = manifesto.get(mes)
+        if (destino.exists() and registro_antigo
+                and registro_antigo.get("arquivo_fonte")
+                and registro_antigo["arquivo_fonte"] != entrada["arquivo_fonte"]):
+            # A fonte passou a apontar outro arquivo para este mes. Nao se
+            # sobrescreve bruto/ (sec.9.3): reporta e deixa a decisao ao humano.
+            logger.error(
+                "%s: o local veio de %s e o catalogo agora aponta %s. Apague "
+                "%s e rode de novo para trocar.",
+                mes, registro_antigo["arquivo_fonte"], entrada["arquivo_fonte"],
+                log.caminho_relativo(destino),
+            )
+            lacunas.append({
+                "mes": mes, "motivo": "arquivo_de_origem_mudou",
+                "detalhe": f"local={registro_antigo['arquivo_fonte']} "
+                           f"catalogo={entrada['arquivo_fonte']}",
+                "data_verificacao": _agora(),
+            })
+            continue
         if destino.exists():
             # Nunca reescrever bruto/ (sec.9.3): confere o hash e segue.
             digest = sha256(destino)

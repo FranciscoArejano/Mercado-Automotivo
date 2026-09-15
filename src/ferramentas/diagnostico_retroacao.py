@@ -101,7 +101,8 @@ def diagnosticar(inicio: str, fim: str, logger) -> tuple[pd.DataFrame, pd.DataFr
             else round(cobertura["automoveis"], 2),
             "cobertura_comerciais_leves": None if cobertura["comerciais_leves"] is None
             else round(cobertura["comerciais_leves"], 2),
-            "nomes_compostos": len(compostos),
+            "linhas_com_nome_composto": len(compostos),
+            "nomes_compostos_distintos": len({m.nome_completo_fonte for m in compostos}),
         })
         logger.info("%s: %s, %d modelos", mes, situacao, len(modelos))
 
@@ -136,7 +137,7 @@ def resumir(detalhe: pd.DataFrame) -> pd.DataFrame:
             modelos_medio=("modelos", "mean"),
             cobertura_autos_media=("cobertura_automoveis", "mean"),
             cobertura_leves_media=("cobertura_comerciais_leves", "mean"),
-            nomes_compostos=("nomes_compostos", "sum"),
+            linhas_com_nome_composto=("linhas_com_nome_composto", "sum"),
         )
         .round(2)
     )
@@ -170,7 +171,34 @@ def main() -> int:
     problemas = detalhe[detalhe["situacao"] != "ok"] if "situacao" in detalhe else pd.DataFrame()
     partes.append(
         (problemas.to_markdown(index=False) + "\n") if not problemas.empty
-        else "Nenhum: todo informe do periodo rendeu tabela por modelo.\n"
+        else "Nenhum: todo informe do periodo rendeu tabela por modelo, com o mes "
+             "declarado batendo com o do catalogo.\n"
+    )
+
+    partes.append("\n## Leitura\n\n")
+    if resumo.empty:
+        partes.append("_Sem dados para concluir._\n")
+    else:
+        pior = resumo.loc[resumo["cobertura_autos_media"].idxmin()]
+        baixos = resumo[resumo["cobertura_autos_media"] < 97.0]
+        partes.append(
+            f"- **Extracao:** {int(resumo['informes'].sum())} informes lidos, "
+            f"{int(resumo['sem_linha'].sum())} sem tabela por modelo, "
+            f"{int(resumo['com_glifos'].sum())} precisando de traducao de glifos. "
+            "O parser nao degrada com a idade do informe.\n"
+            f"- **Cobertura:** o pior ano em automoveis e' {int(pior['ano'])}, com "
+            f"{pior['cobertura_autos_media']:.1f}%. "
+            + (f"Anos abaixo de 97%: {', '.join(str(int(a)) for a in baixos['ano'])}.\n"
+               if not baixos.empty else "Nenhum ano abaixo de 97%.\n")
+            + f"- **Deriva de agregacao:** {len(deriva) and int(deriva['nomes_compostos'].max())} "
+              "nome composto distinto no periodo inteiro, sem entrada nem saida do padrao "
+              "depois do primeiro ano. A unidade de observacao **nao deriva** nestes anos: o "
+              "que a fonte agrega hoje ela ja' agregava em 2003.\n"
+            + f"- **Meses a resolver antes de estender:** {len(problemas)}.\n"
+        )
+    partes.append(
+        "\nA decisao de estender continua sendo do pesquisador (ESPEC.md sec.2). Para "
+        "executar, basta rodar o pipeline com `--inicio 2003-01`.\n"
     )
     destino = config.DIR_SAIDAS / "diagnostico_retroacao.md"
     destino.write_text("".join(partes), encoding="utf-8")

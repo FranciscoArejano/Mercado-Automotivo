@@ -18,7 +18,7 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | B3 | `volume_em_jogo` ordenando errado | corrigido |
 | I1 | Cauda mais rasa que a planilha de controle | **parcial — falta a planilha** |
 | I2 | Taxa de entrada não responde ao limiar | confirmado: é desenho, documentado |
-| I3 | O corte de publicação fabrica a alta recente? | **testado: não fabrica** |
+| I3 | O corte de publicação fabrica a alta recente? | **inconclusivo; a métrica do enunciado estava errada** |
 | Q1 | Leitura de "pico móvel de 12 meses" | **continua aberta — a escolha importa** |
 | Q2 | Tolerância de 0,5% e piso de cobertura | decidido; piso medido, não aplicado |
 | Q3 | Mapa de grupos econômicos | decidido; variante de robustez disponível |
@@ -133,21 +133,34 @@ seção 8 do relatório de validação, e aqui. Ela entra direto em qualquer
 decomposição de margens, e quem for usar essas margens precisa decidir se quer
 um critério simétrico — a decisão continua sendo do pesquisador.
 
-### I3. O corte de publicação fabrica a alta recente? — **não fabrica**
+### I3. O corte de publicação fabrica a alta recente? — **inconclusivo, e a métrica do enunciado estava errada**
 
-Teste feito como proposto: restringir a taxa de saída aos modelos cujo limiar
-de D3 supera o corte de publicação em **todo mês** da própria janela — aqueles
-em que o corte não morde. São 310 dos 647 modelos, e cada taxa usa o seu
-próprio denominador, para que o nível seja comparável e não só a forma.
+Antes do teste foi preciso corrigir a medida. **A truncagem da Fenabrave não é
+um piso de unidades: é número fixo de linhas por sub-segmento.** "Suv's" traz
+exatamente 40 modelos nos 152 meses; "Furgões", 7; "Sedans Grandes", 12.
+Sub-segmento com menos modelos que o teto não trunca nada. A série "corte
+mediano 99 → 396" que motivou a hipótese media outra coisa — o tamanho do
+modelo mediano da fonte, que sobe porque o mercado se concentrou, não porque a
+fonte passou a cortar mais.
 
-No subconjunto imune, a taxa de saída vai de **0,074 em 2022 a 0,143 em 2025**
-— quase dobra, mais do que na série cheia. **A subida persiste, então não é
-artefato do corte.** A tabela sem o ano parcial de 2026 vai ao lado, como
-pedido.
+Medido corretamente (`saidas/validacao.md` §4, `saidas/truncamento_por_bloco.csv`),
+o corte **não sobe em automóveis** — mediana entre 3 e 21 unidades, sem
+tendência — e **sobe muito em comerciais leves**: de 25 unidades em 2014 para
+172 em 2026. É o oposto do que a cobertura sugeria, já que é em comerciais
+leves que ela é quase perfeita.
 
-Isso não anula o risco de cobertura: `saidas/validacao.md` §3 registra que a
-cobertura de automóveis anda −2,63 pontos percentuais entre 2014 e 2026, e o
-alerta continua no relatório.
+Com a medida certa, o subconjunto imune ao corte cai de 310 para **98 modelos**,
+e o teste dá: entre 2022 e 2025 (último ano completo) a taxa de saída vai de
+0,136 a 0,195 na série cheia (+0,059) e de 0,149 a 0,133 no subconjunto imune
+(−0,016). **A subida desaparece nos imunes — aponta para artefato do corte.**
+
+**Mas o teste não tem poder para concluir.** São 98 modelos e mediana de 6
+saídas por ano na janela recente: duas ou três saídas a mais movem a taxa em
+vários pontos. O resultado aponta na direção do artefato sem demonstrá-lo.
+Fica como alerta forte, não como conclusão — e junto com o risco de cobertura
+registrado em §3 (automóveis andam −2,63 pontos percentuais entre 2014 e 2026),
+recomenda cautela com qualquer leitura substantiva da alta recente da taxa de
+saída.
 
 ---
 

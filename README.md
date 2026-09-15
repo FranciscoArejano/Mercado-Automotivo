@@ -109,7 +109,9 @@ E quatro decisoes desta rodada, que valem enquanto nao forem revistas:
 2. **O piso de cobertura nao e' aplicado ao painel.** Medido e recomendado, nao
    gravado -- filtrar destroi informacao de forma irreversivel.
 3. **A serie nao e' estendida para tras** antes de o diagnostico de retroacao ser
-   lido (`saidas/diagnostico_retroacao.md`).
+   lido (`saidas/diagnostico_retroacao.md`). O diagnostico ja' rodou e diz que a
+   extensao e' viavel -- os 132 informes de 2003-2013 sao todos legiveis --, mas
+   executa-la e' decisao do pesquisador.
 4. **O sub-segmento nao e' descartado em nenhuma etapa.** E' a unica pista de
    geracao que a fonte oferece.
 

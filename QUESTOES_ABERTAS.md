@@ -16,7 +16,7 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | B1 | HHI de grupo menor que HHI de marca em 2014 | **causa encontrada e corrigida** |
 | B2 | Buraco de 2023-09 | **recuperado da fonte** |
 | B3 | `volume_em_jogo` ordenando errado | corrigido |
-| I1 | Cauda mais rasa que a planilha de controle | **parcial — falta a planilha** |
+| I1 | Cauda mais rasa que a planilha de controle | **é truncamento, não agregação; falta a planilha para fechar** |
 | I2 | Taxa de entrada não responde ao limiar | confirmado: é desenho, documentado |
 | I3 | O corte de publicação fabrica a alta recente? | **inconclusivo; a métrica do enunciado estava errada** |
 | Q1 | Leitura de "pico móvel de 12 meses" | **continua aberta — a escolha importa** |
@@ -24,7 +24,7 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | Q3 | Mapa de grupos econômicos | decidido; variante de robustez disponível |
 | Q4 | Chave do painel e sub-segmento | decidido e aplicado |
 | Q5 | O que significa "zero" | decidido; sinalização entregue |
-| Q6 | Retroagir a 2003 | diagnóstico rodado; extensão **não** feita |
+| Q6 | Retroagir a 2003 | **viável: 132 informes, todos legíveis**; extensão **não** feita |
 | Q7 | Ranking completando sub-segmento | decidido, mantido |
 | Q8 | "Julho de 2023, maior mês desde 2019" | premissa corrigida na ESPEC |
 | Q9 | Detector de queda abrupta | decidido e aplicado |
@@ -108,19 +108,32 @@ começa por Prisma → Onix Plus (440.598) e Palio → Argo (390.713).
 
 ## As três investigações
 
-### I1. Cauda mais rasa que a planilha de controle — **parcial**
+### I1. Cauda mais rasa que a planilha de controle — **hipótese 2 medida e quase descartada**
 
-**O que falta:** `Vendas_Geral.xlsx` não está no repositório. Sem ela não dá
-para listar os modelos presentes na planilha e ausentes do painel em 2014, que
-é metade da investigação. A etapa 7 está pronta e roda no instante em que o
-arquivo aparecer em `dados/referencia/Vendas_Geral.xlsx`.
+Das duas hipóteses, a de **agregação da fonte** pôde ser medida sem a planilha,
+e ela quase não explica nada. Nomes compostos (`MARCA/A/B`) em todo o painel de
+2014-2026: **três**, e só um com volume — `VW/FOX/CROSS FOX` (383.417 unidades,
+2014-01 a 2022-01), mais `VW/MAN/EXPRESS` e uma linha isolada de
+`RENAULT/MARCOPOLO/VOLARE V9L EO`. No diagnóstico de 2003-2013, **um** nome
+composto, o mesmo Fox/CrossFox, presente desde 2003 e sem nenhuma entrada ou
+saída do padrão. A agregação visível vale por dois ou três modelos, não por 76.
 
-**O que já foi medido**, pelo outro lado da mesma pergunta: a contagem de
-linhas com nome composto (`MARCA/A/B`) por ano, em `saidas/validacao.md` §5 e
-em `saidas/nomes_compostos.csv`. É a medida da hipótese de **agregação da
-fonte** — `VW/FOX/CROSS FOX` como registro único para o que a planilha tratava
-como dois. Quanto maior esse número, menos a diferença de contagem é perda de
-cobertura e mais é a unidade de observação sendo definida pela fonte.
+A hipótese de **truncamento** fecha a conta. Em 2014 o painel traz 2.751.394
+unidades de automóveis contra 2.795.134 publicadas: faltam 43.740 — praticamente
+os ~41 mil que os 76 modelos ausentes somariam. E a medida de truncagem (§4 do
+relatório) mostra 132 dos 156 blocos de automóveis no teto naquele ano, com
+corte mediano de 21 unidades. Os modelos que faltam são exatamente a cauda que
+a fonte não lista.
+
+**Consequência:** vale a leitura da hipótese 1 — a taxa de saída está
+subestimada, porque os modelos pequenos, onde entrada e saída acontecem, não
+entram no painel.
+
+**O que ainda falta:** `Vendas_Geral.xlsx` não está no repositório. Sem ela não
+dá para confirmar que os 76 modelos da planilha são os mesmos que o corte
+derruba, nem para descartar agregação *invisível* — a que a fonte faz sem
+deixar barra no nome. A etapa 7 está pronta e roda no instante em que o arquivo
+aparecer em `dados/referencia/Vendas_Geral.xlsx`.
 
 ### I2. A taxa de entrada não responde ao limiar — confirmado, é desenho
 
@@ -207,8 +220,30 @@ modelo não aparece é zero; lacuna é ausente. O painel ganhou a coluna
 **acima** do limiar de D3 do próprio modelo — onde o zero pode estar
 escondendo valor relevante. São 5.609 pares em 189 modelos.
 
-**Q6 — retroagir a 2003. Diagnóstico rodado; extensão não feita.**
-Ver `saidas/diagnostico_retroacao.md`. O painel continua em 2014-01..2026-08.
+**Q6 — retroagir a 2003. Diagnóstico rodado; extensão não feita; e ela é
+viável.** Os 132 informes de 2003-01 a 2013-12 foram baixados e lidos: **todos
+renderam tabela por modelo**, nenhum precisou de tradução de glifos, nenhum
+ficou para OCR. O parser não degrada com a idade do informe — a cobertura média
+de automóveis fica entre 95,0% (2005) e 99,8% (2004), da mesma ordem dos anos
+recentes. Os dois anos fracos são **2003** (95,4% automóveis, 90,1% comerciais
+leves) e **2005** (95,0% e 90,6%).
+
+**A deriva de agregação não existe nestes anos:** um único nome composto no
+período inteiro, o mesmo `VW/FOX/CROSS FOX`, sem entrada nem saída do padrão
+depois de 2003. O que a fonte agrega hoje ela já agregava em 2003, e a unidade
+de observação não muda de sentido ao longo da série.
+
+**Um defeito encontrado, e não era de parsing.** O catálogo da Fenabrave aponta
+o mês 2005-04 para `3_2005_05_2.pdf`, que é a edição 29 e se declara "Resumo
+Mensal Maio de 2005" — o mesmo conteúdo servido em 2005-05. O informe de abril
+existe, é a edição 28, e está em `3_2005_04_2.pdf`, só não listado. Foi o teste
+de mês declarado que pegou. A correção entrou em
+`config/correcoes_catalogo.csv`, com motivo e evidência, e depois dela o
+diagnóstico não aponta **nenhum** mês problemático.
+
+O painel continua em 2014-01..2026-08, como a Parte 5 manda. Para estender,
+basta rodar `python src/pipeline.py --inicio 2003-01`; o relatório completo está
+em `saidas/diagnostico_retroacao.md`.
 
 **Q7 — ranking completando sub-segmento. Mantido.** Tabela de sub-segmento como
 base, ranking preenchendo o que ela não lista, `origem_tabela` registrando a
@@ -244,8 +279,13 @@ descarta como *quem sai*. Um modelo vivo no primeiro mês continua podendo sair
 1. **Q1** — a leitura de "pico móvel" muda a ordenação de 5 dos 13 anos. Não dá
    para encerrar sem uma decisão explícita, e ela precisa constar de qualquer
    artigo que use taxas de saída.
-2. **I1** — falta `Vendas_Geral.xlsx` para separar truncamento de agregação.
+2. **I1** — falta `Vendas_Geral.xlsx` para confirmar que os modelos ausentes são
+   os que o corte derruba. A agregação visível já foi descartada como
+   explicação; a invisível, não.
 3. **Q3** — o mapa de grupos é rascunho revisado, não fato. As quatro convenções
    discutíveis continuam sendo convenções.
 4. **Adjudicação de `regras.csv`** — por decisão da Parte 0, para quando o
    desenho do artigo de escopo de produto estiver fechado.
+5. **I3** — o teste aponta para artefato do corte na alta recente da taxa de
+   saída, mas com 98 modelos e 6 saídas por ano não tem poder para concluir.
+   Qualquer leitura substantiva dessa alta precisa tratá-la como suspeita.

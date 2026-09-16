@@ -14,9 +14,9 @@ CAMPOS = [
     ("mes", "inteiro 1-12", "Mes de `mes_ref`."),
     ("data", "data", "Primeiro dia de `mes_ref`. Conveniencia para series temporais."),
     ("segmento", "texto", "`automoveis` ou `comerciais_leves`, como a fonte classifica."),
-    ("marca", "texto", "Marca tal como a fonte publica, antes da primeira barra do nome."),
-    ("modelo", "texto", "Nome comercial apos a harmonizacao. Igual a `modelo_fonte` quando "
-                        "nenhuma regra de rebatismo se aplica."),
+    ("marca", "texto", "Marca como a fonte publica, em caixa canonica (ver abaixo)."),
+    ("modelo", "texto", "Nome comercial apos a harmonizacao, em caixa canonica. Igual a "
+                        "`modelo_fonte` quando nenhuma regra de rebatismo se aplica."),
     ("sub_segmento_fonte", "texto", "Sub-segmento em que a fonte listou a linha ('Suv's', "
                                     "'Sedans Compactos'). **Atributo da linha, fora da "
                                     "chave.** Vazio nas linhas vindas so' do ranking."),
@@ -27,7 +27,13 @@ CAMPOS = [
     ("unidades", "inteiro", "Emplacamentos da linha no mes."),
     ("corte_publicacao", "inteiro", "Menor valor que a fonte listou naquele mes e segmento. "
                                     "Modelo ausente do painel esta' abaixo disto."),
-    ("modelo_fonte", "texto", "Nome do modelo como saiu da fonte, antes da harmonizacao."),
+    ("modelo_fonte", "texto", "Nome do modelo antes da harmonizacao, em caixa canonica."),
+    ("grafias_fonte", "texto", "Todas as grafias cruas que a fonte usou para este modelo, "
+                               "letra por letra. E' aqui que `Outlander` e `OUTLANDER` "
+                               "continuam distinguiveis."),
+    ("nome_suspeito", "booleano", "O nome provavelmente nao designa um veiculo -- registro "
+                                  "avulso, encarrocador, erro de cadastro."),
+    ("motivo_nome_suspeito", "texto", "Por que foi marcado. Vazio quando nao foi."),
     ("nome_completo_fonte", "texto", "Nome cru, `MARCA/MODELO`, sem alteracao alem da "
                                      "normalizacao tipografica."),
     ("houve_rebatismo", "booleano", "A serie foi fundida por uma regra `rebatismo` (D2)."),
@@ -76,6 +82,30 @@ def escrever(painel: pd.DataFrame) -> None:
     ]
     linhas += [f"| `{nome}` | {tipo} | {texto} |\n" for nome, tipo, texto in CAMPOS]
     linhas += [
+        "\n## As taxas de entrada e saida nao medem so' rotatividade\n\n",
+        "**Leia isto antes de usar qualquer taxa.** Cerca de um terco dos modelos do painel "
+        "soma algumas milhares de unidades no periodo inteiro -- 0,01% do volume -- e cada "
+        "um conta como uma entrada e uma saida. Sao registros avulsos, conversoes de "
+        "encarrocador e erros de cadastro da fonte. Eles respondem por 30% a 55% de toda a "
+        "rotatividade medida.\n\n",
+        "Por isso `saidas/validacao.md` sec.8 traz as taxas sob tres **pisos de volume total "
+        "do modelo** -- todos, acima de 100 unidades, acima de 1.000 --, com o piso entrando "
+        "no numerador e no denominador. **Nenhuma leitura substantiva deve sair da coluna "
+        "\"todos\".** E o ano parcial, o ultimo da amostra, nao e' citavel para "
+        "rotatividade: a taxa de saida dele e' inflada pelo recorte.\n\n",
+        "A coluna `nome_suspeito` marca os casos em que o nome nem sequer designa veiculo, "
+        "e `saidas/nomes_suspeitos.csv` traz os candidatos a revisao. Nada foi apagado do "
+        "painel.\n\n",
+
+        "\n## Caixa: chave contra transcricao\n\n",
+        "A ESPEC sec.4 proibe uniformizar maiusculas **na transcricao**, e o painel obedece: "
+        "`grafias_fonte` e `nome_completo_fonte` guardam o que a fonte escreveu. A **chave** "
+        "(`marca`, `modelo`) e' outra coisa, e essa e' canonizada em caixa. Sem isso, "
+        "`MITSUBISHI/Outlander` (35.231 unidades em oito anos) e `MITSUBISHI/OUTLANDER` "
+        "(8 unidades num mes) seriam duas fichas do mesmo carro, com uma saida e uma entrada "
+        "fabricadas. Normalizar caixa nao e' fundir modelos: fusao de produtos distintos "
+        "continua exigindo linha em `regras.csv`.\n\n",
+
         "\n## Entrada e saida sao assimetricas\n\n",
         "**A entrada nao depende do limiar.** Ela e' o primeiro mes com unidades positivas; "
         "so' a saida usa a regra D3 (`>= limiar x pico movel de 12 meses`), que foi o que a "

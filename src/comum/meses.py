@@ -15,13 +15,25 @@ CAMPOS = ["mes", "linhas", "situacao", "metodo_predominante", "arquivo_origem"]
 
 
 def registrar(linhas: list[dict]) -> None:
+    """Grava o registro, **mesclando** com o que ja' estava la'.
+
+    A etapa 02 roda com frequencia sobre um recorte de meses -- so' 2003-2013,
+    so' um mes reprocessado. Substituir o arquivo inteiro apagaria os meses fora
+    do recorte e faria as etapas seguintes trata-los como lacuna.
+    """
     caminho = config.DIR_PROCESSADO / "meses_extraidos.csv"
     caminho.parent.mkdir(parents=True, exist_ok=True)
+    registro: dict[str, dict] = {}
+    if caminho.exists():
+        with caminho.open(encoding="utf-8", newline="") as fluxo:
+            registro = {linha["mes"]: linha for linha in csv.DictReader(fluxo)}
+    for linha in linhas:
+        registro[linha["mes"]] = linha
     with caminho.open("w", encoding="utf-8", newline="") as fluxo:
         escritor = csv.DictWriter(fluxo, fieldnames=CAMPOS)
         escritor.writeheader()
-        for linha in sorted(linhas, key=lambda item: item["mes"]):
-            escritor.writerow({campo: linha.get(campo, "") for campo in CAMPOS})
+        for mes in sorted(registro):
+            escritor.writerow({campo: registro[mes].get(campo, "") for campo in CAMPOS})
 
 
 def uteis() -> set[str]:

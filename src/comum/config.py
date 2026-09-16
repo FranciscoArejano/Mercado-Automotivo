@@ -36,6 +36,7 @@ REGRAS = RAIZ / "regras.csv"
 MAPA_GRUPOS = DIR_CONFIG / "mapa_grupos.csv"
 MARCAS = DIR_CONFIG / "marcas.csv"
 CORRECOES_CATALOGO = DIR_CONFIG / "correcoes_catalogo.csv"
+NOMES_NAO_VEICULO = DIR_CONFIG / "nomes_nao_veiculo.csv"
 SUB_SEGMENTOS = DIR_CONFIG / "sub_segmentos.csv"
 
 CANDIDATOS = DIR_SAIDAS / "candidatos.xlsx"
@@ -48,8 +49,11 @@ REFERENCIA_CRUZADA = DIR_SAIDAS / "referencia_cruzada.md"
 VENDAS_GERAL = DIR_DADOS / "referencia" / "Vendas_Geral.xlsx"
 
 # ----------------------------------------------------------------- periodo
-# Recomendacao da sec.2: validar 2014-01..2026-08 antes de retroagir a 2003-01.
-PERIODO_INICIO = os.environ.get("PERIODO_INICIO", "2014-01")
+# A sec.2 mandava validar 2014-01..2026-08 antes de retroagir. Feito: o
+# diagnostico de retroacao leu os 132 informes de 2003-2013 sem nenhum ficar de
+# fora, sem deriva de agregacao, com cobertura da mesma ordem dos anos recentes.
+# A serie passa a comecar em 2003-01 por decisao do pesquisador (rodada 2, sec.6).
+PERIODO_INICIO = os.environ.get("PERIODO_INICIO", "2003-01")
 PERIODO_FIM = os.environ.get("PERIODO_FIM", "2026-08")
 
 # Piso absoluto do que a fonte publica (informes mensais desde 2003-01).
@@ -86,6 +90,15 @@ JANELA_PICO_MESES = 12
 # 'max_movel'    -> pico = max_t( max das unidades em [t-11, t] ) == pico global
 PICO_MOVEL_MODO = os.environ.get("PICO_MOVEL_MODO", "media_movel")
 
+# Pisos de volume TOTAL do modelo no periodo, para decompor as taxas de entrada
+# e saida (rodada 2, sec.1). Nao filtram o painel: entram no numerador e no
+# denominador das taxas, lado a lado, porque 207 dos 648 modelos somam 3.512
+# unidades em treze anos e respondem por 40% a 50% de todas as entradas e saidas.
+PISOS_VOLUME_MODELO = (0, 100, 1000)
+
+# Faixas do relatorio de distribuicao de volume por modelo.
+FAIXAS_VOLUME = ((0, 10), (11, 100), (101, 1_000), (1_001, 10_000), (10_001, None))
+
 # ------------------------------------------------------------------ sec.5
 JANELA_BASTAO_MESES = 6
 RAZAO_PICO_MIN = 0.4
@@ -99,6 +112,11 @@ QUEDA_ABRUPTA = 0.80
 # serie precisa ter tamanho antes da queda para nao marcar tres unidades.
 QUEDA_DESCONTAR_MERCADO = True
 QUEDA_VOLUME_MINIMO = int(os.environ.get("QUEDA_VOLUME_MINIMO", "100"))
+
+# Nome de volume infimo que provavelmente nao e' veiculo (rodada 2, D2). Nao
+# apaga nada: alimenta saidas/nomes_suspeitos.csv e uma coluna de sinalizacao.
+SUSPEITO_VOLUME_MAXIMO = int(os.environ.get("SUSPEITO_VOLUME_MAXIMO", "10"))
+SUSPEITO_MESES_MAXIMO = int(os.environ.get("SUSPEITO_MESES_MAXIMO", "2"))
 
 # ------------------------------------------------------------------- geral
 SEMENTE = 20240101

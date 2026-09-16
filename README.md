@@ -15,7 +15,7 @@ resolver por conta propria. O que ficou em aberto esta' em
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 
-.venv/bin/python src/pipeline.py                 # 2014-01..2026-08, sete etapas
+.venv/bin/python src/pipeline.py                 # 2003-01..2026-08, sete etapas
 .venv/bin/python src/pipeline.py --pular 1       # sem rebaixar os PDFs
 .venv/bin/python src/pipeline.py --de 3 --ate 6  # so' um trecho
 .venv/bin/python -m pytest testes -q
@@ -108,21 +108,24 @@ E quatro decisoes desta rodada, que valem enquanto nao forem revistas:
    evidencia arquivada, nao adjudicada.
 2. **O piso de cobertura nao e' aplicado ao painel.** Medido e recomendado, nao
    gravado -- filtrar destroi informacao de forma irreversivel.
-3. **A serie nao e' estendida para tras** antes de o diagnostico de retroacao ser
-   lido (`saidas/diagnostico_retroacao.md`). O diagnostico ja' rodou e diz que a
-   extensao e' viavel -- os 132 informes de 2003-2013 sao todos legiveis --, mas
-   executa-la e' decisao do pesquisador.
+3. **A serie so' foi estendida para tras depois do diagnostico de retroacao**
+   (`saidas/diagnostico_retroacao.md`), lido e aprovado pelo pesquisador. A
+   extensao a 2003-01 esta' feita; a leitura de cobertura do diagnostico foi
+   corrigida pela extracao completa (ver `QUESTOES_ABERTAS.md`).
 4. **O sub-segmento nao e' descartado em nenhuma etapa.** E' a unica pista de
    geracao que a fonte oferece.
 
-## O que a execucao de 2014-01 a 2026-08 produziu
+## O que a execucao de 2003-01 a 2026-08 produziu
 
-152 informes, **152 meses no painel, sem nenhuma lacuna**, 29.246 linhas, 29,7
-milhoes de unidades, 648 modelos (marca x modelo x segmento). Retrato do estado
-atual, nao promessa:
+284 informes, **284 meses no painel, sem nenhuma lacuna**, 54.188 linhas,
+**57.765.831 unidades**, 940 modelos (marca x modelo x segmento). O invariante
+central -- soma do painel igual ao total que a fonte publica, dentro da
+tolerancia -- vale nos 284 meses. Retrato do estado atual, nao promessa:
 
-- **Cobertura (D5):** 98,4% a 99,2% do total publicado em automoveis, 99,9% em
-  comerciais leves. O que falta e' a cauda que as tabelas da fonte truncam.
+- **Cobertura (D5):** 95,8% a 100,1% do total publicado em automoveis, 99,7% a
+  101,2% em comerciais leves. O que falta e' a cauda que as tabelas da fonte
+  truncam. Os anos de cobertura mais fraca sao os **recentes** -- 2026 (95,8%,
+  parcial), 2025 (97,7%), 2011 (97,9%) --, nao os antigos.
   **Nenhum piso foi aplicado ao painel**; a recomendacao (300 unidades por
   modelo e mes) esta' em `saidas/piso_recomendado.csv`.
 - **HHI por marca**, contra a planilha de controle da sec.7: 1.317 x 1.297
@@ -134,29 +137,44 @@ atual, nao promessa:
   mesmo numero pela mesma fonte -- e a rota do acumulado confirma em 122 de 151
   modelos, com 39 unidades de diferenca.
 - **Seis informes** trazem fonte embutida sem ToUnicode; o texto foi recuperado
-  pela ordem padrao de glifos, sem OCR.
-- **212 pares candidatos** para adjudicacao humana, ordenados pelo **menor** das
+  pela ordem padrao de glifos, sem OCR. **Nenhuma linha do painel veio de OCR.**
+- **307 pares candidatos** para adjudicacao humana, ordenados pelo **menor** das
   duas series. No topo: Prisma -> Onix Plus, Palio -> Argo, Etios -> Corolla
   Cross, Cobalt -> Onix Plus.
 - **`regras.csv` vazio por decisao.** As taxas de entrada e saida sao, portanto,
   o **limite superior** dessas taxas: o cenario em que todo rebatismo conta como
   morte e nascimento.
 
-Tres achados que mudam como o painel se le':
+Quatro achados que mudam como o painel se le':
 
-1. **A escolha entre as duas leituras de "pico movel de 12 meses" nao e' inocua:**
-   5 dos 13 anos mudam de posicao no ranking de taxa de saida. Qualquer resultado
-   sobre em que anos houve mais saida precisa declarar qual leitura usou.
-2. **A alta recente da taxa de saida pode ser artefato da fonte, e o teste nao
-   tem poder para descartar.** A truncagem da Fenabrave e' numero fixo de linhas
-   por sub-segmento, nao piso de unidades; medida assim, ela nao sobe em
-   automoveis e sobe muito em comerciais leves (25 unidades em 2014, 172 em
-   2026). Restrita aos 98 modelos em que o corte nao morde, a taxa de saida vai
-   de 0,149 (2022) a 0,133 (2025) -- a subida some. Mas sao 6 saidas por ano no
-   subconjunto: aponta o artefato sem demonstra-lo.
-3. **Entrada e saida sao assimetricas:** a entrada e' o primeiro mes com unidades
-   positivas e nao usa limiar; so' a saida aplica D3. E' desenho, esta' declarado
-   no dicionario, e entra direto em decomposicao de margens.
+1. **Boa parte da rotatividade e' ruido de cadastro.** 363 dos 940 modelos -- 39% da
+   contagem -- somam 5.988 unidades em 24 anos, 0,010% do volume: registros
+   avulsos, conversoes de encarrocador e erros de digitacao da fonte, cada um
+   valendo uma entrada e uma saida. Em 2003 sao 69% das entradas e 83% das
+   saidas; no meio da serie, cerca de 25%; hoje, cerca de 40%. **A contaminacao
+   nao e' constante no tempo.** Por isso a sec.8 do relatorio traz as taxas sob
+   tres pisos de volume -- todos, acima de 100, acima de 1.000 -- e **nenhuma
+   leitura substantiva sai da coluna "todos"**. Nada foi filtrado do painel.
+2. **A alta recente da taxa de saida e' real ate 2025; 2026 nao e' citavel.** Com
+   piso de volume, 2022 -> 2025 sobe +0,075 (todos), +0,095 (acima de 100) e
+   +0,081 (acima de 1.000): a alta **nao some com o piso, aumenta**. Ja' o salto
+   de 2026 inverte de sinal assim que o piso entra (-0,031 e -0,065) -- e'
+   fantasma somado a ano parcial.
+3. **A ordenacao de anos por taxa de saida nao e' identificada.** 14 dos 24 anos
+   mudam de posicao entre as duas leituras de "pico movel de 12 meses". So'
+   afirmar diferenca entre dois anos quando ela sobreviver as duas leituras:
+   banda, nao ponto. O que sobrevive esta' tabulado na sec.8.
+4. **A fonte publicou uma edicao defeituosa em 2013-11.** Doze modelos saem sob
+   marca trocada -- `PONTIAC/MONTANA`, `FORD/KOMBI`, `VW/RANGER` --, 12.355
+   unidades, 11 marcas fantasma. Nao e' erro de leitura: sao palavras unicas no
+   PDF. Cada troca fabrica uma marca fantasma com uma entrada e uma saida. O
+   painel **reporta e nao corrige** (sec.9.4); quem usar serie por marca precisa
+   decidir o que fazer com esse mes. Ver `saidas/marca_divergente.csv`.
+
+E duas edicoes curtas do informe -- **2003-10 e 2005-03**, 10 paginas em vez de
+44 -- deixam o elenco de modelos pela metade nesses meses, embora o total bata
+com o publicado. Nada foi completado; as opcoes estao descritas em
+`QUESTOES_ABERTAS.md`.
 
 Leia antes de usar o painel: [`saidas/validacao.md`](saidas/validacao.md),
 [`saidas/painel_dicionario.md`](saidas/painel_dicionario.md) e

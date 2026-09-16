@@ -97,3 +97,63 @@ def test_recupera_tambem_o_total_publicado(ambiente):
 
 def test_sem_informe_seguinte_nao_inventa_nada(ambiente):
     assert reconstrucao.reconstruir("2026-08") is None
+
+
+CAMPOS_REGISTRO = [
+    "mes", "mes_fonte", "linhas", "modelos_conferidos_pelo_acumulado",
+    "modelos_divergentes", "divergencia_absoluta", "divergencia_liquida", "observacao",
+]
+
+
+@pytest.fixture
+def registro(tmp_path, monkeypatch):
+    """Ambiente para o registro de meses recuperados, que vive em `saidas/`."""
+    import etapa02_parsing
+
+    monkeypatch.setattr(config, "DIR_SAIDAS", tmp_path / "saidas")
+    monkeypatch.setattr(config, "DIR_EXTRACAO", tmp_path / "extracao")
+    monkeypatch.setattr(etapa02_parsing.config, "DIR_SAIDAS", tmp_path / "saidas")
+    monkeypatch.setattr(etapa02_parsing.config, "DIR_EXTRACAO", tmp_path / "extracao")
+
+    def gravar_extracao(mes, metodo):
+        _escrever(config.DIR_EXTRACAO / f"{mes}.csv", ["mes", "metodo_extracao"],
+                  [{"mes": mes, "metodo_extracao": metodo}])
+
+    return etapa02_parsing, gravar_extracao
+
+
+def test_registro_de_recuperacao_sobrevive_a_rodada_que_reaproveita(registro):
+    # A recuperacao so' dispara com o mes vazio. Na segunda rodada ela nao
+    # repete -- e o registro nao pode sumir com ela.
+    etapa02_parsing, gravar_extracao = registro
+    gravar_extracao("2023-09", "reconstruido")
+    primeira = etapa02_parsing._registro_de_reconstrucao([
+        {"mes": "2023-09", "mes_fonte": "2023-10", "linhas": "167",
+         "modelos_conferidos_pelo_acumulado": "151", "modelos_divergentes": "29",
+         "divergencia_absoluta": "39", "divergencia_liquida": "-37", "observacao": "x"},
+    ])
+    _escrever(config.DIR_SAIDAS / "meses_reconstruidos.csv", CAMPOS_REGISTRO, primeira)
+
+    segunda = etapa02_parsing._registro_de_reconstrucao([])
+    assert [linha["mes"] for linha in segunda] == ["2023-09"]
+    assert segunda[0]["mes_fonte"] == "2023-10"
+
+
+def test_registro_esquece_mes_que_deixou_de_ser_reconstruido(registro):
+    # Se o informe do mes passar a ser legivel, o registro deixa de valer.
+    etapa02_parsing, gravar_extracao = registro
+    gravar_extracao("2023-09", "texto")
+    _escrever(config.DIR_SAIDAS / "meses_reconstruidos.csv", CAMPOS_REGISTRO,
+              [{"mes": "2023-09", "mes_fonte": "2023-10", "linhas": "167"}])
+    assert etapa02_parsing._registro_de_reconstrucao([]) == []
+
+
+def test_rodada_nova_manda_sobre_o_registro_antigo(registro):
+    etapa02_parsing, gravar_extracao = registro
+    gravar_extracao("2023-09", "reconstruido")
+    _escrever(config.DIR_SAIDAS / "meses_reconstruidos.csv", CAMPOS_REGISTRO,
+              [{"mes": "2023-09", "mes_fonte": "2023-10", "linhas": "9"}])
+    atual = etapa02_parsing._registro_de_reconstrucao([
+        {"mes": "2023-09", "mes_fonte": "2023-10", "linhas": "167"},
+    ])
+    assert atual[0]["linhas"] == "167"

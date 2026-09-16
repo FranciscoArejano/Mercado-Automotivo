@@ -100,3 +100,46 @@ def resumo_anual(blocos: pd.DataFrame) -> pd.DataFrame:
         )
         .round(1)
     )
+
+
+def edicoes_abreviadas(bruto: pd.DataFrame, fracao_minima: float = 0.5) -> pd.DataFrame:
+    """Meses em que a fonte publicou uma edicao curta do informe.
+
+    A tabela por modelo tem 17 sub-segmentos no informe normal. Duas edicoes da
+    serie -- 2003-10 (Ed. 10) e 2005-03 (Ed. 27) -- sairam com 10 paginas em vez
+    de 44 e trazem **um** sub-segmento: ali o painel e' carregado quase inteiro
+    pelo ranking mensal, que nao tem sub-segmento nem cauda. O total do mes
+    continua batendo com o publicado -- o ranking cobre o topo --, mas o elenco
+    de modelos fica pela metade, e um modelo que vende pouco some por um mes sem
+    ter saido do mercado.
+
+    Nao se conserta nada aqui (sec.9.4): mede-se e reporta-se. O mes fica no
+    painel como a fonte o publicou.
+    """
+    dados = _padronizar(bruto)
+    por_mes = dados.groupby("mes_ref").agg(
+        linhas_total=("unidades", "size"),
+        linhas_sub_segmento=("origem_tabela", lambda s: int((s == "sub_segmento").sum())),
+    )
+    sub_por_mes = (
+        dados[dados["origem_tabela"] == "sub_segmento"]
+        .groupby("mes_ref")["sub_segmento_fonte"].nunique()
+        .rename("sub_segmentos")
+    )
+    quadro = por_mes.join(sub_por_mes).fillna({"sub_segmentos": 0})
+    quadro["sub_segmentos"] = quadro["sub_segmentos"].astype(int)
+    if quadro.empty:
+        return quadro.reset_index()
+    tipico = int(quadro["sub_segmentos"].median())
+    quadro["sub_segmentos_tipicos"] = tipico
+    quadro["fracao_do_tipico"] = (quadro["sub_segmentos"] / tipico).round(3) if tipico else 1.0
+    reconstruidos = set(
+        dados.loc[dados["origem_tabela"] == "mes_anterior", "mes_ref"].unique()
+    )
+    quadro["situacao"] = [
+        "mes recuperado do informe seguinte" if mes in reconstruidos
+        else "edicao curta do informe"
+        for mes in quadro.index
+    ]
+    abreviadas = quadro[quadro["fracao_do_tipico"] < fracao_minima]
+    return abreviadas.reset_index().sort_values("mes_ref")

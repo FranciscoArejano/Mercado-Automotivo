@@ -28,7 +28,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from comum import config, dicionario, grupos, log, truncamento  # noqa: E402
+from comum import config, dicionario, grupos, log, nomes, truncamento  # noqa: E402
 from comum import regras as mod_regras  # noqa: E402
 
 ETAPA = "etapa05_painel"
@@ -36,7 +36,8 @@ ETAPA = "etapa05_painel"
 COLUNAS = [
     "mes_ref", "ano", "mes", "data", "segmento", "marca", "modelo",
     "sub_segmento_fonte", "grupo_economico", "grupo_mapeado", "unidades",
-    "corte_publicacao", "modelo_fonte", "nome_completo_fonte",
+    "corte_publicacao", "nome_suspeito", "motivo_nome_suspeito",
+    "modelo_fonte", "grafias_fonte", "nome_completo_fonte",
     "houve_rebatismo", "data_rebatismo", "cadeia_rebatismo",
     "reclassificacao", "conta_entrada_saida", "origem_tabela", "arquivos_origem",
 ]
@@ -50,17 +51,39 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
     #    Compactos" com a nova -- as duas linhas ficam separadas. E' a unica
     #    pista de geracao que a fonte da'. A soma por modelo e' visao
     #    (comum/visoes.py), nao esquema.
-    chaves = ["mes_ref", "ano", "mes", "data", "segmento_fonte", "marca_fonte",
-              "modelo_fonte", "sub_segmento_fonte"]
+    # D1: a chave e' canonizada em caixa antes de agrupar. A fonte escreveu
+    # MITSUBISHI/Outlander por oito anos e MITSUBISHI/OUTLANDER num mes, e sem
+    # isto o mesmo carro vira duas fichas, com uma saida e uma entrada
+    # fabricadas. `modelo_fonte` e `nome_completo_fonte` guardam a grafia crua.
+    bruto = bruto.copy()
+    bruto["marca_chave"] = bruto["marca_fonte"].map(nomes.chave)
+    bruto["modelo_chave"] = bruto["modelo_fonte"].map(nomes.chave)
+    colisoes = nomes.colisoes_de_caixa(
+        bruto.rename(columns={"marca_fonte": "marca", "modelo_fonte": "modelo",
+                              "segmento_fonte": "segmento"}),
+        ("marca", "modelo", "segmento"),
+    )
+    if not colisoes.empty:
+        logger.warning(
+            "%d grafias unificadas por caixa na chave: %s",
+            len(colisoes),
+            "; ".join(f"{linha.marca}/{linha.modelo}" for linha in colisoes.itertuples()),
+        )
+        colisoes.to_csv(config.DIR_SAIDAS / "colisoes_de_caixa.csv", index=False)
+
+    chaves = ["mes_ref", "ano", "mes", "data", "segmento_fonte", "marca_chave",
+              "modelo_chave", "sub_segmento_fonte"]
     agregado = (
         bruto.groupby(chaves, as_index=False)
         .agg(
             unidades=("unidades", "sum"),
-            nome_completo_fonte=("nome_completo_fonte", "first"),
+            grafias_fonte=("modelo_fonte", lambda s: "+".join(sorted(set(s)))),
+            nome_completo_fonte=("nome_completo_fonte", lambda s: "+".join(sorted(set(s)))),
             origem_tabela=("origem_tabela", lambda s: "+".join(sorted(set(s)))),
             arquivos_origem=("arquivo_origem", lambda s: "+".join(sorted(set(s)))),
         )
-        .rename(columns={"segmento_fonte": "segmento", "marca_fonte": "marca"})
+        .rename(columns={"segmento_fonte": "segmento", "marca_chave": "marca",
+                         "modelo_chave": "modelo_fonte"})
     )
 
     # 2. Rebatismo (D2): funde origem e destino numa serie continua.
@@ -113,6 +136,7 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
             grupo_mapeado=("grupo_mapeado", "min"),
             unidades=("unidades", "sum"),
             modelo_fonte=("modelo_fonte", lambda s: "+".join(sorted(set(s)))),
+            grafias_fonte=("grafias_fonte", lambda s: "+".join(sorted(set(s)))),
             nome_completo_fonte=("nome_completo_fonte", lambda s: "+".join(sorted(set(s)))),
             houve_rebatismo=("houve_rebatismo", "max"),
             data_rebatismo=("data_rebatismo", lambda s: next((v for v in s if v), "")),
@@ -133,6 +157,22 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
     painel = painel.merge(
         blocos, on=["mes_ref", "segmento", "sub_segmento_fonte"], how="left")
     painel["corte_publicacao"] = painel["corte_publicacao"].fillna(0).astype("int64")
+
+    # 6. D2: nome que nao designa veiculo. Nada e' apagado -- o painel ganha a
+    #    marca e o relatorio lista os candidatos a revisao humana.
+    motivos = [
+        nomes.motivo_nao_veiculo(marca, modelo)
+        for marca, modelo in zip(painel["marca"], painel["modelo"])
+    ]
+    painel["motivo_nome_suspeito"] = motivos
+    painel["nome_suspeito"] = [bool(m) for m in motivos]
+    suspeitos = painel.loc[painel["nome_suspeito"], ["marca", "modelo"]].drop_duplicates()
+    if not suspeitos.empty:
+        logger.info(
+            "%d nomes marcados como provavelmente nao-veiculo (%d linhas, %d unidades)",
+            len(suspeitos), int(painel["nome_suspeito"].sum()),
+            int(painel.loc[painel["nome_suspeito"], "unidades"].sum()),
+        )
 
     logger.info(
         "regras aplicadas: %d rebatismos, %d reclassificacoes, %d substituicoes, %d ignorar",

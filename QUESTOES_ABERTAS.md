@@ -16,19 +16,57 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | B1 | HHI de grupo menor que HHI de marca em 2014 | **causa encontrada e corrigida** |
 | B2 | Buraco de 2023-09 | **recuperado da fonte** |
 | B3 | `volume_em_jogo` ordenando errado | corrigido |
-| I1 | Cauda mais rasa que a planilha de controle | **é truncamento, não agregação; falta a planilha para fechar** |
+| I1 | Cauda mais rasa que a planilha de controle | **fechado: truncamento nas unidades, colapso de variante na contagem** |
 | I2 | Taxa de entrada não responde ao limiar | confirmado: é desenho, documentado |
-| I3 | O corte de publicação fabrica a alta recente? | **inconclusivo; a métrica do enunciado estava errada** |
-| Q1 | Leitura de "pico móvel de 12 meses" | **continua aberta — a escolha importa** |
+| I3 | O corte de publicação fabrica a alta recente? | **resolvido pelo piso de volume: a alta é real até 2025; 2026 é artefato** |
+| Q1 | Leitura de "pico móvel de 12 meses" | **encerrada com a regra de banda** |
 | Q2 | Tolerância de 0,5% e piso de cobertura | decidido; piso medido, não aplicado |
 | Q3 | Mapa de grupos econômicos | decidido; variante de robustez disponível |
 | Q4 | Chave do painel e sub-segmento | decidido e aplicado |
 | Q5 | O que significa "zero" | decidido; sinalização entregue |
-| Q6 | Retroagir a 2003 | **viável: 132 informes, todos legíveis**; extensão **não** feita |
+| Q6 | Retroagir a 2003 | **feita**: a série começa em 2003-01 |
 | Q7 | Ranking completando sub-segmento | decidido, mantido |
 | Q8 | "Julho de 2023, maior mês desde 2019" | premissa corrigida na ESPEC |
 | Q9 | Detector de queda abrupta | decidido e aplicado |
 | Q10 | Censura à esquerda | formulação transportada para a ESPEC §5 |
+| Rodada 2 | Modelos fantasma dominam a rotatividade | **achado novo, decomposto por piso de volume** |
+| D1 | Duplicata por caixa (`Outlander`/`OUTLANDER`) | corrigido |
+| D2 | Linhas que não são modelos | sinalizadas, nada apagado |
+| D3 | Dois números para zeros frágeis | reconciliado |
+| Rodada 3 | Série estendida a 2003-01 | **rodada: 284 meses, 57,8 milhões de unidades, 940 modelos** |
+| D4 | 2013-11 é edição defeituosa na origem (marca trocada) | **detectado, reportado, não corrigido** |
+| D5 | Duas edições curtas do informe (2003-10, 2005-03) | **medidas; completar é decisão do pesquisador** |
+
+---
+
+## Rodada 2 — o achado que muda a leitura das taxas
+
+**207 dos 647 modelos somam 3.504 unidades em treze anos** — 0,012% do volume — e
+cada um conta como uma entrada e uma saída. São registros avulsos, conversões de
+encarroçador e erros de cadastro: `FIAT/FIAT`, `FORD/ENGERAUTO SPARTAKUS`,
+`VW/ZILK`, `TOYOTA/RIBEIRAUTO`. Eles respondem por **30% a 55% de todas as
+entradas e saídas**, ano a ano.
+
+**Na série estendida a 2003 o problema é maior, e é pior nos anos antigos.**
+São **363 dos 940 modelos — 39% da contagem — com 5.988 unidades em 24 anos**,
+0,010% do volume. E a proporção que eles tomam da rotatividade cai ao longo da
+série: em 2003 são 69% das entradas e **83% das saídas**; de 2012 a 2016 ficam
+entre 19% e 36%; nos anos recentes voltam para a faixa de 40%. Ou seja, a
+contaminação **não é constante no tempo** — ler a coluna "todos" não só infla as
+taxas, como infla mais o começo da série que o meio. Era o item 4 de "o que
+continua aberto" da rodada 2, e está respondido.
+
+As taxas da §8 do relatório não mediam rotatividade de portfólio: mediam
+rotatividade **mais** ruído de cadastro, em proporção parecida. É maior que
+qualquer problema discutido antes, porque essa é a variável dependente do artigo
+de escopo de produto.
+
+**O que foi feito.** Nada foi filtrado do painel — a Parte 0 continua valendo.
+A §8 passou a trazer as taxas sob **três pisos de volume total do modelo**:
+todos, acima de 100 unidades, acima de 1.000. O piso entra no numerador e no
+denominador. O relatório abre com a advertência de que **nenhuma leitura
+substantiva deve sair da coluna "todos"**, e `saidas/taxas_por_piso_de_volume.csv`
+traz contagens e denominadores.
 
 ---
 
@@ -51,7 +89,7 @@ artigo é outro arquivo de regras passado à etapa 5.
 
 ---
 
-## Os três defeitos
+## Os três defeitos da rodada 1
 
 ### B1. HHI de grupo menor que HHI de marca em 2014 — causa encontrada
 
@@ -95,7 +133,12 @@ uma segunda publicação do mesmo número pela mesma fonte.
 - Toda linha sai com `origem_tabela='mes_anterior'` e
   `metodo_extracao='reconstruido'`; o mês fica como `ok_reconstruido`.
 
-A série não tem mais buracos: 152 meses, nenhuma lacuna.
+A série não tem mais buracos: 284 meses, nenhuma lacuna.
+
+O registro dessa
+recuperação agora sobrevive a uma rodada que reaproveita a extração já gravada —
+antes ele era reescrito do zero e sumia, deixando o painel marcando
+`origem_tabela='mes_anterior'` sem procedência no relatório.
 
 ### B3. `volume_em_jogo` — corrigido
 
@@ -106,86 +149,239 @@ começa por Prisma → Onix Plus (440.598) e Palio → Argo (390.713).
 
 ---
 
-## As três investigações
+## As três investigações da rodada 1
 
-### I1. Cauda mais rasa que a planilha de controle — **hipótese 2 medida e quase descartada**
+### I1. Cauda mais rasa que a planilha de controle — **fechado, com dois mecanismos**
 
-Das duas hipóteses, a de **agregação da fonte** pôde ser medida sem a planilha,
-e ela quase não explica nada. Nomes compostos (`MARCA/A/B`) em todo o painel de
-2014-2026: **três**, e só um com volume — `VW/FOX/CROSS FOX` (383.417 unidades,
-2014-01 a 2022-01), mais `VW/MAN/EXPRESS` e uma linha isolada de
-`RENAULT/MARCOPOLO/VOLARE V9L EO`. No diagnóstico de 2003-2013, **um** nome
-composto, o mesmo Fox/CrossFox, presente desde 2003 e sem nenhuma entrada ou
-saída do padrão. A agregação visível vale por dois ou três modelos, não por 76.
+O cruzamento com `Vendas_Geral.xlsx`, ano de 2014: 147 modelos casam
+exatamente, 48 casam por família, e **115 não têm contraparte alguma, somando
+44.737 unidades** — praticamente as 43.740 que a cobertura apontava como
+faltantes em automóveis. **Truncamento confirmado nas unidades.** Os 115 têm
+mediana de 65 unidades no ano; 99 vendem menos de 500. É cauda premium e de
+nicho: Audi A1, Mini Countryman, BMW X5, Mercedes GLC, CAOA Chery Face.
 
-A hipótese de **truncamento** fecha a conta. Em 2014 o painel traz 2.751.394
-unidades de automóveis contra 2.795.134 publicadas: faltam 43.740 — praticamente
-os ~41 mil que os 76 modelos ausentes somariam. E a medida de truncagem (§4 do
-relatório) mostra 132 dos 156 blocos de automóveis no teto naquele ano, com
-corte mediano de 21 unidades. Os modelos que faltam são exatamente a cauda que
-a fonte não lista.
+**Mas a contagem de modelos tem um segundo mecanismo, e o teste de barra no nome
+não o via.** A planilha traz `Pajero TR4` (7.519), `Pajero HPE` (4.800) e
+`Pajero Full` (2.429) — três veículos; o painel traz uma única ficha
+`MITSUBISHI/PAJERO`, **sem barra nenhuma**. A agregação é invisível para o teste
+de `MARCA/A/B`, que encontra só três casos no painel inteiro e concluía que a
+fonte quase não agrega.
 
-**Consequência:** vale a leitura da hipótese 1 — a taxa de saída está
-subestimada, porque os modelos pequenos, onde entrada e saída acontecem, não
-entram no painel.
+**O que foi feito.** A etapa 7 ganhou busca de colapso por **cardinalidade de
+família**: agrupa os dois lados pela primeira palavra do nome do modelo e
+reporta as famílias em que a planilha tem mais entradas que o painel
+(`saidas/colapsos_de_variante.csv`). A família é heurística de busca, não
+classificação — aponta onde olhar, e o resultado vai para revisão humana.
+Casos como Cruze e Etios ficam de fora por construção: são dois produtos dos
+dois lados, só com nomenclatura diferente.
 
-**O que ainda falta:** `Vendas_Geral.xlsx` não está no repositório. Sem ela não
-dá para confirmar que os 76 modelos da planilha são os mesmos que o corte
-derruba, nem para descartar agregação *invisível* — a que a fonte faz sem
-deixar barra no nome. A etapa 7 está pronta e roda no instante em que o arquivo
-aparecer em `dados/referencia/Vendas_Geral.xlsx`.
+A etapa 7 também passou a produzir `saidas/so_na_planilha.csv`, a medida direta
+do truncamento.
+
+**Falta só rodar.** `Vendas_Geral.xlsx` ainda não está em `dados/referencia/`.
+Com o arquivo no lugar, `python src/etapa07_referencia_cruzada.py` refaz isso
+contra o painel completo, e não só contra as fichas.
 
 ### I2. A taxa de entrada não responde ao limiar — confirmado, é desenho
 
 Confirmado: **a entrada é o primeiro mês com unidades positivas e não usa o
 limiar**; só a saída aplica D3, que foi o que a ESPEC especificou. Por isso as
-três colunas de entrada são idênticas nos treze anos.
+três colunas de entrada são idênticas nos 24 anos.
 
 A assimetria está agora declarada em três lugares: no dicionário de dados, na
 seção 8 do relatório de validação, e aqui. Ela entra direto em qualquer
 decomposição de margens, e quem for usar essas margens precisa decidir se quer
 um critério simétrico — a decisão continua sendo do pesquisador.
 
-### I3. O corte de publicação fabrica a alta recente? — **inconclusivo, e a métrica do enunciado estava errada**
+### I3. O corte de publicação fabrica a alta recente? — **resolvido: a alta é real até 2025**
 
-Antes do teste foi preciso corrigir a medida. **A truncagem da Fenabrave não é
-um piso de unidades: é número fixo de linhas por sub-segmento.** "Suv's" traz
-exatamente 40 modelos nos 152 meses; "Furgões", 7; "Sedans Grandes", 12.
-Sub-segmento com menos modelos que o teto não trunca nada. A série "corte
-mediano 99 → 396" que motivou a hipótese media outra coisa — o tamanho do
-modelo mediano da fonte, que sobe porque o mercado se concentrou, não porque a
-fonte passou a cortar mais.
+Duas correções no caminho até a resposta, ambas minhas.
 
-Medido corretamente (`saidas/validacao.md` §4, `saidas/truncamento_por_bloco.csv`),
-o corte **não sobe em automóveis** — mediana entre 3 e 21 unidades, sem
-tendência — e **sobe muito em comerciais leves**: de 25 unidades em 2014 para
-172 em 2026. É o oposto do que a cobertura sugeria, já que é em comerciais
-leves que ela é quase perfeita.
+**Primeira: a métrica do enunciado estava errada.** A truncagem da Fenabrave não
+é um piso de unidades: é **número fixo de linhas por sub-segmento**. "Suv's" traz
+40 modelos no teto e nunca menos de 35 nos 284 meses; "Furgões", 7 sempre. A série "corte mediano
+99 → 396" media o tamanho do modelo mediano da fonte, que sobe porque o mercado
+se concentrou. Medido corretamente, o corte **não sobe em automóveis** — mediana
+entre 3 e 21 unidades — e **sobe muito em comerciais leves**, de 25 unidades em
+2014 para 172 em 2026.
 
-Com a medida certa, o subconjunto imune ao corte cai de 310 para **98 modelos**,
-e o teste dá: entre 2022 e 2025 (último ano completo) a taxa de saída vai de
-0,136 a 0,195 na série cheia (+0,059) e de 0,149 a 0,133 no subconjunto imune
-(−0,016). **A subida desaparece nos imunes — aponta para artefato do corte.**
+**Segunda: o teste que montei não tinha poder, e apontou para o lado errado.**
+O subconjunto imune ao corte tem 98 modelos e mediana de 5 saídas por ano; ali a
+alta "desaparecia", e eu li isso como indício de artefato. Com o piso de volume —
+190 a 197 modelos em vez de 98 — o teste ganha poder e responde o contrário:
 
-**Mas o teste não tem poder para concluir.** São 98 modelos e mediana de 6
-saídas por ano na janela recente: duas ou três saídas a mais movem a taxa em
-vários pontos. O resultado aponta na direção do artefato sem demonstrá-lo.
-Fica como alerta forte, não como conclusão — e junto com o risco de cobertura
-registrado em §3 (automóveis andam −2,63 pontos percentuais entre 2014 e 2026),
-recomenda cautela com qualquer leitura substantiva da alta recente da taxa de
-saída.
+| piso | 2022 | 2025 | variação |
+|---|---:|---:|---:|
+| todos | 0,120 | 0,195 | **+0,075** |
+| acima de 100 unidades | 0,079 | 0,174 | **+0,095** |
+| acima de 1.000 unidades | 0,068 | 0,149 | **+0,081** |
+
+(Números da série estendida, 2003-01 a 2026-08. Na janela de 2014 em diante eram
++0,063, +0,085 e +0,063 — mesma conclusão, magnitude um pouco maior.)
+
+**A alta não some com o piso — ela se mantém ou aumenta.** É movimento real de
+portfólio entre 2022 e 2025, e não artefato nem do corte nem dos fantasmas.
+
+E o salto de 2026 **inverte de sinal** assim que o piso entra: +0,030 com todos,
+−0,031 acima de 100, −0,065 acima de 1.000. É fantasma somado a ano incompleto.
+**2026 não é citável para rotatividade**, e o relatório diz isso antes da
+primeira tabela.
+
+O subconjunto imune fica no relatório como conferência secundária, com a ressalva
+de que não decide nada sozinho.
+
+---
+
+## Os três defeitos da rodada 2
+
+### D1. Duplicata por caixa — corrigido
+
+A fonte escreveu `MITSUBISHI/Outlander` de 2014-01 a 2022-07 (35.231 unidades) e
+`MITSUBISHI/OUTLANDER` em 2022-12 (8 unidades). Sem normalização, o mesmo carro
+virava duas fichas, com uma saída e uma entrada fabricadas.
+
+**A chave do painel passou a ser canonizada em caixa.** Isso não contraria a
+ESPEC §4, que proíbe uniformizar maiúsculas *na transcrição*: `grafias_fonte` e
+`nome_completo_fonte` guardam a grafia crua, letra por letra. E não é fusão de
+modelos: não há decisão metodológica em dizer que `Outlander` e `OUTLANDER` são
+a mesma cadeia de caracteres. Fusão de produtos distintos continua exigindo
+linha em `regras.csv`. `saidas/colisoes_de_caixa.csv` registra o que foi
+unificado — hoje só esse par, mas a retroação a 2003 multiplicava a chance de
+reincidência, e é por isso que a regra entrou agora.
+
+### D2. Linhas que não são modelos — sinalizadas, nada apagado
+
+`FIAT/FIAT`, `FIAT/FAG`, `FORD/ENGERAUTO SPARTAKUS`, `VW/ZILK`,
+`TOYOTA/RIBEIRAUTO`. O painel ganhou `nome_suspeito` e `motivo_nome_suspeito`;
+`saidas/nomes_suspeitos.csv` traz os candidatos a revisão humana.
+
+A marcação automática cobre só o caso **objetivo** — nome do modelo igual ao da
+marca. O resto vem de `config/nomes_nao_veiculo.csv`, lista curada com motivo
+por linha, porque volume baixo não serve como critério nos dois sentidos:
+`TOYOTA/RIBEIRAUTO` soma 67 unidades em 25 meses e escaparia de qualquer corte,
+enquanto `CITROEN/C4` e `DODGE/CHARGER` têm uma unidade só e são carros de
+verdade. São 29 nomes marcados hoje na série 2003-2026 — eram 21 na janela de 2014 em diante.
+
+### D3. Dois números para zeros frágeis — reconciliado
+
+Ver Q5. Os 5.609 vinham da métrica de corte errada; o número corrente sai do
+relatório, e a definição está fixada lá.
+
+---
+
+## Rodada 3 — a série estendida a 2003
+
+A retroação foi feita: **284 meses, de 2003-01 a 2026-08**, 54.188 linhas de
+fonte, **57.765.831 unidades**, 940 modelos. O invariante central — soma do
+painel igual ao total que a fonte publica, dentro da tolerância — vale nos 284
+meses. Nenhum informe precisou de OCR e nenhum ficou sem linha.
+
+O que a série antiga trouxe de novo, além do achado dos fantasmas acima:
+
+### D4. 2013-11 é edição defeituosa na origem
+
+O informe de Nov/2013 publica `PONTIAC/MONTANA` (3.901 unidades), `FORD/KOMBI`,
+`VW/RANGER`, `FORD/MASTER`, `THINK/CITY` — e um `/ELANTRA` sem marca nenhuma.
+São **12 modelos sob marca trocada, 12.355 unidades, 11 marcas fantasma** num
+único mês.
+
+**Não é erro de leitura.** Verificado no PDF: `PONTIAC/MONTANA` é um objeto de
+texto único em x0=382,08, exatamente como os vizinhos corretos. Foi a fonte que
+trocou a coluna naquela edição.
+
+O efeito é pior que um número errado: cada troca fabrica uma marca fantasma com
+uma entrada e uma saída, e tira o volume da marca certa naquele mês. Quem usar
+séries **por marca** precisa decidir o que fazer com 2013-11.
+
+`src/comum/marca_do_modelo.py` detecta isso pela redundância da própria série —
+um modelo que aparece sob a mesma marca em ≥90% dos meses e destoa num — e
+**não corrige nada** (ESPEC §9.4). São 55 pares (mês × modelo) na série inteira,
+em `saidas/marca_divergente.csv`. Nem toda divergência é defeito: `TIGGO 7` sob
+`CHERY` em 2019-2020 contra `CAOA CHERY` depois é **troca real de marca**. O
+teste aponta; a leitura é humana.
+
+Sobre grupos econômicos: `PONTIAC` entrou em `config/mapa_grupos.csv` com
+vigência 2003-01 a 2010-10, que é quando a marca existiu. Em 2013-11 o mapa
+devolve `('PONTIAC', False)` — sem grupo —, e isso está **certo** sob D4: o mapa
+nunca é retroativo nem pós-datado. Atribuir grupo não conserta o defeito; só
+registraria de quem a marca era.
+
+### D5. Duas edições curtas do informe
+
+O informe normal tem 44 páginas e 17 sub-segmentos na tabela por modelo.
+**2003-10 (Ed. 10) e 2005-03 (Ed. 27) saíram com 10 páginas** e trazem **um**
+sub-segmento. São as edições corretas dos meses certos — o cabeçalho confere —,
+só que abreviadas na origem.
+
+Ali o mês é carregado quase inteiro pelo ranking mensal: o **total bate** com o
+publicado (99,0% de cobertura nos dois), porque o ranking cobre o topo, mas o
+**elenco de modelos fica pela metade**: 89 e 87 fichas contra ~180 nos meses
+vizinhos.
+
+Consequência: nesses dois meses um modelo de cauda some sem ter saído do
+mercado. Não vira saída — D3 olha o pico móvel de 12 meses —, mas vira zero
+frágil e entra na contagem de modelos do ano.
+
+**Nada foi completado.** A coluna de mês anterior do informe seguinte
+recuperaria o elenco, do mesmo jeito que recuperou 2023-09; mas isso misturaria
+linha lida direto com linha republicada **dentro do mesmo mês**, e a regra de
+mistura é decisão do pesquisador, não do código (§9.6). A detecção está em
+`truncamento.edicoes_abreviadas` e a lista em `saidas/edicoes_abreviadas.csv`.
+
+*Opções, se o pesquisador quiser fechar isso:* (a) deixar como está e tratar os
+dois meses como parcialmente observados na análise; (b) completar o elenco pela
+coluna de mês anterior, marcando as linhas acrescentadas com
+`origem_tabela='mes_anterior'`, de modo que a mistura fique visível linha a
+linha; (c) excluir os dois meses das contagens de modelos, mantendo-os nos
+volumes. A recomendação do código é (b), porque é a única que não perde
+informação nem esconde a origem — mas nada foi escrito.
+
+### Duas variantes de grafia de sub-segmento
+
+O informe de **2017-04** escreve `Pickup's Grandes` e `Pickup's Pequenas` onde os
+outros 283 meses escrevem `Pick-up's Grandes` e `Pick-up's Pequenas`. Entraram em
+`config/sub_segmentos.csv` como linhas próprias, com o segmento correto e o
+motivo registrado — não foram renomeadas, porque o painel guarda o que a fonte
+publicou. Sem efeito mensurável na truncagem: os tetos das duas grafias
+coincidem (11 e 6 linhas).
+
+### Correção: 2003 e 2005 não são os anos de cobertura mais fraca
+
+O diagnóstico de retroação previa 2003 e 2005 como os piores anos de cobertura
+(95,4% e 95,0% em automóveis) e a rodada 2 pediu que fossem registrados assim.
+**A extração completa desmente isso**: ficam em 99,61% e 99,72%, na faixa dos
+melhores anos da série.
+
+A diferença é de método, não de dado. O diagnóstico somava só a tabela por
+sub-segmento e tirava média entre meses; o painel também usa o ranking mensal
+para completar a cauda. E os 4 pontos inteiros vinham dos **dois meses do D5**,
+não do ano.
+
+Os anos de cobertura mais fraca da série são **2026 (95,81%, parcial), 2025
+(97,67%) e 2011 (97,89%)** — todos recentes. A deriva de cobertura em automóveis
+é de −3,80 pontos entre 2003 e 2026, e ela anda **contra** a intuição de que os
+informes antigos seriam piores.
 
 ---
 
 ## As dez questões
 
-**Q1 — pico móvel. Mantido `media_movel`, mas a questão CONTINUA ABERTA.**
-A comparação foi rodada, como pedido, e o resultado não permite encerrar:
-**5 dos 13 anos mudam de posição** no ranking de taxa de saída entre
-`media_movel` e `max_movel` (2019, 2020, 2023, 2024, 2025). A escolha não é
-inócua. Qualquer resultado sobre em que anos houve mais saída depende dela e
-precisa declarar qual leitura usou. A tabela lado a lado está em
-`saidas/validacao.md` §8.
+**Q1 — pico móvel. ENCERRADA, com uma regra que vale mais que a escolha.**
+Mantido `media_movel`, por princípio: um lote isolado de venda direta não é a
+escala do produto, e `max_movel` numa série completa degenera para o pico
+global, o que esvazia a palavra "móvel".
+
+A comparação mostrou que **14 dos 24 anos mudam de posição** entre as duas
+leituras, e daí sai a regra: **a ordenação de anos por taxa de saída não é
+identificada** no nível de precisão em que as duas leituras discordam. Só
+afirmar diferença entre dois anos quando ela sobreviver às duas. **Reportar
+banda, não ponto.**
+
+O que sobrevive, medido entre anos consecutivos completos com variação acima de
+3 pontos percentuais no mesmo sentido: o **degrau de 2015 para 2016** (a taxa
+praticamente dobra nas duas leituras, +0,078 e +0,059) e o de **2017 para 2018**
+(+0,040 e +0,032). O que não sobrevive é qualquer ordenação fina entre os anos
+do meio. O relatório traz a regra e a lista em texto, na §8.
 
 **Q2 — tolerância e piso. Adotado.** As três verificações internas ao documento
 estão no lugar. Sobre D5: **o piso não é aplicado ao painel.** O que a rodada
@@ -213,37 +409,47 @@ sub-segmentos no mesmo mês, as duas linhas ficam separadas no painel; a soma
 por modelo virou uma *visão* (`comum/visoes.py`), não o esquema. A ESPEC foi
 corrigida: geração é invisível na maior parte dos casos, não em todos.
 
-**Q5 — o que é "zero". Adotado, com a sinalização.** Mês com informe em que o
-modelo não aparece é zero; lacuna é ausente. O painel ganhou a coluna
-`corte_publicacao` (menor valor listado naquele mês e segmento), e
-`saidas/zeros_frageis.csv` lista os pares modelo × mês em que o corte está
-**acima** do limiar de D3 do próprio modelo — onde o zero pode estar
-escondendo valor relevante. São 5.609 pares em 189 modelos.
+**Q5 — o que significa "zero". Adotado, com a sinalização.** Mês com informe em
+que o modelo não aparece é zero; lacuna é ausente. O painel ganhou a coluna
+`corte_publicacao` e `saidas/zeros_frageis.csv` lista os pares modelo × mês em
+que o corte está **acima** do limiar de D3 do próprio modelo.
 
-**Q6 — retroagir a 2003. Diagnóstico rodado; extensão não feita; e ela é
-viável.** Os 132 informes de 2003-01 a 2013-12 foram baixados e lidos: **todos
-renderam tabela por modelo**, nenhum precisou de tradução de glifos, nenhum
-ficou para OCR. O parser não degrada com a idade do informe — a cobertura média
-de automóveis fica entre 95,0% (2005) e 99,8% (2004), da mesma ordem dos anos
-recentes. Os dois anos fracos são **2003** (95,4% automóveis, 90,1% comerciais
-leves) e **2005** (95,0% e 90,6%).
+**D3 — os dois números reconciliados.** Os 5.609 que este arquivo trazia vinham
+da métrica de corte errada (o menor valor publicado no mês inteiro), que
+superestimava a truncagem. Com o corte medido por bloco, o número é o do
+relatório. A definição, para não haver terceira versão: **par (modelo, mês) em
+que o modelo não aparece, o mês está entre a entrada e a saída do modelo no
+limiar de 5%, e o corte do bloco em que ele seria listado supera o limiar de D3
+dele.** O número corrente sai sempre de `saidas/validacao.md` §8 e de
+`saidas/zeros_frageis.csv`; este arquivo não o repete mais.
 
-**A deriva de agregação não existe nestes anos:** um único nome composto no
-período inteiro, o mesmo `VW/FOX/CROSS FOX`, sem entrada nem saída do padrão
-depois de 2003. O que a fonte agrega hoje ela já agregava em 2003, e a unidade
-de observação não muda de sentido ao longo da série.
+**Q6 — retroagir a 2003. FEITA.** O diagnóstico não deixou argumento contra:
+132 informes de 2003-01 a 2013-12, **todos com tabela por modelo**, nenhum
+precisando de OCR ou de tradução de glifos, cobertura média de automóveis entre
+95,0% (2005) e 99,8% (2004) — a mesma ordem dos anos recentes — e **nenhuma
+deriva de agregação**: um único nome composto no período inteiro, o mesmo
+`VW/FOX/CROSS FOX`, presente desde 2003.
 
-**Um defeito encontrado, e não era de parsing.** O catálogo da Fenabrave aponta
-o mês 2005-04 para `3_2005_05_2.pdf`, que é a edição 29 e se declara "Resumo
-Mensal Maio de 2005" — o mesmo conteúdo servido em 2005-05. O informe de abril
-existe, é a edição 28, e está em `3_2005_04_2.pdf`, só não listado. Foi o teste
-de mês declarado que pegou. A correção entrou em
-`config/correcoes_catalogo.csv`, com motivo e evidência, e depois dela o
-diagnóstico não aponta **nenhum** mês problemático.
+O ganho é o que faltava na janela de 2014: o boom até 2012, as reduções de IPI
+de 2008-2009 e de 2012, e o Inovar-Auto. Para o artigo de escopo de produto, é a
+diferença entre uma recessão e um ciclo completo.
 
-O painel continua em 2014-01..2026-08, como a Parte 5 manda. Para estender,
-basta rodar `python src/pipeline.py --inicio 2003-01`; o relatório completo está
-em `saidas/diagnostico_retroacao.md`.
+**Um defeito encontrado no caminho, e não era de parsing.** O catálogo da
+Fenabrave aponta o mês 2005-04 para `3_2005_05_2.pdf`, que é a edição 29 e se
+declara "Resumo Mensal Maio de 2005" — o mesmo conteúdo servido em 2005-05. O
+informe de abril existe, é a edição 28, e está em `3_2005_04_2.pdf`, só não
+listado. Foi o teste de mês declarado que pegou. A correção entrou em
+`config/correcoes_catalogo.csv`, com motivo e evidência por linha.
+
+`PERIODO_INICIO` passou a ser `2003-01`. A série tem hoje **284 meses, 54.188
+linhas de fonte, 57.765.831 unidades e 940 modelos**, com o invariante central
+válido nos 284 meses.
+
+O pedido de "registrar 2003 e 2005 como os anos de cobertura mais fraca" **não
+se sustentou na extração completa** — ver a seção da rodada 3: a média do
+diagnóstico vinha de duas edições curtas, e os anos fracos são os recentes. A
+decomposição por piso de volume da §8 vale para a série estendida e mostrou que
+a proporção de fantasmas é **maior** nos anos antigos, não igual.
 
 **Q7 — ranking completando sub-segmento. Mantido.** Tabela de sub-segmento como
 base, ranking preenchendo o que ela não lista, `origem_tabela` registrando a
@@ -276,16 +482,35 @@ descarta como *quem sai*. Um modelo vivo no primeiro mês continua podendo sair
 
 ## O que continua aberto
 
-1. **Q1** — a leitura de "pico móvel" muda a ordenação de 5 dos 13 anos. Não dá
-   para encerrar sem uma decisão explícita, e ela precisa constar de qualquer
-   artigo que use taxas de saída.
-2. **I1** — falta `Vendas_Geral.xlsx` para confirmar que os modelos ausentes são
-   os que o corte derruba. A agregação visível já foi descartada como
-   explicação; a invisível, não.
-3. **Q3** — o mapa de grupos é rascunho revisado, não fato. As quatro convenções
-   discutíveis continuam sendo convenções.
-4. **Adjudicação de `regras.csv`** — por decisão da Parte 0, para quando o
-   desenho do artigo de escopo de produto estiver fechado.
-5. **I3** — o teste aponta para artefato do corte na alta recente da taxa de
-   saída, mas com 98 modelos e 6 saídas por ano não tem poder para concluir.
-   Qualquer leitura substantiva dessa alta precisa tratá-la como suspeita.
+1. **Adjudicação de `regras.csv`** — por decisão da Parte 0, para quando o
+   desenho do artigo de escopo de produto estiver fechado. Enquanto isso, as
+   taxas são o limite superior.
+2. **Cruzamento com `Vendas_Geral.xlsx`** — a etapa 7 está pronta, com busca de
+   colapso por cardinalidade de família e a lista de modelos sem contraparte.
+   Falta o arquivo em `dados/referencia/`.
+3. **O mapa de grupos** é rascunho revisado, não fato. As quatro convenções
+   discutíveis continuam sendo convenções; separar Kia de Hyundai move o HHI em
+   no máximo 0,87%.
+4. **Revisão de `config/nomes_nao_veiculo.csv`** — 29 nomes marcados,
+   `saidas/nomes_suspeitos.csv` traz os 180 candidatos a revisão humana. A
+   retroação a 2003 multiplicou a lista de nomes de volume ínfimo.
+5. **O que fazer com 2013-11** (D4) em qualquer série por marca. O painel
+   registra o defeito e não decide.
+6. **As duas edições curtas** (D5): manter como está, completar pela coluna de
+   mês anterior, ou excluir das contagens de modelos. Três opções descritas
+   acima; nenhuma aplicada.
+
+---
+
+## Regras que passaram a valer para qualquer artigo
+
+1. **Nenhuma leitura de rotatividade sai da coluna "todos"** das taxas de
+   entrada e saída. Use os pisos de volume.
+2. **O ano parcial não é citável** para rotatividade. Hoje é 2026.
+3. **Diferença entre dois anos só se afirma quando sobrevive às duas leituras de
+   "pico móvel"** (Q1). Banda, não ponto.
+4. **Todo teste de sanidade roda duas vezes**, no painel e no total publicado
+   pela fonte, e separa "bug nosso" de "premissa não confirmada".
+5. **A contaminação por fantasmas não é constante no tempo** — é mais forte em
+   2003-2011 que no meio da série. Comparar anos distantes exige piso de volume,
+   não só advertência.

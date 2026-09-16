@@ -33,7 +33,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from comum import config, log, marcas  # noqa: E402
+from comum import config, familias, log, marcas  # noqa: E402
 
 ETAPA = "etapa07_referencia_cruzada"
 ANOS_COMPARAVEIS = range(2014, 2024)
@@ -137,7 +137,16 @@ def executar(caminho: Path = config.VENDAS_GERAL) -> int:
             f"Esperada em `{log.caminho_relativo(caminho)}` e nao encontrada. A comparacao "
             "nao foi feita. Isto **nao** invalida o painel: a planilha e' controle, nao "
             "insumo.\n\nPara rodar o confronto, coloque o arquivo nesse caminho (ou passe "
-            "`--planilha CAMINHO`) e execute:\n\n```\npython src/etapa07_referencia_cruzada.py\n```\n"
+            "`--planilha CAMINHO`) e execute:\n\n```\npython src/etapa07_referencia_cruzada.py\n"
+            "```\n\nO que este confronto entrega, e que nenhuma outra etapa entrega:\n\n"
+            "- **`saidas/so_na_planilha.csv`** -- modelos que a planilha traz e o painel nao "
+            "tem em mes nenhum. E' a medida direta do truncamento.\n"
+            "- **`saidas/colapsos_de_variante.csv`** -- familias em que a planilha tem mais "
+            "variantes que o painel, por cardinalidade e nao por barra no nome. E' o unico "
+            "teste que enxerga a agregacao invisivel: `Pajero TR4`, `Pajero HPE` e "
+            "`Pajero Full` contra um unico `MITSUBISHI/PAJERO`.\n"
+            "- A comparacao mes a mes e modelo a modelo, que revela erro de leitura dos "
+            "dois lados.\n"
         )
         config.REFERENCIA_CRUZADA.write_text(texto, encoding="utf-8")
         logger.warning("planilha de controle ausente em %s -- comparacao nao realizada",
@@ -186,6 +195,38 @@ def executar(caminho: Path = config.VENDAS_GERAL) -> int:
         .drop(columns=["magnitude"])
     )
 
+    # --------------------------------------------- sem contraparte alguma
+    # Modelo que a planilha traz e o painel nao tem em ano nenhum: e' a medida
+    # direta do truncamento, e o que confirma (ou nao) a hipotese 1 de I1.
+    do_painel = set(zip(reconstruido["marca"].map(familias.chave),
+                        reconstruido["modelo"].map(familias.chave)))
+    so_na_planilha = (
+        planilha.assign(
+            marca_chave=planilha["marca"].map(familias.chave),
+            modelo_chave=planilha["modelo"].map(familias.chave),
+        )
+        .groupby(["marca_chave", "modelo_chave", "nome_planilha"], as_index=False)
+        .agg(unidades=("unidades_planilha", "sum"),
+             meses=("mes_ref", "nunique"), primeiro_mes=("mes_ref", "min"))
+    )
+    so_na_planilha = so_na_planilha[
+        [(m, mo) not in do_painel
+         for m, mo in zip(so_na_planilha["marca_chave"], so_na_planilha["modelo_chave"])]
+    ].sort_values("unidades", ascending=False)
+    so_na_planilha.to_csv(config.DIR_SAIDAS / "so_na_planilha.csv", index=False)
+
+    # -------------------------------------- colapso por cardinalidade
+    # O teste de barra no nome (`MARCA/A/B`) nao ve a agregacao invisivel: a
+    # planilha traz Pajero TR4, HPE e Full, e o painel traz PAJERO, sem barra.
+    # Cardinalidade de familia enxerga -- onde a planilha tem mais variantes que
+    # o painel, houve colapso.
+    familias_painel = familias.cardinalidade(
+        reconstruido, "marca", "modelo", "unidades_painel")
+    familias_planilha = familias.cardinalidade(
+        planilha, "marca", "modelo", "unidades_planilha")
+    colapsos = familias.colapsos(familias_painel, familias_planilha)
+    colapsos.to_csv(config.DIR_SAIDAS / "colapsos_de_variante.csv", index=False)
+
     texto = cabecalho
     texto += "## Observacoes do leitor da planilha\n\n"
     texto += "".join(f"- {o}\n" for o in observacoes) or "_(nenhuma)_\n"
@@ -196,10 +237,34 @@ def executar(caminho: Path = config.VENDAS_GERAL) -> int:
         f"de {len(comparacao)} comparados. Lista completa em "
         "`saidas/referencia_cruzada.csv`.\n\n" + _tabela(piores, 60)
     )
+    texto += (
+        "\n## Sem contraparte no painel (truncamento)\n\n"
+        "Modelos que a planilha traz e o painel nao tem em nenhum mes. Se as unidades "
+        "deles baterem com o que a cobertura aponta como faltante, o truncamento esta' "
+        "confirmado e a taxa de saida do painel esta' subestimada -- os modelos pequenos, "
+        "onde entrada e saida acontecem, nao entram.\n\n"
+        f"**{len(so_na_planilha)} modelos, {int(so_na_planilha['unidades'].sum()):,} "
+        "unidades.** Mediana de "
+        f"{float(so_na_planilha['unidades'].median()) if len(so_na_planilha) else 0:.0f} "
+        "unidades. Lista completa em `saidas/so_na_planilha.csv`.\n\n"
+        + _tabela(so_na_planilha, 30)
+    ).replace(",", ".")
+    texto += (
+        "\n## Colapso de variante (agregacao invisivel)\n\n"
+        "Familias -- primeira palavra do nome do modelo -- em que a planilha tem mais "
+        "entradas que o painel. E' o teste que enxerga o que a barra no nome nao ve: a "
+        "planilha traz `Pajero TR4`, `Pajero HPE` e `Pajero Full`, tres veiculos; o painel "
+        "traz `MITSUBISHI/PAJERO`, uma ficha, sem barra nenhuma.\n\n"
+        "A familia e' **heuristica de busca, nao classificacao**: aponta onde olhar. Cada "
+        "linha e' caso para revisao humana, nunca correcao automatica.\n\n"
+        f"**{len(colapsos)} familias** com variantes a mais na planilha. Lista completa em "
+        "`saidas/colapsos_de_variante.csv`.\n\n" + _tabela(colapsos, 40)
+    )
     config.REFERENCIA_CRUZADA.write_text(texto, encoding="utf-8")
 
     log.contagem(logger, linhas_planilha=len(planilha), linhas_painel=len(reconstruido),
-                 comparadas=len(comparacao), divergentes=len(piores))
+                 comparadas=len(comparacao), divergentes=len(piores),
+                 so_na_planilha=len(so_na_planilha), colapsos=len(colapsos))
     logger.info("gravado %s", log.caminho_relativo(config.REFERENCIA_CRUZADA))
     return 0
 

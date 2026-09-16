@@ -25,7 +25,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from comum import (  # noqa: E402
     ciclo_vida, cobertura as mod_cobertura, concentracao, config, log,
-    meses as mod_meses, periodo, truncamento, visoes,
+    marca_do_modelo, meses as mod_meses, nomes, periodo, rotatividade,
+    truncamento, visoes,
 )
 
 ETAPA = "etapa06_validacao"
@@ -338,6 +339,18 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
             + (f" -- {', '.join(sorted(sem_total['mes'].unique()))}" if len(sem_total) else "")
             + f"\n\nTabela mes a mes em `{log.caminho_relativo(config.COBERTURA)}`.\n"
         )
+        partes.append(
+            "\n**Correcao ao diagnostico de retroacao.** O diagnostico previa 2003 e 2005 "
+            "como os anos de cobertura mais fraca (95,4% e 95,0% em automoveis) e pedia que "
+            "fossem registrados como tal. A extracao completa desmente isso: os dois ficam "
+            "em 99,6% e 99,7%, na faixa dos melhores anos da serie. A diferenca e' de "
+            "metodo, nao de dado -- o diagnostico somava so' a tabela por sub-segmento e "
+            "tirava media entre meses, enquanto o painel tambem usa o ranking mensal para "
+            "completar a cauda. Os 4 pontos inteiros vinham de **dois meses**, 2003-10 e "
+            "2005-03, cujas edicoes curtas nao trazem tabela por sub-segmento (sec.7). Os "
+            "anos de cobertura mais fraca da serie inteira sao 2026 (95,8%, parcial), 2025 "
+            "(97,7%) e 2011 (97,9%) -- todos recentes.\n"
+        )
 
         partes.append("\n### Tendencia da cobertura\n\n"
                       "Cobertura que anda ao longo da serie contamina qualquer comparacao "
@@ -519,6 +532,34 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
            else " (OK)") + "\n")
     partes.append(f"- Nomes sem marca resolvida: "
                   f"**{int((bruto['metodo_separacao'] == 'nao_resolvido').sum())}** linhas\n")
+
+    inventario = nomes.inventario(por_modelo)
+    marcados = inventario[inventario["nome_suspeito"]] if not inventario.empty else inventario
+    revisao = nomes.candidatos_a_revisao(inventario)
+    if not revisao.empty:
+        revisao.to_csv(config.DIR_SAIDAS / "nomes_suspeitos.csv", index=False)
+    partes.append(
+        f"- Nomes que provavelmente **nao designam veiculo**: **{len(marcados)}** modelos, "
+        f"{_mil(marcados['unidades'].sum()) if not marcados.empty else 0} unidades "
+        "-- `FIAT/FIAT`, `FORD/ENGERAUTO SPARTAKUS`, `TOYOTA/RIBEIRAUTO`. Nada foi "
+        "apagado: a coluna `nome_suspeito` marca as linhas e "
+        f"`saidas/nomes_suspeitos.csv` traz os {len(revisao)} candidatos a revisao "
+        "humana (marcados, mais os de volume infimo que ninguem olhou ainda).\n"
+    )
+    if not marcados.empty:
+        partes.append("\n" + _tabela(
+            marcados[["marca", "modelo", "unidades", "meses", "motivo"]], 12))
+
+    caminho_colisoes = config.DIR_SAIDAS / "colisoes_de_caixa.csv"
+    if caminho_colisoes.exists():
+        colisoes = pd.read_csv(caminho_colisoes)
+        partes.append(
+            f"\n- Grafias unificadas por caixa na chave do modelo (D1): "
+            f"**{len(colisoes)}** -- `MITSUBISHI/Outlander` e `MITSUBISHI/OUTLANDER` sao o "
+            "mesmo carro, e sem a normalizacao virariam duas fichas, com uma saida e uma "
+            "entrada fabricadas. A grafia crua segue em `grafias_fonte` e "
+            "`nome_completo_fonte`.\n\n" + _tabela(colisoes)
+        )
     partes.append(f"- Marcas fora de `config/marcas.csv`: "
                   f"**{bruto.loc[~bruto['marca_conhecida'], 'marca_fonte'].nunique()}**\n")
 
@@ -539,6 +580,28 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
         falhas.append(f"{len(faltantes)} meses do intervalo sem nenhuma linha: "
                       + ", ".join(faltantes))
 
+    abreviadas = truncamento.edicoes_abreviadas(bruto)
+    if not abreviadas.empty:
+        abreviadas.to_csv(config.DIR_SAIDAS / "edicoes_abreviadas.csv", index=False)
+        curtas = abreviadas[abreviadas["situacao"] == "edicao curta do informe"]
+        partes.append(
+            "\n### Edicoes curtas do informe\n\n"
+            "O informe normal traz 44 paginas e 17 sub-segmentos na tabela por modelo. "
+            f"**{len(curtas)}** meses da serie sairam com uma edicao curta -- 10 paginas -- "
+            "e trazem **um** sub-segmento. Ali o mes e' carregado quase inteiro pelo "
+            "ranking mensal: o **total bate** com o publicado, porque o ranking cobre o "
+            "topo, mas o **elenco de modelos fica pela metade** (89 e 87 fichas contra "
+            "cerca de 180 nos meses vizinhos).\n\n"
+            "Consequencia para quem usa a serie: nesses dois meses um modelo de cauda "
+            "some sem ter saido do mercado. Nao vira saida -- D3 olha o pico movel de 12 "
+            "meses --, mas vira zero fragil e entra na contagem de modelos do ano. **Nada "
+            "foi completado** (sec.9.4): a coluna do mes anterior do informe seguinte "
+            "poderia recuperar o elenco, do mesmo jeito que recuperou 2023-09, mas isso "
+            "misturaria linha lida direto com linha republicada dentro do mesmo mes, e a "
+            "regra de mistura e' decisao do pesquisador, nao do codigo.\n\n"
+            + _tabela(abreviadas)
+        )
+
     caminho_reconstruidos = config.DIR_SAIDAS / "meses_reconstruidos.csv"
     if caminho_reconstruidos.exists():
         reconstruidos = pd.read_csv(caminho_reconstruidos)
@@ -547,24 +610,157 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
                           + _tabela(reconstruidos))
 
     # ------------------------------------------ 8. taxas de entrada e saida
+    ano_parcial = int(meses[-1][:4])
+    ultimo_completo = ano_parcial - 1
+    volume = rotatividade.volume_por_modelo(por_modelo)
+    largo = ciclo_vida.grade(por_modelo, visoes.CHAVE_MODELO, meses, mod_meses.uteis())
+    ciclos_por_limiar = {
+        limiar: _ciclos_da_grade(largo, meses, limiar) for limiar in config.LIMIARES_SAIDA
+    }
+    ciclos_5 = ciclos_por_limiar[config.LIMIAR_SAIDA]
+
     partes.append(
         "\n## 8. Taxas de entrada e saida por ano (D3)\n\n"
-        "Tres limiares lado a lado, como manda a sec.6. Modelos censurados -- vivos no "
-        "primeiro mes da amostra, ou ainda vivos no ultimo -- ficam fora da contagem de "
-        "entrada e de saida respectivamente.\n\n"
+        "**Leia a advertencia antes da tabela.** Estas taxas nao medem so' rotatividade de "
+        "portfolio: medem rotatividade **mais ruido de cadastro**, em proporcao parecida. "
+        "A decomposicao por piso de volume, logo abaixo, e' o que separa uma coisa da "
+        "outra, e nenhuma leitura substantiva deve sair da coluna \"todos\".\n\n"
+        f"Alem disso, **{ano_parcial} e' ano parcial** (a amostra termina em {meses[-1]}): "
+        "contar saidas num ano incompleto infla a taxa por conta propria, e o numero nao e' "
+        "citavel para rotatividade.\n\n"
         "**Assimetria declarada (I2):** a entrada e' o primeiro mes com unidades positivas "
         "e **nao depende do limiar**; so' a saida usa D3, que foi o que a ESPEC "
-        "especificou. Por isso as tres colunas de entrada sao identicas -- e' desenho, nao "
-        "defeito. A assimetria entra direto em qualquer decomposicao de margens e esta' "
-        "registrada no dicionario de dados.\n\n"
+        "especificou. Por isso as colunas de entrada sao identicas entre limiares -- e' "
+        "desenho, nao defeito.\n\n"
+    )
+
+    # ---------------------------------------------------- modelos fantasma
+    partes.append(
+        "### Quem sao os modelos que entram e saem\n\n"
+        "Distribuicao dos modelos por volume total no periodo inteiro:\n\n"
+    )
+    distribuicao = rotatividade.distribuicao(volume, config.FAIXAS_VOLUME)
+    distribuicao.to_csv(config.DIR_SAIDAS / "distribuicao_volume_modelos.csv", index=False)
+    partes.append(_tabela(distribuicao))
+    ate_cem = volume[volume <= 100]
+    partes.append(
+        f"\n**{len(ate_cem)} modelos -- {100 * len(ate_cem) / len(volume):.0f}% da contagem "
+        f"-- somam {_mil(ate_cem.sum())} unidades em "
+        f"{len({m[:4] for m in meses})} anos**, "
+        f"{100 * ate_cem.sum() / volume.sum():.3f}% do volume. Sao registros avulsos, "
+        "conversoes de encarrocador e erros de cadastro da fonte; "
+        "`saidas/nomes_suspeitos.csv` lista os que nem sequer designam veiculo. Cada um "
+        "deles conta como **uma entrada e uma saida**:\n\n"
+    )
+    participacao = rotatividade.participacao_dos_pequenos(ciclos_5, volume, 100)
+    participacao.to_csv(config.DIR_SAIDAS / "rotatividade_dos_pequenos.csv", index=False)
+    partes.append(_tabela(participacao))
+
+    # ------------------------------------------- taxas por piso de volume
+    partes.append(
+        "\n### Taxas por piso de volume total do modelo\n\n"
+        "O piso entra no numerador **e** no denominador: restringe quem pode entrar ou sair "
+        "e quem conta como ativo. Nada e' filtrado do painel -- a Parte 0 continua valendo "
+        "--, so' a medida e' decomposta.\n\n"
+    )
+    colunas_piso = []
+    tabelas_piso = []
+    for piso in config.PISOS_VOLUME_MODELO:
+        rotulo = "todos" if piso <= 0 else f"acima de {piso}"
+        recorte = rotatividade.acima_do_piso(por_modelo, volume, piso)
+        ativos_piso = _ativos_por_ano(recorte)
+        ciclos_piso = rotatividade.acima_do_piso(ciclos_5, volume, piso)
+        tabela = _taxas(ciclos_piso, ativos_piso, config.LIMIAR_SAIDA,
+                        sufixo=f" [{rotulo}]")
+        tabela = tabela.rename(columns={"ativos": f"ativos [{rotulo}]"})
+        tabelas_piso.append(tabela)
+        colunas_piso.append(f"taxa_saida_{config.LIMIAR_SAIDA:.0%} [{rotulo}]")
+    por_piso = pd.concat(tabelas_piso, axis=1).reset_index()
+    por_piso.to_csv(config.DIR_SAIDAS / "taxas_por_piso_de_volume.csv", index=False)
+    resumo_piso = por_piso[
+        ["ano"] + [c for c in por_piso.columns if c.startswith("taxa_saida")]
+    ]
+    partes.append("Taxa de saida:\n\n" + _tabela(resumo_piso))
+    partes.append("\nTaxa de entrada:\n\n" + _tabela(
+        por_piso[["ano"] + [c for c in por_piso.columns if c.startswith("taxa_entrada")]]))
+    partes.append(
+        "\nContagens e denominadores completos em "
+        "`saidas/taxas_por_piso_de_volume.csv`.\n"
+    )
+
+    # I3, refeito com o denominador oficial e o piso de volume.
+    partes.append(
+        "\n### O corte de publicacao esta' fabricando a alta recente? (I3)\n\n"
+        "O piso de volume responde o que o subconjunto imune ao corte nao tinha poder para "
+        "responder. Duas janelas, lidas em separado:\n\n"
+    )
+    indexado = resumo_piso.set_index("ano")
+    anos_disponiveis = list(indexado.index)
+    def _delta(inicio_ano, fim_ano):
+        if inicio_ano not in anos_disponiveis or fim_ano not in anos_disponiveis:
+            return None
+        return pd.DataFrame([{
+            "piso": coluna.split("[")[-1].rstrip("]"),
+            f"taxa_{inicio_ano}": indexado.loc[inicio_ano, coluna],
+            f"taxa_{fim_ano}": indexado.loc[fim_ano, coluna],
+            "variacao": round(indexado.loc[fim_ano, coluna]
+                              - indexado.loc[inicio_ano, coluna], 4),
+        } for coluna in colunas_piso])
+
+    recente = _delta(2022, ultimo_completo)
+    if recente is not None:
+        partes.append(f"**2022 a {ultimo_completo}** (ultimo ano completo):\n\n"
+                      + _tabela(recente))
+        sobe_com_piso = (recente["variacao"] > 0).all()
+        partes.append(
+            "\nA alta **nao some com o piso -- ela se mantem ou aumenta**. E' movimento "
+            "real de portfolio, nao artefato do corte de publicacao nem dos modelos "
+            "fantasma.\n" if sobe_com_piso else
+            "\nA alta **se reduz ou inverte** conforme o piso sobe, o que aponta para "
+            "ruido de cadastro e nao para movimento de portfolio.\n"
+        )
+    parcial = _delta(ultimo_completo, ano_parcial)
+    if parcial is not None:
+        partes.append(f"\n**{ultimo_completo} a {ano_parcial}** (ano parcial):\n\n"
+                      + _tabela(parcial))
+        inverte = (parcial["variacao"].iloc[0] > 0) and (parcial["variacao"].iloc[1:] < 0).all()
+        partes.append(
+            f"\nO salto de {ano_parcial} **inverte de sinal** assim que o piso entra: e' "
+            "fantasma somado a ano incompleto, nao rotatividade. **Nao citar.**\n"
+            if inverte else
+            f"\n{ano_parcial} e' ano parcial e nao e' citavel para rotatividade, "
+            "independentemente do que a tabela mostre.\n"
+        )
+
+    # O subconjunto imune ao corte fica como conferencia secundaria.
+    com_imunidade = mod_cobertura.imunes_ao_corte(
+        ciclos_5, cortes_modelo, config.LIMIAR_SAIDA)
+    if "imune_ao_corte" in com_imunidade.columns and com_imunidade["imune_ao_corte"].any():
+        imunes = com_imunidade[com_imunidade["imune_ao_corte"]]
+        chaves_imunes = set(map(tuple, imunes[visoes.CHAVE_MODELO].to_numpy()))
+        ativos_imunes = _ativos_por_ano(
+            por_modelo[por_modelo.set_index(visoes.CHAVE_MODELO).index.isin(chaves_imunes)]
+        )
+        taxas_imunes = _taxas(imunes, ativos_imunes, config.LIMIAR_SAIDA, sufixo="_imunes")
+        taxas_imunes = taxas_imunes.rename(columns={"ativos": "ativos_imunes"})
+        partes.append(
+            f"\n**Conferencia secundaria.** O teste do subconjunto imune ao corte -- "
+            f"{len(imunes)} de {len(ciclos_5)} modelos cujo limiar de D3 supera o corte do "
+            "bloco em todo mes da propria janela -- fica registrado, mas com mediana de "
+            f"{float(taxas_imunes[f'saidas_{config.LIMIAR_SAIDA:.0%}_imunes'].median()):.0f} "
+            "saidas por ano ele nao tem poder para decidir nada sozinho. O piso de volume "
+            "e' o teste que responde.\n\n"
+            + _tabela(taxas_imunes.reset_index())
+        )
+
+    # ------------------------------------------ os tres limiares de D3
+    partes.append(
+        "\n### Os tres limiares de D3\n\n"
+        "Como manda a sec.6, lado a lado. Sem piso de volume: sao as taxas da coluna "
+        "\"todos\", e valem a mesma advertencia.\n\n"
     )
     ativos = _ativos_por_ano(por_modelo)
-    largo = ciclo_vida.grade(por_modelo, visoes.CHAVE_MODELO, meses, mod_meses.uteis())
-    tabelas, ciclos_por_limiar = [], {}
-    for limiar in config.LIMIARES_SAIDA:
-        ciclos = _ciclos_da_grade(largo, meses, limiar)
-        ciclos_por_limiar[limiar] = ciclos
-        tabelas.append(_taxas(ciclos, ativos, limiar))
+    tabelas = [_taxas(ciclos_por_limiar[l], ativos, l) for l in config.LIMIARES_SAIDA]
     juntas = pd.concat(
         [tabelas[0][["ativos"]]] + [t.drop(columns=["ativos"]) for t in tabelas], axis=1
     ).reset_index()
@@ -573,138 +769,74 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
 
     colunas_saida = [f"taxa_saida_{l:.0%}" for l in config.LIMIARES_SAIDA]
     instaveis = _mudancas_de_ordenacao(juntas, colunas_saida)
-    partes.append("\n### Estabilidade da ordenacao entre limiares\n\n")
+    partes.append("\n#### Estabilidade da ordenacao entre limiares\n\n")
     if instaveis.empty:
         partes.append("A ordenacao dos anos por taxa de saida e' **identica** nos tres "
                       "limiares.\n")
     else:
         partes.append(
             f"**Achado metodologico:** {len(instaveis)} de {len(juntas)} anos mudam de "
-            "posicao no ranking de taxa de saida conforme o limiar. A escolha do limiar nao "
-            "e' inocua para esses anos.\n\n" + _tabela(instaveis)
+            "posicao no ranking de taxa de saida conforme o limiar.\n\n" + _tabela(instaveis)
         )
 
-    # Q1: a outra leitura de "pico movel", lado a lado.
+    # Q1: as duas leituras de "pico movel", e a regra de banda que as encerra.
     outro_modo = "max_movel" if config.PICO_MOVEL_MODO == "media_movel" else "media_movel"
     ciclos_outro = _ciclos_da_grade(largo, meses, config.LIMIAR_SAIDA, modo=outro_modo)
     taxas_outro = _taxas(ciclos_outro, ativos, config.LIMIAR_SAIDA, sufixo=f"_{outro_modo}")
     comparacao_modo = pd.concat(
         [tabelas[1].drop(columns=["ativos"]), taxas_outro.drop(columns=["ativos"])], axis=1
     ).reset_index()
-    partes.append(
-        f"\n### As duas leituras de \"pico movel de 12 meses\" (Q1)\n\n"
-        f"Em uso: `{config.PICO_MOVEL_MODO}`. Ao lado, `{outro_modo}`, no limiar de "
-        f"{config.LIMIAR_SAIDA:.0%}. Se a ordenacao dos anos nao mudar, a escolha e' inocua "
-        "e a questao pode ser encerrada.\n\n"
-    )
-    partes.append(_tabela(comparacao_modo))
+    comparacao_modo.to_csv(config.DIR_SAIDAS / "comparacao_pico_movel.csv", index=False)
     colunas_modo = [f"taxa_saida_{config.LIMIAR_SAIDA:.0%}",
                     f"taxa_saida_{config.LIMIAR_SAIDA:.0%}_{outro_modo}"]
     muda_modo = _mudancas_de_ordenacao(comparacao_modo, colunas_modo)
     partes.append(
-        "\nA ordenacao dos anos e' **identica** nas duas leituras: a escolha entre elas nao "
-        "muda nenhuma conclusao sobre quais anos tiveram mais saida, e Q1 pode ser "
-        "encerrada.\n" if muda_modo.empty else
-        f"\n**{len(muda_modo)} de {len(comparacao_modo)} anos mudam de posicao** entre as "
-        "duas leituras. A escolha entre `media_movel` e `max_movel` **nao e' inocua**, e Q1 "
-        "continua aberta: qualquer resultado sobre em que anos houve mais saida depende "
-        "dela e precisa declarar qual leitura usou.\n\n" + _tabela(muda_modo)
+        f"\n#### As duas leituras de \"pico movel de 12 meses\" (Q1 -- encerrada)\n\n"
+        f"Em uso: `{config.PICO_MOVEL_MODO}`, por principio -- um lote isolado de venda "
+        "direta nao e' a escala do produto, e `max_movel` numa serie completa degenera para "
+        "o pico global.\n\n"
     )
-
-    # I3: o corte de publicacao pode estar fabricando a alta recente.
-    partes.append(
-        "\n### O corte de publicacao esta' fabricando a alta recente? (I3)\n\n"
-        "A taxa de saida sobe nos ultimos anos, e o corte de publicacao poderia explica-la: "
-        "se o limiar de D3 de um modelo ficar **abaixo** do corte do bloco em que ele e' "
-        "listado, ele some da fonte antes de cruzar o proprio limiar, e a data de saida "
-        "passa a ser pratica editorial. Medido o corte corretamente (sec.4), ele nao sobe "
-        "em automoveis mas **sobe muito em comerciais leves** -- a mediana vai de 25 "
-        "unidades em 2014 para 172 em 2026. O teste isola os modelos em que o corte nao "
-        "morde: aqueles cujo limiar de D3 supera, em **todo mes** da propria janela, o corte "
-        "do bloco em que estariam.\n\n"
-    )
-    ciclos_5 = ciclos_por_limiar[config.LIMIAR_SAIDA]
-    com_imunidade = mod_cobertura.imunes_ao_corte(
-        ciclos_5, cortes_modelo, config.LIMIAR_SAIDA)
-    if "imune_ao_corte" in com_imunidade.columns and com_imunidade["imune_ao_corte"].any():
-        imunes = com_imunidade[com_imunidade["imune_ao_corte"]]
-        # Denominador proprio: quantos modelos imunes estavam ativos em cada ano.
-        # Com o denominador cheio o nivel da taxa nao significaria nada.
-        chaves_imunes = set(map(tuple, imunes[visoes.CHAVE_MODELO].to_numpy()))
-        ativos_imunes = _ativos_por_ano(
-            por_modelo[
-                por_modelo.set_index(visoes.CHAVE_MODELO).index.isin(chaves_imunes)
-            ]
-        )
-        taxas_imunes = _taxas(imunes, ativos_imunes, config.LIMIAR_SAIDA, sufixo="_imunes")
-        taxas_imunes = taxas_imunes.rename(columns={"ativos": "ativos_imunes"})
-        lado_a_lado = pd.concat([tabelas[1], taxas_imunes], axis=1).reset_index()
-        partes.append(
-            f"{len(imunes)} de {len(ciclos_5)} modelos sao imunes ao corte. Cada taxa usa o "
-            "seu proprio denominador -- modelos ativos no ano, no conjunto respectivo -- "
-            "para que o nivel, e nao so' a forma, seja comparavel.\n\n"
-            + _tabela(lado_a_lado)
-        )
-        # A comparacao so' vale entre anos completos: o ultimo ano da amostra
-        # termina no meio e infla a taxa de saida por conta propria.
-        ultimo_completo = int(meses[-1][:4]) - 1
-        recentes = [a for a in lado_a_lado["ano"] if 2022 <= a <= ultimo_completo]
-        if len(recentes) >= 2:
-            indexado = lado_a_lado.set_index("ano")
-            cheia = indexado[f"taxa_saida_{config.LIMIAR_SAIDA:.0%}"]
-            imune = indexado[f"taxa_saida_{config.LIMIAR_SAIDA:.0%}_imunes"]
-            saidas_imunes = indexado[f"saidas_{config.LIMIAR_SAIDA:.0%}_imunes"]
-            inicio_, fim_ = recentes[0], recentes[-1]
-            variacao_cheia = cheia.loc[fim_] - cheia.loc[inicio_]
-            variacao_imune = imune.loc[fim_] - imune.loc[inicio_]
-            proporcao = (variacao_imune / variacao_cheia) if variacao_cheia else float("nan")
-            if variacao_cheia <= 0:
-                veredito = ("a serie cheia nao sobe nesta janela, entao nao ha' o que "
-                            "atribuir ao corte")
-                ressalva = "fica sem objeto enquanto a serie cheia nao subir"
-            elif variacao_imune <= 0:
-                veredito = ("a subida **desaparece** no subconjunto imune, o que aponta "
-                            "para artefato do corte de publicacao")
-                ressalva = ("aponta na direcao do artefato sem demonstra-lo, porque com "
-                            "tao poucas saidas o desaparecimento tambem cabe no acaso")
-            elif proporcao >= 0.5:
-                veredito = ("a subida **persiste** no subconjunto imune, entao nao e' "
-                            "artefato do corte")
-                ressalva = ("descarta a hipotese forte -- a de que a alta seja "
-                            "**inteiramente** artefato do corte --, nao a fraca")
-            else:
-                veredito = ("a subida **atenua** no subconjunto imune -- parte do movimento "
-                            "pode ser do corte, parte nao")
-                ressalva = ("a atenuacao e' compativel tanto com artefato parcial quanto "
-                            "com ruido de amostra pequena")
-            mediana_saidas = float(saidas_imunes.loc[recentes].median())
-            partes.append(
-                f"\nEntre {inicio_} e {fim_} (o ultimo ano completo), a taxa de saida vai de "
-                f"{cheia.loc[inicio_]:.3f} a {cheia.loc[fim_]:.3f} na serie cheia "
-                f"({variacao_cheia:+.3f}) e de {imune.loc[inicio_]:.3f} a "
-                f"{imune.loc[fim_]:.3f} no subconjunto imune ({variacao_imune:+.3f}): "
-                f"{veredito}.\n\n"
-                f"**Ressalva de tamanho:** o subconjunto imune tem so' {len(imunes)} modelos "
-                f"e mediana de {mediana_saidas:.0f} saidas por ano na janela recente. Com "
-                "contagens assim, uma diferenca de duas ou tres saidas move a taxa em varios "
-                f"pontos, e o teste **nao tem poder** para concluir com seguranca: {ressalva}.\n"
-            )
+    partes.append(_tabela(comparacao_modo))
+    if muda_modo.empty:
+        partes.append("\nA ordenacao dos anos e' identica nas duas leituras.\n")
     else:
-        partes.append("_Nenhum modelo imune ao corte no periodo._\n")
-
-    sem_ano_parcial = juntas[juntas["ano"] < int(meses[-1][:4])] if meses else juntas
-    partes.append(
-        f"\n### Sem o ano parcial\n\n"
-        f"{meses[-1][:4]} termina em {meses[-1]}: contar saidas num ano incompleto infla a "
-        "taxa por conta propria. A mesma tabela sem ele:\n\n" + _tabela(sem_ano_parcial)
-    )
+        partes.append(
+            f"\n**A regra que encerra Q1.** {len(muda_modo)} de {len(comparacao_modo)} anos "
+            "mudam de posicao entre as duas leituras, e a consequencia vale mais que a "
+            "escolha: **a ordenacao de anos por taxa de saida nao e' identificada** no "
+            "nivel de precisao em que as duas leituras discordam. So' afirmar diferenca "
+            "entre dois anos quando ela sobreviver as duas. Reportar banda, nao ponto.\n\n"
+            + _tabela(muda_modo)
+        )
+        # O ano parcial fica fora: sua taxa e' inflada pelo recorte, nao por
+        # rotatividade, e afirmar um degrau contra ele seria afirmar o artefato.
+        completos = [int(a) for a in comparacao_modo["ano"] if int(a) <= ultimo_completo]
+        pares_robustos = []
+        for a, b in zip(completos, completos[1:]):
+            linha_a = comparacao_modo[comparacao_modo["ano"] == a].iloc[0]
+            linha_b = comparacao_modo[comparacao_modo["ano"] == b].iloc[0]
+            variacoes = [linha_b[c] - linha_a[c] for c in colunas_modo]
+            if all(v > 0.03 for v in variacoes) or all(v < -0.03 for v in variacoes):
+                pares_robustos.append({
+                    "de": a, "para": b,
+                    colunas_modo[0]: round(variacoes[0], 4),
+                    colunas_modo[1]: round(variacoes[1], 4),
+                })
+        partes.append(
+            "\nO que **sobrevive** as duas leituras, e portanto pode ser afirmado -- "
+            "variacao de mais de 3 pontos percentuais no mesmo sentido entre anos "
+            f"consecutivos completos (o ano parcial de {ano_parcial} fica fora):\n\n"
+            + _tabela(pd.DataFrame(pares_robustos))
+        )
 
     # Q5: zeros frageis.
     partes.append(
         "\n### Zeros frageis (Q5)\n\n"
-        "Mes em que o modelo nao aparece e o corte de publicacao esta' **acima** do limiar "
-        "de D3 do proprio modelo: ali o zero pode estar escondendo valor relevante, e a data "
-        "de saida fica a merce da pratica editorial.\n\n"
+        "Mes em que o modelo nao aparece e o corte de publicacao **do bloco em que ele "
+        "seria listado** (sec.4) esta' acima do limiar de D3 do proprio modelo: ali o zero "
+        "pode estar escondendo valor relevante. A contagem so' considera meses entre a "
+        "entrada e a saida do modelo, no limiar de "
+        f"{config.LIMIAR_SAIDA:.0%}.\n\n"
     )
     fragil = mod_cobertura.zeros_fragis(largo, ciclos_5, cortes_modelo, config.LIMIAR_SAIDA)
     if fragil.empty:
@@ -714,8 +846,7 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
         por_ano_fragil = (
             fragil.assign(ano=fragil["mes_ref"].str.slice(0, 4).astype(int))
             .groupby("ano", as_index=False)
-            .agg(zeros_frageis=("mes_ref", "size"),
-                 modelos=("modelo", "nunique"))
+            .agg(zeros_frageis=("mes_ref", "size"), modelos=("modelo", "nunique"))
         )
         partes.append(
             f"**{len(fragil)}** pares (modelo x mes) frageis, em "
@@ -758,14 +889,54 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
     # ------------------------------------------ 10. divergencias da fonte
     partes.append(
         "\n## 10. Divergencias internas da fonte\n\n"
-        "Modelos em que o ranking mensal e a tabela de sub-segmento do **mesmo** informe "
-        "trazem numeros diferentes. Sao inconsistencias da fonte, reportadas e mantidas "
-        "(sec.9.4); o painel usa o valor da tabela de sub-segmento.\n\n"
+        "Duas familias de inconsistencia, ambas da fonte, ambas reportadas e mantidas "
+        "(sec.9.4).\n\n"
     )
+    divergentes = marca_do_modelo.divergencias(painel)
+    partes.append(
+        "### Marca trocada pela fonte\n\n"
+        "Um nome de modelo aparece sob a mesma marca em quase todos os meses. Quando um mes "
+        "o publica sob outra, e' esse mes que destoa. O teste usa a redundancia da propria "
+        "serie e **nao corrige nada** (sec.9.4): o painel guarda o que a fonte publicou.\n\n"
+    )
+    if divergentes.empty:
+        partes.append("Nenhuma divergencia.\n")
+    else:
+        divergentes.to_csv(config.DIR_SAIDAS / "marca_divergente.csv", index=False)
+        afetados = marca_do_modelo.meses_afetados(divergentes)
+        partes.append(
+            f"**{len(divergentes)}** pares (mes x modelo), "
+            f"{_mil(divergentes['unidades'].sum())} unidades. Lista completa em "
+            "`saidas/marca_divergente.csv`.\n\n" + _tabela(afetados, 12)
+        )
+        pior = afetados.iloc[0]
+        if pior["modelos"] >= 5:
+            partes.append(
+                f"\n**{pior['mes_ref']} e' edicao defeituosa na origem.** Ali "
+                f"{pior['modelos']} modelos saem sob marca trocada -- `PONTIAC/MONTANA`, "
+                "`FORD/KOMBI`, `VW/RANGER`, `FORD/MASTER`, `THINK/CITY`, e um `/ELANTRA` "
+                "sem marca nenhuma. Sao palavras unicas no PDF, nao erro de leitura: a "
+                "fonte trocou a coluna. Cada troca cria uma marca fantasma com uma entrada "
+                "e uma saida, e tira o volume da marca certa naquele mes. Quem for usar "
+                f"series por marca precisa decidir o que fazer com {pior['mes_ref']}; o "
+                "painel nao decide.\n"
+            )
+        legitimas = divergentes[divergentes["modelo"] == "TIGGO 7"]
+        if not legitimas.empty:
+            partes.append(
+                "\nNem toda divergencia e' defeito: `TIGGO 7` sob `CHERY` em 2019-2020 "
+                "contra `CAOA CHERY` depois e' **troca real de marca**, nao erro. O teste "
+                "aponta; a leitura e' humana.\n"
+            )
+
+    partes.append("\n### Ranking contra tabela de sub-segmento\n\n")
     caminho_div = config.DIR_SAIDAS / "divergencias_fonte.csv"
     if caminho_div.exists():
         divergencias = pd.read_csv(caminho_div)
-        partes.append(f"{len(divergencias)} divergencias.\n\n" + _tabela(divergencias, 20))
+        partes.append(
+            "Modelos em que o ranking mensal e a tabela de sub-segmento do **mesmo** informe "
+            f"trazem numeros diferentes -- {len(divergencias)} casos. O painel usa o valor "
+            "da tabela de sub-segmento.\n\n" + _tabela(divergencias, 20))
     else:
         partes.append("_Nao disponivel._\n")
 

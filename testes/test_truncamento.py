@@ -88,3 +88,44 @@ def test_linhas_do_ranking_nao_entram_no_calculo():
     blocos = truncamento.por_bloco(pd.concat([bruto, do_ranking], ignore_index=True))
     assert len(blocos) == 1
     assert blocos.iloc[0]["corte"] == 120
+
+
+def _mes_normal(mes, sub_segmentos=17, linhas_por_bloco=4):
+    linhas = []
+    for indice in range(sub_segmentos):
+        linhas += _bloco(mes, f"SUB{indice}", list(range(100, 100 + linhas_por_bloco)))
+    return linhas
+
+
+def test_edicao_curta_e_apontada_pelo_numero_de_sub_segmentos():
+    # 2003-10 e 2005-03 sairam com 10 paginas: um sub-segmento em vez de 17.
+    bruto = _bruto(_mes_normal("2003-09") + _mes_normal("2003-11")
+                   + _mes_normal("2003-12")
+                   + _bloco("2003-10", "SUB0", [100, 90, 80]))
+    curtas = truncamento.edicoes_abreviadas(bruto)
+    assert list(curtas["mes_ref"]) == ["2003-10"]
+    assert curtas.iloc[0]["sub_segmentos"] == 1
+    assert curtas.iloc[0]["sub_segmentos_tipicos"] == 17
+    assert curtas.iloc[0]["situacao"] == "edicao curta do informe"
+
+
+def test_mes_reconstruido_e_separado_da_edicao_curta():
+    # 2023-09 vem inteiro da coluna de mes anterior: nao tem sub-segmento, mas
+    # nao e' edicao curta -- e' segunda publicacao do mesmo numero.
+    recuperado = [
+        {"mes_ref": "2023-09", "segmento_fonte": "automoveis", "sub_segmento_fonte": "",
+         "marca_fonte": "GM", "modelo_fonte": f"M{i}", "unidades": 10 * i,
+         "origem_tabela": "mes_anterior"}
+        for i in range(1, 6)
+    ]
+    bruto = _bruto(_mes_normal("2023-08") + _mes_normal("2023-10")
+                   + _mes_normal("2023-11") + recuperado)
+    curtas = truncamento.edicoes_abreviadas(bruto)
+    assert list(curtas["mes_ref"]) == ["2023-09"]
+    assert curtas.iloc[0]["situacao"] == "mes recuperado do informe seguinte"
+
+
+def test_serie_sem_edicao_curta_nao_aponta_nada():
+    bruto = _bruto(_mes_normal("2020-01") + _mes_normal("2020-02")
+                   + _mes_normal("2020-03"))
+    assert truncamento.edicoes_abreviadas(bruto).empty

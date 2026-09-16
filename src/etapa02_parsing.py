@@ -286,6 +286,39 @@ def _agregar(subdir: str, campos: list[str]) -> list[dict]:
     return [{campo: linha.get(campo, "") for campo in campos} for linha in linhas]
 
 
+def _registro_de_reconstrucao(desta_rodada: list[dict]) -> list[dict]:
+    """Registro de meses recuperados, preservado entre rodadas.
+
+    A recuperacao so' dispara quando o mes esta' vazio, entao uma segunda rodada
+    -- que reaproveita o arquivo ja' gravado -- nao a repete e apagaria o
+    registro se ele fosse reescrito do zero. O painel continuaria marcando
+    `origem_tabela='mes_anterior'` nas linhas, mas o relatorio perderia a
+    procedencia, que e' justamente o que separa segunda publicacao de estimativa.
+
+    Entao: o que esta rodada produziu manda, e o que ja' estava fica, desde que a
+    extracao no disco continue sendo inteiramente reconstruida.
+    """
+    caminho = config.DIR_SAIDAS / "meses_reconstruidos.csv"
+    por_mes = {linha["mes"]: linha for linha in _ler_csv(caminho)}
+    ainda_vale = {}
+    for mes, linha in por_mes.items():
+        arquivo = config.DIR_EXTRACAO / f"{mes}.csv"
+        if not arquivo.exists():
+            continue
+        metodos = {l.get("metodo_extracao", "") for l in _ler_csv(arquivo)}
+        if metodos == {"reconstruido"}:
+            ainda_vale[mes] = linha
+    ainda_vale.update({linha["mes"]: linha for linha in desta_rodada})
+    return [ainda_vale[mes] for mes in sorted(ainda_vale)]
+
+
+def _ler_csv(caminho: Path) -> list[dict]:
+    if not caminho.exists():
+        return []
+    with caminho.open(encoding="utf-8", newline="") as fluxo:
+        return list(csv.DictReader(fluxo))
+
+
 def executar(inicio: str, fim: str, tolerancia_total: float | None = None,
              forcar: bool = False, usar_ocr: bool = False,
              reconstruir_lacunas: bool = True) -> int:
@@ -428,7 +461,7 @@ def executar(inicio: str, fim: str, tolerancia_total: float | None = None,
     _escrever(config.DIR_SAIDAS / "meses_reconstruidos.csv",
               ["mes", "mes_fonte", "linhas", "modelos_conferidos_pelo_acumulado",
                "modelos_divergentes", "divergencia_absoluta", "divergencia_liquida",
-               "observacao"], reconstruidos)
+               "observacao"], _registro_de_reconstrucao(reconstruidos))
 
     linhas_extraidas = sum(
         1 for _ in _agregar("extracao", CAMPOS_EXTRACAO)

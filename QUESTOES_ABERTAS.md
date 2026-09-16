@@ -336,6 +336,26 @@ linha; (c) excluir os dois meses das contagens de modelos, mantendo-os nos
 volumes. A recomendação do código é (b), porque é a única que não perde
 informação nem esconde a origem — mas nada foi escrito.
 
+### Os informes de 2003-2013 passaram a ser versionados
+
+O `.gitignore` excluía `dados/bruto/pdf/` desde a primeira rodada, com a
+justificativa escrita no README de que "são pesados e a etapa 01 os rebaixa
+idênticos". Isso nunca foi regra da ESPEC — foi escolha de implementação minha,
+e a ESPEC só exige que `bruto/` seja intocado e tenha manifesto com hash (§1,
+§9.3). **Decisão do pesquisador: reverter a escolha para a série antiga.** Os 132 informes de 2003-01 a 2013-12 (521 MB) estão agora em
+`dados/bruto/pdf/`; os de 2014 em diante continuam fora.
+
+O raciocínio é que a premissa "a etapa 01 os rebaixa idênticos" pressupõe que a
+fonte continue servindo o arquivo — e isso não vale igual para os dois grupos.
+Informes recentes a Fenabrave tem interesse em manter no ar; os de vinte anos
+atrás somem numa reformulação de site sem aviso, e são justamente os que a
+retroação acabou de ganhar e que não existiam em lugar nenhum antes.
+
+O manifesto com os SHA-256 continua ao lado deles, então a conferência não
+depende de confiar no repositório: qualquer cópia futura bate contra o hash.
+
+Custo aceito: meio giga a mais para clonar.
+
 ### Duas variantes de grafia de sub-segmento
 
 O informe de **2017-04** escreve `Pickup's Grandes` e `Pickup's Pequenas` onde os

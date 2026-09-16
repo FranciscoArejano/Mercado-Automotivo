@@ -184,8 +184,23 @@ Leia antes de usar o painel: [`saidas/validacao.md`](saidas/validacao.md),
 
 Todo numero do painel se reconstitui a partir de tres coisas versionadas: os
 PDFs originais (hash SHA-256 em `dados/bruto/manifesto.csv`), `regras.csv` e os
-scripts de `src/`. Os PDFs em si nao vao para o repositorio -- sao pesados e a
-etapa 01 os rebaixa identicos; o manifesto e as lacunas, sim.
+scripts de `src/`.
+
+**Os informes de 2003 a 2013 estao no repositorio** -- 132 arquivos, 521 MB, em
+`dados/bruto/pdf/`. Os de 2014 em diante, nao: para esses vale a regra antiga,
+de que a etapa 01 os rebaixa identicos, e o manifesto basta.
+
+A assimetria e' deliberada. "Reconstituivel pela etapa 01" pressupoe que a fonte
+continue servindo o arquivo, e essa premissa nao vale igual para os dois grupos:
+a Fenabrave tem interesse em manter no ar os informes recentes, e nenhum em
+manter os de vinte anos atras, que somem numa reformulacao de site sem aviso.
+Para a serie antiga o repositorio e' o arquivo, e o manifesto ao lado dela diz o
+SHA-256 de cada PDF -- entao qualquer copia futura pode ser conferida contra ele.
+
+O custo: o repositorio pesa meio giga a mais para clonar. Foi decisao explicita
+do pesquisador, revertendo uma escolha de implementacao das primeiras rodadas --
+a ESPEC nunca tratou do assunto, so' exige que `bruto/` seja intocado e tenha
+manifesto com hash.
 
 Cada etapa escreve `logs/<etapa>.log` com contagem de linhas lidas e escritas.
 O pipeline e' idempotente: rodar duas vezes produz o mesmo resultado.

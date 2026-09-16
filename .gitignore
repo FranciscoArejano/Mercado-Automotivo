@@ -7,9 +7,18 @@ __pycache__/
 # Dados brutos: pesados e reconstituiveis pelo etapa01_aquisicao.py.
 # O manifesto (hash + data de download) e as lacunas SAO versionados,
 # porque sao eles que tornam a aquisicao auditavel.
-dados/bruto/pdf/
+dados/bruto/pdf/*
 !dados/bruto/manifesto.csv
 !dados/bruto/lacunas.csv
+
+# EXCECAO: os informes de 2003 a 2013 sao versionados.
+# "Reconstituivel pela etapa 01" pressupoe que a fonte continue servindo o
+# arquivo. Vale para os informes recentes, que a Fenabrave tem interesse em
+# manter no ar; nao vale para os de vinte anos atras, que somem numa
+# reformulacao de site sem aviso. Para esses, o repositorio e' o arquivo --
+# e o manifesto ao lado deles diz o SHA-256 de cada um.
+!dados/bruto/pdf/200[3-9]-[01][0-9].pdf
+!dados/bruto/pdf/201[0-3]-[01][0-9].pdf
 
 # Artefatos derivados: reconstituiveis a partir de bruto/ + regras.csv
 dados/processado/

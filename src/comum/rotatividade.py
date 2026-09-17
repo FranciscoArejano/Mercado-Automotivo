@@ -21,6 +21,15 @@ import pandas as pd
 CHAVE_MODELO = ["marca", "modelo", "segmento"]
 
 
+def _sem_zero(serie: pd.Series) -> pd.Series:
+    """Denominador com zero virando NaN, sem trocar o dtype.
+
+    Ano sem nenhuma entrada ou saida da' denominador zero. `replace(0, pd.NA)`
+    devolveria serie de objetos e o `.round()` seguinte estouraria.
+    """
+    return serie.where(serie != 0)
+
+
 def volume_por_modelo(por_modelo: pd.DataFrame) -> pd.Series:
     """Volume total de cada modelo no periodo inteiro."""
     return por_modelo.groupby(CHAVE_MODELO)["unidades"].sum()
@@ -71,9 +80,9 @@ def participacao_dos_pequenos(ciclos: pd.DataFrame, volume: pd.Series, piso: int
         f"saidas_ate_{piso}": saidas[saidas["pequeno"]].groupby("ano").size(),
     }).fillna(0).astype(int)
     tabela[f"pct_entradas_ate_{piso}"] = (
-        100 * tabela[f"entradas_ate_{piso}"] / tabela["entradas"].replace(0, pd.NA)).round(0)
+        100 * tabela[f"entradas_ate_{piso}"] / _sem_zero(tabela["entradas"])).round(0)
     tabela[f"pct_saidas_ate_{piso}"] = (
-        100 * tabela[f"saidas_ate_{piso}"] / tabela["saidas"].replace(0, pd.NA)).round(0)
+        100 * tabela[f"saidas_ate_{piso}"] / _sem_zero(tabela["saidas"])).round(0)
     return tabela.reset_index()
 
 

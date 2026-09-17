@@ -34,6 +34,13 @@ CAMPOS = [
     ("nome_suspeito", "booleano", "O nome provavelmente nao designa um veiculo -- registro "
                                   "avulso, encarrocador, erro de cadastro."),
     ("motivo_nome_suspeito", "texto", "Por que foi marcado. Vazio quando nao foi."),
+    ("marca_publicada_fonte", "texto", "A marca como a fonte publicou, antes de qualquer "
+     "recuperacao. Igual a `marca` em tudo menos nas linhas de D4."),
+    ("marca_recuperada", "booleano", "A marca desta linha foi recuperada da coluna de mes "
+     "anterior do informe seguinte, porque a edicao do mes saiu com a coluna trocada (D4). "
+     "O **valor nao muda** -- muda a quem ele e' atribuido, e a nova atribuicao vem da mesma "
+     "fonte republicando o mesmo mes, com o valor conferindo unidade a unidade. Hoje: 8 "
+     "modelos de 2013-11. `marca_publicada_fonte` guarda a marca errada ao lado."),
     ("nome_completo_fonte", "texto", "Nome cru, `MARCA/MODELO`, sem alteracao alem da "
                                      "normalizacao tipografica."),
     ("houve_rebatismo", "booleano", "A serie foi fundida por uma regra `rebatismo` (D2)."),

@@ -117,8 +117,8 @@ E quatro decisoes desta rodada, que valem enquanto nao forem revistas:
 
 ## O que a execucao de 2003-01 a 2026-08 produziu
 
-284 informes, **284 meses no painel, sem nenhuma lacuna**, 54.188 linhas,
-**57.765.831 unidades**, 940 modelos (marca x modelo x segmento). O invariante
+284 informes, **284 meses no painel, sem nenhuma lacuna**, 54.183 linhas,
+**57.709.372 unidades**, 933 modelos (marca x modelo x segmento). O invariante
 central -- soma do painel igual ao total que a fonte publica, dentro da
 tolerancia -- vale nos 284 meses. Retrato do estado atual, nao promessa:
 
@@ -164,17 +164,29 @@ Quatro achados que mudam como o painel se le':
    mudam de posicao entre as duas leituras de "pico movel de 12 meses". So'
    afirmar diferenca entre dois anos quando ela sobreviver as duas leituras:
    banda, nao ponto. O que sobrevive esta' tabulado na sec.8.
-4. **A fonte publicou uma edicao defeituosa em 2013-11.** Doze modelos saem sob
-   marca trocada -- `PONTIAC/MONTANA`, `FORD/KOMBI`, `VW/RANGER` --, 12.355
-   unidades, 11 marcas fantasma. Nao e' erro de leitura: sao palavras unicas no
-   PDF. Cada troca fabrica uma marca fantasma com uma entrada e uma saida. O
-   painel **reporta e nao corrige** (sec.9.4); quem usar serie por marca precisa
-   decidir o que fazer com esse mes. Ver `saidas/marca_divergente.csv`.
+4. **A fonte publicou uma edicao defeituosa em 2013-11, e ela escondia um
+   defeito nosso.** Doze modelos sairam sob marca trocada -- `PONTIAC/MONTANA`,
+   `FORD/KOMBI`, `VW/RANGER`. **Oito foram recuperados** pela coluna de mes
+   anterior do informe de dezembro, que republica novembro com as marcas certas
+   e os mesmos valores; os outros quatro so' aparecem no ranking mensal, que nao
+   tem essa coluna. Ao corrigir a marca apareceu o resto: a deduplicacao entre o
+   ranking e a tabela de sub-segmento comparava o nome **cru**, e `VW /GOL` com
+   um espaco sobrando nao casava com `VW/GOL` -- **56.459 unidades contadas duas
+   vezes**, que era o que punha a cobertura de 2013 acima de 100%. Corrigido; a
+   cobertura de 2013-11 em automoveis foi de 121,97% para 99,19%.
 
 E duas edicoes curtas do informe -- **2003-10 e 2005-03**, 10 paginas em vez de
 44 -- deixam o elenco de modelos pela metade nesses meses, embora o total bata
 com o publicado. Nada foi completado; as opcoes estao descritas em
 `QUESTOES_ABERTAS.md`.
+
+E o cruzamento com a planilha de controle **fechou**: 12.335 pares casam
+exatamente, 16,86 milhoes de unidades identicas dos dois lados, e o painel fica
+0,6% a 1,2% abaixo da planilha todo ano -- a truncagem da cauda. A busca por
+cardinalidade de familia separa os dois mecanismos que estavam confundidos: 160
+familias **ausentes** do painel (truncamento) e 31 de **colapso de variante**,
+11 delas com o volume conferindo dentro de 5% -- `MITSUBISHI/PAJERO`, uma ficha
+de 35.283 unidades contra cinco variantes somando 35.356 na planilha.
 
 Leia antes de usar o painel: [`saidas/validacao.md`](saidas/validacao.md),
 [`saidas/painel_dicionario.md`](saidas/painel_dicionario.md) e

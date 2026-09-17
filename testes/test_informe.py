@@ -72,3 +72,21 @@ def test_numeros_antes_do_rotulo_tambem_sao_lidos():
     lido = _totais_do_resumo(linhas)
     assert lido["automoveis"][0] == 131516.0
     assert lido["comerciais_leves"][0] == 20867.0
+
+
+def test_chave_de_nome_reconhece_o_mesmo_modelo_nas_duas_tabelas():
+    """`VW /GOL` no ranking e `VW/GOL` no sub-segmento sao o mesmo carro.
+
+    Comparando a string crua, a linha do ranking entrava como modelo novo e o
+    mesmo numero era contado duas vezes -- 56.459 unidades em 2013-11.
+    """
+    import etapa02_parsing
+
+    assert (etapa02_parsing._chave_de_nome("VW /GOL")
+            == etapa02_parsing._chave_de_nome("VW/GOL"))
+    assert (etapa02_parsing._chave_de_nome("TOYOTA /ETIOS HB")
+            == etapa02_parsing._chave_de_nome("TOYOTA/ETIOS HB"))
+    # Marca diferente continua sendo modelo diferente: a canonizacao e' de
+    # tipografia, nao de identidade.
+    assert (etapa02_parsing._chave_de_nome("PONTIAC/MONTANA")
+            != etapa02_parsing._chave_de_nome("GM/MONTANA"))

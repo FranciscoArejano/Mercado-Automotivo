@@ -34,7 +34,9 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | D2 | Linhas que não são modelos | sinalizadas, nada apagado |
 | D3 | Dois números para zeros frágeis | reconciliado |
 | Rodada 3 | Série estendida a 2003-01 | **rodada: 284 meses, 57,8 milhões de unidades, 940 modelos** |
-| D4 | 2013-11 é edição defeituosa na origem (marca trocada) | **detectado, reportado, não corrigido** |
+| D4 | 2013-11, marca trocada | **recuperado pelo informe seguinte: 8 de 12** |
+| D6 | Deduplicação comparava nome cru: 56.459 unidades contadas duas vezes em 2013-11 | **defeito nosso, corrigido** |
+| I1 | Cruzamento com `Vendas_Geral.xlsx` | **feito: truncamento e colapso de variante, ambos medidos** |
 | D5 | Duas edições curtas do informe (2003-10, 2005-03) | **medidas; completar é decisão do pesquisador** |
 
 ---
@@ -278,35 +280,88 @@ meses. Nenhum informe precisou de OCR e nenhum ficou sem linha.
 
 O que a série antiga trouxe de novo, além do achado dos fantasmas acima:
 
-### D4. 2013-11 é edição defeituosa na origem
+### D4. 2013-11 — recuperado, e um defeito nosso encontrado junto
 
-O informe de Nov/2013 publica `PONTIAC/MONTANA` (3.901 unidades), `FORD/KOMBI`,
-`VW/RANGER`, `FORD/MASTER`, `THINK/CITY` — e um `/ELANTRA` sem marca nenhuma.
-São **12 modelos sob marca trocada, 12.355 unidades, 11 marcas fantasma** num
-único mês.
+**Decisão revista pelo pesquisador:** o caso não é ambíguo, é recuperável, pela
+mesma rota já validada em 2023-09. O informe de dezembro republica novembro na
+coluna de mês anterior com as marcas certas e **os mesmos valores**. Conferido
+no PDF versionado:
 
-**Não é erro de leitura.** Verificado no PDF: `PONTIAC/MONTANA` é um objeto de
-texto único em x0=382,08, exatamente como os vizinhos corretos. Foi a fonte que
-trocou a coluna naquela edição.
+| Novembro/2013, como saiu | Dezembro/2013, coluna de mês anterior | valor |
+|---|---|---:|
+| `PONTIAC/MONTANA` | `GM/MONTANA` (pg. 18) | 3.901 |
+| `FORD/KOMBI` | `VW/KOMBI` (pg. 18) | 2.383 |
+| `VW/RANGER` | `FORD/RANGER` (pg. 18) | 1.967 |
+| `FORD/MASTER` | `RENAULT/MASTER` (pg. 18) | 839 |
+| `THINK/CITY` | `HONDA/CITY` (pg. 12) | 2.464 |
+| `/ELANTRA` (sem marca) | `HYUNDAI/ELANTRA` (pg. 13) | 460 |
 
-O efeito é pior que um número errado: cada troca fabrica uma marca fantasma com
-uma entrada e uma saída, e tira o volume da marca certa naquele mês. Quem usar
-séries **por marca** precisa decidir o que fazer com 2013-11.
+Isto **não contraria a §9.4**: o número não muda: muda a quem ele é atribuído, e
+a nova atribuição vem da mesma fonte republicando o mesmo mês. A validação é a
+coincidência exata do valor — valor diferente não recupera nada.
 
-`src/comum/marca_do_modelo.py` detecta isso pela redundância da própria série —
-um modelo que aparece sob a mesma marca em ≥90% dos meses e destoa num — e
-**não corrige nada** (ESPEC §9.4). São 55 pares (mês × modelo) na série inteira,
-em `saidas/marca_divergente.csv`. Nem toda divergência é defeito: `TIGGO 7` sob
-`CHERY` em 2019-2020 contra `CAOA CHERY` depois é **troca real de marca**. O
-teste aponta; a leitura é humana.
+**Resultado: 8 dos 12 modelos recuperados.** Os outros quatro — `DODGE/SPRINTER`
+(66), `LEXUS/SC` (42), `ASIA/TOPIC` (34), `DFM/MINIVAN` (20) — aparecem em
+dezembro **só no ranking mensal**, que não traz coluna de mês anterior. Não há
+rota para eles, e ficam no painel como a fonte os publicou.
 
-Sobre grupos econômicos: `PONTIAC` entrou em `config/mapa_grupos.csv` com
-vigência 2003-01 a 2010-10, que é quando a marca existiu. Em 2013-11 o mapa
-devolve `('PONTIAC', False)` — sem grupo —, e isso está **certo** sob D4: o mapa
-nunca é retroativo nem pós-datado. Atribuir grupo não conserta o defeito; só
-registraria de quem a marca era.
+Cada linha recuperada leva `marca_recuperada = True` e `marca_publicada_fonte`
+com a marca errada ao lado; `saidas/marca_recuperada.csv` traz os 12 com a
+evidência. O escopo vem de `config/meses_com_marca_trocada.csv`, lista curada:
+sem ela, a recuperação atingiria `TIGGO 7` sob `CHERY`, que é **troca real de
+marca** e cuja "correção" destruiria o dado.
 
-### D5. Duas edições curtas do informe
+#### O que a recuperação revelou: um defeito nosso, de 56.459 unidades
+
+Ao corrigir a marca, quatro modelos passaram a aparecer **duas vezes** no mesmo
+mês. Investigando, o defeito de 2013-11 não está só na marca, e uma parte dele
+era nossa.
+
+O informe tem duas tabelas. A de sub-segmento já trazia **a marca certa**
+(`GM /MONTANA`, pg. 18); quem trocou a coluna foi o **ranking mensal** (pg. 6).
+E a deduplicação entre as duas tabelas comparava o nome **cru**: no ranking de
+novembro a fonte escreve `VW /GOL`, com um espaço sobrando antes da barra, e na
+tabela de sub-segmento `VW/GOL`. Strings diferentes → a linha do ranking entrava
+como modelo novo, e **o mesmo número era contado duas vezes**.
+
+São 5 linhas e **56.459 unidades** — `VW/GOL` 20.360, `FIAT/UNO` 15.851,
+`FIAT/PALIO` 12.816, `GM/CELTA` 5.007, `TOYOTA/ETIOS HB` 2.425. É o que punha a
+cobertura de 2013 acima de 100%, coisa que o relatório mostrava desde a rodada
+anterior sem que ninguém perseguisse.
+
+**Corrigido**: a chave de reconciliação passou a comparar o nome canonizado, a
+mesma correção de D1 aplicada à chave da etapa 02. A grafia crua segue intacta
+nas duas linhas. A cobertura de 2013-11 em automóveis foi de **121,97% para
+99,19%**, em linha com os meses vizinhos. Só esse mês mudou em toda a série.
+
+A guarda da §9.3 funcionou como devia: recusou sobrescrever `painel_bruto.parquet`,
+gravou a versão nova ao lado e exigiu `--recriar` depois da comparação.
+
+#### O que ficou medido e **não** resolvido
+
+Sobram 4 linhas, **9.171 unidades**, em que o ranking duplica a tabela de
+sub-segmento por causa da marca trocada — `MONTANA` 3.901, `CITY` 2.464,
+`RANGER` 1.967, `MASTER` 839. Recuperada a marca, elas são o mesmo modelo com o
+mesmo valor no mesmo informe, e a regra Q7 (sub-segmento manda, ranking só
+preenche o que ela não lista) diria para descartar a do ranking.
+
+**Não descartei.** Diferente do caso anterior, aqui as duas linhas são
+*diferentes como publicadas* — marcas distintas —, e o descarte mudaria o total
+do mês em 9.171 unidades, quebrando o invariante central, que existe exatamente
+para impedir que a harmonização mexa em volume. É decisão do pesquisador (§9.6).
+
+É o que mantém 2013-11 em **116,7% de cobertura em comerciais leves**: 6.707 das
+6.743 unidades de excesso são essas. Medido em
+`saidas/duplicatas_de_marca_trocada.csv`.
+
+*Opções:* (a) deixar como está, com a cobertura do mês declaradamente acima de
+100%; (b) aplicar Q7 e descartar as 4 linhas do ranking, aceitando que o
+invariante central passe a admitir exceção declarada; (c) descartar e registrar
+as linhas removidas num arquivo de supressões, mantendo o invariante contra esse
+arquivo em vez de contra o painel bruto. Recomendo (c): preserva a
+rastreabilidade e não relaxa a guarda.
+
+### D5. Duas edições curtas do informe### D5. Duas edições curtas do informe
 
 O informe normal tem 44 páginas e 17 sub-segmentos na tabela por modelo.
 **2003-10 (Ed. 10) e 2005-03 (Ed. 27) saíram com 10 páginas** e trazem **um**
@@ -357,6 +412,56 @@ O manifesto com os SHA-256 continua ao lado deles, então a conferência não
 depende de confiar no repositório: qualquer cópia futura bate contra o hash.
 
 Custo aceito: cerca de 1 GB para clonar.
+
+### I1 fechado: o cruzamento com `Vendas_Geral.xlsx` rodou
+
+A planilha entrou em `dados/referencia/` e a etapa 7 rodou sobre a série
+inteira. O total bate ano a ano com o sinal certo: o painel fica **0,57% a 1,23%
+abaixo** da planilha, todo ano, que é a truncagem da cauda pela fonte.
+
+| | pares | unidades |
+|---|---:|---:|
+| Casam exatamente | 12.335 | 16.862.179 nos dois lados |
+| Divergem no valor | 1.766 | 3,18 M contra 3,20 M |
+| Só na planilha | 14.073 | 2.232.587 |
+| Só no painel | 6.843 | 2.071.870 |
+
+**Os dois mecanismos de I1 ficaram separados**, que era o ponto. A busca por
+cardinalidade de família encontra 191 famílias com mais variantes na planilha, e
+elas não são a mesma coisa:
+
+- **160 são ausência**: a família não existe no painel. BMW "Série", Lamborghini,
+  Changan. Isso é truncamento ou marca que a fonte não publica.
+- **31 são colapso de variante**, e **11 delas com o volume conferindo dentro de
+  5%** — que é a assinatura forte: colapso preserva o volume, truncamento o
+  perde. `MITSUBISHI/PAJERO` é uma ficha de 35.283 unidades contra cinco
+  variantes somando 35.356 na planilha. Também `FIAT/SIENA` (288.815 × 288.515),
+  `FIAT/DOBLO`, `HYUNDAI/TUCSON`, `VW/TIGUAN`, `MITSUBISHI/OUTLANDER`,
+  `AUDI/Q3`.
+
+Quatro defeitos do leitor da planilha foram corrigidos no caminho, e valem
+registro porque cada um produzia um resultado *plausível e errado*:
+
+1. **A coluna de nome era escolhida procurando uma barra** (`MARCA/MODELO`, como
+   no PDF). A planilha escreve `Fiat⍽Palio`, sem barra, e o leitor caía no
+   fallback e lia a **coluna de posição**: todo modelo virava `1º`, `2º`, e a
+   comparação dava 100% de divergência.
+2. **As marcas não casavam**: a planilha escreve por extenso. `Chevrolet` casava
+   com a marca `CHEVROLET` do painel, que existe mas é variante rara da fonte
+   (169 unidades) — e não com `GM`, que tem 10,3 milhões.
+   `config/marcas_planilha.csv` traz os cinco apelidos, com evidência por linha.
+3. **A caixa e os acentos**: painel `GOL`, planilha `Gol`; `UP` contra `up!`,
+   `DOBLO` contra `Doblò`. Sem dobrar, 2,6 milhões de unidades apareciam como
+   "sem contraparte" e o truncamento ficava superestimado por uma ordem de
+   grandeza. `nomes.chave_de_comparacao` faz isso **só no merge** — o painel não
+   vê nada disso.
+4. **A aba 2023 vai só até agosto.** Comparada inteira, acusava +60% de
+   divergência no ano que era só ausência de dado. Os quatro meses sem cobertura
+   ficam fora da comparação.
+
+E um defeito que derrubava a etapa: `serie.replace(0, pd.NA)` como denominador
+devolve série de objetos, e o `.round()` seguinte estoura com `NAType`. Estava
+em quatro lugares, dois deles latentes.
 
 ### Duas variantes de grafia de sub-segmento
 
@@ -507,17 +612,18 @@ descarta como *quem sai*. Um modelo vivo no primeiro mês continua podendo sair
 1. **Adjudicação de `regras.csv`** — por decisão da Parte 0, para quando o
    desenho do artigo de escopo de produto estiver fechado. Enquanto isso, as
    taxas são o limite superior.
-2. **Cruzamento com `Vendas_Geral.xlsx`** — a etapa 7 está pronta, com busca de
-   colapso por cardinalidade de família e a lista de modelos sem contraparte.
-   Falta o arquivo em `dados/referencia/`.
+2. **A nomenclatura entre painel e planilha** — 12.335 pares casam exatamente
+   (16,86 milhões de unidades idênticas), mas `CRUZE` da planilha contra
+   `CRUZE HB`/`CRUZE SEDAN` do painel, ou `SW4` contra `HILUX SW4`, ficam de
+   fora do casamento exato. A busca por família aponta; adjudicar é humano.
 3. **O mapa de grupos** é rascunho revisado, não fato. As quatro convenções
    discutíveis continuam sendo convenções; separar Kia de Hyundai move o HHI em
    no máximo 0,87%.
 4. **Revisão de `config/nomes_nao_veiculo.csv`** — 29 nomes marcados,
    `saidas/nomes_suspeitos.csv` traz os 180 candidatos a revisão humana. A
    retroação a 2003 multiplicou a lista de nomes de volume ínfimo.
-5. **O que fazer com 2013-11** (D4) em qualquer série por marca. O painel
-   registra o defeito e não decide.
+5. **As 4 linhas do ranking de 2013-11 que duplicam o sub-segmento** (D4),
+   9.171 unidades. Três opções descritas acima; recomendo a (c).
 6. **As duas edições curtas** (D5): manter como está, completar pela coluna de
    mês anterior, ou excluir das contagens de modelos. Três opções descritas
    acima; nenhuma aplicada.

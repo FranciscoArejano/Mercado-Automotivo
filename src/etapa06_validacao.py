@@ -896,9 +896,50 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
     partes.append(
         "### Marca trocada pela fonte\n\n"
         "Um nome de modelo aparece sob a mesma marca em quase todos os meses. Quando um mes "
-        "o publica sob outra, e' esse mes que destoa. O teste usa a redundancia da propria "
-        "serie e **nao corrige nada** (sec.9.4): o painel guarda o que a fonte publicou.\n\n"
+        "o publica sob outra, e' esse mes que destoa. O que sobra nesta lista **nao foi "
+        "corrigido**: o painel guarda o que a fonte publicou, e nem toda divergencia e' "
+        "defeito -- `TIGGO 7` sob `CHERY` ate' 2020 e sob `CAOA CHERY` depois e' troca real "
+        "de marca, que 'corrigir' destruiria.\n\n"
     )
+    caminho_recuperada = config.DIR_SAIDAS / "marca_recuperada.csv"
+    if caminho_recuperada.exists():
+        recuperada = pd.read_csv(caminho_recuperada)
+        feitas = recuperada[recuperada["marca_recuperada"].notna()
+                            & (recuperada["marca_recuperada"].astype(str) != "")]
+        sobraram = recuperada.drop(feitas.index)
+        partes.append(
+            f"**Recuperacao de D4: {len(feitas)} de {len(recuperada)} modelos.** Onde a "
+            "edicao saiu com a coluna de marca trocada, o informe do mes seguinte republica "
+            "o mes na coluna de mes anterior com a marca certa. O **valor nao muda** -- muda "
+            "a atribuicao --, e so' se recupera quando o valor confere unidade a unidade. "
+            "E' a mesma rota de 2023-09 (sec.9.2), usada para a marca em vez do valor. As "
+            "linhas levam `marca_recuperada` e guardam a marca errada em "
+            "`marca_publicada_fonte`.\n\n" + _tabela(
+                feitas[["mes_ref", "modelo", "marca_publicada", "marca_recuperada",
+                        "unidades"]], 14)
+        )
+        if not sobraram.empty:
+            partes.append(
+                f"\n**{len(sobraram)} sem rota.** O informe seguinte lista o modelo so' no "
+                "ranking mensal, que nao traz coluna de mes anterior. Ficam no painel como "
+                "a fonte os publicou.\n\n" + _tabela(
+                    sobraram[["mes_ref", "modelo", "marca_publicada", "unidades",
+                              "situacao"]], 8)
+            )
+    caminho_duplicatas = config.DIR_SAIDAS / "duplicatas_de_marca_trocada.csv"
+    if caminho_duplicatas.exists():
+        duplicatas = pd.read_csv(caminho_duplicatas)
+        partes.append(
+            f"\n**Consequencia medida e nao resolvida:** recuperada a marca, "
+            f"**{len(duplicatas)}** linhas do ranking passam a repetir uma linha de "
+            f"sub-segmento do mesmo informe -- {_mil(duplicatas['unidades_ranking'].sum())} "
+            "unidades que a fonte publicou duas vezes, sob marcas diferentes. A regra Q7 "
+            "diria para descartar a do ranking; descartar mudaria o total do mes e "
+            "quebraria o invariante central, que existe para impedir que a harmonizacao "
+            "mexa em volume. **Nada foi descartado** -- e' decisao do pesquisador (sec.9.6), "
+            "e e' o que mantem a cobertura de 2013-11 em comerciais leves acima de 100%.\n\n"
+            + _tabela(duplicatas, 8)
+        )
     if divergentes.empty:
         partes.append("Nenhuma divergencia.\n")
     else:

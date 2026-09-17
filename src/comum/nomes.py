@@ -28,6 +28,8 @@ carros de verdade.
 from __future__ import annotations
 
 import csv
+import re
+import unicodedata
 from functools import lru_cache
 
 import pandas as pd
@@ -36,6 +38,9 @@ from . import config
 from .texto import normalizar_tipografia
 
 CAMPOS_NAO_VEICULO = ["marca", "modelo", "motivo"]
+
+_PONTUACAO = re.compile(r"[^A-Z0-9 ]+")
+_ESPACOS = re.compile(r" +")
 
 
 def chave(texto: str) -> str:
@@ -126,3 +131,27 @@ def candidatos_a_revisao(inventario_modelos: pd.DataFrame) -> pd.DataFrame:
     return inventario_modelos[
         inventario_modelos["nome_suspeito"] | inventario_modelos["volume_infimo"]
     ]
+
+
+def chave_de_comparacao(texto: str) -> str:
+    """Chave para confrontar o painel com um arquivo externo. **Nunca grava.**
+
+    `chave` normaliza so' caixa, porque e' a chave do painel e a sec.4 e'
+    restritiva sobre o que se pode uniformizar num dado que vai ser publicado.
+    Esta aqui e' outra coisa: existe so' para o merge da etapa 7, onde os dois
+    lados sao vocabularios diferentes descrevendo o mesmo carro. A planilha de
+    controle escreve `up!`, `Doblò`, `Etios Sedã`; a fonte publica `UP`,
+    `DOBLO`, `ETIOS SEDAN`. Sem dobrar acento e pontuacao, 2,6 milhoes de
+    unidades apareceriam como "sem contraparte" e o truncamento ficaria
+    superestimado por uma ordem de grandeza.
+
+    Dobra acento, remove pontuacao e colapsa espaco. O painel nao ve nada disso:
+    quem chama isto e' o comparador, e as grafias originais vao lado a lado no
+    CSV de saida.
+    """
+    base = chave(texto)
+    sem_acento = "".join(
+        caractere for caractere in unicodedata.normalize("NFD", base)
+        if unicodedata.category(caractere) != "Mn"
+    )
+    return _ESPACOS.sub(" ", _PONTUACAO.sub(" ", sem_acento)).strip()

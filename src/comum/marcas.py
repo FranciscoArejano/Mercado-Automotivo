@@ -19,6 +19,7 @@ from . import config
 from .texto import normalizar_tipografia
 
 CAMPOS_MARCAS = ["marca_fonte", "observacao"]
+CAMPOS_MARCAS_PLANILHA = ["marca_planilha", "marca_painel", "observacao"]
 
 
 @dataclass(frozen=True)
@@ -62,3 +63,48 @@ def separar(nome_completo_fonte: str) -> Separacao:
             return Separacao(nome[: len(marca)], normalizar_tipografia(nome[len(marca):]),
                              "lista_de_marcas", True)
     return Separacao("", nome, "nao_resolvido", False)
+
+
+@lru_cache(maxsize=1)
+def carregar_apelidos_da_planilha() -> tuple[tuple[str, str], ...]:
+    """Marcas que a planilha de controle escreve diferente da fonte (sec.7).
+
+    A planilha e' controle independente, montado a' mao, e escreve a marca por
+    extenso -- "Volkswagen Gol" onde a Fenabrave publica "VW/GOL". Sem esta
+    tabela, 3,9 milhoes de unidades ficariam sem contraparte e a comparacao
+    acusaria divergencia onde nao ha' nenhuma.
+
+    Isto **nao** e' harmonizacao do painel: o painel nao e' tocado, e `regras.csv`
+    segue vazio. E' vocabulario de um arquivo de controle sendo traduzido para o
+    vocabulario da fonte, so' para a comparacao. O humano escreve; o codigo le'.
+
+    Devolve pares (prefixo_normalizado, marca_no_painel), mais longos primeiro.
+    """
+    if not config.MARCAS_PLANILHA.exists():
+        return ()
+    with config.MARCAS_PLANILHA.open(encoding="utf-8", newline="") as fluxo:
+        pares = [
+            (normalizar_tipografia(linha["marca_planilha"]).upper(),
+             normalizar_tipografia(linha["marca_painel"]).upper())
+            for linha in csv.DictReader(fluxo)
+            if normalizar_tipografia(linha.get("marca_planilha", ""))
+        ]
+    return tuple(sorted(pares, key=lambda par: (-len(par[0]), par[0])))
+
+
+def separar_da_planilha(nome: str) -> Separacao:
+    """Separa um nome da planilha de controle, honrando os apelidos.
+
+    Os apelidos vem antes da lista de marcas do painel, e e' deliberado:
+    "Chevrolet Onix" casaria com a marca `CHEVROLET` do painel, que existe mas e'
+    variante rara da fonte (169 unidades). A marca certa e' `GM`.
+    """
+    limpo = normalizar_tipografia(nome)
+    alvo = limpo.upper()
+    for prefixo, marca_painel in carregar_apelidos_da_planilha():
+        if alvo == prefixo:
+            return Separacao(marca_painel, "", "apelido_da_planilha", True)
+        if alvo.startswith(prefixo + " "):
+            return Separacao(marca_painel, normalizar_tipografia(limpo[len(prefixo):]),
+                             "apelido_da_planilha", True)
+    return separar(limpo)

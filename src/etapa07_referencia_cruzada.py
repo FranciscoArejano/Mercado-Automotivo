@@ -33,11 +33,24 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from comum import config, familias, log, marcas  # noqa: E402
+from comum import config, familias, log, marcas, nomes  # noqa: E402
 
 ETAPA = "etapa07_referencia_cruzada"
 ANOS_COMPARAVEIS = range(2014, 2024)
 RE_ROTULO_MES = re.compile(r"^([a-zA-Z]{3})[/\-]?(\d{2,4})$")
+
+
+def _inteiros(quadro: pd.DataFrame, colunas: list[str]) -> pd.DataFrame:
+    """Contagem de unidades sai inteira, nao em notacao cientifica.
+
+    `to_markdown` renderiza 3284610.0 como 3.28461e+06, que num relatorio de
+    conferencia de totais e' exatamente o que nao se quer ler.
+    """
+    saida = quadro.copy()
+    for coluna in colunas:
+        if coluna in saida:
+            saida[coluna] = saida[coluna].round(0).astype("Int64")
+    return saida
 
 
 def _tabela(quadro: pd.DataFrame, maximo: int = 40) -> str:
@@ -49,11 +62,50 @@ def _tabela(quadro: pd.DataFrame, maximo: int = 40) -> str:
     return texto + "\n"
 
 
-def ler_planilha(caminho: Path, logger) -> tuple[pd.DataFrame, list[str]]:
-    """Le a planilha por posicao de coluna. Devolve (longo, observacoes)."""
+RE_POSICAO = re.compile(r"^\d+\s*[ºo°]?$")
+
+
+def _coluna_de_nome(rotulos: list[str], corpo: pd.DataFrame,
+                    colunas_mes: list[int]) -> int | None:
+    """Qual coluna traz `Marca Modelo`.
+
+    O rotulo manda -- a planilha chama a coluna de `Marca/Veiculo`. So' quando
+    ele nao existe e' que se procura pelo conteudo, e ai' a coluna de **posicao**
+    ("1o", "2o", ...) tem de ser excluida explicitamente: sem isso o leitor a
+    escolhe, e todo modelo vira um numero ordinal que nao casa com nada. Foi o
+    que aconteceu na primeira execucao desta etapa.
+    """
+    for indice, rotulo in enumerate(rotulos):
+        if indice in colunas_mes:
+            continue
+        chave = rotulo.strip().lower()
+        if "veic" in chave or "veíc" in chave or "modelo" in chave:
+            return indice
+
+    melhor, melhor_texto = None, 0
+    for indice in range(len(rotulos)):
+        if indice in colunas_mes:
+            continue
+        valores = corpo.iloc[:, indice].dropna().astype(str).str.strip()
+        valores = valores[valores.str.lower() != "nan"]
+        if valores.empty:
+            continue
+        texto = int((~valores.str.match(RE_POSICAO)
+                     & ~valores.str.match(r"^[\d.,]+$")).sum())
+        if texto > melhor_texto:
+            melhor, melhor_texto = indice, texto
+    return melhor
+
+
+def ler_planilha(caminho: Path, logger) -> tuple[pd.DataFrame, list[str], list[str]]:
+    """Le a planilha por posicao de coluna.
+
+    Devolve (longo, observacoes, meses_sem_cobertura).
+    """
     livro = pd.read_excel(caminho, sheet_name=None, header=None)
     observacoes: list[str] = []
     registros: list[dict] = []
+    meses_vazios: set[str] = set()
 
     for aba, bruto in livro.items():
         achado = re.search(r"(20\d{2})", str(aba))
@@ -93,12 +145,27 @@ def ler_planilha(caminho: Path, logger) -> tuple[pd.DataFrame, list[str]]:
             )
         colunas_mes = colunas_mes[:12]
 
+        # Coluna de mes inteiramente vazia e' fim da cobertura do controle, nao
+        # mercado parado: a aba 2023 so' vai ate' agosto. Compara-la contra o
+        # painel acusaria +60% de divergencia que e' so' ausencia de dado.
+        corpo_bruto = bruto.iloc[linha_cabecalho + 1:]
+        vazias = [
+            posicao for posicao, coluna in enumerate(colunas_mes, start=1)
+            if pd.to_numeric(corpo_bruto.iloc[:, coluna], errors="coerce").fillna(0).sum() == 0
+        ]
+        if vazias:
+            observacoes.append(
+                f"aba `{aba}`: meses {', '.join(f'{m:02d}' for m in vazias)} sem nenhum "
+                "valor -- a cobertura do controle termina antes do fim do ano. Esses "
+                "meses ficam **fora** da comparacao."
+            )
+            meses_vazios.update(f"{ano}-{m:02d}" for m in vazias)
+
         corpo = bruto.iloc[linha_cabecalho + 1:]
-        coluna_nome = next(
-            (i for i in range(len(rotulos)) if i not in colunas_mes
-             and corpo.iloc[:, i].astype(str).str.contains("/").any()),
-            0,
-        )
+        coluna_nome = _coluna_de_nome(rotulos, corpo, colunas_mes)
+        if coluna_nome is None:
+            observacoes.append(f"aba `{aba}`: coluna de nome nao identificada -- aba ignorada")
+            continue
         for _, linha in corpo.iterrows():
             nome = str(linha.iloc[coluna_nome]).strip()
             if not nome or nome.lower() in {"nan", "total", "modelo"}:
@@ -107,7 +174,7 @@ def ler_planilha(caminho: Path, logger) -> tuple[pd.DataFrame, list[str]]:
                 valor = pd.to_numeric(linha.iloc[coluna], errors="coerce")
                 if pd.isna(valor):
                     continue
-                separacao = marcas.separar(nome)
+                separacao = marcas.separar_da_planilha(nome)
                 registros.append({
                     "mes_ref": f"{ano}-{posicao:02d}",
                     "marca": separacao.marca,
@@ -117,7 +184,16 @@ def ler_planilha(caminho: Path, logger) -> tuple[pd.DataFrame, list[str]]:
                 })
         logger.info("aba %s: %d colunas de mes, %d linhas de modelo", aba, len(colunas_mes), len(corpo))
 
-    return pd.DataFrame(registros), observacoes
+    return pd.DataFrame(registros), observacoes, sorted(meses_vazios)
+
+
+def _sem_zero(serie: pd.Series) -> pd.Series:
+    """Denominador com zero virando NaN, sem trocar o dtype.
+
+    `serie.replace(0, pd.NA)` parece equivalente e nao e': devolve uma serie de
+    objetos, e o `.round()` seguinte estoura com NAType. `.where` mantem float.
+    """
+    return serie.where(serie != 0)
 
 
 def executar(caminho: Path = config.VENDAS_GERAL) -> int:
@@ -158,13 +234,27 @@ def executar(caminho: Path = config.VENDAS_GERAL) -> int:
             f"{log.caminho_relativo(config.PAINEL)} nao existe -- rode as etapas anteriores."
         )
 
-    planilha, observacoes = ler_planilha(caminho, logger)
+    planilha, observacoes, meses_sem_cobertura = ler_planilha(caminho, logger)
     painel = pd.read_parquet(config.PAINEL)
     painel = painel[painel["ano"].isin(ANOS_COMPARAVEIS)]
+    if meses_sem_cobertura:
+        painel = painel[~painel["mes_ref"].isin(meses_sem_cobertura)]
+        logger.info("%d meses fora da comparacao por falta de cobertura do controle: %s",
+                    len(meses_sem_cobertura), ", ".join(meses_sem_cobertura))
     reconstruido = (
         painel.groupby(["mes_ref", "marca", "modelo"], as_index=False)["unidades"].sum()
         .rename(columns={"unidades": "unidades_painel"})
     )
+
+    # A chave de comparacao e' canonizada em caixa dos dois lados: a fonte
+    # publica "GOL", a planilha escreve "Gol", e sao o mesmo carro. Isto nao
+    # toca o painel -- e' a chave do merge, e as grafias originais seguem nas
+    # colunas ao lado.
+    for quadro, lado in ((reconstruido, "painel"), (planilha, "planilha")):
+        quadro[f"marca_{lado}_grafia"] = quadro["marca"]
+        quadro[f"modelo_{lado}_grafia"] = quadro["modelo"]
+        quadro["marca"] = quadro["marca"].map(nomes.chave_de_comparacao)
+        quadro["modelo"] = quadro["modelo"].map(nomes.chave_de_comparacao)
 
     comparacao = reconstruido.merge(planilha, on=["mes_ref", "marca", "modelo"], how="outer")
     comparacao["unidades_painel"] = comparacao["unidades_painel"].fillna(0)
@@ -180,13 +270,15 @@ def executar(caminho: Path = config.VENDAS_GERAL) -> int:
     mensal = comparacao.groupby("mes_ref", as_index=False).agg(
         painel=("unidades_painel", "sum"), planilha=("unidades_planilha", "sum"))
     mensal["diferenca"] = mensal["painel"] - mensal["planilha"]
-    mensal["diferenca_pct"] = (100 * mensal["diferenca"] / mensal["planilha"].replace(0, pd.NA)).round(3)
+    mensal["diferenca_pct"] = (
+        100 * mensal["diferenca"] / _sem_zero(mensal["planilha"])).round(3)
 
     anual = comparacao.assign(ano=comparacao["mes_ref"].str.slice(0, 4).astype(int))
     anual = anual.groupby("ano", as_index=False).agg(
         painel=("unidades_painel", "sum"), planilha=("unidades_planilha", "sum"))
     anual["diferenca"] = anual["painel"] - anual["planilha"]
-    anual["diferenca_pct"] = (100 * anual["diferenca"] / anual["planilha"].replace(0, pd.NA)).round(3)
+    anual["diferenca_pct"] = (
+        100 * anual["diferenca"] / _sem_zero(anual["planilha"])).round(3)
 
     piores = (
         comparacao[comparacao["situacao"] != "igual"]
@@ -230,8 +322,9 @@ def executar(caminho: Path = config.VENDAS_GERAL) -> int:
     texto = cabecalho
     texto += "## Observacoes do leitor da planilha\n\n"
     texto += "".join(f"- {o}\n" for o in observacoes) or "_(nenhuma)_\n"
-    texto += "\n## Total por ano\n\n" + _tabela(anual)
-    texto += "\n## Total por mes\n\n" + _tabela(mensal, 200)
+    colunas_de_unidades = ["painel", "planilha", "diferenca"]
+    texto += "\n## Total por ano\n\n" + _tabela(_inteiros(anual, colunas_de_unidades))
+    texto += "\n## Total por mes\n\n" + _tabela(_inteiros(mensal, colunas_de_unidades), 200)
     texto += (
         f"\n## Divergencias modelo a modelo\n\n{len(piores)} pares (mes x modelo) divergentes "
         f"de {len(comparacao)} comparados. Lista completa em "

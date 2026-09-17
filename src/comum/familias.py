@@ -71,10 +71,33 @@ def colapsos(do_painel: pd.DataFrame, da_planilha: pd.DataFrame) -> pd.DataFrame
         junto["variantes_planilha"] - junto["variantes_painel"])
     apertados = junto[junto["variantes_a_mais_na_planilha"] > 0].copy()
     apertados["unidades_planilha"] = apertados["unidades_planilha"].fillna(0).astype(int)
+    apertados["unidades_painel"] = apertados["unidades_painel"].fillna(0).astype(int)
+
+    # Duas coisas diferentes caem neste filtro, e confundi-las inverte a leitura:
+    #
+    # - familia que o painel **tem**, com menos variantes: candidata a colapso.
+    #   MITSUBISHI/PAJERO e' uma ficha de 35.283 unidades contra cinco variantes
+    #   de 35.356 na planilha -- mesmo volume, particao diferente.
+    # - familia que o painel **nao tem**: nao houve colapso nenhum, o modelo
+    #   simplesmente nao esta' la'. BMW "Serie", Lamborghini, Changan. Isso e'
+    #   truncamento ou ausencia de marca, medido na secao anterior.
+    #
+    # A proximidade de volume e' o que separa as duas: colapso preserva o
+    # volume, truncamento o perde.
+    apertados["mecanismo"] = "colapso de variante"
+    apertados.loc[apertados["variantes_painel"] == 0, "mecanismo"] = "ausente do painel"
+    proximo = (
+        (apertados["variantes_painel"] > 0)
+        & (apertados["unidades_planilha"] > 0)
+        & ((apertados["unidades_painel"] - apertados["unidades_planilha"]).abs()
+           <= 0.05 * apertados["unidades_planilha"])
+    )
+    apertados.loc[proximo, "mecanismo"] = "colapso de variante (volume confere)"
+
     return apertados.sort_values(
         ["variantes_a_mais_na_planilha", "unidades_planilha"], ascending=[False, False]
     )[[
-        "marca", "familia", "variantes_painel", "variantes_planilha",
+        "marca", "familia", "mecanismo", "variantes_painel", "variantes_planilha",
         "variantes_a_mais_na_planilha", "nomes_painel", "nomes_planilha",
         "unidades_painel", "unidades_planilha",
     ]]

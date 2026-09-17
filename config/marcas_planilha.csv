@@ -1,0 +1,6 @@
+marca_planilha,marca_painel,observacao
+Volkswagen,VW,"A planilha escreve a marca por extenso; a Fenabrave publica 'VW'. Confirmado pelo volume: 3.945.792 unidades na planilha sem contraparte alguma antes do mapeamento."
+Chevrolet,GM,"A Fenabrave publica 'GM'. O painel tem tambem 'CHEVROLET', mas e' variante rara da fonte (169 unidades em 4 modelos) e nao e' esta marca: sem o mapeamento, 4.320.820 unidades da planilha casariam com 169 do painel."
+Citroën,CITROEN,"Acento. A normalizacao tipografica nao mexe em acentos de proposito (sec.4), entao o mapeamento tem de ser explicito."
+Mercedes-Benz,M.BENZ,"A Fenabrave abrevia 'M.BENZ'."
+Rolls-Royce,ROLLS ROYCE,"A Fenabrave escreve sem hifen."

@@ -30,6 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from comum import config, dicionario, grupos, log, nomes, truncamento  # noqa: E402
 from comum import regras as mod_regras  # noqa: E402
+from comum import recuperacao_marca as mod_recuperacao  # noqa: E402
 
 ETAPA = "etapa05_painel"
 
@@ -38,6 +39,7 @@ COLUNAS = [
     "sub_segmento_fonte", "grupo_economico", "grupo_mapeado", "unidades",
     "corte_publicacao", "nome_suspeito", "motivo_nome_suspeito",
     "modelo_fonte", "grafias_fonte", "nome_completo_fonte",
+    "marca_publicada_fonte", "marca_recuperada",
     "houve_rebatismo", "data_rebatismo", "cadeia_rebatismo",
     "reclassificacao", "conta_entrada_saida", "origem_tabela", "arquivos_origem",
 ]
@@ -71,6 +73,45 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
         )
         colisoes.to_csv(config.DIR_SAIDAS / "colisoes_de_caixa.csv", index=False)
 
+    # D4: edicao que saiu com a coluna de marca trocada. O valor nao muda -- so'
+    # a quem ele e' atribuido --, e a nova atribuicao vem da mesma fonte
+    # republicando o mes na coluna de mes anterior do informe seguinte, a rota
+    # ja' validada em 2023-09. `marca_fonte` segue intacta na linha ao lado.
+    bruto["marca_publicada_fonte"] = bruto["marca_chave"]
+    bruto["marca_recuperada"] = False
+    recuperacoes = mod_recuperacao.recuperacoes(
+        bruto.rename(columns={"marca_chave": "marca", "modelo_chave": "modelo",
+                              "segmento_fonte": "segmento"})
+    )
+    if not recuperacoes.empty:
+        recuperacoes.to_csv(config.DIR_SAIDAS / "marca_recuperada.csv", index=False)
+        aplicadas = recuperacoes[recuperacoes["marca_recuperada"] != ""]
+        for _, linha in aplicadas.iterrows():
+            alvo_linhas = (
+                (bruto["mes_ref"] == linha["mes_ref"])
+                & (bruto["modelo_chave"] == linha["modelo"])
+                & (bruto["segmento_fonte"] == linha["segmento"])
+            )
+            bruto.loc[alvo_linhas, "marca_chave"] = nomes.chave(linha["marca_recuperada"])
+            bruto.loc[alvo_linhas, "marca_recuperada"] = True
+        duplicatas = mod_recuperacao.duplicatas_apos_recuperacao(bruto)
+        if not duplicatas.empty:
+            duplicatas.to_csv(config.DIR_SAIDAS / "duplicatas_de_marca_trocada.csv",
+                              index=False)
+            logger.warning(
+                "D4: %d linhas do ranking repetem uma de sub-segmento depois da "
+                "recuperacao (%d unidades contadas duas vezes pela fonte). NADA foi "
+                "descartado -- ver saidas/duplicatas_de_marca_trocada.csv",
+                len(duplicatas), int(duplicatas["unidades_ranking"].sum()),
+            )
+        logger.warning(
+            "D4: %d de %d modelos com marca trocada recuperados pelo informe seguinte "
+            "(%s); %d sem rota",
+            len(aplicadas), len(recuperacoes),
+            ", ".join(sorted(recuperacoes["mes_ref"].unique())),
+            len(recuperacoes) - len(aplicadas),
+        )
+
     chaves = ["mes_ref", "ano", "mes", "data", "segmento_fonte", "marca_chave",
               "modelo_chave", "sub_segmento_fonte"]
     agregado = (
@@ -80,6 +121,9 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
             grafias_fonte=("modelo_fonte", lambda s: "+".join(sorted(set(s)))),
             nome_completo_fonte=("nome_completo_fonte", lambda s: "+".join(sorted(set(s)))),
             origem_tabela=("origem_tabela", lambda s: "+".join(sorted(set(s)))),
+            marca_publicada_fonte=("marca_publicada_fonte",
+                                   lambda s: "+".join(sorted(set(s)))),
+            marca_recuperada=("marca_recuperada", "max"),
             arquivos_origem=("arquivo_origem", lambda s: "+".join(sorted(set(s)))),
         )
         .rename(columns={"segmento_fonte": "segmento", "marca_chave": "marca",
@@ -145,6 +189,9 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
             conta_entrada_saida=("conta_entrada_saida", "min"),
             origem_tabela=("origem_tabela", lambda s: "+".join(sorted(set(s)))),
             arquivos_origem=("arquivos_origem", lambda s: "+".join(sorted(set(s)))),
+            marca_publicada_fonte=("marca_publicada_fonte",
+                                   lambda s: "+".join(sorted(set(s)))),
+            marca_recuperada=("marca_recuperada", "max"),
         )
     )
     # 5. Corte de publicacao (QUESTOES_ABERTAS.md Q5). Nao e' o menor valor do

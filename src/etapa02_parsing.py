@@ -35,7 +35,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from comum import config, informe, log, meses as mod_meses, periodo  # noqa: E402
+from comum import config, informe, log, marcas, meses as mod_meses, nomes, periodo  # noqa: E402
 from comum import reconstrucao as mod_reconstrucao  # noqa: E402
 
 ETAPA = "etapa02_parsing"
@@ -60,6 +60,16 @@ CAMPOS_SUBTOTAIS = [
     "mes", "segmento", "sub_segmento_fonte", "total_publicado", "soma_modelos_listados",
     "modelos_listados", "cauda_nao_publicada", "arquivo_origem",
 ]
+
+
+def _chave_de_nome(nome_completo_fonte: str) -> str:
+    """Chave para reconhecer o mesmo modelo nas duas tabelas do mesmo informe.
+
+    Canoniza caixa e espaco em volta da barra. A grafia crua fica intacta em
+    `nome_completo_fonte`; isto e' so' a chave de comparacao.
+    """
+    separacao = marcas.separar(nome_completo_fonte)
+    return f"{nomes.chave(separacao.marca)}/{nomes.chave(separacao.modelo)}"
 
 
 def _escrever(caminho: Path, campos: list[str], linhas: list[dict]) -> None:
@@ -161,9 +171,20 @@ def processar_arquivo(mes: str, caminho: Path, tolerancia_total: float | None,
                   f"cauda nao publicada: {cauda:.0f} unidades")
 
     # 3. ranking x tabelas de sub-segmento
+    # A chave compara o nome **canonizado**, nao a string crua. O ranking de
+    # 2013-11 escreve `VW /GOL` com um espaco sobrando antes da barra, e a
+    # tabela de sub-segmento escreve `VW/GOL`: strings diferentes, mesmo carro.
+    # Comparando cru, o ranking entrava como modelo novo e o mesmo numero era
+    # contado duas vezes -- 56.459 unidades so' naquele mes, que e' o que punha
+    # a cobertura de 2013 acima de 100%.
+    #
+    # Canonizar a chave nao e' fundir modelos nem mexer no transcrito:
+    # `nome_completo_fonte` guarda a grafia crua das duas linhas. E' a mesma
+    # correcao de D1, aplicada a' chave de reconciliacao em vez de a' do painel.
     por_nome: dict[tuple[str, str], float] = defaultdict(float)
     for modelo in extracao.modelos:
-        por_nome[(modelo.segmento, modelo.nome_completo_fonte)] += modelo.unidades_mes
+        por_nome[(modelo.segmento, _chave_de_nome(modelo.nome_completo_fonte))] += (
+            modelo.unidades_mes)
 
     linhas: list[dict] = []
     for modelo in extracao.modelos:
@@ -183,7 +204,7 @@ def processar_arquivo(mes: str, caminho: Path, tolerancia_total: float | None,
     conferidos = divergentes = 0
     volume_conferido = desvio_absoluto = 0.0
     for item in extracao.ranking:
-        chave = (item.segmento, item.nome_completo_fonte)
+        chave = (item.segmento, _chave_de_nome(item.nome_completo_fonte))
         if chave in por_nome:
             conferidos += 1
             volume_conferido += item.unidades_mes

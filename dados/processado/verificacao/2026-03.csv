@@ -1,0 +1,5 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2026-03,mes_declarado,2026-03,,,,,ok,2026-03
+2026-03,ranking_x_sub_segmento,2026-03,239917,239916,-1,-0.0004,ok,1 modelos divergentes de 73 conferidos; desvio de volume 0.0004%
+2026-03,cobertura,automoveis,206375,199723,-6652,-3.2233,medido,cobertura=96.78%
+2026-03,cobertura,comerciais_leves,51848,51804,-44,-0.0849,medido,cobertura=99.92%

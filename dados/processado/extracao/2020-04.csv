@@ -1,0 +1,186 @@
+mes,segmento,origem_tabela,sub_segmento_fonte,posicao_fonte,nome_completo_fonte,unidades_mes,unidades_mes_anterior,unidades_acumulado,participacao_pct,pagina,metodo_extracao,arquivo_origem
+2020-04,automoveis,sub_segmento,Veículos de Entrada,1,VW/GOL,1648,5681,19303,31.38,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Veículos de Entrada,2,RENAULT/KWID,1622,4109,18283,29.73,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Veículos de Entrada,3,FIAT/MOBI,933,3527,13454,21.87,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Veículos de Entrada,4,FIAT/UNO,308,1104,3824,6.22,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Veículos de Entrada,5,TOYOTA/ETIOS HB,309,823,3686,5.99,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Veículos de Entrada,6,VW/UP,208,812,2914,4.74,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Veículos de Entrada,7,CAOA CHERY/QQ,1,2,18,0.03,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Veículos de Entrada,8,VW/FUSCA,0,5,16,0.03,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Veículos de Entrada,9,GM/CHEVETTE,0,0,3,0.00,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,1,GM/ONIX,3619,12007,50740,31.27,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,2,HYUNDAI/HB20,2837,7042,24835,15.31,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,3,FORD/KA,1842,7103,24462,15.08,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,4,FIAT/ARGO,1176,6071,17957,11.07,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,5,VW/POLO,1065,3774,15948,9.83,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,6,RENAULT/SANDERO,554,3303,11046,6.81,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,7,TOYOTA/YARIS HB,445,1700,7240,4.46,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,8,VW/FOX/CROSS FOX,313,1404,6858,4.23,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,9,NISSAN/MARCH,104,388,1641,1.01,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,10,PEUGEOT/208,55,199,674,0.42,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,11,CITROEN/C3,15,96,402,0.25,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Pequenos,12,MINI/COOPER,19,81,250,0.15,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Médios,1,GM/CRUZE HB,73,167,1326,82.00,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Médios,2,M.BENZ/CLASSE A,5,26,88,5.44,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Médios,3,BMW/118i,10,10,59,3.65,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Médios,4,AUDI/A3,8,10,53,3.28,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Médios,5,VW/GOLF,5,3,19,1.18,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Hatch Médios,6,BMW/I3,0,3,15,0.93,11,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Pequenos,1,FORD/KA SEDAN,924,3627,10751,23.52,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Pequenos,2,HYUNDAI/HB20S,702,1778,7207,15.77,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Pequenos,3,FIAT/CRONOS,862,1557,5768,12.62,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Pequenos,4,NISSAN/VERSA,313,1467,5456,11.94,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Pequenos,5,VW/VOYAGE,429,1340,5024,10.99,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Pequenos,6,RENAULT/LOGAN,256,1264,4888,10.69,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Pequenos,7,FIAT/SIENA,205,913,3710,8.12,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Pequenos,8,TOYOTA/ETIOS SEDAN,202,502,2046,4.48,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Pequenos,9,GM/PRISMA,11,57,859,1.88,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Pequenos,10,GM/CLASSIC,0,0,3,0.01,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Compactos,1,GM/ONIX PLUS,2223,6670,26737,60.30,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Compactos,2,VW/VIRTUS,653,2562,9397,21.19,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Compactos,3,TOYOTA/YARIS SEDAN,343,1165,4777,10.77,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Compactos,4,HONDA/CITY,139,707,2610,5.89,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Compactos,5,GM/COBALT,4,18,427,0.96,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Compactos,6,CAOA CHERY/ARRIZO 5,19,85,382,0.86,12,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,1,TOYOTA/COROLLA,1335,3642,13422,49.83,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,2,HONDA/CIVIC,457,1356,5312,19.72,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,3,GM/CRUZE SEDAN,403,656,3929,14.59,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,4,VW/JETTA,135,353,1537,5.71,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,5,M.BENZ/CLASSE C,37,194,721,2.68,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,6,AUDI/A3 SEDAN,32,101,497,1.85,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,7,NISSAN/SENTRA,26,123,495,1.84,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,8,M.BENZ/CLASSE A,51,113,322,1.20,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,9,KIA/CERATO,21,60,246,0.91,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,10,CITROEN/C4L,102,12,213,0.79,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,11,AUDI/A5,8,23,104,0.39,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,12,M.BENZ/CLA35,0,3,32,0.12,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,13,MITSUBISHI/LANCER,0,2,26,0.10,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,14,TOYOTA/PRIUS,1,4,24,0.09,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,15,FORD/FUSION,1,1,14,0.05,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,16,SUBARU/WRX,0,12,14,0.05,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,17,BMW/430I,2,2,11,0.04,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,18,FORD/FOCUS SEDAN,0,0,8,0.03,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,19,BMW/218I,1,4,5,0.02,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,20,M.BENZ/CLA45,0,0,2,0.01,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans médios,21,VW/SANTANA,0,1,2,0.01,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,1,BMW/320I,102,302,976,55.61,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,2,VOLVO/S60,7,25,137,7.81,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,3,VW/PASSAT,3,17,87,4.96,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,4,M.BENZ/CLASSE C,6,21,85,4.84,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,5,BMW/330I,9,17,72,4.10,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,6,AUDI/A4,3,18,67,3.82,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,7,BMW/530E,4,5,36,2.05,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,8,BMW/330E,21,10,31,1.77,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,9,M.BENZ/CLA250,12,15,31,1.77,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,10,VOLVO/S90,3,5,24,1.37,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,11,PORSCHE/PANAMERA,6,5,23,1.31,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sedans Grandes,12,LEXUS/ES300,2,11,22,1.25,13,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sw Médios,1,FIAT/WEEKEND,32,12,116,94.31,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sw Médios,2,VW/SPACE FOX,0,0,4,3.25,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sw Médios,3,FIAT/PALIO WEEKEND,0,1,2,1.63,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sw Médios,4,VW/PARATI,1,0,1,0.81,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sw Grandes,1,AUDI/A4 AVANT,3,10,68,64.15,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sw Grandes,2,VOLVO/V60,2,7,23,21.70,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sw Grandes,3,AUDI/RS4,0,3,13,12.26,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sw Grandes,4,GM/CARAVAN,0,1,2,1.89,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Monocab,1,HONDA/FIT,202,1274,4723,78.78,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Monocab,2,FIAT/DOBLO,127,378,1211,20.20,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Monocab,3,GM/BOLT,12,44,60,1.00,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Monocab,4,FIAT/IDEA,0,0,1,0.02,14,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Grandcab,1,GM/SPIN,416,1274,4804,98.89,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Grandcab,2,KIA/CARNIVAL,3,16,48,0.99,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Grandcab,3,CHRYSLER/PACIFICA,1,1,4,0.08,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Grandcab,4,FORD/GALAXY,0,0,1,0.02,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sports,1,PORSCHE/911,45,91,312,40.52,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sports,2,FORD/MUSTANG,12,43,137,17.79,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sports,3,PORSCHE/BOXSTER,15,35,128,16.62,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sports,4,BMW/Z4,3,13,63,8.18,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sports,5,PORSCHE/CAYMAN,0,2,28,3.64,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sports,6,BMW/M2,1,6,16,2.08,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sports,7,JAGUAR/F-TYPE,0,3,16,2.08,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sports,8,GM/CAMARO,0,3,10,1.30,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Sports,9,CHEVROLET/CORVETTE,0,1,5,0.65,15,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,1,JEEP/RENEGADE,1155,4492,15325,11.41,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,2,VW/T CROSS,998,4417,14126,10.52,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,3,JEEP/COMPASS,1095,3059,13150,9.79,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,4,NISSAN/KICKS,785,3597,13146,9.79,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,5,HYUNDAI/CRETA,615,3484,12295,9.15,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,6,HONDA/HR-V,551,2761,9622,7.16,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,7,FORD/ECOSPORT,580,2050,7307,5.44,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,8,GM/TRACKER,1395,1907,5596,4.17,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,9,RENAULT/DUSTER,1015,1015,3903,2.91,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,10,CITROEN/C4 CACTUS,200,804,3641,2.71,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,11,RENAULT/CAPTUR,384,1117,3406,2.54,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,12,CAOA CHERY/TIGGO 5X,235,1192,3350,2.49,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,13,HONDA/WR-V,134,785,3074,2.29,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,14,TOYOTA/HILUX SW4,371,736,2770,2.06,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,15,VW/TIGUAN,147,769,2647,1.97,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,16,PEUGEOT/2008,59,316,1465,1.09,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,17,CAOA CHERY/TIGGO,51,403,1373,1.02,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,18,TOYOTA/RAV4,24,280,1349,1.00,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,19,GM/EQUINOX,124,217,1035,0.77,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,20,HYUNDAI/IX35,60,324,981,0.73,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,21,LAND ROVER/DISCOVERY,61,197,856,0.64,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,22,CAOA CHERY/TIGGO 7,116,245,832,0.62,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,23,VOLVO/XC60,104,190,758,0.56,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,24,BMW/X1,52,223,725,0.54,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,25,VOLVO/XC40,66,188,720,0.54,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,26,MITSUBISHI/ECLIPSE CROSS,69,219,657,0.49,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,27,KIA/SPORTAGE,34,159,630,0.47,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,28,HYUNDAI/TUCSON,41,163,600,0.45,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,29,MITSUBISHI/ASX,30,157,578,0.43,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,30,AUDI/Q3,24,115,541,0.40,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,31,GM/TRAILBLAZER,106,100,482,0.36,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,32,MITSUBISHI/PAJERO,51,130,463,0.34,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,33,M.BENZ/CLASSE GLA,25,115,455,0.34,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,34,PEUGEOT/3008,20,122,417,0.31,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,35,LAND ROVER/EVOQUE,36,125,355,0.26,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,36,SUZUKI/JIMNY,55,76,337,0.25,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,37,TROLLER/T4,19,73,320,0.24,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,38,MITSUBISHI/Outlander,22,66,285,0.21,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,39,AUDI/Q5,38,68,269,0.20,16,texto_glifos,2020-04.pdf
+2020-04,automoveis,sub_segmento,Suv's,40,LAND ROVER/RANGE ROVER,23,79,259,0.19,16,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Pequenas,1,FIAT/STRADA,1628,4798,17035,58.60,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Pequenas,2,VW/SAVEIRO,1090,2666,10198,35.08,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Pequenas,3,GM/MONTANA,522,793,1834,6.31,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Pequenas,4,PEUGEOT/PARTNER,0,0,2,0.01,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Pequenas,5,FORD/RANCHERO,0,0,1,0.00,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,1,FIAT/TORO,1713,3597,15083,29.70,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,2,TOYOTA/HILUX,1762,2971,11168,21.99,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,3,GM/S10,1100,1582,6865,13.52,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,4,FORD/RANGER,1070,1560,5583,10.99,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,5,VW/AMAROK,515,1144,4649,9.16,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,6,NISSAN/FRONTIER,501,580,2518,4.96,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,7,MITSUBISHI/L200,432,713,2417,4.76,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,8,RENAULT/OROCH,55,244,2011,3.96,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,9,RAM/2500,64,15,449,0.88,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,10,EFFA/V22,3,4,23,0.05,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Pick-up's Grandes,11,FORD/F100,0,0,2,0.00,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões,1,RENAULT/MASTER,351,466,2073,22.36,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões,2,FIAT/DUCATO,299,412,1484,16.01,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões,3,HYUNDAI/HR,159,379,1361,14.68,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões,4,VW/EXPRESS,59,244,823,8.88,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões,5,KIA/K2500,61,197,708,7.64,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões,6,PEUGEOT/EXPERT,48,143,574,6.19,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões,7,CITROEN/JUMPY,37,162,570,6.15,18,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões Pequenos,1,FIAT/FIORINO,232,1328,3834,88.46,19,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões Pequenos,2,PEUGEOT/PARTNER,14,75,312,7.20,19,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões Pequenos,3,FIAT/UNO,0,0,166,3.83,19,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,sub_segmento,Furgões Pequenos,4,RENAULT/KANGOO,0,0,10,0.23,19,texto_glifos,2020-04.pdf
+2020-04,comerciais_leves,ranking,,21,PEUGEOT/BOXER,32,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,22,IVECO/DAILY 30S13,18,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,23,M.BENZ/SPRINTER 314,15,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,24,CITROEN/JUMPER,14,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,26,M.BENZ/SPRINTER 416,13,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,27,IVECO/DAILY 35S14,9,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,28,EFFA/V21,9,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,29,M.BENZ/SPRINTER,7,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,30,FOTON/AUMARK 1039,6,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,31,IVECO/DAILY 35-150,5,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,32,M.BENZ/SPRINTER 313,5,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,33,IVECO/DAILY,3,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,34,M.BENZ/SPRINTER 415,3,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,36,IVECO/DAILY 30-130,2,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,37,EFFA/K01,2,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,38,JAC/v260,2,,,,6,texto,2020-04.pdf
+2020-04,comerciais_leves,ranking,,39,FORD/F75,1,,,,6,texto,2020-04.pdf

@@ -1,0 +1,198 @@
+mes,segmento,origem_tabela,sub_segmento_fonte,posicao_fonte,nome_completo_fonte,unidades_mes,unidades_mes_anterior,unidades_acumulado,participacao_pct,pagina,metodo_extracao,arquivo_origem
+2018-10,automoveis,sub_segmento,Veículos de Entrada,1,FORD/KA,10461,8680,85918,28.72,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Veículos de Entrada,2,VW/GOL,8973,6765,61505,20.56,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Veículos de Entrada,3,RENAULT/KWID,5940,5485,52578,17.58,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Veículos de Entrada,4,FIAT/MOBI,4997,3537,41902,14.01,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Veículos de Entrada,5,TOYOTA/ETIOS HB,1248,1165,25157,8.41,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Veículos de Entrada,6,VW/UP,1788,1544,16847,5.63,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Veículos de Entrada,7,FIAT/UNO,2309,1515,12106,4.05,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Veículos de Entrada,8,CHERY/QQ,284,233,2716,0.91,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Veículos de Entrada,9,FIAT/PALIO,9,8,383,0.13,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,1,GM/ONIX,22324,17981,168540,34.12,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,2,HYUNDAI/HB20,9361,8626,88116,17.84,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,3,VW/POLO,6090,5317,57915,11.73,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,4,FIAT/ARGO,6881,6395,52900,10.71,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,5,RENAULT/SANDERO,6060,4577,43848,8.88,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,6,VW/FOX/CROSS FOX,3791,2917,32415,6.56,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,7,TOYOTA/YARIS HB,3148,2943,13267,2.69,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,8,FORD/FIESTA,691,682,13008,2.63,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,9,NISSAN/MARCH,733,690,10387,2.10,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,10,PEUGEOT/208,511,516,6229,1.26,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,11,CITROEN/C3,390,475,5544,1.12,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Pequenos,12,MINI/COOPER,148,132,1247,0.25,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Médios,1,GM/CRUZE HB,474,374,4579,41.33,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Médios,2,FORD/FOCUS,184,245,2639,23.82,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Médios,3,VW/GOLF,141,203,2418,21.83,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Médios,4,PEUGEOT/308,17,21,416,3.76,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Médios,5,VOLVO/V40,30,21,391,3.53,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Hatch Médios,6,LEXUS/CT200H,20,24,176,1.59,11,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Pequenos,1,GM/PRISMA,7716,6532,57395,23.51,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Pequenos,2,FORD/KA SEDAN,4319,3282,31772,13.01,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Pequenos,3,VW/VOYAGE,4256,2828,27737,11.36,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Pequenos,4,HYUNDAI/HB20S,2932,2451,26895,11.01,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Pequenos,5,FIAT/CRONOS,2720,3062,24276,9.94,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Pequenos,6,NISSAN/VERSA,2302,2462,22852,9.36,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Pequenos,7,RENAULT/LOGAN,1921,2907,19715,8.07,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Pequenos,8,TOYOTA/ETIOS SEDAN,892,851,19190,7.86,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Pequenos,9,FIAT/SIENA,1317,1441,14285,5.85,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Pequenos,10,CHERY/CELER SEDAN,0,3,45,0.02,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Compactos,1,VW/VIRTUS,4159,3523,33439,46.70,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Compactos,2,GM/COBALT,2094,1994,16952,23.68,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Compactos,3,HONDA/CITY,1852,1030,11553,16.14,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Compactos,4,TOYOTA/YARIS SEDAN,2633,2122,7774,10.86,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Compactos,5,FORD/NEW FIESTA,26,27,1536,2.15,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Compactos,6,LIFAN/LF 530,8,8,332,0.46,12,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,1,TOYOTA/COROLLA,5928,4774,48857,41.16,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,2,HONDA/CIVIC,2298,1913,21766,18.34,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,3,GM/CRUZE SEDAN,1723,1540,16271,13.71,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,4,FORD/FOCUS SEDAN,354,378,3862,3.25,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,5,FORD/FUSION,397,346,3825,3.22,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,6,NISSAN/SENTRA,522,451,3640,3.07,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,7,VW/JETTA,523,287,3612,3.04,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,8,M.BENZ/CLASSE C,510,295,3273,2.76,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,9,CITROEN/C4L,273,197,3018,2.54,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,10,TOYOTA/PRIUS,183,137,2156,1.82,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,11,KIA/CERATO,153,110,2091,1.76,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,12,AUDI/A3 SEDAN,190,126,1582,1.33,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,13,MITSUBISHI/LANCER,174,109,1314,1.11,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,14,HYUNDAI/ELANTRA,119,152,1033,0.87,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,15,PEUGEOT/408,31,23,706,0.59,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,16,RENAULT/FLUENCE,3,11,683,0.58,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,17,AUDI/A5,50,35,431,0.36,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,18,BMW/220I,7,5,278,0.23,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,19,BMW/430I,17,14,116,0.10,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,20,AUDI/RS3,5,4,68,0.06,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans médios,21,BMW/M240I,1,0,42,0.04,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,1,BMW/320,244,231,2468,28.47,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,2,VW/PASSAT,133,105,1285,14.82,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,3,M.BENZ/CLA180,70,93,1169,13.48,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,4,AUDI/A4,89,58,885,10.21,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,5,M.BENZ/CLASSE C,38,10,840,9.69,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,6,M.BENZ/CLASSE E,30,19,260,3.00,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,7,BMW/328,14,15,235,2.71,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,8,JAGUAR/XE,14,15,214,2.47,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,9,TOYOTA/CAMRY,32,19,203,2.34,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,10,BMW/530,7,13,151,1.74,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,11,PORSCHE/PANAMERA,35,10,141,1.63,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sedans Grandes,12,M.BENZ/CLA200,8,8,128,1.48,13,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sw Médios,1,VW/SPACE FOX,617,449,4800,61.37,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sw Médios,2,FIAT/WEEKEND,628,436,3015,38.55,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sw Médios,3,FIAT/PALIO WEEKEND,1,0,3,0.04,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sw Médios,4,FORD/BELINA,0,0,1,0.01,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sw Grandes,1,VW/GOLF VARIANT,21,31,446,65.20,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sw Grandes,2,AUDI/A4 AVANT,13,12,170,24.85,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sw Grandes,3,VOLVO/V60,16,1,65,9.50,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sw Grandes,4,GM/CARAVAN,0,0,1,0.15,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sw Grandes,5,TOYOTA/FIELDER,0,0,1,0.15,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sw Grandes,6,VW/JETTA VARIANT,0,0,1,0.15,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Monocab,1,HONDA/FIT,2861,1869,22587,83.33,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Monocab,2,FIAT/DOBLO,554,411,4272,15.76,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Monocab,3,M.BENZ/A 200,1,1,113,0.42,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Monocab,4,M.BENZ/CLASSE B,3,0,107,0.39,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Monocab,5,RENAULT/KANGOO,0,12,20,0.07,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Monocab,6,FIAT/IDEA,0,0,4,0.01,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Monocab,7,EFFA/M100,0,0,1,0.00,14,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Grandcab,1,GM/SPIN,2558,1783,17818,97.05,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Grandcab,2,CITROEN/C4 PICASSO,14,14,280,1.53,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Grandcab,3,KIA/CARNIVAL,23,24,232,1.26,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Grandcab,4,CHRYSLER/PACIFICA,1,7,12,0.07,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sports,1,FORD/MUSTANG,40,51,895,46.91,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sports,2,PORSCHE/911,22,31,157,8.23,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sports,3,PORSCHE/BOXSTER,22,19,128,6.71,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sports,4,ASA/CAUYPE,10,15,119,6.24,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sports,5,AUDI/TT,9,5,104,5.45,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sports,6,PORSCHE/CAYMAN,1,6,87,4.56,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sports,7,M.BENZ/SLC 300,8,3,59,3.09,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sports,8,GM/CAMARO,16,20,58,3.04,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Sports,9,BMW/M2,0,0,28,1.47,15,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,1,JEEP/COMPASS,6163,5005,50517,12.12,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,2,HONDA/HR-V,5352,3971,40936,9.82,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,3,HYUNDAI/CRETA,5026,4195,38886,9.33,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,4,NISSAN/KICKS,4663,3999,38447,9.22,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,5,JEEP/RENEGADE,3693,3385,37002,8.88,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,6,FORD/ECOSPORT,3167,2888,28183,6.76,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,7,GM/TRACKER,2094,1674,21998,5.28,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,8,RENAULT/CAPTUR,3239,2329,20587,4.94,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,9,RENAULT/DUSTER,2702,1803,18141,4.35,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,10,HONDA/WR-V,891,787,12263,2.94,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,11,TOYOTA/HILUX SW4,1273,1016,11020,2.64,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,12,PEUGEOT/2008,1046,839,8080,1.94,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,13,HYUNDAI/IX35,598,483,7149,1.71,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,14,CITROEN/AIRCROSS,345,324,4900,1.18,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,15,KIA/SPORTAGE,396,400,4782,1.15,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,16,MITSUBISHI/ASX,355,423,4574,1.10,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,17,HYUNDAI/TUCSON,426,355,4234,1.02,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,18,GM/EQUINOX,488,403,4124,0.99,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,19,VW/TIGUAN,1033,658,4016,0.96,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,20,TOYOTA/RAV4,323,304,3658,0.88,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,21,CHERY/TIGGO,1045,766,3497,0.84,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,22,BMW/X1,434,314,3423,0.82,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,23,LAND ROVER/DISCOVERY,249,254,3255,0.78,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,24,GM/TRAILBLAZER,532,337,3115,0.75,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,25,AUDI/Q3,279,210,2555,0.61,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,26,JAC/T40,279,183,2495,0.60,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,27,PEUGEOT/3008,189,213,2479,0.59,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,28,M.BENZ/CLASSE GLA,322,250,2468,0.59,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,29,VOLVO/XC60,310,232,2302,0.55,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,30,MITSUBISHI/Outlander,209,190,1934,0.46,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,31,VOLVO/XC40,461,140,1862,0.45,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,32,SUZUKI/JIMNY,153,234,1858,0.45,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,33,SUZUKI/VITARA,156,129,1613,0.39,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,34,LIFAN/X60,109,90,1418,0.34,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,35,MITSUBISHI/PAJERO,114,73,1337,0.32,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,36,LAND ROVER/EVOQUE,71,76,1281,0.31,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,37,TROLLER/T4,115,119,1258,0.30,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,38,CITROEN/C4 CACTUS,793,190,1051,0.25,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,39,M.BENZ/GLC,130,80,912,0.22,16,texto,2018-10.pdf
+2018-10,automoveis,sub_segmento,Suv's,40,AUDI/Q5,71,78,735,0.18,16,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,1,FIAT/STRADA,7189,4693,56264,53.44,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,2,VW/SAVEIRO,4065,4326,38448,36.52,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,3,GM/MONTANA,1256,1292,10570,10.04,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,4,PEUGEOT/PARTNER,0,0,5,0.00,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,5,GM/CHEVY,1,0,1,0.00,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,1,FIAT/TORO,5659,4575,48693,29.63,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,2,TOYOTA/HILUX,4027,3281,31369,19.09,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,3,GM/S10,2794,2450,26005,15.82,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,4,FORD/RANGER,2094,2145,16840,10.25,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,5,VW/AMAROK,1612,2505,15425,9.39,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,6,RENAULT/OROCH,1127,1045,11191,6.81,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,7,MITSUBISHI/L200,906,840,9063,5.51,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,8,NISSAN/FRONTIER,460,361,5074,3.09,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,9,RAM/2500,67,79,533,0.32,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,10,LIFAN/FOISON,1,0,75,0.05,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Pick-up's Grandes,11,EFFA/V22,5,1,24,0.01,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões,1,RENAULT/MASTER,663,608,5988,28.68,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões,2,HYUNDAI/HR,333,353,4191,20.07,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões,3,KIA/K2500,296,350,2020,9.67,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões,4,FIAT/DUCATO,373,333,1923,9.21,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões,5,IVECO/DAILY 3514,175,160,1697,8.13,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões,6,M.BENZ/SPRINTER 313,166,154,1025,4.91,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões,7,CITROEN/JUMPY,156,74,989,4.74,18,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões Pequenos,1,FIAT/FIORINO,1705,1285,10905,80.98,19,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões Pequenos,2,RENAULT/KANGOO,48,95,1217,9.04,19,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões Pequenos,3,PEUGEOT/PARTNER,72,67,1041,7.73,19,texto,2018-10.pdf
+2018-10,comerciais_leves,sub_segmento,Furgões Pequenos,4,CITROEN/BERLINGO,33,21,200,1.49,19,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,17,VW/EXPRESS,241,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,21,PEUGEOT/EXPERT,113,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,24,M.BENZ/SPRINTER,64,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,25,IVECO/DAILY 30S13,62,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,28,IVECO/DAILY,27,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,29,M.BENZ/SPRINTER 415,24,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,30,EFFA/K01,21,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,31,JAC/v260,16,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,32,IVECO/DAILY 5516,8,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,34,TOYOTA/BANDEIRANTE,3,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,35,EFFA/K02,3,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,36,FORD/F150,2,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,37,FORD/F75,2,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,38,M.BENZ/RIBEIRAUTO,2,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,39,M.BENZ/SPRINTER 515,2,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,40,DKW/VEMAGUETE,1,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,41,FARGO/FARGO,1,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,42,GM/C1404,1,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,43,GM/C1414,1,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,44,GM/CHEVROLET,1,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,46,M.BENZ/VITO,1,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,47,VW/KOMBI,1,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,49,HAFEI/RUIYI,1,,,,6,texto,2018-10.pdf
+2018-10,comerciais_leves,ranking,,50,HAFEI/ZHONGYI VAN,1,,,,6,texto,2018-10.pdf

@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2023-11,mes_declarado,2023-11,,,,,ok,2023-11
+2023-11,subtotal_sub_segmento,automoveis/Grandcab,1638,1632,-6,-0.3663,ok,cauda nao publicada: 6 unidades
+2023-11,subtotal_sub_segmento,automoveis/Hatch Médios,96,90,-6,-6.2500,cauda_truncada,cauda nao publicada: 6 unidades
+2023-11,subtotal_sub_segmento,automoveis/Hatch Pequenos,46114,46026,-88,-0.1908,ok,cauda nao publicada: 88 unidades
+2023-11,subtotal_sub_segmento,automoveis/Monocab,0,0,0,,sem_total,
+2023-11,subtotal_sub_segmento,automoveis/Sedans Compactos,11247,11247,0,,ok,cauda nao publicada: 0 unidades
+2023-11,subtotal_sub_segmento,automoveis/Sedans Grandes,487,434,-53,-10.8830,cauda_truncada,cauda nao publicada: 53 unidades
+2023-11,subtotal_sub_segmento,automoveis/Sedans Pequenos,9270,9270,0,,ok,cauda nao publicada: 0 unidades
+2023-11,subtotal_sub_segmento,automoveis/Sedans médios,4592,4590,-2,-0.0436,ok,cauda nao publicada: 2 unidades
+2023-11,subtotal_sub_segmento,automoveis/Sports,287,269,-18,-6.2718,cauda_truncada,cauda nao publicada: 18 unidades
+2023-11,subtotal_sub_segmento,automoveis/Suv's,74541,72307,-2234,-2.9970,cauda_truncada,cauda nao publicada: 2234 unidades
+2023-11,subtotal_sub_segmento,automoveis/Sw Grandes,6,6,0,,ok,cauda nao publicada: 0 unidades
+2023-11,subtotal_sub_segmento,automoveis/Sw Médios,0,0,0,,sem_total,
+2023-11,subtotal_sub_segmento,automoveis/Veículos de Entrada,12368,12368,0,,ok,cauda nao publicada: 0 unidades
+2023-11,subtotal_sub_segmento,comerciais_leves/Furgões,2649,1978,-671,-25.3303,cauda_truncada,cauda nao publicada: 671 unidades
+2023-11,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,2334,2332,-2,-0.0857,ok,cauda nao publicada: 2 unidades
+2023-11,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,21348,20784,-564,-2.6419,cauda_truncada,cauda nao publicada: 564 unidades
+2023-11,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,14615,14615,0,,ok,cauda nao publicada: 0 unidades
+2023-11,ranking_x_sub_segmento,2023-11,194434,194431,-3,-0.0015,ok,2 modelos divergentes de 73 conferidos; desvio de volume 0.0015%
+2023-11,cobertura,automoveis,160693,158573,-2120,-1.3193,medido,cobertura=98.68%
+2023-11,cobertura,comerciais_leves,40956,40942,-14,-0.0342,medido,cobertura=99.97%

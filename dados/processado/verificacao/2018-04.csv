@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2018-04,mes_declarado,2018-04,,,,,ok,2018-04
+2018-04,subtotal_sub_segmento,automoveis/Grandcab,1297,1296,-1,-0.0771,ok,cauda nao publicada: 1 unidades
+2018-04,subtotal_sub_segmento,automoveis/Hatch Médios,1315,1277,-38,-2.8897,cauda_truncada,cauda nao publicada: 38 unidades
+2018-04,subtotal_sub_segmento,automoveis/Hatch Pequenos,50363,50326,-37,-0.0735,ok,cauda nao publicada: 37 unidades
+2018-04,subtotal_sub_segmento,automoveis/Monocab,2762,2762,0,,ok,cauda nao publicada: 0 unidades
+2018-04,subtotal_sub_segmento,automoveis/Sedans Compactos,6826,6826,0,,ok,cauda nao publicada: 0 unidades
+2018-04,subtotal_sub_segmento,automoveis/Sedans Grandes,979,900,-79,-8.0695,cauda_truncada,cauda nao publicada: 79 unidades
+2018-04,subtotal_sub_segmento,automoveis/Sedans Pequenos,28327,28326,-1,-0.0035,ok,cauda nao publicada: 1 unidades
+2018-04,subtotal_sub_segmento,automoveis/Sedans médios,13666,13656,-10,-0.0732,ok,cauda nao publicada: 10 unidades
+2018-04,subtotal_sub_segmento,automoveis/Sports,197,174,-23,-11.6751,cauda_truncada,cauda nao publicada: 23 unidades
+2018-04,subtotal_sub_segmento,automoveis/Suv's,40626,39371,-1255,-3.0892,cauda_truncada,cauda nao publicada: 1255 unidades
+2018-04,subtotal_sub_segmento,automoveis/Sw Grandes,107,107,0,,ok,cauda nao publicada: 0 unidades
+2018-04,subtotal_sub_segmento,automoveis/Sw Médios,648,648,0,,ok,cauda nao publicada: 0 unidades
+2018-04,subtotal_sub_segmento,automoveis/Veículos de Entrada,31572,31569,-3,-0.0095,ok,cauda nao publicada: 3 unidades
+2018-04,subtotal_sub_segmento,comerciais_leves/Furgões,1928,1742,-186,-9.6473,cauda_truncada,cauda nao publicada: 186 unidades
+2018-04,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1501,1500,-1,-0.0666,ok,cauda nao publicada: 1 unidades
+2018-04,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,16617,16611,-6,-0.0361,ok,cauda nao publicada: 6 unidades
+2018-04,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,11246,11246,0,,ok,cauda nao publicada: 0 unidades
+2018-04,ranking_x_sub_segmento,2018-04,195336,195328,-8,-0.0041,ok,3 modelos divergentes de 76 conferidos; desvio de volume 0.0041%
+2018-04,cobertura,automoveis,178699,177238,-1461,-0.8176,medido,cobertura=99.18%
+2018-04,cobertura,comerciais_leves,31296,31292,-4,-0.0128,medido,cobertura=99.99%

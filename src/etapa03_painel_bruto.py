@@ -28,6 +28,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from comum import config, log, marcas, periodo  # noqa: E402
+from comum import recuperacao_marca as mod_recuperacao  # noqa: E402
 
 ETAPA = "etapa03_painel_bruto"
 
@@ -35,7 +36,7 @@ COLUNAS = [
     "mes_ref", "ano", "mes", "data", "segmento_fonte", "sub_segmento_fonte",
     "origem_tabela", "posicao_fonte", "marca_fonte", "modelo_fonte",
     "nome_completo_fonte", "metodo_separacao", "marca_conhecida", "unidades",
-    "metodo_extracao", "arquivo_origem", "pagina_origem",
+    "metodo_extracao", "arquivo_origem", "pagina_origem", "duplicata_publicada",
 ]
 
 
@@ -83,6 +84,22 @@ def montar(meses: list[str], logger) -> tuple[pd.DataFrame, pd.DataFrame]:
     bruto["pagina_origem"] = pd.to_numeric(bruto["pagina"]).astype("int32")
     bruto["posicao_fonte"] = pd.to_numeric(bruto["posicao_fonte"]).astype("int32")
     bruto = bruto.rename(columns={"segmento": "segmento_fonte"})
+
+    # Duplicata que a **fonte** publicou: a mesma linha sai na tabela de
+    # sub-segmento e no ranking do mesmo informe, sob marcas diferentes, por
+    # causa da coluna trocada em 2013-11. A linha entra como publicada e sai
+    # marcada -- nunca apagada daqui, que e' transcricao fiel (sec.4). Quem
+    # suprime e' o painel de analise, e o invariante central e' conferido contra
+    # esta coluna.
+    bruto = mod_recuperacao.marcar_duplicatas_publicadas(bruto)
+    marcadas = bruto[bruto["duplicata_publicada"] != ""]
+    if not marcadas.empty:
+        logger.warning(
+            "%d linhas marcadas como duplicata publicada pela fonte (%d unidades): %s",
+            len(marcadas), int(marcadas["unidades"].sum()),
+            "; ".join(f"{linha.mes_ref} {linha.nome_completo_fonte}"
+                      for linha in marcadas.itertuples()),
+        )
 
     painel = bruto[COLUNAS].copy()
 

@@ -14,7 +14,18 @@ __pycache__/
 # o SHA-256 de cada PDF, de modo que a conferencia nao depende de confiar
 # no repositorio.
 
-# Artefatos derivados: reconstituiveis a partir de bruto/ + regras.csv
-dados/processado/
-saidas/
+# Artefatos derivados: SAO versionados (ESPEC sec.10.2).
+#
+# A regra anterior os ignorava, "porque sao reconstituiveis a partir de bruto/".
+# A justificativa nao estava errada em principio, estava incompleta: ela vale
+# quando a reconstituicao e' barata E a entrada e' duravel. Com os 284 PDFs
+# versionados a entrada ficou duravel, mas reconstituir continua custando 12.916
+# paginas -- e reprocessar isso para conferir um numero nao e' reprodutibilidade,
+# e' atrito. Versionar os derivados fecha o outro lado: uma afirmacao de artigo
+# passa a poder citar um commit.
+#
+# Sao ~16 MB no conjunto. Se passar de 50 MB, reportar e pedir decisao em vez de
+# voltar a ignorar em silencio.
+#
+# `logs/` continua ignorado: e' ruido de execucao, nao produto.
 logs/

@@ -1,0 +1,163 @@
+mes,segmento,origem_tabela,sub_segmento_fonte,posicao_fonte,nome_completo_fonte,unidades_mes,unidades_mes_anterior,unidades_acumulado,participacao_pct,pagina,metodo_extracao,arquivo_origem
+2003-01,automoveis,sub_segmento,Veículos de Entrada,1,VW/GOL,13157,14906,13157,27.85,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Veículos de Entrada,2,FIAT/PALIO,9188,11393,9188,19.45,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Veículos de Entrada,3,GM/CELTA,9088,9785,9088,19.23,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Veículos de Entrada,4,FIAT/UNO,7096,6976,7096,15.02,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Veículos de Entrada,5,RENAULT/CLIO,3473,3272,3473,7.35,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Veículos de Entrada,6,PEUGEOT/206,3134,3258,3134,6.63,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Veículos de Entrada,7,FORD/KA,2111,2305,2111,4.47,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Veículos de Entrada,8,PEUGEOT/106,3,0,3,0.01,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Pequenos,1,FORD/FIESTA,6286,7925,6286,54.58,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Pequenos,2,VW/POLO,2635,3354,2635,22.88,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Pequenos,3,GM/CORSA,2417,2774,2417,20.99,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Pequenos,4,RENAULT/TWINGO,170,149,170,1.48,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Pequenos,5,CITROEN/C3,7,0,7,0.06,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Pequenos,6,GM/KADETT,1,1,1,0.01,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Pequenos,7,MITSUBISHI/SMART,0,1,0,0.00,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Médios,1,GM/ASTRA,1842,2267,1842,26.48,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Médios,2,VW/GOLF,1706,2017,1706,24.53,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Médios,3,FIAT/STILO,1495,1647,1495,21.50,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Médios,4,FORD/FOCUS,951,629,951,13.67,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Médios,5,AUDI/A3,663,828,663,9.53,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Hatch Médios,6,FIAT/BRAVA,298,292,298,4.28,10,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Pequenos,1,GM/CLASSIC,5820,7264,5820,51.51,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Pequenos,2,GM/CORSA SEDAN,2896,3007,2896,25.63,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Pequenos,3,FIAT/SIENA,2562,2553,2562,22.68,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Pequenos,4,RENAULT/CLIO SEDAN,17,5,17,0.15,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Pequenos,5,SEAT/CORDOBA,3,7,3,0.03,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Pequenos,6,FIAT/PREMIO,0,1,0,0.00,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Pequenos,7,VW/VOYAGE,0,3,0,0.00,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Compactos,1,GM/ASTRA SEDAN,1438,1861,1438,71.44,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Compactos,2,VW/POLO SEDAN,572,202,572,28.42,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Compactos,3,VW/LOGUS,2,1,2,0.10,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Compactos,4,FORD/VERSAILLES,1,0,1,0.05,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Compactos,5,GM/MONZA,0,2,0,0.00,11,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,1,HONDA/CIVIC,1619,1719,1619,28.96,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,2,TOYOTA/COROLLA,1545,2451,1545,27.64,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,3,VW/SANTANA,1447,1842,1447,25.89,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,4,FIAT/MAREA,355,380,355,6.35,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,5,FORD/FOCUS SEDAN,318,415,318,5.69,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,6,GM/VECTRA,139,279,139,2.49,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,7,RENAULT/MEGANE,118,131,118,2.11,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,8,M.BENZ/CLASSE C,30,39,30,0.54,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,9,VW/BORA,14,19,14,0.25,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,10,FIAT/TEMPRA,2,1,2,0.04,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,11,M.BENZ/CLK,2,1,2,0.04,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans médios,12,HYUNDAI/ELANTRA,1,4,1,0.02,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,1,CITROEN/C5,83,70,83,27.30,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,2,AUDI/A4,56,72,56,18.42,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,3,PEUGEOT/406,29,61,29,9.54,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,4,GM/OMEGA,25,29,25,8.22,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,5,FORD/MONDEO,23,32,23,7.57,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,6,M.BENZ/C180,15,12,15,4.93,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,7,VW/PASSAT,14,25,14,4.61,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,8,BMW/330,13,15,13,4.28,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,9,RENAULT/LAGUNA,13,10,13,4.28,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,10,BMW/320,12,19,12,3.95,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,11,M.BENZ/CLASSE E,11,25,11,3.62,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sedans Grandes,12,AUDI/A6,10,11,10,3.29,12,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sw Médios,1,FIAT/PALIO WEEKEND,2507,2490,2507,63.94,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sw Médios,2,VW/PARATI,1406,2082,1406,35.86,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sw Médios,3,ALFA ROMEO/156,6,5,6,0.15,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sw Médios,4,AUDI/A4,2,0,2,0.05,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sw Grandes,1,FIAT/MAREA WEEKEND,104,107,104,95.41,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sw Grandes,2,VOLVO/V70,3,3,3,2.75,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sw Grandes,3,AUDI/A4 AVANT,2,6,2,1.83,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sw Grandes,4,GM/CARAVAN,0,1,0,0.00,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sw Grandes,5,VW/PASSAT,0,1,0,0.00,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Monocab,1,GM/MERIVA,1738,1863,1738,57.21,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Monocab,2,FIAT/DOBLO,618,721,618,20.34,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Monocab,3,M.BENZ/CLASSE A,479,645,479,15.77,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Monocab,4,RENAULT/KANGOO,138,141,138,4.54,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Monocab,5,CITROEN/BERLI,54,91,54,1.78,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Monocab,6,MITSUBISHI/SPACE WAGON,6,12,6,0.20,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Monocab,7,HYUNDAI/ATOS,5,12,5,0.16,13,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Grandcab,1,CITROEN/XSARA PICASSO,1071,453,1071,42.81,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Grandcab,2,GM/ZAFIRA,708,1000,708,28.30,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Grandcab,3,RENAULT/SCENIC,661,1174,661,26.42,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Grandcab,4,CITROEN/XSARA,62,89,62,2.48,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sports,1,JAGUAR/S-TYPE,11,8,11,32.35,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sports,2,JAGUAR/X-TYPE,5,1,5,14.71,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sports,3,AUDI/COUPE,4,3,4,11.76,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sports,4,AUDI/S3,4,7,4,11.76,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sports,5,AUDI/ROADSTER,3,1,3,8.82,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sports,6,AUDI/A6,2,1,2,5.88,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sports,7,FERRARI/360,2,0,2,5.88,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sports,8,MASERATI/COUPE,2,0,2,5.88,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Sports,9,BMW/Z8,1,1,1,2.94,14,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,1,GM/BLAZER,268,281,268,24.95,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,2,MITSUBISHI/PAJERO,258,427,258,24.02,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,3,FORD/ECOSPORT,113,28,113,10.52,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,4,LAND ROVER/DEFENDER,99,136,99,9.22,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,5,TROLLER/T4,92,80,92,8.57,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,6,KIA/SPORTAGE,51,79,51,4.75,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,7,SUZUKI/GVITARA,42,77,42,3.91,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,8,NISSAN/PATHFINDER,24,19,24,2.23,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,9,GM/TRACKER,21,46,21,1.96,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,10,TOYOTA/HILUX SW4,20,44,20,1.86,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,11,BMW/X5,18,49,18,1.68,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,12,TOYOTA/RAV4,18,29,18,1.68,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,13,SUZUKI/JIMNY,9,10,9,0.84,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,14,HONDA/CRV,6,4,6,0.56,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,15,HYUNDAI/PORTER,6,2,6,0.56,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,16,VOLVO/XC70,6,2,6,0.56,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,17,CROSS LANDER/CROSS LANDER,4,0,4,0.37,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,18,JEEP/CHEROKEE,3,5,3,0.28,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,19,SSANGYONG/KORANDO,2,0,2,0.19,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,20,SSANGYONG/MUSSO,2,2,2,0.19,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,21,SUBARU/FORESTER,2,1,2,0.19,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,22,CHRYSLER/MRE CGPI,1,0,1,0.09,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,23,GM/SPACE,1,0,1,0.09,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,24,GM/SUBURBAN,1,3,1,0.09,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,25,HYUNDAI/SANTAFE,1,3,1,0.09,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,26,JEEP/LIBERTY,1,1,1,0.09,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,27,LAND ROVER/DISCOVERY,1,5,1,0.09,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,28,M.BENZ/CLASSE M,1,0,1,0.09,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,29,M.BENZ/ML430,1,0,1,0.09,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,30,SSANGYONG/REXTON,1,1,1,0.09,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,31,TOYOTA/MRE CGPI,1,0,1,0.09,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,32,GM/VERANEIO,0,1,0,0.00,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,33,HYUNDAI/TERRACAN,0,1,0,0.00,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,34,LAND ROVER/LAND ROVER,0,1,0,0.00,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,35,M.BENZ/G500,0,1,0,0.00,15,texto,2003-01.pdf
+2003-01,automoveis,sub_segmento,Suv's,36,TROLLER/RF,0,1,0,0.00,15,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Pequenas,1,FIAT/STRADA,2240,1870,2240,53.01,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Pequenas,2,VW/SAVEIRO,1410,1790,1410,33.36,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Pequenas,3,FORD/COURIER,574,454,574,13.58,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Pequenas,4,FIAT/UNO,1,1,1,0.02,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Pequenas,5,FORD/PAMPA,1,1,1,0.02,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Pequenas,6,GM/CORSA,0,7,0,0.00,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Grandes,1,GM/S10,1183,2081,1183,38.58,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Grandes,2,MITSUBISHI/L200,663,762,663,21.62,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Grandes,3,NISSAN/FRONTIER,444,765,444,14.48,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Grandes,4,FORD/RANGER,356,574,356,11.61,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Grandes,5,TOYOTA/HILUX,260,229,260,8.48,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Grandes,6,FORD/F250,158,277,158,5.15,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Grandes,7,FORD/F1000,1,2,1,0.03,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Grandes,8,FORD/F150,1,0,1,0.03,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Grandes,9,GM/D20,0,4,0,0.00,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Pick-up's Grandes,10,GM/SILVERADO,0,2,0,0.00,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões,1,VW/KOMBI,1175,1252,1175,60.60,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões,2,FIAT/DUCATO,238,209,238,12.27,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões,3,KIA/BESTA,157,113,157,8.10,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões,4,HYUNDAI/H100,104,89,104,5.36,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões,5,RENAULT/MASTER,100,145,100,5.16,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões,6,PEUGEOT/BOXER,92,122,92,4.74,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões,7,M.BENZ/SPRINTER,73,75,73,3.76,17,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões Pequenos,1,FIAT/FIORINO,548,423,548,64.17,18,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões Pequenos,2,FIAT/DOBLO,167,133,167,19.56,18,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões Pequenos,3,RENAULT/KANGOO,78,84,78,9.13,18,texto,2003-01.pdf
+2003-01,comerciais_leves,sub_segmento,Furgões Pequenos,4,PEUGEOT/PARTNER,61,61,61,7.14,18,texto,2003-01.pdf
+2003-01,automoveis,ranking,,38,PEUGEOT/307,193,,,,6,texto,2003-01.pdf
+2003-01,automoveis,ranking,,40,FORD/ESCORT,166,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,21,M.BENZ/SPRINTER 313,45,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,22,CITROEN/JUMPER,25,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,23,KIA/K2700,23,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,24,RENAULT/TRAFFIC,18,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,25,HYUNDAI/H1STAREX,11,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,26,IVECO/3510,7,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,27,M.BENZ/SPRINTER 413,4,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,28,VW/VAN,2,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,33,M.BENZ/SPRINTER 312,1,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,34,MITSUBISHI/MMC L300,1,,,,6,texto,2003-01.pdf
+2003-01,comerciais_leves,ranking,,35,TOYOTA/BANDEIRANTE,1,,,,6,texto,2003-01.pdf

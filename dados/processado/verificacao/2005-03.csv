@@ -1,0 +1,6 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2005-03,mes_declarado,2005-03,,,,,ok,2005-03
+2005-03,subtotal_sub_segmento,automoveis/Veículos de Entrada,53323,53323,0,,ok,cauda nao publicada: 0 unidades
+2005-03,ranking_x_sub_segmento,2005-03,53320,53320,0,,ok,0 modelos divergentes de 7 conferidos; desvio de volume 0.0000%
+2005-03,cobertura,automoveis,124402,123201,-1201,-0.9654,medido,cobertura=99.03%
+2005-03,cobertura,comerciais_leves,16216,16215,-1,-0.0062,medido,cobertura=99.99%

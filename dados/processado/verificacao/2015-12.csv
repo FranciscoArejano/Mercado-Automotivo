@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2015-12,mes_declarado,2015-12,,,,,ok,2015-12
+2015-12,subtotal_sub_segmento,automoveis/Grandcab,2491,2491,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Hatch Médios,4550,4550,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Hatch Pequenos,47757,47757,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Monocab,5666,5666,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Sedans Compactos,5556,5556,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Sedans Grandes,1985,1985,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Sedans Pequenos,32485,32485,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Sedans médios,16139,16139,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Sports,132,132,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Suv's,31537,31537,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Sw Grandes,150,150,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Sw Médios,1200,1200,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,automoveis/Veículos de Entrada,40911,40911,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,comerciais_leves/Furgões,2068,2068,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1732,1732,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,12131,12131,0,,ok,cauda nao publicada: 0 unidades
+2015-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,10914,10914,0,,ok,cauda nao publicada: 0 unidades
+2015-12,ranking_x_sub_segmento,2015-12,201602,201599,-3,-0.0015,ok,2 modelos divergentes de 76 conferidos; desvio de volume 0.0015%
+2015-12,cobertura,automoveis,193217,190559,-2658,-1.3757,medido,cobertura=98.62%
+2015-12,cobertura,comerciais_leves,27439,27433,-6,-0.0219,medido,cobertura=99.98%

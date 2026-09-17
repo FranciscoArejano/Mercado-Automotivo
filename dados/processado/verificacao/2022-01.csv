@@ -1,0 +1,20 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2022-01,mes_declarado,2022-01,,,,,ok,2022-01
+2022-01,subtotal_sub_segmento,automoveis/Grandcab,564,564,0,,ok,cauda nao publicada: 0 unidades
+2022-01,subtotal_sub_segmento,automoveis/Hatch Médios,127,127,0,,ok,cauda nao publicada: 0 unidades
+2022-01,subtotal_sub_segmento,automoveis/Hatch Pequenos,17531,17517,-14,-0.0799,ok,cauda nao publicada: 14 unidades
+2022-01,subtotal_sub_segmento,automoveis/Monocab,203,203,0,,ok,cauda nao publicada: 0 unidades
+2022-01,subtotal_sub_segmento,automoveis/Sedans Compactos,6443,6443,0,,ok,cauda nao publicada: 0 unidades
+2022-01,subtotal_sub_segmento,automoveis/Sedans Grandes,502,488,-14,-2.7888,cauda_truncada,cauda nao publicada: 14 unidades
+2022-01,subtotal_sub_segmento,automoveis/Sedans Pequenos,5882,5882,0,,ok,cauda nao publicada: 0 unidades
+2022-01,subtotal_sub_segmento,automoveis/Sedans médios,4170,4170,0,,ok,cauda nao publicada: 0 unidades
+2022-01,subtotal_sub_segmento,automoveis/Sports,130,119,-11,-8.4615,cauda_truncada,cauda nao publicada: 11 unidades
+2022-01,subtotal_sub_segmento,automoveis/Suv's,46832,45928,-904,-1.9303,cauda_truncada,cauda nao publicada: 904 unidades
+2022-01,subtotal_sub_segmento,automoveis/Veículos de Entrada,9776,9776,0,,ok,cauda nao publicada: 0 unidades
+2022-01,subtotal_sub_segmento,comerciais_leves/Furgões,2481,2143,-338,-13.6235,cauda_truncada,cauda nao publicada: 338 unidades
+2022-01,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1390,1390,0,,ok,cauda nao publicada: 0 unidades
+2022-01,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,12615,12609,-6,-0.0476,ok,cauda nao publicada: 6 unidades
+2022-01,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,7902,7902,0,,ok,cauda nao publicada: 0 unidades
+2022-01,ranking_x_sub_segmento,2022-01,111913,111913,0,,ok,0 modelos divergentes de 75 conferidos; desvio de volume 0.0000%
+2022-01,cobertura,automoveis,92212,91221,-991,-1.0747,medido,cobertura=98.93%
+2022-01,cobertura,comerciais_leves,24389,24387,-2,-0.0082,medido,cobertura=99.99%

@@ -1,0 +1,200 @@
+mes,segmento,origem_tabela,sub_segmento_fonte,posicao_fonte,nome_completo_fonte,unidades_mes,unidades_mes_anterior,unidades_acumulado,participacao_pct,pagina,metodo_extracao,arquivo_origem
+2013-06,automoveis,sub_segmento,Veículos de Entrada,1,VW/GOL,22541,19953,121349,30.52,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Veículos de Entrada,2,FIAT/UNO,16324,18352,96502,24.27,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Veículos de Entrada,3,FIAT/PALIO,13615,15015,88334,22.22,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Veículos de Entrada,4,GM/CELTA,5004,4389,37077,9.33,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Veículos de Entrada,5,FORD/KA,1542,1864,17046,4.29,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Veículos de Entrada,6,TOYOTA/ETIOS HB,2799,2905,16452,4.14,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Veículos de Entrada,7,RENAULT/CLIO,2581,2756,14159,3.56,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Veículos de Entrada,8,PEUGEOT/207,625,725,6652,1.67,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Veículos de Entrada,9,GM/CHEVETTE,0,0,1,0.00,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,1,VW/FOX/CROSS FOX,13805,10625,67162,19.57,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,2,HYUNDAI/HB20,8407,9631,61835,18.02,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,3,GM/ONIX,9742,10184,58520,17.05,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,4,FORD/FIESTA,12993,11394,54608,15.91,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,5,RENAULT/SANDERO,8707,7375,42761,12.46,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,6,CITROEN/C3,2481,2513,17056,4.97,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,7,GM/AGILE,3220,2408,15179,4.42,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,8,NISSAN/MARCH,1818,1962,11564,3.37,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,9,PEUGEOT/208,2392,2610,6882,2.01,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,10,GM/SONIC,443,591,4137,1.21,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Pequenos,11,FIAT/500,501,577,3517,1.02,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Médios,1,FIAT/PUNTO,3318,3158,21871,36.88,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Médios,2,FORD/FOCUS,1412,1408,10787,18.19,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Médios,3,GM/CRUZE HB,1607,1658,10774,18.17,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Médios,4,VW/GOLF,637,848,5672,9.57,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Médios,5,PEUGEOT/308,899,791,5423,9.15,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Hatch Médios,6,FIAT/BRAVO,649,742,4771,8.05,11,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Pequenos,1,FIAT/SIENA,9580,10748,55959,24.55,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Pequenos,2,VW/VOYAGE,7410,8347,48948,21.47,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Pequenos,3,GM/CLASSIC,9193,7880,43684,19.16,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Pequenos,4,GM/PRISMA,5779,5537,21083,9.25,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Pequenos,5,FORD/FIESTA SEDAN,3276,3337,14600,6.40,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Pequenos,6,TOYOTA/ETIOS SEDAN,2312,2588,13285,5.83,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Pequenos,7,RENAULT/LOGAN,2275,2199,10592,4.65,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Pequenos,8,NISSAN/VERSA,1424,1650,9917,4.35,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Pequenos,9,HYUNDAI/HB20S,3609,4363,9001,3.95,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Pequenos,10,RENAULT/SYMBOL,22,32,885,0.39,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Compactos,1,GM/COBALT,4823,5174,28984,49.11,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Compactos,2,HONDA/CITY,1954,2567,16290,27.60,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Compactos,3,VW/POLO SEDAN,742,782,5202,8.81,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Compactos,4,GM/SONIC SEDAN,371,363,3299,5.59,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Compactos,5,PEUGEOT/207 SEDAN,345,356,3100,5.25,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Compactos,6,FORD/NEW FIESTA,769,137,2145,3.63,12,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,1,HONDA/CIVIC,5181,5191,26191,24.68,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,2,TOYOTA/COROLLA,4409,4775,24857,23.43,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,3,GM/CRUZE SEDAN,2130,2006,11598,10.93,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,4,RENAULT/FLUENCE,1023,1002,7058,6.65,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,5,VW/JETTA,1128,1475,6582,6.20,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,6,FIAT/LINEA,706,654,3942,3.72,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,7,FORD/FUSION,920,750,3836,3.62,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,8,FORD/FOCUS SEDAN,601,736,3526,3.32,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,9,KIA/CERATO,541,610,3459,3.26,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,10,MITSUBISHI/LANCER,440,445,3211,3.03,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,11,NISSAN/SENTRA,407,588,3211,3.03,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,12,PEUGEOT/408,536,419,2653,2.50,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,13,HYUNDAI/ELANTRA,446,379,2066,1.95,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,14,CITROEN/C4 PALLAS,566,584,1930,1.82,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,15,JAC/J5,104,85,841,0.79,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,16,M.BENZ/CLASSE C,31,43,332,0.31,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,17,AUDI/A5,78,26,283,0.27,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,18,TOYOTA/PRIUS,22,10,186,0.18,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,19,LIFAN/LF 620,13,29,144,0.14,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,20,PEUGEOT/307 SEDAN,0,2,128,0.12,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans médios,21,CHERY/CIELO SEDAN,18,6,68,0.06,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,1,BMW/320,559,416,2453,30.05,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,2,M.BENZ/C180,420,377,2026,24.82,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,3,HYUNDAI/AZERA,107,180,1185,14.52,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,4,VW/PASSAT,84,107,537,6.58,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,5,CITROEN/DS5,117,97,436,5.34,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,6,BMW/328,141,121,413,5.06,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,7,KIA/OPTIMA,47,60,335,4.10,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,8,HYUNDAI/SONATA,32,81,193,2.36,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,9,VOLVO/S60,10,6,191,2.34,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,10,BMW/528,24,27,138,1.69,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,11,M.BENZ/CLASSE E,15,32,135,1.65,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sedans Grandes,12,M.BENZ/C 250,24,40,120,1.47,13,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sw Médios,1,FIAT/PALIO WEEKEND,1576,1897,9544,51.75,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sw Médios,2,VW/SPACE FOX,1036,1204,6796,36.85,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sw Médios,3,VW/SPACECROSS,204,282,2037,11.05,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sw Médios,4,PEUGEOT/207 SW,3,1,65,0.35,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sw Grandes,1,RENAULT/MEGANE GT,4,5,189,42.09,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sw Grandes,2,VW/JETTA VARIANT,2,10,122,27.17,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sw Grandes,3,VOLVO/V60,5,13,119,26.50,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sw Grandes,4,AUDI/A4 AVANT,9,2,13,2.90,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sw Grandes,5,AUDI/RS4,5,0,5,1.11,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sw Grandes,6,DODGE/CARAVAN,0,0,1,0.22,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,1,HONDA/FIT,4233,3276,20667,40.89,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,2,FIAT/IDEA,2091,2018,11835,23.42,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,3,FIAT/DOBLO,953,1217,6439,12.74,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,4,NISSAN/LIVINA,836,661,4323,8.55,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,5,CITROEN/C3 PICASSO,489,599,3482,6.89,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,6,KIA/PICANTO,284,324,2097,4.15,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,7,M.BENZ/CLASSE B,56,149,736,1.46,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,8,SUZUKI/SX4,78,87,555,1.10,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,9,M.BENZ/A 200,25,116,193,0.38,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,10,RENAULT/KANGOO,1,9,164,0.32,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Monocab,11,EFFA/M100,2,5,51,0.10,14,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Grandcab,1,GM/SPIN,3513,3369,18806,91.46,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Grandcab,2,JAC/J6,116,95,832,4.05,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Grandcab,3,CITROEN/C4 PICASSO,119,123,809,3.93,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Grandcab,4,CHRYSLER/TOWN COUNTRY,21,18,116,0.56,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sports,1,GM/CAMARO,67,98,610,38.56,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sports,2,BMW/Z4,96,73,293,18.52,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sports,3,M.BENZ/SLK,36,39,246,15.55,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sports,4,PORSCHE/BOXSTER,21,22,134,8.47,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sports,5,VW/CC,11,16,86,5.44,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sports,6,PEUGEOT/RCZ,12,8,59,3.73,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sports,7,FORD/MUSTANG,8,6,55,3.48,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sports,8,BMW/M5,7,11,50,3.16,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Sports,9,AUDI/TT,9,4,49,3.10,15,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,1,FORD/ECOSPORT,5622,5828,33032,25.76,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,2,RENAULT/DUSTER,4134,3737,19129,14.92,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,3,MITSUBISHI/PAJERO,1438,1574,8453,6.59,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,4,HYUNDAI/TUCSON,1082,1362,8126,6.34,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,5,TOYOTA/HILUX SW4,1135,1094,5927,4.62,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,6,HYUNDAI/IX35,729,878,5599,4.37,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,7,KIA/SPORTAGE,877,735,4718,3.68,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,8,CITROEN/C3 AIRCROSS,670,932,4390,3.42,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,9,MITSUBISHI/ASX,1032,843,4291,3.35,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,10,VW/TIGUAN,377,412,3056,2.38,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,11,LAND ROVER/EVOQUE,567,500,2787,2.17,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,12,HONDA/CRV,1062,813,1969,1.54,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,13,SUZUKI/GVITARA,296,326,1925,1.50,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,14,HYUNDAI/SANTAFE,322,740,1914,1.49,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,15,FORD/EDGE,253,232,1713,1.34,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,16,JEEP/CHEROKEE,327,366,1690,1.32,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,17,MITSUBISHI/Outlander,242,274,1499,1.17,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,18,KIA/SORENTO,390,437,1486,1.16,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,19,FIAT/FREEMONT,63,191,1450,1.13,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,20,GM/TRAILBLAZER,341,272,1400,1.09,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,21,GM/CAPTIVA,216,231,1381,1.08,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,22,LAND ROVER/FREELANDER,245,205,1271,0.99,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,23,BMW/X1,202,265,1231,0.96,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,24,VOLVO/XC60,109,172,1019,0.79,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,25,LAND ROVER/DISCOVERY,155,198,900,0.70,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,26,DODGE/JOURNEY,46,29,844,0.66,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,27,KIA/SOUL,135,79,752,0.59,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,28,PEUGEOT/3008,110,161,726,0.57,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,29,AUDI/Q3,132,93,713,0.56,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,30,TOYOTA/RAV4,501,160,699,0.55,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,31,SUZUKI/JIMNY,148,137,624,0.49,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,32,TROLLER/T4,82,85,607,0.47,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,33,CHERY/TIGGO,114,84,469,0.37,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,34,JEEP/COMPASS,104,110,438,0.34,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,35,HYUNDAI/VERACRUZ,39,73,394,0.31,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,36,BMW/X3,74,150,376,0.29,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,37,PORSCHE/CAYENNE,66,70,344,0.27,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,38,LAND ROVER/RANGE ROVER,51,68,335,0.26,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,39,SSANGYONG/KORANDO,50,59,313,0.24,16,texto,2013-06.pdf
+2013-06,automoveis,sub_segmento,Suv's,40,M.BENZ/CLASSE M,20,40,246,0.19,16,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,1,FIAT/STRADA,11764,11079,62011,50.89,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,2,VW/SAVEIRO,6574,5105,34057,27.95,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,3,GM/MONTANA,3964,4430,22204,18.22,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,4,FORD/COURIER,42,291,3005,2.47,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,5,PEUGEOT/HOGGAR,67,67,389,0.32,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,6,HAFEI/MINI,39,26,180,0.15,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,1,GM/S10,5053,5180,26536,30.75,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,2,TOYOTA/HILUX,3576,3623,19790,22.93,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,3,VW/AMAROK,1827,1933,11646,13.49,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,4,MITSUBISHI/L200,2165,1680,10548,12.22,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,5,FORD/RANGER,1091,1370,9199,10.66,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,6,NISSAN/FRONTIER,1198,1246,7323,8.49,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,7,DODGE/RAM,90,101,377,0.44,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,8,RELY/RELY PICK-UP,107,87,329,0.38,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,9,HAFEI/RUIYI,22,38,279,0.32,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,10,MAHINDRA/HWKCS34,26,24,146,0.17,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Pick-up's Grandes,11,MAHINDRA/HWKCD4,15,17,131,0.15,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões,1,VW/KOMBI,1869,1866,10925,37.39,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões,2,FIAT/DUCATO,806,734,5059,17.32,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões,3,RENAULT/MASTER,1006,660,4776,16.35,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões,4,HYUNDAI/HR,576,633,3253,11.13,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões,5,KIA/K2500,318,325,1985,6.79,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões,6,IVECO/DAILY 3514,387,336,1747,5.98,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões,7,M.BENZ/SPRINTER 311,218,216,1472,5.04,18,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões Pequenos,1,FIAT/FIORINO,1280,1037,6822,57.14,19,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões Pequenos,2,RENAULT/KANGOO,259,332,2271,19.02,19,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões Pequenos,3,FIAT/DOBLO,620,413,2010,16.84,19,texto,2013-06.pdf
+2013-06,comerciais_leves,sub_segmento,Furgões Pequenos,4,HAFEI/TOWNER,133,184,836,7.00,19,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,19,PEUGEOT/BOXER,253,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,20,CITROEN/JUMPER,243,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,22,FORD/TRANSIT,194,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,24,CHANA/SC,125,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,28,SHINERAY/P TRUCKS,52,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,29,M.BENZ/SPRINTER,49,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,31,PEUGEOT/PARTNER,40,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,32,SHINERAY/DTRUCK,39,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,34,JINBEI/TOPIC,33,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,35,HAFEI/MINIVAN,32,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,38,JINBEI/M35,20,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,39,JAC/T140,20,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,41,IVECO/DAILY,10,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,42,SHINERAY/TRUCK,10,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,43,HAFEI/START PICK UP,9,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,44,RENAULT/RENAULT,8,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,45,M.BENZ/SPRINTER 313,7,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,46,SHINERAY/P VAN,6,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,47,SHINERAY/CARGOV,5,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,48,FOTON/AUMARK 1039,4,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,49,AGRALE/AGRALE MARRUA,3,,,,6,texto,2013-06.pdf
+2013-06,comerciais_leves,ranking,,50,FORD/F150,2,,,,6,texto,2013-06.pdf

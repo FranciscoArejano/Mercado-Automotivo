@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2010-03,mes_declarado,2010-03,,,,,ok,2010-03
+2010-03,subtotal_sub_segmento,automoveis/Grandcab,2297,2297,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Hatch Médios,16185,16185,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Hatch Pequenos,48221,48221,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Monocab,15235,15235,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Sedans Compactos,7726,7726,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Sedans Grandes,1502,1502,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Sedans Pequenos,50404,50404,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Sedans médios,19010,19010,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Sports,176,176,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Suv's,20904,20904,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Sw Grandes,390,390,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Sw Médios,7075,7075,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,automoveis/Veículos de Entrada,101297,101297,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,comerciais_leves/Furgões,7103,7103,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,2162,2162,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,11702,11702,0,,ok,cauda nao publicada: 0 unidades
+2010-03,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,19839,19839,0,,ok,cauda nao publicada: 0 unidades
+2010-03,ranking_x_sub_segmento,2010-03,312565,312562,-3,-0.0010,ok,2 modelos divergentes de 76 conferidos; desvio de volume 0.0010%
+2010-03,cobertura,automoveis,295447,292889,-2558,-0.8658,medido,cobertura=99.13%
+2010-03,cobertura,comerciais_leves,41912,41903,-9,-0.0215,medido,cobertura=99.98%

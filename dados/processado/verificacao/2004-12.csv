@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2004-12,mes_declarado,2004-12,,,,,ok,2004-12
+2004-12,subtotal_sub_segmento,automoveis/Grandcab,4206,4206,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Hatch Médios,7989,7989,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Hatch Pequenos,18987,18987,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Monocab,6794,6794,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Sedans Compactos,3554,3554,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Sedans Grandes,507,507,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Sedans Pequenos,23673,23673,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Sedans médios,8004,8004,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Sports,40,40,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Suv's,7675,7675,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Sw Grandes,883,883,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Sw Médios,4431,4431,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,automoveis/Veículos de Entrada,63181,63181,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,comerciais_leves/Furgões,2423,2423,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1066,1066,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,6092,6092,0,,ok,cauda nao publicada: 0 unidades
+2004-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,8050,8050,0,,ok,cauda nao publicada: 0 unidades
+2004-12,ranking_x_sub_segmento,2004-12,166484,166484,0,,ok,0 modelos divergentes de 74 conferidos; desvio de volume 0.0000%
+2004-12,cobertura,automoveis,150188,149924,-264,-0.1758,medido,cobertura=99.82%
+2004-12,cobertura,comerciais_leves,17927,17926,-1,-0.0056,medido,cobertura=99.99%

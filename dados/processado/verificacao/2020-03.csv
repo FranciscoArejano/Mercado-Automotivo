@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2020-03,mes_declarado,2020-03,,,,,ok,2020-03
+2020-03,subtotal_sub_segmento,automoveis/Grandcab,1291,1290,-1,-0.0775,ok,cauda nao publicada: 1 unidades
+2020-03,subtotal_sub_segmento,automoveis/Hatch Médios,241,219,-22,-9.1286,cauda_truncada,cauda nao publicada: 22 unidades
+2020-03,subtotal_sub_segmento,automoveis/Hatch Pequenos,43223,43168,-55,-0.1272,ok,cauda nao publicada: 55 unidades
+2020-03,subtotal_sub_segmento,automoveis/Monocab,1696,1696,0,,ok,cauda nao publicada: 0 unidades
+2020-03,subtotal_sub_segmento,automoveis/Sedans Compactos,11210,11207,-3,-0.0268,ok,cauda nao publicada: 3 unidades
+2020-03,subtotal_sub_segmento,automoveis/Sedans Grandes,495,453,-42,-8.4848,cauda_truncada,cauda nao publicada: 42 unidades
+2020-03,subtotal_sub_segmento,automoveis/Sedans Pequenos,12505,12505,0,,ok,cauda nao publicada: 0 unidades
+2020-03,subtotal_sub_segmento,automoveis/Sedans médios,6663,6663,0,,ok,cauda nao publicada: 0 unidades
+2020-03,subtotal_sub_segmento,automoveis/Sports,209,197,-12,-5.7416,cauda_truncada,cauda nao publicada: 12 unidades
+2020-03,subtotal_sub_segmento,automoveis/Suv's,37595,36524,-1071,-2.8488,cauda_truncada,cauda nao publicada: 1071 unidades
+2020-03,subtotal_sub_segmento,automoveis/Sw Grandes,21,21,0,,ok,cauda nao publicada: 0 unidades
+2020-03,subtotal_sub_segmento,automoveis/Sw Médios,13,13,0,,ok,cauda nao publicada: 0 unidades
+2020-03,subtotal_sub_segmento,automoveis/Veículos de Entrada,16066,16063,-3,-0.0187,ok,cauda nao publicada: 3 unidades
+2020-03,subtotal_sub_segmento,comerciais_leves/Furgões,2481,2004,-477,-19.2261,cauda_truncada,cauda nao publicada: 477 unidades
+2020-03,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1404,1403,-1,-0.0712,ok,cauda nao publicada: 1 unidades
+2020-03,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,12415,12412,-3,-0.0242,ok,cauda nao publicada: 3 unidades
+2020-03,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,8257,8257,0,,ok,cauda nao publicada: 0 unidades
+2020-03,ranking_x_sub_segmento,2020-03,148002,147998,-4,-0.0027,ok,3 modelos divergentes de 72 conferidos; desvio de volume 0.0027%
+2020-03,cobertura,automoveis,131249,130019,-1230,-0.9371,medido,cobertura=99.06%
+2020-03,cobertura,comerciais_leves,24561,24556,-5,-0.0204,medido,cobertura=99.98%

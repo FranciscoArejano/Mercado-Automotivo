@@ -1,0 +1,202 @@
+mes,segmento,origem_tabela,sub_segmento_fonte,posicao_fonte,nome_completo_fonte,unidades_mes,unidades_mes_anterior,unidades_acumulado,participacao_pct,pagina,metodo_extracao,arquivo_origem
+2011-06,automoveis,sub_segmento,Veículos de Entrada,1,VW/GOL,27427,26980,145242,31.34,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Veículos de Entrada,2,FIAT/UNO,25430,24261,133384,28.78,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Veículos de Entrada,3,GM/CELTA,13414,13381,72069,15.55,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Veículos de Entrada,4,FIAT/PALIO,8468,7771,47496,10.25,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Veículos de Entrada,5,FORD/KA,5458,5471,32439,7.00,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Veículos de Entrada,6,PEUGEOT/207,3170,3888,18039,3.89,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Veículos de Entrada,7,RENAULT/CLIO,1931,1957,14719,3.18,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Veículos de Entrada,8,PEUGEOT/206,1,0,6,0.00,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Veículos de Entrada,9,GM/CHEVETTE,1,0,1,0.00,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,1,VW/FOX/CROSS FOX,5084,9233,59729,26.87,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,2,FORD/FIESTA,6901,7252,43056,19.37,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,3,GM/AGILE,4913,6424,35980,16.18,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,4,RENAULT/SANDERO,5998,5447,32381,14.57,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,5,CITROEN/C3,3995,3764,19796,8.90,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,6,GM/CORSA,2415,2103,16208,7.29,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,7,JAC/J3,1765,1927,5332,2.40,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,8,VW/POLO,806,779,4559,2.05,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,9,CHERY/FACE,533,321,2347,1.06,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,10,CHERY/QQ,1054,721,1802,0.81,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Pequenos,11,LIFAN/LF 320,177,224,1118,0.50,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Médios,1,HYUNDAI/I30,3075,3511,19636,27.08,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Médios,2,FIAT/PUNTO,3037,3185,15972,22.03,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Médios,3,FORD/FOCUS,1933,1910,12337,17.01,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Médios,4,GM/ASTRA,2058,1970,11327,15.62,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Médios,5,VW/GOLF,658,1284,7626,10.52,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Hatch Médios,6,CITROEN/C4,810,1024,5611,7.74,11,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Pequenos,1,GM/CLASSIC,9968,11085,53829,24.55,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Pequenos,2,FIAT/SIENA,8748,9401,50194,22.89,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Pequenos,3,VW/VOYAGE,8095,7608,40179,18.32,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Pequenos,4,GM/PRISMA,4489,4614,26223,11.96,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Pequenos,5,RENAULT/LOGAN,3272,3714,19361,8.83,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Pequenos,6,FORD/FIESTA SEDAN,3121,3589,18021,8.22,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Pequenos,7,GM/CORSA SEDAN,1572,1493,8178,3.73,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Pequenos,8,RENAULT/SYMBOL,549,553,3278,1.49,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Pequenos,9,GM/CORVETTE,1,0,3,0.00,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Pequenos,10,M.BENZ/CLASSE CLC,0,0,2,0.00,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Compactos,1,HONDA/CITY,1590,2428,14948,34.38,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Compactos,2,PEUGEOT/207 SEDAN,1536,2010,9533,21.93,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Compactos,3,FORD/NEW FIESTA,1419,1247,6295,14.48,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Compactos,4,VW/POLO SEDAN,1005,1084,6262,14.40,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Compactos,5,JAC/J3 TURIN,1205,1112,3224,7.42,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Compactos,6,NISSAN/TIIDA SEDAN,585,694,3217,7.40,12,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,1,TOYOTA/COROLLA,4129,4581,24596,25.97,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,2,KIA/CERATO,2835,3064,13392,14.14,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,3,HONDA/CIVIC,1643,2162,12366,13.06,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,4,GM/VECTRA,1417,1675,8664,9.15,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,5,FIAT/LINEA,1321,1370,6263,6.61,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,6,FORD/FUSION,840,797,4831,5.10,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,7,NISSAN/SENTRA,789,728,4751,5.02,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,8,VW/JETTA,1622,1742,4417,4.66,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,9,CITROEN/C4 PALLAS,440,552,3838,4.05,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,10,FORD/FOCUS SEDAN,790,449,3378,3.57,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,11,RENAULT/FLUENCE,727,446,2531,2.67,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,12,M.BENZ/CLASSE C,618,297,2257,2.38,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,13,PEUGEOT/408,704,607,1996,2.11,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,14,LIFAN/LF 620,82,55,406,0.43,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,15,CHERY/CIELO SEDAN,58,99,355,0.37,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,16,VW/BORA,4,15,288,0.30,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,17,PEUGEOT/307 SEDAN,4,11,214,0.23,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,18,AUDI/A5,29,32,117,0.12,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,19,BMW/135i,4,1,17,0.02,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,20,GM/CRUZE SEDAN,17,0,17,0.02,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans médios,21,M.BENZ/S 400,1,2,14,0.01,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,1,HYUNDAI/AZERA,1285,1149,5258,38.57,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,2,HYUNDAI/SONATA,600,630,3297,24.18,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,3,GM/MALIBU,182,417,1231,9.03,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,4,BMW/320,202,227,948,6.95,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,5,AUDI/A4,133,128,659,4.83,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,6,KIA/CADENZA,100,86,462,3.39,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,7,VW/PASSAT,93,42,380,2.79,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,8,GM/OMEGA,39,40,333,2.44,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,9,BMW/325,67,70,318,2.33,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,10,CITROEN/C5,40,40,271,1.99,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,11,M.BENZ/CLASSE E,51,63,252,1.85,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sedans Grandes,12,M.BENZ/C 250,95,61,225,1.65,13,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Médios,1,FIAT/PALIO WEEKEND,2125,1995,11680,43.80,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Médios,2,VW/SPACE FOX,1510,1870,10608,39.78,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Médios,3,VW/PARATI,429,459,2321,8.70,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Médios,4,HYUNDAI/I30 SW,337,401,2057,7.71,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Grandes,1,RENAULT/MEGANE GT,592,552,3378,77.41,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Grandes,2,VW/JETTA VARIANT,158,112,864,19.80,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Grandes,3,VW/PASSAT VAR,8,12,112,2.57,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Grandes,4,PEUGEOT/307SW,0,0,5,0.11,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Grandes,5,VW/QUANTUM,0,0,2,0.05,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Grandes,6,AUDI/A4 AVANT,0,0,1,0.02,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Grandes,7,AUDI/S6,0,0,1,0.02,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sw Grandes,8,GM/CARAVAN,1,0,1,0.02,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,1,HONDA/FIT,1623,2369,16452,27.07,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,2,FIAT/IDEA,2524,2585,12315,20.26,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,3,GM/MERIVA,1771,1897,10626,17.49,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,4,NISSAN/LIVINA,1469,1427,8107,13.34,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,5,FIAT/DOBLO,1169,1400,6677,10.99,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,6,KIA/PICANTO,200,478,4196,6.90,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,7,SUZUKI/SX4,113,139,709,1.17,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,8,CITROEN/C3 PICASSO,449,143,658,1.08,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,9,M.BENZ/CLASSE B,128,127,536,0.88,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,10,EFFA/M100,95,62,486,0.80,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Monocab,11,RENAULT/KANGOO,0,0,10,0.02,14,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Grandcab,1,GM/ZAFIRA,767,499,3311,34.96,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Grandcab,2,CITROEN/C4 PICASSO,454,458,2928,30.92,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Grandcab,3,CITROEN/XSARA PICASSO,337,457,2892,30.54,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Grandcab,4,KIA/CARENS,97,76,340,3.59,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sports,1,GM/CAMARO,130,218,911,53.75,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sports,2,BMW/Z4,35,20,187,11.03,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sports,3,FORD/MUSTANG,32,38,168,9.91,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sports,4,M.BENZ/SLK,16,29,138,8.14,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sports,5,PORSCHE/BOXSTER,15,18,88,5.19,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sports,6,PORSCHE/911,12,17,55,3.24,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sports,7,AUDI/TT,9,7,52,3.07,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sports,8,NISSAN/370Z,10,11,50,2.95,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Sports,9,PORSCHE/CAYMAN,10,6,46,2.71,15,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,1,FORD/ECOSPORT,4102,3930,21330,17.21,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,2,KIA/SOUL,1419,1806,9440,7.62,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,3,CITROEN/C3 AIRCROSS,1508,1518,9178,7.41,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,4,MITSUBISHI/PAJERO,1408,1402,8032,6.48,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,5,HYUNDAI/TUCSON,1395,1467,7983,6.44,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,6,HONDA/CRV,1237,1172,7120,5.74,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,7,HYUNDAI/IX35,1278,1522,6739,5.44,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,8,GM/CAPTIVA,923,1029,6615,5.34,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,9,MITSUBISHI/ASX,990,1043,4901,3.95,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,10,KIA/SORENTO,806,677,3772,3.04,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,11,KIA/SPORTAGE,911,959,3487,2.81,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,12,HYUNDAI/SANTAFE,601,506,3333,2.69,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,13,TOYOTA/HILUX SW4,308,615,3282,2.65,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,14,VW/TIGUAN,381,432,2815,2.27,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,15,BMW/X1,374,543,2215,1.79,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,16,TOYOTA/RAV4,315,419,1939,1.56,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,17,SUZUKI/GVITARA,371,334,1909,1.54,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,18,MITSUBISHI/Outlander,316,461,1797,1.45,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,19,CHERY/TIGGO,314,283,1793,1.45,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,20,SSANGYONG/KYRONM,269,308,1560,1.26,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,21,VOLVO/XC60,453,257,1556,1.26,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,22,LAND ROVER/DISCOVERY,282,285,1398,1.13,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,23,HYUNDAI/VERACRUZ,202,255,1353,1.09,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,24,PEUGEOT/3008,268,313,1344,1.08,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,25,LAND ROVER/FREELANDER,324,169,1269,1.02,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,26,DODGE/JOURNEY,171,169,1155,0.93,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,27,JEEP/CHEROKEE,95,140,827,0.67,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,28,FORD/EDGE,102,158,734,0.59,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,29,SSANGYONG/ACTYON,116,131,728,0.59,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,30,TROLLER/T4,91,106,650,0.52,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,31,LAND ROVER/RANGE ROVER,98,111,584,0.47,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,32,SUBARU/FORESTER,80,73,536,0.43,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,33,SUZUKI/JIMNY,87,87,512,0.41,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,34,MINI/COOPER SCYMAN,68,66,404,0.33,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,35,PORSCHE/CAYENNE,38,77,364,0.29,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,36,KIA/MOHAVE,61,70,354,0.29,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,37,GM/BLAZER,16,103,306,0.25,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,38,M.BENZ/CLASSE M,67,58,268,0.22,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,39,AUDI/Q5,38,35,185,0.15,16,texto,2011-06.pdf
+2011-06,automoveis,sub_segmento,Suv's,40,BMW/X6,33,25,170,0.14,16,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,1,FIAT/STRADA,10540,10225,58667,47.94,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,2,VW/SAVEIRO,6259,7122,35341,28.88,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,3,GM/MONTANA,4357,3937,21432,17.51,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,4,FORD/COURIER,437,733,3527,2.88,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,5,PEUGEOT/HOGGAR,503,541,2819,2.30,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,6,HAFEI/MINI,104,100,597,0.49,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,1,GM/S10,4044,3483,19876,29.72,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,2,TOYOTA/HILUX,1458,2796,14493,21.67,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,3,MITSUBISHI/L200,1857,1939,10384,15.53,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,4,FORD/RANGER,1134,1164,6620,9.90,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,5,NISSAN/FRONTIER,1190,954,5546,8.29,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,6,VW/AMAROK,764,991,4667,6.98,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,7,HAFEI/RUIYI,785,731,3807,5.69,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,8,FORD/F250,262,279,1382,2.07,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,9,MAHINDRA/MAHINDRA,12,16,56,0.08,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,10,FORD/F150,6,3,24,0.04,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Pick-up's Grandes,11,TOYOTA/TUNDRA,4,2,15,0.02,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões,1,VW/KOMBI,2230,2396,12132,33.77,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões,2,FIAT/DUCATO,1004,1120,6570,18.29,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões,3,KIA/K2500,886,859,4979,13.86,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões,4,HYUNDAI/HR,859,1002,4788,13.33,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões,5,RENAULT/MASTER,508,533,3293,9.17,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões,6,IVECO/DAILY 3514,433,488,2332,6.49,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões,7,PEUGEOT/BOXER,290,323,1828,5.09,18,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões Pequenos,1,FIAT/FIORINO,1516,1884,9715,64.84,19,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões Pequenos,2,HAFEI/TOWNER,445,442,2078,13.87,19,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões Pequenos,3,FIAT/DOBLO,281,347,1757,11.73,19,texto,2011-06.pdf
+2011-06,comerciais_leves,sub_segmento,Furgões Pequenos,4,RENAULT/KANGOO,256,270,1433,9.56,19,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,21,CHANA/SC,300,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,22,FORD/TRANSIT,292,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,27,CITROEN/JUMPER,233,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,28,M.BENZ/SPRINTER 313,170,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,29,HAFEI/MINIVAN,143,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,30,M.BENZ/SPRINTER 311,122,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,31,PEUGEOT/PARTNER,119,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,33,JINBEI/TOPIC,79,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,34,HAFEI/ZHONGYI VAN,72,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,35,M.BENZ/SPRINTER 413,70,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,36,M.BENZ/SPRINTER,54,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,37,KIA/K2700,28,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,38,JINBEI/M35,15,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,40,IVECO/DAILY,8,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,42,JINBEI/VAN CARGO,6,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,44,JINBEI/SY6483N1,3,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,45,AGRALE/AGRALE MARRUA,2,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,46,TOYOTA/RIBEIRAUTO,2,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,47,JINBEI/SY6543US3,2,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,48,CADILLAC/ESCALADE,1,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,49,DODGE/RAM,1,,,,6,texto,2011-06.pdf
+2011-06,comerciais_leves,ranking,,50,FORD/PAMPA,1,,,,6,texto,2011-06.pdf

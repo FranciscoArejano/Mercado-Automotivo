@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2005-12,mes_declarado,2005-12,,,,,ok,2005-12
+2005-12,subtotal_sub_segmento,automoveis/Grandcab,2619,2595,-24,-0.9164,cauda_truncada,cauda nao publicada: 24 unidades
+2005-12,subtotal_sub_segmento,automoveis/Hatch Médios,6633,6544,-89,-1.3418,cauda_truncada,cauda nao publicada: 89 unidades
+2005-12,subtotal_sub_segmento,automoveis/Hatch Pequenos,26654,26654,0,,ok,cauda nao publicada: 0 unidades
+2005-12,subtotal_sub_segmento,automoveis/Monocab,9555,9555,0,,ok,cauda nao publicada: 0 unidades
+2005-12,subtotal_sub_segmento,automoveis/Sedans Compactos,1972,1972,0,,ok,cauda nao publicada: 0 unidades
+2005-12,subtotal_sub_segmento,automoveis/Sedans Grandes,831,689,-142,-17.0878,cauda_truncada,cauda nao publicada: 142 unidades
+2005-12,subtotal_sub_segmento,automoveis/Sedans Pequenos,18922,18922,0,,ok,cauda nao publicada: 0 unidades
+2005-12,subtotal_sub_segmento,automoveis/Sedans médios,12240,12240,0,,ok,cauda nao publicada: 0 unidades
+2005-12,subtotal_sub_segmento,automoveis/Sports,62,47,-15,-24.1935,cauda_truncada,cauda nao publicada: 15 unidades
+2005-12,subtotal_sub_segmento,automoveis/Suv's,8913,8899,-14,-0.1571,ok,cauda nao publicada: 14 unidades
+2005-12,subtotal_sub_segmento,automoveis/Sw Grandes,909,909,0,,ok,cauda nao publicada: 0 unidades
+2005-12,subtotal_sub_segmento,automoveis/Sw Médios,5268,5264,-4,-0.0759,ok,cauda nao publicada: 4 unidades
+2005-12,subtotal_sub_segmento,automoveis/Veículos de Entrada,63236,63236,0,,ok,cauda nao publicada: 0 unidades
+2005-12,subtotal_sub_segmento,comerciais_leves/Furgões,2689,2369,-320,-11.9003,cauda_truncada,cauda nao publicada: 320 unidades
+2005-12,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1458,1457,-1,-0.0686,ok,cauda nao publicada: 1 unidades
+2005-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,6514,6514,0,,ok,cauda nao publicada: 0 unidades
+2005-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,6868,6868,0,,ok,cauda nao publicada: 0 unidades
+2005-12,ranking_x_sub_segmento,2005-12,172874,172840,-34,-0.0197,ok,1 modelos divergentes de 76 conferidos; desvio de volume 0.0197%
+2005-12,cobertura,automoveis,157913,157526,-387,-0.2451,medido,cobertura=99.75%
+2005-12,cobertura,comerciais_leves,17572,17537,-35,-0.1992,medido,cobertura=99.80%

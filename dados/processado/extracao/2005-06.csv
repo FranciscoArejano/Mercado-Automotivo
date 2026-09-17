@@ -1,0 +1,182 @@
+mes,segmento,origem_tabela,sub_segmento_fonte,posicao_fonte,nome_completo_fonte,unidades_mes,unidades_mes_anterior,unidades_acumulado,participacao_pct,pagina,metodo_extracao,arquivo_origem
+2005-06,automoveis,sub_segmento,Veículos de Entrada,1,VW/GOL,16680,14964,87205,30.09,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Veículos de Entrada,2,FIAT/PALIO,11758,12278,61968,21.38,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Veículos de Entrada,3,FIAT/UNO,11587,10122,53761,18.55,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Veículos de Entrada,4,GM/CELTA,9271,10215,52951,18.27,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Veículos de Entrada,5,PEUGEOT/206,3316,2508,15642,5.40,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Veículos de Entrada,6,RENAULT/CLIO,1440,1512,9864,3.40,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Veículos de Entrada,7,FORD/KA,1484,1454,8465,2.92,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Veículos de Entrada,8,GM/CHEVETTE,0,0,3,0.00,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Veículos de Entrada,9,VW/FUSCA,1,1,3,0.00,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Pequenos,1,VW/FOX/CROSS FOX,6588,5430,37147,41.76,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Pequenos,2,FORD/FIESTA,4920,5243,29408,33.06,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Pequenos,3,GM/CORSA,2983,2984,13482,15.16,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Pequenos,4,VW/POLO,618,1088,4993,5.61,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Pequenos,5,CITROEN/C3,670,645,3882,4.36,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Pequenos,6,MINI/COOPER,4,4,20,0.02,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Pequenos,7,GM/KADETT,1,1,9,0.01,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Pequenos,8,SMART/ROADSTER,2,0,2,0.00,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Pequenos,9,RENAULT/TWINGO,0,0,1,0.00,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Pequenos,10,SMART/FORTWO,1,0,1,0.00,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Médios,1,GM/ASTRA,1820,1987,11136,33.95,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Médios,2,VW/GOLF,747,932,5516,16.82,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Médios,3,FORD/FOCUS,806,704,5205,15.87,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Médios,4,FIAT/STILO,837,954,5118,15.60,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Médios,5,PEUGEOT/307,671,663,3562,10.86,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Hatch Médios,6,AUDI/A3,406,413,2262,6.90,10,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Pequenos,1,GM/CLASSIC,6405,6625,32214,34.69,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Pequenos,2,FIAT/SIENA,3739,3685,21156,22.78,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Pequenos,3,FORD/FIESTA SEDAN,3398,3253,17914,19.29,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Pequenos,4,GM/CORSA SEDAN,2710,2889,14377,15.48,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Pequenos,5,RENAULT/CLIO SEDAN,1249,1065,7168,7.72,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Pequenos,6,VW/VOYAGE,1,1,14,0.02,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Pequenos,7,FIAT/PREMIO,1,0,4,0.00,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Pequenos,8,SEAT/CORDOBA,0,1,3,0.00,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Pequenos,9,VW/APOLLO,1,0,1,0.00,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Compactos,1,GM/ASTRA SEDAN,1240,1100,7803,54.78,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Compactos,2,VW/POLO SEDAN,1159,1458,6425,45.11,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Compactos,3,GM/MONZA,3,1,7,0.05,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Compactos,4,FORD/VERSAILLES,1,1,5,0.04,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Compactos,5,VW/LOGUS,0,1,2,0.01,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Compactos,6,FORD/VERONA,0,0,1,0.01,11,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,1,TOYOTA/COROLLA,2785,2773,15824,45.58,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,2,HONDA/CIVIC,1689,1800,10723,30.89,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,3,FORD/FOCUS SEDAN,429,453,2891,8.33,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,4,VW/SANTANA,428,474,2650,7.63,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,5,GM/VECTRA,577,634,2100,6.05,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,6,NISSAN/SENTRA,55,47,176,0.51,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,7,RENAULT/MEGANE,5,13,96,0.28,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,8,FIAT/MAREA,7,11,78,0.22,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,9,VW/BORA,0,5,75,0.22,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,10,M.BENZ/CLASSE CLS,5,4,61,0.18,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,11,M.BENZ/CLASSE C,8,6,35,0.10,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,12,M.BENZ/CLK,3,0,5,0.01,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,13,FORD/DEL REY,2,0,3,0.01,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,14,FIAT/TEMPRA,0,0,1,0.00,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans médios,15,VW/JETTA,0,0,1,0.00,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,1,CITROEN/C5,87,86,458,16.62,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,2,HONDA/ACCORD,105,108,412,14.95,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,3,GM/OMEGA,75,71,398,14.44,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,4,M.BENZ/C180,81,61,359,13.03,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,5,AUDI/A4,67,45,302,10.96,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,6,VW/PASSAT,5,4,267,9.69,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,7,M.BENZ/CLASSE E,13,31,122,4.43,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,8,CITROEN/C8,39,18,102,3.70,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,9,FORD/MONDEO,24,19,95,3.45,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,10,BMW/325,24,41,89,3.23,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,11,BMW/320,2,3,79,2.87,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sedans Grandes,12,BMW/545,8,14,73,2.65,12,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Médios,1,FIAT/PALIO WEEKEND,2359,1989,13509,58.45,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Médios,2,VW/PARATI,1041,934,6142,26.58,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Médios,3,PEUGEOT/206SW,1061,934,3456,14.95,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Médios,4,GM/KADETT,2,0,4,0.02,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Grandes,1,TOYOTA/FIELDER,609,647,3326,88.41,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Grandes,2,PEUGEOT/307SW,54,56,269,7.15,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Grandes,3,VW/PASSAT,1,1,76,2.02,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Grandes,4,AUDI/A4 AVANT,11,7,39,1.04,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Grandes,5,FIAT/MAREA WEEKEND,3,6,35,0.93,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Grandes,6,VOLVO/V70,1,2,6,0.16,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Grandes,7,VW/QUANTUM,1,0,6,0.16,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Grandes,8,PEUGEOT/407SW,3,0,3,0.08,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Grandes,9,GM/CARAVAN,1,0,1,0.03,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sw Grandes,10,GM/OMEGA,0,0,1,0.03,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Monocab,1,HONDA/FIT,3079,2739,17090,52.04,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Monocab,2,GM/MERIVA,1696,2079,9306,28.34,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Monocab,3,FIAT/DOBLO,842,705,4321,13.16,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Monocab,4,M.BENZ/CLASSE A,424,310,2081,6.34,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Monocab,5,RENAULT/KANGOO,0,6,41,0.12,13,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Grandcab,1,CITROEN/XSARA PICASSO,1115,1002,5848,36.16,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Grandcab,2,GM/ZAFIRA,832,835,5390,33.33,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Grandcab,3,RENAULT/SCENIC,867,705,4811,29.75,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Grandcab,4,CHRYSLER/GCARAVAN,33,18,123,0.76,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sports,1,M.BENZ/SLK,12,17,99,48.53,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sports,2,PORSCHE/BOXSTER,9,3,21,10.29,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sports,3,NISSAN/350Z,4,1,20,9.80,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sports,4,JAGUAR/X-TYPE,0,2,14,6.86,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sports,5,PORSCHE/PORSCHE,0,2,13,6.37,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sports,6,BMW/M5,10,0,10,4.90,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sports,7,BMW/Z430,1,1,10,4.90,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sports,8,MASERATI/MASERATI,4,1,10,4.90,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Sports,9,FORD/MUSTANG,1,1,7,3.43,14,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,1,FORD/ECOSPORT,3627,3181,20740,65.66,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,2,MITSUBISHI/PAJERO,867,831,4599,14.56,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,3,GM/BLAZER,339,247,1813,5.74,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,4,NISSAN/XTERRA,88,77,721,2.28,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,5,TROLLER/T4,98,71,510,1.61,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,6,LAND ROVER/FREELANDER,84,78,406,1.29,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,7,TOYOTA/LAND CRUISE,70,46,339,1.07,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,8,MITSUBISHI/AIRTREK,58,38,275,0.87,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,9,TOYOTA/RAV4,69,42,275,0.87,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,10,LAND ROVER/DEFENDER,46,34,240,0.76,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,11,HYUNDAI/TERRACAN,34,37,209,0.66,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,12,HONDA/CRV,37,83,179,0.57,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,13,JEEP/CHEROKEE,40,31,167,0.53,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,14,KIA/SORENTO,31,35,145,0.46,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,15,BMW/X5,24,31,143,0.45,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,16,BMW/X3,19,16,117,0.37,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,17,HYUNDAI/TUCSON,49,41,99,0.31,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,18,LAND ROVER/DISCOVERY,22,29,86,0.27,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,19,KIA/SPORTAGE,17,18,68,0.22,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,20,PORSCHE/CAYENNE,6,16,68,0.22,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,21,VOLVO/XC90,9,11,59,0.19,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,22,VW/TOUAREG,19,7,59,0.19,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,23,NISSAN/PATHFINDER,5,7,36,0.11,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,24,LAND ROVER/RANGE ROVER,2,5,30,0.09,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,25,SSANGYONG/MUSSO,8,4,27,0.09,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,26,FORD/EXPLORER,6,2,26,0.08,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,27,SSANGYONG/REXTON,5,4,24,0.08,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,28,NISSAN/INFINITI,3,4,19,0.06,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,29,NISSAN/XTRAIL,9,7,16,0.05,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,30,HYUNDAI/SANTAFE,7,2,15,0.05,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,31,VOLVO/XC70,2,2,15,0.05,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,32,TOYOTA/TRIP,3,1,9,0.03,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,33,AGRALE/AGRALE MARRUA,0,0,8,0.03,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,34,CROSS LANDER/CROSS LANDER,0,1,8,0.03,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,35,RENAULT/KANGOO,3,0,7,0.02,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,36,SUBARU/FORESTER,0,0,7,0.02,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,37,HUMMER/HUMMER,1,2,7,0.02,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,38,NISSAN/MURANO,0,0,5,0.02,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,39,TOYOTA/BANDEIRANTE,3,1,5,0.02,15,texto,2005-06.pdf
+2005-06,automoveis,sub_segmento,Suv's,40,GM/SUBURBAN,1,2,4,0.01,15,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,1,FIAT/STRADA,3594,3479,20253,51.92,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,2,GM/MONTANA,1555,1442,7632,19.57,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,3,VW/SAVEIRO,1361,1308,7530,19.31,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,4,FORD/COURIER,787,512,3457,8.86,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,5,FIAT/UNO,38,14,130,0.33,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Pequenas,6,FORD/PAMPA,0,0,3,0.01,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,1,MITSUBISHI/L200,1077,1071,6388,23.73,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,2,TOYOTA/HILUX,1715,1895,6341,23.56,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,3,GM/S10,1307,1419,5714,21.23,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,4,FORD/RANGER,671,741,4029,14.97,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,5,NISSAN/FRONTIER,461,442,3062,11.38,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,6,FORD/F250,174,201,1064,3.95,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,7,DODGE/RAM,37,43,285,1.06,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,8,GM/SILVERADO,0,1,13,0.05,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,9,GM/D20,0,2,10,0.04,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,10,GM/C20,1,1,8,0.03,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Pick-up's Grandes,11,FORD/F1000,0,1,3,0.01,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões,1,VW/KOMBI,1236,934,6341,50.71,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões,2,FIAT/DUCATO,349,433,1930,15.44,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões,3,RENAULT/MASTER,200,190,1023,8.18,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões,4,M.BENZ/SPRINTER 313,193,162,1017,8.13,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões,5,KIA/BESTA,183,182,1016,8.13,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões,6,PEUGEOT/BOXER,85,88,739,5.91,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões,7,CITROEN/JUMPER,27,46,438,3.50,17,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões Pequenos,1,FIAT/FIORINO,1100,891,6231,81.23,18,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões Pequenos,2,FIAT/DOBLO,262,147,1012,13.19,18,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões Pequenos,3,RENAULT/KANGOO,48,65,407,5.31,18,texto,2005-06.pdf
+2005-06,comerciais_leves,sub_segmento,Furgões Pequenos,4,PEUGEOT/PARTNER,20,0,21,0.27,18,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,19,IVECO/3510,51,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,20,KIA/K2700,50,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,25,HYUNDAI/HR,23,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,27,HYUNDAI/H100,18,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,28,HYUNDAI/H1STAREX,4,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,29,IVECO/DAILY,4,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,30,GM/CHEVY,2,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,31,TOYOTA/BANDEIRANTE,2,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,32,FORD/F150,1,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,34,GM/TRAFIC,1,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,35,GMC/SAFARI,1,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,36,KIA/K3500,1,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,37,M.BENZ/SPRINTER,1,,,,6,texto,2005-06.pdf
+2005-06,comerciais_leves,ranking,,38,M.BENZ/SPRINTER 311,1,,,,6,texto,2005-06.pdf

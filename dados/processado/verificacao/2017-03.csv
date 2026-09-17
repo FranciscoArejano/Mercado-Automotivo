@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2017-03,mes_declarado,2017-03,,,,,ok,2017-03
+2017-03,subtotal_sub_segmento,automoveis/Grandcab,2095,2091,-4,-0.1909,ok,cauda nao publicada: 4 unidades
+2017-03,subtotal_sub_segmento,automoveis/Hatch Médios,1878,1799,-79,-4.2066,cauda_truncada,cauda nao publicada: 79 unidades
+2017-03,subtotal_sub_segmento,automoveis/Hatch Pequenos,41501,41455,-46,-0.1108,ok,cauda nao publicada: 46 unidades
+2017-03,subtotal_sub_segmento,automoveis/Monocab,3023,3023,0,,ok,cauda nao publicada: 0 unidades
+2017-03,subtotal_sub_segmento,automoveis/Sedans Compactos,3698,3698,0,,ok,cauda nao publicada: 0 unidades
+2017-03,subtotal_sub_segmento,automoveis/Sedans Grandes,641,584,-57,-8.8924,cauda_truncada,cauda nao publicada: 57 unidades
+2017-03,subtotal_sub_segmento,automoveis/Sedans Pequenos,25014,25013,-1,-0.0040,ok,cauda nao publicada: 1 unidades
+2017-03,subtotal_sub_segmento,automoveis/Sedans médios,13659,13631,-28,-0.2050,ok,cauda nao publicada: 28 unidades
+2017-03,subtotal_sub_segmento,automoveis/Sports,106,80,-26,-24.5283,cauda_truncada,cauda nao publicada: 26 unidades
+2017-03,subtotal_sub_segmento,automoveis/Suv's,34132,33535,-597,-1.7491,cauda_truncada,cauda nao publicada: 597 unidades
+2017-03,subtotal_sub_segmento,automoveis/Sw Grandes,105,105,0,,ok,cauda nao publicada: 0 unidades
+2017-03,subtotal_sub_segmento,automoveis/Sw Médios,314,314,0,,ok,cauda nao publicada: 0 unidades
+2017-03,subtotal_sub_segmento,automoveis/Veículos de Entrada,31888,31888,0,,ok,cauda nao publicada: 0 unidades
+2017-03,subtotal_sub_segmento,comerciais_leves/Furgões,1630,1516,-114,-6.9939,cauda_truncada,cauda nao publicada: 114 unidades
+2017-03,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1140,1138,-2,-0.1754,ok,cauda nao publicada: 2 unidades
+2017-03,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,13335,13328,-7,-0.0525,ok,cauda nao publicada: 7 unidades
+2017-03,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,9655,9655,0,,ok,cauda nao publicada: 0 unidades
+2017-03,ranking_x_sub_segmento,2017-03,173395,173394,-1,-0.0006,ok,1 modelos divergentes de 76 conferidos; desvio de volume 0.0006%
+2017-03,cobertura,automoveis,158084,157216,-868,-0.5491,medido,cobertura=99.45%
+2017-03,cobertura,comerciais_leves,25766,25763,-3,-0.0116,medido,cobertura=99.99%

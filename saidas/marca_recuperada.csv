@@ -1,0 +1,9 @@
+mes_ref,modelo,segmento,marca_publicada,unidades,mes_fonte,nome_no_informe_seguinte,pagina_fonte,origem_tabela_fonte,valor_no_informe_seguinte,marca_recuperada,situacao
+2013-11,KOMBI,comerciais_leves,FORD,2383,2013-12,VW/KOMBI,18,sub_segmento,2383.0,VW,"recuperado: valor identico, marca corrigida"
+2013-11,ELANTRA,automoveis,,460,2013-12,HYUNDAI/ELANTRA,13,sub_segmento,460.0,HYUNDAI,"recuperado: valor identico, marca corrigida"
+2013-11,T4,automoveis,TROLER,120,2013-12,TROLLER/T4,16,sub_segmento,120.0,TROLLER,"recuperado: valor identico, marca corrigida"
+2013-11,SPRINTER,comerciais_leves,DODGE,66,2013-12,M.BENZ/SPRINTER,6,ranking,,,"informe seguinte lista o modelo so' no ranking mensal, que nao traz coluna de mes anterior"
+2013-11,CAMARO,automoveis,CAMARO,59,2013-12,GM/CAMARO,15,sub_segmento,59.0,GM,"recuperado: valor identico, marca corrigida"
+2013-11,SC,comerciais_leves,LEXUS,42,2013-12,CHANA/SC,6,ranking,,,"informe seguinte lista o modelo so' no ranking mensal, que nao traz coluna de mes anterior"
+2013-11,TOPIC,comerciais_leves,ASIA,34,2013-12,JINBEI/TOPIC,6,ranking,,,"informe seguinte lista o modelo so' no ranking mensal, que nao traz coluna de mes anterior"
+2013-11,MINIVAN,comerciais_leves,DFM,20,2013-12,HAFEI/MINIVAN,6,ranking,,,"informe seguinte lista o modelo so' no ranking mensal, que nao traz coluna de mes anterior"

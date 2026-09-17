@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2016-12,mes_declarado,2016-12,,,,,ok,2016-12
+2016-12,subtotal_sub_segmento,automoveis/Grandcab,2304,2304,0,,ok,cauda nao publicada: 0 unidades
+2016-12,subtotal_sub_segmento,automoveis/Hatch Médios,1791,1656,-135,-7.5377,cauda_truncada,cauda nao publicada: 135 unidades
+2016-12,subtotal_sub_segmento,automoveis/Hatch Pequenos,47130,46880,-250,-0.5304,cauda_truncada,cauda nao publicada: 250 unidades
+2016-12,subtotal_sub_segmento,automoveis/Monocab,4279,4279,0,,ok,cauda nao publicada: 0 unidades
+2016-12,subtotal_sub_segmento,automoveis/Sedans Compactos,3420,3420,0,,ok,cauda nao publicada: 0 unidades
+2016-12,subtotal_sub_segmento,automoveis/Sedans Grandes,1059,958,-101,-9.5373,cauda_truncada,cauda nao publicada: 101 unidades
+2016-12,subtotal_sub_segmento,automoveis/Sedans Pequenos,27833,27833,0,,ok,cauda nao publicada: 0 unidades
+2016-12,subtotal_sub_segmento,automoveis/Sedans médios,14432,14378,-54,-0.3742,ok,cauda nao publicada: 54 unidades
+2016-12,subtotal_sub_segmento,automoveis/Sports,220,171,-49,-22.2727,cauda_truncada,cauda nao publicada: 49 unidades
+2016-12,subtotal_sub_segmento,automoveis/Suv's,30955,30093,-862,-2.7847,cauda_truncada,cauda nao publicada: 862 unidades
+2016-12,subtotal_sub_segmento,automoveis/Sw Grandes,88,88,0,,ok,cauda nao publicada: 0 unidades
+2016-12,subtotal_sub_segmento,automoveis/Sw Médios,1072,1072,0,,ok,cauda nao publicada: 0 unidades
+2016-12,subtotal_sub_segmento,automoveis/Veículos de Entrada,35366,35365,-1,-0.0028,ok,cauda nao publicada: 1 unidades
+2016-12,subtotal_sub_segmento,comerciais_leves/Furgões,1545,1402,-143,-9.2557,cauda_truncada,cauda nao publicada: 143 unidades
+2016-12,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1162,1160,-2,-0.1721,ok,cauda nao publicada: 2 unidades
+2016-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,17068,17061,-7,-0.0410,ok,cauda nao publicada: 7 unidades
+2016-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,9242,9242,0,,ok,cauda nao publicada: 0 unidades
+2016-12,ranking_x_sub_segmento,2016-12,187634,187631,-3,-0.0016,ok,2 modelos divergentes de 75 conferidos; desvio de volume 0.0016%
+2016-12,cobertura,automoveis,169990,168497,-1493,-0.8783,medido,cobertura=99.12%
+2016-12,cobertura,comerciais_leves,29023,29015,-8,-0.0276,medido,cobertura=99.97%

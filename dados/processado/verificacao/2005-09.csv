@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2005-09,mes_declarado,2005-09,,,,,ok,2005-09
+2005-09,subtotal_sub_segmento,automoveis/Grandcab,2699,2699,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Hatch Médios,5551,5551,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Hatch Pequenos,19620,19620,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Monocab,7039,7039,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Sedans Compactos,1827,1827,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Sedans Grandes,471,471,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Sedans Pequenos,16607,16607,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Sedans médios,6036,6036,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Sports,41,41,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Suv's,5689,5689,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Sw Grandes,870,870,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Sw Médios,4387,4387,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,automoveis/Veículos de Entrada,49823,49823,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,comerciais_leves/Furgões,2128,2128,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1284,1284,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,5728,5728,0,,ok,cauda nao publicada: 0 unidades
+2005-09,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,6533,6533,0,,ok,cauda nao publicada: 0 unidades
+2005-09,ranking_x_sub_segmento,2005-09,135028,135028,0,,ok,0 modelos divergentes de 74 conferidos; desvio de volume 0.0000%
+2005-09,cobertura,automoveis,120942,120660,-282,-0.2332,medido,cobertura=99.77%
+2005-09,cobertura,comerciais_leves,15883,15883,0,,medido,cobertura=100.00%

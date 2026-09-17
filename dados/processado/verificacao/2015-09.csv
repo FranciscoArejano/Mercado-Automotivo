@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2015-09,mes_declarado,2015-09,,,,,ok,2015-09
+2015-09,subtotal_sub_segmento,automoveis/Grandcab,1840,1840,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Hatch Médios,4552,4552,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Hatch Pequenos,39406,39406,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Monocab,5397,5397,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Sedans Compactos,4135,4135,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Sedans Grandes,1572,1572,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Sedans Pequenos,27311,27311,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Sedans médios,14513,14513,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Sports,126,126,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Suv's,28710,28710,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Sw Grandes,165,165,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Sw Médios,1110,1110,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,automoveis/Veículos de Entrada,35652,35652,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,comerciais_leves/Furgões,2035,2035,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1445,1445,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,9482,9482,0,,ok,cauda nao publicada: 0 unidades
+2015-09,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,13013,13013,0,,ok,cauda nao publicada: 0 unidades
+2015-09,ranking_x_sub_segmento,2015-09,174922,174916,-6,-0.0034,ok,4 modelos divergentes de 75 conferidos; desvio de volume 0.0034%
+2015-09,cobertura,automoveis,166361,164489,-1872,-1.1253,medido,cobertura=98.87%
+2015-09,cobertura,comerciais_leves,26249,26237,-12,-0.0457,medido,cobertura=99.95%

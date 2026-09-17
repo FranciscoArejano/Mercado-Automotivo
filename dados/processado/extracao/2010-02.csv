@@ -1,0 +1,195 @@
+mes,segmento,origem_tabela,sub_segmento_fonte,posicao_fonte,nome_completo_fonte,unidades_mes,unidades_mes_anterior,unidades_acumulado,participacao_pct,pagina,metodo_extracao,arquivo_origem
+2010-02,automoveis,sub_segmento,Veículos de Entrada,1,VW/GOL,17985,15889,33874,29.08,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Veículos de Entrada,2,FIAT/PALIO,10669,10599,21268,18.26,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Veículos de Entrada,3,FIAT/UNO,10681,9922,20603,17.69,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Veículos de Entrada,4,GM/CELTA,8920,10017,18937,16.26,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Veículos de Entrada,5,FORD/KA,7372,6404,13776,11.83,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Veículos de Entrada,6,PEUGEOT/207,2606,2277,4883,4.19,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Veículos de Entrada,7,RENAULT/CLIO,1854,1253,3107,2.67,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Veículos de Entrada,8,PEUGEOT/206,14,17,31,0.03,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Pequenos,1,VW/FOX/CROSS FOX,8229,7477,15706,27.45,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Pequenos,2,FORD/FIESTA,6026,5610,11636,20.34,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Pequenos,3,GM/AGILE,5204,5664,10868,19.00,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Pequenos,4,RENAULT/SANDERO,4339,3725,8064,14.10,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Pequenos,5,GM/CORSA,2285,2069,4354,7.61,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Pequenos,6,CITROEN/C3,2300,1786,4086,7.14,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Pequenos,7,VW/POLO,1002,910,1912,3.34,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Pequenos,8,MINI/COOPER,88,130,218,0.38,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Pequenos,9,SMART/FORTWO,78,136,214,0.37,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Pequenos,10,FIAT/500,76,74,150,0.26,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Médios,1,HYUNDAI/I30,2508,2438,4946,24.01,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Médios,2,FIAT/PUNTO,2510,2052,4562,22.15,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Médios,3,GM/ASTRA,2179,2019,4198,20.38,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Médios,4,VW/GOLF,1450,1079,2529,12.28,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Médios,5,FORD/FOCUS,1104,1322,2426,11.78,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Hatch Médios,6,CITROEN/C4,964,972,1936,9.40,11,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Pequenos,1,FIAT/SIENA,9145,8969,18114,29.67,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Pequenos,2,GM/CLASSIC,5030,5482,10512,17.22,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Pequenos,3,VW/VOYAGE,5462,4117,9579,15.69,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Pequenos,4,GM/PRISMA,4550,4557,9107,14.92,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Pequenos,5,FORD/FIESTA SEDAN,3176,2834,6010,9.84,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Pequenos,6,RENAULT/LOGAN,1759,1573,3332,5.46,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Pequenos,7,GM/CORSA SEDAN,1641,1673,3314,5.43,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Pequenos,8,RENAULT/SYMBOL,434,494,928,1.52,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Pequenos,9,M.BENZ/CLASSE CLC,87,65,152,0.25,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Pequenos,10,VW/APOLLO,1,1,2,0.00,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Compactos,1,HONDA/CITY,1647,2592,4239,41.27,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Compactos,2,PEUGEOT/207 SEDAN,1620,1563,3183,30.99,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Compactos,3,VW/POLO SEDAN,995,1123,2118,20.62,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Compactos,4,GM/ASTRA SEDAN,344,387,731,7.12,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Compactos,5,GM/MONZA,0,1,1,0.01,12,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,1,TOYOTA/COROLLA,3728,3242,6970,29.63,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,2,HONDA/CIVIC,2258,2097,4355,18.51,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,3,GM/VECTRA,1398,1413,2811,11.95,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,4,FIAT/LINEA,869,826,1695,7.21,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,5,KIA/CERATO,728,677,1405,5.97,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,6,CITROEN/C4 PALLAS,683,674,1357,5.77,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,7,FORD/FUSION,424,759,1183,5.03,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,8,FORD/FOCUS SEDAN,542,621,1163,4.94,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,9,NISSAN/SENTRA,330,300,630,2.68,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,10,VW/JETTA,181,346,527,2.24,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,11,PEUGEOT/307 SEDAN,258,218,476,2.02,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,12,RENAULT/MEGANE,199,232,431,1.83,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,13,M.BENZ/CLASSE C,146,141,287,1.22,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,14,VW/BORA,69,131,200,0.85,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,15,BMW/135i,3,11,14,0.06,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,16,AUDI/A5,4,3,7,0.03,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,17,M.BENZ/CLS,2,3,5,0.02,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,18,VW/SANTANA,2,1,3,0.01,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,19,GM/IMPALA,1,1,2,0.01,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,20,M.BENZ/S 400,2,0,2,0.01,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans médios,21,CHRYSLER/PACIFIC,0,1,1,0.00,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,1,HYUNDAI/AZERA,397,306,703,37.84,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,2,BMW/320,191,142,333,17.92,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,3,CITROEN/C5,89,95,184,9.90,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,4,AUDI/A4,68,71,139,7.48,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,5,VW/PASSAT,66,57,123,6.62,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,6,TOYOTA/CAMRY,64,58,122,6.57,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,7,KIA/MAGENTIS,44,36,80,4.31,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,8,M.BENZ/CLASSE E,34,31,65,3.50,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,9,PORSCHE/PANAMERA,20,15,35,1.88,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,10,BMW/325,19,11,30,1.61,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,11,CHRYSLER/300C,14,9,23,1.24,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sedans Grandes,12,BMW/550,8,13,21,1.13,13,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Médios,1,FIAT/PALIO WEEKEND,2464,2235,4699,47.16,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Médios,2,VW/SPACE FOX,1732,1968,3700,37.13,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Médios,3,VW/PARATI,372,470,842,8.45,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Médios,4,PEUGEOT/207 SW,337,387,724,7.27,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Grandes,1,RENAULT/MEGANE GT,119,145,264,74.79,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Grandes,2,VW/PASSAT VAR,19,32,51,14.45,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Grandes,3,VW/JETTA VARIANT,8,11,19,5.38,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Grandes,4,PEUGEOT/307SW,2,7,9,2.55,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Grandes,5,PEUGEOT/407SW,5,1,6,1.70,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Grandes,6,TOYOTA/FIELDER,1,1,2,0.57,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Grandes,7,VOLVO/V70,0,1,1,0.28,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sw Grandes,8,VW/QUANTUM,1,0,1,0.28,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,1,HONDA/FIT,3616,2484,6100,35.25,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,2,GM/MERIVA,2129,1933,4062,23.47,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,3,FIAT/IDEA,1754,1484,3238,18.71,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,4,NISSAN/LIVINA,992,645,1637,9.46,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,5,FIAT/DOBLO,623,396,1019,5.89,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,6,KIA/PICANTO,440,417,857,4.95,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,7,M.BENZ/CLASSE B,70,56,126,0.73,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,8,EFFA/M100,53,48,101,0.58,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,9,SUZUKI/SX4,61,38,99,0.57,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,10,RENAULT/KANGOO,27,39,66,0.38,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Monocab,11,M.BENZ/CLASSE A,0,1,1,0.01,14,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Grandcab,1,GM/ZAFIRA,641,651,1292,44.52,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Grandcab,2,CITROEN/XSARA PICASSO,455,436,891,30.70,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Grandcab,3,CITROEN/C4 PICASSO,242,311,553,19.06,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Grandcab,4,RENAULT/SCENIC,64,102,166,5.72,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sports,1,BMW/Z4,50,12,62,27.43,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sports,2,M.BENZ/SLK,22,26,48,21.24,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sports,3,FORD/MUSTANG,15,19,34,15.04,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sports,4,GM/CAMARO,13,8,21,9.29,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sports,5,PORSCHE/BOXSTER,8,9,17,7.52,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sports,6,AUDI/S3,5,11,16,7.08,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sports,7,PORSCHE/911,9,4,13,5.75,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sports,8,ASA/CAUYPE,2,6,8,3.54,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Sports,9,AUDI/R8,3,4,7,3.10,15,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,1,FORD/ECOSPORT,3061,2723,5784,22.23,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,2,HYUNDAI/TUCSON,2462,2429,4891,18.80,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,3,MITSUBISHI/PAJERO,1459,1006,2465,9.47,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,4,GM/CAPTIVA,1007,1025,2032,7.81,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,5,KIA/SPORTAGE,908,811,1719,6.61,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,6,HONDA/CRV,617,1019,1636,6.29,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,7,TOYOTA/HILUX SW4,411,458,869,3.34,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,8,HYUNDAI/SANTAFE,393,395,788,3.03,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,9,HYUNDAI/VERACRUZ,323,342,665,2.56,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,10,KIA/SOUL,308,311,619,2.38,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,11,GM/BLAZER,105,327,432,1.66,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,12,SUZUKI/GVITARA,182,159,341,1.31,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,13,VOLVO/XC60,155,186,341,1.31,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,14,MITSUBISHI/Outlander,181,142,323,1.24,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,15,LAND ROVER/FREELANDER,245,70,315,1.21,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,16,TOYOTA/RAV4,147,123,270,1.04,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,17,CHERY/TIGGO,128,113,241,0.93,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,18,TROLLER/T4,94,113,207,0.80,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,19,DODGE/JOURNEY,84,116,200,0.77,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,20,LAND ROVER/DISCOVERY,83,113,196,0.75,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,21,SSANGYONG/ACTYON,81,95,176,0.68,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,22,SUBARU/FORESTER,90,72,162,0.62,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,23,FORD/EDGE,79,59,138,0.53,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,24,NISSAN/PATHFINDER,42,79,121,0.46,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,25,KIA/MOHAVE,62,56,118,0.45,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,26,LAND ROVER/RANGE ROVER,58,51,109,0.42,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,27,MAHINDRA/SCORPIO,39,66,105,0.40,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,28,NISSAN/XTRAIL,12,91,103,0.40,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,29,SSANGYONG/KYRONM,42,50,92,0.35,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,30,VW/TIGUAN,30,58,88,0.34,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,31,PORSCHE/CAYENNE,42,25,67,0.26,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,32,SUZUKI/JIMNY,27,37,64,0.25,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,33,SUBARU/TRIBECA,26,37,63,0.24,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,34,M.BENZ/CLASSE M,36,24,60,0.23,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,35,BMW/X6,31,24,55,0.21,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,36,AUDI/Q5,16,36,52,0.20,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,37,JEEP/CHEROKEE,24,20,44,0.17,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,38,BMW/X5,16,17,33,0.13,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,39,SSANGYONG/REXTON,10,11,21,0.08,16,texto,2010-02.pdf
+2010-02,automoveis,sub_segmento,Suv's,40,BMW/X1,1,16,17,0.07,16,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Pequenas,1,FIAT/STRADA,7561,6503,14064,50.24,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Pequenas,2,VW/SAVEIRO,3451,3380,6831,24.40,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Pequenas,3,GM/MONTANA,3083,2888,5971,21.33,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Pequenas,4,FORD/COURIER,477,480,957,3.42,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Pequenas,5,HAFEI/MINI,60,73,133,0.48,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Pequenas,6,PEUGEOT/207 PICAPE,39,0,39,0.14,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,1,GM/S10,3060,3339,6399,37.86,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,2,TOYOTA/HILUX,1897,2299,4196,24.83,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,3,MITSUBISHI/L200,1323,1309,2632,15.57,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,4,FORD/RANGER,878,1352,2230,13.19,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,5,NISSAN/FRONTIER,393,578,971,5.75,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,6,FORD/F250,119,169,288,1.70,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,7,HAFEI/RUIYI,46,44,90,0.53,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,8,DODGE/RAM,28,51,79,0.47,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,9,AGRALE/AGRALE MARRUA,1,7,8,0.05,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,10,FORD/F150,3,4,7,0.04,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Pick-up's Grandes,11,TOYOTA/TACOMA,0,1,1,0.01,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões,1,VW/KOMBI,1964,1886,3850,40.76,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões,2,HYUNDAI/HR,1074,915,1989,21.06,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões,3,FIAT/DUCATO,598,679,1277,13.52,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões,4,KIA/K2500,360,334,694,7.35,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões,5,RENAULT/MASTER,285,385,670,7.09,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões,6,PEUGEOT/BOXER,276,223,499,5.28,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões,7,IVECO/DAILY 3514,182,285,467,4.94,18,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões Pequenos,1,FIAT/FIORINO,1067,849,1916,68.06,19,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões Pequenos,2,RENAULT/KANGOO,251,208,459,16.31,19,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões Pequenos,3,FIAT/DOBLO,114,117,231,8.21,19,texto,2010-02.pdf
+2010-02,comerciais_leves,sub_segmento,Furgões Pequenos,4,CHANA/SC,101,108,209,7.42,19,texto,2010-02.pdf
+2010-02,automoveis,ranking,,46,PEUGEOT/307,783,,,,6,texto,2010-02.pdf
+2010-02,automoveis,ranking,,48,GM/VECTRA HATCH,706,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,18,M.BENZ/SPRINTER 313,217,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,20,CITROEN/JUMPER,129,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,23,FORD/TRANSIT,105,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,25,M.BENZ/SPRINTER 311,97,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,26,PEUGEOT/PARTNER,74,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,27,HAFEI/MINIVAN,74,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,29,M.BENZ/SPRINTER 413,52,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,31,KIA/K2700,40,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,33,M.BENZ/SPRINTER,32,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,35,HAFEI/ZHONGYI VAN,17,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,36,JINBEI/M35,9,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,37,IVECO/DAILY,5,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,38,FIAT/TECFORM,4,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,41,FORD/F100,1,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,42,GM/EXPRESS,1,,,,6,texto,2010-02.pdf
+2010-02,comerciais_leves,ranking,,43,TOYOTA/HIACE,1,,,,6,texto,2010-02.pdf

@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2017-12,mes_declarado,2017-12,,,,,ok,2017-12
+2017-12,subtotal_sub_segmento,automoveis/Grandcab,2463,2462,-1,-0.0406,ok,cauda nao publicada: 1 unidades
+2017-12,subtotal_sub_segmento,automoveis/Hatch Médios,1419,1300,-119,-8.3862,cauda_truncada,cauda nao publicada: 119 unidades
+2017-12,subtotal_sub_segmento,automoveis/Hatch Pequenos,48896,48488,-408,-0.8344,cauda_truncada,cauda nao publicada: 408 unidades
+2017-12,subtotal_sub_segmento,automoveis/Monocab,3302,3302,0,,ok,cauda nao publicada: 0 unidades
+2017-12,subtotal_sub_segmento,automoveis/Sedans Compactos,3403,3403,0,,ok,cauda nao publicada: 0 unidades
+2017-12,subtotal_sub_segmento,automoveis/Sedans Grandes,906,827,-79,-8.7196,cauda_truncada,cauda nao publicada: 79 unidades
+2017-12,subtotal_sub_segmento,automoveis/Sedans Pequenos,23411,23410,-1,-0.0043,ok,cauda nao publicada: 1 unidades
+2017-12,subtotal_sub_segmento,automoveis/Sedans médios,13699,13675,-24,-0.1752,ok,cauda nao publicada: 24 unidades
+2017-12,subtotal_sub_segmento,automoveis/Sports,130,86,-44,-33.8462,cauda_truncada,cauda nao publicada: 44 unidades
+2017-12,subtotal_sub_segmento,automoveis/Suv's,44152,43139,-1013,-2.2943,cauda_truncada,cauda nao publicada: 1013 unidades
+2017-12,subtotal_sub_segmento,automoveis/Sw Grandes,97,97,0,,ok,cauda nao publicada: 0 unidades
+2017-12,subtotal_sub_segmento,automoveis/Sw Médios,729,728,-1,-0.1372,ok,cauda nao publicada: 1 unidades
+2017-12,subtotal_sub_segmento,automoveis/Veículos de Entrada,29358,29357,-1,-0.0034,ok,cauda nao publicada: 1 unidades
+2017-12,subtotal_sub_segmento,comerciais_leves/Furgões,1989,1625,-364,-18.3007,cauda_truncada,cauda nao publicada: 364 unidades
+2017-12,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1190,1149,-41,-3.4454,cauda_truncada,cauda nao publicada: 41 unidades
+2017-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,17715,17701,-14,-0.0790,ok,cauda nao publicada: 14 unidades
+2017-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,11965,11965,0,,ok,cauda nao publicada: 0 unidades
+2017-12,ranking_x_sub_segmento,2017-12,190198,189964,-234,-0.1230,ok,3 modelos divergentes de 76 conferidos; desvio de volume 0.1230%
+2017-12,cobertura,automoveis,171988,170274,-1714,-0.9966,medido,cobertura=99.00%
+2017-12,cobertura,comerciais_leves,32864,32853,-11,-0.0335,medido,cobertura=99.97%

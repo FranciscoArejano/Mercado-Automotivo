@@ -74,14 +74,18 @@ force.
 
 O pipeline entrega seis coisas. Nenhuma etapa sobrescreve a anterior.
 
-| Produto | Descrição |
-|---|---|
-| `bruto/` | Arquivos originais baixados, **intocados**, com hash SHA-256 e data de download em `bruto/manifesto.csv`. Nunca reescrever. |
-| `painel_bruto.parquet` | Transcrição fiel da fonte. Uma linha por (ano, mês, marca, modelo, unidades). **Nenhuma fusão, nenhuma limpeza semântica.** |
-| `candidatos.xlsx` | Relatório para adjudicação humana (§5). |
-| `regras.csv` | Arquivo de decisões caso a caso. **O código lê; o humano escreve.** Se não existir, criar com cabeçalho e zero linhas, e seguir sem fundir nada. |
-| `painel.parquet` | Produto final harmonizado, com dicionário de dados em `painel_dicionario.md`. |
-| `validacao.md` | Relatório de validação (§6), gerado a cada execução. |
+| Produto | Descrição | versionado? |
+|---|---|---|
+| `bruto/` | Arquivos originais baixados, **intocados**, com hash SHA-256 e data de download em `bruto/manifesto.csv`. Nunca reescrever. | sim |
+| `painel_bruto.parquet` | Transcrição fiel da fonte. Uma linha por (ano, mês, marca, modelo, unidades). **Nenhuma fusão, nenhuma limpeza semântica.** | sim |
+| `candidatos.xlsx` | Relatório para adjudicação humana (§5). | sim |
+| `regras.csv` | Arquivo de decisões caso a caso. **O código lê; o humano escreve.** Se não existir, criar com cabeçalho e zero linhas, e seguir sem fundir nada. | sim |
+| `painel.parquet` | Produto final harmonizado, com dicionário de dados em `painel_dicionario.md`. | sim |
+| `validacao.md` | Relatório de validação (§6), gerado a cada execução. | sim |
+
+Todos versionados — ver §10.2. Reprocessar 12.916 páginas para conferir um número
+não é reprodutibilidade, é atrito: ter os números exatos que um commit produziu é
+o que permite uma afirmação de artigo citar um commit.
 
 ---
 
@@ -246,3 +250,54 @@ Números da planilha para conferência rápida, em unidades:
 5. Não aplicar o mapa de grupos econômicos retroativamente (D4).
 6. Ao encontrar ambiguidade não coberta por este documento: parar, descrever o caso,
    propor as opções e esperar decisão. Não escolher sozinho.
+7. Não deixar arquivo adquirido de fora, nem produto do §3, existir apenas no
+   container. Se não foi possível comitar, dizer isso explicitamente em vez de seguir.
+
+---
+
+## 10. Durabilidade: nada de valor vive só na sessão
+
+O container em que este pipeline roda é efêmero. Toda premissa de reconstituição
+— "é reconstituível a partir de `bruto/`" — pressupõe que `bruto/` exista em
+algum lugar durável, e que a fonte externa continue servindo o arquivo. Nenhuma
+das duas coisas se garante sozinha. Daí as regras:
+
+**10.1 — Aquisição externa é comitada na mesma sessão.** Todo arquivo que entra
+de fora — informe em PDF, planilha de referência, qualquer coisa baixada ou
+recebida — é comitado e empurrado na sessão em que entra, não no fim do
+trabalho. Se são muitos, comitar em blocos com push a cada bloco, de modo que
+uma interrupção no meio preserve o que já subiu.
+
+**10.2 — Os produtos do §3 são versionados.** `painel_bruto.parquet`,
+`painel.parquet`, `painel_dicionario.md`, `validacao.md`, `candidatos.xlsx` e o
+conteúdo de `saidas/` e `dados/processado/` deixam de ser ignorados. Eles são
+pequenos — ordem de poucos megabytes no conjunto — e ter os números exatos que
+um commit produziu é o que permite uma afirmação de artigo citar um commit.
+Reprocessar 12.916 páginas para conferir um número não é reprodutibilidade, é
+atrito. `logs/` continua ignorado. Se o conjunto derivado passar de 50 MB,
+reportar e pedir decisão em vez de voltar a ignorá-lo em silêncio.
+
+**10.3 — Uma tag por rodada.** Ao fim de cada rodada, uma tag anotada `rodada-N`
+com uma linha sobre o que mudou. O `validacao.md` declara na primeira linha o
+commit que o gerou. Assim "os números desta tabela saem de `rodada-4`" é
+verificável por quem ler o artigo.
+
+**10.4 — Tarefa de fundo não é dona de resultado.** Se algo roda em segundo
+plano e produz arquivo, o arquivo é comitado quando aparece, não quando a tarefa
+termina. Uma tarefa derrubada nunca deve ser a única detentora de um resultado.
+
+**10.5 — Fechamento de sessão.** Antes de encerrar: `git status` limpo e `HEAD`
+igual ao remoto. Se algo ficou de fora, dizer o que ficou e por quê — nunca
+encerrar deixando arquivo de valor apenas no container.
+
+### Registro da mudança de decisão
+
+Até 17/09/2026 os derivados ficavam fora do repositório, com a justificativa de
+que eram reconstituíveis a partir de `bruto/`. **A justificativa não estava
+errada em princípio; estava incompleta.** Ela vale quando a reconstituição é
+barata *e* a entrada é durável. Com os 284 PDFs versionados a entrada ficou
+durável, mas a reconstituição continua custando 12.916 páginas. Versionar os
+derivados é o que fecha o outro lado.
+
+Fica registrado como mudança de decisão, com data e motivo, em vez de reescrito
+como se sempre tivesse sido assim.

@@ -1,0 +1,181 @@
+marca,modelo,segmento,unidades,meses,primeiro_mes,ultimo_mes,motivo,nome_suspeito,volume_infimo
+CADILLAC,CADILLAC,comerciais_leves,1,1,2021-06,2021-06,nome do modelo igual ao da marca,True,True
+DATSUM,DATSUM,comerciais_leves,1,1,2016-11,2016-11,nome do modelo igual ao da marca,True,True
+FIAT,FAG,comerciais_leves,1,1,2017-03,2017-03,FAG nao corresponde a nenhum modelo Fiat; registro avulso de uma unidade.,True,True
+FIAT,FIAT,automoveis,1,1,2022-04,2022-04,nome do modelo igual ao da marca,True,True
+FIAT,PICK UP,comerciais_leves,1,1,2020-10,2020-10,"Descricao generica de carroceria, nao nome de modelo.",True,True
+FORD,ENGERAUTO SPARTAKUS,comerciais_leves,1,1,2016-01,2016-01,"Engerauto e' encarrocador; 'Spartakus' e' a linha de transformacao, nao um modelo de fabrica.",True,True
+GMC,GMC,comerciais_leves,1,1,2020-02,2020-02,nome do modelo igual ao da marca,True,True
+HAFEI,PICK UP,comerciais_leves,1,1,2016-08,2016-08,"Descricao generica de carroceria, nao nome de modelo.",True,True
+INTERNATIONAL,INTERNATIONAL,comerciais_leves,1,1,2020-01,2020-01,nome do modelo igual ao da marca,True,True
+NISSAN,NISSAN,comerciais_leves,1,1,2003-08,2003-08,nome do modelo igual ao da marca,True,True
+NÃO IDENTIFICADO,EE34,comerciais_leves,1,1,2019-02,2019-02,Marcador da propria fonte para registro sem marca identificada; vale para qualquer modelo publicado sob ele.,True,True
+OPEL,OPEL,comerciais_leves,1,1,2022-01,2022-01,nome do modelo igual ao da marca,True,True
+ROLLS ROYCE,ROLLS ROYCE,automoveis,1,1,2024-02,2024-02,nome do modelo igual ao da marca,True,True
+FARGO,FARGO,comerciais_leves,3,3,2018-05,2018-12,nome do modelo igual ao da marca,True,False
+CADILLAC,CADILLAC,automoveis,4,2,2007-01,2007-02,nome do modelo igual ao da marca,True,True
+DODGE,DODGE,comerciais_leves,5,4,2018-06,2020-01,nome do modelo igual ao da marca,True,False
+FORD,FORD,comerciais_leves,6,3,2018-08,2020-10,nome do modelo igual ao da marca,True,False
+VW,ZILK,comerciais_leves,6,2,2014-06,2014-07,Zilk e' transformadora de veiculos; nao e' modelo de fabrica.,True,True
+FIAT,FIAT,comerciais_leves,8,4,2003-02,2016-05,nome do modelo igual ao da marca,True,False
+MASERATI,MASERATI,automoveis,12,6,2005-06,2007-01,nome do modelo igual ao da marca,True,False
+MATRA,MATRA,comerciais_leves,14,7,2003-10,2004-10,nome do modelo igual ao da marca,True,False
+HUMMER,HUMMER,automoveis,44,19,2003-09,2007-03,nome do modelo igual ao da marca,True,False
+PORSCHE,PORSCHE,automoveis,74,17,2005-02,2017-09,nome do modelo igual ao da marca,True,False
+CROSS LANDER,CROSS LANDER,automoveis,118,27,2003-01,2005-12,nome do modelo igual ao da marca,True,False
+TOYOTA,RIBEIRAUTO,comerciais_leves,139,54,2007-01,2023-02,"Ribeirauto e' encarrocador/transformador, nao modelo. Aparece sob TOYOTA (67 unidades em 25 meses) e M.BENZ (40 em 17).",True,False
+M.BENZ,RIBEIRAUTO,comerciais_leves,140,58,2006-12,2019-07,"Ribeirauto e' encarrocador/transformador, nao modelo. Aparece sob TOYOTA (67 unidades em 25 meses) e M.BENZ (40 em 17).",True,False
+MAHINDRA,MAHINDRA,comerciais_leves,347,42,2010-05,2022-01,nome do modelo igual ao da marca,True,False
+RENAULT,RENAULT,comerciais_leves,515,76,2006-04,2018-03,nome do modelo igual ao da marca,True,False
+ASIA,GALLOPER,automoveis,1,1,2004-01,2004-01,,False,True
+AUDI,S4,automoveis,1,1,2004-01,2004-01,,False,True
+BAIC,EU5,automoveis,1,1,2025-05,2025-05,,False,True
+BMW,320 TOURING,automoveis,1,1,2009-11,2009-11,,False,True
+BMW,560L,automoveis,1,1,2017-02,2017-02,,False,True
+BMW,ALPINA,automoveis,1,1,2026-07,2026-07,,False,True
+BMW,Z8,automoveis,1,1,2003-01,2003-01,,False,True
+BUICK,LESABRE,automoveis,1,1,2007-07,2007-07,,False,True
+BUICK,SABRE,automoveis,1,1,2009-03,2009-03,,False,True
+CAOA CHERY,CELER SEDAN,automoveis,1,1,2023-09,2023-09,,False,True
+CBP,191,automoveis,1,1,2004-12,2004-12,,False,True
+CHEVROLET,CAPRICE,automoveis,1,1,2008-04,2008-04,,False,True
+CITROEN,AX,automoveis,1,1,2007-07,2007-07,,False,True
+CITROEN,SAXO,automoveis,1,1,2008-03,2008-03,,False,True
+DAEWOO,NUBIRA,automoveis,1,1,2009-04,2009-04,,False,True
+DODGE,MAXI WAGON,comerciais_leves,1,1,2007-03,2007-03,,False,True
+DODGE,RAM 1500,comerciais_leves,1,1,2015-05,2015-05,,False,True
+DODGE,RT,comerciais_leves,1,1,2009-12,2009-12,,False,True
+FERRARI,SCAGLIETTI,automoveis,1,1,2005-01,2005-01,,False,True
+FIAT,DUNA,automoveis,1,1,2003-12,2003-12,,False,True
+FORD,CARGO,comerciais_leves,1,1,2005-09,2005-09,,False,True
+FORD,ENGERAUTO MAGNUN,comerciais_leves,1,1,2004-07,2004-07,,False,True
+FORD,FAIRLANE,comerciais_leves,1,1,2021-12,2021-12,,False,True
+FORD,FOCUS SW,automoveis,1,1,2010-04,2010-04,,False,True
+FORD,GALAXY,automoveis,1,1,2020-01,2020-01,,False,True
+FORD,KOMBI,comerciais_leves,1,1,2007-02,2007-02,,False,True
+FORD,MAVERICK,automoveis,1,1,2025-01,2025-01,,False,True
+FORD,MERCURY,automoveis,1,1,2007-04,2007-04,,False,True
+FORD,SR PAMP,comerciais_leves,1,1,2006-08,2006-08,,False,True
+FOTON,TM 2.8,comerciais_leves,1,1,2020-09,2020-09,,False,True
+FREIGHTLINER,2500,comerciais_leves,1,1,2016-07,2016-07,,False,True
+GM,10,comerciais_leves,1,1,2019-09,2019-09,,False,True
+GM,C1414,comerciais_leves,1,1,2018-10,2018-10,,False,True
+GM,COLORADO,comerciais_leves,1,1,2018-05,2018-05,,False,True
+GM,COMIN,automoveis,1,1,2004-03,2004-03,,False,True
+GM,CORSA,comerciais_leves,1,1,2003-06,2003-06,,False,True
+GM,CORVETTE,comerciais_leves,1,1,2004-05,2004-05,,False,True
+GM,PROCOPIO,comerciais_leves,1,1,2007-09,2007-09,,False,True
+GM,SONOMA,comerciais_leves,1,1,2016-02,2016-02,,False,True
+GM,SPACE,automoveis,1,1,2003-01,2003-01,,False,True
+GMC,SAFARI,comerciais_leves,1,1,2005-06,2005-06,,False,True
+HAFEI,HFJ1020,comerciais_leves,1,1,2008-01,2008-01,,False,True
+HONDA,ODYSSEY,automoveis,1,1,2021-02,2021-02,,False,True
+HONDA,RIDGELINE,comerciais_leves,1,1,2008-11,2008-11,,False,True
+HYUNDAI,AVANTE,automoveis,1,1,2009-03,2009-03,,False,True
+HYUNDAI,HD 65,comerciais_leves,1,1,2007-08,2007-08,,False,True
+HYUNDAI,STARIA,automoveis,1,1,2026-02,2026-02,,False,True
+IVECO,4012,comerciais_leves,1,1,2003-08,2003-08,,False,True
+JAC,REFINE,comerciais_leves,1,1,2015-09,2015-09,,False,True
+JAGUAR,XJ,automoveis,1,1,2008-03,2008-03,,False,True
+JEEP,LIBERTY,automoveis,1,1,2003-01,2003-01,,False,True
+JIMBEI,HAISE,comerciais_leves,1,1,2008-01,2008-01,,False,True
+JMEV,GSE,automoveis,1,1,2026-02,2026-02,,False,True
+KIA,K3500,comerciais_leves,1,1,2005-06,2005-06,,False,True
+M.BENZ,AMG GT,automoveis,1,1,2018-05,2018-05,,False,True
+M.BENZ,C 203 SW,automoveis,1,1,2010-06,2010-06,,False,True
+M.BENZ,COUPE,automoveis,1,1,2007-06,2007-06,,False,True
+M.BENZ,METRIS,comerciais_leves,1,1,2018-07,2018-07,,False,True
+M.BENZ,ML430,automoveis,1,1,2003-01,2003-01,,False,True
+M.BENZ,MRE CGPI,comerciais_leves,1,1,2008-03,2008-03,,False,True
+MAZDA,MPV,automoveis,1,1,2003-02,2003-02,,False,True
+MITSUBISHI,MMC L300,comerciais_leves,1,1,2003-01,2003-01,,False,True
+MITSUBISHI,MONTERO,automoveis,1,1,2004-08,2004-08,,False,True
+MPLM,MPLM/JAVALI,comerciais_leves,1,1,2003-12,2003-12,,False,True
+NISSAN,AX,comerciais_leves,1,1,2008-10,2008-10,,False,True
+NISSAN,D21 SC,comerciais_leves,1,1,2019-05,2019-05,,False,True
+NISSAN,DATSUN,comerciais_leves,1,1,2008-09,2008-09,,False,True
+NISSAN,KUEST,automoveis,1,1,2004-02,2004-02,,False,True
+NISSAN,NAVARA,comerciais_leves,1,1,2019-04,2019-04,,False,True
+NISSAN,SERENA,comerciais_leves,1,1,2009-03,2009-03,,False,True
+OPEL,OPEL VECTRA,automoveis,1,1,2003-08,2003-08,,False,True
+PEUGEOT,205,automoveis,1,1,2003-03,2003-03,,False,True
+PEUGEOT,206 SEDAN,automoveis,1,1,2006-09,2006-09,,False,True
+PEUGEOT,504,automoveis,1,1,2004-01,2004-01,,False,True
+RENAULT,TWINGO,comerciais_leves,1,1,2008-01,2008-01,,False,True
+SUBARU,OUTBACK WAGON,automoveis,1,1,2021-03,2021-03,,False,True
+TOYOTA,MRE CGPI,automoveis,1,1,2003-01,2003-01,,False,True
+VW,AMAZON SAVANA,comerciais_leves,1,1,2009-03,2009-03,,False,True
+VW,SURAN,automoveis,1,1,2019-06,2019-06,,False,True
+AGRALE,MA,comerciais_leves,2,2,2016-04,2016-05,,False,True
+ALFA ROMEO,MONTREAL,automoveis,2,2,2008-04,2026-07,,False,True
+CADILLAC,ESCALADE,automoveis,2,1,2007-02,2007-02,,False,True
+CHRYSLER,CARAVANSE,automoveis,2,2,2004-01,2004-12,,False,True
+CHRYSLER,MRE CGPI,automoveis,2,2,2003-01,2003-02,,False,True
+CITROEN,C2,automoveis,2,1,2006-10,2006-10,,False,True
+DAEWOO,ESPERO,automoveis,2,2,2003-03,2003-12,,False,True
+DKW,VEMAGUETE,comerciais_leves,2,2,2018-10,2019-12,,False,True
+DODGE,CHARGER,automoveis,2,2,2006-09,2023-08,,False,True
+DODGE,D100,comerciais_leves,2,2,2011-03,2011-11,,False,True
+DODGE,SPORT,comerciais_leves,2,2,2003-10,2004-09,,False,True
+FERRARI,F8 SPIDER,automoveis,2,1,2023-01,2023-01,,False,True
+FERRARI,FERRARI CHAL STRADALE,automoveis,2,1,2005-01,2005-01,,False,True
+FIAT,CITY,comerciais_leves,2,2,2022-03,2023-12,,False,True
+FORD,CLUB WAGON,comerciais_leves,2,2,2006-03,2009-10,,False,True
+FORD,CORCEL II,automoveis,2,2,2023-01,2023-02,,False,True
+FORD,JEEP,comerciais_leves,2,2,2018-08,2023-05,,False,True
+FORD,MRE CGPI,comerciais_leves,2,2,2003-02,2005-07,,False,True
+FORD,SR DESERTER,comerciais_leves,2,2,2004-09,2004-11,,False,True
+GM,AVALANCHE,comerciais_leves,2,2,2011-07,2018-12,,False,True
+HAFEI,HF10,comerciais_leves,2,1,2010-04,2010-04,,False,True
+HAFEI,HF6392,comerciais_leves,2,1,2010-04,2010-04,,False,True
+HYUNDAI,EXCEL,automoveis,2,2,2004-09,2006-07,,False,True
+ISUZU,PICK UP,comerciais_leves,2,2,2009-04,2009-10,,False,True
+JAC,EJV7L,comerciais_leves,2,1,2023-12,2023-12,,False,True
+KARRY,Q22,comerciais_leves,2,1,2012-03,2012-03,,False,True
+KIA,BONGO,comerciais_leves,2,2,2009-06,2010-09,,False,True
+LEXUS,GX,automoveis,2,1,2006-02,2006-02,,False,True
+LVTONG,LT S14 C,comerciais_leves,2,1,2021-09,2021-09,,False,True
+M.BENZ,EQV 300,comerciais_leves,2,2,2021-05,2022-11,,False,True
+M.BENZ,ML270,automoveis,2,1,2003-05,2003-05,,False,True
+MG,MG COUPE ROADSTER,comerciais_leves,2,2,2006-03,2006-07,,False,True
+MITSUBISHI,3000,automoveis,2,1,2004-01,2004-01,,False,True
+NISSAN,D21 DC,comerciais_leves,2,2,2007-07,2009-03,,False,True
+NISSAN,QUEST,automoveis,2,2,2006-03,2006-04,,False,True
+PORSCHE,CARRERA,automoveis,2,1,2006-01,2006-01,,False,True
+RENAULT,19,automoveis,2,2,2003-03,2005-09,,False,True
+RENAULT,ESPACE,automoveis,2,1,2003-11,2003-11,,False,True
+SMART,ROADSTER,automoveis,2,1,2005-06,2005-06,,False,True
+SSANGYONG,ISTANA,automoveis,2,2,2003-02,2003-11,,False,True
+TOYOTA,LAND CRUISER,automoveis,2,2,2003-03,2003-04,,False,True
+TOYOTA,TOCOMA,comerciais_leves,2,2,2015-02,2015-12,,False,True
+TROLLER,RF,automoveis,2,1,2003-05,2003-05,,False,True
+VICTORY,GHT6360,comerciais_leves,2,1,2011-08,2011-08,,False,True
+VICTORY,GHT6400,comerciais_leves,2,1,2011-08,2011-08,,False,True
+VW,BRASILIA,automoveis,2,2,2025-03,2026-01,,False,True
+VW,CONAN,comerciais_leves,2,1,2004-02,2004-02,,False,True
+BMW,M850I,automoveis,3,1,2020-01,2020-01,,False,True
+DENZA,D9,automoveis,3,1,2025-01,2025-01,,False,True
+JINBEI,SY6583N3,comerciais_leves,3,1,2010-10,2010-10,,False,True
+LINCOLN,NAVIGATOR,automoveis,3,2,2003-05,2006-01,,False,True
+RENAULT,ALASKAN,comerciais_leves,3,2,2017-12,2018-12,,False,True
+RENAULT,EXPRESS 1.6,comerciais_leves,3,2,2003-05,2004-07,,False,True
+TOYOTA,PREVIA,automoveis,3,1,2019-05,2019-05,,False,True
+VW,PUMA,automoveis,3,1,2020-01,2020-01,,False,True
+BYD,E6,automoveis,4,1,2018-07,2018-07,,False,True
+FERRARI,488 PISTA,automoveis,4,2,2020-06,2020-08,,False,True
+FIAT,PALIO FURGAO,comerciais_leves,4,2,2011-08,2015-08,,False,True
+FORD,CONTOURSE,comerciais_leves,4,2,2019-07,2019-10,,False,True
+GREAT WALL,WINGLE,comerciais_leves,4,1,2011-07,2011-07,,False,True
+M.BENZ,C43,automoveis,4,1,2017-01,2017-01,,False,True
+MASERATI,COUPE,automoveis,4,2,2003-01,2003-02,,False,True
+NISSAN,TOWNSTAR,comerciais_leves,4,1,2024-03,2024-03,,False,True
+RENAULT,MARCOPOLO/VOLARE V9L EO,comerciais_leves,4,1,2023-06,2023-06,,False,True
+VW,BABY,comerciais_leves,4,2,2003-06,2005-09,,False,True
+DFM,MINIBUS 1.0,comerciais_leves,5,2,2015-06,2016-03,,False,True
+EDRA,ARIS,comerciais_leves,5,2,2010-04,2010-05,,False,True
+HYUNDAI,H350,comerciais_leves,5,2,2019-07,2020-02,,False,True
+FERRARI,296 GTB,automoveis,6,1,2024-01,2024-01,,False,True
+M.BENZ,GL,automoveis,6,2,2007-01,2007-08,,False,True
+M.BENZ,AUTOVAN,comerciais_leves,7,1,2003-02,2003-02,,False,True
+FERRARI,458,automoveis,8,1,2011-01,2011-01,,False,True
+BMW,530I,automoveis,9,1,2018-12,2018-12,,False,True

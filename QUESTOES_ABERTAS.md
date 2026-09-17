@@ -337,31 +337,69 @@ nas duas linhas. A cobertura de 2013-11 em automóveis foi de **121,97% para
 A guarda da §9.3 funcionou como devia: recusou sobrescrever `painel_bruto.parquet`,
 gravou a versão nova ao lado e exigiu `--recriar` depois da comparação.
 
-#### O que ficou medido e **não** resolvido
+#### Resolvido: opção (c), e por que a forma importava
 
-Sobram 4 linhas, **9.171 unidades**, em que o ranking duplica a tabela de
-sub-segmento por causa da marca trocada — `MONTANA` 3.901, `CITY` 2.464,
-`RANGER` 1.967, `MASTER` 839. Recuperada a marca, elas são o mesmo modelo com o
-mesmo valor no mesmo informe, e a regra Q7 (sub-segmento manda, ranking só
-preenche o que ela não lista) diria para descartar a do ranking.
+As 4 linhas restantes — 9.171 unidades — foram **suprimidas com registro**, e a
+observação que veio junto era mais importante que a escolha: **essas 4 são o
+mesmo defeito das 5 irmãs.** As cinco foram consertadas na chave de
+reconciliação, a montante, e o invariante nunca correu risco. As quatro
+resistiram ao mesmo conserto por um motivo incidental — a chave divergia na
+marca, não no espaço em branco.
 
-**Não descartei.** Diferente do caso anterior, aqui as duas linhas são
-*diferentes como publicadas* — marcas distintas —, e o descarte mudaria o total
-do mês em 9.171 unidades, quebrando o invariante central, que existe exatamente
-para impedir que a harmonização mexa em volume. É decisão do pesquisador (§9.6).
+**A supressão é coluna do painel bruto, não arquivo externo.**
+`duplicata_publicada` fica vazia em 54.179 linhas e, nas quatro, aponta a linha
+que cada uma duplica (`GM /MONTANA (Pick-up's Pequenas, pg. 18)`). Arquivo
+externo contra o qual o invariante é conferido pode crescer em silêncio; coluna
+coberta por teste, não.
 
-É o que mantém 2013-11 em **116,7% de cobertura em comerciais leves**: 6.707 das
-6.743 unidades de excesso são essas. Medido em
-`saidas/duplicatas_de_marca_trocada.csv`.
+**O invariante foi reescrito, não excepcionado.** A redação nova: *os totais
+mensais de `painel.parquet` e `painel_bruto.parquet` coincidem depois de
+excluídas as linhas marcadas em `duplicata_publicada`, e essas linhas são
+exatamente quatro, enumeradas.* Vale nos 284 meses, como a antiga valia. Um
+invariante com exceção enumerada e testada é mais forte que um com dispensa,
+porque a exceção não pode crescer sem quebrar o teste.
 
-*Opções:* (a) deixar como está, com a cobertura do mês declaradamente acima de
-100%; (b) aplicar Q7 e descartar as 4 linhas do ranking, aceitando que o
-invariante central passe a admitir exceção declarada; (c) descartar e registrar
-as linhas removidas num arquivo de supressões, mantendo o invariante contra esse
-arquivo em vez de contra o painel bruto. Recomendo (c): preserva a
-rastreabilidade e não relaxa a guarda.
+**`testes/test_duplicatas_publicadas.py` trava as quatro** por mês, segmento,
+marca, modelo e valor, e mais quatro propriedades: que cada marcada aponta uma
+linha que existe, com o mesmo valor; que o painel não carrega nenhuma; que o
+invariante vale nos 284 meses; e que a marcação exige valor idêntico. Uma quinta
+duplicata numa rodada futura falha alto em vez de mudar o total de um mês em
+silêncio.
 
-### D5. Duas edições curtas do informe### D5. Duas edições curtas do informe
+**A assimetria está escrita** no dicionário de dados e no `validacao.md`, porque
+um parecerista vai perguntar por que o mesmo defeito teve dois tratamentos. A
+resposta: *a montante quando dá para consertar sem tocar no transcrito; a
+jusante, marcado e enumerado, quando não dá.* Canonizar a marca na etapa 02
+significaria reescrever a marca dentro do painel bruto, que é transcrição fiel
+da fonte (§4) — não cabe lá.
+
+**Resultado:** nenhum mês da série fica fora da faixa de 100,5%. O último era
+2013-11 em comerciais leves, que foi de 116,7% para **100,089%**. A cobertura da
+série inteira agora vai de 94,54% a 100,09%.
+
+### O piso por pico mensal entrou
+
+O piso por volume total **não é neutro quanto à longevidade**: volume total é
+venda mensal média vezes meses de vida, então ele descarta preferencialmente
+modelo de vida curta — que são justamente os que contribuem com uma entrada e
+uma saída. Um piso que morde a variável dependente não serve sozinho de prova.
+
+A §8 agora traz as duas famílias. E elas concordam:
+
+| família | piso | 2022 → 2025 | 2025 → 2026 |
+|---|---|---:|---:|
+| volume total | todos | +0,0747 | +0,0304 |
+| volume total | acima de 100 | +0,0952 | −0,0310 |
+| volume total | acima de 1.000 | +0,0810 | −0,0645 |
+| pico mensal | pico ≥ 10/mês | +0,0877 | −0,0398 |
+| pico mensal | pico ≥ 50/mês | +0,0989 | −0,0642 |
+
+**A alta de 2022 a 2025 sobrevive às duas famílias e fica mais forte com piso em
+ambas.** Não é artefato do corte de publicação, dos modelos fantasma, nem da
+escolha do piso. **O salto de 2026 inverte de sinal nas duas** assim que
+qualquer piso entra. O resultado está à prova de parecer.
+
+### D5. Duas edições curtas do informe### D5. Duas edições curtas do informe### D5. Duas edições curtas do informe
 
 O informe normal tem 44 páginas e 17 sub-segmentos na tabela por modelo.
 **2003-10 (Ed. 10) e 2005-03 (Ed. 27) saíram com 10 páginas** e trazem **um**
@@ -622,8 +660,9 @@ descarta como *quem sai*. Um modelo vivo no primeiro mês continua podendo sair
 4. **Revisão de `config/nomes_nao_veiculo.csv`** — 29 nomes marcados,
    `saidas/nomes_suspeitos.csv` traz os 180 candidatos a revisão humana. A
    retroação a 2003 multiplicou a lista de nomes de volume ínfimo.
-5. **As 4 linhas do ranking de 2013-11 que duplicam o sub-segmento** (D4),
-   9.171 unidades. Três opções descritas acima; recomendo a (c).
+5. **Durabilidade (ESPEC §10)** — os derivados passaram a ser versionados e cada
+   rodada ganha tag. A regra existe; o hábito ainda não foi testado numa sessão
+   inteira.
 6. **As duas edições curtas** (D5): manter como está, completar pela coluna de
    mês anterior, ou excluir das contagens de modelos. Três opções descritas
    acima; nenhuma aplicada.

@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2024-07,mes_declarado,2024-07,,,,,ok,2024-07
+2024-07,subtotal_sub_segmento,automoveis/Grandcab,2409,2409,0,,ok,cauda nao publicada: 0 unidades
+2024-07,subtotal_sub_segmento,automoveis/Hatch Médios,51,49,-2,-3.9216,cauda_truncada,cauda nao publicada: 2 unidades
+2024-07,subtotal_sub_segmento,automoveis/Hatch Pequenos,48746,48533,-213,-0.4370,ok,cauda nao publicada: 213 unidades
+2024-07,subtotal_sub_segmento,automoveis/Monocab,0,0,0,,sem_total,
+2024-07,subtotal_sub_segmento,automoveis/Sedans Compactos,13090,13089,-1,-0.0076,ok,cauda nao publicada: 1 unidades
+2024-07,subtotal_sub_segmento,automoveis/Sedans Grandes,742,723,-19,-2.5606,cauda_truncada,cauda nao publicada: 19 unidades
+2024-07,subtotal_sub_segmento,automoveis/Sedans Pequenos,6298,6298,0,,ok,cauda nao publicada: 0 unidades
+2024-07,subtotal_sub_segmento,automoveis/Sedans médios,5619,5619,0,,ok,cauda nao publicada: 0 unidades
+2024-07,subtotal_sub_segmento,automoveis/Sports,537,515,-22,-4.0968,cauda_truncada,cauda nao publicada: 22 unidades
+2024-07,subtotal_sub_segmento,automoveis/Suv's,90132,87775,-2357,-2.6151,cauda_truncada,cauda nao publicada: 2357 unidades
+2024-07,subtotal_sub_segmento,automoveis/Sw Grandes,7,7,0,,ok,cauda nao publicada: 0 unidades
+2024-07,subtotal_sub_segmento,automoveis/Sw Médios,0,0,0,,sem_total,
+2024-07,subtotal_sub_segmento,automoveis/Veículos de Entrada,10334,10334,0,,ok,cauda nao publicada: 0 unidades
+2024-07,subtotal_sub_segmento,comerciais_leves/Furgões,3469,2441,-1028,-29.6339,cauda_truncada,cauda nao publicada: 1028 unidades
+2024-07,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,2206,2201,-5,-0.2267,ok,cauda nao publicada: 5 unidades
+2024-07,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,24984,23554,-1430,-5.7237,cauda_truncada,cauda nao publicada: 1430 unidades
+2024-07,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,18581,18581,0,,ok,cauda nao publicada: 0 unidades
+2024-07,ranking_x_sub_segmento,2024-07,216348,216346,-2,-0.0009,ok,1 modelos divergentes de 73 conferidos; desvio de volume 0.0009%
+2024-07,cobertura,automoveis,178047,175351,-2696,-1.5142,medido,cobertura=98.49%
+2024-07,cobertura,comerciais_leves,49253,49239,-14,-0.0284,medido,cobertura=99.97%

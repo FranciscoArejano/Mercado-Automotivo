@@ -58,6 +58,23 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
     # isto o mesmo carro vira duas fichas, com uma saida e uma entrada
     # fabricadas. `modelo_fonte` e `nome_completo_fonte` guardam a grafia crua.
     bruto = bruto.copy()
+
+    # Supressao das duplicatas que a fonte publicou (Q7). A linha do ranking
+    # repete uma da tabela de sub-segmento do mesmo informe, com o mesmo valor,
+    # sob marca trocada; o painel bruto a guarda **marcada**, e e' aqui que ela
+    # sai. Nao e' filtro de analise nem limpeza semantica: e' a mesma regra que
+    # ja' diz que o ranking so' preenche o que o sub-segmento nao lista.
+    if "duplicata_publicada" in bruto:
+        suprimidas = bruto[bruto["duplicata_publicada"] != ""]
+        if not suprimidas.empty:
+            suprimidas.to_csv(config.DIR_SAIDAS / "duplicatas_suprimidas.csv", index=False)
+            logger.warning(
+                "%d linhas suprimidas por duplicarem a tabela de sub-segmento "
+                "(%d unidades) -- ver saidas/duplicatas_suprimidas.csv",
+                len(suprimidas), int(suprimidas["unidades"].sum()),
+            )
+            bruto = bruto[bruto["duplicata_publicada"] == ""].copy()
+
     bruto["marca_chave"] = bruto["marca_fonte"].map(nomes.chave)
     bruto["modelo_chave"] = bruto["modelo_fonte"].map(nomes.chave)
     colisoes = nomes.colisoes_de_caixa(
@@ -106,7 +123,7 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
             )
         logger.warning(
             "D4: %d de %d modelos com marca trocada recuperados pelo informe seguinte "
-            "(%s); %d sem rota",
+            "(%s); %d sem rota. (Os 12 da edicao defeituosa menos os suprimidos acima.)",
             len(aplicadas), len(recuperacoes),
             ", ".join(sorted(recuperacoes["mes_ref"].unique())),
             len(recuperacoes) - len(aplicadas),
@@ -232,6 +249,20 @@ def aplicar(bruto: pd.DataFrame, regras: list[mod_regras.Regra], logger) -> tupl
 
 
 def conferir_invariante(bruto: pd.DataFrame, painel: pd.DataFrame) -> pd.DataFrame:
+    """Os totais mensais coincidem **excluidas as linhas marcadas**.
+
+    A redacao antiga era "os totais mensais de painel e painel_bruto coincidem".
+    Ela nao sobrevive a' supressao das duplicatas que a fonte publicou, e a saida
+    nao e' abrir excecao: e' reescrever o invariante com o conjunto de excecoes
+    **enumerado**. Um invariante com excecao enumerada e testada e' mais forte
+    que um com dispensa, porque a excecao nao pode crescer sem quebrar o teste --
+    `testes/test_duplicatas_publicadas.py` trava as quatro linhas por mes, marca,
+    modelo e valor.
+
+    A regra nova vale nos 284 meses, como a antiga valia.
+    """
+    if "duplicata_publicada" in bruto:
+        bruto = bruto[bruto["duplicata_publicada"] == ""]
     antes = bruto.groupby("mes_ref")["unidades"].sum()
     depois = painel.groupby("mes_ref")["unidades"].sum()
     comparacao = pd.DataFrame({"painel_bruto": antes, "painel": depois}).fillna(0)
@@ -260,7 +291,7 @@ def executar() -> int:
             "INVARIANTE CENTRAL QUEBRADO: harmonizacao alterou o total mensal em "
             f"{len(quebras)} meses. Primeiros casos:\n{quebras.head(10).to_string()}"
         )
-    logger.info("invariante central: soma mensal identica em %d meses", len(comparacao))
+    logger.info("invariante central: soma mensal identica em %d meses, excluidas as duplicatas marcadas", len(comparacao))
 
     painel.to_parquet(config.PAINEL, index=False)
     config.DIR_SAIDAS.mkdir(parents=True, exist_ok=True)

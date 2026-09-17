@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2017-01,mes_declarado,2017-01,,,,,ok,2017-01
+2017-01,subtotal_sub_segmento,automoveis/Grandcab,2108,2106,-2,-0.0949,ok,cauda nao publicada: 2 unidades
+2017-01,subtotal_sub_segmento,automoveis/Hatch Médios,1744,1654,-90,-5.1606,cauda_truncada,cauda nao publicada: 90 unidades
+2017-01,subtotal_sub_segmento,automoveis/Hatch Pequenos,33809,33733,-76,-0.2248,ok,cauda nao publicada: 76 unidades
+2017-01,subtotal_sub_segmento,automoveis/Monocab,2863,2863,0,,ok,cauda nao publicada: 0 unidades
+2017-01,subtotal_sub_segmento,automoveis/Sedans Compactos,2784,2784,0,,ok,cauda nao publicada: 0 unidades
+2017-01,subtotal_sub_segmento,automoveis/Sedans Grandes,616,586,-30,-4.8701,cauda_truncada,cauda nao publicada: 30 unidades
+2017-01,subtotal_sub_segmento,automoveis/Sedans Pequenos,17251,17251,0,,ok,cauda nao publicada: 0 unidades
+2017-01,subtotal_sub_segmento,automoveis/Sedans médios,9758,9730,-28,-0.2869,ok,cauda nao publicada: 28 unidades
+2017-01,subtotal_sub_segmento,automoveis/Sports,99,79,-20,-20.2020,cauda_truncada,cauda nao publicada: 20 unidades
+2017-01,subtotal_sub_segmento,automoveis/Suv's,23577,23105,-472,-2.0020,cauda_truncada,cauda nao publicada: 472 unidades
+2017-01,subtotal_sub_segmento,automoveis/Sw Grandes,47,47,0,,ok,cauda nao publicada: 0 unidades
+2017-01,subtotal_sub_segmento,automoveis/Sw Médios,378,378,0,,ok,cauda nao publicada: 0 unidades
+2017-01,subtotal_sub_segmento,automoveis/Veículos de Entrada,26322,26322,0,,ok,cauda nao publicada: 0 unidades
+2017-01,subtotal_sub_segmento,comerciais_leves/Furgões,1285,1173,-112,-8.7160,cauda_truncada,cauda nao publicada: 112 unidades
+2017-01,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,757,754,-3,-0.3963,ok,cauda nao publicada: 3 unidades
+2017-01,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,11675,11672,-3,-0.0257,ok,cauda nao publicada: 3 unidades
+2017-01,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,8463,8463,0,,ok,cauda nao publicada: 0 unidades
+2017-01,ranking_x_sub_segmento,2017-01,135769,135769,0,,ok,0 modelos divergentes de 76 conferidos; desvio de volume 0.0000%
+2017-01,cobertura,automoveis,121399,120638,-761,-0.6269,medido,cobertura=99.37%
+2017-01,cobertura,comerciais_leves,22181,22180,-1,-0.0045,medido,cobertura=100.00%

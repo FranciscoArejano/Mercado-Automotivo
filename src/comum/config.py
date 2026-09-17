@@ -97,6 +97,10 @@ PICO_MOVEL_MODO = os.environ.get("PICO_MOVEL_MODO", "media_movel")
 # denominador das taxas, lado a lado, porque 207 dos 648 modelos somam 3.512
 # unidades em treze anos e respondem por 40% a 50% de todas as entradas e saidas.
 PISOS_VOLUME_MODELO = (0, 100, 1000)
+# Segunda familia de piso, sobre o pico mensal do modelo. Volume total nao e'
+# neutro quanto a' longevidade -- descarta modelo de vida curta, que e' o que
+# a taxa de entrada e saida mede. Ver comum/rotatividade.pico_por_modelo.
+PISOS_PICO_MENSAL = (0, 10, 50)
 
 # Faixas do relatorio de distribuicao de volume por modelo.
 FAIXAS_VOLUME = ((0, 10), (11, 100), (101, 1_000), (1_001, 10_000), (10_001, None))

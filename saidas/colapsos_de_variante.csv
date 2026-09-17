@@ -1,0 +1,192 @@
+marca,familia,mecanismo,variantes_painel,variantes_planilha,variantes_a_mais_na_planilha,nomes_painel,nomes_planilha,unidades_painel,unidades_planilha
+BMW,SERIE,ausente do painel,0,11,11,,SERIE 1 | SERIE 2 ACTIVE TOURER | SERIE 2 GRAN COUPE | SERIE 3 | SERIE 4 | SERIE 4 CABRIO | SERIE 5 | SERIE 6 COUPE | SERIE 6 GRAN COUPE | SERIE 7 | SERIE 8 COUPE,0,59438
+AUDI,RS,ausente do painel,0,7,7,,RS 3 SPORTBACK | RS 4 AVANT | RS 5 SPORTBACK | RS 6 AVANT | RS E TRON GT | RS Q3 | RS Q8,0,813
+,LAMBORGHINI,ausente do painel,0,5,5,,LAMBORGHINI AVENTADOR | LAMBORGHINI GALLARDO | LAMBORGHINI HURACAN | LAMBORGHINI HURACAN SPYDER | LAMBORGHINI URUS,0,111
+MITSUBISHI,PAJERO,colapso de variante (volume confere),1,5,4,PAJERO,PAJERO FULL | PAJERO FULL 3D | PAJERO HPE | PAJERO SPORT | PAJERO TR4,35283,35356
+,CHANGAN,ausente do painel,0,4,4,,CHANGAN MINI STAR CS | CHANGAN STAR CS | CHANGAN STAR FAMILY | CHANGAN STAR UTILITY,0,334
+CITROEN,C4,colapso de variante,3,6,3,C4 CACTUS | C4 PALLAS | C4 PICASSO,C4 CACTUS | C4 HATCH | C4 LOUNGE | C4 PALLAS | C4 PICASSO | GRAND C4 PICASSO,71433,100962
+LAND ROVER,RANGE,colapso de variante,1,4,3,RANGE ROVER,RANGE ROVER | RANGE ROVER EVOQUE | RANGE ROVER SPORT | RANGE ROVER VELAR,4794,30521
+CITROEN,DS,ausente do painel,0,3,3,,DS 3 | DS 4 | DS 5,0,1492
+JAC,IEV,colapso de variante,1,4,3,IEV 330P,IEV 20 | IEV 330P | IEV 40 | IEV 60,21,260
+FERRARI,488,colapso de variante,1,4,3,488 PISTA,488 GTB | 488 PISTA | 488 PISTA SPIDER | 488 SPIDER,4,62
+KIA,BONGO,ausente do painel,0,2,2,,BONGO | BONGO K2500,0,23543
+MINI,HATCH,ausente do painel,0,2,2,,HATCH 3 PORTAS | HATCH 5 PORTAS,0,10616
+CAOA CHERY,CELER,ausente do painel,0,2,2,,CELER | CELER SEDAN,0,7300
+PORSCHE,718,ausente do painel,0,2,2,,718 BOXSTER | 718 CAYMAN,0,2402
+SHINERAY,A9,ausente do painel,0,2,2,,A9 | A9 CARGO,0,1001
+AUDI,Q8,ausente do painel,0,2,2,,Q8 | Q8 SPORTBACK,0,675
+HAFEI,TOWNER,colapso de variante,1,3,2,TOWNER,TOWNER FURGAO | TOWNER PASSAGEIRO | TOWNER PICK UP,284,538
+SSANGYONG,ACTYON,ausente do painel,0,2,2,,ACTYON | ACTYON SPORTS,0,420
+CAOA CHERY,CIELO,ausente do painel,0,2,2,,CIELO HATCH | CIELO SEDAN,0,40
+,BENTLEY,ausente do painel,0,2,2,,BENTLEY CONTINENTAL GT | BENTLEY FLYING SPUR,0,32
+FERRARI,812,ausente do painel,0,2,2,,812 GTS | 812 SUPERFAST,0,16
+PEUGEOT,E,ausente do painel,0,2,2,,E 2008 | E 208,0,12
+,EXEED,ausente do painel,0,2,2,,EXEED LX | EXEED VX LANYUE,0,7
+MCLAREN,570S,ausente do painel,0,2,2,,570S | 570S SPIDER,0,5
+FIAT,SIENA,colapso de variante (volume confere),1,2,1,SIENA,GRAND SIENA | SIENA,288815,288515
+TOYOTA,SW4,ausente do painel,0,1,1,,SW4,0,120069
+FIAT,DOBLO,colapso de variante (volume confere),1,2,1,DOBLO,DOBLO | DOBLO CARGO,61082,61115
+HYUNDAI,TUCSON,colapso de variante (volume confere),1,2,1,TUCSON,NEW TUCSON | TUCSON,60480,60566
+VW,TIGUAN,colapso de variante (volume confere),1,2,1,TIGUAN,TIGUAN | TIGUAN ALLSPACE,38914,39104
+MITSUBISHI,OUTLANDER,colapso de variante (volume confere),1,2,1,OUTLANDER,OUTLANDER | OUTLANDER SPORT,35239,35174
+AUDI,Q3,colapso de variante (volume confere),1,2,1,Q3,Q3 | Q3 SPORTBACK,29558,29931
+VW,CROSSFOX,ausente do painel,0,1,1,,CROSSFOX,0,26885
+VW,SPACEFOX,ausente do painel,0,1,1,,SPACEFOX,0,26249
+LAND ROVER,DISCOVERY,colapso de variante (volume confere),1,2,1,DISCOVERY,DISCOVERY | DISCOVERY SPORT,25983,26080
+M BENZ,GLA,ausente do painel,0,1,1,,GLA,0,20889
+HONDA,CR,ausente do painel,0,1,1,,CR V,0,13800
+VW,DELIVERY,ausente do painel,0,1,1,,DELIVERY EXPRESS,0,13426
+SUZUKI,VITARA,colapso de variante,1,2,1,VITARA,GRAND VITARA | VITARA,4850,11708
+HYUNDAI,SANTA,ausente do painel,0,1,1,,SANTA FE,0,10909
+CAOA CHERY,ARRIZO,colapso de variante,2,3,1,ARRIZO 5 | ARRIZO 6,ARRIZO 5 | ARRIZO 5E | ARRIZO 6,7968,10811
+AUDI,Q5,colapso de variante,1,2,1,Q5,Q5 | Q5 SPORTBACK,7625,10246
+PEUGEOT,PARTNER,colapso de variante (volume confere),1,2,1,PARTNER,PARTNER | PARTNER RAPID,9522,9522
+M BENZ,GLC,colapso de variante,1,2,1,GLC,GLC | GLC COUPE,2767,7788
+NISSAN,LIVINA,colapso de variante,1,2,1,LIVINA,GRAND LIVINA | LIVINA,7751,7361
+JAC,J3,colapso de variante,1,2,1,J3 TURIN,J3 | J3 TURIN,3633,7145
+M BENZ,CLA,ausente do painel,0,1,1,,CLA,0,6544
+JEEP,CHEROKEE,colapso de variante,1,2,1,CHEROKEE,CHEROKEE | GRAND CHEROKEE,5739,6315
+AUDI,A5,colapso de variante (volume confere),1,2,1,A5,A5 | A5 SPORTBACK,5040,5045
+M BENZ,GLE,colapso de variante,1,2,1,GLE,GLE | GLE COUPE,555,4698
+M BENZ,GLB,ausente do painel,0,1,1,,GLB,0,4641
+JAC,T50,ausente do painel,0,1,1,,T50,0,4599
+,HAVAL,ausente do painel,0,1,1,,HAVAL H6,0,4567
+PEUGEOT,207,colapso de variante,1,2,1,207,207 | 207 PASSION,3423,4371
+JAC,J2,ausente do painel,0,1,1,,J2,0,3703
+MINI,COUNTRYMAN,ausente do painel,0,1,1,,COUNTRYMAN,0,3473
+SUZUKI,S,ausente do painel,0,1,1,,S CROSS,0,3288
+JAGUAR,F,colapso de variante,1,2,1,F TYPE,F PACE | F TYPE,308,3141
+LIFAN,530,ausente do painel,0,1,1,,530,0,3029
+JAGUAR,E,ausente do painel,0,1,1,,E PACE,0,2815
+LEXUS,NX,ausente do painel,0,1,1,,NX,0,2449
+KIA,CARNIVAL,colapso de variante (volume confere),1,2,1,CARNIVAL,CARNIVAL | GRAND CARNIVAL,1838,1849
+JEEP,WRANGLER,ausente do painel,0,1,1,,WRANGLER,0,1605
+JAC,E,colapso de variante,2,3,1,E J7 | E JS1,E J7 | E JS1 | E JS4,1024,1412
+LEXUS,UX,ausente do painel,0,1,1,,UX,0,1309
+RELY,PICK,ausente do painel,0,1,1,,PICK UP,0,1286
+AUDI,Q7,ausente do painel,0,1,1,,Q7,0,1231
+PEUGEOT,5008,ausente do painel,0,1,1,,5008,0,1210
+AUDI,TT,colapso de variante,1,2,1,TT,TT COUPE | TT RS COUPE,1089,1176
+SMART,FORTWO,ausente do painel,0,1,1,,FORTWO,0,1006
+VOLVO,C40,ausente do painel,0,1,1,,C40,0,964
+CAOA CHERY,FACE,ausente do painel,0,1,1,,FACE,0,900
+AUDI,E,colapso de variante,1,2,1,E TRON GT,E TRON | E TRON SPORTBACK,73,740
+FORD,F,ausente do painel,0,1,1,,F 150,0,726
+VW,TOUAREG,ausente do painel,0,1,1,,TOUAREG,0,726
+FOTON,1039,ausente do painel,0,1,1,,1039,0,712
+MINI,CABRIO,ausente do painel,0,1,1,,CABRIO,0,708
+SUBARU,IMPREZA,ausente do painel,0,1,1,,IMPREZA,0,650
+GEELY,EC7,ausente do painel,0,1,1,,EC7,0,644
+LEXUS,CT,ausente do painel,0,1,1,,CT,0,571
+GEELY,GC2,ausente do painel,0,1,1,,GC2,0,566
+BMW,M1,ausente do painel,0,1,1,,M1,0,520
+LEXUS,ES,ausente do painel,0,1,1,,ES,0,508
+HYUNDAI,VELOSTER,ausente do painel,0,1,1,,VELOSTER,0,432
+JAC,T60,ausente do painel,0,1,1,,T60,0,368
+AUDI,S3,ausente do painel,0,1,1,,S3 SPORTBACK,0,347
+MAHINDRA,PIK,ausente do painel,0,1,1,,PIK UP,0,338
+MAHINDRA,JIPE,ausente do painel,0,1,1,,JIPE,0,324
+LEXUS,RX,ausente do painel,0,1,1,,RX,0,319
+KIA,NIRO,ausente do painel,0,1,1,,NIRO,0,318
+LIFAN,X80,ausente do painel,0,1,1,,X80,0,318
+SUZUKI,SWIFT,ausente do painel,0,1,1,,SWIFT,0,290
+SHINERAY,T20,ausente do painel,0,1,1,,T20,0,283
+AUDI,SQ5,ausente do painel,0,1,1,,SQ5,0,279
+JAGUAR,I,ausente do painel,0,1,1,,I PACE,0,264
+BMW,M5,ausente do painel,0,1,1,,M5,0,252
+BYD,TAN,ausente do painel,0,1,1,,TAN,0,251
+SSANGYONG,KYRON,ausente do painel,0,1,1,,KYRON,0,232
+KIA,CADENZA,ausente do painel,0,1,1,,CADENZA,0,223
+BMW,IX,ausente do painel,0,1,1,,IX,0,222
+MINI,CLUBMAN,ausente do painel,0,1,1,,CLUBMAN,0,200
+BMW,X7,ausente do painel,0,1,1,,X7,0,180
+SHINERAY,T22,ausente do painel,0,1,1,,T22,0,173
+AUDI,A7,ausente do painel,0,1,1,,A7 SPORTBACK,0,169
+M BENZ,GLS,ausente do painel,0,1,1,,GLS,0,169
+CHRYSLER,300,ausente do painel,0,1,1,,300,0,161
+MINI,PACEMAN,ausente do painel,0,1,1,,PACEMAN,0,146
+JAC,T80,ausente do painel,0,1,1,,T80,0,145
+KIA,MOHAVE,ausente do painel,0,1,1,,MOHAVE,0,123
+LEXUS,IS,ausente do painel,0,1,1,,IS,0,121
+AGRALE,MARRUA,ausente do painel,0,1,1,,MARRUA,0,117
+MASERATI,LEVANTE,ausente do painel,0,1,1,,LEVANTE,0,114
+BMW,IX3,ausente do painel,0,1,1,,IX3,0,94
+MINI,ELECTRIC,ausente do painel,0,1,1,,ELECTRIC,0,93
+JAGUAR,XJ,ausente do painel,0,1,1,,XJ,0,81
+PEUGEOT,508,ausente do painel,0,1,1,,508,0,65
+BMW,M8,ausente do painel,0,1,1,,M8,0,60
+LIFAN,320,ausente do painel,0,1,1,,320,0,53
+MINI,ROADSTER,ausente do painel,0,1,1,,ROADSTER,0,46
+AUDI,A8,ausente do painel,0,1,1,,A8,0,44
+SSANGYONG,REXTON,ausente do painel,0,1,1,,REXTON,0,44
+CAOA CHERY,S,ausente do painel,0,1,1,,S 18,0,41
+FERRARI,458,ausente do painel,0,1,1,,458,0,40
+KIA,STINGER,ausente do painel,0,1,1,,STINGER,0,37
+FERRARI,F8,colapso de variante,1,2,1,F8 SPIDER,F8 SPIDER | F8 TRIBUTO,2,33
+HYUNDAI,EQUUS,ausente do painel,0,1,1,,EQUUS,0,33
+MINI,COUPE,ausente do painel,0,1,1,,COUPE,0,32
+HYUNDAI,HD,ausente do painel,0,1,1,,HD 80,0,31
+MASERATI,GHIBLI,ausente do painel,0,1,1,,GHIBLI,0,31
+HYUNDAI,GENESIS,ausente do painel,0,1,1,,GENESIS,0,30
+JAC,IEV750V,ausente do painel,0,1,1,,IEV750V,0,30
+MINI,ONE,ausente do painel,0,1,1,,ONE,0,27
+SSANGYONG,TIVOLI,ausente do painel,0,1,1,,TIVOLI,0,24
+FERRARI,PORTOFINO,ausente do painel,0,1,1,,PORTOFINO,0,23
+NISSAN,TIIDA,ausente do painel,0,1,1,,TIIDA,0,23
+ASTON MARTIN,VANTAGE,ausente do painel,0,1,1,,VANTAGE,0,22
+HYUNDAI,SONATA,ausente do painel,0,1,1,,SONATA,0,19
+MCLAREN,720S,ausente do painel,0,1,1,,720S,0,18
+FERRARI,CALIFORNIA,ausente do painel,0,1,1,,CALIFORNIA,0,17
+KIA,QUORIS,ausente do painel,0,1,1,,QUORIS,0,17
+LIFAN,620,ausente do painel,0,1,1,,620,0,17
+MCLAREN,756LT,ausente do painel,0,1,1,,756LT,0,15
+JAGUAR,XK,ausente do painel,0,1,1,,XK,0,14
+M BENZ,SL,ausente do painel,0,1,1,,SL,0,14
+ASTON MARTIN,DBX,ausente do painel,0,1,1,,DBX,0,11
+M BENZ,SLS,ausente do painel,0,1,1,,SLS AMG,0,11
+MASERATI,GRAN,ausente do painel,0,1,1,,GRAN TURISMO,0,11
+FERRARI,F12BERLINETTA,ausente do painel,0,1,1,,F12BERLINETTA,0,10
+SSANGYONG,XLV,ausente do painel,0,1,1,,XLV,0,10
+FERRARI,ROMA,ausente do painel,0,1,1,,ROMA,0,9
+MASERATI,QUATTROPORTE,ausente do painel,0,1,1,,QUATTROPORTE,0,9
+ROLLS ROYCE,GHOST,ausente do painel,0,1,1,,GHOST,0,9
+,TAC,ausente do painel,0,1,1,,TAC STARK,0,8
+ASTON MARTIN,V8,ausente do painel,0,1,1,,V8 VANTAGE,0,8
+NISSAN,X,ausente do painel,0,1,1,,X TRAIL,0,8
+PORSCHE,918,ausente do painel,0,1,1,,918 SPYDER,0,8
+ROLLS ROYCE,PHANTOM,ausente do painel,0,1,1,,PHANTOM,0,8
+FERRARI,SF90,ausente do painel,0,1,1,,SF90 STRADALE,0,7
+HYUNDAI,VERACRUZ,ausente do painel,0,1,1,,VERACRUZ,0,7
+JAC,IEV350T,ausente do painel,0,1,1,,IEV350T,0,6
+ASTON MARTIN,DBS,ausente do painel,0,1,1,,DBS,0,5
+FERRARI,GTC4LUSSO,ausente do painel,0,1,1,,GTC4LUSSO T,0,5
+FERRARI,S90,ausente do painel,0,1,1,,S90 SPIDER,0,5
+KIA,CARENS,ausente do painel,0,1,1,,CARENS,0,5
+MCLAREN,GT,ausente do painel,0,1,1,,GT,0,5
+TESLA,MODEL,colapso de variante,2,3,1,MODEL 3 | MODEL S,MODEL 3 | MODEL S | MODEL X,34,5
+ASTON MARTIN,RAPIDE,ausente do painel,0,1,1,,RAPIDE,0,4
+FERRARI,FF,ausente do painel,0,1,1,,FF,0,4
+MASERATI,GRANCABRIO,ausente do painel,0,1,1,,GRANCABRIO,0,4
+ROLLS ROYCE,CULLINAN,ausente do painel,0,1,1,,CULLINAN,0,4
+FERRARI,296,ausente do painel,0,1,1,,296 GTB,0,3
+FERRARI,F12TDF,ausente do painel,0,1,1,,F12TDF,0,3
+MCLAREN,P1,ausente do painel,0,1,1,,P1,0,3
+MCLAREN,SENNA,ausente do painel,0,1,1,,SENNA,0,3
+ASTON MARTIN,DB9,ausente do painel,0,1,1,,DB9,0,2
+ASTON MARTIN,VIRAGE,ausente do painel,0,1,1,,VIRAGE,0,2
+KIA,SELTOS,ausente do painel,0,1,1,,SELTOS,0,2
+LEXUS,LS,ausente do painel,0,1,1,,LS,0,2
+LIFAN,X70,ausente do painel,0,1,1,,X70,0,2
+M BENZ,EQA,ausente do painel,0,1,1,,EQA,0,2
+M BENZ,EQB,ausente do painel,0,1,1,,EQB,0,2
+M BENZ,EQC,ausente do painel,0,1,1,,EQC,0,2
+MASERATI,MC20,ausente do painel,0,1,1,,MC20,0,2
+ROLLS ROYCE,WRAITH,ausente do painel,0,1,1,,WRAITH,0,2
+ASTON MARTIN,DB,ausente do painel,0,1,1,,DB 11,0,1
+KIA,EV6,ausente do painel,0,1,1,,EV6,0,1
+KIA,K900,ausente do painel,0,1,1,,K900,0,1
+KIA,TELLURIDE,ausente do painel,0,1,1,,TELLURIDE,0,1
+M BENZ,EQS,ausente do painel,0,1,1,,EQS,0,1
+MCLAREN,540C,ausente do painel,0,1,1,,540C,0,1
+MCLAREN,570GT,ausente do painel,0,1,1,,570GT,0,1
+VOLVO,S80,ausente do painel,0,1,1,,S80,0,1

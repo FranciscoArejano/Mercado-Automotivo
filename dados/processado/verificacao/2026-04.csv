@@ -1,0 +1,5 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2026-04,mes_declarado,2026-04,,,,,ok,2026-04
+2026-04,ranking_x_sub_segmento,2026-04,220031,220027,-4,-0.0018,ok,2 modelos divergentes de 73 conferidos; desvio de volume 0.0018%
+2026-04,cobertura,automoveis,187313,180002,-7311,-3.9031,medido,cobertura=96.10%
+2026-04,cobertura,comerciais_leves,49943,49913,-30,-0.0601,medido,cobertura=99.94%

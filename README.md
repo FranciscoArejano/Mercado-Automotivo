@@ -213,5 +213,17 @@ revertendo uma escolha de implementacao das primeiras rodadas -- a ESPEC nunca
 tratou do assunto, so' exige que `bruto/` seja intocado e tenha manifesto com
 hash.
 
+**Os derivados tambem sao versionados** (ESPEC sec.10.2): `painel.parquet`,
+`painel_bruto.parquet`, `validacao.md`, `candidatos.xlsx`, o dicionario e todo o
+conteudo de `saidas/` e `dados/processado/` -- cerca de 16 MB no conjunto. A
+regra anterior os ignorava por serem reconstituiveis; a justificativa valia
+enquanto a reconstituicao fosse barata, e reprocessar 12.916 paginas para
+conferir um numero nao e'. Com os derivados no repositorio, uma afirmacao de
+artigo pode citar um commit. So' `logs/` continua ignorado.
+
+**Uma tag por rodada** (sec.10.3): `rodada-N`, anotada, com uma linha sobre o que
+mudou. O `validacao.md` declara na primeira linha o commit que o gerou -- entao
+"os numeros desta tabela saem de `rodada-4`" e' verificavel por quem ler.
+
 Cada etapa escreve `logs/<etapa>.log` com contagem de linhas lidas e escritas.
 O pipeline e' idempotente: rodar duas vezes produz o mesmo resultado.

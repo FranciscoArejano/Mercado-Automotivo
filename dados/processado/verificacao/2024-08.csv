@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2024-08,mes_declarado,2024-08,,,,,ok,2024-08
+2024-08,subtotal_sub_segmento,automoveis/Grandcab,2646,2646,0,,ok,cauda nao publicada: 0 unidades
+2024-08,subtotal_sub_segmento,automoveis/Hatch Médios,65,57,-8,-12.3077,cauda_truncada,cauda nao publicada: 8 unidades
+2024-08,subtotal_sub_segmento,automoveis/Hatch Pequenos,50195,50053,-142,-0.2829,ok,cauda nao publicada: 142 unidades
+2024-08,subtotal_sub_segmento,automoveis/Monocab,5,5,0,,ok,cauda nao publicada: 0 unidades
+2024-08,subtotal_sub_segmento,automoveis/Sedans Compactos,12753,12753,0,,ok,cauda nao publicada: 0 unidades
+2024-08,subtotal_sub_segmento,automoveis/Sedans Grandes,607,591,-16,-2.6359,cauda_truncada,cauda nao publicada: 16 unidades
+2024-08,subtotal_sub_segmento,automoveis/Sedans Pequenos,7727,7727,0,,ok,cauda nao publicada: 0 unidades
+2024-08,subtotal_sub_segmento,automoveis/Sedans médios,5175,5172,-3,-0.0580,ok,cauda nao publicada: 3 unidades
+2024-08,subtotal_sub_segmento,automoveis/Sports,627,593,-34,-5.4226,cauda_truncada,cauda nao publicada: 34 unidades
+2024-08,subtotal_sub_segmento,automoveis/Suv's,81718,79625,-2093,-2.5612,cauda_truncada,cauda nao publicada: 2093 unidades
+2024-08,subtotal_sub_segmento,automoveis/Sw Grandes,10,10,0,,ok,cauda nao publicada: 0 unidades
+2024-08,subtotal_sub_segmento,automoveis/Sw Médios,1,1,0,,ok,cauda nao publicada: 0 unidades
+2024-08,subtotal_sub_segmento,automoveis/Veículos de Entrada,9403,9402,-1,-0.0106,ok,cauda nao publicada: 1 unidades
+2024-08,subtotal_sub_segmento,comerciais_leves/Furgões,3627,2612,-1015,-27.9846,cauda_truncada,cauda nao publicada: 1015 unidades
+2024-08,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,2115,2106,-9,-0.4255,ok,cauda nao publicada: 9 unidades
+2024-08,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,24500,23510,-990,-4.0408,cauda_truncada,cauda nao publicada: 990 unidades
+2024-08,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,21941,21941,0,,ok,cauda nao publicada: 0 unidades
+2024-08,ranking_x_sub_segmento,2024-08,212834,212831,-3,-0.0014,ok,2 modelos divergentes de 73 conferidos; desvio de volume 0.0014%
+2024-08,cobertura,automoveis,170995,168635,-2360,-1.3802,medido,cobertura=98.62%
+2024-08,cobertura,comerciais_leves,52201,52178,-23,-0.0441,medido,cobertura=99.96%

@@ -1,0 +1,204 @@
+mes,segmento,origem_tabela,sub_segmento_fonte,posicao_fonte,nome_completo_fonte,unidades_mes,unidades_mes_anterior,unidades_acumulado,participacao_pct,pagina,metodo_extracao,arquivo_origem
+2009-07,automoveis,sub_segmento,Veículos de Entrada,1,VW/GOL,27506,29309,169970,31.87,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Veículos de Entrada,2,FIAT/PALIO,18650,20768,115534,21.66,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Veículos de Entrada,3,FIAT/UNO,16173,16282,98392,18.45,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Veículos de Entrada,4,GM/CELTA,14605,12915,76093,14.27,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Veículos de Entrada,5,FORD/KA,7502,7704,46119,8.65,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Veículos de Entrada,6,PEUGEOT/207,3032,3406,16007,3.00,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Veículos de Entrada,7,RENAULT/CLIO,740,687,7014,1.32,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Veículos de Entrada,8,PEUGEOT/206,507,734,4209,0.79,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Veículos de Entrada,9,GM/CHEVETTE,0,0,4,0.00,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,1,VW/FOX/CROSS FOX,13235,13755,79853,40.26,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,2,FORD/FIESTA,5560,8482,43525,21.95,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,3,RENAULT/SANDERO,4665,5261,25352,12.78,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,4,GM/CORSA,2914,3410,21383,10.78,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,5,CITROEN/C3,3034,3568,18798,9.48,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,6,VW/POLO,1432,1904,8668,4.37,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,7,SMART/FORTWO,162,105,471,0.24,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,8,MINI/COOPER,47,93,265,0.13,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,9,FIAT/500,1,1,4,0.00,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,10,KIA/RIO,0,0,2,0.00,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Pequenos,11,GM/KADETT,0,0,1,0.00,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Médios,1,GM/ASTRA,1796,3274,15139,23.97,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Médios,2,FIAT/PUNTO,2298,2447,14705,23.28,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Médios,3,VW/GOLF,2184,1965,11755,18.61,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Médios,4,FORD/FOCUS,1306,1363,8495,13.45,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Médios,5,FIAT/STILO,1104,1030,6629,10.49,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Hatch Médios,6,GM/VECTRA HATCH,983,1334,6441,10.20,10,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Pequenos,1,GM/CLASSIC,12219,12583,63051,23.49,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Pequenos,2,FIAT/SIENA,11457,10581,58864,21.93,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Pequenos,3,VW/VOYAGE,8559,8831,47557,17.72,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Pequenos,4,GM/PRISMA,5689,7142,35476,13.22,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Pequenos,5,FORD/FIESTA SEDAN,3224,4769,25685,9.57,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Pequenos,6,GM/CORSA SEDAN,2533,3016,17362,6.47,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Pequenos,7,RENAULT/LOGAN,3433,2813,16234,6.05,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Pequenos,8,RENAULT/SYMBOL,786,728,2831,1.05,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Pequenos,9,RENAULT/CLIO SEDAN,7,4,931,0.35,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Pequenos,10,M.BENZ/CLASSE CLC,44,68,415,0.15,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Compactos,1,PEUGEOT/207 SEDAN,2142,2501,10678,47.55,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Compactos,2,VW/POLO SEDAN,1414,2018,9652,42.98,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Compactos,3,GM/ASTRA SEDAN,259,289,1739,7.74,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Compactos,4,HONDA/CITY,378,0,378,1.68,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Compactos,5,GM/MONZA,1,2,8,0.04,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Compactos,6,FORD/VERONA,0,1,2,0.01,11,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,1,HONDA/CIVIC,4273,6290,32635,27.82,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,2,TOYOTA/COROLLA,4555,5087,28951,24.68,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,3,GM/VECTRA,2055,2358,13494,11.50,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,4,FIAT/LINEA,1487,1323,7210,6.15,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,5,CITROEN/C4 PALLAS,1110,961,6702,5.71,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,6,FORD/FOCUS SEDAN,810,891,5819,4.96,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,7,FORD/FUSION,799,661,5460,4.65,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,8,NISSAN/SENTRA,173,240,4118,3.51,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,9,VW/BORA,236,299,3581,3.05,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,10,RENAULT/MEGANE,707,610,3138,2.68,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,11,VW/JETTA,275,231,2483,2.12,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,12,PEUGEOT/307 SEDAN,47,69,2333,1.99,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,13,M.BENZ/CLASSE C,154,90,886,0.76,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,14,KIA/CERATO,58,92,356,0.30,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,15,M.BENZ/CLS,5,10,53,0.05,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,16,VW/SANTANA,6,4,37,0.03,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,17,AUDI/A5,8,0,23,0.02,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,18,BMW/135i,8,9,17,0.01,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,19,AUDI/S5,0,0,5,0.00,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,20,FIAT/TEMPRA,2,0,3,0.00,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans médios,21,GM/IMPALA,0,0,2,0.00,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,1,HYUNDAI/AZERA,774,938,5162,51.30,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,2,HONDA/ACCORD,88,139,963,9.57,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,3,VW/PASSAT,41,92,936,9.30,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,4,GM/OMEGA,20,37,607,6.03,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,5,BMW/320,191,48,578,5.74,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,6,KIA/MAGENTIS,115,84,384,3.82,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,7,AUDI/A4,71,53,373,3.71,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,8,TOYOTA/CAMRY,22,20,356,3.54,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,9,CITROEN/C5,118,92,251,2.49,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,10,BMW/325,28,34,179,1.78,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,11,CHRYSLER/300C,19,19,162,1.61,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sedans Grandes,12,BMW/335I,18,20,111,1.10,12,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Médios,1,FIAT/PALIO WEEKEND,3366,3647,25878,49.75,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Médios,2,VW/SPACE FOX,2962,2381,16499,31.72,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Médios,3,PEUGEOT/207 SW,710,725,4990,9.59,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Médios,4,VW/PARATI,643,619,4654,8.95,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,1,RENAULT/MEGANE GT,213,244,1505,51.66,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,2,VW/JETTA VARIANT,122,64,659,22.62,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,3,VW/PASSAT VAR,6,24,436,14.97,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,4,PEUGEOT/307SW,45,72,263,9.03,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,5,PEUGEOT/407SW,6,2,24,0.82,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,6,TOYOTA/FIELDER,3,3,13,0.45,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,7,AUDI/A4 AVANT,1,0,7,0.24,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,8,VW/QUANTUM,0,0,3,0.10,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,9,BMW/530,0,1,1,0.03,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,10,DODGE/CARAVAN,0,0,1,0.03,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sw Grandes,11,VOLVO/V70,0,0,1,0.03,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,1,HONDA/FIT,4136,5169,29284,41.09,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,2,GM/MERIVA,3546,2972,19173,26.90,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,3,FIAT/IDEA,2582,3206,14843,20.83,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,4,FIAT/DOBLO,701,630,4006,5.62,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,5,NISSAN/LIVINA,594,577,1754,2.46,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,6,KIA/PICANTO,217,202,1072,1.50,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,7,M.BENZ/CLASSE B,115,132,745,1.05,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,8,RENAULT/KANGOO,11,11,228,0.32,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,9,EFFA/M100,17,13,151,0.21,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,10,M.BENZ/CLASSE A,2,1,4,0.01,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Monocab,11,SUZUKI/SX4,0,0,3,0.00,13,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Grandcab,1,GM/ZAFIRA,794,893,5107,36.18,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Grandcab,2,CITROEN/XSARA PICASSO,521,766,4169,29.54,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Grandcab,3,CITROEN/C4 PICASSO,429,419,2909,20.61,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Grandcab,4,RENAULT/SCENIC,280,330,1930,13.67,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sports,1,M.BENZ/SLK,29,34,251,40.16,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sports,2,FORD/MUSTANG,17,7,94,15.04,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sports,3,VW/EOS,10,5,57,9.12,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sports,4,PORSCHE/911,7,12,51,8.16,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sports,5,AUDI/TT,4,5,48,7.68,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sports,6,M.BENZ/SL,6,5,44,7.04,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sports,7,MITSUBISHI/ECLIPSE,4,3,28,4.48,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sports,8,ASA/CAUYPE,9,14,28,4.48,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Sports,9,DODGE/CHALLENGER,4,1,24,3.84,14,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,1,FORD/ECOSPORT,3074,3580,25096,26.90,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,2,HYUNDAI/TUCSON,2991,2551,13749,14.74,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,3,MITSUBISHI/PAJERO,1423,1183,8303,8.90,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,4,GM/CAPTIVA,1024,1221,7931,8.50,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,5,HONDA/CRV,213,1135,7385,7.92,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,6,HYUNDAI/SANTAFE,766,709,4215,4.52,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,7,KIA/SPORTAGE,697,814,4028,4.32,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,8,GM/TRACKER,1,7,3438,3.68,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,9,TOYOTA/HILUX SW4,456,438,3032,3.25,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,10,GM/BLAZER,145,188,1648,1.77,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,11,SUZUKI/GVITARA,270,288,1485,1.59,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,12,MITSUBISHI/Outlander,184,200,1187,1.27,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,13,HYUNDAI/VERACRUZ,191,215,1056,1.13,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,14,KIA/SORENTO,143,175,928,0.99,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,15,LAND ROVER/FREELANDER,187,153,872,0.93,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,16,VOLVO/XC60,152,163,819,0.88,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,17,TROLLER/T4,141,110,817,0.88,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,18,FORD/EDGE,102,115,769,0.82,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,19,DODGE/JOURNEY,50,90,717,0.77,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,20,TOYOTA/RAV4,33,32,632,0.68,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,21,SSANGYONG/ACTYON,100,87,621,0.67,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,22,SUBARU/FORESTER,90,124,458,0.49,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,23,TOYOTA/LAND CRUISE,61,32,410,0.44,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,24,LAND ROVER/RANGE ROVER,77,59,396,0.42,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,25,JEEP/CHEROKEE,51,47,359,0.38,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,26,LAND ROVER/DISCOVERY,49,52,346,0.37,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,27,VW/TOUAREG,11,16,318,0.34,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,28,MAHINDRA/SCORPIO,49,37,249,0.27,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,29,KIA/MOHAVE,46,55,235,0.25,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,30,NISSAN/XTRAIL,22,22,230,0.25,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,31,M.BENZ/CLASSE M,15,28,221,0.24,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,32,BMW/X6,41,38,190,0.20,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,33,SUBARU/TRIBECA,51,37,175,0.19,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,34,PORSCHE/CAYENNE,29,25,171,0.18,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,35,BMW/X5,31,51,170,0.18,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,36,KIA/SOUL,159,0,159,0.17,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,37,SUZUKI/JIMNY,26,16,137,0.15,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,38,NISSAN/PATHFINDER,40,44,130,0.14,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,39,LAND ROVER/ROVER,24,7,114,0.12,15,texto,2009-07.pdf
+2009-07,automoveis,sub_segmento,Suv's,40,MITSUBISHI/AIRTREK,5,10,104,0.11,15,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Pequenas,1,FIAT/STRADA,8275,8083,49899,56.21,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Pequenas,2,GM/MONTANA,3503,3265,17593,19.82,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Pequenas,3,VW/SAVEIRO,2740,2734,16346,18.41,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Pequenas,4,FORD/COURIER,726,840,4687,5.28,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Pequenas,5,HAFEI/MINI,48,15,245,0.28,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Pequenas,6,FORD/PAMPA,2,0,3,0.00,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,1,GM/S10,3915,3714,20652,34.14,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,2,TOYOTA/HILUX,3094,2969,16329,26.99,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,3,MITSUBISHI/L200,1562,1684,11413,18.87,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,4,FORD/RANGER,1012,919,6295,10.41,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,5,NISSAN/FRONTIER,606,700,3712,6.14,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,6,FORD/F250,203,268,1523,2.52,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,7,DODGE/RAM,74,31,376,0.62,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,8,HAFEI/RUIYI,33,20,152,0.25,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,9,AGRALE/AGRALE MARRUA,7,9,30,0.05,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,10,FORD/F150,1,1,11,0.02,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Pick-up's Grandes,11,GM/SILVERADO,1,0,5,0.01,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões,1,VW/KOMBI,2372,2199,15193,48.71,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões,2,HYUNDAI/HR,1098,843,5450,17.47,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões,3,FIAT/DUCATO,742,671,4321,13.85,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões,4,RENAULT/MASTER,283,269,2119,6.79,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões,5,KIA/K2500,378,292,1757,5.63,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões,6,M.BENZ/SPRINTER 313,174,122,1373,4.40,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões,7,IVECO/DAILY 3514,181,128,976,3.13,17,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões Pequenos,1,FIAT/FIORINO,1664,1492,9255,75.31,18,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões Pequenos,2,FIAT/DOBLO,163,469,1292,10.51,18,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões Pequenos,3,RENAULT/KANGOO,307,183,1162,9.46,18,texto,2009-07.pdf
+2009-07,comerciais_leves,sub_segmento,Furgões Pequenos,4,PEUGEOT/PARTNER,63,60,580,4.72,18,texto,2009-07.pdf
+2009-07,automoveis,ranking,,37,HYUNDAI/I30,1320,,,,6,texto,2009-07.pdf
+2009-07,automoveis,ranking,,39,CITROEN/C4,1155,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,21,PEUGEOT/BOXER,135,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,22,CITROEN/JUMPER,119,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,23,M.BENZ/SPRINTER 311,102,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,24,FORD/TRANSIT,95,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,25,HAFEI/MINIVAN,78,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,29,M.BENZ/SPRINTER 413,44,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,30,M.BENZ/SPRINTER,37,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,31,KIA/K2700,35,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,33,HAFEI/ZHONGYI VAN,20,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,34,IVECO/DAILY,14,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,35,CHANA/SC,11,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,36,JINBEI/VAN 13P,9,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,38,JINBEI/M35,6,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,39,FIAT/TECFORM,4,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,41,IVECO/DAILY 5516,2,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,44,HYUNDAI/H100,1,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,45,IVECO/FM 480,1,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,46,M.BENZ/SPRINTER 312,1,,,,6,texto,2009-07.pdf
+2009-07,comerciais_leves,ranking,,47,TOYOTA/RIBEIRAUTO,1,,,,6,texto,2009-07.pdf

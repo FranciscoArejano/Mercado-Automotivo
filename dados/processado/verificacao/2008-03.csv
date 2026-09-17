@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2008-03,mes_declarado,2008-03,,,,,ok,2008-03
+2008-03,subtotal_sub_segmento,automoveis/Grandcab,2248,2202,-46,-2.0463,cauda_truncada,cauda nao publicada: 46 unidades
+2008-03,subtotal_sub_segmento,automoveis/Hatch Médios,13734,11301,-2433,-17.7152,cauda_truncada,cauda nao publicada: 2433 unidades
+2008-03,subtotal_sub_segmento,automoveis/Hatch Pequenos,25446,25446,0,,ok,cauda nao publicada: 0 unidades
+2008-03,subtotal_sub_segmento,automoveis/Monocab,9020,9020,0,,ok,cauda nao publicada: 0 unidades
+2008-03,subtotal_sub_segmento,automoveis/Sedans Compactos,2854,2854,0,,ok,cauda nao publicada: 0 unidades
+2008-03,subtotal_sub_segmento,automoveis/Sedans Grandes,1014,909,-105,-10.3550,cauda_truncada,cauda nao publicada: 105 unidades
+2008-03,subtotal_sub_segmento,automoveis/Sedans Pequenos,29900,29900,0,,ok,cauda nao publicada: 0 unidades
+2008-03,subtotal_sub_segmento,automoveis/Sedans médios,14178,14176,-2,-0.0141,ok,cauda nao publicada: 2 unidades
+2008-03,subtotal_sub_segmento,automoveis/Sports,135,96,-39,-28.8889,cauda_truncada,cauda nao publicada: 39 unidades
+2008-03,subtotal_sub_segmento,automoveis/Suv's,11696,11671,-25,-0.2137,ok,cauda nao publicada: 25 unidades
+2008-03,subtotal_sub_segmento,automoveis/Sw Grandes,922,922,0,,ok,cauda nao publicada: 0 unidades
+2008-03,subtotal_sub_segmento,automoveis/Sw Médios,6208,6208,0,,ok,cauda nao publicada: 0 unidades
+2008-03,subtotal_sub_segmento,automoveis/Veículos de Entrada,76619,76619,0,,ok,cauda nao publicada: 0 unidades
+2008-03,subtotal_sub_segmento,comerciais_leves/Furgões,5177,4830,-347,-6.7027,cauda_truncada,cauda nao publicada: 347 unidades
+2008-03,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1908,1879,-29,-1.5199,cauda_truncada,cauda nao publicada: 29 unidades
+2008-03,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,7457,7456,-1,-0.0134,ok,cauda nao publicada: 1 unidades
+2008-03,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,12297,12297,0,,ok,cauda nao publicada: 0 unidades
+2008-03,ranking_x_sub_segmento,2008-03,209664,209657,-7,-0.0033,ok,2 modelos divergentes de 73 conferidos; desvio de volume 0.0033%
+2008-03,cobertura,automoveis,194031,193053,-978,-0.5040,medido,cobertura=99.50%
+2008-03,cobertura,comerciais_leves,26868,26836,-32,-0.1191,medido,cobertura=99.88%

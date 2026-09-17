@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2012-03,mes_declarado,2012-03,,,,,ok,2012-03
+2012-03,subtotal_sub_segmento,automoveis/Grandcab,1277,1277,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Hatch Médios,8946,8946,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Hatch Pequenos,51896,51896,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Monocab,9655,9655,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Sedans Compactos,11048,11048,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Sedans Grandes,1473,1473,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Sedans Pequenos,30836,30836,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Sedans médios,21951,21951,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Sports,150,150,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Suv's,21087,21087,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Sw Grandes,1358,1358,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Sw Médios,4068,4068,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,automoveis/Veículos de Entrada,72098,72098,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,comerciais_leves/Furgões,6467,6467,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,3108,3108,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,10347,10347,0,,ok,cauda nao publicada: 0 unidades
+2012-03,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,21734,21734,0,,ok,cauda nao publicada: 0 unidades
+2012-03,ranking_x_sub_segmento,2012-03,250806,250801,-5,-0.0020,ok,3 modelos divergentes de 78 conferidos; desvio de volume 0.0020%
+2012-03,cobertura,automoveis,240644,235843,-4801,-1.9951,medido,cobertura=98.00%
+2012-03,cobertura,comerciais_leves,43445,43418,-27,-0.0621,medido,cobertura=99.94%

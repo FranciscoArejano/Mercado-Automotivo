@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2021-12,mes_declarado,2021-12,,,,,ok,2021-12
+2021-12,subtotal_sub_segmento,automoveis/Grandcab,1610,1610,0,,ok,cauda nao publicada: 0 unidades
+2021-12,subtotal_sub_segmento,automoveis/Hatch Médios,329,321,-8,-2.4316,cauda_truncada,cauda nao publicada: 8 unidades
+2021-12,subtotal_sub_segmento,automoveis/Hatch Pequenos,28680,28644,-36,-0.1255,ok,cauda nao publicada: 36 unidades
+2021-12,subtotal_sub_segmento,automoveis/Monocab,485,485,0,,ok,cauda nao publicada: 0 unidades
+2021-12,subtotal_sub_segmento,automoveis/Sedans Compactos,12091,12089,-2,-0.0165,ok,cauda nao publicada: 2 unidades
+2021-12,subtotal_sub_segmento,automoveis/Sedans Grandes,541,495,-46,-8.5028,cauda_truncada,cauda nao publicada: 46 unidades
+2021-12,subtotal_sub_segmento,automoveis/Sedans Pequenos,15061,15061,0,,ok,cauda nao publicada: 0 unidades
+2021-12,subtotal_sub_segmento,automoveis/Sedans médios,8240,8239,-1,-0.0121,ok,cauda nao publicada: 1 unidades
+2021-12,subtotal_sub_segmento,automoveis/Sports,213,183,-30,-14.0845,cauda_truncada,cauda nao publicada: 30 unidades
+2021-12,subtotal_sub_segmento,automoveis/Suv's,69856,68232,-1624,-2.3248,cauda_truncada,cauda nao publicada: 1624 unidades
+2021-12,subtotal_sub_segmento,automoveis/Sw Grandes,1,1,0,,ok,cauda nao publicada: 0 unidades
+2021-12,subtotal_sub_segmento,automoveis/Sw Médios,1,1,0,,ok,cauda nao publicada: 0 unidades
+2021-12,subtotal_sub_segmento,automoveis/Veículos de Entrada,18992,18992,0,,ok,cauda nao publicada: 0 unidades
+2021-12,subtotal_sub_segmento,comerciais_leves/Furgões,3607,3002,-605,-16.7729,cauda_truncada,cauda nao publicada: 605 unidades
+2021-12,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1292,1286,-6,-0.4644,ok,cauda nao publicada: 6 unidades
+2021-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,20879,20873,-6,-0.0287,ok,cauda nao publicada: 6 unidades
+2021-12,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,11629,11629,0,,ok,cauda nao publicada: 0 unidades
+2021-12,ranking_x_sub_segmento,2021-12,187122,187122,0,,ok,0 modelos divergentes de 75 conferidos; desvio de volume 0.0000%
+2021-12,cobertura,automoveis,156146,154353,-1793,-1.1483,medido,cobertura=98.85%
+2021-12,cobertura,comerciais_leves,37409,37407,-2,-0.0053,medido,cobertura=99.99%

@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2023-06,mes_declarado,2023-06,,,,,ok,2023-06
+2023-06,subtotal_sub_segmento,automoveis/Grandcab,1521,1520,-1,-0.0657,ok,cauda nao publicada: 1 unidades
+2023-06,subtotal_sub_segmento,automoveis/Hatch Médios,144,142,-2,-1.3889,cauda_truncada,cauda nao publicada: 2 unidades
+2023-06,subtotal_sub_segmento,automoveis/Hatch Pequenos,40881,40855,-26,-0.0636,ok,cauda nao publicada: 26 unidades
+2023-06,subtotal_sub_segmento,automoveis/Monocab,2,2,0,,ok,cauda nao publicada: 0 unidades
+2023-06,subtotal_sub_segmento,automoveis/Sedans Compactos,11805,11804,-1,-0.0085,ok,cauda nao publicada: 1 unidades
+2023-06,subtotal_sub_segmento,automoveis/Sedans Grandes,564,549,-15,-2.6596,cauda_truncada,cauda nao publicada: 15 unidades
+2023-06,subtotal_sub_segmento,automoveis/Sedans Pequenos,6837,6837,0,,ok,cauda nao publicada: 0 unidades
+2023-06,subtotal_sub_segmento,automoveis/Sedans médios,4717,4717,0,,ok,cauda nao publicada: 0 unidades
+2023-06,subtotal_sub_segmento,automoveis/Sports,215,193,-22,-10.2326,cauda_truncada,cauda nao publicada: 22 unidades
+2023-06,subtotal_sub_segmento,automoveis/Suv's,62340,61091,-1249,-2.0035,cauda_truncada,cauda nao publicada: 1249 unidades
+2023-06,subtotal_sub_segmento,automoveis/Sw Grandes,3,3,0,,ok,cauda nao publicada: 0 unidades
+2023-06,subtotal_sub_segmento,automoveis/Sw Médios,0,0,0,,sem_total,
+2023-06,subtotal_sub_segmento,automoveis/Veículos de Entrada,12924,12923,-1,-0.0077,ok,cauda nao publicada: 1 unidades
+2023-06,subtotal_sub_segmento,comerciais_leves/Furgões,2323,1897,-426,-18.3384,cauda_truncada,cauda nao publicada: 426 unidades
+2023-06,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,2439,2435,-4,-0.1640,ok,cauda nao publicada: 4 unidades
+2023-06,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,19267,18568,-699,-3.6280,cauda_truncada,cauda nao publicada: 699 unidades
+2023-06,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,13643,13643,0,,ok,cauda nao publicada: 0 unidades
+2023-06,ranking_x_sub_segmento,2023-06,174519,174518,-1,-0.0006,ok,1 modelos divergentes de 72 conferidos; desvio de volume 0.0006%
+2023-06,cobertura,automoveis,142017,140636,-1381,-0.9724,medido,cobertura=99.03%
+2023-06,cobertura,comerciais_leves,37674,37664,-10,-0.0265,medido,cobertura=99.97%

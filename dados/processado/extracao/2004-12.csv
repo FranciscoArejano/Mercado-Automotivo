@@ -1,0 +1,181 @@
+mes,segmento,origem_tabela,sub_segmento_fonte,posicao_fonte,nome_completo_fonte,unidades_mes,unidades_mes_anterior,unidades_acumulado,participacao_pct,pagina,metodo_extracao,arquivo_origem
+2004-12,automoveis,sub_segmento,Veículos de Entrada,1,VW/GOL,18771,16082,177851,29.44,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Veículos de Entrada,2,FIAT/PALIO,12291,10069,130121,21.54,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Veículos de Entrada,3,GM/CELTA,13514,11354,122559,20.28,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Veículos de Entrada,4,FIAT/UNO,10151,7898,92738,15.35,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Veículos de Entrada,5,PEUGEOT/206,4057,3068,36272,6.00,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Veículos de Entrada,6,RENAULT/CLIO,2490,1414,22588,3.74,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Veículos de Entrada,7,FORD/KA,1904,1667,22048,3.65,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Veículos de Entrada,8,GM/CHEVETTE,3,0,13,0.00,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Veículos de Entrada,9,PEUGEOT/106,0,0,10,0.00,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Pequenos,1,FORD/FIESTA,5760,5033,63933,39.07,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Pequenos,2,VW/FOX/CROSS FOX,8025,5471,54383,33.24,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Pequenos,3,GM/CORSA,3348,1666,25601,15.65,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Pequenos,4,VW/POLO,1025,902,11849,7.24,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Pequenos,5,CITROEN/C3,825,711,7801,4.77,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Pequenos,6,MINI/COOPER,3,2,31,0.02,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Pequenos,7,GM/KADETT,1,2,13,0.01,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Pequenos,8,RENAULT/TWINGO,0,0,13,0.01,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Médios,1,GM/ASTRA,3130,1791,19446,30.09,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Médios,2,VW/GOLF,1356,1172,14166,21.92,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Médios,3,FORD/FOCUS,1229,1067,11359,17.58,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Médios,4,FIAT/STILO,1234,817,10137,15.68,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Médios,5,AUDI/A3,524,419,5653,8.75,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Hatch Médios,6,PEUGEOT/307,516,370,3869,5.99,10,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Pequenos,1,GM/CLASSIC,8822,5972,69708,41.89,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Pequenos,2,FIAT/SIENA,4874,3614,40718,24.47,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Pequenos,3,GM/CORSA SEDAN,4379,2300,30128,18.10,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Pequenos,4,RENAULT/CLIO SEDAN,1837,1278,15582,9.36,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Pequenos,5,FORD/FIESTA SEDAN,3757,3410,10241,6.15,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Pequenos,6,VW/VOYAGE,2,3,28,0.02,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Pequenos,7,FIAT/PREMIO,1,1,6,0.00,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Pequenos,8,SEAT/CORDOBA,0,0,3,0.00,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Pequenos,9,VW/APOLLO,1,0,3,0.00,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Pequenos,10,GM/COMIN,0,0,1,0.00,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Compactos,1,GM/ASTRA SEDAN,2291,1677,20545,61.31,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Compactos,2,VW/POLO SEDAN,1259,1185,12924,38.57,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Compactos,3,GM/MONZA,2,3,21,0.06,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Compactos,4,FORD/VERSAILLES,1,2,15,0.04,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Compactos,5,VW/LOGUS,0,0,4,0.01,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Compactos,6,FORD/VERONA,1,0,3,0.01,11,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,1,TOYOTA/COROLLA,4093,3070,37280,49.19,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,2,HONDA/CIVIC,2070,1809,20692,27.30,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,3,VW/SANTANA,702,438,7183,9.48,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,4,FORD/FOCUS SEDAN,673,524,5955,7.86,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,5,GM/VECTRA,297,184,3226,4.26,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,6,RENAULT/MEGANE,69,36,621,0.82,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,7,FIAT/MAREA,30,23,502,0.66,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,8,VW/BORA,46,27,209,0.28,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,9,M.BENZ/CLASSE C,6,11,75,0.10,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,10,M.BENZ/CLK,1,2,18,0.02,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,11,NISSAN/SENTRA,13,0,15,0.02,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,12,FIAT/TEMPRA,2,1,8,0.01,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,13,HYUNDAI/ELANTRA,0,1,2,0.00,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,14,CBP/191,1,0,1,0.00,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,15,CHRYSLER/PACIFIC,1,0,1,0.00,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,16,FORD/DEL REY,0,0,1,0.00,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,17,HYUNDAI/ACCENT,0,0,1,0.00,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans médios,18,HYUNDAI/EXCEL,0,0,1,0.00,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,1,VW/PASSAT,106,48,826,17.65,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,2,GM/OMEGA,109,89,806,17.22,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,3,CITROEN/C5,44,43,523,11.18,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,4,M.BENZ/C180,43,26,479,10.24,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,5,AUDI/A4,48,34,411,8.78,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,6,HONDA/ACCORD,36,33,392,8.38,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,7,FORD/MONDEO,22,27,279,5.96,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,8,M.BENZ/C230,19,25,232,4.96,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,9,BMW/320,24,21,225,4.81,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,10,M.BENZ/CLASSE E,18,12,218,4.66,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,11,TOYOTA/CAMRY,28,13,163,3.48,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sedans Grandes,12,BMW/545,10,12,126,2.69,12,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Médios,1,FIAT/PALIO WEEKEND,2952,2653,23401,60.73,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Médios,2,VW/PARATI,1475,1386,14942,38.77,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Médios,3,PEUGEOT/206SW,3,0,159,0.41,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Médios,4,GM/KADETT,1,6,34,0.09,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Grandes,1,TOYOTA/FIELDER,789,663,4863,80.82,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Grandes,2,PEUGEOT/307SW,37,34,562,9.34,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Grandes,3,VW/PASSAT,24,18,244,4.06,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Grandes,4,FIAT/MAREA WEEKEND,15,10,240,3.99,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Grandes,5,AUDI/A4 AVANT,12,8,72,1.20,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Grandes,6,VOLVO/V70,3,0,20,0.33,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Grandes,7,VW/QUANTUM,1,2,11,0.18,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Grandes,8,GM/CARAVAN,1,0,3,0.05,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sw Grandes,9,CHRYSLER/CARAVANSE,1,0,2,0.03,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Monocab,1,HONDA/FIT,3121,2552,29511,47.22,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Monocab,2,GM/MERIVA,2226,1614,20686,33.10,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Monocab,3,FIAT/DOBLO,887,567,6625,10.60,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Monocab,4,M.BENZ/CLASSE A,522,402,5047,8.08,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Monocab,5,RENAULT/KANGOO,38,32,603,0.96,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Monocab,6,HYUNDAI/ATOS,0,0,18,0.03,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Monocab,7,CITROEN/BERLI,0,0,4,0.01,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Monocab,8,MITSUBISHI/SPACE WAGON,0,0,3,0.00,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Monocab,9,CITROEN/BERLINGO,0,0,2,0.00,13,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Grandcab,1,GM/ZAFIRA,1757,1212,12148,34.58,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Grandcab,2,CITROEN/XSARA PICASSO,1328,978,11821,33.65,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Grandcab,3,RENAULT/SCENIC,1087,895,10937,31.13,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Grandcab,4,CHRYSLER/GCARAVAN,34,20,227,0.65,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sports,1,M.BENZ/SLK,26,5,48,17.45,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sports,2,JAGUAR/X-TYPE,3,2,40,14.55,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sports,3,AUDI/S3,0,0,34,12.36,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sports,4,NISSAN/350Z,5,5,33,12.00,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sports,5,JAGUAR/S-TYPE,1,0,30,10.91,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sports,6,JAGUAR/S TYPE,2,3,27,9.82,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sports,7,BMW/Z430,2,1,22,8.00,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sports,8,PORSCHE/911,1,4,22,8.00,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Sports,9,BMW/M3,0,2,19,6.91,14,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,1,FORD/ECOSPORT,5110,4159,38668,67.74,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,2,MITSUBISHI/PAJERO,986,815,7673,13.44,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,3,GM/BLAZER,632,381,3001,5.26,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,4,NISSAN/XTERRA,146,83,1104,1.93,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,5,TROLLER/T4,101,85,1017,1.78,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,6,LAND ROVER/DEFENDER,67,28,712,1.25,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,7,TOYOTA/LAND CRUISE,110,52,640,1.12,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,8,LAND ROVER/FREELANDER,96,64,606,1.06,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,9,MITSUBISHI/AIRTREK,51,34,560,0.98,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,10,TOYOTA/RAV4,86,40,409,0.72,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,11,GM/TRACKER,5,2,352,0.62,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,12,BMW/X5,37,20,324,0.57,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,13,JEEP/CHEROKEE,33,20,277,0.49,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,14,LAND ROVER/DISCOVERY,30,27,234,0.41,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,15,BMW/X3,25,23,195,0.34,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,16,KIA/SPORTAGE,8,5,178,0.31,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,17,HYUNDAI/TERRACAN,36,22,172,0.30,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,18,KIA/SORENTO,29,23,134,0.23,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,19,PORSCHE/CAYENNE,12,7,110,0.19,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,20,NISSAN/PATHFINDER,7,7,104,0.18,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,21,VOLVO/XC90,11,6,99,0.17,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,22,LAND ROVER/RANGE ROVER,10,9,73,0.13,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,23,HONDA/CRV,2,10,66,0.12,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,24,VW/TOUAREG,12,5,59,0.10,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,25,SUBARU/FORESTER,2,3,55,0.10,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,26,CROSS LANDER/CROSS LANDER,0,1,43,0.08,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,27,VOLVO/XC70,7,5,40,0.07,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,28,SSANGYONG/MUSSO,6,2,33,0.06,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,29,HYUNDAI/PORTER,0,0,28,0.05,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,30,SSANGYONG/REXTON,5,1,28,0.05,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,31,HYUNDAI/MATRIX,0,0,16,0.03,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,32,HYUNDAI/SANTAFE,2,2,13,0.02,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,33,TOYOTA/LEXUS,1,0,11,0.02,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,34,FORD/EXPLORER,5,0,10,0.02,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,35,M.BENZ/CLASSE M,2,0,9,0.02,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,36,GM/SUBURBAN,0,1,7,0.01,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,37,TOYOTA/BANDEIRANTE,0,0,7,0.01,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,38,NISSAN/INFINITI,1,2,6,0.01,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,39,HUMMER/HUMMER,2,0,6,0.01,15,texto,2004-12.pdf
+2004-12,automoveis,sub_segmento,Suv's,40,TOYOTA/HILUX SW4,0,1,5,0.01,15,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Pequenas,1,FIAT/STRADA,3589,3094,29707,38.80,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Pequenas,2,GM/MONTANA,2297,1550,21585,28.19,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Pequenas,3,VW/SAVEIRO,1451,1380,17888,23.36,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Pequenas,4,FORD/COURIER,637,556,7044,9.20,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Pequenas,5,FIAT/UNO,76,5,342,0.45,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Pequenas,6,FORD/PAMPA,0,0,6,0.01,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,1,GM/S10,1702,1046,14024,27.73,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,2,MITSUBISHI/L200,1471,1175,12596,24.91,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,3,FORD/RANGER,1118,885,7564,14.96,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,4,TOYOTA/HILUX,830,674,6711,13.27,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,5,NISSAN/FRONTIER,720,623,6673,13.20,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,6,FORD/F250,245,241,2928,5.79,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,7,GM/D20,3,1,19,0.04,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,8,GM/C20,2,0,17,0.03,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,9,GM/SILVERADO,0,1,17,0.03,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,10,FORD/F150,0,0,12,0.02,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Pick-up's Grandes,11,FORD/F1000,1,1,8,0.02,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões,1,VW/KOMBI,1243,923,12389,53.83,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões,2,FIAT/DUCATO,302,241,3357,14.59,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões,3,RENAULT/MASTER,214,180,2400,10.43,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões,4,PEUGEOT/BOXER,253,129,1520,6.60,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões,5,KIA/BESTA,207,115,1499,6.51,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões,6,M.BENZ/SPRINTER 313,188,136,1031,4.48,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões,7,M.BENZ/SPRINTER,16,31,818,3.55,17,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões Pequenos,1,FIAT/FIORINO,875,863,8970,77.25,18,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões Pequenos,2,FIAT/DOBLO,161,108,1720,14.81,18,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões Pequenos,3,RENAULT/KANGOO,29,34,695,5.99,18,texto,2004-12.pdf
+2004-12,comerciais_leves,sub_segmento,Furgões Pequenos,4,PEUGEOT/PARTNER,1,0,227,1.95,18,texto,2004-12.pdf
+2004-12,comerciais_leves,ranking,,19,IVECO/3510,141,,,,6,texto,2004-12.pdf
+2004-12,comerciais_leves,ranking,,21,CITROEN/JUMPER,69,,,,6,texto,2004-12.pdf
+2004-12,comerciais_leves,ranking,,22,HYUNDAI/H100,40,,,,6,texto,2004-12.pdf
+2004-12,comerciais_leves,ranking,,23,KIA/K2700,33,,,,6,texto,2004-12.pdf
+2004-12,comerciais_leves,ranking,,26,HYUNDAI/H1STAREX,8,,,,6,texto,2004-12.pdf
+2004-12,comerciais_leves,ranking,,29,M.BENZ/SPRINTER 413,2,,,,6,texto,2004-12.pdf
+2004-12,comerciais_leves,ranking,,30,FORD/ENGERAUTO PAMPA,1,,,,6,texto,2004-12.pdf
+2004-12,comerciais_leves,ranking,,32,FORD/NOGUEIRA,1,,,,6,texto,2004-12.pdf

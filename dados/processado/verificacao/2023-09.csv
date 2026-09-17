@@ -1,0 +1,3 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2023-09,mes_declarado,2023-09,,,,,indeterminado,titulo 'Resumo Mensal' nao encontrado
+2023-09,extracao_de_texto,2023-09,,,,,falhou,paginas=46 sem_texto=46

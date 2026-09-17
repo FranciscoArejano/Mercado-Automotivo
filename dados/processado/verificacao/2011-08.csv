@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2011-08,mes_declarado,2011-08,,,,,ok,2011-08
+2011-08,subtotal_sub_segmento,automoveis/Grandcab,2136,2136,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Hatch Médios,15452,15452,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Hatch Pequenos,45516,45516,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Monocab,10463,10463,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Sedans Compactos,7706,7706,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Sedans Grandes,2376,2376,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Sedans Pequenos,38208,38208,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Sedans médios,16865,16865,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Sports,334,334,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Suv's,23218,23218,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Sw Grandes,1175,1175,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Sw Médios,4665,4665,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,automoveis/Veículos de Entrada,85020,85020,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,comerciais_leves/Furgões,7344,7344,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,3044,3044,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,13542,13542,0,,ok,cauda nao publicada: 0 unidades
+2011-08,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,23956,23956,0,,ok,cauda nao publicada: 0 unidades
+2011-08,ranking_x_sub_segmento,2011-08,270322,270319,-3,-0.0011,ok,2 modelos divergentes de 78 conferidos; desvio de volume 0.0011%
+2011-08,cobertura,automoveis,258206,253134,-5072,-1.9643,medido,cobertura=98.04%
+2011-08,cobertura,comerciais_leves,49558,49542,-16,-0.0323,medido,cobertura=99.97%

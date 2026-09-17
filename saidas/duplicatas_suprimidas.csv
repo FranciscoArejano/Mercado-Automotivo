@@ -1,0 +1,5 @@
+mes_ref,ano,mes,data,segmento_fonte,sub_segmento_fonte,origem_tabela,posicao_fonte,marca_fonte,modelo_fonte,nome_completo_fonte,metodo_separacao,marca_conhecida,unidades,metodo_extracao,arquivo_origem,pagina_origem,duplicata_publicada
+2013-11,2013,11,2013-11-01,automoveis,,ranking,26,THINK,CITY,THINK/CITY,barra,True,2464,texto,2013-11.pdf,6,"HONDA/CITY (Sedans Compactos, pg. 12)"
+2013-11,2013,11,2013-11-01,comerciais_leves,,ranking,4,PONTIAC,MONTANA,PONTIAC/MONTANA,barra,True,3901,texto,2013-11.pdf,6,"GM /MONTANA (Pick-up's Pequenas, pg. 18)"
+2013-11,2013,11,2013-11-01,comerciais_leves,,ranking,8,VW,RANGER,VW /RANGER,barra,True,1967,texto,2013-11.pdf,6,"FORD/RANGER (Pick-up's Grandes, pg. 18)"
+2013-11,2013,11,2013-11-01,comerciais_leves,,ranking,13,FORD,MASTER,FORD/MASTER,barra,True,839,texto,2013-11.pdf,6,"RENAULT/MASTER (Furgões, pg. 18)"

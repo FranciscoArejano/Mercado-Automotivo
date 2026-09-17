@@ -1,0 +1,6 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2020-05,mes_declarado,2020-05,,,,,ok,2020-05
+2020-05,marcador_de_secao,2020-05,,,,,corrigido_pelo_sub_segmento,"13 blocos; p11: 'Veículos de Entrada' e' de automoveis, mas o marcador da secao dizia comerciais_leves"
+2020-05,ranking_x_sub_segmento,2020-05,53236,53235,-1,-0.0019,ok,1 modelos divergentes de 73 conferidos; desvio de volume 0.0019%
+2020-05,cobertura,automoveis,44139,43493,-646,-1.4636,medido,cobertura=98.54%
+2020-05,cobertura,comerciais_leves,12500,12495,-5,-0.0400,medido,cobertura=99.96%

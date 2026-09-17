@@ -126,6 +126,71 @@ def recuperacoes(painel: pd.DataFrame) -> pd.DataFrame:
     return pd.concat(partes, ignore_index=True) if partes else pd.DataFrame()
 
 
+def marcar_duplicatas_publicadas(bruto: pd.DataFrame) -> pd.DataFrame:
+    """Marca, no painel bruto, a linha do ranking que duplica uma de sub-segmento.
+
+    Recuperada a marca (`recuperacoes`), quatro linhas de 2013-11 passam a ser o
+    **mesmo modelo, com o mesmo valor, no mesmo informe** que uma linha da tabela
+    de sub-segmento. A regra Q7 e' que o sub-segmento manda e o ranking so'
+    preenche o que ela nao lista, entao essas quatro nao deviam ter entrado.
+
+    **Por que aqui e nao na chave da etapa 02.** As cinco irmas deste defeito --
+    `VW /GOL` contra `VW/GOL` -- foram consertadas la', na canonizacao da chave
+    de reconciliacao, porque a divergencia era **tipografica**: mesma marca,
+    mesmo modelo, espaco a mais. Estas quatro resistiram ao mesmo conserto por um
+    motivo incidental: a divergencia e' de **marca** (`PONTIAC/MONTANA` contra
+    `GM /MONTANA`), e canonizar isso na etapa 02 significaria reescrever a marca
+    dentro do painel bruto, que e' transcricao fiel da fonte (sec.4). Entao a
+    linha entra como a fonte a publicou e sai **marcada**, nao apagada:
+    `duplicata_publicada` aponta a linha que ela duplica, e a supressao acontece
+    a jusante, no painel de analise.
+
+    E' o mesmo defeito com dois tratamentos, e a assimetria esta' registrada no
+    dicionario de dados e em `validacao.md` porque ela precisa de resposta
+    escrita: a montante quando da' para consertar sem mexer no transcrito, a
+    jusante quando nao da'.
+    """
+    marcado = bruto.copy()
+    marcado["duplicata_publicada"] = ""
+    recuperacoes_feitas = recuperacoes(
+        marcado.rename(columns={"marca_fonte": "marca", "modelo_fonte": "modelo",
+                                "segmento_fonte": "segmento"})
+    )
+    if recuperacoes_feitas.empty:
+        return marcado
+    aplicadas = recuperacoes_feitas[recuperacoes_feitas["marca_recuperada"] != ""]
+
+    from .nomes import chave as _chave_do_nome
+
+    for _, linha in aplicadas.iterrows():
+        marca_certa = _chave_do_nome(linha["marca_recuperada"])
+        modelo = _chave_do_nome(linha["modelo"])
+        no_mes = (
+            (marcado["mes_ref"] == linha["mes_ref"])
+            & (marcado["segmento_fonte"] == linha["segmento"])
+            & (marcado["modelo_fonte"].map(_chave_do_nome) == modelo)
+        )
+        do_sub = marcado[
+            no_mes & (marcado["origem_tabela"] == "sub_segmento")
+            & (marcado["marca_fonte"].map(_chave_do_nome) == marca_certa)
+        ]
+        do_ranking = marcado[
+            no_mes & (marcado["origem_tabela"] == "ranking")
+            & (marcado["marca_fonte"].map(_chave_do_nome)
+               == _chave_do_nome(linha["marca_publicada"]))
+        ]
+        if do_sub.empty or do_ranking.empty:
+            continue
+        referencia = do_sub.iloc[0]
+        if int(referencia["unidades"]) != int(do_ranking.iloc[0]["unidades"]):
+            continue
+        marcado.loc[do_ranking.index, "duplicata_publicada"] = (
+            f"{referencia['nome_completo_fonte']} "
+            f"({referencia['sub_segmento_fonte']}, pg. {referencia['pagina_origem']})"
+        )
+    return marcado
+
+
 def duplicatas_apos_recuperacao(bruto: pd.DataFrame) -> pd.DataFrame:
     """Linhas do ranking que, recuperada a marca, repetem uma de sub-segmento.
 

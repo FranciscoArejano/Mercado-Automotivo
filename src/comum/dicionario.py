@@ -34,6 +34,18 @@ CAMPOS = [
     ("nome_suspeito", "booleano", "O nome provavelmente nao designa um veiculo -- registro "
                                   "avulso, encarrocador, erro de cadastro."),
     ("motivo_nome_suspeito", "texto", "Por que foi marcado. Vazio quando nao foi."),
+    ("duplicata_publicada", "texto", "So' no painel bruto. Quando preenchida, esta linha "
+     "repete outra do **mesmo informe**, com o mesmo valor, sob marca trocada, e o texto "
+     "aponta qual. Essas linhas ficam fora do painel de analise, e o invariante central e' "
+     "conferido depois de exclui-las. Hoje sao exatamente quatro, todas de 2013-11, travadas "
+     "por teste. ASSIMETRIA DELIBERADA: o mesmo defeito teve dois tratamentos. Cinco "
+     "duplicatas irmas foram removidas **a montante**, na canonizacao da chave de "
+     "reconciliacao da etapa 02, porque a divergencia era tipografica (`VW /GOL` contra "
+     "`VW/GOL`) e consertar a chave nao mexe no que foi transcrito. Estas quatro divergiam "
+     "na **marca** (`PONTIAC/MONTANA` contra `GM /MONTANA`), e canoniza-las na etapa 02 "
+     "significaria reescrever a marca dentro do painel bruto, que e' transcricao fiel da "
+     "fonte (sec.4). Entao foram removidas **a jusante**, por supressao registrada. A regra: "
+     "a montante quando da' para consertar sem tocar no transcrito; a jusante quando nao da'."),
     ("marca_publicada_fonte", "texto", "A marca como a fonte publicou, antes de qualquer "
      "recuperacao. Igual a `marca` em tudo menos nas linhas de D4."),
     ("marca_recuperada", "booleano", "A marca desta linha foi recuperada da coluna de mes "

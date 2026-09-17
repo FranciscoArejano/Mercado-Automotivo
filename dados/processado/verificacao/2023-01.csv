@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2023-01,mes_declarado,2023-01,,,,,ok,2023-01
+2023-01,subtotal_sub_segmento,automoveis/Grandcab,1428,1427,-1,-0.0700,ok,cauda nao publicada: 1 unidades
+2023-01,subtotal_sub_segmento,automoveis/Hatch Médios,158,153,-5,-3.1646,cauda_truncada,cauda nao publicada: 5 unidades
+2023-01,subtotal_sub_segmento,automoveis/Hatch Pequenos,25179,25170,-9,-0.0357,ok,cauda nao publicada: 9 unidades
+2023-01,subtotal_sub_segmento,automoveis/Monocab,4,4,0,,ok,cauda nao publicada: 0 unidades
+2023-01,subtotal_sub_segmento,automoveis/Sedans Compactos,9158,9158,0,,ok,cauda nao publicada: 0 unidades
+2023-01,subtotal_sub_segmento,automoveis/Sedans Grandes,574,557,-17,-2.9617,cauda_truncada,cauda nao publicada: 17 unidades
+2023-01,subtotal_sub_segmento,automoveis/Sedans Pequenos,6463,6463,0,,ok,cauda nao publicada: 0 unidades
+2023-01,subtotal_sub_segmento,automoveis/Sedans médios,2595,2595,0,,ok,cauda nao publicada: 0 unidades
+2023-01,subtotal_sub_segmento,automoveis/Sports,208,190,-18,-8.6538,cauda_truncada,cauda nao publicada: 18 unidades
+2023-01,subtotal_sub_segmento,automoveis/Suv's,47143,46217,-926,-1.9642,cauda_truncada,cauda nao publicada: 926 unidades
+2023-01,subtotal_sub_segmento,automoveis/Sw Grandes,1,1,0,,ok,cauda nao publicada: 0 unidades
+2023-01,subtotal_sub_segmento,automoveis/Sw Médios,1,1,0,,ok,cauda nao publicada: 0 unidades
+2023-01,subtotal_sub_segmento,automoveis/Veículos de Entrada,10920,10920,0,,ok,cauda nao publicada: 0 unidades
+2023-01,subtotal_sub_segmento,comerciais_leves/Furgões,2182,1870,-312,-14.2988,cauda_truncada,cauda nao publicada: 312 unidades
+2023-01,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1418,1416,-2,-0.1410,ok,cauda nao publicada: 2 unidades
+2023-01,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,13277,13002,-275,-2.0713,cauda_truncada,cauda nao publicada: 275 unidades
+2023-01,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,9710,9710,0,,ok,cauda nao publicada: 0 unidades
+2023-01,ranking_x_sub_segmento,2023-01,126705,126615,-90,-0.0710,ok,1 modelos divergentes de 74 conferidos; desvio de volume 0.0710%
+2023-01,cobertura,automoveis,103872,102856,-1016,-0.9781,medido,cobertura=99.02%
+2023-01,cobertura,comerciais_leves,26588,26488,-100,-0.3761,medido,cobertura=99.62%

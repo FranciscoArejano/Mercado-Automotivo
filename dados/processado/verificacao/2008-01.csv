@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2008-01,mes_declarado,2008-01,,,,,ok,2008-01
+2008-01,subtotal_sub_segmento,automoveis/Grandcab,2178,2178,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Hatch Médios,10113,10113,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Hatch Pequenos,26047,14885,-11162,-42.8533,cauda_truncada,cauda nao publicada: 11162 unidades
+2008-01,subtotal_sub_segmento,automoveis/Monocab,8047,8047,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Sedans Compactos,3259,3259,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Sedans Grandes,669,669,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Sedans Pequenos,29904,29904,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Sedans médios,14646,14646,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Sports,86,86,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Suv's,10811,10811,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Sw Grandes,1043,1043,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Sw Médios,6452,6452,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,automoveis/Veículos de Entrada,65513,65513,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,comerciais_leves/Furgões,4601,4601,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1739,1739,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,7576,7576,0,,ok,cauda nao publicada: 0 unidades
+2008-01,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,10826,10826,0,,ok,cauda nao publicada: 0 unidades
+2008-01,ranking_x_sub_segmento,2008-01,186123,186122,-1,-0.0005,ok,1 modelos divergentes de 74 conferidos; desvio de volume 0.0005%
+2008-01,cobertura,automoveis,180331,178768,-1563,-0.8667,medido,cobertura=99.13%
+2008-01,cobertura,comerciais_leves,25115,25112,-3,-0.0119,medido,cobertura=99.99%

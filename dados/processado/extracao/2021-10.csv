@@ -1,0 +1,191 @@
+mes,segmento,origem_tabela,sub_segmento_fonte,posicao_fonte,nome_completo_fonte,unidades_mes,unidades_mes_anterior,unidades_acumulado,participacao_pct,pagina,metodo_extracao,arquivo_origem
+2021-10,automoveis,sub_segmento,Veículos de Entrada,1,FIAT/MOBI,2945,4573,62465,35.02,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Veículos de Entrada,2,VW/GOL,5039,3141,51035,28.61,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Veículos de Entrada,3,RENAULT/KWID,2655,1963,42431,23.79,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Veículos de Entrada,4,FIAT/UNO,363,323,19323,10.83,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Veículos de Entrada,5,VW/UP,2,3,1977,1.11,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Veículos de Entrada,6,TOYOTA/ETIOS HB,2,0,1093,0.61,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Veículos de Entrada,7,VW/FUSCA,1,2,17,0.01,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Veículos de Entrada,8,FIAT/PALIO,0,0,10,0.01,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Veículos de Entrada,9,GM/CELTA,2,0,4,0.00,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,1,FIAT/ARGO,8381,4911,73795,25.67,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,2,HYUNDAI/HB20,5844,7147,72989,25.39,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,3,GM/ONIX,5157,4310,52771,18.36,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,4,VW/POLO,1040,759,18377,6.39,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,5,TOYOTA/YARIS HB,1087,1026,18303,6.37,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,6,VW/FOX/CROSS FOX,1595,2334,17542,6.10,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,7,PEUGEOT/208,2270,1697,12876,4.48,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,8,RENAULT/SANDERO,424,490,11088,3.86,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,9,FORD/KA,23,42,8454,2.94,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,10,MINI/COOPER,102,131,696,0.24,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,11,KIA/RIO,0,2,169,0.06,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Pequenos,12,MINI/JCW,9,17,96,0.03,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Médios,1,GM/CRUZE HB,101,188,1580,67.29,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Médios,2,NISSAN/LEAF,192,2,236,10.05,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Médios,3,BMW/I3,11,24,145,6.18,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Médios,4,M.BENZ/CLASSE A,11,16,144,6.13,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Médios,5,BMW/M135I,3,7,123,5.24,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Hatch Médios,6,AUDI/A3,4,0,43,1.83,11,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Pequenos,1,HYUNDAI/HB20S,1716,2269,20681,23.14,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Pequenos,2,VW/VOYAGE,2968,872,20648,23.10,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Pequenos,3,FIAT/CRONOS,2816,2301,19807,22.16,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Pequenos,4,FIAT/SIENA,946,1192,11719,13.11,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Pequenos,5,RENAULT/LOGAN,370,375,7953,8.90,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Pequenos,6,NISSAN/V-DRIVE,17,71,4925,5.51,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Pequenos,7,FORD/KA SEDAN,3,17,1897,2.12,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Pequenos,8,TOYOTA/ETIOS SEDAN,3,3,1708,1.91,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Pequenos,9,GM/PRISMA,5,1,23,0.03,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Pequenos,10,NISSAN/VERSA,0,0,19,0.02,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Compactos,1,GM/ONIX PLUS,4494,3747,38081,46.21,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Compactos,2,VW/VIRTUS,1409,1240,19056,23.13,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Compactos,3,TOYOTA/YARIS SEDAN,557,598,10967,13.31,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Compactos,4,NISSAN/VERSA,945,683,7911,9.60,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Compactos,5,HONDA/CITY,266,652,5948,7.22,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Compactos,6,CAOA CHERY/ARRIZO 5,7,13,430,0.52,12,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,1,TOYOTA/COROLLA,3014,2279,33468,54.00,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,2,HONDA/CIVIC,1657,1891,15664,25.27,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,3,GM/CRUZE SEDAN,480,659,4795,7.74,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,4,CAOA CHERY/ARRIZO 6,276,346,2770,4.47,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,5,VW/JETTA,110,89,2682,4.33,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,6,KIA/CERATO,105,107,815,1.31,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,7,AUDI/A5,27,25,347,0.56,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,8,M.BENZ/CLASSE C,1,0,308,0.50,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,9,CITROEN/C4L,2,0,258,0.42,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,10,M.BENZ/CLASSE A,5,8,200,0.32,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,11,AUDI/A3 SEDAN,5,0,134,0.22,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,12,BMW/M235I,18,21,124,0.20,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,13,BMW/218I,7,17,97,0.16,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,14,BMW/430I,2,3,90,0.15,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,15,BMW/M440I,14,10,71,0.11,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,16,M.BENZ/CLA45,1,6,57,0.09,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,17,M.BENZ/CLA35,1,8,54,0.09,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,18,SUBARU/WRX,0,7,13,0.02,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,19,BYD/E5,0,0,11,0.02,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,20,NISSAN/SENTRA,0,1,8,0.01,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans médios,21,HYUNDAI/ELANTRA,1,0,3,0.00,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,1,BMW/320I,417,437,4704,66.61,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,2,AUDI/A4,22,48,485,6.87,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,3,BMW/330E,76,82,470,6.66,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,4,M.BENZ/CLASSE C,3,4,249,3.53,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,5,BMW/745LE,5,15,136,1.93,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,6,VOLVO/S60,4,3,118,1.67,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,7,M.BENZ/CLA250,20,14,106,1.50,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,8,PORSCHE/PANAMERA,17,8,106,1.50,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,9,AUDI/A6,4,8,80,1.13,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,10,M.BENZ/CLASSE E,3,3,76,1.08,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,11,BMW/530E,5,3,69,0.98,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sedans Grandes,12,BMW/M340I,9,3,64,0.91,13,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sw Médios,1,FIAT/WEEKEND,0,0,8,47.06,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sw Médios,2,VW/SPACE FOX,0,0,3,17.65,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sw Médios,3,FIAT/PALIO WEEKEND,1,0,2,11.76,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sw Médios,4,VW/PARATI,0,0,2,11.76,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sw Grandes,1,AUDI/RS6 AVANT,4,3,94,78.99,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sw Grandes,2,AUDI/RS4 AVANT,0,1,22,18.49,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sw Grandes,3,SUBARU/OUTBACK WAGON,0,0,1,0.84,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sw Grandes,4,VW/GOLF VARIANT,0,1,1,0.84,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sw Grandes,5,VW/QUANTUM,0,0,1,0.84,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Monocab,1,HONDA/FIT,512,450,6318,53.81,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Monocab,2,FIAT/DOBLO,276,506,5287,45.03,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Monocab,3,GM/BOLT,0,0,132,1.12,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Monocab,4,FIAT/IDEA,0,0,1,0.01,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Monocab,5,GM/MERIVA,1,0,1,0.01,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Monocab,6,NISSAN/LIVINA,0,0,1,0.01,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Monocab,7,EFFA/M100,0,0,1,0.01,14,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Grandcab,1,GM/SPIN,612,460,10712,99.30,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Grandcab,2,KIA/CARNIVAL,0,17,51,0.47,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Grandcab,3,CHRYSLER/PACIFICA,1,4,19,0.18,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Grandcab,4,TOYOTA/SIENNA,0,0,4,0.04,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sports,1,PORSCHE/911,34,47,814,29.57,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sports,2,BMW/Z4,15,61,372,13.51,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sports,3,FORD/MUSTANG,101,5,346,12.57,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sports,4,PORSCHE/TAYCAN,26,29,342,12.42,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sports,5,PORSCHE/BOXSTER,8,23,201,7.30,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sports,6,PORSCHE/CAYMAN,2,0,110,4.00,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sports,7,BMW/M3,35,16,107,3.89,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sports,8,JAGUAR/F-TYPE,3,7,88,3.20,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Sports,9,AUDI/TT,0,2,75,2.72,15,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,1,JEEP/RENEGADE,6723,4501,65393,12.09,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,2,JEEP/COMPASS,6097,6822,58955,10.90,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,3,HYUNDAI/CRETA,5492,4549,52622,9.73,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,4,VW/T CROSS,6008,5732,51008,9.43,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,5,GM/TRACKER,4151,3936,36748,6.79,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,6,VW/NIVUS,3485,3355,33905,6.27,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,7,HONDA/HR-V,3381,3501,31843,5.89,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,8,NISSAN/KICKS,2337,2903,30392,5.62,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,9,TOYOTA/COROLLA CROSS,2999,3049,26214,4.85,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,10,RENAULT/DUSTER,1408,1056,18890,3.49,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,11,CITROEN/C4 CACTUS,1556,1542,14374,2.66,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,12,TOYOTA/HILUX SW4,1149,1155,10858,2.01,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,13,CAOA CHERY/TIGGO 5X,1391,1122,10633,1.97,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,14,HONDA/WR-V,734,1125,8385,1.55,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,15,CAOA CHERY/TIGGO 8,1104,1063,8218,1.52,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,16,RENAULT/CAPTUR,1193,594,6324,1.17,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,17,PEUGEOT/2008,310,170,5527,1.02,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,18,VW/TAOS,1682,1092,5334,0.99,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,19,CAOA CHERY/TIGGO 2,182,225,3818,0.71,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,20,CAOA CHERY/TIGGO 7,596,468,3380,0.62,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,21,VW/TIGUAN,142,162,3293,0.61,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,22,CAOA CHERY/TIGGO 3X,970,799,3108,0.57,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,23,VOLVO/XC60,331,444,3091,0.57,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,24,FORD/ECOSPORT,3,4,2989,0.55,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,25,BMW/X1,365,451,2926,0.54,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,26,GM/TRAILBLAZER,253,391,2859,0.53,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,27,VOLVO/XC40,225,169,2579,0.48,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,28,MITSUBISHI/Outlander,203,289,2436,0.45,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,29,HYUNDAI/IX35,125,210,2367,0.44,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,30,M.BENZ/CLASSE GLB,52,66,2105,0.39,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,31,FORD/TERRITORY,60,126,1960,0.36,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,32,AUDI/Q3,165,247,1951,0.36,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,33,MITSUBISHI/PAJERO,144,182,1905,0.35,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,34,MITSUBISHI/ECLIPSE CROSS,155,200,1875,0.35,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,35,LAND ROVER/DISCOVERY,182,176,1607,0.30,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,36,HYUNDAI/TUCSON,16,21,1430,0.26,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,37,AUDI/Q5,207,183,1228,0.23,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,38,TROLLER/T4,79,138,1106,0.20,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,39,KIA/SPORTAGE,75,98,1045,0.19,16,texto,2021-10.pdf
+2021-10,automoveis,sub_segmento,Suv's,40,LAND ROVER/EVOQUE,51,91,919,0.17,16,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,1,FIAT/STRADA,6130,5769,91507,79.04,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,2,VW/SAVEIRO,2174,1389,22099,19.09,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,3,GM/MONTANA,23,29,2161,1.87,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,4,PEUGEOT/PARTNER,0,2,7,0.01,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,5,FIAT/UNO,0,0,1,0.00,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Pequenas,6,FORD/PAMPA,0,0,1,0.00,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,1,FIAT/TORO,5187,6851,59833,33.16,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,2,TOYOTA/HILUX,3814,4396,36383,20.16,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,3,GM/S10,3775,4234,29726,16.47,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,4,FORD/RANGER,1442,1349,16600,9.20,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,5,MITSUBISHI/L200,1008,1276,10190,5.65,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,6,RENAULT/OROCH,533,517,9856,5.46,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,7,NISSAN/FRONTIER,1036,1184,9053,5.02,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,8,VW/AMAROK,340,501,5903,3.27,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,9,RAM/2500,31,131,2176,1.21,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,10,RAM/1500,33,49,510,0.28,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Pick-up's Grandes,11,EFFA/V22,23,25,182,0.10,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões,1,RENAULT/MASTER,953,700,7104,24.98,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões,2,PEUGEOT/EXPERT,264,452,3250,11.43,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões,3,VW/MAN/EXPRESS,296,311,2959,10.41,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões,4,HYUNDAI/HR,268,325,2865,10.07,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões,5,CITROEN/JUMPY,272,301,2613,9.19,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões,6,FIAT/DUCATO,293,248,2255,7.93,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões,7,KIA/K2500,224,265,1969,6.92,18,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões Pequenos,1,FIAT/FIORINO,1775,2316,17918,92.60,19,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões Pequenos,2,FIAT/DOBLO,205,30,838,4.33,19,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões Pequenos,3,PEUGEOT/PARTNER,51,66,444,2.29,19,texto,2021-10.pdf
+2021-10,comerciais_leves,sub_segmento,Furgões Pequenos,4,BYD/T3,11,0,116,0.60,19,texto,2021-10.pdf
+2021-10,automoveis,ranking,,45,JEEP/COMMANDER,372,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,20,IVECO/DAILY 35-150,171,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,21,PEUGEOT/BOXER,94,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,22,IVECO/DAILY 30-130,75,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,23,M.BENZ/SPRINTER 416,67,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,25,EFFA/V21,50,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,26,CITROEN/JUMPER,49,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,28,M.BENZ/SPRINTER 314,32,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,32,M.BENZ/SPRINTER,21,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,33,FOTON/AUMARK 1039,14,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,35,IVECO/DAILY,7,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,36,FOTON/AUMARK 3.5-14DT,7,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,37,JAC/v260,5,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,38,EFFA/V25,4,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,39,FORD/F250,3,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,40,GM/SILVERADO,2,,,,6,texto,2021-10.pdf
+2021-10,comerciais_leves,ranking,,41,AGRALE/AGRALE MARRUA,1,,,,6,texto,2021-10.pdf

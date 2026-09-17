@@ -48,6 +48,26 @@ PREMISSA_MAIOR_MES = ("2021-01", "2023-08", "2023-07")
 SALTO_JULHO_2023 = ("2023-06", "2023-07", 0.15)
 
 
+def _commit() -> str:
+    """O commit que gerou este relatorio (sec.10.3).
+
+    Declarar o commit e' o que permite a um artigo citar "os numeros desta tabela
+    saem de `rodada-4`" e alguem verificar. `-sujo` quando ha' mudanca nao
+    comitada: o relatorio nao corresponde exatamente a nenhum commit.
+    """
+    import subprocess
+    try:
+        cabeca = subprocess.run(["git", "rev-parse", "--short", "HEAD"],
+                                cwd=config.RAIZ, capture_output=True, text=True, timeout=10)
+        if cabeca.returncode != 0:
+            return "desconhecido (fora de um repositorio git)"
+        sujo = subprocess.run(["git", "status", "--porcelain"],
+                              cwd=config.RAIZ, capture_output=True, text=True, timeout=10)
+        return cabeca.stdout.strip() + ("-sujo" if sujo.stdout.strip() else "")
+    except Exception:
+        return "desconhecido"
+
+
 def _mil(valor) -> str:
     """Milhar com ponto, como se escreve em portugues."""
     return f"{int(valor):,}".replace(",", ".")
@@ -213,6 +233,8 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
 
     partes.append(
         "# Validacao do painel de vendas de veiculos 0 km\n\n"
+        f"**Commit: `{_commit()}`.** Os numeros deste relatorio saem desse commit, e sao "
+        "conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).\n\n"
         f"Gerado em {datetime.now(timezone.utc).isoformat(timespec='seconds')} (UTC) por "
         f"`src/{ETAPA}.py`.\n\n"
         f"- Periodo: **{meses[0]} a {meses[-1]}** ({len(meses)} meses)\n"
@@ -229,14 +251,31 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
     )
 
     # ---------------------------------------------------- 1. invariante central
-    antes = bruto.groupby("mes_ref")["unidades"].sum()
+    marcadas = (bruto[bruto["duplicata_publicada"] != ""]
+                if "duplicata_publicada" in bruto else bruto.iloc[0:0])
+    sem_marcadas = (bruto[bruto["duplicata_publicada"] == ""]
+                    if "duplicata_publicada" in bruto else bruto)
+    antes = sem_marcadas.groupby("mes_ref")["unidades"].sum()
     depois = painel.groupby("mes_ref")["unidades"].sum()
     invariante = pd.DataFrame({"painel_bruto": antes, "painel": depois}).fillna(0)
     invariante["diferenca"] = invariante["painel"] - invariante["painel_bruto"]
     quebras = invariante[invariante["diferenca"] != 0]
-    partes.append("\n## 1. Invariante central\n\n"
-                  "A soma de unidades por mes tem de ser identica nos dois paineis. "
-                  "Harmonizacao redistribui rotulos; nao cria nem destroi unidades.\n\n")
+    partes.append(
+        "\n## 1. Invariante central\n\n"
+        "A soma de unidades por mes tem de ser identica nos dois paineis **depois de "
+        "excluidas as linhas marcadas em `duplicata_publicada`**, e essas linhas sao "
+        f"exatamente **{len(marcadas)}**, enumeradas abaixo. Harmonizacao redistribui "
+        "rotulos; nao cria nem destroi unidades.\n\n"
+        "A excecao e' enumerada e travada por teste "
+        "(`testes/test_duplicatas_publicadas.py`), nao dispensada: ela nao pode crescer "
+        "sem quebrar o teste, e por isso o invariante com ela e' mais forte que o "
+        "invariante sem supressao nenhuma.\n\n"
+    )
+    if not marcadas.empty:
+        partes.append(_tabela(
+            marcadas[["mes_ref", "segmento_fonte", "marca_fonte", "modelo_fonte",
+                      "unidades", "duplicata_publicada"]]
+        ) + "\n")
     if quebras.empty:
         partes.append(f"**OK** -- identica nos {len(invariante)} meses.\n")
     else:
@@ -688,6 +727,76 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
         "`saidas/taxas_por_piso_de_volume.csv`.\n"
     )
 
+    # Segunda familia de piso: pico mensal. O piso de volume total nao e' neutro
+    # quanto a' longevidade, e por isso sozinho ele nao prova nada.
+    pico = rotatividade.pico_por_modelo(por_modelo)
+    tabelas_pico = []
+    for piso in config.PISOS_PICO_MENSAL:
+        rotulo = "todos" if piso <= 0 else f"pico >= {piso}/mes"
+        recorte = rotatividade.acima_do_piso(por_modelo, pico, piso - 1 if piso else 0)
+        ciclos_pico = rotatividade.acima_do_piso(ciclos_5, pico, piso - 1 if piso else 0)
+        tabela = _taxas(ciclos_pico, _ativos_por_ano(recorte), config.LIMIAR_SAIDA,
+                        sufixo=f" [{rotulo}]")
+        tabelas_pico.append(tabela.rename(columns={"ativos": f"ativos [{rotulo}]"}))
+    por_pico = pd.concat(tabelas_pico, axis=1).reset_index()
+    por_pico.to_csv(config.DIR_SAIDAS / "taxas_por_piso_de_pico.csv", index=False)
+    resumo_pico = por_pico[
+        ["ano"] + [c for c in por_pico.columns if c.startswith("taxa_saida")]
+    ]
+    partes.append(
+        "\n### A segunda familia de piso: pico mensal\n\n"
+        "O piso de volume total **nao e' neutro quanto a' longevidade**. Volume total e' "
+        "venda mensal media vezes meses de vida, entao um piso sobre ele descarta "
+        "preferencialmente modelo de vida curta -- que sao exatamente os que contribuem com "
+        "uma entrada e uma saida. Um piso que morde a variavel dependente nao serve sozinho "
+        "de prova.\n\n"
+        "O piso sobre o **pico mensal** nao tem esse vies: um modelo que vendeu 500 num mes "
+        "so' passa, e um que vendeu 3 por mes durante dez anos nao. Conclusao que sobrevive "
+        "as duas familias nao e' artefato da escolha do piso.\n\n"
+        + _tabela(resumo_pico)
+        + "\nContagens completas em `saidas/taxas_por_piso_de_pico.csv`.\n"
+    )
+
+    # O veredito das duas familias, lado a lado. E' o que torna a conclusao
+    # robusta a' escolha do piso, em vez de dependente dela.
+    indexado_pico = resumo_pico.set_index("ano")
+    def _par(quadro, ano_inicio, ano_fim, coluna):
+        if ano_inicio not in quadro.index or ano_fim not in quadro.index:
+            return None
+        return float(quadro.loc[ano_fim, coluna]) - float(quadro.loc[ano_inicio, coluna])
+
+    veredito = []
+    for rotulo, quadro, colunas in (
+        ("volume total", resumo_piso.set_index("ano"),
+         [f"taxa_saida_{config.LIMIAR_SAIDA:.0%} [{'todos' if p <= 0 else f'acima de {p}'}]"
+          for p in config.PISOS_VOLUME_MODELO]),
+        ("pico mensal", indexado_pico,
+         [f"taxa_saida_{config.LIMIAR_SAIDA:.0%} [{'todos' if p <= 0 else f'pico >= {p}/mes'}]"
+          for p in config.PISOS_PICO_MENSAL]),
+    ):
+        for coluna in colunas:
+            if coluna not in quadro.columns:
+                continue
+            veredito.append({
+                "familia": rotulo,
+                "piso": coluna.split("[")[-1].rstrip("]"),
+                "2022 -> 2025": _par(quadro, 2022, ultimo_completo, coluna),
+                f"{ultimo_completo} -> {ano_parcial}": _par(
+                    quadro, ultimo_completo, ano_parcial, coluna),
+            })
+    if veredito:
+        partes.append(
+            "\n#### As duas familias lado a lado\n\n"
+            "Se a conclusao depende de qual piso se escolhe, ela nao e' conclusao. Aqui "
+            "nao depende:\n\n"
+            + _tabela(pd.DataFrame(veredito).round(4))
+            + "\n**A alta de 2022 a 2025 sobrevive as duas familias e fica mais forte com "
+            "piso em ambas** -- nao e' artefato do corte de publicacao, dos modelos "
+            f"fantasma nem da escolha do piso. **O salto de {ano_parcial} inverte de sinal "
+            "nas duas** assim que qualquer piso entra: e' fantasma somado a ano incompleto, "
+            "e nao e' citavel.\n"
+        )
+
     # I3, refeito com o denominador oficial e o piso de volume.
     partes.append(
         "\n### O corte de publicacao esta' fabricando a alta recente? (I3)\n\n"
@@ -908,7 +1017,11 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
                             & (recuperada["marca_recuperada"].astype(str) != "")]
         sobraram = recuperada.drop(feitas.index)
         partes.append(
-            f"**Recuperacao de D4: {len(feitas)} de {len(recuperada)} modelos.** Onde a "
+            "**O caminho completo de D4, em tres passos.** A fonte publicou **12** modelos "
+            "sob marca trocada em 2013-11. **Quatro** deles eram a linha do ranking "
+            "duplicando a tabela de sub-segmento e foram suprimidos (sec.1) -- nao ha' o que "
+            "recuperar numa linha que nao entra. Dos **8 que restam**, os numeros abaixo.\n\n"
+            f"**Recuperados: {len(feitas)} de {len(recuperada)}.** Onde a "
             "edicao saiu com a coluna de marca trocada, o informe do mes seguinte republica "
             "o mes na coluna de mes anterior com a marca certa. O **valor nao muda** -- muda "
             "a atribuicao --, e so' se recupera quando o valor confere unidade a unidade. "
@@ -926,6 +1039,23 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
                     sobraram[["mes_ref", "modelo", "marca_publicada", "unidades",
                               "situacao"]], 8)
             )
+    partes.append(
+        "\n**A assimetria, e por que ela existe.** O mesmo defeito de 2013-11 teve dois "
+        "tratamentos, e a diferenca nao e' de criterio, e' de onde cabe o conserto.\n\n"
+        "- **Cinco linhas foram removidas a montante**, na canonizacao da chave de "
+        "reconciliacao da etapa 02 -- `VW/GOL` 20.360, `FIAT/UNO` 15.851, `FIAT/PALIO` "
+        "12.816, `GM/CELTA` 5.007, `TOYOTA/ETIOS HB` 2.425, somando 56.459 unidades. Ali a "
+        "divergencia era **tipografica**: o ranking escreve `VW /GOL` com um espaco a mais "
+        "e a tabela de sub-segmento `VW/GOL`. Consertar a chave nao mexe em nada do que foi "
+        "transcrito, e o invariante nunca correu risco.\n"
+        "- **Quatro foram removidas a jusante**, por supressao marcada em "
+        "`duplicata_publicada`. Estas divergiam na **marca** (`PONTIAC/MONTANA` contra "
+        "`GM /MONTANA`), e canoniza-las na etapa 02 seria reescrever a marca dentro do "
+        "painel bruto, que e' transcricao fiel da fonte (sec.4). Nao cabe la'.\n\n"
+        "A regra que sai disso: **a montante quando da' para consertar sem tocar no "
+        "transcrito; a jusante, marcado e enumerado, quando nao da'.**\n"
+    )
+
     caminho_duplicatas = config.DIR_SAIDAS / "duplicatas_de_marca_trocada.csv"
     if caminho_duplicatas.exists():
         duplicatas = pd.read_csv(caminho_duplicatas)

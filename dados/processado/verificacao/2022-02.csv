@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2022-02,mes_declarado,2022-02,,,,,ok,2022-02
+2022-02,subtotal_sub_segmento,automoveis/Grandcab,127,127,0,,ok,cauda nao publicada: 0 unidades
+2022-02,subtotal_sub_segmento,automoveis/Hatch Médios,136,132,-4,-2.9412,cauda_truncada,cauda nao publicada: 4 unidades
+2022-02,subtotal_sub_segmento,automoveis/Hatch Pequenos,22185,22151,-34,-0.1533,ok,cauda nao publicada: 34 unidades
+2022-02,subtotal_sub_segmento,automoveis/Monocab,138,138,0,,ok,cauda nao publicada: 0 unidades
+2022-02,subtotal_sub_segmento,automoveis/Sedans Compactos,9379,9378,-1,-0.0107,ok,cauda nao publicada: 1 unidades
+2022-02,subtotal_sub_segmento,automoveis/Sedans Grandes,689,681,-8,-1.1611,cauda_truncada,cauda nao publicada: 8 unidades
+2022-02,subtotal_sub_segmento,automoveis/Sedans Pequenos,7086,7086,0,,ok,cauda nao publicada: 0 unidades
+2022-02,subtotal_sub_segmento,automoveis/Sedans médios,3977,3977,0,,ok,cauda nao publicada: 0 unidades
+2022-02,subtotal_sub_segmento,automoveis/Sports,143,124,-19,-13.2867,cauda_truncada,cauda nao publicada: 19 unidades
+2022-02,subtotal_sub_segmento,automoveis/Suv's,43483,42716,-767,-1.7639,cauda_truncada,cauda nao publicada: 767 unidades
+2022-02,subtotal_sub_segmento,automoveis/Sw Grandes,5,5,0,,ok,cauda nao publicada: 0 unidades
+2022-02,subtotal_sub_segmento,automoveis/Sw Médios,0,0,0,,sem_total,
+2022-02,subtotal_sub_segmento,automoveis/Veículos de Entrada,10184,10184,0,,ok,cauda nao publicada: 0 unidades
+2022-02,subtotal_sub_segmento,comerciais_leves/Furgões,2206,1859,-347,-15.7298,cauda_truncada,cauda nao publicada: 347 unidades
+2022-02,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1614,1613,-1,-0.0620,ok,cauda nao publicada: 1 unidades
+2022-02,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,11220,11214,-6,-0.0535,ok,cauda nao publicada: 6 unidades
+2022-02,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,7559,7559,0,,ok,cauda nao publicada: 0 unidades
+2022-02,ranking_x_sub_segmento,2022-02,116166,116166,0,,ok,0 modelos divergentes de 75 conferidos; desvio de volume 0.0000%
+2022-02,cobertura,automoveis,97590,96699,-891,-0.9130,medido,cobertura=99.09%
+2022-02,cobertura,comerciais_leves,22602,22600,-2,-0.0088,medido,cobertura=99.99%

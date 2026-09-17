@@ -35,6 +35,23 @@ def volume_por_modelo(por_modelo: pd.DataFrame) -> pd.Series:
     return por_modelo.groupby(CHAVE_MODELO)["unidades"].sum()
 
 
+def pico_por_modelo(por_modelo: pd.DataFrame) -> pd.Series:
+    """Maior venda mensal de cada modelo no periodo inteiro.
+
+    Segunda familia de piso, e ela existe porque a primeira **nao e' neutra
+    quanto a' longevidade**. Volume total e' venda mensal media vezes meses de
+    vida, entao um piso sobre ele descarta preferencialmente modelo de vida
+    curta -- que sao justamente os que contribuem com uma entrada e uma saida, a
+    variavel que se quer medir. Um piso sobre o pico mensal nao tem esse vies:
+    um modelo que vendeu 500 num mes so' passa, e um que vendeu 3 por mes
+    durante dez anos nao.
+
+    Se as conclusoes sobrevivem as duas familias de piso, elas nao sao artefato
+    da escolha do piso.
+    """
+    return por_modelo.groupby(CHAVE_MODELO)["unidades"].max()
+
+
 def distribuicao(volume: pd.Series, faixas) -> pd.DataFrame:
     """Quantos modelos e quantas unidades em cada faixa de volume total."""
     linhas = []

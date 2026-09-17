@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2013-09,mes_declarado,2013-09,,,,,ok,2013-09
+2013-09,subtotal_sub_segmento,automoveis/Grandcab,3519,3519,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Hatch Médios,8909,8909,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Hatch Pequenos,60084,60084,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Monocab,6426,6426,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Sedans Compactos,7800,7800,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Sedans Grandes,1445,1445,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Sedans Pequenos,43703,43703,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Sedans médios,19131,19131,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Sports,252,252,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Suv's,24158,24158,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Sw Grandes,5,5,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Sw Médios,4107,4107,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,automoveis/Veículos de Entrada,61750,61750,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,comerciais_leves/Furgões,6447,6447,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1908,1908,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,15897,15897,0,,ok,cauda nao publicada: 0 unidades
+2013-09,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,22736,22736,0,,ok,cauda nao publicada: 0 unidades
+2013-09,ranking_x_sub_segmento,2013-09,267269,267262,-7,-0.0026,ok,2 modelos divergentes de 78 conferidos; desvio de volume 0.0026%
+2013-09,cobertura,automoveis,245803,241289,-4514,-1.8364,medido,cobertura=98.16%
+2013-09,cobertura,comerciais_leves,48114,48090,-24,-0.0499,medido,cobertura=99.95%

@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2020-08,mes_declarado,2020-08,,,,,ok,2020-08
+2020-08,subtotal_sub_segmento,automoveis/Grandcab,1593,1593,0,,ok,cauda nao publicada: 0 unidades
+2020-08,subtotal_sub_segmento,automoveis/Hatch Médios,412,393,-19,-4.6117,cauda_truncada,cauda nao publicada: 19 unidades
+2020-08,subtotal_sub_segmento,automoveis/Hatch Pequenos,39030,38975,-55,-0.1409,ok,cauda nao publicada: 55 unidades
+2020-08,subtotal_sub_segmento,automoveis/Monocab,1486,1486,0,,ok,cauda nao publicada: 0 unidades
+2020-08,subtotal_sub_segmento,automoveis/Sedans Compactos,11335,11334,-1,-0.0088,ok,cauda nao publicada: 1 unidades
+2020-08,subtotal_sub_segmento,automoveis/Sedans Grandes,689,611,-78,-11.3208,cauda_truncada,cauda nao publicada: 78 unidades
+2020-08,subtotal_sub_segmento,automoveis/Sedans Pequenos,10347,10347,0,,ok,cauda nao publicada: 0 unidades
+2020-08,subtotal_sub_segmento,automoveis/Sedans médios,6952,6951,-1,-0.0144,ok,cauda nao publicada: 1 unidades
+2020-08,subtotal_sub_segmento,automoveis/Sports,156,137,-19,-12.1795,cauda_truncada,cauda nao publicada: 19 unidades
+2020-08,subtotal_sub_segmento,automoveis/Suv's,50918,49005,-1913,-3.7570,cauda_truncada,cauda nao publicada: 1913 unidades
+2020-08,subtotal_sub_segmento,automoveis/Sw Grandes,29,29,0,,ok,cauda nao publicada: 0 unidades
+2020-08,subtotal_sub_segmento,automoveis/Sw Médios,0,0,0,,sem_total,
+2020-08,subtotal_sub_segmento,automoveis/Veículos de Entrada,19048,19048,0,,ok,cauda nao publicada: 0 unidades
+2020-08,subtotal_sub_segmento,comerciais_leves/Furgões,2966,2091,-875,-29.5010,cauda_truncada,cauda nao publicada: 875 unidades
+2020-08,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,2175,2173,-2,-0.0920,ok,cauda nao publicada: 2 unidades
+2020-08,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,13615,13614,-1,-0.0073,ok,cauda nao publicada: 1 unidades
+2020-08,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,12739,12739,0,,ok,cauda nao publicada: 0 unidades
+2020-08,ranking_x_sub_segmento,2020-08,162936,162935,-1,-0.0006,ok,1 modelos divergentes de 74 conferidos; desvio de volume 0.0006%
+2020-08,cobertura,automoveis,142046,139909,-2137,-1.5044,medido,cobertura=98.50%
+2020-08,cobertura,comerciais_leves,31498,31496,-2,-0.0063,medido,cobertura=99.99%

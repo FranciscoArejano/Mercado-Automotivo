@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2019-08,mes_declarado,2019-08,,,,,ok,2019-08
+2019-08,subtotal_sub_segmento,automoveis/Grandcab,2827,2827,0,,ok,cauda nao publicada: 0 unidades
+2019-08,subtotal_sub_segmento,automoveis/Hatch Médios,642,494,-148,-23.0530,cauda_truncada,cauda nao publicada: 148 unidades
+2019-08,subtotal_sub_segmento,automoveis/Hatch Pequenos,66043,65898,-145,-0.2196,ok,cauda nao publicada: 145 unidades
+2019-08,subtotal_sub_segmento,automoveis/Monocab,2405,2405,0,,ok,cauda nao publicada: 0 unidades
+2019-08,subtotal_sub_segmento,automoveis/Sedans Compactos,9478,9477,-1,-0.0106,ok,cauda nao publicada: 1 unidades
+2019-08,subtotal_sub_segmento,automoveis/Sedans Grandes,607,514,-93,-15.3213,cauda_truncada,cauda nao publicada: 93 unidades
+2019-08,subtotal_sub_segmento,automoveis/Sedans Pequenos,26022,26022,0,,ok,cauda nao publicada: 0 unidades
+2019-08,subtotal_sub_segmento,automoveis/Sedans médios,10717,10716,-1,-0.0093,ok,cauda nao publicada: 1 unidades
+2019-08,subtotal_sub_segmento,automoveis/Sports,143,124,-19,-13.2867,cauda_truncada,cauda nao publicada: 19 unidades
+2019-08,subtotal_sub_segmento,automoveis/Suv's,51078,49111,-1967,-3.8510,cauda_truncada,cauda nao publicada: 1967 unidades
+2019-08,subtotal_sub_segmento,automoveis/Sw Grandes,68,68,0,,ok,cauda nao publicada: 0 unidades
+2019-08,subtotal_sub_segmento,automoveis/Sw Médios,123,122,-1,-0.8130,cauda_truncada,cauda nao publicada: 1 unidades
+2019-08,subtotal_sub_segmento,automoveis/Veículos de Entrada,25720,25718,-2,-0.0078,ok,cauda nao publicada: 2 unidades
+2019-08,subtotal_sub_segmento,comerciais_leves/Furgões,3043,2552,-491,-16.1354,cauda_truncada,cauda nao publicada: 491 unidades
+2019-08,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,1570,1570,0,,ok,cauda nao publicada: 0 unidades
+2019-08,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,17940,17937,-3,-0.0167,ok,cauda nao publicada: 3 unidades
+2019-08,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,12234,12234,0,,ok,cauda nao publicada: 0 unidades
+2019-08,ranking_x_sub_segmento,2019-08,216699,216699,0,,ok,0 modelos divergentes de 73 conferidos; desvio de volume 0.0000%
+2019-08,cobertura,automoveis,195927,193496,-2431,-1.2408,medido,cobertura=98.76%
+2019-08,cobertura,comerciais_leves,34791,34789,-2,-0.0057,medido,cobertura=99.99%

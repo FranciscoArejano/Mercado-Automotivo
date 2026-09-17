@@ -1,0 +1,22 @@
+mes,verificacao,escopo,esperado,obtido,diferenca,diferenca_pct,situacao,detalhe
+2021-06,mes_declarado,2021-06,,,,,ok,2021-06
+2021-06,subtotal_sub_segmento,automoveis/Grandcab,2010,2010,0,,ok,cauda nao publicada: 0 unidades
+2021-06,subtotal_sub_segmento,automoveis/Hatch Médios,173,160,-13,-7.5145,cauda_truncada,cauda nao publicada: 13 unidades
+2021-06,subtotal_sub_segmento,automoveis/Hatch Pequenos,28494,28475,-19,-0.0667,ok,cauda nao publicada: 19 unidades
+2021-06,subtotal_sub_segmento,automoveis/Monocab,1629,1629,0,,ok,cauda nao publicada: 0 unidades
+2021-06,subtotal_sub_segmento,automoveis/Sedans Compactos,6011,6011,0,,ok,cauda nao publicada: 0 unidades
+2021-06,subtotal_sub_segmento,automoveis/Sedans Grandes,687,652,-35,-5.0946,cauda_truncada,cauda nao publicada: 35 unidades
+2021-06,subtotal_sub_segmento,automoveis/Sedans Pequenos,11764,11764,0,,ok,cauda nao publicada: 0 unidades
+2021-06,subtotal_sub_segmento,automoveis/Sedans médios,6546,6545,-1,-0.0153,ok,cauda nao publicada: 1 unidades
+2021-06,subtotal_sub_segmento,automoveis/Sports,303,256,-47,-15.5116,cauda_truncada,cauda nao publicada: 47 unidades
+2021-06,subtotal_sub_segmento,automoveis/Suv's,54604,52645,-1959,-3.5876,cauda_truncada,cauda nao publicada: 1959 unidades
+2021-06,subtotal_sub_segmento,automoveis/Sw Grandes,16,16,0,,ok,cauda nao publicada: 0 unidades
+2021-06,subtotal_sub_segmento,automoveis/Sw Médios,0,0,0,,sem_total,
+2021-06,subtotal_sub_segmento,automoveis/Veículos de Entrada,21021,21019,-2,-0.0095,ok,cauda nao publicada: 2 unidades
+2021-06,subtotal_sub_segmento,comerciais_leves/Furgões,3276,2623,-653,-19.9328,cauda_truncada,cauda nao publicada: 653 unidades
+2021-06,subtotal_sub_segmento,comerciais_leves/Furgões Pequenos,2184,2182,-2,-0.0916,ok,cauda nao publicada: 2 unidades
+2021-06,subtotal_sub_segmento,comerciais_leves/Pick-up's Grandes,17946,17941,-5,-0.0279,ok,cauda nao publicada: 5 unidades
+2021-06,subtotal_sub_segmento,comerciais_leves/Pick-up's Pequenas,12863,12863,0,,ok,cauda nao publicada: 0 unidades
+2021-06,ranking_x_sub_segmento,2021-06,160155,160150,-5,-0.0031,ok,4 modelos divergentes de 75 conferidos; desvio de volume 0.0031%
+2021-06,cobertura,automoveis,133318,131182,-2136,-1.6022,medido,cobertura=98.40%
+2021-06,cobertura,comerciais_leves,36271,36266,-5,-0.0138,medido,cobertura=99.99%

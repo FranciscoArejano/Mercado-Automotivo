@@ -1,8 +1,8 @@
 # Validacao do painel de vendas de veiculos 0 km
 
-**Commit: `e9d3f63`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
+**Commit: `bcdeba8-sujo`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
 
-Gerado em 2026-09-17T17:18:23+00:00 (UTC) por `src/etapa06_validacao.py`.
+Gerado em 2026-09-29T23:39:06+00:00 (UTC) por `src/etapa06_validacao.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: painel bruto 54,183 / painel 54,179 / visao por modelo 53,700
@@ -875,6 +875,62 @@ Modelos em que o ranking mensal e a tabela de sub-segmento do **mesmo** informe 
 
 _(420 linhas restantes omitidas; ver CSV correspondente.)_
 
-## 11. Situacao
+## 11. Dimensao macro mensal
+
+Tabela de fatos **separada**, unidade `mes_ref`: `macro_mensal.parquet`. O painel nao foi alargado com nenhuma destas colunas -- a juncao e' do codigo de analise, e e' por isso que a dimensao pode ter janela diferente sem contaminar nada.
+
+- Linhas: **284**, uma por mes de 2003-01 a 2026-08
+- Meses repetidos: **0** (OK)
+- Series: **17** em 22 colunas
+
+**Serie que comeca depois de 2003-01 ou termina antes de 2026-08 fica com o mes vazio.** Nao se preenche, nao se interpola, nao se estende com o ultimo valor (sec.9.2) -- a coluna `meses_do_painel_cobertos` diz quanto cada uma alcanca.
+
+| serie                | nome                                            | unidade                   | situacao_da_serie   | janela_efetiva   |   meses_do_painel_cobertos |      minimo |          maximo |
+|:---------------------|:------------------------------------------------|:--------------------------|:--------------------|:-----------------|---------------------------:|------------:|----------------:|
+| sgs_20749            | Taxa media de juros -- PF aquisicao de veiculos | % a.a.                    | ativa               | 2003-01..2026-08 |                        284 |     18.56   |    53.85        |
+| sgs_20603            | Saldo da carteira -- PF aquisicao de veiculos   | R$ milhoes                | ativa               | 2007-03..2026-08 |                        234 |   2490      | 23807           |
+| sgs_21131            | Prazo medio -- PF aquisicao de veiculos         | meses                     | ativa               | 2011-03..2026-08 |                        186 |      2.45   |    10.52        |
+| sgs_20758            | Inadimplencia -- PF aquisicao de veiculos       | % da carteira             | ativa               | 2011-03..2026-08 |                        186 |      5.28   |    21.64        |
+| sgs_20126            | Concessoes -- PF aquisicao de veiculos          | R$ milhoes                | descontinuada       | 2004-02..2022-12 |                        227 |     50.82   |   114.13        |
+| sgs_3698             | Cambio R$/US$ venda -- media do periodo         | R$/US$                    | ativa               | 2003-01..2026-08 |                        284 |      1.5639 |     6.097       |
+| sgs_4390             | Selic acumulada no mes                          | % a.m.                    | ativa               | 2003-01..2026-08 |                        284 |      0.13   |     2.08        |
+| sgs_4189             | Selic acumulada em 12 meses                     | % a.a.                    | ativa               | 2003-01..2026-08 |                        284 |      1.9    |    26.32        |
+| sgs_433              | IPCA -- variacao mensal                         | % a.m.                    | ativa               | 2003-01..2026-08 |                        284 |     -0.68   |     2.25        |
+| sgs_4192             | IGP-DI -- numero indice                         | indice (base a confirmar) | ativa               | 2003-01..2026-08 |                        284 | 501192      |     2.64285e+06 |
+| sgs_24363            | IBC-Br                                          | indice                    | ativa               | 2003-01..2026-07 |                        283 |     67.2195 |   118.017       |
+| sgs_7832             | Massa salarial real                             | % (variacao)              | descontinuada       | 2003-01..2019-08 |                        200 |    -24.8    |    16.97        |
+| ipca_automovel_novo  | IPCA subitem 7641 -- automovel_novo             | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |     -5.48   |     2.88        |
+| ipca_automovel_usado | IPCA subitem 107654 -- automovel_usado          | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |     -4.12   |     2.38        |
+| ipca_gasolina        | IPCA subitem 7657 -- gasolina                   | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |    -15.48   |    11.26        |
+| ipca_etanol          | IPCA subitem 7658 -- etanol                     | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |    -13.51   |    12.92        |
+| ipca_motocicleta     | IPCA subitem 7654 -- motocicleta                | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |     -1.08   |     2.76        |
+
+**6 series nao cobrem os 284 meses** e ficam com lacuna declarada. Isso e' propriedade da fonte, nao defeito da coleta.
+
+### As emendas do IPCA por subitem
+
+O IPCA por subitem vem repartido em quatro tabelas do SIDRA. A emenda guarda **as duas coisas** -- a variacao mensal de cada tabela e o indice encadeado com base declarada em `2003-01 = 100` --, em colunas separadas, para que a costura seja auditavel linha a linha.
+
+As janelas se encaixam sem sobreposicao: o primeiro mes de cada tabela e' o mes seguinte ao ultimo da anterior. `meses_duplicados` conta quantas vezes um mes aparece em duas tabelas -- soma **0**, entao nenhuma variacao foi contada duas vezes.
+
+| subitem         | mes_anterior   |   tabela_anterior | mes_ref   |   tabela_sidra |   variacao_pct |   meses_duplicados |
+|:----------------|:---------------|------------------:|:----------|---------------:|---------------:|-------------------:|
+| automovel_novo  | 2006-06        |               655 | 2006-07   |           2938 |          -0.42 |                  0 |
+| automovel_novo  | 2011-12        |              2938 | 2012-01   |           1419 |           0.05 |                  0 |
+| automovel_novo  | 2019-12        |              1419 | 2020-01   |           7060 |           0.58 |                  0 |
+| automovel_usado | 2006-06        |               655 | 2006-07   |           2938 |          -0.42 |                  0 |
+| automovel_usado | 2011-12        |              2938 | 2012-01   |           1419 |          -1.08 |                  0 |
+| automovel_usado | 2019-12        |              1419 | 2020-01   |           7060 |          -0.46 |                  0 |
+| gasolina        | 2006-06        |               655 | 2006-07   |           2938 |           0.81 |                  0 |
+| gasolina        | 2011-12        |              2938 | 2012-01   |           1419 |          -0.35 |                  0 |
+| gasolina        | 2019-12        |              1419 | 2020-01   |           7060 |           0.89 |                  0 |
+| etanol          | 2006-06        |               655 | 2006-07   |           2938 |           1.04 |                  0 |
+| etanol          | 2011-12        |              2938 | 2012-01   |           1419 |          -1.25 |                  0 |
+| etanol          | 2019-12        |              1419 | 2020-01   |           7060 |           2.59 |                  0 |
+| motocicleta     | 2006-06        |               655 | 2006-07   |           2938 |           0.7  |                  0 |
+| motocicleta     | 2011-12        |              2938 | 2012-01   |           1419 |          -0.33 |                  0 |
+| motocicleta     | 2019-12        |              1419 | 2020-01   |           7060 |           0.79 |                  0 |
+
+## 12. Situacao
 
 Todas as verificacoes obrigatorias passaram.

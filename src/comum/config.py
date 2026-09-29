@@ -37,6 +37,10 @@ MAPA_GRUPOS = DIR_CONFIG / "mapa_grupos.csv"
 MARCAS = DIR_CONFIG / "marcas.csv"
 MARCAS_PLANILHA = DIR_CONFIG / "marcas_planilha.csv"
 MESES_COM_MARCA_TROCADA = DIR_CONFIG / "meses_com_marca_trocada.csv"
+SERIES_MACRO = DIR_CONFIG / "series_macro.csv"
+MACRO_MENSAL = DIR_PROCESSADO / "macro_mensal.parquet"
+# Base do indice encadeado do IPCA por subitem. Declarada, nao implicita.
+BASE_INDICE_IPCA = os.environ.get("BASE_INDICE_IPCA", "2003-01")
 CORRECOES_CATALOGO = DIR_CONFIG / "correcoes_catalogo.csv"
 NOMES_NAO_VEICULO = DIR_CONFIG / "nomes_nao_veiculo.csv"
 SUB_SEGMENTOS = DIR_CONFIG / "sub_segmentos.csv"

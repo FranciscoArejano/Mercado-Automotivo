@@ -1112,7 +1112,66 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
         partes.append("_Nao disponivel._\n")
 
     # ------------------------------------------------------------ 11. fecho
-    partes.append("\n## 11. Situacao\n\n")
+    # ------------------------------------------------- 11. dimensao macro
+    caminho_macro = config.DIR_SAIDAS / "macro_series.csv"
+    if caminho_macro.exists() and config.MACRO_MENSAL.exists():
+        series_macro = pd.read_csv(caminho_macro)
+        quadro_macro = pd.read_parquet(config.MACRO_MENSAL)
+        partes.append(
+            "\n## 11. Dimensao macro mensal\n\n"
+            "Tabela de fatos **separada**, unidade `mes_ref`: `macro_mensal.parquet`. O "
+            "painel nao foi alargado com nenhuma destas colunas -- a juncao e' do codigo de "
+            "analise, e e' por isso que a dimensao pode ter janela diferente sem contaminar "
+            "nada.\n\n"
+            f"- Linhas: **{len(quadro_macro)}**, uma por mes de "
+            f"{quadro_macro['mes_ref'].min()} a {quadro_macro['mes_ref'].max()}\n"
+            f"- Meses repetidos: **{int(quadro_macro['mes_ref'].duplicated().sum())}** "
+            f"({'OK' if not quadro_macro['mes_ref'].duplicated().any() else 'FALHOU'})\n"
+            f"- Series: **{len(series_macro)}** em "
+            f"{len(quadro_macro.columns) - 1} colunas\n\n"
+            "**Serie que comeca depois de 2003-01 ou termina antes de 2026-08 fica com o "
+            "mes vazio.** Nao se preenche, nao se interpola, nao se estende com o ultimo "
+            "valor (sec.9.2) -- a coluna `meses_do_painel_cobertos` diz quanto cada uma "
+            "alcanca.\n\n"
+            + _tabela(series_macro[[
+                c for c in ("serie", "nome", "unidade", "situacao_da_serie",
+                            "janela_efetiva", "meses_do_painel_cobertos",
+                            "minimo", "maximo") if c in series_macro.columns
+            ]], 20)
+        )
+        if "meses_do_painel_cobertos" in series_macro:
+            curtas = series_macro[series_macro["meses_do_painel_cobertos"] < len(quadro_macro)]
+            if not curtas.empty:
+                partes.append(
+                    f"\n**{len(curtas)} series nao cobrem os {len(quadro_macro)} meses** e "
+                    "ficam com lacuna declarada. Isso e' propriedade da fonte, nao defeito "
+                    "da coleta.\n"
+                )
+
+        caminho_emendas = config.DIR_SAIDAS / "macro_emendas_ipca.csv"
+        if caminho_emendas.exists():
+            emendas = pd.read_csv(caminho_emendas)
+            duplicados = int(emendas["meses_duplicados"].sum()) if not emendas.empty else 0
+            partes.append(
+                "\n### As emendas do IPCA por subitem\n\n"
+                "O IPCA por subitem vem repartido em quatro tabelas do SIDRA. A emenda "
+                "guarda **as duas coisas** -- a variacao mensal de cada tabela e o indice "
+                f"encadeado com base declarada em `{config.BASE_INDICE_IPCA} = 100` --, em "
+                "colunas separadas, para que a costura seja auditavel linha a linha.\n\n"
+                "As janelas se encaixam sem sobreposicao: o primeiro mes de cada tabela e' "
+                "o mes seguinte ao ultimo da anterior. `meses_duplicados` conta quantas "
+                f"vezes um mes aparece em duas tabelas -- soma **{duplicados}**, entao "
+                "nenhuma variacao foi contada duas vezes.\n\n" + _tabela(emendas, 24)
+            )
+            if duplicados:
+                falhas.append(f"{duplicados} meses contados duas vezes nas emendas do IPCA")
+    else:
+        partes.append(
+            "\n## 11. Dimensao macro mensal\n\n"
+            "_Nao disponivel: rode `python src/etapa08_macro.py`._\n"
+        )
+
+    partes.append("\n## 12. Situacao\n\n")
     if falhas:
         partes.append("**Validacao FALHOU:**\n\n" + "".join(f"- {f}\n" for f in falhas))
     else:

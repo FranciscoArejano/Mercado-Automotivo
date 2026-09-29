@@ -145,27 +145,45 @@ def diagnosticar(mes: str, caminho: Path) -> dict:
     return achado
 
 
-def executar(inicio: str, fim: str) -> int:
+def executar(inicio: str, fim: str, refazer: bool = False) -> int:
     logger = log.preparar(ETAPA)
     if not config.MANIFESTO.exists():
         raise SystemExit("manifesto ausente -- rode a etapa 01.")
     with config.MANIFESTO.open(encoding="utf-8", newline="") as fluxo:
         manifesto = {linha["mes"]: linha for linha in csv.DictReader(fluxo)}
 
-    linhas = []
+    # Grava a cada mes, e retoma de onde parou (ESPEC sec.10.4: tarefa de fundo
+    # nao e' dona de resultado). A primeira versao acumulava tudo em memoria e
+    # gravava uma vez no fim; um restart de container no meio da varredura levou
+    # junto cem meses de leitura. Ler 284 PDFs custa uma hora -- perder isso por
+    # nao ter gravado e' desperdicio evitavel.
+    config.DIR_SAIDAS.mkdir(parents=True, exist_ok=True)
+    destino = config.DIR_SAIDAS / "diagnostico_canal.csv"
+    ja_medidos: dict[str, dict] = {}
+    if destino.exists() and not refazer:
+        anterior = pd.read_csv(destino, dtype=str, keep_default_na=False)
+        ja_medidos = {linha["mes"]: linha for linha in anterior.to_dict("records")}
+        if ja_medidos:
+            logger.info("retomando: %d meses ja' medidos em %s",
+                        len(ja_medidos), log.caminho_relativo(destino))
+
+    linhas: list[dict] = []
     for mes in periodo.intervalo(inicio, fim):
+        if mes in ja_medidos:
+            linhas.append(ja_medidos[mes])
+            continue
         registro = manifesto.get(mes)
         if registro is None:
-            linhas.append({"mes": mes, "situacao": "sem informe baixado"})
-            continue
-        achado = diagnosticar(mes, config.RAIZ / registro["arquivo_local"])
+            achado = {"mes": mes, "situacao": "sem informe baixado"}
+        else:
+            achado = diagnosticar(mes, config.RAIZ / registro["arquivo_local"])
+            logger.info("%s: %s, %d tipos de tabela", mes, achado.get("situacao"),
+                        achado.get("tipos_presentes", 0))
         linhas.append(achado)
-        logger.info("%s: %s, %d tipos de tabela", mes, achado.get("situacao"),
-                    achado.get("tipos_presentes", 0))
+        pd.DataFrame(linhas).to_csv(destino, index=False)
 
     detalhe = pd.DataFrame(linhas)
-    config.DIR_SAIDAS.mkdir(parents=True, exist_ok=True)
-    detalhe.to_csv(config.DIR_SAIDAS / "diagnostico_canal.csv", index=False)
+    detalhe.to_csv(destino, index=False)
     log.contagem(logger, meses=len(detalhe),
                  com_canal=int((detalhe.get("tipos_presentes", 0) > 0).sum()))
     return 0
@@ -175,7 +193,10 @@ def main() -> int:
     analisador = argparse.ArgumentParser(description=__doc__)
     analisador.add_argument("--inicio", default=config.PERIODO_INICIO)
     analisador.add_argument("--fim", default=config.PERIODO_FIM)
-    return executar(analisador.parse_args().inicio, analisador.parse_args().fim)
+    analisador.add_argument("--refazer", action="store_true",
+                            help="ignora o que ja' foi medido e le' tudo de novo")
+    argumentos = analisador.parse_args()
+    return executar(argumentos.inicio, argumentos.fim, argumentos.refazer)
 
 
 if __name__ == "__main__":

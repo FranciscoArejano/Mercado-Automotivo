@@ -28,3 +28,16 @@ def test_etapa_e_chamavel_pelo_pipeline(numero, modulo, descricao):
 def test_toda_etapa_tem_script_e_esta_na_lista():
     scripts = sorted(p.stem for p in (RAIZ / "src").glob("etapa*.py"))
     assert scripts == sorted(modulo for _, modulo, _ in pipeline.ETAPAS)
+
+
+def test_corrida_sem_argumentos_inclui_todas_as_etapas(monkeypatch):
+    """`--ate` tinha padrao 7: as etapas 8 e 9 ficavam fora da corrida padrao."""
+    chamadas = []
+    monkeypatch.setattr(pipeline, "_chamar", lambda modulo, i, f: chamadas.append(modulo) or 0)
+    monkeypatch.setattr(sys, "argv", ["pipeline.py"])
+    assert pipeline.main() == 0
+    assert chamadas == [modulo for _, modulo, _ in pipeline.ETAPAS]
+
+
+def test_catalogo_e_a_ultima_etapa():
+    assert pipeline.ETAPAS[-1][1] == "etapa10_catalogo"

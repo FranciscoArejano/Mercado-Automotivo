@@ -9,13 +9,17 @@ codigo as aplica, reporta o que nao esta' coberto por elas e **para** em vez de
 resolver por conta propria. O que ficou em aberto esta' em
 [`QUESTOES_ABERTAS.md`](QUESTOES_ABERTAS.md).
 
+**Antes de desenhar um artigo, leia [`CATALOGO.md`](CATALOGO.md)**: o indice do
+que existe (com janela e linhas calculadas do dado), do que cada produto
+sustenta e das fontes mapeadas e ainda nao construidas. E' gerado pelo pipeline.
+
 ## Como rodar
 
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 
-.venv/bin/python src/pipeline.py                 # 2003-01..2026-08, sete etapas
+.venv/bin/python src/pipeline.py                 # 2003-01..2026-08, todas as etapas
 .venv/bin/python src/pipeline.py --pular 1       # sem rebaixar os PDFs
 .venv/bin/python src/pipeline.py --de 3 --ate 6  # so' um trecho
 .venv/bin/python -m pytest testes -q
@@ -31,7 +35,10 @@ Cada etapa tambem roda isolada e recebe `--inicio` / `--fim`:
 Parametros ficam em `src/comum/config.py` e aceitam variavel de ambiente
 (`PERIODO_INICIO`, `PERIODO_FIM`, `PICO_MOVEL_MODO`, `PAUSA_SEGUNDOS`).
 
-## As sete etapas
+## As etapas
+
+Rodam na ordem de dependencia, nao na numerica: 8 e 9 antes de 6, que as
+valida; 10 por ultimo, porque descreve todas.
 
 | # | Script | O que faz | Produto |
 |---|---|---|---|
@@ -42,6 +49,9 @@ Parametros ficam em `src/comum/config.py` e aceitam variavel de ambiente
 | 5 | `etapa05_painel.py` | Aplica `regras.csv`, confere o invariante central | `painel.parquet`, `saidas/painel_dicionario.md` |
 | 6 | `etapa06_validacao.py` | Validacoes obrigatorias da sec.6 | `saidas/validacao.md`, `saidas/cobertura.csv` |
 | 7 | `etapa07_referencia_cruzada.py` | Confronto com `Vendas_Geral.xlsx` (controle, nao fonte) | `saidas/referencia_cruzada.md` |
+| 8 | `etapa08_macro.py` | Series mensais do BCB e do IBGE, em tabela separada | `macro_mensal.parquet`, `saidas/macro_series.csv` |
+| 9 | `etapa09_canal.py` | Venda direta e varejo por modelo (top-50 por canal) | `painel_canal.parquet`, `saidas/painel_canal_dicionario.md` |
+| 10 | `etapa10_catalogo.py` | Indice do repositorio, calculado do dado | `CATALOGO.md` |
 
 ## Arquivos que o humano escreve
 
@@ -51,6 +61,14 @@ Parametros ficam em `src/comum/config.py` e aceitam variavel de ambiente
 | `config/mapa_grupos.csv` | Mapa **datado** de marca para grupo economico (D4). Rascunho -- ver Q3. |
 | `config/marcas.csv` | Lista curada de marcas conhecidas. Marca observada e fora dela e' reportada, nunca adivinhada. |
 | `config/sub_segmentos.csv` | Mapa explicito de sub-segmento para segmento. E' ele, e nao o titulo da secao, que decide o segmento -- o titulo vem corrompido em tres meses de 2020. |
+| `config/series_macro.csv` | As series da dimensao macro, com unidade, janela e `natureza_e_ressalvas`. |
+| `config/regras_classificacao.csv` | Regras auditaveis da classificacao de modelo: carroceria pelo sub-segmento da fonte, propulsao por marcador no nome. |
+| `config/catalogo_usos.csv` | O que cada produto e cada serie sustenta, para o `CATALOGO.md`. |
+| `config/fontes_candidatas.csv` | Fontes mapeadas e nao construidas, com o estado de cada uma. |
+
+`dados/referencia/classificacao_proposta_assistente.csv` nao e' do humano: e' a
+proposta do assistente, por conhecimento, que alimenta o rascunho de
+classificacao. Nada nela e' fato ate' a adjudicacao.
 
 `saidas/candidatos.xlsx` e' o insumo de `regras.csv`: a aba `pares` traz uma
 coluna `decisao` vazia para preencher e transportar.
@@ -85,6 +103,8 @@ Nao fazem parte do pipeline; rodam sob demanda.
 | `src/ferramentas/inventario_marcas.py` | Lista as marcas observadas na fonte, com volume e periodo, para curar `config/marcas.csv` com evidencia. |
 | `src/ferramentas/robustez_grupos.py` | Recalcula a concentracao com outra convencao de grupo (por padrao Kia separada da Hyundai). |
 | `src/ferramentas/diagnostico_retroacao.py` | Le os informes de 2003-2013 **sem escrever no painel** e reporta, ano a ano, onde a extracao degrada e como a agregacao da fonte deriva. |
+| `src/ferramentas/diagnostico_canal.py` | Fase 1 do canal de venda: mede, informe a informe, o que as tabelas de canal trazem, sem gravar dimensao. |
+| `src/ferramentas/classificacao_rascunho.py` | Fase 1 da classificacao de modelo: `saidas/classificacao_rascunho.xlsx`, uma proposta por modelo-vigencia para adjudicacao. Recusa sobrescrever rascunho com decisao preenchida. |
 
 ## O que o pipeline nunca faz
 
@@ -191,6 +211,10 @@ de 35.283 unidades contra cinco variantes somando 35.356 na planilha.
 Leia antes de usar o painel: [`saidas/validacao.md`](saidas/validacao.md),
 [`saidas/painel_dicionario.md`](saidas/painel_dicionario.md) e
 [`QUESTOES_ABERTAS.md`](QUESTOES_ABERTAS.md).
+
+**Antes de desenhar um artigo, leia [`CATALOGO.md`](CATALOGO.md)**: o indice do
+que existe (com janela e linhas calculadas do dado), do que cada produto
+sustenta e das fontes mapeadas e ainda nao construidas. E' gerado pelo pipeline.
 
 ## Rastreabilidade
 

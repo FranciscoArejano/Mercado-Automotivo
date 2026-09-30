@@ -60,7 +60,12 @@ def executar(inicio: str | None = None, fim: str | None = None) -> int:
     resumo: list[dict] = []
 
     # ------------------------------------------------------------ BCB / SGS
+    # O catalogo documenta tambem os subitens do IPCA (fonte IBGE/SIDRA), que
+    # sao coletados abaixo. Mandar esses codigos ao SGS dava 404 e registrava
+    # cinco falhas que nao eram falhas.
     for linha in catalogo:
+        if linha.get("fonte", "BCB/SGS") != "BCB/SGS":
+            continue
         codigo, nome = linha["codigo"], linha["nome"]
         coluna = f"sgs_{codigo}"
         try:
@@ -104,6 +109,10 @@ def executar(inicio: str | None = None, fim: str | None = None) -> int:
             juncoes.append(emendas)
 
         no_periodo = encadeada[encadeada["mes_ref"].isin(meses)]
+        # A janela e a contagem sao dos meses COM valor. O SIDRA devolve '...'
+        # nos meses em que o subitem nao existia (o usado antes de 2006-07), e
+        # contar a linha vazia como mes coberto dizia 284 onde ha' 242.
+        com_valor = no_periodo[no_periodo["variacao_pct"].notna()]
         painel = painel.merge(
             no_periodo[["mes_ref", "variacao_pct", "indice"]].rename(columns={
                 "variacao_pct": f"ipca_{apelido}_var_pct",
@@ -117,15 +126,15 @@ def executar(inicio: str | None = None, fim: str | None = None) -> int:
             "base_efetiva": macro.base_efetiva(variacoes, config.BASE_INDICE_IPCA),
             "situacao_da_serie": "ativa",
             "janela_declarada": "1999-08..2026-08 (quatro tabelas)",
-            "janela_efetiva": (f"{no_periodo['mes_ref'].min()}..{no_periodo['mes_ref'].max()}"
-                               if not no_periodo.empty else "vazia"),
-            "observacoes": len(no_periodo),
-            "meses_do_painel_cobertos": int(no_periodo["mes_ref"].nunique()),
-            "minimo": None if no_periodo.empty else float(no_periodo["variacao_pct"].min()),
-            "maximo": None if no_periodo.empty else float(no_periodo["variacao_pct"].max()),
+            "janela_efetiva": (f"{com_valor['mes_ref'].min()}..{com_valor['mes_ref'].max()}"
+                               if not com_valor.empty else "vazia"),
+            "observacoes": len(com_valor),
+            "meses_do_painel_cobertos": int(com_valor["mes_ref"].nunique()),
+            "minimo": None if com_valor.empty else float(com_valor["variacao_pct"].min()),
+            "maximo": None if com_valor.empty else float(com_valor["variacao_pct"].max()),
         })
-        logger.info("SIDRA c315/%s (%s): %d meses no periodo",
-                    subitem, apelido, len(no_periodo))
+        logger.info("SIDRA c315/%s (%s): %d meses com valor no periodo",
+                    subitem, apelido, len(com_valor))
 
     # ------------------------------------------------------------- gravacao
     config.DIR_PROCESSADO.mkdir(parents=True, exist_ok=True)

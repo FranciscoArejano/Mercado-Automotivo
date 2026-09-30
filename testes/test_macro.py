@@ -115,3 +115,40 @@ def test_usado_esta_declarado_como_indice_de_depreciacao():
     # A ressalva tem de estar no catalogo, e nao so' em quem ja' sabe.
     usado = next(l for l in macro.carregar_catalogo() if l["codigo"] == "ipca_107654")
     assert "DEPRECIACAO" in usado["natureza_e_ressalvas"].upper()
+
+
+def test_etapa_nao_manda_subitem_do_ipca_ao_sgs_e_conta_so_mes_com_valor(tmp_path, monkeypatch):
+    """Dois defeitos da rodada da macro, travados.
+
+    1. O catalogo documenta os subitens do IPCA (fonte IBGE/SIDRA); a etapa os
+       mandava tambem ao SGS, que dava 404 e registrava cinco falhas falsas.
+    2. O resumo contava como coberto o mes que o SIDRA devolve vazio ('...'):
+       o usado aparecia com 284 meses onde tem 242.
+    """
+    import etapa08_macro
+    from comum import config
+
+    pedidos_sgs = []
+
+    def sgs_falso(codigo, inicio, fim):
+        pedidos_sgs.append(codigo)
+        return pd.DataFrame({"mes_ref": ["2020-01", "2020-02"], "valor": [1.0, 2.0]})
+
+    def sidra_falso(subitem):
+        valores = [None, 0.5] if subitem == "107654" else [0.1, 0.2]
+        return _variacoes([("2020-01", valores[0], 7060), ("2020-02", valores[1], 7060)])
+
+    monkeypatch.setattr(macro, "coletar_sgs", sgs_falso)
+    monkeypatch.setattr(macro, "coletar_ipca_subitem", sidra_falso)
+    monkeypatch.setattr(config, "DIR_PROCESSADO", tmp_path)
+    monkeypatch.setattr(config, "DIR_SAIDAS", tmp_path)
+    monkeypatch.setattr(config, "MACRO_MENSAL", tmp_path / "macro.parquet")
+    monkeypatch.setattr(config, "BASE_INDICE_IPCA", "2020-01")
+
+    assert etapa08_macro.executar("2020-01", "2020-02") == 0
+    assert pedidos_sgs and all(codigo.isdigit() for codigo in pedidos_sgs)
+    resumo = pd.read_csv(tmp_path / "macro_series.csv")
+    assert "situacao" not in resumo or resumo["situacao"].isna().all()
+    usado = resumo.set_index("serie").loc["ipca_automovel_usado"]
+    assert usado["meses_do_painel_cobertos"] == 1
+    assert usado["janela_efetiva"] == "2020-02..2020-02"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Encadeia as sete etapas (ESPEC.md sec.8).
+"""Encadeia as etapas (ESPEC.md sec.8).
 
 Cada etapa tambem roda isolada. Aqui elas correm na ordem, e a primeira que
 falhar interrompe a corrida -- nenhuma etapa sobrescreve a anterior, entao o
@@ -37,6 +37,8 @@ ETAPAS = [
     (9, "etapa09_canal", "painel de canal de venda"),
     (6, "etapa06_validacao", "validacao"),
     (7, "etapa07_referencia_cruzada", "referencia cruzada"),
+    # O catalogo descreve o que as outras produziram: vem por ultimo.
+    (10, "etapa10_catalogo", "catalogo do repositorio"),
 ]
 
 
@@ -57,7 +59,9 @@ def main() -> int:
     analisador.add_argument("--inicio", default=config.PERIODO_INICIO)
     analisador.add_argument("--fim", default=config.PERIODO_FIM)
     analisador.add_argument("--de", type=int, default=1)
-    analisador.add_argument("--ate", type=int, default=7)
+    # O padrao e' a ultima etapa pelo NUMERO. Com `default=7`, as etapas 8 e 9
+    # (acrescentadas depois) ficavam de fora de uma corrida sem argumentos.
+    analisador.add_argument("--ate", type=int, default=max(n for n, _, _ in ETAPAS))
     analisador.add_argument("--pular", type=int, nargs="*", default=[])
     args = analisador.parse_args()
 

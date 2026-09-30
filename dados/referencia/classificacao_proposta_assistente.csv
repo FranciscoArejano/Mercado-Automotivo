@@ -1,0 +1,439 @@
+marca,modelo,segmento,vigencia_inicio,vigencia_fim,propulsao_oferecida,carroceria,origem_producao,confianca_propulsao,confianca_carroceria,confianca_origem,observacao
+VW,GOL,automoveis,,,gasolina+flex,hatch,nacional,alta,alta,alta,Gasolina so' no inicio: o Gol Total Flex e' de 2003-03 e a transicao nao esta' datada por versao.
+FIAT,STRADA,comerciais_leves,,,gasolina+flex,,nacional,media,,alta,Transicao flex 2003-2006 nao datada.
+FIAT,UNO,automoveis,,,gasolina+flex,hatch,nacional,alta,alta,alta,O nome cobre o Uno Mille (ate' 2013) e o Novo Uno (2010-2021); os dois hatch e nacionais.
+FIAT,PALIO,automoveis,,,gasolina+flex,hatch,nacional,alta,alta,alta,
+GM,ONIX,automoveis,,,flex,,nacional,alta,,alta,Gravatai.
+VW,FOX/CROSS FOX,automoveis,,,gasolina+flex,,nacional,media,,alta,Nome composto: agrega Fox e CrossFox. Transicao flex nao datada.
+GM,CELTA,automoveis,,,gasolina+flex,hatch,nacional,alta,alta,alta,
+HYUNDAI,HB20,automoveis,,,flex,,nacional,alta,,alta,Piracicaba.
+FIAT,SIENA,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+TOYOTA,COROLLA,automoveis,2003-01,2019-09,gasolina+flex,,nacional,alta,,alta,Indaiatuba.
+TOYOTA,COROLLA,automoveis,2019-10,2026-08,flex+hev,,nacional,media,,alta,Versao hibrida flex a partir da 12a geracao; mes de lancamento proposto e' aproximado.
+GM,CLASSIC,automoveis,,,gasolina+flex,,nacional,alta,,alta,Corsa Classic sedan.
+FORD,KA,automoveis,,,gasolina+flex,,nacional,alta,,alta,Producao nacional encerrada em 2021 com a saida da Ford; o resto da serie e' residuo.
+FORD,FIESTA,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+VW,SAVEIRO,comerciais_leves,,,gasolina+flex,,nacional,alta,,alta,
+RENAULT,SANDERO,automoveis,,,flex,,nacional,alta,,alta,Sao Jose dos Pinhais.
+GM,PRISMA,automoveis,,,flex,,nacional,alta,,alta,
+VW,POLO,automoveis,,,gasolina+flex,,nacional,media,,alta,Duas geracoes (ate' ~2014 e de 2017 em diante); as duas nacionais.
+TOYOTA,HILUX,comerciais_leves,,,diesel+gasolina+flex,,importado,media,,alta,Argentina (Zarate). Quais versoes a gasolina/flex e em que anos nao esta' proposto.
+VW,VOYAGE,automoveis,,,flex,,nacional,alta,,alta,O Voyage atual e' de 2008; as 6 a 28 unidades/ano de 2003-2007 sao residuo do modelo antigo.
+GM,S10,comerciais_leves,,,diesel+gasolina+flex,,nacional,media,,alta,Sao Jose dos Campos.
+FORD,ECOSPORT,automoveis,,,gasolina+flex+diesel,,nacional,media,,alta,Camacari. Houve versao diesel nos primeiros anos.
+FIAT,ARGO,automoveis,,,flex,,nacional,alta,,alta,
+HONDA,CIVIC,automoveis,2003-01,2021-12,gasolina+flex,,nacional,alta,,alta,Sumare ate' a 10a geracao.
+HONDA,CIVIC,automoveis,2022-01,2026-08,gasolina+hev,,importado,media,,media,11a geracao so' importada: Type R (gasolina) e e:HEV (hibrido). Fronteira no fim da producao nacional.
+FIAT,MOBI,automoveis,,,flex,hatch,nacional,alta,alta,alta,
+HONDA,FIT,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+JEEP,RENEGADE,automoveis,,,flex+diesel,,nacional,alta,,alta,Goiana.
+FIAT,TORO,comerciais_leves,,,flex+diesel,,nacional,alta,,alta,Goiana.
+HYUNDAI,CRETA,automoveis,,,flex,,nacional,alta,,alta,Piracicaba.
+JEEP,COMPASS,automoveis,2012-01,2016-08,gasolina,,importado,media,,alta,1a geracao importada.
+JEEP,COMPASS,automoveis,2016-09,2026-08,flex+diesel+phev,,nacional,media,,media,"2a geracao em Goiana. A versao 4xe (plug-in, ~2021-2023) era importada; 'ambos' tambem se defende."
+RENAULT,KWID,automoveis,,,flex,hatch,nacional,alta,alta,alta,A versao eletrica e' outra chave (RENAULT/E-KWID).
+GM,MONTANA,comerciais_leves,,,gasolina+flex,,nacional,media,,media,Tres geracoes muito diferentes sob o mesmo nome; a de 2023 em diante e' picape compacta.
+VW,T CROSS,automoveis,,,flex,,nacional,alta,,alta,
+HONDA,HR-V,automoveis,,,flex,,nacional,alta,,alta,
+GM,TRACKER,automoveis,2003-01,2009-12,gasolina,,importado,media,,media,1a geracao (base Suzuki). Pais de origem nao confirmado.
+GM,TRACKER,automoveis,2013-01,2020-02,flex,,importado,media,,media,Importado do Mexico. Fronteira no lancamento da 2a geracao nacional.
+GM,TRACKER,automoveis,2020-03,2026-08,flex,,nacional,alta,,alta,Sao Caetano do Sul.
+HYUNDAI,HB20S,automoveis,,,flex,,nacional,alta,,alta,
+GM,ONIX PLUS,automoveis,,,flex,,nacional,alta,,alta,
+NISSAN,KICKS,automoveis,2016-07,2017-04,flex,,importado,alta,,media,Importado do Mexico no lancamento. Fronteira aproximada.
+NISSAN,KICKS,automoveis,2017-05,2026-08,flex,,nacional,alta,,alta,Resende.
+CITROEN,C3,automoveis,,,gasolina+flex,,nacional,alta,,alta,Porto Real.
+RENAULT,LOGAN,automoveis,,,flex,,nacional,alta,,alta,
+RENAULT,DUSTER,automoveis,,,flex,,nacional,alta,,alta,
+FORD,RANGER,comerciais_leves,,,diesel+gasolina+flex,,importado,media,,alta,Argentina (Pacheco).
+FIAT,FIORINO,comerciais_leves,,,gasolina+flex,,nacional,media,,alta,
+FORD,FIESTA SEDAN,automoveis,,,gasolina+flex,,nacional,media,,media,
+GM,CORSA,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+GM,SPIN,automoveis,,,flex,,nacional,alta,,alta,
+HONDA,CITY,automoveis,,,flex,,nacional,alta,,alta,
+MITSUBISHI,L200,comerciais_leves,,,diesel,,nacional,media,,alta,Catalao (HPE). Versoes a gasolina/flex podem ter existido.
+FIAT,PALIO WEEKEND,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+FIAT,PUNTO,automoveis,,,flex,,nacional,alta,,alta,
+RENAULT,CLIO,automoveis,,,gasolina+flex,hatch,,media,alta,baixa,"Origem nao proposta: producao no Parana e na Argentina em periodos que nao sei datar."
+VW,NIVUS,automoveis,,,flex,,nacional,alta,,alta,
+GM,COBALT,automoveis,,,flex,,nacional,alta,,alta,
+FIAT,CRONOS,automoveis,,,flex,,importado,alta,,alta,Argentina (Cordoba).
+VW,VIRTUS,automoveis,,,flex,,nacional,alta,,alta,
+TOYOTA,COROLLA CROSS,automoveis,,,flex+hev,,nacional,alta,,alta,Sorocaba.
+FIAT,IDEA,automoveis,,,flex,,nacional,alta,,alta,
+TOYOTA,ETIOS HB,automoveis,,,flex,hatch,nacional,alta,alta,alta,Sorocaba.
+GM,AGILE,automoveis,,,flex,,importado,alta,,alta,Argentina (Rosario).
+VW,KOMBI,comerciais_leves,,,gasolina+flex,,nacional,alta,,alta,Producao encerrada em 2013; o resto e' residuo.
+FORD,FOCUS,automoveis,,,gasolina+flex,,importado,media,,media,Argentina (Pacheco).
+TOYOTA,HILUX SW4,automoveis,,,diesel+gasolina+flex,,importado,media,,alta,Argentina.
+NISSAN,VERSA,automoveis,2011-01,2014-03,flex,,importado,media,,media,Mexico. Fronteiras aproximadas.
+NISSAN,VERSA,automoveis,2014-04,2020-07,flex,,nacional,alta,,media,Resende.
+NISSAN,VERSA,automoveis,2020-08,2026-08,flex,,importado,media,,media,Nova geracao do Mexico; a antiga seguiu como NISSAN/V-DRIVE.
+GM,CORSA SEDAN,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+VW,UP,automoveis,,,flex,hatch,nacional,alta,alta,alta,Taubate.
+GM,MERIVA,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+FIAT,PULSE,automoveis,,,flex,,nacional,media,,alta,"MHEV: versao mild hybrid 12V nos anos finais. Mild hybrid nao esta' na lista de valores -- ver questoes."
+PEUGEOT,206,automoveis,,,gasolina+flex,hatch,nacional,alta,alta,media,
+GM,ASTRA,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+FORD,KA SEDAN,automoveis,,,flex,,nacional,alta,,alta,
+HYUNDAI,TUCSON,automoveis,,,gasolina+flex,,ambos,media,,media,Montagem CAOA em Anapolis em parte do periodo e importacao no resto; datas nao propostas.
+GM,CRUZE SEDAN,automoveis,2011-01,2016-05,flex,,nacional,alta,,media,Sao Caetano do Sul.
+GM,CRUZE SEDAN,automoveis,2016-06,2026-08,flex,,importado,alta,,media,2a geracao da Argentina (Rosario). Fronteira aproximada.
+PEUGEOT,208,automoveis,2013-01,2019-12,flex,,nacional,alta,,media,Porto Real.
+PEUGEOT,208,automoveis,2020-01,2026-08,flex+bev,,importado,media,,media,2a geracao da Argentina; e-208 importado. Retorno a Porto Real nos anos finais nao confirmado.
+VW,GOLF,automoveis,,,gasolina+flex+phev,,ambos,media,,media,Geracoes nacionais (IV e VII) e importadas; GTE plug-in importado.
+VW,SPACE FOX,automoveis,,,flex,,importado,media,,media,Argentina (Pacheco).
+MITSUBISHI,PAJERO,automoveis,,,diesel+gasolina+flex,,ambos,media,,media,Nome agregado (TR4 Sport Full Dakar): parte nacional (Catalao) e parte importada.
+VW,AMAROK,comerciais_leves,,,diesel,,importado,alta,,alta,Argentina.
+FIAT,FASTBACK,automoveis,,,flex,,nacional,media,,alta,MHEV nos anos finais -- ver questoes.
+NISSAN,FRONTIER,comerciais_leves,2003-01,2008-12,diesel,,nacional,media,,baixa,Producao no Parana nos anos 2000 nao datada; origem deixada como nacional com confianca baixa.
+NISSAN,FRONTIER,comerciais_leves,2009-01,2026-08,diesel,,importado,media,,media,Mexico e depois Argentina.
+TOYOTA,ETIOS SEDAN,automoveis,,,flex,,nacional,alta,,alta,
+VW,POLO SEDAN,automoveis,,,gasolina+flex,,nacional,media,,media,
+TOYOTA,YARIS HB,automoveis,,,flex,,nacional,alta,,alta,
+RENAULT,MASTER,comerciais_leves,,,diesel,,nacional,alta,,alta,
+NISSAN,MARCH,automoveis,2011-01,2014-03,flex,,importado,alta,,media,Mexico.
+NISSAN,MARCH,automoveis,2014-04,2021-12,flex,,nacional,alta,,media,Resende.
+GM,VECTRA,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+PEUGEOT,207,automoveis,,,flex,hatch,nacional,alta,alta,alta,Porto Real; o 207 brasileiro e' derivado do 206.
+FIAT,DOBLO,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+VW,JETTA,automoveis,,,gasolina+flex,,importado,media,,alta,Mexico. Versao flex so' em parte do periodo.
+TOYOTA,YARIS SEDAN,automoveis,,,flex,,nacional,alta,,alta,
+FIAT,DUCATO,comerciais_leves,,,diesel,,nacional,alta,,alta,Sete Lagoas.
+RENAULT,OROCH,comerciais_leves,,,flex,,nacional,alta,,alta,
+VW,PARATI,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+HYUNDAI,I30,automoveis,,,gasolina,,importado,media,,alta,
+HYUNDAI,HR,comerciais_leves,,,diesel,,nacional,alta,media,media,"CAOA, Anapolis. E' caminhao leve cabine-sobre-motor; a fonte o poe em Furgoes."
+HYUNDAI,IX35,automoveis,,,gasolina+flex,,ambos,media,,media,Importado e depois CAOA Anapolis; datas nao propostas.
+NISSAN,SENTRA,automoveis,,,gasolina+flex,,importado,media,,alta,Mexico.
+FORD,FOCUS SEDAN,automoveis,,,gasolina+flex,,importado,media,,media,Argentina.
+VW,TERA,automoveis,,,flex,,nacional,alta,,alta,Taubate.
+CAOA CHERY,TIGGO 7,automoveis,,,gasolina+flex,,nacional,media,,media,"CAOA, Anapolis. Versoes MHEV e plug-in em anos recentes nao datadas -- ver questoes."
+FORD,FUSION,automoveis,,,gasolina+flex+hev,,importado,media,,alta,Mexico. Fusion Hybrid vendido por varios anos.
+BYD,DOLPHIN MINI,automoveis,,,bev,,importado,alta,,media,China. Montagem em Camacari (BA) iniciada nos anos finais; vigencia nao proposta.
+BYD,SONG,automoveis,,,phev,,importado,alta,,media,"Agrega Song Plus DM-i e Song Pro DM-i, ambos plug-in. Camacari nos anos finais, nao datado."
+CAOA CHERY,TIGGO 5X,automoveis,,,flex,,nacional,media,,media,CAOA Anapolis. Versao MHEV em anos recentes -- ver questoes.
+GWM,HAVAL H6,automoveis,,,hev+phev,,importado,alta,,media,Producao em Iracemapolis iniciada nos anos finais; vigencia nao proposta.
+HONDA,WR-V,automoveis,,,flex,,nacional,alta,,media,A geracao de 2025 pode ser importada; nao confirmado.
+HONDA,CRV,automoveis,,,gasolina+flex,,importado,media,,alta,
+KIA,SPORTAGE,automoveis,,,gasolina+flex+diesel,,importado,media,,alta,
+RENAULT,CAPTUR,automoveis,,,flex,,nacional,alta,,alta,
+JEEP,COMMANDER,automoveis,,,flex+diesel,,nacional,alta,,alta,Goiana.
+GM,ZAFIRA,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+GM,CRUZE HB,automoveis,2012-01,2016-05,flex,,nacional,alta,,media,
+GM,CRUZE HB,automoveis,2016-06,2026-08,flex,,importado,alta,,media,Argentina.
+PEUGEOT,2008,automoveis,,,flex+bev,,ambos,media,,media,Porto Real na 1a geracao; e-2008 importado; origem da 2a geracao nao confirmada.
+GM,ASTRA SEDAN,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+FIAT,STILO,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+CITROEN,XSARA PICASSO,automoveis,,,gasolina+flex,,nacional,alta,,alta,Porto Real.
+FORD,COURIER,comerciais_leves,,,gasolina+flex,,nacional,alta,,alta,
+PEUGEOT,207 SEDAN,automoveis,,,flex,,importado,media,,media,"207 Passion, Argentina."
+RENAULT,CLIO SEDAN,automoveis,,,gasolina+flex,,,media,,baixa,Origem nao proposta.
+VW,TAOS,automoveis,,,flex,,importado,alta,,alta,Argentina.
+RAM,RAMPAGE,comerciais_leves,,,flex+diesel,,nacional,alta,,alta,Goiana.
+MITSUBISHI,ASX,automoveis,,,gasolina+flex,,ambos,media,,media,Importado e depois Catalao; datas nao propostas.
+CITROEN,C4 CACTUS,automoveis,,,flex,,nacional,alta,,alta,
+FIAT,LINEA,automoveis,,,gasolina+flex,,nacional,media,,alta,
+NISSAN,LIVINA,automoveis,,,flex,,nacional,alta,,media,
+KIA,CERATO,automoveis,,,gasolina+flex,,importado,media,,alta,
+BYD,DOLPHIN,automoveis,,,bev,,importado,alta,,alta,
+CAOA CHERY,TIGGO 8,automoveis,,,gasolina+flex+phev,,nacional,media,,media,CAOA Anapolis. A versao plug-in pode ser importada.
+KIA,K2500,comerciais_leves,,,diesel,,importado,alta,media,media,Bongo. Caminhao leve; a fonte o poe em Furgoes.
+CITROEN,C3 AIRCROSS,automoveis,,,flex,,nacional,alta,,alta,
+HONDA,CITY HATCH,automoveis,,,flex,,nacional,alta,,alta,
+VW,TIGUAN,automoveis,,,gasolina,,importado,alta,,alta,
+PEUGEOT,307,automoveis,,,gasolina+flex,,importado,media,,media,
+RENAULT,FLUENCE,automoveis,,,gasolina+flex,,importado,media,,alta,Argentina.
+CITROEN,C4 PALLAS,automoveis,,,gasolina+flex,,importado,media,,alta,Argentina.
+GM,CAPTIVA,automoveis,,,gasolina,,importado,alta,,alta,
+FORD,NEW FIESTA,automoveis,,,gasolina+flex,,importado,media,,media,A fonte o classifica todo como sedan: e' o New Fiesta Sedan do Mexico.
+BMW,X1,automoveis,2010-01,2014-09,gasolina,,importado,alta,,media,
+BMW,X1,automoveis,2014-10,2026-08,gasolina+flex,,nacional,media,,media,Araquari. Datas de inicio (e de eventual fim) da producao local sao aproximadas.
+MITSUBISHI,OUTLANDER,automoveis,,,gasolina+phev,,,media,,baixa,Origem nao proposta: montagem em Catalao em parte do periodo nao confirmada.
+RENAULT,KARDIAN,automoveis,,,flex,,nacional,alta,,alta,
+TOYOTA,RAV4,automoveis,2003-01,2019-05,gasolina,,importado,alta,,alta,
+TOYOTA,RAV4,automoveis,2019-06,2026-08,hev,,importado,media,,alta,5a geracao so' hibrida. Fronteira aproximada.
+PEUGEOT,206SW,automoveis,,,gasolina+flex,,nacional,media,,media,
+M.BENZ,CLASSE C,automoveis,2003-01,2016-02,gasolina,,importado,alta,,media,
+M.BENZ,CLASSE C,automoveis,2016-03,2020-12,gasolina,,nacional,media,,media,Iracemapolis (fabrica fechada em 2020). Datas aproximadas.
+M.BENZ,CLASSE C,automoveis,2021-01,2026-08,gasolina+phev,,importado,media,,media,
+RENAULT,SCENIC,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+HYUNDAI,SANTAFE,automoveis,,,gasolina,,importado,media,,alta,
+RENAULT,KANGOO,comerciais_leves,,,gasolina+flex,,,media,,baixa,Origem nao proposta.
+VOLVO,XC60,automoveis,,,gasolina+diesel+phev,,importado,media,,alta,
+KIA,PICANTO,automoveis,,,gasolina+flex,,importado,media,media,alta,E' um hatch; a fonte o poe em Monocab.
+FIAT,DOBLO,comerciais_leves,,,gasolina+flex,,nacional,alta,,alta,Versao de carga.
+LAND ROVER,DISCOVERY,automoveis,,,diesel+gasolina,,,media,,baixa,"Se o nome agrega o Discovery Sport, parte foi montada em Itatiaia; nao confirmado."
+MITSUBISHI,ECLIPSE CROSS,automoveis,,,gasolina+flex,,nacional,media,,media,Catalao; importado no lancamento.
+BMW,320,automoveis,2003-01,2014-09,gasolina,,importado,alta,,media,
+BMW,320,automoveis,2014-10,2019-12,gasolina+flex,,nacional,media,,media,Araquari.
+HYUNDAI,AZERA,automoveis,,,gasolina,,importado,alta,,alta,
+RENAULT,MEGANE,automoveis,,,gasolina+flex,,,media,,baixa,Origem nao proposta.
+FIAT,500,automoveis,,,gasolina+flex,,importado,media,,alta,
+FIAT,WEEKEND,automoveis,,,flex,,nacional,alta,,alta,O Palio Weekend renomeado.
+AUDI,Q3,automoveis,,,gasolina+flex,,ambos,media,,media,Montado em Sao Jose dos Pinhais em parte do periodo; datas nao propostas.
+RENAULT,MEGANE GT,automoveis,,,gasolina+flex,,,media,,baixa,Megane Grand Tour. Origem nao proposta.
+GM,VECTRA HATCH,automoveis,,,flex,,nacional,alta,,alta,Vectra GT.
+GM,TRAILBLAZER,automoveis,,,diesel+gasolina,,nacional,alta,,alta,
+KIA,SOUL,automoveis,,,gasolina+flex,,importado,media,,alta,
+KIA,SORENTO,automoveis,,,gasolina+diesel,,importado,media,,alta,
+TOYOTA,FIELDER,automoveis,,,gasolina+flex,,nacional,alta,,alta,Corolla Fielder.
+PEUGEOT,308,automoveis,,,gasolina+flex,,importado,media,,media,Argentina.
+IVECO,DAILY 3514,comerciais_leves,,,diesel,,nacional,alta,,alta,Sete Lagoas.
+CITROEN,C4L,automoveis,,,gasolina+flex,,importado,media,,media,C4 Lounge. Argentina.
+CITROEN,BASALT,automoveis,,,flex,,nacional,alta,,alta,
+CITROEN,C4,automoveis,,,gasolina+flex,,importado,media,,media,
+BMW,320I,automoveis,2008-01,2014-09,gasolina,,importado,alta,,media,
+BMW,320I,automoveis,2014-10,2026-08,gasolina+flex,,nacional,media,,media,Araquari.
+PEUGEOT,BOXER,comerciais_leves,,,diesel,,,alta,,baixa,Origem nao proposta.
+LAND ROVER,EVOQUE,automoveis,2011-01,2016-05,gasolina+diesel,,importado,media,,media,
+LAND ROVER,EVOQUE,automoveis,2016-06,2026-08,gasolina+diesel,,nacional,media,,media,Itatiaia. Inicio aproximado; fim da producao local nao proposto.
+GEELY,EX2,automoveis,,,bev,,importado,alta,,alta,
+BYD,KING,automoveis,,,phev,,importado,alta,,media,Camacari nos anos finais nao datado.
+RENAULT,SYMBOL,automoveis,,,flex,,importado,media,,media,
+MITSUBISHI,LANCER,automoveis,,,gasolina+flex,,,media,,baixa,Origem nao proposta.
+GM,EQUINOX,automoveis,,,gasolina+bev,,importado,media,,alta,Mexico. O Equinox EV pode estar agregado no nome; nao confirmado.
+PEUGEOT,408,automoveis,,,gasolina+flex,,importado,media,,alta,Argentina.
+CHERY,TIGGO,automoveis,,,gasolina+flex,,importado,media,,media,
+FORD,TERRITORY,automoveis,,,gasolina,,importado,alta,,alta,China.
+FORD,TRANSIT,comerciais_leves,,,diesel,,importado,alta,,alta,A E-Transit eletrica pode estar agregada nos anos finais.
+CHERY,QQ,automoveis,2011-01,2014-12,gasolina,,importado,media,,media,
+CHERY,QQ,automoveis,2015-01,2020-12,flex,,nacional,media,,media,Jacarei. Fronteira aproximada.
+CITROEN,C3 PICASSO,automoveis,,,flex,,nacional,alta,,alta,
+FIAT,BRAVO,automoveis,,,gasolina+flex,,nacional,alta,,alta,
+CITROEN,AIRCROSS,automoveis,,,flex,,nacional,alta,,alta,
+AUDI,A3 SEDAN,automoveis,,,gasolina+flex,,ambos,media,,media,Montado em Sao Jose dos Pinhais em parte do periodo; datas nao propostas.
+VW,SANTANA,automoveis,,,gasolina+flex,,nacional,alta,,alta,Producao encerrada em 2006; o resto e' residuo.
+HYUNDAI,ELANTRA,automoveis,,,gasolina+flex,,importado,media,,alta,
+TOYOTA,YARIS CROSS,automoveis,,,flex+hev,,nacional,media,,media,Sorocaba.
+M.BENZ,SPRINTER 313,comerciais_leves,,,diesel,,importado,alta,,media,Argentina.
+SUZUKI,GVITARA,automoveis,,,gasolina,,importado,alta,,media,
+FIAT,FREEMONT,automoveis,,,gasolina,,importado,alta,,alta,Mexico.
+GM,SONIC,automoveis,2012-01,2014-12,flex,,importado,media,,media,Hatch da 1a vida do nome.
+GM,SONIC,automoveis,2025-01,2026-08,flex,,nacional,media,,media,"Outro produto com o mesmo nome: crossover derivado do Onix, 2026. Onze anos de buraco no dado entre os dois."
+AUDI,A3,automoveis,2003-01,2006-12,gasolina,,nacional,alta,,alta,1a geracao feita em Curitiba.
+AUDI,A3,automoveis,2007-01,2026-08,gasolina+phev,,importado,media,,alta,Sportback e-tron plug-in em parte do periodo.
+TROLLER,T4,automoveis,,,diesel,,nacional,alta,,alta,Horizonte (CE).
+FORD,F250,comerciais_leves,,,diesel,,nacional,media,,alta,Sao Bernardo do Campo ate' ~2011; o resto e' residuo.
+GM,BLAZER,automoveis,,,gasolina+diesel+flex,,nacional,media,,alta,
+CITROEN,JUMPER,comerciais_leves,,,diesel,,,alta,,baixa,Origem nao proposta.
+PEUGEOT,PARTNER,comerciais_leves,,,gasolina+flex,,,baixa,,baixa,Origem e propulsao incertas.
+NISSAN,KAIT,automoveis,,,flex,,nacional,media,,media,Resende.
+CITROEN,C4 PICASSO,automoveis,,,gasolina+flex,,importado,media,,media,
+JAC,J3,automoveis,,,gasolina+flex,,importado,media,,alta,
+PEUGEOT,307 SEDAN,automoveis,,,gasolina+flex,,importado,media,,media,
+MITSUBISHI,TRITON,comerciais_leves,,,diesel,,nacional,alta,,media,Nova geracao produzida em Catalao (HPE); inicio da producao local nao datado.
+LAND ROVER,FREELANDER,automoveis,,,gasolina+diesel,,importado,media,,alta,
+PEUGEOT,EXPERT,comerciais_leves,,,diesel,,importado,alta,,media,Uruguai (Nordex) proposto; em qualquer caso importado.
+M.BENZ,CLASSE GLA,automoveis,2015-05,2016-08,gasolina,,importado,alta,,media,
+M.BENZ,CLASSE GLA,automoveis,2016-09,2020-12,gasolina,,nacional,media,,media,Iracemapolis (fechada em 2020). Inicio da producao do GLA aproximado.
+M.BENZ,CLASSE GLA,automoveis,2021-01,2023-04,gasolina,,importado,alta,,media,
+SUZUKI,JIMNY,automoveis,2003-01,2011-12,gasolina,,importado,alta,,media,
+SUZUKI,JIMNY,automoveis,2012-01,2022-02,gasolina,,nacional,media,,media,Catalao (HPE). Inicio da producao local aproximado.
+M.BENZ,CLASSE A,automoveis,2003-01,2005-12,gasolina,,nacional,alta,,media,Juiz de Fora (1a geracao). Fim da producao aproximado.
+M.BENZ,CLASSE A,automoveis,2006-01,2025-09,gasolina,,importado,alta,,media,Geracoes posteriores importadas; a fonte mistura Monocab e sedan.
+BYD,SONG PLUS,automoveis,,,phev,,importado,media,,alta,DM-i. Uma versao eletrica (EV) pode ter sido vendida sob o mesmo nome.
+VW,PASSAT,automoveis,,,gasolina,,importado,alta,,alta,
+PEUGEOT,207 SW,automoveis,,,flex,,nacional,alta,,media,Porto Real.
+VW,BORA,automoveis,,,gasolina+flex,,importado,media,,alta,Mexico. O que vem depois de ~2011 e' residuo.
+JEEP,CHEROKEE,automoveis,,,gasolina,,importado,media,,alta,Versoes diesel nao verificadas.
+DODGE,JOURNEY,automoveis,,,gasolina,,importado,alta,,alta,Mexico.
+OMODA JAECOO,OMODA 5,automoveis,,,,,importado,baixa,,alta,Propulsao da versao vendida no Brasil nao conhecida.
+FIAT,TITANO,comerciais_leves,,,diesel,,importado,alta,,media,
+OMODA JAECOO,JAECOO 7,automoveis,,,phev,,importado,media,,alta,Versao a gasolina pode ter sido vendida.
+CITROEN,JUMPY,comerciais_leves,,,diesel,,importado,alta,,media,Uruguai (Nordex) proposto.
+LIFAN,X60,automoveis,,,gasolina,,importado,media,,media,
+JAC,J3 TURIN,automoveis,,,gasolina+flex,,importado,media,,alta,
+VOLVO,XC40,automoveis,,,gasolina+phev+bev,,importado,media,,alta,A versao eletrica passou a se chamar EX40; pode aparecer com outro nome.
+HAFEI,RUIYI,comerciais_leves,,,gasolina,,importado,media,,media,China.
+FORD,EDGE,automoveis,,,gasolina,,importado,alta,,alta,Canada.
+GM,SONIC SEDAN,automoveis,,,flex,,importado,media,,alta,
+M.BENZ,SPRINTER 311,comerciais_leves,,,diesel,furgao,importado,alta,media,media,"Argentina. O numero cobre furgao, chassi e micro-onibus."
+FIAT,SCUDO,comerciais_leves,,,diesel,,importado,alta,,media,Uruguai (Nordex) proposto.
+M.BENZ,C180,automoveis,,,gasolina,,importado,alta,,media,
+FORD,MAVERICK,comerciais_leves,,,gasolina+hev,,importado,alta,,alta,Mexico.
+HYUNDAI,VERACRUZ,automoveis,,,gasolina,,importado,alta,,alta,
+IVECO,DAILY,comerciais_leves,,,diesel,,nacional,alta,,media,"Sete Lagoas. Inclui chassi-cabine (caminhao leve), que a lista de valores nao tem."
+PEUGEOT,3008,automoveis,,,gasolina,,importado,alta,,alta,
+PEUGEOT,HOGGAR,comerciais_leves,,,flex,,nacional,alta,,alta,Porto Real.
+VW,SPACECROSS,automoveis,,,flex,,importado,alta,,alta,Argentina.
+GWM,ORA 03,automoveis,,,bev,,importado,alta,,alta,
+AUDI,A4,automoveis,,,gasolina,,importado,alta,,alta,
+BYD,YUAN,automoveis,,,bev,,importado,alta,,media,Yuan Pro. Camacari nos anos finais nao datado.
+HYUNDAI,SONATA,automoveis,,,gasolina,,importado,alta,,alta,
+HAFEI,TOWNER,comerciais_leves,,,gasolina,,importado,media,,media,China.
+RAM,2500,comerciais_leves,,,diesel,,importado,alta,,alta,Mexico.
+MINI,COOPER,automoveis,,,gasolina+bev,,importado,media,,alta,O Cooper SE eletrico pode estar sob este nome ou sob outro.
+LAND ROVER,RANGE ROVER,automoveis,,,gasolina+diesel+phev,,importado,media,,alta,
+NISSAN,TIIDA,automoveis,,,flex,,importado,media,,alta,Mexico.
+AUDI,Q5,automoveis,,,gasolina+phev,,importado,media,,alta,Houve tambem um Q5 hibrido (HEV) no inicio da decada de 2010; nao verificado.
+CHERY,TIGGO 5X,automoveis,,,flex,,nacional,media,,media,CAOA Anapolis. Mesmo produto de CAOA CHERY/TIGGO 5X antes da troca de marca.
+HONDA,ACCORD,automoveis,,,gasolina+hev,,importado,media,,alta,Hibrido nos anos finais nao datado.
+RENAULT,BOREAL,automoveis,,,flex,,nacional,media,,media,Sao Jose dos Pinhais proposto.
+GWM,HAVAL H9,automoveis,,,diesel,,,media,,baixa,Origem nao proposta.
+M.BENZ,SPRINTER,comerciais_leves,,,diesel,,importado,alta,,media,Argentina.
+RAM,3500,comerciais_leves,,,diesel,,importado,alta,,alta,Mexico.
+AUDI,A5,automoveis,,,gasolina,,importado,alta,,alta,
+CHERY,FACE,automoveis,,,gasolina,,importado,media,,alta,
+BYD,SEAL,automoveis,,,bev,,importado,alta,,alta,
+CAOA CHERY,ARRIZO 6,automoveis,,,flex,,,media,,baixa,Origem nao proposta. Versao MHEV em anos recentes -- ver questoes.
+HONDA,ZR-V,automoveis,,,gasolina,,importado,alta,,alta,Mexico.
+CHANA,SC,comerciais_leves,,,gasolina,,importado,media,,alta,
+CAOA CHERY,TIGGO 3X,automoveis,,,flex,,nacional,media,,media,CAOA Anapolis.
+PORSCHE,911,automoveis,,,gasolina,,importado,alta,,alta,
+SUZUKI,SX4,automoveis,,,gasolina,,importado,alta,media,alta,E' um crossover/hatch; a fonte o poe em Monocab.
+SUBARU,FORESTER,automoveis,,,gasolina,,importado,alta,,alta,
+EFFA,V21,comerciais_leves,,,gasolina,,importado,media,,media,China.
+VW,MAN/EXPRESS,comerciais_leves,,,diesel,,nacional,alta,media,alta,"Resende. Delivery Express: caminhao leve, que a fonte poe em Furgoes."
+JAC,J6,automoveis,,,gasolina+flex,,importado,media,,alta,
+VW TRUCK E BUS,EXPRESS,comerciais_leves,,,diesel,,nacional,alta,media,alta,"Resende. Delivery Express: caminhao leve, que a fonte poe em Furgoes."
+NISSAN,TIIDA SEDAN,automoveis,,,flex,,importado,media,,alta,Mexico.
+DODGE,RAM,comerciais_leves,,,diesel+gasolina,,importado,media,,alta,
+M.BENZ,CLASSE B,automoveis,,,gasolina,,importado,alta,,alta,
+NISSAN,V-DRIVE,automoveis,,,flex,,nacional,alta,,alta,Resende.
+FORD,BRONCO,automoveis,,,gasolina,,importado,alta,,alta,Bronco Sport (Mexico).
+VW,EXPRESS,comerciais_leves,,,diesel,,nacional,alta,media,alta,"Resende. Delivery Express: caminhao leve, que a fonte poe em Furgoes."
+IVECO,DAILY 30-130,comerciais_leves,,,diesel,furgao,nacional,alta,media,media,"Sete Lagoas. Sem sub-segmento na fonte; a Daily inclui chassi-cabine."
+VW,JETTA VARIANT,automoveis,,,gasolina,,importado,alta,,alta,
+GWM,TANK 300,automoveis,,,hev,,importado,media,,media,
+TOYOTA,PRIUS,automoveis,,,hev,,importado,alta,,alta,
+GM,CAMARO,automoveis,,,gasolina,,importado,alta,,alta,
+PORSCHE,CAYENNE,automoveis,,,gasolina+diesel+hev+phev,,importado,media,,alta,"Diesel, S Hybrid (HEV) e E-Hybrid (PHEV) em periodos diferentes, nao datados."
+VOLVO,EX30,automoveis,,,,,importado,,,alta,Propulsao pela regra N04.
+SSANGYONG,ACTYON,automoveis,,,diesel+gasolina,,importado,media,,alta,
+FORD,MUSTANG,automoveis,,,gasolina,,importado,alta,,alta,O Mustang Mach-E (eletrico) pode estar sob este nome ou sob outro.
+BMW,X3,automoveis,,,gasolina+phev,,ambos,media,,baixa,Producao em Araquari em parte do periodo nao datada.
+MITSUBISHI,AIRTREK,automoveis,,,gasolina,,importado,alta,,alta,
+GWM,POER,comerciais_leves,,,diesel,,,media,,baixa,Origem nao proposta.
+HYUNDAI,I20,automoveis,,,,,,baixa,,baixa,Modelo de 2026; propulsao e origem nao conhecidas.
+BMW,328,automoveis,2008-01,2014-09,gasolina,,importado,alta,,media,
+BMW,328,automoveis,2014-10,2019-05,gasolina+flex,,nacional,media,,media,Araquari.
+M.BENZ,A 200,automoveis,,,gasolina,,importado,alta,,alta,
+RAM,1500,comerciais_leves,,,gasolina,,importado,alta,,alta,
+GM,OMEGA,automoveis,,,gasolina,,importado,alta,,alta,Australia (Holden).
+KIA,K2700,comerciais_leves,,,diesel,,importado,alta,media,media,"Bongo: caminhao leve, que a fonte poe em Furgoes."
+HAFEI,MINIVAN,comerciais_leves,,,gasolina,,importado,media,,media,China.
+CAOA CHERY,TIGGO,automoveis,,,,,,baixa,,baixa,Nome generico; nao se sabe qual Tiggo.
+IVECO,DAILY 35-150,comerciais_leves,,,diesel,,nacional,alta,,media,Sete Lagoas.
+FIAT,MAREA,automoveis,,,gasolina+flex,,nacional,media,,alta,Betim.
+SSANGYONG,KYRONM,automoveis,,,diesel+gasolina,,importado,media,,alta,
+M.BENZ,CLASSE E,automoveis,,,gasolina,,importado,media,,alta,Versoes diesel e PHEV nao verificadas.
+SUZUKI,VITARA,automoveis,,,gasolina,,importado,alta,,media,
+LEAPMOTOR,C10,automoveis,,,bev,,importado,media,,alta,Existe versao REEV (eletrico com extensor a combustao) que a lista de valores nao tem -- ver questoes.
+TOYOTA,LAND CRUISE,automoveis,,,diesel+gasolina,,importado,media,,alta,
+BMW,X5,automoveis,,,gasolina+diesel+phev,,importado,media,,alta,
+CITROEN,C5,automoveis,,,gasolina,,importado,alta,,alta,
+M.BENZ,CLA200,automoveis,,,gasolina,,importado,alta,,alta,
+HAFEI,MINI,comerciais_leves,,,gasolina,,importado,media,,media,China.
+KIA,BESTA,comerciais_leves,,,diesel,,importado,alta,,alta,
+M.BENZ,GLC,automoveis,,,gasolina+phev,,importado,media,,alta,
+PEUGEOT,307SW,automoveis,,,gasolina,,importado,media,,alta,
+NISSAN,XTERRA,automoveis,,,diesel,,nacional,media,,media,Sao Jose dos Pinhais.
+M.BENZ,SLK,automoveis,,,gasolina,,importado,alta,,alta,
+JAC,J5,automoveis,,,gasolina,,importado,media,,alta,
+GM,SPARK,automoveis,,,bev,,,alta,,baixa,Spark EUV. Montagem anunciada em Horizonte (CE); inicio nao datado.
+PORSCHE,BOXSTER,automoveis,,,gasolina,,importado,alta,,alta,
+M.BENZ,CLASSE GLB,automoveis,,,gasolina,,importado,alta,,alta,
+HYUNDAI,I30 SW,automoveis,,,gasolina,,importado,alta,,alta,
+TOYOTA,CAMRY,automoveis,,,gasolina+hev,,importado,alta,,alta,
+FORD,F150,comerciais_leves,,,gasolina,,importado,alta,,alta,
+RENAULT,KANGOO,automoveis,,,gasolina+flex,,,media,,baixa,Origem nao proposta.
+M.BENZ,SPRINTER 315,comerciais_leves,,,diesel,furgao,importado,alta,media,media,"Argentina. Sem sub-segmento na fonte; o numero cobre furgao, chassi e micro-onibus."
+RAM,CLASSIC,comerciais_leves,,,gasolina,,importado,alta,,alta,Mexico.
+JAC,T40,automoveis,,,gasolina+flex,,importado,media,,alta,
+JAC,T5,automoveis,,,gasolina+flex,,importado,media,,alta,
+M.BENZ,SPRINTER 413,comerciais_leves,,,diesel,furgao,importado,alta,media,media,"Argentina. Sem sub-segmento na fonte; o numero cobre furgao, chassi e micro-onibus."
+VOLVO,S60,automoveis,,,gasolina+phev,,importado,media,,alta,
+HYUNDAI,VELOSTER,automoveis,,,gasolina,hatch,importado,alta,media,alta,Sem sub-segmento na fonte.
+RAM,DAKOTA,comerciais_leves,,,diesel,,importado,media,,media,Argentina (Cordoba) proposto.
+VW,GOLF VARIANT,automoveis,,,gasolina,,importado,alta,,alta,
+GM,SILVERADO,comerciais_leves,2003-01,2021-12,diesel+gasolina,,nacional,media,,media,Residuo da Silverado nacional (1997-2001).
+GM,SILVERADO,comerciais_leves,2022-01,2026-08,gasolina,,importado,alta,,alta,Nova geracao importada.
+PORSCHE,MACAN,automoveis,,,gasolina+bev,,importado,media,,alta,Macan eletrico nos anos finais nao datado.
+BMW,330E,automoveis,,,,,,,,baixa,Propulsao pela regra N03. Producao em Araquari em parte do periodo nao datada.
+BMW,Z4,automoveis,,,gasolina,,importado,alta,,alta,
+LAND ROVER,DEFENDER,automoveis,,,diesel+gasolina,,importado,media,,alta,Defender antigo (ate' 2016) diesel; novo (2020+) gasolina e diesel. PHEV nao verificado.
+GM,MALIBU,automoveis,,,gasolina,,importado,alta,,alta,
+M.BENZ,CLASSE M,automoveis,,,gasolina+diesel,,importado,media,,alta,
+VOLVO,XC90,automoveis,,,gasolina+diesel+phev,,importado,media,,alta,
+LIFAN,LF 530,automoveis,,,gasolina,,importado,media,,media,
+BMW,X4,automoveis,,,gasolina,,,alta,,baixa,Origem nao proposta: producao em Araquari em parte do periodo nao confirmada.
+JINBEI,TOPIC,comerciais_leves,,,gasolina,furgao,importado,media,media,media,Sem sub-segmento na fonte. Van.
+BYD,YUAN PLUS,automoveis,,,bev,,importado,alta,,alta,
+CAOA CHANGAN,UNIT-T,automoveis,,,,,,baixa,,baixa,Modelo de 2026; propulsao e origem nao conhecidas.
+CAOA CHERY,TIGGO 2,automoveis,,,,,,baixa,,baixa,Propulsao e origem nao propostas.
+CHERY,ARRIZO 5,automoveis,,,flex,,nacional,media,,media,Jacarei.
+SMART,FORTWO,automoveis,,,gasolina,,importado,alta,,alta,
+KIA,CARNIVAL,automoveis,,,gasolina,,importado,media,,alta,
+KIA,MAGENTIS,automoveis,,,gasolina,,importado,alta,,alta,
+GEELY,EX5 EM-I,automoveis,,,,,importado,,,alta,Propulsao pela regra N02.
+M.BENZ,SPRINTER 416,comerciais_leves,,,diesel,furgao,importado,alta,media,media,"Argentina. Sem sub-segmento na fonte; o numero cobre furgao, chassi e micro-onibus."
+LIFAN,FOISON,comerciais_leves,,,gasolina,,importado,media,,media,
+EFFA,V22,comerciais_leves,,,gasolina,,importado,media,,media,China.
+IVECO,DAILY 35S14,comerciais_leves,,,diesel,,nacional,alta,,media,Sete Lagoas.
+GEELY,EX5,automoveis,,,bev,,importado,alta,,alta,
+IVECO,DAILY 30S13,comerciais_leves,,,diesel,furgao,nacional,alta,media,media,"Sete Lagoas. Sem sub-segmento na fonte; a Daily inclui chassi-cabine."
+PORSCHE,PANAMERA,automoveis,,,gasolina+diesel+phev,,importado,media,,alta,
+BMW,325,automoveis,,,gasolina,,importado,alta,,alta,
+RELY,RELY PICK-UP,comerciais_leves,,,gasolina,,importado,media,,media,Marca da Chery.
+CHERY,TIGGO 7,automoveis,,,gasolina+flex,,nacional,media,,media,CAOA Anapolis. Mesmo produto de CAOA CHERY/TIGGO 7 antes da troca de marca.
+GAC,AION UT,automoveis,,,bev,,importado,alta,,alta,
+M.BENZ,C 250,automoveis,,,gasolina,,importado,alta,,alta,
+KIA,MOHAVE,automoveis,,,gasolina+diesel,,importado,media,,alta,
+EFFA,M100,automoveis,,,gasolina,,importado,media,,media,China.
+GAC,GS4,automoveis,,,,,,baixa,,baixa,Propulsao e origem nao conhecidas; producao da GAC em Goias anunciada.
+CHRYSLER,300C,automoveis,,,gasolina,,importado,alta,,alta,
+SSANGYONG,KORANDO,automoveis,,,diesel+gasolina,,importado,media,,alta,
+CHERY,CELER,automoveis,,,flex,,nacional,media,,media,Jacarei.
+M.BENZ,SPRINTER 314,comerciais_leves,,,diesel,furgao,importado,alta,media,media,"Argentina. Sem sub-segmento na fonte; o numero cobre furgao, chassi e micro-onibus."
+BYD,SHARK,comerciais_leves,,,phev,picape,importado,alta,alta,media,Sem sub-segmento na fonte.
+SHINERAY,P TRUCKS,comerciais_leves,,,,,,baixa,baixa,baixa,Sem sub-segmento na fonte; produto nao identificado.
+CHERY,CELER SEDAN,automoveis,,,flex,,nacional,media,,media,Jacarei; primeiros meses possivelmente importados.
+HAFEI,START PICK UP,comerciais_leves,,,gasolina,picape,importado,media,media,media,Sem sub-segmento na fonte.
+FIAT,UNO,comerciais_leves,,,gasolina+flex,,nacional,media,media,alta,"Uno Furgao e derivados; a fonte o divide entre picape e furgao."
+TOYOTA,HIACE,comerciais_leves,,,diesel,,importado,media,,alta,
+AUDI,TT,automoveis,,,gasolina,,importado,alta,,alta,
+VW,PASSAT VAR,automoveis,,,gasolina,,importado,alta,,alta,
+LIFAN,LF 620,automoveis,,,gasolina,,importado,media,,media,
+M.BENZ,CLASSE CLC,automoveis,,,gasolina,,nacional,alta,media,media,Juiz de Fora. E' um cupe hatch de 3 portas; a fonte o poe em Sedans Pequenos.
+HYUNDAI,H100,comerciais_leves,,,diesel,,importado,alta,,alta,
+KIA,OPTIMA,automoveis,,,gasolina,,importado,media,,alta,
+VW,BEETLE,automoveis,,,gasolina,,importado,alta,,alta,Mexico.
+M.BENZ,CLA180,automoveis,,,gasolina,,importado,alta,,alta,
+LIFAN,LF 320,automoveis,,,gasolina,,importado,media,,media,
+PORSCHE,CAYMAN,automoveis,,,gasolina,,importado,alta,,alta,
+HAFEI,ZHONGYI VAN,comerciais_leves,,,gasolina,,importado,media,,media,China.
+FOTON,AUMARK 1039,comerciais_leves,,,diesel,,,alta,baixa,baixa,"Caminhao leve sem sub-segmento na fonte; nenhum valor da lista serve. Origem nao proposta."
+BMW,330I,automoveis,,,gasolina,,,media,,baixa,Origem nao proposta: producao em Araquari em parte do periodo.
+NISSAN,XTRAIL,automoveis,,,gasolina,,importado,alta,,alta,
+PEUGEOT,407,automoveis,,,gasolina,,importado,alta,,alta,
+BMW,X6,automoveis,,,gasolina,,importado,alta,,alta,
+BMW,318,automoveis,,,gasolina,,importado,alta,,alta,
+FIAT,MAREA WEEKEND,automoveis,,,gasolina+flex,,nacional,media,,alta,Betim.
+M.BENZ,CLA250,automoveis,,,gasolina,,importado,alta,,alta,
+MINI,COOPER SCYMAN,automoveis,,,gasolina,,importado,alta,,alta,Countryman.
+KIA,CADENZA,automoveis,,,gasolina,,importado,alta,,alta,
+AUDI,A4 AVANT,automoveis,,,gasolina,,importado,alta,,alta,
+NISSAN,LEAF,automoveis,,,bev,,importado,alta,,alta,
+CHERY,CIELO SEDAN,automoveis,,,gasolina,,importado,media,,alta,
+JAC,E-JS1,automoveis,,,,,importado,,,alta,Propulsao pela regra N01.
+CAOA CHERY,ARRIZO 5,automoveis,,,flex,,nacional,media,,media,
+JAGUAR,XE,automoveis,,,gasolina,,importado,alta,,alta,
+NISSAN,PATHFINDER,automoveis,,,diesel+gasolina,,importado,media,,alta,
+PORSCHE,TAYCAN,automoveis,,,bev,,importado,alta,,alta,
+BMW,M3,automoveis,,,gasolina,,importado,alta,,alta,
+VW,TOUAREG,automoveis,,,gasolina+diesel,,importado,media,,alta,
+M.BENZ,SPRINTER 317,comerciais_leves,,,diesel,furgao,importado,alta,media,media,"Argentina. Sem sub-segmento na fonte; o numero cobre furgao, chassi e micro-onibus."
+VOLVO,V40,automoveis,,,gasolina,,importado,alta,media,alta,"O nome cobre a V40 perua antiga (ate' ~2004) e o V40 hatch (2012-2019)."
+CITROEN,DS5,automoveis,,,gasolina,,importado,alta,media,alta,E' um hatch/crossover; a fonte o poe em Sedans Grandes.
+NISSAN,ALTIMA,automoveis,,,gasolina,,importado,alta,,alta,
+MAHINDRA,SCORPIO,automoveis,,,diesel,,nacional,media,,media,Montagem CKD em Manaus (Bramont) proposta.
+FOTON,AUMARK S 315,comerciais_leves,,,diesel,,,alta,baixa,baixa,"Caminhao leve sem sub-segmento na fonte; nenhum valor da lista serve. Origem nao proposta."
+BMW,M2,automoveis,,,gasolina,,importado,alta,,alta,
+CHRYSLER,GCARAVAN,automoveis,,,gasolina,,importado,alta,,alta,
+JAC,T6,automoveis,,,gasolina,,importado,media,,alta,
+JETOUR,T2,automoveis,,,,suv,importado,baixa,media,media,Sem sub-segmento na fonte. Propulsao da versao vendida no Brasil nao conhecida.
+KIA,STONIC,automoveis,,,gasolina,,importado,media,,alta,E' hibrido leve (MHEV 48V) -- ver questoes.
+JINBEI,M35,comerciais_leves,,,,,importado,baixa,baixa,media,Sem sub-segmento na fonte; produto nao identificado.
+VOLVO,V60,automoveis,,,gasolina,,importado,media,,alta,
+M.BENZ,VITO,comerciais_leves,,,diesel+gasolina,,importado,media,,media,Argentina.

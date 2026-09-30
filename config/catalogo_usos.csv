@@ -1,0 +1,23 @@
+alvo,sustenta,nao_sustenta,ressalvas
+painel,"Participacao de mercado e concentracao (HHI) por marca, grupo economico e modelo, mes a mes desde 2003. Ciclo de vida do nome comercial: entrada, saida e sobrevivencia, com os pisos de volume e de pico. Sazonalidade e choques (IPI, crises, pandemia) no mercado e no modelo. Com a classificacao adjudicada (fase 2): eletrificacao, SUVizacao, nacional contra importado.","Preco, versao e propulsao (ainda). Venda por UF. Geracao do produto, salvo onde a fonte a separa em sub-segmentos. A cauda abaixo do corte de publicacao: zero quer dizer 'abaixo do corte daquele mes'.","regras.csv vazio: nada foi fundido, e as taxas de entrada e saida sao o limite superior. A fonte trunca a cauda (cobertura abaixo de 100%, conferida mes a mes em saidas/cobertura.csv). O ultimo ano e' parcial e nao se cita para rotatividade. Nomes suspeitos sao marcados, nao apagados. O sub-segmento e' atributo da linha, fora da chave."
+painel_bruto,"Auditoria e reconstituicao: cada numero volta ao PDF e a' pagina de origem. Reprocessar com outras regras de harmonizacao sem reler os informes.","Analise direta: marca como publicada, grafias cruas, sem harmonizacao, com as duplicatas publicadas pela fonte ainda dentro (marcadas).","Transcricao fiel da fonte (ESPEC sec.4); nunca sobrescrito sem --recriar. As linhas com duplicata_publicada ficam fora do painel e do invariante central."
+painel_canal,"Composicao dentro do canal e dentro do ano: que modelos dependem de venda direta (locadora, frotista, PCD) e quais do varejo. Participacao da venda direta no nivel, so' em comerciais leves.","Nivel entre anos em automoveis (o U da cobertura). Participacao de venda direta em automoveis como nivel. Ranking de marca (descartado de proposito). Ausencia no top-50 nao e' zero.","Top-50 por canal e segmento; a cauda e' mais rasa que a do painel. Toda serie temporal vai ao lado de saidas/canal_cobertura.csv. Dicionario proprio: saidas/painel_canal_dicionario.md."
+macro_mensal,"Controles e choques mensais para o painel: credito (juros, prazo, inadimplencia, saldo, concessoes), cambio, Selic, inflacao e atividade; preco relativo do automovel novo, do usado e dos combustiveis.","Preco por modelo ou por versao. Qualquer mes fora da janela efetiva de cada serie.","Lacuna e' lacuna: serie que comeca depois de 2003-01 ou termina antes do fim fica vazia, sem interpolacao. Ler natureza_e_ressalvas de cada serie antes de usar (tabela acima)."
+classificacao,"Depois da adjudicacao (fase 2): eletrificacao da oferta, SUVizacao por carroceria, nacional contra importado, e as regras de elegibilidade de politica que dependem desses atributos.","Unidades por versao ou por propulsao: a fonte nao separa. Eletrificacao 'parcial' nao diz quantas unidades foram eletrificadas.","Hoje e' rascunho para adjudicacao, nao dado. Nada foi gravado em dados/processado/."
+20749,Custo do credito como determinante da demanda; transmissao da politica monetaria ao mercado de veiculos.,,
+20603,Ciclo e alavancagem do financiamento de veiculos (deflacionar antes de comparar anos).,Nada antes de 2007-03.,
+21131,Condicao de credito alem da taxa: alongamento do prazo e parcela.,Nada antes de 2011-03.,
+20758,Risco de credito e aperto de oferta de financiamento.,Nada antes de 2011-03.,
+20126,Fluxo de credito novo contra vendas no periodo coberto.,Nada depois de 2022-12 (descontinuada).,
+3698,Custo do importado e do componente importado; com a classificacao: nacional contra importado.,,
+4390,Politica monetaria mes a mes.,,
+4189,Nivel da politica monetaria suavizado.,"Soma ou media entre meses: a janela e' movel e os meses se sobrepoem.",
+433,Deflator geral; inflacao como controle.,,
+4192,Deflator alternativo depois de confirmada a base.,Uso como indice antes de confirmar a base.,
+24363,Atividade e renda agregada mensal.,O ultimo mes do painel.,
+7832,Renda do trabalho ate' 2019-08.,Nivel (e' variacao). Nada depois de 2019-08.,
+ipca_7641,Preco relativo do carro novo contra o IPCA; repasse de IPI e de cambio.,,
+ipca_107654,Ritmo de depreciacao do usado no IPCA.,Preco de mercado do usado; substituicao novo-usado so' com cautela.,
+ipca_7657,Custo de uso; com o etanol: preco relativo e escolha do combustivel no flex.,,
+ipca_7658,Preco relativo etanol-gasolina e escolha do combustivel no flex.,,
+ipca_7654,Preco do substituto de entrada (motocicleta).,,

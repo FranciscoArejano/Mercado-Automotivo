@@ -1,0 +1,8 @@
+fonte,estado,observacao
+"Comex Stat (importação por NCM e origem)",API testada e acessível; sintaxe de filtro por capítulo a acertar,
+"Frota e idade do estoque (Senatran)",não testado,
+"Produção, exportação, emprego (Anfavea)",não testado,
+"PBE Veicular (consumo, CO₂)",não testado; exige crosswalk modelo–versão,
+Preços por versão (FIPE),não testado; exige o mesmo crosswalk,
+"Emplacamento por UF (Fenabrave, Dados Regionais)",granularidade não verificada,
+"Calendário de política (IPI, MP 1175, tarifa de eletrificados)",construção manual a partir de decretos,

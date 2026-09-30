@@ -1,23 +1,18 @@
-serie,nome,fonte,unidade,situacao_da_serie,janela_declarada,janela_efetiva,observacoes,meses_do_painel_cobertos,minimo,maximo,situacao,base_declarada,base_efetiva
-sgs_20749,Taxa media de juros -- PF aquisicao de veiculos,BCB/SGS,% a.a.,ativa,2003-01..2026-08,2003-01..2026-08,284.0,284.0,18.56,53.85,,,
-sgs_20603,Saldo da carteira -- PF aquisicao de veiculos,BCB/SGS,R$ milhoes,ativa,2007-03..2026-08,2007-03..2026-08,234.0,234.0,2490.0,23807.0,,,
-sgs_21131,Prazo medio -- PF aquisicao de veiculos,BCB/SGS,meses,ativa,2011-03..2026-08,2011-03..2026-08,186.0,186.0,2.45,10.52,,,
-sgs_20758,Inadimplencia -- PF aquisicao de veiculos,BCB/SGS,% da carteira,ativa,2011-03..2026-08,2011-03..2026-08,186.0,186.0,5.28,21.64,,,
-sgs_20126,Concessoes -- PF aquisicao de veiculos,BCB/SGS,R$ milhoes,descontinuada,2004-02..2022-12,2004-02..2022-12,227.0,227.0,50.82,114.13,,,
-sgs_3698,Cambio R$/US$ venda -- media do periodo,BCB/SGS,R$/US$,ativa,2003-01..2026-08,2003-01..2026-08,284.0,284.0,1.5639,6.097,,,
-sgs_4390,Selic acumulada no mes,BCB/SGS,% a.m.,ativa,2003-01..2026-09,2003-01..2026-08,284.0,284.0,0.13,2.08,,,
-sgs_4189,Selic acumulada em 12 meses,BCB/SGS,% a.a.,ativa,2003-01..2026-09,2003-01..2026-08,284.0,284.0,1.9,26.32,,,
-sgs_433,IPCA -- variacao mensal,BCB/SGS,% a.m.,ativa,2003-01..2026-08,2003-01..2026-08,284.0,284.0,-0.68,2.25,,,
-sgs_4192,IGP-DI -- numero indice,BCB/SGS,indice (base a confirmar),ativa,2003-01..2026-08,2003-01..2026-08,284.0,284.0,501192.0,2642850.0,,,
-sgs_24363,IBC-Br,BCB/SGS,indice,ativa,2003-01..2026-07,2003-01..2026-07,283.0,283.0,67.21946,118.01719,,,
-sgs_7832,Massa salarial real,BCB/SGS,% (variacao),descontinuada,2003-01..2019-08,2003-01..2019-08,200.0,200.0,-24.8,16.97,,,
-sgs_ipca_7641,IPCA subitem 5102001 -- Automovel novo,BCB/SGS,,,,,,,,,falhou: falhou apos 4 tentativas: HTTP Error 404: Not Found,,
-sgs_ipca_107654,IPCA subitem -- Automovel usado,BCB/SGS,,,,,,,,,falhou: falhou apos 4 tentativas: HTTP Error 404: Not Found,,
-sgs_ipca_7657,IPCA subitem -- Gasolina,BCB/SGS,,,,,,,,,falhou: falhou apos 4 tentativas: HTTP Error 404: Not Found,,
-sgs_ipca_7658,IPCA subitem -- Etanol,BCB/SGS,,,,,,,,,falhou: falhou apos 4 tentativas: HTTP Error 404: Not Found,,
-sgs_ipca_7654,IPCA subitem -- Motocicleta,BCB/SGS,,,,,,,,,falhou: falhou apos 4 tentativas: HTTP Error 404: Not Found,,
-ipca_automovel_novo,IPCA subitem 7641 -- automovel_novo,IBGE/SIDRA,% a.m. e indice encadeado,ativa,1999-08..2026-08 (quatro tabelas),2003-01..2026-08,284.0,284.0,-5.48,2.88,,2003-01,2003-01
-ipca_automovel_usado,IPCA subitem 107654 -- automovel_usado,IBGE/SIDRA,% a.m. e indice encadeado,ativa,1999-08..2026-08 (quatro tabelas),2003-01..2026-08,284.0,284.0,-4.12,2.38,,2003-01,2006-06
-ipca_gasolina,IPCA subitem 7657 -- gasolina,IBGE/SIDRA,% a.m. e indice encadeado,ativa,1999-08..2026-08 (quatro tabelas),2003-01..2026-08,284.0,284.0,-15.48,11.26,,2003-01,2003-01
-ipca_etanol,IPCA subitem 7658 -- etanol,IBGE/SIDRA,% a.m. e indice encadeado,ativa,1999-08..2026-08 (quatro tabelas),2003-01..2026-08,284.0,284.0,-13.51,12.92,,2003-01,2003-01
-ipca_motocicleta,IPCA subitem 7654 -- motocicleta,IBGE/SIDRA,% a.m. e indice encadeado,ativa,1999-08..2026-08 (quatro tabelas),2003-01..2026-08,284.0,284.0,-1.08,2.76,,2003-01,2003-01
+serie,nome,fonte,unidade,situacao_da_serie,janela_declarada,janela_efetiva,observacoes,meses_do_painel_cobertos,minimo,maximo,base_declarada,base_efetiva
+sgs_20749,Taxa media de juros -- PF aquisicao de veiculos,BCB/SGS,% a.a.,ativa,2003-01..2026-08,2003-01..2026-08,284,284,18.56,53.85,,
+sgs_20603,Saldo da carteira -- PF aquisicao de veiculos,BCB/SGS,R$ milhoes,ativa,2007-03..2026-08,2007-03..2026-08,234,234,2490.0,23807.0,,
+sgs_21131,Prazo medio -- PF aquisicao de veiculos,BCB/SGS,meses,ativa,2011-03..2026-08,2011-03..2026-08,186,186,2.45,10.52,,
+sgs_20758,Inadimplencia -- PF aquisicao de veiculos,BCB/SGS,% da carteira,ativa,2011-03..2026-08,2011-03..2026-08,186,186,5.28,21.64,,
+sgs_20126,Concessoes -- PF aquisicao de veiculos,BCB/SGS,R$ milhoes,descontinuada,2004-02..2022-12,2004-02..2022-12,227,227,50.82,114.13,,
+sgs_3698,Cambio R$/US$ venda -- media do periodo,BCB/SGS,R$/US$,ativa,2003-01..2026-08,2003-01..2026-08,284,284,1.5639,6.097,,
+sgs_4390,Selic acumulada no mes,BCB/SGS,% a.m.,ativa,2003-01..2026-09,2003-01..2026-08,284,284,0.13,2.08,,
+sgs_4189,Selic acumulada em 12 meses,BCB/SGS,% a.a.,ativa,2003-01..2026-09,2003-01..2026-08,284,284,1.9,26.32,,
+sgs_433,IPCA -- variacao mensal,BCB/SGS,% a.m.,ativa,2003-01..2026-08,2003-01..2026-08,284,284,-0.68,2.25,,
+sgs_4192,IGP-DI -- numero indice,BCB/SGS,indice (base a confirmar),ativa,2003-01..2026-08,2003-01..2026-08,284,284,501192.0,2642850.0,,
+sgs_24363,IBC-Br,BCB/SGS,indice,ativa,2003-01..2026-07,2003-01..2026-07,283,283,67.21946,118.01719,,
+sgs_7832,Massa salarial real,BCB/SGS,% (variacao),descontinuada,2003-01..2019-08,2003-01..2019-08,200,200,-24.8,16.97,,
+ipca_automovel_novo,IPCA subitem 7641 -- automovel_novo,IBGE/SIDRA,% a.m. e indice encadeado,ativa,1999-08..2026-08 (quatro tabelas),2003-01..2026-08,284,284,-5.48,2.88,2003-01,2003-01
+ipca_automovel_usado,IPCA subitem 107654 -- automovel_usado,IBGE/SIDRA,% a.m. e indice encadeado,ativa,1999-08..2026-08 (quatro tabelas),2006-07..2026-08,242,242,-4.12,2.38,2003-01,2006-06
+ipca_gasolina,IPCA subitem 7657 -- gasolina,IBGE/SIDRA,% a.m. e indice encadeado,ativa,1999-08..2026-08 (quatro tabelas),2003-01..2026-08,284,284,-15.48,11.26,2003-01,2003-01
+ipca_etanol,IPCA subitem 7658 -- etanol,IBGE/SIDRA,% a.m. e indice encadeado,ativa,1999-08..2026-08 (quatro tabelas),2003-01..2026-08,284,284,-13.51,12.92,2003-01,2003-01
+ipca_motocicleta,IPCA subitem 7654 -- motocicleta,IBGE/SIDRA,% a.m. e indice encadeado,ativa,1999-08..2026-08 (quatro tabelas),2003-01..2026-08,284,284,-1.08,2.76,2003-01,2003-01

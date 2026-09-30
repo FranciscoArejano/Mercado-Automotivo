@@ -1,8 +1,8 @@
 # Validacao do painel de vendas de veiculos 0 km
 
-**Commit: `0278d35`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
+**Commit: `e07273e-sujo`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
 
-Gerado em 2026-09-30T22:40:26+00:00 (UTC) por `src/etapa06_validacao.py`.
+Gerado em 2026-09-30T23:39:13+00:00 (UTC) por `src/etapa06_validacao.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: painel bruto 54,183 / painel 54,179 / visao por modelo 53,700
@@ -881,7 +881,7 @@ Tabela de fatos **separada**, unidade `mes_ref`: `macro_mensal.parquet`. O paine
 
 - Linhas: **284**, uma por mes de 2003-01 a 2026-08
 - Meses repetidos: **0** (OK)
-- Series: **22** em 22 colunas
+- Series: **17** em 22 colunas
 
 **Serie que comeca depois de 2003-01 ou termina antes de 2026-08 fica com o mes vazio.** Nao se preenche, nao se interpola, nao se estende com o ultimo valor (sec.9.2) -- a coluna `meses_do_painel_cobertos` diz quanto cada uma alcanca.
 
@@ -899,18 +899,13 @@ Tabela de fatos **separada**, unidade `mes_ref`: `macro_mensal.parquet`. O paine
 | sgs_4192             | IGP-DI -- numero indice                         | indice (base a confirmar) | ativa               | 2003-01..2026-08 |                        284 | 501192      |     2.64285e+06 |
 | sgs_24363            | IBC-Br                                          | indice                    | ativa               | 2003-01..2026-07 |                        283 |     67.2195 |   118.017       |
 | sgs_7832             | Massa salarial real                             | % (variacao)              | descontinuada       | 2003-01..2019-08 |                        200 |    -24.8    |    16.97        |
-| sgs_ipca_7641        | IPCA subitem 5102001 -- Automovel novo          | nan                       | nan                 | nan              |                        nan |    nan      |   nan           |
-| sgs_ipca_107654      | IPCA subitem -- Automovel usado                 | nan                       | nan                 | nan              |                        nan |    nan      |   nan           |
-| sgs_ipca_7657        | IPCA subitem -- Gasolina                        | nan                       | nan                 | nan              |                        nan |    nan      |   nan           |
-| sgs_ipca_7658        | IPCA subitem -- Etanol                          | nan                       | nan                 | nan              |                        nan |    nan      |   nan           |
-| sgs_ipca_7654        | IPCA subitem -- Motocicleta                     | nan                       | nan                 | nan              |                        nan |    nan      |   nan           |
 | ipca_automovel_novo  | IPCA subitem 7641 -- automovel_novo             | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |     -5.48   |     2.88        |
-| ipca_automovel_usado | IPCA subitem 107654 -- automovel_usado          | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |     -4.12   |     2.38        |
+| ipca_automovel_usado | IPCA subitem 107654 -- automovel_usado          | % a.m. e indice encadeado | ativa               | 2006-07..2026-08 |                        242 |     -4.12   |     2.38        |
 | ipca_gasolina        | IPCA subitem 7657 -- gasolina                   | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |    -15.48   |    11.26        |
+| ipca_etanol          | IPCA subitem 7658 -- etanol                     | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |    -13.51   |    12.92        |
+| ipca_motocicleta     | IPCA subitem 7654 -- motocicleta                | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |     -1.08   |     2.76        |
 
-_(2 linhas restantes omitidas; ver CSV correspondente.)_
-
-**6 series nao cobrem os 284 meses** e ficam com lacuna declarada. Isso e' propriedade da fonte, nao defeito da coleta.
+**7 series nao cobrem os 284 meses** e ficam com lacuna declarada. Isso e' propriedade da fonte, nao defeito da coleta.
 
 ### As emendas do IPCA por subitem
 

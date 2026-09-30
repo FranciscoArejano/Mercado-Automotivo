@@ -1,6 +1,6 @@
 # Dicionario de dados -- `painel.parquet`
 
-Gerado em 2026-09-30T22:39:36+00:00 (UTC) por `src/etapa05_painel.py`.
+Gerado em 2026-09-30T23:34:24+00:00 (UTC) por `src/etapa05_painel.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: 54,179
@@ -35,7 +35,7 @@ O **sub-segmento fica na linha, fora da chave**. Quando a fonte lista o mesmo `(
 | `motivo_nome_suspeito` | texto | Por que foi marcado. Vazio quando nao foi. |
 | `duplicata_publicada` | texto | So' no painel bruto. Quando preenchida, esta linha repete outra do **mesmo informe**, com o mesmo valor, sob marca trocada, e o texto aponta qual. Essas linhas ficam fora do painel de analise, e o invariante central e' conferido depois de exclui-las. Hoje sao exatamente quatro, todas de 2013-11, travadas por teste. ASSIMETRIA DELIBERADA: o mesmo defeito teve dois tratamentos. Cinco duplicatas irmas foram removidas **a montante**, na canonizacao da chave de reconciliacao da etapa 02, porque a divergencia era tipografica (`VW /GOL` contra `VW/GOL`) e consertar a chave nao mexe no que foi transcrito. Estas quatro divergiam na **marca** (`PONTIAC/MONTANA` contra `GM /MONTANA`), e canoniza-las na etapa 02 significaria reescrever a marca dentro do painel bruto, que e' transcricao fiel da fonte (sec.4). Entao foram removidas **a jusante**, por supressao registrada. A regra: a montante quando da' para consertar sem tocar no transcrito; a jusante quando nao da'. |
 | `marca_publicada_fonte` | texto | A marca como a fonte publicou, antes de qualquer recuperacao. Igual a `marca` em tudo menos nas linhas de D4. |
-| `marca_recuperada` | booleano | A marca desta linha foi recuperada da coluna de mes anterior do informe seguinte, porque a edicao do mes saiu com a coluna trocada (D4). O **valor nao muda** -- muda a quem ele e' atribuido, e a nova atribuicao vem da mesma fonte republicando o mesmo mes, com o valor conferindo unidade a unidade. Hoje: 8 modelos de 2013-11. `marca_publicada_fonte` guarda a marca errada ao lado. |
+| `marca_recuperada` | booleano | A marca desta linha foi recuperada da coluna de mes anterior do informe seguinte, porque a edicao do mes saiu com a coluna trocada (D4). O **valor nao muda** -- muda a quem ele e' atribuido, e a nova atribuicao vem da mesma fonte republicando o mesmo mes, com o valor conferindo unidade a unidade. Hoje: 4 linhas, em 2013-11 (contado do dado). `marca_publicada_fonte` guarda a marca errada ao lado. |
 | `nome_completo_fonte` | texto | Nome cru, `MARCA/MODELO`, sem alteracao alem da normalizacao tipografica. |
 | `houve_rebatismo` | booleano | A serie foi fundida por uma regra `rebatismo` (D2). |
 | `data_rebatismo` | texto AAAA-MM | Data do rebatismo, do campo `data_evento` da regra. |
@@ -87,6 +87,9 @@ Dois arquivos com a mesma unidade de tempo, **nunca colunas deste painel** -- a 
 
 - `painel_canal.parquet` -- venda direta e varejo por modelo, top-50 por segmento. Dicionario proprio em `saidas/painel_canal_dicionario.md`; leia a advertencia sobre o nivel antes de usar.
 - `macro_mensal.parquet` -- credito, juros, cambio, precos e atividade. Cada serie documentada em `config/series_macro.csv`, com a coluna `natureza_e_ressalvas`.
+- **Classificacao de modelo** (propulsao, carroceria, origem da producao) -- **ainda nao existe como dado**. A fase 1 produziu so' um rascunho para adjudicacao, `saidas/classificacao_rascunho.xlsx`; nada foi gravado em `dados/processado/`.
+
+**Limitacao da classificacao, registrada desde ja':** a fonte nao separa unidades por versao. Um modelo vendido em flex e em hibrido aparece como um numero so', e nao ha' como saber quantas unidades foram de cada. Por isso a propulsao sera' **conjunto** (`propulsao_oferecida`) e a eletrificacao tera' tres niveis (`nenhuma`, `parcial`, `total`). Somar as unidades dos modelos `parcial` como se fossem eletrificadas superestima a eletrificacao; soma-las como combustao a subestima. Contar unidades eletrificadas por propulsao exige fonte externa.
 
 ## Reconstituicao
 

@@ -1,0 +1,15 @@
+id,tipo,atributo,condicao,valor,exemplo,observacao
+S01,sub_segmento_da_fonte,carroceria,sub_segmento_fonte in (Hatch Pequenos; Hatch Médios),hatch,GM/ONIX,"Classificacao da propria Fenabrave, linha a linha. E' a fonte, nao o conhecimento de ninguem."
+S02,sub_segmento_da_fonte,carroceria,sub_segmento_fonte in (Sedans Pequenos; Sedans Compactos; Sedans médios; Sedans Grandes),sedan,GM/ONIX PLUS,
+S03,sub_segmento_da_fonte,carroceria,sub_segmento_fonte = Suv's,suv,JEEP/RENEGADE,"A fonte chama de SUV o que muitos chamariam de crossover (Pulse, Nivus). Segue-se a fonte, que e' o que um artigo cita."
+S04,sub_segmento_da_fonte,carroceria,sub_segmento_fonte in (Pick-up's Pequenas; Pick-up's Grandes; Pickup's Pequenas; Pickup's Grandes),picape,FIAT/STRADA,"As grafias 'Pickup's' sao a variante de 2017-04 (config/sub_segmentos.csv)."
+S05,sub_segmento_da_fonte,carroceria,sub_segmento_fonte in (Furgões; Furgões Pequenos),furgao,RENAULT/MASTER,"A fonte poe aqui tambem caminhoes leves cabine-sobre-motor (Hyundai HR, Kia Bongo, VW Delivery Express). A lista de valores nao tem 'caminhao leve' -- ver questoes em aberto."
+S06,sub_segmento_da_fonte,carroceria,sub_segmento_fonte in (Monocab; Grandcab),minivan,GM/SPIN,"Monocab = monovolume compacto; Grandcab = monovolume de 7 lugares. A fonte poe o Kia Picanto e o Suzuki SX4 em Monocab; a discordancia vai sinalizada no modelo."
+S07,sub_segmento_da_fonte,carroceria,sub_segmento_fonte in (Sw Médios; Sw Grandes),perua,FIAT/PALIO WEEKEND,
+S08,sub_segmento_da_fonte,carroceria,sub_segmento_fonte = Sports,esportivo,PORSCHE/911,"A fonte poe o Mitsubishi Lancer em Sports em 1% do volume; o dominante dele e' sedan."
+S09,sub_segmento_da_fonte,carroceria,sub_segmento_fonte = Veículos de Entrada,(nenhum),VW/GOL,"NAO E' CARROCERIA: e' faixa de preco. Ignorado na regra. Os 14 modelos que so' aparecem aqui recebem carroceria por conhecimento, marcada como tal."
+S10,agregacao,carroceria,sub-segmento dominante do modelo na vigencia,,M.BENZ/CLASSE C,"Carroceria da vigencia = a do sub-segmento com mais unidades nela, desconsiderando S09. Se uma segunda carroceria tem 10% ou mais do volume, a linha sai com confianca media e a divisao na observacao."
+N01,nome,propulsao_oferecida,modelo comeca com 'E-',bev,JAC/E-JS1,"Prefixo que a propria fabricante usa para a versao eletrica. Tambem RENAULT/E-KWID e JAC/E-J7, abaixo do piso de 1.000 unidades."
+N02,nome,propulsao_oferecida,modelo contem 'EM-I' ou 'DM-I',phev,GEELY/EX5 EM-I,"EM-i (Geely) e DM-i (BYD) sao os nomes comerciais dos sistemas plug-in."
+N03,nome,propulsao_oferecida,marca BMW e modelo com 3 digitos seguidos de 'E',phev,BMW/330E,"Convencao BMW: 330e, 530e. Tambem BMW/530E, abaixo do piso."
+N04,nome,propulsao_oferecida,marca VOLVO e modelo comecando com 'EX' ou 'EC' seguido de digito,bev,VOLVO/EX30,"Convencao Volvo para a linha eletrica (EX30, EX40, EC40)."

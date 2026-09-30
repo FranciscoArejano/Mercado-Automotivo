@@ -48,6 +48,14 @@ BASE_INDICE_IPCA = os.environ.get("BASE_INDICE_IPCA", "2003-01")
 CORRECOES_CATALOGO = DIR_CONFIG / "correcoes_catalogo.csv"
 NOMES_NAO_VEICULO = DIR_CONFIG / "nomes_nao_veiculo.csv"
 SUB_SEGMENTOS = DIR_CONFIG / "sub_segmentos.csv"
+REGRAS_CLASSIFICACAO = DIR_CONFIG / "regras_classificacao.csv"
+# Proposta por conhecimento do assistente: entrada do rascunho, nao fato.
+PROPOSTA_CLASSIFICACAO = DIR_DADOS / "referencia" / "classificacao_proposta_assistente.csv"
+CLASSIFICACAO_RASCUNHO = DIR_SAIDAS / "classificacao_rascunho.xlsx"
+CLASSIFICACAO_RESUMO = DIR_SAIDAS / "classificacao_resumo.csv"
+CATALOGO_USOS = DIR_CONFIG / "catalogo_usos.csv"
+FONTES_CANDIDATAS = DIR_CONFIG / "fontes_candidatas.csv"
+CATALOGO_REPOSITORIO = RAIZ / "CATALOGO.md"
 
 CANDIDATOS = DIR_SAIDAS / "candidatos.xlsx"
 VALIDACAO = DIR_SAIDAS / "validacao.md"
@@ -109,6 +117,10 @@ PISOS_VOLUME_MODELO = (0, 100, 1000)
 # neutro quanto a' longevidade -- descarta modelo de vida curta, que e' o que
 # a taxa de entrada e saida mede. Ver comum/rotatividade.pico_por_modelo.
 PISOS_PICO_MENSAL = (0, 10, 50)
+# Piso de volume total para a dimensao de classificacao: acima dele o modelo
+# recebe proposta; abaixo, `nao_classificado`. E' o maior piso de
+# PISOS_VOLUME_MODELO -- quem esta' abaixo ja' sai da analise de rotatividade.
+PISO_CLASSIFICACAO = int(os.environ.get("PISO_CLASSIFICACAO", "1000"))
 
 # Faixas do relatorio de distribuicao de volume por modelo.
 FAIXAS_VOLUME = ((0, 10), (11, 100), (101, 1_000), (1_001, 10_000), (10_001, None))

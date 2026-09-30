@@ -1,0 +1,178 @@
+mes_ref,segmento,canal,posicao_fonte,nome_completo_fonte,unidades,origem_tabela,pagina_origem,arquivo_origem,metodo_extracao
+2020-01,automoveis,direta,1,GM/ONIX,4968,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,2,VW/GOL,3544,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,3,GM/ONIX PLUS,3181,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,4,JEEP/COMPASS,3161,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,5,JEEP/RENEGADE,2348,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,6,FORD/KA,2338,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,7,RENAULT/KWID,2325,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,8,FORD/KA SEDAN,1918,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,9,NISSAN/KICKS,1820,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,10,FIAT/MOBI,1418,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,11,RENAULT/SANDERO,1397,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,12,VW/VOYAGE,1364,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,13,VW/VIRTUS,1300,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,14,HYUNDAI/CRETA,1258,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,15,RENAULT/LOGAN,1227,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,16,VW/T CROSS,1211,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,17,VW/POLO,1165,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,18,FIAT/UNO,992,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,19,GM/CRUZE SEDAN,967,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,20,GM/SPIN,686,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,21,RENAULT/DUSTER,682,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,22,FORD/ECOSPORT,643,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,23,RENAULT/CAPTUR,600,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,24,HYUNDAI/HB20,590,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,25,TOYOTA/YARIS SEDAN,569,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,26,TOYOTA/COROLLA,561,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,27,FIAT/ARGO,539,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,28,NISSAN/VERSA,524,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,29,CITROEN/C4 CACTUS,514,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,30,TOYOTA/ETIOS SEDAN,437,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,31,FIAT/CRONOS,347,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,32,VW/FOX/CROSS FOX,338,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,33,FIAT/DOBLO,334,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,34,TOYOTA/ETIOS HB,326,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,35,CHERY/TIGGO 5X,319,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,36,PEUGEOT/2008,311,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,37,FIAT/SIENA,308,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,38,TOYOTA/HILUX SW4,274,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,39,HONDA/FIT,266,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,40,HONDA/HR-V,265,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,41,HYUNDAI/HB20S,239,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,42,VW/TIGUAN,234,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,43,GM/COBALT,220,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,44,HONDA/CITY,208,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,45,TOYOTA/YARIS HB,200,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,46,VW/UP,140,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,47,GM/CRUZE HB,106,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,48,NISSAN/MARCH,96,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,49,GM/TRAILBLAZER,94,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,direta,50,HONDA/WR-V,89,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,1,FIAT/STRADA,5177,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,2,FIAT/TORO,4129,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,3,VW/SAVEIRO,3030,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,4,TOYOTA/HILUX,1386,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,5,GM/S10,1264,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,6,FORD/RANGER,968,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,7,VW/AMAROK,802,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,8,RENAULT/OROCH,631,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,9,FIAT/FIORINO,536,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,10,RENAULT/MASTER,447,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,11,NISSAN/FRONTIER,350,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,12,FIAT/DUCATO,322,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,13,RAM/2500,271,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,14,GM/MONTANA,221,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,15,FIAT/UNO,166,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,16,CITROEN/JUMPY,157,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,17,PEUGEOT/EXPERT,153,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,18,MITSUBISHI/L200,133,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,19,HYUNDAI/HR,73,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,20,PEUGEOT/PARTNER,70,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,21,IVECO/DAILY 35S14,47,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,22,VW/EXPRESS,34,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,23,CITROEN/JUMPER,25,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,24,PEUGEOT/BOXER,24,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,25,IVECO/DAILY,17,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,26,IVECO/DAILY 30S13,11,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,27,RENAULT/KANGOO,10,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,28,CITROEN/BERLINGO,3,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,comerciais_leves,direta,29,M.BENZ/SPRINTER 416,1,modelo_direta_mes,27,2020-01.pdf,texto
+2020-01,automoveis,varejo,1,GM/ONIX,12495,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,2,HYUNDAI/HB20,5965,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,3,GM/ONIX PLUS,5541,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,4,FORD/KA,4996,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,5,VW/POLO,4428,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,6,RENAULT/KWID,4414,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,7,FIAT/ARGO,4255,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,8,TOYOTA/COROLLA,3371,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,9,HONDA/HR-V,3056,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,10,FIAT/MOBI,2898,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,11,VW/FOX/CROSS FOX,2620,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,12,VW/GOL,2486,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,13,HYUNDAI/CRETA,2476,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,14,TOYOTA/YARIS HB,2408,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,15,VW/T CROSS,2128,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,16,NISSAN/KICKS,1995,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,17,JEEP/RENEGADE,1977,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,18,VW/VIRTUS,1836,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,19,HYUNDAI/HB20S,1834,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,20,RENAULT/SANDERO,1741,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,21,FIAT/CRONOS,1643,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,22,FORD/ECOSPORT,1595,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,23,HONDA/CIVIC,1520,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,24,NISSAN/VERSA,1282,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,25,HONDA/FIT,1247,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,26,FORD/KA SEDAN,1230,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,27,TOYOTA/ETIOS HB,1188,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,28,JEEP/COMPASS,1151,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,29,HONDA/WR-V,993,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,30,TOYOTA/YARIS SEDAN,970,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,31,GM/TRACKER,870,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,32,GM/SPIN,831,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,33,FIAT/SIENA,823,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,34,GM/CRUZE SEDAN,772,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,35,VW/UP,752,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,36,CITROEN/C4 CACTUS,676,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,37,GM/CRUZE HB,649,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,38,HONDA/CITY,622,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,39,TOYOTA/HILUX SW4,605,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,40,TOYOTA/RAV4,581,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,41,CHERY/TIGGO 5X,568,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,42,VW/TIGUAN,563,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,43,CHERY/TIGGO,476,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,44,RENAULT/DUSTER,471,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,45,NISSAN/MARCH,442,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,46,RENAULT/LOGAN,406,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,47,GM/PRISMA,402,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,48,RENAULT/CAPTUR,356,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,49,GM/EQUINOX,286,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,automoveis,varejo,50,HYUNDAI/IX35,283,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,1,TOYOTA/HILUX,1925,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,2,FIAT/TORO,1171,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,3,GM/S10,1139,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,4,FORD/RANGER,669,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,5,VW/AMAROK,549,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,6,MITSUBISHI/L200,489,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,7,RENAULT/OROCH,462,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,8,FIAT/FIORINO,326,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,9,HYUNDAI/HR,323,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,10,NISSAN/FRONTIER,323,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,11,RENAULT/MASTER,255,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,12,FIAT/STRADA,242,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,13,VW/SAVEIRO,225,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,14,KIA/K2500,221,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,15,VW/EXPRESS,197,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,16,IVECO/DAILY 35S14,92,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,17,M.BENZ/SPRINTER 416,71,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,18,IVECO/DAILY 30S13,60,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,19,PEUGEOT/EXPERT,49,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,20,FIAT/DUCATO,46,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,21,GM/MONTANA,43,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,22,CITROEN/JUMPY,38,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,23,M.BENZ/SPRINTER 314,30,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,24,PEUGEOT/PARTNER,25,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,25,EFFA/V21,19,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,26,M.BENZ/SPRINTER 313,18,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,27,RAM/2500,14,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,28,M.BENZ/SPRINTER,10,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,29,JAC/v260,10,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,30,FOTON/AUMARK 1039,8,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,31,EFFA/V22,7,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,32,M.BENZ/SPRINTER 415,6,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,33,EFFA/K01,6,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,34,IVECO/DAILY,4,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,35,CITROEN/BERLINGO,3,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,36,CITROEN/JUMPER,3,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,37,PEUGEOT/BOXER,3,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,38,GM/C10,2,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,39,DODGE/DODGE,1,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,40,FORD/F100,1,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,41,FORD/F1000,1,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,42,FORD/F75,1,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,43,FORD/RANCHERO,1,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,44,GM/BRASINCA,1,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,45,GM/CHEVROLET,1,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,46,INTERNATIONAL/INTERNATIONAL,1,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,47,IVECO/DAILY 5516,1,modelo_varejo_mes,28,2020-01.pdf,texto
+2020-01,comerciais_leves,varejo,48,VW/KOMBI,1,modelo_varejo_mes,28,2020-01.pdf,texto

@@ -1,0 +1,156 @@
+mes_ref,segmento,canal,posicao_fonte,nome_completo_fonte,unidades,origem_tabela,pagina_origem,arquivo_origem,metodo_extracao
+2003-02,automoveis,direta,1,GM/CELTA,6103,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,2,VW/GOL,5920,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,3,FORD/FIESTA,4738,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,4,FIAT/PALIO,3947,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,5,FIAT/UNO,3723,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,6,GM/CLASSIC,1564,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,7,GM/CORSA,948,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,8,FIAT/SIENA,832,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,9,RENAULT/CLIO,763,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,10,VW/POLO,598,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,11,FORD/KA,553,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,12,VW/PARATI,378,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,13,VW/POLO SEDAN,367,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,14,VW/SANTANA,339,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,15,VW/GOLF,282,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,16,GM/ASTRA SEDAN,252,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,17,FIAT/STILO,226,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,18,FIAT/PALIO WEEKEND,204,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,19,TOYOTA/COROLLA,164,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,20,GM/ZAFIRA,145,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,21,HONDA/CIVIC,144,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,22,FIAT/DOBLO,128,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,23,GM/CORSA SEDAN,124,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,24,GM/ASTRA,123,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,25,FIAT/MAREA,105,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,26,AUDI/A3,93,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,27,GM/MERIVA,87,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,28,FORD/ESCORT,67,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,29,RENAULT/SCENIC,67,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,30,FORD/FOCUS SEDAN,60,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,31,FIAT/MAREA WEEKEND,48,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,32,MITSUBISHI/PAJERO,46,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,33,CITROEN/XSARA PICASSO,39,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,34,VW/PASSAT,35,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,35,GM/VECTRA,31,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,36,GM/BLAZER,29,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,37,RENAULT/KANGOO,27,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,38,FORD/FOCUS,25,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,39,FORD/ECOSPORT,23,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,40,FIAT/BRAVA,21,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,41,RENAULT/MEGANE,13,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,42,SUBARU/LEGACY,13,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,43,CITROEN/XSARA,12,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,44,HYUNDAI/ATOS,12,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,45,AUDI/A4,10,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,46,AUDI/A6,10,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,47,RENAULT/CLIO SEDAN,10,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,48,VW/BORA,10,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,49,PEUGEOT/206,9,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,direta,50,VW/BEETLE,9,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,1,VW/SAVEIRO,836,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,2,GM/S10,599,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,3,FIAT/STRADA,434,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,4,VW/KOMBI,256,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,5,FIAT/FIORINO,186,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,6,FIAT/DOBLO,173,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,7,MITSUBISHI/L200,101,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,8,FORD/RANGER,99,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,9,FORD/F250,89,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,10,HYUNDAI/H100,85,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,11,FORD/COURIER,69,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,12,RENAULT/KANGOO,52,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,13,RENAULT/MASTER,40,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,14,TOYOTA/HILUX,26,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,15,FIAT/DUCATO,25,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,16,RENAULT/TRAFFIC,11,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,17,HYUNDAI/H1STAREX,9,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,18,NISSAN/FRONTIER,6,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,19,FIAT/FIAT,2,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,20,IVECO/3510,2,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,comerciais_leves,direta,21,PEUGEOT/PARTNER,2,modelo_direta_mes,25,2003-02.pdf,texto
+2003-02,automoveis,varejo,1,VW/GOL,7159,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,2,FIAT/PALIO,5800,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,3,FIAT/UNO,4189,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,4,PEUGEOT/206,3667,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,5,GM/CELTA,3355,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,6,GM/CLASSIC,3298,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,7,GM/CORSA SEDAN,2564,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,8,RENAULT/CLIO,2436,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,9,TOYOTA/COROLLA,2243,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,10,VW/POLO,2129,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,11,GM/ASTRA,2019,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,12,FORD/FIESTA,1998,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,13,FIAT/PALIO WEEKEND,1912,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,14,FIAT/SIENA,1857,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,15,HONDA/CIVIC,1788,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,16,GM/MERIVA,1777,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,17,GM/CORSA,1562,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,18,FORD/KA,1481,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,19,VW/GOLF,1436,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,20,GM/ASTRA SEDAN,1217,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,21,FIAT/STILO,1101,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,22,VW/SANTANA,1089,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,23,VW/POLO SEDAN,1053,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,24,VW/PARATI,1033,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,25,CITROEN/XSARA PICASSO,1013,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,26,AUDI/A3,905,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,27,GM/ZAFIRA,786,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,28,RENAULT/SCENIC,786,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,29,M.BENZ/CLASSE A,625,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,30,FIAT/DOBLO,522,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,31,FORD/FOCUS,516,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,32,MITSUBISHI/PAJERO,375,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,33,FORD/FOCUS SEDAN,308,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,34,GM/VECTRA,284,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,35,CITROEN/XSARA,234,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,36,FIAT/BRAVA,227,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,37,PEUGEOT/307,185,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,38,FIAT/MAREA,177,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,39,GM/BLAZER,142,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,40,TROLLER/T4,99,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,41,RENAULT/TWINGO,93,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,42,SUZUKI/GVITARA,92,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,43,RENAULT/MEGANE,86,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,44,LAND ROVER/DEFENDER,82,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,45,CITROEN/C5,70,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,46,KIA/SPORTAGE,65,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,47,RENAULT/CLIO SEDAN,64,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,48,RENAULT/KANGOO,62,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,49,CITROEN/BERLI,55,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,automoveis,varejo,50,FIAT/MAREA WEEKEND,54,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,1,FIAT/STRADA,1986,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,2,VW/SAVEIRO,836,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,3,VW/KOMBI,827,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,4,NISSAN/FRONTIER,686,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,5,FORD/COURIER,640,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,6,MITSUBISHI/L200,636,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,7,GM/S10,449,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,8,FIAT/FIORINO,400,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,9,TOYOTA/HILUX,339,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,10,FIAT/DUCATO,329,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,11,FORD/RANGER,289,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,12,KIA/BESTA,270,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,13,FIAT/DOBLO,140,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,14,FORD/F250,114,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,15,M.BENZ/SPRINTER,62,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,16,PEUGEOT/BOXER,54,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,17,RENAULT/KANGOO,52,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,18,PEUGEOT/PARTNER,43,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,19,M.BENZ/SPRINTER 313,42,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,20,CITROEN/JUMPER,39,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,21,HYUNDAI/H100,31,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,22,KIA/K2700,23,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,23,RENAULT/MASTER,22,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,24,RENAULT/TRAFFIC,11,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,25,M.BENZ/AUTOVAN,7,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,26,IVECO/3510,4,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,27,M.BENZ/SPRINTER 413,3,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,28,GM/A20,2,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,29,GM/D20,2,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,30,FIAT/UNO,1,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,31,FORD/MRE CGPI,1,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,32,HYUNDAI/H1STAREX,1,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,33,M.BENZ/SPRINTER 312,1,modelo_varejo_mes,26,2003-02.pdf,texto
+2003-02,comerciais_leves,varejo,34,TOYOTA/BANDEIRANTE,1,modelo_varejo_mes,26,2003-02.pdf,texto

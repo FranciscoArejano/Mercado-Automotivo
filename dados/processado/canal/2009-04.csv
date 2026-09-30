@@ -1,0 +1,178 @@
+mes_ref,segmento,canal,posicao_fonte,nome_completo_fonte,unidades,origem_tabela,pagina_origem,arquivo_origem,metodo_extracao
+2009-04,automoveis,direta,1,VW/GOL,6763,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,2,FIAT/PALIO,5325,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,3,FIAT/UNO,4687,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,4,FORD/FIESTA,1984,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,5,GM/CELTA,1964,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,6,VW/VOYAGE,1927,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,7,FIAT/SIENA,1839,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,8,FORD/FIESTA SEDAN,1368,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,9,FORD/KA,1158,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,10,VW/FOX/CROSS FOX,1020,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,11,FIAT/PALIO WEEKEND,886,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,12,FORD/ECOSPORT,765,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,13,HONDA/FIT,764,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,14,HYUNDAI/TUCSON,678,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,15,RENAULT/LOGAN,611,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,16,GM/PRISMA,609,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,17,GM/CLASSIC,568,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,18,TOYOTA/COROLLA,505,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,19,VW/PARATI,499,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,20,HYUNDAI/AZERA,472,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,21,RENAULT/SANDERO,464,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,22,GM/BLAZER,433,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,23,GM/MERIVA,428,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,24,FIAT/PUNTO,364,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,25,FIAT/LINEA,351,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,26,FIAT/IDEA,349,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,27,FIAT/STILO,310,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,28,HYUNDAI/SANTAFE,308,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,29,VW/GOLF,308,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,30,GM/VECTRA,303,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,31,GM/CORSA SEDAN,291,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,32,VW/POLO SEDAN,287,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,33,FORD/FOCUS,280,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,34,FORD/FOCUS SEDAN,258,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,35,GM/ASTRA,224,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,36,VW/SPACE FOX,213,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,37,GM/ASTRA SEDAN,212,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,38,HONDA/CIVIC,182,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,39,FIAT/DOBLO,181,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,40,VW/PASSAT,157,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,41,VW/POLO,138,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,42,GM/CORSA,111,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,43,RENAULT/CLIO,99,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,44,HYUNDAI/VERACRUZ,97,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,45,CITROEN/C3,96,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,46,PEUGEOT/207 SEDAN,94,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,47,VW/PASSAT VAR,93,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,48,PEUGEOT/207,86,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,49,RENAULT/MEGANE,81,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,direta,50,VW/JETTA,79,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,1,FIAT/STRADA,3687,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,2,VW/KOMBI,1575,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,3,VW/SAVEIRO,1270,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,4,GM/S10,1039,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,5,FIAT/FIORINO,731,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,6,TOYOTA/HILUX,549,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,7,GM/MONTANA,539,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,8,MITSUBISHI/L200,469,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,9,RENAULT/MASTER,395,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,10,FIAT/DUCATO,305,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,11,FORD/RANGER,292,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,12,HYUNDAI/HR,282,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,13,FORD/COURIER,277,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,14,RENAULT/KANGOO,183,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,15,FORD/F250,111,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,16,NISSAN/FRONTIER,98,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,17,PEUGEOT/PARTNER,92,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,18,FIAT/DOBLO,86,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,19,IVECO/DAILY 3514,16,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,20,M.BENZ/SPRINTER 311,16,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,21,M.BENZ/SPRINTER,10,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,22,PEUGEOT/BOXER,9,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,23,IVECO/DAILY,8,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,24,M.BENZ/SPRINTER 313,7,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,25,M.BENZ/SPRINTER 413,7,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,26,FORD/TRANSIT,6,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,27,CITROEN/JUMPER,2,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,28,TOYOTA/RIBEIRAUTO,2,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,comerciais_leves,direta,29,HAFEI/ZHONGYI VAN,2,modelo_direta_mes,25,2009-04.pdf,texto
+2009-04,automoveis,varejo,1,VW/GOL,15831,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,2,FIAT/PALIO,10971,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,3,VW/FOX/CROSS FOX,10532,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,4,FIAT/UNO,9120,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,5,GM/CELTA,7797,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,6,FIAT/SIENA,7412,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,7,GM/CLASSIC,6145,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,8,FORD/KA,5276,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,9,VW/VOYAGE,4977,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,10,FORD/FIESTA,4107,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,11,GM/PRISMA,4089,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,12,HONDA/CIVIC,4018,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,13,HONDA/FIT,3880,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,14,TOYOTA/COROLLA,3696,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,15,FORD/ECOSPORT,2863,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,16,FIAT/PALIO WEEKEND,2562,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,17,RENAULT/SANDERO,2513,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,18,GM/CORSA,2355,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,19,FORD/FIESTA SEDAN,2275,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,20,GM/CORSA SEDAN,2183,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,21,CITROEN/C3,2107,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,22,GM/MERIVA,2085,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,23,FIAT/PUNTO,1732,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,24,GM/VECTRA,1682,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,25,FIAT/IDEA,1669,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,26,GM/ASTRA,1530,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,27,PEUGEOT/207,1481,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,28,VW/GOLF,1370,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,29,HONDA/CRV,1369,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,30,RENAULT/LOGAN,1198,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,31,HYUNDAI/TUCSON,1183,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,32,VW/SPACE FOX,1114,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,33,MITSUBISHI/PAJERO,1103,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,34,PEUGEOT/207 SEDAN,1032,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,35,VW/POLO,1010,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,36,VW/POLO SEDAN,967,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,37,GM/VECTRA HATCH,902,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,38,FORD/FOCUS,889,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,39,GM/CAPTIVA,884,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,40,FORD/FOCUS SEDAN,748,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,41,CITROEN/C4 PALLAS,733,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,42,CITROEN/XSARA PICASSO,661,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,43,CITROEN/C4,650,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,44,PEUGEOT/307,640,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,45,HYUNDAI/AZERA,604,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,46,GM/ZAFIRA,577,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,47,FIAT/STILO,570,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,48,FIAT/LINEA,536,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,49,CITROEN/C4 PICASSO,502,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,automoveis,varejo,50,PEUGEOT/207 SW,501,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,1,FIAT/STRADA,3321,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,2,GM/MONTANA,1797,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,3,TOYOTA/HILUX,1527,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,4,GM/S10,1409,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,5,MITSUBISHI/L200,1281,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,6,VW/SAVEIRO,995,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,7,VW/KOMBI,576,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,8,FIAT/FIORINO,565,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,9,HYUNDAI/HR,564,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,10,NISSAN/FRONTIER,426,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,11,FORD/COURIER,396,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,12,FORD/RANGER,381,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,13,FIAT/DUCATO,321,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,14,KIA/K2500,227,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,15,M.BENZ/SPRINTER 313,168,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,16,IVECO/DAILY 3514,141,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,17,FORD/F250,118,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,18,CITROEN/JUMPER,105,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,19,PEUGEOT/BOXER,99,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,20,M.BENZ/SPRINTER 311,82,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,21,PEUGEOT/PARTNER,57,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,22,DODGE/RAM,49,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,23,HAFEI/MINI,49,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,24,HAFEI/MINIVAN,48,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,25,FORD/TRANSIT,41,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,26,KIA/K2700,36,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,27,M.BENZ/SPRINTER 413,28,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,28,M.BENZ/SPRINTER,26,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,29,FIAT/DOBLO,21,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,30,HAFEI/RUIYI,19,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,31,CHANA/SC,15,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,32,IVECO/DAILY,12,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,33,RENAULT/KANGOO,9,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,34,RENAULT/MASTER,9,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,35,JINBEI/VAN 13P,8,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,36,HAFEI/ZHONGYI VAN,7,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,37,AGRALE/AGRALE MARRUA,3,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,38,JINBEI/M35,3,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,39,FIAT/TECFORM,2,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,40,FORD/F150,2,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,41,GM/D20,2,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,42,FORD/F1000,1,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,43,GM/SILVERADO,1,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,44,HYUNDAI/GRACE,1,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,45,ISUZU/PICK UP,1,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,46,IVECO/FM 480,1,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,47,M.BENZ/SPRINTER 314,1,modelo_varejo_mes,26,2009-04.pdf,texto
+2009-04,comerciais_leves,varejo,48,TOYOTA/TACOMA,1,modelo_varejo_mes,26,2009-04.pdf,texto

@@ -1,0 +1,187 @@
+mes_ref,segmento,canal,posicao_fonte,nome_completo_fonte,unidades,origem_tabela,pagina_origem,arquivo_origem,metodo_extracao
+2012-08,automoveis,direta,1,FIAT/UNO,10594,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,2,VW/GOL,9272,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,3,FIAT/PALIO,5140,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,4,VW/FOX/CROSS FOX,3654,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,5,GM/CELTA,3291,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,6,FORD/FIESTA,2995,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,7,RENAULT/SANDERO,2479,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,8,VW/VOYAGE,2223,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,9,FIAT/SIENA,1842,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,10,FORD/FIESTA SEDAN,1523,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,11,GM/COBALT,1367,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,12,FIAT/IDEA,1331,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,13,RENAULT/DUSTER,1307,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,14,FIAT/PALIO WEEKEND,1284,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,15,RENAULT/LOGAN,1233,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,16,GM/AGILE,998,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,17,FORD/KA,976,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,18,FIAT/PUNTO,973,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,19,GM/CLASSIC,897,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,20,RENAULT/FLUENCE,872,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,21,VW/SPACE FOX,804,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,22,HONDA/CIVIC,785,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,23,HYUNDAI/TUCSON,767,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,24,FIAT/DOBLO,735,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,25,FORD/FOCUS,588,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,26,GM/PRISMA,520,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,27,TOYOTA/COROLLA,505,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,28,FIAT/LINEA,486,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,29,HONDA/FIT,481,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,30,HYUNDAI/I30,481,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,31,VW/POLO SEDAN,424,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,32,GM/MERIVA,398,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,33,VW/PARATI,373,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,34,FORD/FUSION,372,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,35,HYUNDAI/IX35,354,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,36,FORD/FOCUS SEDAN,329,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,37,VW/GOLF,318,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,38,VW/JETTA,310,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,39,FIAT/BRAVO,303,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,40,GM/CRUZE SEDAN,301,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,41,VW/POLO,291,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,42,FORD/NEW FIESTA,280,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,43,NISSAN/MARCH,265,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,44,HONDA/CITY,231,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,45,HYUNDAI/ELANTRA,227,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,46,RENAULT/SYMBOL,198,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,47,AUDI/A1,163,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,48,PEUGEOT/408,163,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,49,RENAULT/CLIO,163,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,direta,50,TOYOTA/HILUX SW4,159,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,1,FIAT/STRADA,6827,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,2,GM/MONTANA,3815,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,3,VW/SAVEIRO,3529,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,4,VW/KOMBI,2279,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,5,GM/S10,1297,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,6,VW/AMAROK,1235,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,7,RENAULT/MASTER,729,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,8,FIAT/FIORINO,682,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,9,FORD/COURIER,666,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,10,FIAT/DUCATO,595,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,11,TOYOTA/HILUX,586,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,12,NISSAN/FRONTIER,583,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,13,FIAT/DOBLO,442,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,14,MITSUBISHI/L200,224,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,15,HYUNDAI/HR,190,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,16,RENAULT/KANGOO,160,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,17,PEUGEOT/PARTNER,83,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,18,FORD/RANGER,79,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,19,PEUGEOT/HOGGAR,71,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,20,IVECO/DAILY 3514,33,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,21,HAFEI/TOWNER,21,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,22,HAFEI/MINI,11,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,23,M.BENZ/SPRINTER 311,8,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,24,M.BENZ/SPRINTER 313,5,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,25,PEUGEOT/BOXER,5,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,26,RENAULT/RENAULT,5,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,27,TOYOTA/RIBEIRAUTO,4,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,28,FORD/F250,2,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,29,VW/CARAVELLE,2,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,30,VW/MULTIVAN,2,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,31,JINBEI/M35,2,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,32,AGRALE/AGRALE MARRUA,1,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,33,FIAT/TECFORM,1,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,34,FORD/TRANSIT,1,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,35,KIA/K2500,1,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,comerciais_leves,direta,36,HAFEI/MINIVAN,1,modelo_direta_mes,26,2012-08.pdf,texto
+2012-08,automoveis,varejo,1,VW/GOL,23357,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,2,FIAT/UNO,19779,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,3,VW/FOX/CROSS FOX,19647,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,4,FIAT/PALIO,16079,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,5,GM/CELTA,15855,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,6,FIAT/SIENA,10636,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,7,FORD/FIESTA,10464,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,8,RENAULT/SANDERO,9263,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,9,VW/VOYAGE,7476,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,10,GM/CLASSIC,7375,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,11,GM/PRISMA,5606,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,12,HONDA/CIVIC,5451,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,13,GM/AGILE,5259,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,14,FIAT/PUNTO,5180,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,15,GM/COBALT,5024,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,16,GM/CRUZE SEDAN,4498,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,17,GM/SPIN,4459,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,18,HONDA/FIT,4326,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,19,TOYOTA/COROLLA,4114,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,20,PEUGEOT/207,3925,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,21,HONDA/CITY,3845,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,22,CITROEN/C3,3743,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,23,RENAULT/DUSTER,3742,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,24,FORD/KA,3590,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,25,FORD/FIESTA SEDAN,3110,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,26,GM/CORSA,2785,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,27,RENAULT/LOGAN,2450,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,28,RENAULT/CLIO,2368,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,29,FORD/FOCUS,2193,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,30,FIAT/IDEA,2170,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,31,NISSAN/MARCH,2135,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,32,VW/JETTA,2109,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,33,NISSAN/LIVINA,2025,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,34,HONDA/CRV,1937,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,35,MITSUBISHI/PAJERO,1833,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,36,VW/SPACE FOX,1819,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,37,NISSAN/VERSA,1751,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,38,PEUGEOT/308,1576,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,39,GM/SONIC SEDAN,1558,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,40,FORD/ECOSPORT,1530,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,41,GM/CRUZE HB,1489,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,42,VW/POLO SEDAN,1435,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,43,HYUNDAI/TUCSON,1428,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,44,FIAT/PALIO WEEKEND,1381,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,45,HYUNDAI/I30,1346,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,46,FIAT/500,1323,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,47,VW/GOLF,1290,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,48,CITROEN/C3 AIRCROSS,1272,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,49,MITSUBISHI/ASX,1247,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,automoveis,varejo,50,PEUGEOT/207 SEDAN,1158,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,1,FIAT/STRADA,6154,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,2,GM/S10,4170,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,3,TOYOTA/HILUX,3723,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,4,VW/SAVEIRO,3064,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,5,MITSUBISHI/L200,2078,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,6,GM/MONTANA,1585,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,7,NISSAN/FRONTIER,1572,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,8,VW/AMAROK,1059,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,9,FIAT/FIORINO,716,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,10,HYUNDAI/HR,676,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,11,VW/KOMBI,445,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,12,IVECO/DAILY 3514,336,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,13,KIA/K2500,311,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,14,FIAT/DUCATO,300,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,15,RENAULT/KANGOO,279,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,16,FORD/RANGER,262,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,17,PEUGEOT/BOXER,252,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,18,CHANA/SC,234,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,19,HAFEI/RUIYI,227,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,20,HAFEI/TOWNER,217,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,21,FORD/TRANSIT,210,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,22,CITROEN/JUMPER,198,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,23,M.BENZ/SPRINTER 311,150,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,24,PEUGEOT/HOGGAR,137,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,25,FIAT/DOBLO,107,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,26,M.BENZ/SPRINTER 313,104,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,27,DODGE/RAM,99,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,28,RENAULT/MASTER,87,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,29,JINBEI/TOPIC,71,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,30,HAFEI/MINIVAN,62,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,31,HAFEI/MINI,60,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,32,HAFEI/START PICK UP,56,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,33,SHINERAY/P TRUCKS,46,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,34,M.BENZ/SPRINTER,32,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,35,FORD/COURIER,30,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,36,M.BENZ/SPRINTER 413,28,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,37,JINBEI/M35,28,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,38,EFFA/PLUTUS,14,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,39,PEUGEOT/PARTNER,11,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,40,SHINERAY/P VAN,10,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,41,MAHINDRA/MAHINDRA,10,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,42,AGRALE/AGRALE MARRUA,5,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,43,SHINERAY/CARGOV,5,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,44,FORD/F150,4,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,45,HAFEI/ZHONGYI VAN,3,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,46,IVECO/DAILY,2,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,47,FORD/F1000,1,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,48,GM/AVALANCHE,1,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,49,GM/CHEVY,1,modelo_varejo_mes,27,2012-08.pdf,texto
+2012-08,comerciais_leves,varejo,50,M.BENZ/RIBEIRAUTO,1,modelo_varejo_mes,27,2012-08.pdf,texto

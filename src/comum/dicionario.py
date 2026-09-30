@@ -165,6 +165,14 @@ def escrever(painel: pd.DataFrame) -> None:
         "o cenario em que todo rebatismo conta como morte e nascimento. "
         "`saidas/candidatos.xlsx` e' a evidencia arquivada para a adjudicacao futura.\n\n",
 
+        "## Dimensoes paralelas\n\n",
+        "Dois arquivos com a mesma unidade de tempo, **nunca colunas deste painel** -- a "
+        "juncao e' do codigo de analise:\n\n",
+        "- `painel_canal.parquet` -- venda direta e varejo por modelo, top-50 por segmento. "
+        "Dicionario proprio em `saidas/painel_canal_dicionario.md`; leia a advertencia "
+        "sobre o nivel antes de usar.\n",
+        "- `macro_mensal.parquet` -- credito, juros, cambio, precos e atividade. Cada serie "
+        "documentada em `config/series_macro.csv`, com a coluna `natureza_e_ressalvas`.\n\n",
         "## Reconstituicao\n\n",
         "Todo numero se reconstitui a partir de tres coisas versionadas: os PDFs originais "
         "(hash em `dados/bruto/manifesto.csv`), `regras.csv` e os scripts de `src/`. "

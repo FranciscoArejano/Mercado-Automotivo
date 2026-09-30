@@ -38,6 +38,10 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | D6 | Deduplicação comparava nome cru: 56.459 unidades contadas duas vezes em 2013-11 | **defeito nosso, corrigido** |
 | I1 | Cruzamento com `Vendas_Geral.xlsx` | **feito: truncamento e colapso de variante, ambos medidos** |
 | D5 | Duas edições curtas do informe (2003-10, 2005-03) | **medidas; completar é decisão do pesquisador** |
+| Canal | Venda direta e varejo por modelo | **extraído: 281 meses, 48.996 linhas, 98% de identidade com o painel principal** |
+| Canal | Ranking por marca | **não extraído, de propósito** — gráfico, percentual, redundante |
+| Canal | Participação de canal: o top-50 é neutro? | **não em automóveis (viés +1,3 pp e instável); sim em comerciais leves** |
+| Macro | Dimensão macro mensal | **17 séries; o IPCA de usado é índice de depreciação** |
 
 ---
 
@@ -529,6 +533,91 @@ informes antigos seriam piores.
 
 ---
 
+## Dimensão de canal: venda direta e varejo
+
+Os informes separam venda direta — o que a montadora negocia com frotista e
+locadora, mais táxi, produtor rural e PCD — de varejo desde 2003-01. A estrutura
+existe em 281 dos 284 meses; os 3 sem ela são as mesmas lacunas do painel
+principal. Produto: `painel_canal.parquet`, tabela paralela, nunca coluna do
+painel de vendas.
+
+### O ranking por marca existe e **não foi extraído**
+
+Registrado aqui para ninguém "descobrir" isso depois e tomar por esquecimento.
+Três motivos, e o terceiro é decisivo:
+
+1. É **gráfico de barras** com rótulo rotacionado e três painéis sobrepostos
+   quase no mesmo x. A extração seria frágil.
+2. Entrega **percentual**, não unidade.
+3. É **redundante**: participação de canal por marca sai de agregar as tabelas
+   por modelo, que são texto.
+
+Número lido do rótulo de um gráfico de barras não se defende em artigo; número
+agregado de tabela de texto, com cobertura declarada, se defende.
+
+### O top-50 é neutro entre os canais? — medido
+
+Venda direta e varejo têm rankings de 50 **separados**, que truncam caudas
+**diferentes**. A hipótese era que venda direta, concentrada, teria o top-50
+quase completo, e varejo, disperso, menos — e que o truncamento **não se
+cancelaria na razão**. Os 29 meses em que a fonte publica a participação em
+texto (2024-04 em diante) permitiram medir.
+
+**A hipótese se confirma, e o resultado se divide por segmento.**
+
+| | automóveis | comerciais leves |
+|---|---:|---:|
+| meses na calibração | 28 | 29 |
+| viés médio (calculada − publicada) | **+1,32 pp** | +0,03 pp |
+| meses com viés positivo | **28 de 28** | 22 de 29 |
+| viés nos 6 primeiros meses | +1,03 | +0,02 |
+| viés nos 6 últimos meses | **+1,91** | +0,02 |
+| cobertura do top-50 da venda direta | 96,5% a 99,1% | 99,9% a 100% |
+| cobertura do top-50 do varejo | **89,2% a 94,7%** | 99,6% a 100% |
+
+- **Automóveis: o nível da participação construída não serve.** O viés é
+  sempre do mesmo lado — a participação calculada superestima a venda direta —
+  e **não é estável**: dobra em dois anos. Correlaciona com a cobertura do
+  varejo a r = −0,95: o varejo se fragmenta, o top-50 dele cobre menos, o viés
+  sobe. A dimensão serve para **composição dentro de cada canal**, não para o
+  nível. Uma correção condicionada à cobertura existiria (r = −0,84 com a
+  cobertura total, que é observável na série inteira), mas **extrapolaria**: a
+  amostra cobre 92,2% a 96,7% de cobertura, e 66 dos 281 meses — o fundo do U —
+  ficam abaixo disso.
+- **Comerciais leves: o nível serve.** Viés nulo e estável, e a condição em que
+  foi medido vale em todos os anos, porque o top-50 cobre ~100% do segmento
+  desde 2003.
+
+Isso está escrito no dicionário (`saidas/painel_canal_dicionario.md`) antes de
+alguém usar.
+
+**Como os percentuais publicados foram atribuídos.** Não se lê o gráfico. A
+ordem dos números no texto muda de pizza para pizza — em 2026-08 a venda direta
+vem primeiro em automóveis e segundo em comerciais leves — e ler "o primeiro
+número" teria invertido o sinal do viés em metade dos casos. A atribuição usa
+duas restrições aritméticas: a identidade de média ponderada entre os segmentos,
+e os limites que as próprias tabelas impõem à participação verdadeira. A ordem
+das pizzas vem do layout, confirmada pelos títulos em texto. Em 2025-10
+automóveis ficou ambíguo entre 49,9% e 50,1% e saiu da calibração, sem chute.
+
+### A cobertura em U é advertência de primeira ordem
+
+A parte do mês que as tabelas explicam, em automóveis, vai de 99,2% (2004) a
+88,2% (2011) e volta a 97,7% (2022) — amplitude de 14 pontos, quase quatro vezes
+a deriva do painel principal. **O nível das quantidades de canal não é
+comparável entre anos.** Comparações seguras são dentro do ano, e qualquer série
+temporal construída sobre esta dimensão tem de ser reportada ao lado da série de
+cobertura.
+
+### A conferência que sustenta a dimensão
+
+Onde o modelo aparece nos dois canais, direta + varejo foi comparado com o total
+da tabela de sub-segmento do painel principal: **18.417 de 18.799 (97,97%)
+batem exatamente**, unidade a unidade. São duas tabelas independentes da mesma
+fonte. Os 114 casos de valor idêntico nos dois canais passam pelo mesmo teste:
+112 são coincidência confirmada — o T-Cross vendeu mesmo 3.896 + 3.896 = 7.792
+em 2023-12 —, e os dois restantes têm uma ou duas unidades.
+
 ## As dez questões
 
 **Q1 — pico móvel. ENCERRADA, com uma regra que vale mais que a escolha.**
@@ -660,7 +749,11 @@ descarta como *quem sai*. Um modelo vivo no primeiro mês continua podendo sair
 4. **Revisão de `config/nomes_nao_veiculo.csv`** — 29 nomes marcados,
    `saidas/nomes_suspeitos.csv` traz os 180 candidatos a revisão humana. A
    retroação a 2003 multiplicou a lista de nomes de volume ínfimo.
-5. **Durabilidade (ESPEC §10)** — os derivados passaram a ser versionados e cada
+5. **Correção do viés de canal em automóveis** — possível, condicionada à
+   cobertura, mas extrapolaria para o fundo do U. Não aplicada. Se o artigo
+   precisar do nível da participação em automóveis, a decisão é sua: usar só
+   2024-04 em diante, onde há o publicado, ou aceitar a extrapolação declarada.
+6. **Durabilidade (ESPEC §10)** — os derivados passaram a ser versionados e cada
    rodada ganha tag. A regra existe; o hábito ainda não foi testado numa sessão
    inteira.
 6. **As duas edições curtas** (D5): manter como está, completar pela coluna de

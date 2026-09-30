@@ -1,6 +1,14 @@
 mes_ref,segmento,direta_publicada_pct,direta_calculada_pct,vies_pp,cobertura_direta_pct,cobertura_varejo_pct,cobertura_total_pct
+2024-04,automoveis,44.01,45.11,1.1,98.59,94.31,96.19
+2024-04,comerciais_leves,61.57,61.58,0.01,99.99,99.95,99.98
+2024-05,automoveis,42.33,43.29,0.96,98.33,94.53,96.14
+2024-05,comerciais_leves,60.03,60.05,0.02,99.99,99.9,99.95
+2024-06,automoveis,45.54,46.54,1.0,98.58,94.69,96.46
+2024-06,comerciais_leves,59.34,59.35,0.01,100.0,99.96,99.98
 2024-07,automoveis,43.4,44.41,1.01,98.31,94.37,96.08
 2024-07,comerciais_leves,63.4,63.45,0.05,100.06,99.85,99.98
+2024-08,automoveis,45.1,46.15,1.05,98.46,94.38,96.22
+2024-08,comerciais_leves,65.2,65.18,-0.02,99.93,100.03,99.97
 2024-09,automoveis,47.8,48.87,1.07,98.58,94.45,96.42
 2024-09,comerciais_leves,66.4,66.44,0.04,100.05,99.86,99.98
 2024-10,automoveis,47.7,48.68,0.98,98.4,94.61,96.41
@@ -27,6 +35,7 @@ mes_ref,segmento,direta_publicada_pct,direta_calculada_pct,vies_pp,cobertura_dir
 2025-08,comerciais_leves,65.2,65.24,0.04,100.03,99.87,99.97
 2025-09,automoveis,47.2,48.02,0.82,97.39,94.24,95.73
 2025-09,comerciais_leves,68.8,68.8,0.0,99.97,99.97,99.97
+2025-10,comerciais_leves,68.9,68.97,0.07,100.01,99.67,99.9
 2025-11,automoveis,53.0,54.62,1.62,98.22,92.04,95.32
 2025-11,comerciais_leves,67.6,67.7,0.1,100.06,99.6,99.91
 2025-12,automoveis,47.0,48.35,1.35,97.82,92.67,95.09

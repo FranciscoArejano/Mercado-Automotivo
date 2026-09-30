@@ -1,6 +1,6 @@
 # Dicionario de dados -- `painel.parquet`
 
-Gerado em 2026-09-17T17:16:02+00:00 (UTC) por `src/etapa05_painel.py`.
+Gerado em 2026-09-30T22:39:36+00:00 (UTC) por `src/etapa05_painel.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: 54,179
@@ -80,6 +80,13 @@ As tabelas por modelo do informe tem numero fixo de linhas por sub-segmento e tr
 ## Harmonizacao
 
 Nesta rodada `regras.csv` esta' **vazio**: nada foi fundido. As taxas de entrada e saida derivadas deste painel sao, portanto, o **limite superior** dessas taxas -- o cenario em que todo rebatismo conta como morte e nascimento. `saidas/candidatos.xlsx` e' a evidencia arquivada para a adjudicacao futura.
+
+## Dimensoes paralelas
+
+Dois arquivos com a mesma unidade de tempo, **nunca colunas deste painel** -- a juncao e' do codigo de analise:
+
+- `painel_canal.parquet` -- venda direta e varejo por modelo, top-50 por segmento. Dicionario proprio em `saidas/painel_canal_dicionario.md`; leia a advertencia sobre o nivel antes de usar.
+- `macro_mensal.parquet` -- credito, juros, cambio, precos e atividade. Cada serie documentada em `config/series_macro.csv`, com a coluna `natureza_e_ressalvas`.
 
 ## Reconstituicao
 

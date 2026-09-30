@@ -1171,7 +1171,163 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
             "_Nao disponivel: rode `python src/etapa08_macro.py`._\n"
         )
 
-    partes.append("\n## 12. Situacao\n\n")
+    # ------------------------------------------------- 12. canal de venda
+    if config.PAINEL_CANAL.exists():
+        from comum import canal as mod_canal
+        from etapa09_canal import advertencia_de_nivel
+
+        painel_canal = pd.read_parquet(config.PAINEL_CANAL)
+        def ler(nome: str) -> pd.DataFrame:
+            # Conferencia sem achado grava CSV vazio -- e' o resultado bom, nao
+            # arquivo quebrado. `read_csv` estoura nele, entao vazio vira vazio.
+            caminho = config.DIR_SAIDAS / nome
+            if not caminho.exists():
+                return pd.DataFrame()
+            try:
+                return pd.read_csv(caminho)
+            except pd.errors.EmptyDataError:
+                return pd.DataFrame()
+        cob_canal = ler("canal_cobertura.csv")
+        calibracao = ler("canal_calibracao.csv")
+        cruzamento = ler("canal_contra_painel_principal.csv")
+        iguais = ler("canal_mesmo_valor_nos_dois_canais.csv")
+        furos = ler("canal_posicoes_com_furo.csv")
+        registro_canal = (pd.read_csv(config.CANAL_MESES) if config.CANAL_MESES.exists()
+                          else pd.DataFrame())
+        lacunas_canal = (registro_canal[registro_canal["situacao"] != "ok"]
+                         if not registro_canal.empty else pd.DataFrame())
+
+        partes.append(
+            "\n## 12. Canal de venda: venda direta e varejo\n\n"
+            "Tabela de fatos **paralela**: `painel_canal.parquet`, chave `(mes_ref, segmento, "
+            "canal, marca, modelo)`. Nao e' coluna do painel de vendas -- sao recortes "
+            "diferentes da mesma realidade. Dicionario proprio em "
+            "`saidas/painel_canal_dicionario.md`.\n\n"
+            f"- Linhas: **{len(painel_canal):,}**\n".replace(",", ".")
+            + f"- Lacunas declaradas: **{len(lacunas_canal)}** -- "
+            + (", ".join(f"`{m}`" for m in lacunas_canal["mes"]) if not lacunas_canal.empty
+               else "nenhuma")
+            + ". Sao as mesmas do painel principal, pelas mesmas causas. Entram sem linha, "
+            "nunca como zero (sec.9.2).\n"
+            f"- Posicoes com furo no ranking: **{len(furos)}** "
+            f"({'OK' if furos.empty else 'FALHOU'}) -- todo ranking e' contiguo de 1 a n, "
+            "entao nenhuma linha ficou para tras na leitura.\n"
+        )
+        if not furos.empty:
+            falhas.append(f"{len(furos)} rankings de canal com posicao faltando")
+
+        if not cob_canal.empty:
+            anual = cob_canal.assign(ano=cob_canal["mes_ref"].str.slice(0, 4))
+            anual = (anual.groupby(["ano", "segmento"])["cobertura_pct"]
+                     .agg(["min", "median", "max"]).round(1).reset_index())
+            largo = anual.pivot(index="ano", columns="segmento", values="median")
+            partes.append(
+                "\n### A cobertura anda em U -- advertencia de primeira ordem\n\n"
+                + advertencia_de_nivel(cob_canal) + "\n\n"
+                "Cobertura: `direta + varejo` do top-50 contra o total que o proprio informe "
+                "publica, mediana do ano. Mes a mes em `saidas/canal_cobertura.csv`.\n\n"
+                + _tabela(largo.reset_index().rename(columns={
+                    "automoveis": "automoveis_%", "comerciais_leves": "comerciais_leves_%"}))
+            )
+
+        if not calibracao.empty:
+            resumo = mod_canal.resumo_calibracao(calibracao)
+            por_canal = calibracao.groupby("segmento")[
+                ["cobertura_direta_pct", "cobertura_varejo_pct"]].agg(["min", "max"]).round(1)
+            por_canal.columns = [f"{a}_{b}" for a, b in por_canal.columns]
+            partes.append(
+                "\n### Cobertura por canal -- so' onde ela e' mensuravel\n\n"
+                "A cobertura de **cada** canal exige saber o tamanho do canal, e isso so' a "
+                "participacao publicada da'. Entao ela existe nos 29 meses de 2024-04 em "
+                "diante, e em nenhum outro. E' a medida que mostra o mecanismo: o top-50 da "
+                "venda direta capta quase tudo, o do varejo capta menos.\n\n"
+                + _tabela(por_canal.reset_index())
+                + "\n### Calibracao: a participacao calculada contra a publicada\n\n"
+                "Venda direta e varejo truncam caudas **diferentes**, entao a participacao "
+                "calculada das tabelas nao e' neutra. Nos meses em que a fonte publica a "
+                "participacao em texto, as duas foram comparadas. `vies` e' calculada menos "
+                "publicada, em pontos percentuais. Detalhe em `saidas/canal_calibracao.csv`.\n\n"
+                + _tabela(resumo.drop(columns=["estavel"]))
+                + "\n"
+            )
+            from etapa09_canal import _veredito
+            for linha in resumo.to_dict("records"):
+                partes.append("- " + _veredito(linha) + "\n")
+            partes.append(
+                f"\nCriterio de estabilidade: a media dos {mod_canal.MESES_DA_PONTA} ultimos "
+                f"meses nao pode se afastar da dos {mod_canal.MESES_DA_PONTA} primeiros por "
+                f"mais de {mod_canal.DERIVA_MAXIMA_PP} ponto, nem por mais de metade do "
+                "proprio vies.\n\n"
+                "A atribuicao dos percentuais publicados nao le' o grafico: a ordem dos numeros "
+                "muda de pizza para pizza, entao qual deles e' venda direta foi decidido pela "
+                "identidade de media ponderada entre os segmentos e pelos limites que as "
+                "proprias tabelas impoem a' participacao verdadeira.\n"
+            )
+            participacao = ler("canal_participacao.csv")
+            for segmento in ("automoveis", "comerciais_leves"):
+                coluna = f"resolucao_{segmento}"
+                if participacao.empty or coluna not in participacao:
+                    continue
+                abertos = participacao[participacao[coluna] != "unica"]
+                for linha in abertos.to_dict("records"):
+                    partes.append(
+                        f"\n`{linha['mes_ref']}`, {segmento.replace('_', ' ')}: "
+                        f"{linha[coluna]} -- o mes saiu da calibracao deste segmento, e nao "
+                        "foi resolvido no chute.\n")
+
+        if not cruzamento.empty:
+            com = cruzamento[cruzamento["unidades_painel_principal"].notna()]
+            identicos = int((com["situacao"] == "identico").sum())
+            dentro = int((com["diferenca"].abs() <= 0.01 * com["unidades_painel_principal"]).sum())
+            partes.append(
+                "\n### Conferencia com o painel principal\n\n"
+                "Duas tabelas **independentes** do mesmo informe: o ranking por canal e a "
+                "tabela por sub-segmento. Onde o modelo aparece nos dois canais, "
+                "`direta + varejo` tem de dar o total do modelo no painel principal.\n\n"
+                f"- Batem **exatamente**: **{identicos} de {len(com)}** "
+                f"({100 * identicos / len(com):.2f}%)\n"
+                f"- Dentro de 1%: {dentro} de {len(com)}\n\n"
+                "As maiores diferencas sao `VW/FOX/CROSS FOX`, o unico nome composto da serie "
+                "(a tabela de sub-segmento agrega Fox e CrossFox), e modelos que ja' aparecem "
+                "na sec.9 como revisao da fonte entre meses. Lista completa em "
+                "`saidas/canal_contra_painel_principal.csv`.\n\n"
+                + _tabela(com.reindex(com["diferenca"].abs().sort_values(ascending=False).index)
+                          [["mes_ref", "segmento", "marca", "modelo", "unidades_direta",
+                            "unidades_varejo", "unidades_painel_principal", "diferenca"]], 8)
+            )
+
+        if not iguais.empty:
+            partes.append(
+                "\n### Modelo com valor identico nos dois canais\n\n"
+                f"**{len(iguais)}** casos. Valor identico em venda direta e varejo e' a "
+                "assinatura de duplicata de leitura, do tipo do 2013-11 -- ou coincidencia. O "
+                "painel principal decide: se `direta + varejo` da' o total do modelo, os dois "
+                "canais sao mesmo iguais.\n\n"
+            )
+            if "veredito" in iguais:
+                partes.append(_tabela(iguais["veredito"].value_counts().rename_axis("veredito")
+                                      .reset_index(name="casos")) + "\n")
+                resto = iguais[~iguais["veredito"].str.startswith("coincidencia")]
+                if not resto.empty:
+                    partes.append(
+                        "Os que nao sao coincidencia confirmada, todos de uma ou duas unidades "
+                        "-- imateriais, e nesse tamanho duplicata e divergencia de uma unidade "
+                        "entre tabelas nao se distinguem:\n\n" + _tabela(resto))
+
+        partes.append(
+            "\n### O que ficou de fora, de proposito\n\n"
+            "O **ranking por marca** existe na fonte e **nao foi extraido**. E' grafico de "
+            "barras com rotulo rotacionado e paineis sobrepostos, em percentual e nao em "
+            "unidades -- e e' redundante: participacao de canal por marca sai de agregar este "
+            "painel. Numero lido do rotulo de um grafico nao se defende em artigo; numero "
+            "agregado de tabela de texto, com cobertura declarada, se defende. Registrado em "
+            "`QUESTOES_ABERTAS.md` para ninguem tomar isso por esquecimento.\n"
+        )
+    else:
+        partes.append("\n## 12. Canal de venda\n\n_Nao disponivel: rode "
+                      "`python src/etapa09_canal.py`._\n")
+
+    partes.append("\n## 13. Situacao\n\n")
     if falhas:
         partes.append("**Validacao FALHOU:**\n\n" + "".join(f"- {f}\n" for f in falhas))
     else:

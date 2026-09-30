@@ -1,115 +1,115 @@
-mes_ref,segmento,marca,modelo,unidades_direta,unidades_varejo
-2003-01,automoveis,FIAT,MAREA WEEKEND,52.0,52.0
-2003-02,comerciais_leves,RENAULT,KANGOO,52.0,52.0
-2003-02,comerciais_leves,RENAULT,TRAFFIC,11.0,11.0
-2003-02,comerciais_leves,VW,SAVEIRO,836.0,836.0
-2003-05,comerciais_leves,FIAT,DOBLO,67.0,67.0
-2003-05,comerciais_leves,RENAULT,EXPRESS 1.6,1.0,1.0
-2003-07,automoveis,FIAT,MAREA,67.0,67.0
-2003-09,comerciais_leves,M.BENZ,SPRINTER 413,1.0,1.0
-2004-04,comerciais_leves,FORD,F1000,1.0,1.0
-2004-05,comerciais_leves,GM,D20,1.0,1.0
-2004-06,comerciais_leves,FORD,RANGER,157.0,157.0
-2004-07,comerciais_leves,HYUNDAI,H100,28.0,28.0
-2004-08,comerciais_leves,FIAT,FIORINO,441.0,441.0
-2005-01,comerciais_leves,HYUNDAI,H1STAREX,3.0,3.0
-2005-04,comerciais_leves,GM,C20,1.0,1.0
-2005-04,comerciais_leves,GM,D20,2.0,2.0
-2005-06,comerciais_leves,HYUNDAI,H1STAREX,2.0,2.0
-2005-10,comerciais_leves,FIAT,DOBLO,73.0,73.0
-2005-11,comerciais_leves,HYUNDAI,HR,8.0,8.0
-2006-05,comerciais_leves,FIAT,DOBLO,103.0,103.0
-2006-05,comerciais_leves,HYUNDAI,H100,7.0,7.0
-2006-08,comerciais_leves,HYUNDAI,H100,2.0,2.0
-2006-08,comerciais_leves,IVECO,DAILY,35.0,35.0
-2006-11,comerciais_leves,FIAT,TECFORM,1.0,1.0
-2007-03,comerciais_leves,HYUNDAI,HR,104.0,104.0
-2008-11,comerciais_leves,AGRALE,AGRALE MARRUA,2.0,2.0
-2008-12,comerciais_leves,IVECO,DAILY 5516,1.0,1.0
-2009-01,comerciais_leves,FORD,F1000,1.0,1.0
-2009-03,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0
-2009-08,comerciais_leves,AGRALE,AGRALE MARRUA,2.0,2.0
-2009-10,comerciais_leves,PEUGEOT,PARTNER,30.0,30.0
-2010-01,comerciais_leves,RENAULT,RENAULT,1.0,1.0
-2010-03,comerciais_leves,AGRALE,AGRALE MARRUA,3.0,3.0
-2010-05,comerciais_leves,FORD,F1000,1.0,1.0
-2010-06,comerciais_leves,AGRALE,AGRALE MARRUA,2.0,2.0
-2010-11,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0
-2011-04,comerciais_leves,PEUGEOT,PARTNER,52.0,52.0
-2011-05,comerciais_leves,IVECO,DAILY 5516,1.0,1.0
-2011-06,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0
-2011-06,comerciais_leves,IVECO,DAILY,4.0,4.0
-2011-11,comerciais_leves,M.BENZ,RIBEIRAUTO,1.0,1.0
-2012-01,comerciais_leves,GM,SILVERADO,1.0,1.0
-2012-03,comerciais_leves,FORD,F250,14.0,14.0
-2012-06,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0
-2012-11,comerciais_leves,FORD,F250,1.0,1.0
-2013-01,comerciais_leves,FORD,F250,1.0,1.0
-2013-01,comerciais_leves,HYUNDAI,HR,196.0,196.0
-2013-12,comerciais_leves,FORD,COURIER,1.0,1.0
-2014-03,comerciais_leves,FIAT,TECFORM,1.0,1.0
-2014-07,comerciais_leves,PEUGEOT,PARTNER,15.0,15.0
-2014-08,comerciais_leves,PEUGEOT,HOGGAR,11.0,11.0
-2015-08,comerciais_leves,HAFEI,TOWNER,1.0,1.0
-2015-09,comerciais_leves,IVECO,DAILY,3.0,3.0
-2015-11,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0
-2015-11,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0
-2015-12,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0
-2016-01,comerciais_leves,FIAT,UNO,1.0,1.0
-2016-01,comerciais_leves,M.BENZ,SPRINTER 415,1.0,1.0
-2016-01,comerciais_leves,VW,KOMBI,1.0,1.0
-2016-03,comerciais_leves,FIAT,UNO,1.0,1.0
-2016-04,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0
-2016-04,comerciais_leves,M.BENZ,SPRINTER 415,1.0,1.0
-2016-04,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0
-2016-05,comerciais_leves,IVECO,DAILY,1.0,1.0
-2016-05,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0
-2016-05,comerciais_leves,VW,KOMBI,1.0,1.0
-2016-06,comerciais_leves,M.BENZ,SPRINTER 415,1.0,1.0
-2016-06,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0
-2016-08,comerciais_leves,JINBEI,TOPIC,2.0,2.0
-2016-11,comerciais_leves,M.BENZ,SPRINTER 515,1.0,1.0
-2017-02,comerciais_leves,M.BENZ,SPRINTER 415,2.0,2.0
-2017-05,comerciais_leves,IVECO,DAILY,1.0,1.0
-2017-06,comerciais_leves,IVECO,DAILY,1.0,1.0
-2017-06,comerciais_leves,VICR,SAVEIRO,1.0,1.0
-2017-07,comerciais_leves,M.BENZ,SPRINTER 415,4.0,4.0
-2017-07,comerciais_leves,PEUGEOT,BOXER,1.0,1.0
-2017-08,comerciais_leves,TOYOTA,BANDEIRANTE,3.0,3.0
-2017-11,comerciais_leves,RENAULT,RENAULT,1.0,1.0
-2017-12,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0
-2017-12,comerciais_leves,FIAT,DOBLO,1.0,1.0
-2018-04,comerciais_leves,FIAT,DOBLO,1.0,1.0
-2018-08,comerciais_leves,M.BENZ,SPRINTER 415,9.0,9.0
-2018-12,comerciais_leves,M.BENZ,SPRINTER 311,3.0,3.0
-2019-01,comerciais_leves,IVECO,DAILY 5516,2.0,2.0
-2019-06,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0
-2019-09,comerciais_leves,FORD,F100,1.0,1.0
-2019-12,comerciais_leves,IVECO,DAILY 5516,1.0,1.0
-2020-01,comerciais_leves,CITROEN,BERLINGO,3.0,3.0
-2020-03,comerciais_leves,IVECO,DAILY,1.0,1.0
-2020-04,comerciais_leves,PEUGEOT,PARTNER,7.0,7.0
-2020-07,comerciais_leves,PEUGEOT,BOXER,14.0,14.0
-2020-08,comerciais_leves,CITROEN,BERLINGO,2.0,2.0
-2020-08,comerciais_leves,IVECO,DAILY 35S14,10.0,10.0
-2020-09,comerciais_leves,CITROEN,JUMPY,70.0,70.0
-2021-05,comerciais_leves,IVECO,DAILY 30S13,2.0,2.0
-2021-08,comerciais_leves,PEUGEOT,BOXER,12.0,12.0
-2021-12,comerciais_leves,CITROEN,BERLINGO,1.0,1.0
-2022-02,comerciais_leves,CITROEN,JUMPER,2.0,2.0
-2022-02,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0
-2022-04,comerciais_leves,CITROEN,JUMPER,1.0,1.0
-2022-04,comerciais_leves,GM,MONTANA,1.0,1.0
-2022-06,comerciais_leves,GM,MONTANA,2.0,2.0
-2022-07,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0
-2022-10,comerciais_leves,FORD,F250,1.0,1.0
-2022-12,comerciais_leves,JEEP,GLADIATOR,3.0,3.0
-2023-06,comerciais_leves,JEEP,GLADIATOR,7.0,7.0
-2023-08,comerciais_leves,CITROEN,JUMPER,4.0,4.0
-2023-11,comerciais_leves,PEUGEOT,BOXER,4.0,4.0
-2023-12,automoveis,VW,T CROSS,3896.0,3896.0
-2024-02,comerciais_leves,PEUGEOT,BOXER,4.0,4.0
-2024-02,comerciais_leves,PEUGEOT,PARTNER,35.0,35.0
-2024-07,automoveis,FORD,TERRITORY,254.0,254.0
-2024-10,comerciais_leves,FORD,F150,21.0,21.0
-2024-12,comerciais_leves,PEUGEOT,BOXER,3.0,3.0
+mes_ref,segmento,marca,modelo,unidades_direta,unidades_varejo,unidades_painel_principal,veredito
+2003-01,automoveis,FIAT,MAREA WEEKEND,52.0,52.0,104.0,coincidencia: direta + varejo = total do modelo
+2003-02,comerciais_leves,RENAULT,KANGOO,52.0,52.0,104.0,coincidencia: direta + varejo = total do modelo
+2003-02,comerciais_leves,RENAULT,TRAFFIC,11.0,11.0,22.0,coincidencia: direta + varejo = total do modelo
+2003-02,comerciais_leves,VW,SAVEIRO,836.0,836.0,1672.0,coincidencia: direta + varejo = total do modelo
+2003-05,comerciais_leves,FIAT,DOBLO,67.0,67.0,134.0,coincidencia: direta + varejo = total do modelo
+2003-05,comerciais_leves,RENAULT,EXPRESS 1.6,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2003-07,automoveis,FIAT,MAREA,67.0,67.0,134.0,coincidencia: direta + varejo = total do modelo
+2003-09,comerciais_leves,M.BENZ,SPRINTER 413,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2004-04,comerciais_leves,FORD,F1000,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2004-05,comerciais_leves,GM,D20,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2004-06,comerciais_leves,FORD,RANGER,157.0,157.0,314.0,coincidencia: direta + varejo = total do modelo
+2004-07,comerciais_leves,HYUNDAI,H100,28.0,28.0,56.0,coincidencia: direta + varejo = total do modelo
+2004-08,comerciais_leves,FIAT,FIORINO,441.0,441.0,882.0,coincidencia: direta + varejo = total do modelo
+2005-01,comerciais_leves,HYUNDAI,H1STAREX,3.0,3.0,6.0,coincidencia: direta + varejo = total do modelo
+2005-04,comerciais_leves,GM,C20,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2005-04,comerciais_leves,GM,D20,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2005-06,comerciais_leves,HYUNDAI,H1STAREX,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2005-10,comerciais_leves,FIAT,DOBLO,73.0,73.0,146.0,coincidencia: direta + varejo = total do modelo
+2005-11,comerciais_leves,HYUNDAI,HR,8.0,8.0,16.0,coincidencia: direta + varejo = total do modelo
+2006-05,comerciais_leves,FIAT,DOBLO,103.0,103.0,206.0,coincidencia: direta + varejo = total do modelo
+2006-05,comerciais_leves,HYUNDAI,H100,7.0,7.0,14.0,coincidencia: direta + varejo = total do modelo
+2006-08,comerciais_leves,HYUNDAI,H100,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2006-08,comerciais_leves,IVECO,DAILY,35.0,35.0,70.0,coincidencia: direta + varejo = total do modelo
+2006-11,comerciais_leves,FIAT,TECFORM,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2007-03,comerciais_leves,HYUNDAI,HR,104.0,104.0,208.0,coincidencia: direta + varejo = total do modelo
+2008-11,comerciais_leves,AGRALE,AGRALE MARRUA,2.0,2.0,3.0,nenhum dos dois bate
+2008-12,comerciais_leves,IVECO,DAILY 5516,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2009-01,comerciais_leves,FORD,F1000,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2009-03,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2009-08,comerciais_leves,AGRALE,AGRALE MARRUA,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2009-10,comerciais_leves,PEUGEOT,PARTNER,30.0,30.0,60.0,coincidencia: direta + varejo = total do modelo
+2010-01,comerciais_leves,RENAULT,RENAULT,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2010-03,comerciais_leves,AGRALE,AGRALE MARRUA,3.0,3.0,6.0,coincidencia: direta + varejo = total do modelo
+2010-05,comerciais_leves,FORD,F1000,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2010-06,comerciais_leves,AGRALE,AGRALE MARRUA,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2010-11,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2011-04,comerciais_leves,PEUGEOT,PARTNER,52.0,52.0,104.0,coincidencia: direta + varejo = total do modelo
+2011-05,comerciais_leves,IVECO,DAILY 5516,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2011-06,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2011-06,comerciais_leves,IVECO,DAILY,4.0,4.0,8.0,coincidencia: direta + varejo = total do modelo
+2011-11,comerciais_leves,M.BENZ,RIBEIRAUTO,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2012-01,comerciais_leves,GM,SILVERADO,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2012-03,comerciais_leves,FORD,F250,14.0,14.0,28.0,coincidencia: direta + varejo = total do modelo
+2012-06,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2012-11,comerciais_leves,FORD,F250,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2013-01,comerciais_leves,FORD,F250,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2013-01,comerciais_leves,HYUNDAI,HR,196.0,196.0,392.0,coincidencia: direta + varejo = total do modelo
+2013-12,comerciais_leves,FORD,COURIER,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2014-03,comerciais_leves,FIAT,TECFORM,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2014-07,comerciais_leves,PEUGEOT,PARTNER,15.0,15.0,30.0,coincidencia: direta + varejo = total do modelo
+2014-08,comerciais_leves,PEUGEOT,HOGGAR,11.0,11.0,22.0,coincidencia: direta + varejo = total do modelo
+2015-08,comerciais_leves,HAFEI,TOWNER,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2015-09,comerciais_leves,IVECO,DAILY,3.0,3.0,6.0,coincidencia: direta + varejo = total do modelo
+2015-11,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2015-11,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2015-12,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-01,comerciais_leves,FIAT,UNO,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-01,comerciais_leves,M.BENZ,SPRINTER 415,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-01,comerciais_leves,VW,KOMBI,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-03,comerciais_leves,FIAT,UNO,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-04,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-04,comerciais_leves,M.BENZ,SPRINTER 415,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-04,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-05,comerciais_leves,IVECO,DAILY,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-05,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-05,comerciais_leves,VW,KOMBI,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-06,comerciais_leves,M.BENZ,SPRINTER 415,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-06,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2016-08,comerciais_leves,JINBEI,TOPIC,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2016-11,comerciais_leves,M.BENZ,SPRINTER 515,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2017-02,comerciais_leves,M.BENZ,SPRINTER 415,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2017-05,comerciais_leves,IVECO,DAILY,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2017-06,comerciais_leves,IVECO,DAILY,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2017-06,comerciais_leves,VICR,SAVEIRO,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2017-07,comerciais_leves,M.BENZ,SPRINTER 415,4.0,4.0,8.0,coincidencia: direta + varejo = total do modelo
+2017-07,comerciais_leves,PEUGEOT,BOXER,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2017-08,comerciais_leves,TOYOTA,BANDEIRANTE,3.0,3.0,6.0,coincidencia: direta + varejo = total do modelo
+2017-11,comerciais_leves,RENAULT,RENAULT,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2017-12,comerciais_leves,AGRALE,AGRALE MARRUA,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2017-12,comerciais_leves,FIAT,DOBLO,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2018-04,comerciais_leves,FIAT,DOBLO,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2018-08,comerciais_leves,M.BENZ,SPRINTER 415,9.0,9.0,18.0,coincidencia: direta + varejo = total do modelo
+2018-12,comerciais_leves,M.BENZ,SPRINTER 311,3.0,3.0,6.0,coincidencia: direta + varejo = total do modelo
+2019-01,comerciais_leves,IVECO,DAILY 5516,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2019-06,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2019-09,comerciais_leves,FORD,F100,1.0,1.0,1.0,DUPLICATA: cada canal repete o total do modelo
+2019-12,comerciais_leves,IVECO,DAILY 5516,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2020-01,comerciais_leves,CITROEN,BERLINGO,3.0,3.0,6.0,coincidencia: direta + varejo = total do modelo
+2020-03,comerciais_leves,IVECO,DAILY,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2020-04,comerciais_leves,PEUGEOT,PARTNER,7.0,7.0,14.0,coincidencia: direta + varejo = total do modelo
+2020-07,comerciais_leves,PEUGEOT,BOXER,14.0,14.0,28.0,coincidencia: direta + varejo = total do modelo
+2020-08,comerciais_leves,CITROEN,BERLINGO,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2020-08,comerciais_leves,IVECO,DAILY 35S14,10.0,10.0,20.0,coincidencia: direta + varejo = total do modelo
+2020-09,comerciais_leves,CITROEN,JUMPY,70.0,70.0,140.0,coincidencia: direta + varejo = total do modelo
+2021-05,comerciais_leves,IVECO,DAILY 30S13,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2021-08,comerciais_leves,PEUGEOT,BOXER,12.0,12.0,24.0,coincidencia: direta + varejo = total do modelo
+2021-12,comerciais_leves,CITROEN,BERLINGO,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2022-02,comerciais_leves,CITROEN,JUMPER,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2022-02,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2022-04,comerciais_leves,CITROEN,JUMPER,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2022-04,comerciais_leves,GM,MONTANA,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2022-06,comerciais_leves,GM,MONTANA,2.0,2.0,4.0,coincidencia: direta + varejo = total do modelo
+2022-07,comerciais_leves,TOYOTA,BANDEIRANTE,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2022-10,comerciais_leves,FORD,F250,1.0,1.0,2.0,coincidencia: direta + varejo = total do modelo
+2022-12,comerciais_leves,JEEP,GLADIATOR,3.0,3.0,6.0,coincidencia: direta + varejo = total do modelo
+2023-06,comerciais_leves,JEEP,GLADIATOR,7.0,7.0,14.0,coincidencia: direta + varejo = total do modelo
+2023-08,comerciais_leves,CITROEN,JUMPER,4.0,4.0,8.0,coincidencia: direta + varejo = total do modelo
+2023-11,comerciais_leves,PEUGEOT,BOXER,4.0,4.0,8.0,coincidencia: direta + varejo = total do modelo
+2023-12,automoveis,VW,T CROSS,3896.0,3896.0,7792.0,coincidencia: direta + varejo = total do modelo
+2024-02,comerciais_leves,PEUGEOT,BOXER,4.0,4.0,8.0,coincidencia: direta + varejo = total do modelo
+2024-02,comerciais_leves,PEUGEOT,PARTNER,35.0,35.0,70.0,coincidencia: direta + varejo = total do modelo
+2024-07,automoveis,FORD,TERRITORY,254.0,254.0,508.0,coincidencia: direta + varejo = total do modelo
+2024-10,comerciais_leves,FORD,F150,21.0,21.0,42.0,coincidencia: direta + varejo = total do modelo
+2024-12,comerciais_leves,PEUGEOT,BOXER,3.0,3.0,6.0,coincidencia: direta + varejo = total do modelo

@@ -1,8 +1,8 @@
 # Validacao do painel de vendas de veiculos 0 km
 
-**Commit: `bcdeba8-sujo`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
+**Commit: `a17f6b0-sujo`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
 
-Gerado em 2026-09-29T23:39:06+00:00 (UTC) por `src/etapa06_validacao.py`.
+Gerado em 2026-09-30T22:39:43+00:00 (UTC) por `src/etapa06_validacao.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: painel bruto 54,183 / painel 54,179 / visao por modelo 53,700
@@ -881,7 +881,7 @@ Tabela de fatos **separada**, unidade `mes_ref`: `macro_mensal.parquet`. O paine
 
 - Linhas: **284**, uma por mes de 2003-01 a 2026-08
 - Meses repetidos: **0** (OK)
-- Series: **17** em 22 colunas
+- Series: **22** em 22 colunas
 
 **Serie que comeca depois de 2003-01 ou termina antes de 2026-08 fica com o mes vazio.** Nao se preenche, nao se interpola, nao se estende com o ultimo valor (sec.9.2) -- a coluna `meses_do_painel_cobertos` diz quanto cada uma alcanca.
 
@@ -899,11 +899,16 @@ Tabela de fatos **separada**, unidade `mes_ref`: `macro_mensal.parquet`. O paine
 | sgs_4192             | IGP-DI -- numero indice                         | indice (base a confirmar) | ativa               | 2003-01..2026-08 |                        284 | 501192      |     2.64285e+06 |
 | sgs_24363            | IBC-Br                                          | indice                    | ativa               | 2003-01..2026-07 |                        283 |     67.2195 |   118.017       |
 | sgs_7832             | Massa salarial real                             | % (variacao)              | descontinuada       | 2003-01..2019-08 |                        200 |    -24.8    |    16.97        |
+| sgs_ipca_7641        | IPCA subitem 5102001 -- Automovel novo          | nan                       | nan                 | nan              |                        nan |    nan      |   nan           |
+| sgs_ipca_107654      | IPCA subitem -- Automovel usado                 | nan                       | nan                 | nan              |                        nan |    nan      |   nan           |
+| sgs_ipca_7657        | IPCA subitem -- Gasolina                        | nan                       | nan                 | nan              |                        nan |    nan      |   nan           |
+| sgs_ipca_7658        | IPCA subitem -- Etanol                          | nan                       | nan                 | nan              |                        nan |    nan      |   nan           |
+| sgs_ipca_7654        | IPCA subitem -- Motocicleta                     | nan                       | nan                 | nan              |                        nan |    nan      |   nan           |
 | ipca_automovel_novo  | IPCA subitem 7641 -- automovel_novo             | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |     -5.48   |     2.88        |
 | ipca_automovel_usado | IPCA subitem 107654 -- automovel_usado          | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |     -4.12   |     2.38        |
 | ipca_gasolina        | IPCA subitem 7657 -- gasolina                   | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |    -15.48   |    11.26        |
-| ipca_etanol          | IPCA subitem 7658 -- etanol                     | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |    -13.51   |    12.92        |
-| ipca_motocicleta     | IPCA subitem 7654 -- motocicleta                | % a.m. e indice encadeado | ativa               | 2003-01..2026-08 |                        284 |     -1.08   |     2.76        |
+
+_(2 linhas restantes omitidas; ver CSV correspondente.)_
 
 **6 series nao cobrem os 284 meses** e ficam com lacuna declarada. Isso e' propriedade da fonte, nao defeito da coleta.
 
@@ -918,7 +923,6 @@ As janelas se encaixam sem sobreposicao: o primeiro mes de cada tabela e' o mes 
 | automovel_novo  | 2006-06        |               655 | 2006-07   |           2938 |          -0.42 |                  0 |
 | automovel_novo  | 2011-12        |              2938 | 2012-01   |           1419 |           0.05 |                  0 |
 | automovel_novo  | 2019-12        |              1419 | 2020-01   |           7060 |           0.58 |                  0 |
-| automovel_usado | 2006-06        |               655 | 2006-07   |           2938 |          -0.42 |                  0 |
 | automovel_usado | 2011-12        |              2938 | 2012-01   |           1419 |          -1.08 |                  0 |
 | automovel_usado | 2019-12        |              1419 | 2020-01   |           7060 |          -0.46 |                  0 |
 | gasolina        | 2006-06        |               655 | 2006-07   |           2938 |           0.81 |                  0 |
@@ -931,6 +935,117 @@ As janelas se encaixam sem sobreposicao: o primeiro mes de cada tabela e' o mes 
 | motocicleta     | 2011-12        |              2938 | 2012-01   |           1419 |          -0.33 |                  0 |
 | motocicleta     | 2019-12        |              1419 | 2020-01   |           7060 |           0.79 |                  0 |
 
-## 12. Situacao
+## 12. Canal de venda: venda direta e varejo
+
+Tabela de fatos **paralela**: `painel_canal.parquet`. chave `(mes_ref. segmento. canal. marca. modelo)`. Nao e' coluna do painel de vendas -- sao recortes diferentes da mesma realidade. Dicionario proprio em `saidas/painel_canal_dicionario.md`.
+
+- Linhas: **48.996**
+- Lacunas declaradas: **3** -- `2003-10`, `2005-03`, `2023-09`. Sao as mesmas do painel principal, pelas mesmas causas. Entram sem linha, nunca como zero (sec.9.2).
+- Posicoes com furo no ranking: **0** (OK) -- todo ranking e' contiguo de 1 a n, entao nenhuma linha ficou para tras na leitura.
+
+### A cobertura anda em U -- advertencia de primeira ordem
+
+O nivel das quantidades de canal **nao e' comparavel entre anos**. Um ranking de tamanho fixo cobre menos quanto mais modelos o mercado tem, e e' isso que produz o U: em automoveis, a parte do mes que as tabelas explicam tem mediana de 99.2% em 2004, cai a 88.2% em 2011 e volta a 97.7% depois -- amplitude de 14.1 pontos entre o melhor e o pior mes, quase quatro vezes a deriva do painel principal. Comparacoes seguras sao **dentro do ano** -- entre modelos, entre marcas, entre canais. Qualquer serie temporal construida sobre esta dimensao tem de ser reportada **ao lado da serie de cobertura** (`saidas/canal_cobertura.csv`), nunca sozinha.
+
+Cobertura: `direta + varejo` do top-50 contra o total que o proprio informe publica, mediana do ano. Mes a mes em `saidas/canal_cobertura.csv`.
+
+|   ano |   automoveis_% |   comerciais_leves_% |
+|------:|---------------:|---------------------:|
+|  2003 |           99.2 |                100   |
+|  2004 |           99.2 |                100   |
+|  2005 |           99   |                100   |
+|  2006 |           98.5 |                100   |
+|  2007 |           97.3 |                100   |
+|  2008 |           95.4 |                100   |
+|  2009 |           94.6 |                100   |
+|  2010 |           92.4 |                100   |
+|  2011 |           88.2 |                100   |
+|  2012 |           89.5 |                100   |
+|  2013 |           90.4 |                100   |
+|  2014 |           91   |                 99.9 |
+|  2015 |           91   |                100   |
+|  2016 |           92.9 |                100   |
+|  2017 |           93.8 |                100   |
+|  2018 |           92.8 |                100   |
+|  2019 |           94   |                100   |
+|  2020 |           94.6 |                100   |
+|  2021 |           95.6 |                100   |
+|  2022 |           97.7 |                100   |
+|  2023 |           97.4 |                100   |
+|  2024 |           96.3 |                100   |
+|  2025 |           96   |                100   |
+|  2026 |           93.9 |                 99.9 |
+
+### Cobertura por canal -- so' onde ela e' mensuravel
+
+A cobertura de **cada** canal exige saber o tamanho do canal, e isso so' a participacao publicada da'. Entao ela existe nos 29 meses de 2024-04 em diante, e em nenhum outro. E' a medida que mostra o mecanismo: o top-50 da venda direta capta quase tudo, o do varejo capta menos.
+
+| segmento         |   cobertura_direta_pct_min |   cobertura_direta_pct_max |   cobertura_varejo_pct_min |   cobertura_varejo_pct_max |
+|:-----------------|---------------------------:|---------------------------:|---------------------------:|---------------------------:|
+| automoveis       |                       96.5 |                       99.1 |                       89.2 |                       94.7 |
+| comerciais_leves |                       99.9 |                      100.1 |                       99.6 |                      100   |
+
+### Calibracao: a participacao calculada contra a publicada
+
+Venda direta e varejo truncam caudas **diferentes**, entao a participacao calculada das tabelas nao e' neutra. Nos meses em que a fonte publica a participacao em texto, as duas foram comparadas. `vies` e' calculada menos publicada, em pontos percentuais. Detalhe em `saidas/canal_calibracao.csv`.
+
+| segmento         |   meses |   vies_medio_pp |   desvio_pp |   vies_min_pp |   vies_max_pp |   meses_positivos |   meses_negativos |   media_6_primeiros |   media_6_ultimos |   deriva_pp |   correlacao_com_cobertura_do_varejo |   cobertura_total_min_pct |   cobertura_total_max_pct |
+|:-----------------|--------:|----------------:|------------:|--------------:|--------------:|------------------:|------------------:|--------------------:|------------------:|------------:|-------------------------------------:|--------------------------:|--------------------------:|
+| automoveis       |      28 |            1.32 |        0.39 |          0.81 |          2.02 |                28 |                 0 |                1.03 |              1.91 |        0.87 |                               -0.954 |                      92.2 |                      96.7 |
+| comerciais_leves |      29 |            0.03 |        0.03 |         -0.02 |          0.1  |                22 |                 5 |                0.02 |              0.02 |       -0    |                               -0.952 |                      99.9 |                     100   |
+
+- **automoveis: a participacao construida NAO serve para o nivel -- so' para composicao dentro de cada canal.** O vies e' sempre do mesmo lado (28 de 28 meses superestimam a venda direta), medio de +1.32 ponto, mas **nao e' estavel**: anda de +1.03 nos seis primeiros meses a +1.91 nos seis ultimos. O mecanismo e' o da truncagem: a venda direta e' concentrada, e o top-50 dela capta quase tudo; o varejo e' disperso, e o top-50 dele capta menos -- e cada vez menos, conforme o mercado se fragmenta (correlacao do vies com a cobertura do varejo: -0.954). Uma correcao unica nao vale para a serie, e uma correcao condicionada a' cobertura extrapolaria: a amostra cobre so' 92.2% a 96.7% de cobertura, e o fundo do U fica abaixo disso.
+- **comerciais leves: a participacao construida serve para o nivel.** Vies medio de +0.03 ponto, desvio de 0.03, estavel nos 29 meses da amostra. E a condicao em que ela foi medida vale na serie inteira: a cobertura do segmento fica entre 99.9% e 100.0% na amostra e perto de 100% em todos os anos.
+
+Criterio de estabilidade: a media dos 6 ultimos meses nao pode se afastar da dos 6 primeiros por mais de 0.5 ponto, nem por mais de metade do proprio vies.
+
+A atribuicao dos percentuais publicados nao le' o grafico: a ordem dos numeros muda de pizza para pizza, entao qual deles e' venda direta foi decidido pela identidade de media ponderada entre os segmentos e pelos limites que as proprias tabelas impoem a' participacao verdadeira.
+
+`2025-10`, automoveis: ambigua entre 49.9 e 50.1 -- o mes saiu da calibracao deste segmento, e nao foi resolvido no chute.
+
+### Conferencia com o painel principal
+
+Duas tabelas **independentes** do mesmo informe: o ranking por canal e a tabela por sub-segmento. Onde o modelo aparece nos dois canais, `direta + varejo` tem de dar o total do modelo no painel principal.
+
+- Batem **exatamente**: **18417 de 18799** (97.97%)
+- Dentro de 1%: 18740 de 18799
+
+As maiores diferencas sao `VW/FOX/CROSS FOX`, o unico nome composto da serie (a tabela de sub-segmento agrega Fox e CrossFox), e modelos que ja' aparecem na sec.9 como revisao da fonte entre meses. Lista completa em `saidas/canal_contra_painel_principal.csv`.
+
+| mes_ref   | segmento   | marca   | modelo        |   unidades_direta |   unidades_varejo |   unidades_painel_principal |   diferenca |
+|:----------|:-----------|:--------|:--------------|------------------:|------------------:|----------------------------:|------------:|
+| 2011-06   | automoveis | VW      | FOX/CROSS FOX |               639 |              3706 |                        5084 |        -739 |
+| 2014-09   | automoveis | VW      | FOX/CROSS FOX |              1909 |              6033 |                        8469 |        -527 |
+| 2014-10   | automoveis | VW      | FOX/CROSS FOX |              2800 |              6417 |                        9682 |        -465 |
+| 2009-12   | automoveis | VW      | FOX/CROSS FOX |               273 |              8230 |                        8850 |        -347 |
+| 2010-01   | automoveis | VW      | FOX/CROSS FOX |               676 |              6764 |                        7136 |         304 |
+| 2017-06   | automoveis | CITROEN | C3            |               546 |               494 |                         802 |         238 |
+| 2017-12   | automoveis | FORD    | KA            |              3032 |              4849 |                        7649 |         232 |
+| 2003-01   | automoveis | CITROEN | XSARA         |                10 |               267 |                          62 |         215 |
+
+_(18791 linhas restantes omitidas; ver CSV correspondente.)_
+
+### Modelo com valor identico nos dois canais
+
+**114** casos. Valor identico em venda direta e varejo e' a assinatura de duplicata de leitura, do tipo do 2013-11 -- ou coincidencia. O painel principal decide: se `direta + varejo` da' o total do modelo, os dois canais sao mesmo iguais.
+
+| veredito                                        |   casos |
+|:------------------------------------------------|--------:|
+| coincidencia: direta + varejo = total do modelo |     112 |
+| nenhum dos dois bate                            |       1 |
+| DUPLICATA: cada canal repete o total do modelo  |       1 |
+
+Os que nao sao coincidencia confirmada, todos de uma ou duas unidades -- imateriais, e nesse tamanho duplicata e divergencia de uma unidade entre tabelas nao se distinguem:
+
+| mes_ref   | segmento         | marca   | modelo        |   unidades_direta |   unidades_varejo |   unidades_painel_principal | veredito                                       |
+|:----------|:-----------------|:--------|:--------------|------------------:|------------------:|----------------------------:|:-----------------------------------------------|
+| 2008-11   | comerciais_leves | AGRALE  | AGRALE MARRUA |                 2 |                 2 |                           3 | nenhum dos dois bate                           |
+| 2019-09   | comerciais_leves | FORD    | F100          |                 1 |                 1 |                           1 | DUPLICATA: cada canal repete o total do modelo |
+
+### O que ficou de fora, de proposito
+
+O **ranking por marca** existe na fonte e **nao foi extraido**. E' grafico de barras com rotulo rotacionado e paineis sobrepostos, em percentual e nao em unidades -- e e' redundante: participacao de canal por marca sai de agregar este painel. Numero lido do rotulo de um grafico nao se defende em artigo; numero agregado de tabela de texto, com cobertura declarada, se defende. Registrado em `QUESTOES_ABERTAS.md` para ninguem tomar isso por esquecimento.
+
+## 13. Situacao
 
 Todas as verificacoes obrigatorias passaram.

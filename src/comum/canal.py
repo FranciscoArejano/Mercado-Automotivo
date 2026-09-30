@@ -63,7 +63,6 @@ TABELAS_DO_PAINEL = {"modelo_direta_mes": "direta", "modelo_varejo_mes": "varejo
 # Uma entrada por linha dentro de uma coluna ja' recortada. O nome pode ter
 # digito (`GM/S10`, `RAM/3500`), entao as unidades sao o ultimo numero da linha.
 RE_ENTRADA = re.compile(r"^(\d{1,3})\s*[ºo°]\s+(\S.*?)\s+(\d{1,3}(?:\.\d{3})*|\d+)$")
-RE_PERCENTUAL = re.compile(r"^(\d{1,3}(?:[.,]\d+)?)%$")
 
 
 @dataclass
@@ -153,27 +152,34 @@ def ler_tabela_de_modelo(pagina, numero: int, tipo: str) -> list[Entrada]:
     return saida
 
 
-def ler_pizzas(pagina) -> list[tuple[float, float]]:
-    """Os tres pares de percentuais da pagina de participacao, de cima para baixo.
+RE_PERCENTUAL_NO_TEXTO = re.compile(r"(\d{1,3}(?:[.,]\d+)?)\s*%")
 
-    Agrupa pelos dois maiores saltos verticais: as tres pizzas sao empilhadas, e
-    a distancia entre elas e' bem maior que entre os dois rotulos de uma mesma.
-    Devolve [] quando os numeros nao sao texto -- o caso de 2003-01 a 2024-03.
+
+def ler_pizzas(texto: str) -> list[tuple[float, float]]:
+    """Os tres pares de percentuais da pagina de participacao.
+
+    Le' o **texto decodificado**, em ordem, e emparelha os numeros consecutivos.
+    A primeira versao agrupava pela posicao vertical, supondo as tres pizzas
+    empilhadas, e falhava em 2024-04..06, quando o layout era outro. O que e'
+    estavel nos dois layouts e' a ordem no texto: os seis numeros saem em pares
+    consecutivos, na ordem automoveis / comerciais leves / conjunto -- e de
+    2024-04 a 2024-06 o texto traz ate' o titulo antes de cada par.
+
+    Tem de ser o texto decodificado: em 2024-06 o proprio sinal de % e' glifo
+    sem ToUnicode (`54.46(cid:8)`), e em 2024-04 e 2024-05 o cabecalho inteiro.
+
+    Devolve [] quando os numeros nao sao texto -- o caso de 2003-01 a 2024-03 --
+    ou quando algum par nao fecha 100, que e' sinal de leitura errada.
     """
-    valores = []
-    for palavra in pagina.extract_words():
-        casado = RE_PERCENTUAL.match(palavra["text"])
-        if casado:
-            valores.append((float(palavra["top"]), float(casado.group(1).replace(",", "."))))
+    valores = [float(v.replace(",", ".")) for v in RE_PERCENTUAL_NO_TEXTO.findall(texto)]
     if len(valores) != 6:
         return []
-    valores.sort()
-    saltos = sorted(range(1, 6), key=lambda i: valores[i][0] - valores[i - 1][0])[-2:]
-    cortes = sorted(saltos)
-    grupos = [valores[:cortes[0]], valores[cortes[0]:cortes[1]], valores[cortes[1]:]]
-    if any(len(grupo) != 2 for grupo in grupos):
+    pares = [(valores[i], valores[i + 1]) for i in (0, 2, 4)]
+    # A fonte arredonda cada numero por conta propria (45,1 + 55 = 100,1), entao a
+    # soma pode escapar de 100 por um decimo ou dois; mais que isso e' erro.
+    if any(abs(a + b - 100) > 0.3 for a, b in pares):
         return []
-    return [(grupo[0][1], grupo[1][1]) for grupo in grupos]
+    return pares
 
 
 def ler(caminho: Path, dicas: dict[str, int] | None = None) -> Leitura:
@@ -188,14 +194,14 @@ def ler(caminho: Path, dicas: dict[str, int] | None = None) -> Leitura:
     with pdfplumber.open(caminho) as pdf:
         def examinar(numero: int) -> None:
             pagina = pdf.pages[numero - 1]
-            tipo, _, _ = _tipo_da_pagina(pagina)
+            tipo, texto, _ = _tipo_da_pagina(pagina)
             if tipo not in procurados or tipo in leitura.paginas:
                 return
             leitura.paginas[tipo] = numero
             if tipo in TABELAS_DO_PAINEL:
                 leitura.entradas.extend(ler_tabela_de_modelo(pagina, numero, tipo))
             else:
-                leitura.pizzas = ler_pizzas(pagina)
+                leitura.pizzas = ler_pizzas(texto)
 
         for tipo, numero in (dicas or {}).items():
             if tipo in procurados and numero and 1 <= int(numero) <= len(pdf.pages):
@@ -280,3 +286,50 @@ def atribuir_participacao(pizzas, total_automoveis, total_leves,
                     "sim" if primeiro[i] else "nao" for i in range(3)),
             ))
     return solucoes
+
+
+# ---------------------------------------------------------------- calibracao
+# Criterio de estabilidade, declarado em vez de implicito. Compara a media dos
+# seis primeiros meses da amostra com a dos seis ultimos: se o vies anda mais
+# que meio ponto, ou mais que metade do proprio tamanho, ele nao e' estavel o
+# bastante para uma correcao unica valer na serie inteira.
+MESES_DA_PONTA = 6
+DERIVA_MAXIMA_PP = 0.5
+DERIVA_MAXIMA_RELATIVA = 0.5
+
+
+def resumo_calibracao(calibracao):
+    """Sinal, magnitude e estabilidade do vies, por segmento."""
+    import numpy as np
+    import pandas as pd
+
+    if calibracao.empty:
+        return pd.DataFrame()
+    linhas = []
+    for segmento, grupo in calibracao.sort_values("mes_ref").groupby("segmento"):
+        vies = grupo["vies_pp"].astype(float)
+        inicio = float(vies.head(MESES_DA_PONTA).mean())
+        fim = float(vies.tail(MESES_DA_PONTA).mean())
+        deriva = fim - inicio
+        media = float(vies.mean())
+        estavel = (
+            (abs(deriva) <= DERIVA_MAXIMA_PP
+             and abs(deriva) <= DERIVA_MAXIMA_RELATIVA * max(abs(media), 1e-9))
+            or abs(deriva) <= 0.05  # vies nulo nao "deriva" por ruido de arredondamento
+        )
+        correlacao = (float(np.corrcoef(vies, grupo["cobertura_varejo_pct"])[0, 1])
+                      if vies.std() > 0 else float("nan"))
+        linhas.append({
+            "segmento": segmento, "meses": len(grupo),
+            "vies_medio_pp": round(media, 2), "desvio_pp": round(float(vies.std()), 2),
+            "vies_min_pp": round(float(vies.min()), 2), "vies_max_pp": round(float(vies.max()), 2),
+            "meses_positivos": int((vies > 0).sum()), "meses_negativos": int((vies < 0).sum()),
+            f"media_{MESES_DA_PONTA}_primeiros": round(inicio, 2),
+            f"media_{MESES_DA_PONTA}_ultimos": round(fim, 2),
+            "deriva_pp": round(deriva, 2),
+            "correlacao_com_cobertura_do_varejo": round(correlacao, 3),
+            "estavel": bool(estavel),
+            "cobertura_total_min_pct": round(float(grupo["cobertura_total_pct"].min()), 1),
+            "cobertura_total_max_pct": round(float(grupo["cobertura_total_pct"].max()), 1),
+        })
+    return pd.DataFrame(linhas)

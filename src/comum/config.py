@@ -42,6 +42,7 @@ MACRO_MENSAL = DIR_PROCESSADO / "macro_mensal.parquet"
 DIR_CANAL = DIR_PROCESSADO / "canal"
 PAINEL_CANAL = DIR_PROCESSADO / "painel_canal.parquet"
 CANAL_MESES = DIR_PROCESSADO / "canal_meses.csv"
+DICIONARIO_CANAL = DIR_SAIDAS / "painel_canal_dicionario.md"
 # Base do indice encadeado do IPCA por subitem. Declarada, nao implicita.
 BASE_INDICE_IPCA = os.environ.get("BASE_INDICE_IPCA", "2003-01")
 CORRECOES_CATALOGO = DIR_CONFIG / "correcoes_catalogo.csv"

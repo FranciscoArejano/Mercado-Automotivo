@@ -113,6 +113,8 @@ def executar(inicio: str | None = None, fim: str | None = None) -> int:
         resumo.append({
             "serie": f"ipca_{apelido}", "nome": f"IPCA subitem {subitem} -- {apelido}",
             "fonte": "IBGE/SIDRA", "unidade": "% a.m. e indice encadeado",
+            "base_declarada": config.BASE_INDICE_IPCA,
+            "base_efetiva": macro.base_efetiva(variacoes, config.BASE_INDICE_IPCA),
             "situacao_da_serie": "ativa",
             "janela_declarada": "1999-08..2026-08 (quatro tabelas)",
             "janela_efetiva": (f"{no_periodo['mes_ref'].min()}..{no_periodo['mes_ref'].max()}"

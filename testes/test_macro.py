@@ -78,3 +78,40 @@ def test_catalogo_traz_fonte_e_unidade_em_toda_linha():
         assert linha["unidade"].strip(), f"{linha['codigo']} sem unidade"
         assert linha["data_coleta"].strip(), f"{linha['codigo']} sem data de coleta"
         assert linha["situacao_da_serie"].strip(), f"{linha['codigo']} sem situacao"
+
+
+def test_serie_que_comeca_depois_nao_ganha_emenda_de_inicio():
+    # O automovel usado e' aceito pela tabela 655 mas vem como '...' nela toda.
+    # A serie COMECA em 2006-07; nao ha' juncao 655 -> 2938 ali, e a tabela de
+    # emendas nao pode afirmar uma juncao que nao aconteceu.
+    emendas = macro.juncoes_das_tabelas(_variacoes([
+        ("2006-05", None, 655), ("2006-06", None, 655),
+        ("2006-07", -0.42, 2938), ("2006-08", 0.3, 2938),
+        ("2011-12", 0.1, 2938), ("2012-01", -1.08, 1419),
+    ]))
+    assert list(emendas["mes_ref"]) == ["2012-01"]
+    assert int(emendas.iloc[0]["tabela_anterior"]) == 2938
+
+
+def test_base_efetiva_quando_a_serie_comeca_depois_da_declarada():
+    variacoes = _variacoes([("2003-01", None, 655), ("2006-06", None, 655),
+                            ("2006-07", -0.42, 2938)])
+    assert macro.base_efetiva(variacoes, "2003-01") == "2006-06"
+
+
+def test_base_efetiva_igual_a_declarada_quando_ha_dado_nela():
+    variacoes = _variacoes([("2003-01", 0.1, 655), ("2003-02", 0.2, 655)])
+    assert macro.base_efetiva(variacoes, "2003-01") == "2003-01"
+
+
+def test_catalogo_traz_natureza_e_ressalvas_em_toda_linha():
+    for linha in macro.carregar_catalogo():
+        assert linha.get("natureza_e_ressalvas", "").strip(), \
+            f"{linha['codigo']} sem natureza_e_ressalvas"
+
+
+def test_usado_esta_declarado_como_indice_de_depreciacao():
+    # Usar o subitem de usado como preco do bem substituto e' erro conceitual.
+    # A ressalva tem de estar no catalogo, e nao so' em quem ja' sabe.
+    usado = next(l for l in macro.carregar_catalogo() if l["codigo"] == "ipca_107654")
+    assert "DEPRECIACAO" in usado["natureza_e_ressalvas"].upper()

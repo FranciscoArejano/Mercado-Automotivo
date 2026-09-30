@@ -126,6 +126,23 @@ def encadear(variacoes: pd.DataFrame, base_mes: str, base_valor: float = 100.0
     return quadro
 
 
+def base_efetiva(variacoes: pd.DataFrame, base_mes: str) -> str:
+    """O mes em que o indice encadeado vale de fato 100.
+
+    E' a base declarada quando a serie tem dado nela. Quando a serie comeca
+    depois -- o automovel usado so' tem variacao a partir de 2006-07 --, a base
+    declarada e' vazia: o indice vale 100 no mes anterior ao primeiro dado, e e'
+    isso que tem de estar escrito, nao a base que nao existe.
+    """
+    com_dado = variacoes[variacoes["variacao_pct"].notna()].sort_values("mes_ref")
+    if com_dado.empty:
+        return ""
+    primeiro = com_dado["mes_ref"].iloc[0]
+    if primeiro <= base_mes:
+        return base_mes
+    return (pd.Period(primeiro, freq="M") - 1).strftime("%Y-%m")
+
+
 def juncoes_das_tabelas(variacoes: pd.DataFrame) -> pd.DataFrame:
     """Os meses em que a serie troca de tabela do SIDRA.
 
@@ -135,14 +152,23 @@ def juncoes_das_tabelas(variacoes: pd.DataFrame) -> pd.DataFrame:
     """
     if variacoes.empty:
         return pd.DataFrame()
-    quadro = variacoes.sort_values("mes_ref").reset_index(drop=True)
+    # So' conta como emenda a troca entre duas tabelas que **publicam** o
+    # subitem. O automovel usado e' aceito pela tabela 655 mas vem como '...'
+    # nos 83 meses dela: a serie **comeca** em 2006-07, nao se emenda ali. Sem
+    # este filtro a tabela registrava uma juncao 655 -> 2938 que nao aconteceu,
+    # e a tabela de emendas e' justamente o que torna o encadeamento auditavel.
+    quadro = (variacoes[variacoes["variacao_pct"].notna()]
+              .sort_values("mes_ref").reset_index(drop=True))
+    if quadro.empty:
+        return pd.DataFrame()
     troca = quadro["tabela_sidra"] != quadro["tabela_sidra"].shift()
     juncoes = quadro[troca & (quadro.index > 0)].copy()
     anteriores = quadro.shift().loc[juncoes.index]
     juncoes["mes_anterior"] = anteriores["mes_ref"].values
     juncoes["tabela_anterior"] = anteriores["tabela_sidra"].values
+    todos = variacoes[variacoes["variacao_pct"].notna()]
     juncoes["meses_duplicados"] = [
-        int((quadro["mes_ref"] == mes).sum() - 1) for mes in juncoes["mes_ref"]
+        int((todos["mes_ref"] == mes).sum() - 1) for mes in juncoes["mes_ref"]
     ]
     return juncoes[["mes_anterior", "tabela_anterior", "mes_ref", "tabela_sidra",
                     "variacao_pct", "meses_duplicados"]]

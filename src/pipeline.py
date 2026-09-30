@@ -23,9 +23,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from comum import config, log  # noqa: E402
 
-# A ordem da lista e' de **dependencia**, nao numerica. A etapa 8 (dimensao
-# macro) nao depende do painel -- ela le' duas APIs externas e escreve um
-# arquivo proprio --, mas a etapa 6 valida o que ela produziu, entao roda antes.
+# A ordem da lista e' de **dependencia**, nao numerica. As etapas 8 (dimensao
+# macro) e 9 (canal de venda) nao dependem do painel -- escrevem arquivos
+# proprios --, mas a etapa 6 valida o que elas produziram, entao rodam antes.
 # O numero e' o do modulo; a posicao e' quem precisa de quem.
 ETAPAS = [
     (1, "etapa01_aquisicao", "aquisicao dos informes"),
@@ -34,6 +34,7 @@ ETAPAS = [
     (4, "etapa04_candidatos", "relatorio de candidatos"),
     (5, "etapa05_painel", "painel harmonizado"),
     (8, "etapa08_macro", "dimensao macro mensal"),
+    (9, "etapa09_canal", "painel de canal de venda"),
     (6, "etapa06_validacao", "validacao"),
     (7, "etapa07_referencia_cruzada", "referencia cruzada"),
 ]

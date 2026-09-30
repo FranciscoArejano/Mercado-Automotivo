@@ -29,7 +29,7 @@ import pdfplumber
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from comum import config, log, periodo  # noqa: E402
+from comum import config, informe, log, periodo  # noqa: E402
 
 ETAPA = "diagnostico_canal"
 
@@ -108,6 +108,13 @@ def diagnosticar(mes: str, caminho: Path) -> dict:
                 texto = pagina.extract_text() or ""
                 if not texto:
                     continue
+                # Informe com fonte sem ToUnicode devolve `(cid:N)` no lugar do
+                # texto. A etapa 02 ja' sabe traduzir isso pela ordem padrao de
+                # glifos TrueType, e sem reusar isso aqui quatro meses de 2020 e
+                # 2024 apareceriam como "a fonte nao publica tabela de canal",
+                # quando publica -- o defeito seria do leitor.
+                if informe.tem_cids(texto):
+                    texto = informe.decodificar_cids(texto)
                 cabecalho = "\n".join(texto.splitlines()[:6])
                 for tipo, padrao in TIPOS.items():
                     if tipo in paginas_por_tipo or not padrao.search(cabecalho):

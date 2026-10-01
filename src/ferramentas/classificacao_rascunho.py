@@ -213,7 +213,10 @@ LEIA_ME = [
     ("o que o PBE distingue",
      "Combustao, Hibrido, Plug-In e Eletrico, mais o combustivel (G, F, D, E). NAO distingue "
      "hibrido leve: o Kia Stonic MHEV e o Subaru Forester MHEV estao em Hibrido, o Subaru XV "
-     "MHEV em Combustao (2021). NAO distingue REEV: o Leapmotor C10 REEV esta' em Plug-In. "
+     "MHEV em Combustao (2021); os Stellantis 'HYB' (Pulse, Fastback, Renegade), o Toro de "
+     "2026 e o Discovery Sport D200 estao em Hibrido sem MHEV no nome -- 'so' no PBE: hev' "
+     "contra uma proposta mhev e' provavelmente rotulo do PBE. NAO distingue REEV: o "
+     "Leapmotor C10 REEV esta' em Plug-In. "
      "Onde o nome da versao diz MHEV ou REEV, o nome manda (aba `pbe_mapeamento`). Ate' "
      "2020 nao ha' coluna de propulsao: hibrido sem marcador no nome sai como combustao."),
     ("origem contra fonte datada",

@@ -1,4 +1,4 @@
-# Catalogo do repositorio -- dado do commit `fba281a`
+# Catalogo do repositorio -- dado do commit `53780f5`
 
 Gerado por `src/etapa10_catalogo.py` a cada execucao do pipeline. **Nao editar a mao**: janelas, linhas e contagens saem dos arquivos. O texto de usos esta' em `config/catalogo_usos.csv` e as fontes candidatas em `config/fontes_candidatas.csv`; edite la' e rode `python src/etapa10_catalogo.py`.
 
@@ -82,8 +82,9 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 - **Unidade de observacao:** o modelo `(marca, modelo, segmento)` numa vigencia (`vigencia_inicio`, `vigencia_fim`).
 - **Linhas:** 438 modelo-vigencias de 409 modelos (volume acima de 1.000 unidades); 524 modelos `nao_classificado`.
 - **Confianca da proposta:** `alta` 176 linhas, 68,7% do volume; `media` 230 linhas, 29,9% do volume; `baixa` 32 linhas, 1,4% do volume.
-- **Validacao contra fonte** (do volume): propulsao contra o PBE -- `concorda` 83,0%; `diverge` 11,3%; `ausente` 5,7%. Origem com fonte datada aberta: 66 modelos (aba `origem_fontes`).
-- **Regras de adjudicacao** (`config/regras_adjudicacao.csv`): 39 linhas decididas so' por regra (aba `resolvido_por_regra`); 154 para decisao humana (aba `a_adjudicar`). `montagem_local` com fonte em 6 linhas; as outras 432 `desconhecido`.
+- **Validacao contra fonte** (do volume): propulsao contra o PBE -- `concorda` 83,7%; `diverge` 10,6%; `ausente` 5,6%. Origem com fonte datada aberta: 67 modelos (aba `origem_fontes`).
+- **Regras de adjudicacao** (`config/regras_adjudicacao.csv`): 88 linhas decididas so' por regra (aba `resolvido_por_regra`); 104 para decisao humana (aba `a_adjudicar`). Montagem local com modo de fonte em parte da vigencia de 6 linhas (aba `montagem_local`, por periodo).
+- **Procedencia forte ou humana** (previa, do volume): propulsao 91,0%, carroceria 79,5%, origem 4,4%.
 - **Decisoes humanas preenchidas:** 0 de 438.
 - **Arquivo:** `saidas/classificacao_rascunho.xlsx` (abas `leia_me`, `a_adjudicar`, `resolvido_por_regra`, `montagem_local`, `questoes`, `regras_adjudicacao`, `validacao`, `regras`); regras em `config/regras_classificacao.csv` e `config/regras_adjudicacao.csv`, mapeamento do PBE em `config/pbe_propulsao.csv` e `config/pbe_modelos.csv`, tipo de fonte em `config/tipo_fonte_dominio.csv`.
 - **Ressalvas principais:** Hoje e' rascunho para adjudicacao, nao dado. Nada foi gravado em dados/processado/.
@@ -94,7 +95,7 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 |---|---|
 | `dados/bruto/pdf/` | 284 informes originais da Fenabrave, hash em `dados/bruto/manifesto.csv` |
 | `dados/bruto/pbe/` | 18 tabelas do PBE Veicular (Inmetro), com manifesto SHA-256; extracao em `saidas/pbe_versoes.csv` |
-| `dados/bruto/origem_paginas/` | 56 paginas de fonte de origem, abertas e guardadas, com SHA-256 |
+| `dados/bruto/origem_paginas/` | 71 paginas de fonte de origem, abertas e guardadas, com SHA-256 |
 | `regras.csv` | 0 regras de harmonizacao (rebatismo, desdobramento) |
 | `config/mapa_grupos.csv` | 148 linhas marca-grupo com vigencia |
 | `dados/referencia/Vendas_Geral.xlsx` | controle independente (ESPEC sec.7), nao fonte |

@@ -198,7 +198,17 @@ def escrever(painel: pd.DataFrame) -> None:
         "omiti-lo a subestimaria; `total` exige so' tracao eletrica (`hev`, `phev`, `reev`, "
         "`bev`). A **transicao para o flex** (2003-2006) nao e' datada por modelo: os modelos "
         "que a atravessaram tem `gasolina+flex` na vigencia inteira -- precisao de mes seria "
-        "falsa, e nenhum artigo planejado depende dela.\n\n",
+        "falsa, e nenhum artigo planejado depende dela. A **montagem local** e' coluna "
+        "propria, `montagem_local` (`fabricacao`, `ckd`, `skd`, `desconhecido`), separada "
+        "da origem: um carro pode ser `nacional` na origem e `ckd` no modo de montagem, e kit "
+        "e carro inteiro tem tratamento tributario diferente. O padrao e' `desconhecido`; so' "
+        "muda com fonte que declara o modo.\n\n",
+        "**Adjudicacao por regra:** o pesquisador aprova criterios "
+        "(`config/regras_adjudicacao.csv`: o PBE Veicular acrescenta propulsao omitida; mantem-se "
+        "o que o PBE nao podia ver; fonte de origem oficial ou de imprensa especializada que "
+        "concorda ou ajusta a data e' aceita; contradicao, leitura inconclusiva ou fonte so' "
+        "fraca vao a julgamento). So' o que os criterios nao decidem e' julgado linha a linha. "
+        "A forca da fonte vem de `config/tipo_fonte_dominio.csv`.\n\n",
         "## Reconstituicao\n\n",
         "Todo numero se reconstitui a partir de tres coisas versionadas: os PDFs originais "
         "(hash em `dados/bruto/manifesto.csv`), `regras.csv` e os scripts de `src/`. "

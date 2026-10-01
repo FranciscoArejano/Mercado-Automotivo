@@ -29,7 +29,8 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from comum import classificacao, config, validacao_classificacao as validacao  # noqa: E402
+from comum import adjudicacao, classificacao, config, tipo_fonte  # noqa: E402
+from comum import validacao_classificacao as validacao  # noqa: E402
 
 # A busca de fonte de origem cobre a origem `media`/`baixa` dos maiores modelos.
 TOP_ORIGEM = 241
@@ -197,11 +198,39 @@ LEIA_ME = [
      "refina o furgao da fonte); a transicao flex fica como esta' (gasolina+flex na "
      "vigencia inteira, limitacao conhecida); 'um nome, dois produtos' e 'um produto, duas "
      "chaves' seguem adiadas pela Parte 0. Ver a coluna `estado` da aba `questoes`."),
+    ("regras de adjudicacao",
+     "O pesquisador aprova regras (aba `regras_adjudicacao`, de config/regras_adjudicacao.csv); "
+     "o script as aplica; so' o que elas nao decidem vai para `a_adjudicar`. Propulsao: P1 (o "
+     "PBE acrescenta), P2 (o que o PBE nao pode ver), P3 (hibrido leve). Origem: O1 (fonte forte "
+     "que concorda), O2 (fonte forte que ajusta a data), O3 (contradiz, inconclusivo ou so' "
+     "fonte fraca: sempre humano). A proposta fica intacta; a decisao da regra vai em "
+     "`decisao_por_regra`, na sintaxe de `decisao_humana`."),
     ("a_adjudicar",
-     "So' o que ainda precisa de decisao humana, maior volume primeiro: divergencia com o "
-     "PBE; ausencia no PBE entre os {top} maiores; fonte de origem que contradiz a proposta "
-     "ou ajusta a data dela; e origem sem fonte datada nos casos que a rodada mandou buscar. "
-     "A coluna `motivo` diz qual. A decisao pode ser escrita ali ou na aba `classificacao`."),
+     "So' o que as regras nao decidem, maior volume primeiro. `motivo` diz por que cada regra "
+     "nao decidiu (separados por ' | '); `na_fila_antes` diz se a linha ja' estava na fila da "
+     "rodada anterior ou entrou agora (O3: leitura apoiada so' em fonte fraca). "
+     "`decisao_por_regra` traz a parte que as regras ja' decidiram; `propulsao_apos_regras` e "
+     "`origem_apos_regras` o valor depois delas. A decisao humana pode ser escrita ali ou na aba "
+     "`classificacao`; `ok` numa linha parcial aceita o valor depois das regras."),
+    ("resolvido_por_regra",
+     "Cada decisao de regra: id (P1, P2, O1, O2), atributo, valor antes e depois, a evidencia "
+     "(`base`) e a `ressalva` quando a regra decide pelo texto mas com condicao fraca (P2 por "
+     "condicao necessaria; P2 em modelo que o PBE, ja' existindo, nao listou). "
+     "`situacao_da_linha`: resolvida (saiu da fila) ou parcial (algum outro motivo a mantem). "
+     "Nada some: toda linha que saiu da fila esta' aqui."),
+    ("tipo_fonte",
+     "Coluna de origem_fontes.csv: oficial, imprensa_especializada (fortes), imprensa_geral, "
+     "blog_agregador (fracas), pelo dominio da URL. O mapeamento esta' em "
+     "config/tipo_fonte_dominio.csv, proposta para revisao; editar e rodar "
+     "`python src/ferramentas/origem_fonte.py --tipos`. Na aba `classificacao`, "
+     "`origem_tipos_fonte` junta os tipos das fontes do modelo."),
+    ("montagem_local",
+     "fabricacao, ckd, skd ou desconhecido (padrao), separado de `origem_producao`: um carro pode "
+     "ser nacional na origem e ckd no modo de montagem. So' muda onde uma fonte, com trecho "
+     "copiado e verificado (dados/referencia/montagem_fontes.csv), declara o modo para um periodo "
+     "que toca a vigencia, e a linha nao e' importado. `montagem_cobertura` diz se a fonte cobre "
+     "a vigencia inteira ou so' parte. A aba `montagem_local` lista os casos com fonte, os que "
+     "nao foram aplicados e por que, e quantas linhas ficaram desconhecido."),
     ("validacao contra o PBE",
      "Colunas `pbe_*`. O PBE Veicular (Inmetro, 2009-2026) lista por versao o tipo de "
      "propulsao (coluna propria desde 2021) e o combustivel. Casamento por marca e prefixo do "
@@ -242,6 +271,10 @@ DECISOES = {
                                          "`gasolina+flex` na vigencia inteira. Limitacao "
                                          "conhecida, registrada no dicionario."),
     "um nome, dois produtos": ("adiada (Parte 0)", "Questao de `regras.csv`."),
+    "montagem de conjuntos importados (SKD/CKD)": (
+        "decidida em 2026-10-01", "Coluna nova `montagem_local` (fabricacao, ckd, skd, "
+        "desconhecido), separada de `origem_producao`; padrao desconhecido, muda so' com fonte "
+        "que declara o modo."),
     "um produto, duas chaves": ("adiada (Parte 0)", "Questao de `regras.csv`."),
 }
 
@@ -296,15 +329,52 @@ def gerar():
     casado = validacao.casar(versoes, chaves)
     rascunho = validacao.comparar_pbe(rascunho, casado)
     rascunho = validacao.anexar_origem(rascunho, validacao.carregar_fontes_origem())
-    # decisao_humana fica sempre por ultimo
-    rascunho = rascunho[[c for c in rascunho.columns if c != "decisao_humana"]
-                        + ["decisao_humana"]]
     top = TOP_ORIGEM
-    fila = validacao.a_adjudicar(rascunho, top)
+    fila_antes = validacao.a_adjudicar(rascunho, top)
     resumo_val = pd.concat([_casamento(rascunho, casado),
                             validacao.resumo_validacao(rascunho, volume, top)],
                            ignore_index=True)
-    return rascunho, fora, resumo, fila, resumo_val, casado
+
+    # regras de adjudicacao e montagem local
+    fontes = adjudicacao.carregar_fontes()
+    com_regras, resolvido = adjudicacao.aplicar(rascunho, casado, fontes, top)
+    com_regras, casos_montagem = adjudicacao.anexar_montagem(
+        com_regras, adjudicacao.carregar_montagem())
+    fila = adjudicacao.a_adjudicar(com_regras, fila_antes)
+    contas = adjudicacao.contas(fila_antes, com_regras, resolvido)
+    contas = pd.concat([contas, _sensibilidade(rascunho, casado, com_regras, top)],
+                       ignore_index=True)
+    # decisao_por_regra e decisao_humana ficam sempre por ultimo
+    fim = ["decisao_por_regra", "decisao_humana"]
+    com_regras = com_regras[[c for c in com_regras.columns if c not in fim] + fim]
+    return {"rascunho": com_regras, "fora": fora, "resumo": resumo, "fila": fila,
+            "resumo_val": resumo_val, "casado": casado, "resolvido": resolvido,
+            "contas": contas, "casos_montagem": casos_montagem,
+            "resumo_montagem": adjudicacao.resumo_montagem(com_regras)}
+
+
+def _sensibilidade(rascunho: pd.DataFrame, casado: pd.DataFrame, com_regras: pd.DataFrame,
+                   top: int) -> pd.DataFrame:
+    """O que muda na fila com as duas leituras alternativas registradas no log."""
+    chave = validacao.CHAVE + ["vigencia_inicio"]
+    base = set(map(tuple, com_regras.loc[com_regras["pendencias"] != "", chave].to_numpy()))
+    linhas = []
+    for conta, kwargs in [
+        ("sensibilidade: revista automotiva de consumo como imprensa_geral",
+         {"fontes": adjudicacao.carregar_fontes(tipo_fonte.carregar_mapa(
+             rebaixar=frozenset({"revista_automotiva_de_consumo"})))}),
+        ("sensibilidade: P1 literal (hev de qualquer Hibrido do PBE)",
+         {"fontes": adjudicacao.carregar_fontes(), "p1_literal": True}),
+    ]:
+        outro, _ = adjudicacao.aplicar(rascunho, casado, top=top, **kwargs)
+        fila = set(map(tuple, outro.loc[outro["pendencias"] != "", chave].to_numpy()))
+        unidades = dict(zip(map(tuple, outro[chave].to_numpy()), outro["unidades_na_vigencia"]))
+        for rotulo, conjunto in (("voltam a' fila", fila - base), ("saem da fila", base - fila)):
+            if conjunto:
+                linhas.append({"conta": f"{conta}: {rotulo}", "linhas": len(conjunto),
+                               "unidades": int(sum(unidades[k] for k in conjunto)),
+                               "modelos": ", ".join(sorted({f"{k[0]}/{k[1]}" for k in conjunto}))})
+    return pd.DataFrame(linhas)
 
 
 def _casamento(rascunho: pd.DataFrame, casado: pd.DataFrame) -> pd.DataFrame:
@@ -345,8 +415,10 @@ def _nao_casados(casado: pd.DataFrame, rascunho: pd.DataFrame) -> pd.DataFrame:
             .sort_values(["versoes"], ascending=False))
 
 
-def escrever(rascunho, fora, resumo, questoes, volume_painel: int, fila, resumo_val,
-             casado) -> None:
+def escrever(saida: dict, questoes: pd.DataFrame, volume_painel: int) -> None:
+    rascunho, fora, resumo, fila = (saida["rascunho"], saida["fora"], saida["resumo"],
+                                    saida["fila"])
+    resumo_val, casado = saida["resumo_val"], saida["casado"]
     regras = classificacao.carregar_regras()
     n_modelos = rascunho[classificacao.CHAVE].drop_duplicates().shape[0]
     pct = 100 * rascunho["unidades_na_vigencia"].sum() / volume_painel
@@ -358,9 +430,15 @@ def escrever(rascunho, fora, resumo, questoes, volume_painel: int, fila, resumo_
 
     config.DIR_SAIDAS.mkdir(parents=True, exist_ok=True)
     with pd.ExcelWriter(config.CLASSIFICACAO_RASCUNHO, engine="xlsxwriter") as escritor:
-        abas = [("leia_me", leia_me), ("a_adjudicar", fila), ("classificacao", rascunho),
-                ("questoes", questoes), ("validacao", resumo_val), ("resumo", resumo),
-                ("origem_fontes", validacao.carregar_fontes_origem()),
+        abas = [("leia_me", leia_me), ("a_adjudicar", fila),
+                ("resolvido_por_regra", saida["resolvido"]),
+                ("montagem_local", saida["casos_montagem"]), ("classificacao", rascunho),
+                ("questoes", questoes), ("regras_adjudicacao", adjudicacao.carregar_regras()),
+                ("contas_das_regras", saida["contas"]), ("validacao", resumo_val),
+                ("resumo", resumo), ("origem_fontes", validacao.carregar_fontes_origem()),
+                ("montagem_fontes", adjudicacao.carregar_montagem()),
+                ("tipo_fonte_dominio", pd.read_csv(config.TIPO_FONTE_DOMINIO, dtype=str,
+                                                   keep_default_na=False)),
                 ("pbe_mapeamento", validacao.regras_propulsao()),
                 ("pbe_nao_casados", _nao_casados(casado, rascunho)),
                 ("regras", regras), ("nao_classificados", fora)]
@@ -373,8 +451,15 @@ def escrever(rascunho, fora, resumo, questoes, volume_painel: int, fila, resumo_
             for i, coluna in enumerate(quadro.columns):
                 largura = max([len(str(coluna))] + [len(str(v)) for v in quadro[coluna].head(200)])
                 folha.set_column(i, i, min(max(largura, 8) + 1, 70))
+        # quantas linhas ficaram desconhecido, abaixo dos casos
+        inicio = len(saida["casos_montagem"]) + 3
+        saida["resumo_montagem"].to_excel(escritor, sheet_name="montagem_local", index=False,
+                                          startrow=inicio)
     resumo.to_csv(config.CLASSIFICACAO_RESUMO, index=False)
     resumo_val.to_csv(config.DIR_SAIDAS / "classificacao_validacao.csv", index=False)
+    saida["contas"].to_csv(config.DIR_SAIDAS / "classificacao_regras_contas.csv", index=False)
+    saida["resolvido"].to_csv(config.DIR_SAIDAS / "classificacao_resolvido_por_regra.csv",
+                              index=False)
     casado[casado["marca"] != ""][
         ["ano_pbe", "pagina", "marca_pbe", "modelo_versao", "tipo_propulsao", "marcador_nome",
          "combustivel", "valor_taxonomia", "regra_mapeamento", "marca", "modelo", "segmento"]
@@ -393,10 +478,13 @@ def main() -> int:
               "recuso sobrescrever sem --sobrescrever.", file=sys.stderr)
         return 2
 
-    rascunho, fora, resumo, fila, resumo_val, casado = gerar()
+    saida = gerar()
+    rascunho, fora, resumo, fila = (saida["rascunho"], saida["fora"], saida["resumo"],
+                                    saida["fila"])
+    resumo_val = saida["resumo_val"]
     questoes = _questoes(rascunho)
     volume = int(pd.read_parquet(config.PAINEL, columns=["unidades"])["unidades"].sum())
-    escrever(rascunho, fora, resumo, questoes, volume, fila, resumo_val, casado)
+    escrever(saida, questoes, volume)
 
     print(f"{len(rascunho)} linhas (modelo-vigencia) de "
           f"{rascunho[classificacao.CHAVE].drop_duplicates().shape[0]} modelos; "
@@ -407,6 +495,8 @@ def main() -> int:
     print(questoes[["tema", "estado", "modelos", "unidades"]].to_string(index=False))
     print("\nvalidacao contra fonte:")
     print(resumo_val.to_string(index=False))
+    print("\nregras de adjudicacao:")
+    print(saida["contas"].drop(columns="modelos", errors="ignore").to_string(index=False))
     print(f"\na adjudicar: {len(fila)} linhas")
     print(f"\ngravado {config.CLASSIFICACAO_RASCUNHO.relative_to(config.RAIZ)} e "
           f"{config.CLASSIFICACAO_RESUMO.relative_to(config.RAIZ)}")

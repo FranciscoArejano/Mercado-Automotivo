@@ -252,6 +252,16 @@ def _classificacao() -> tuple[dict, str]:
                                  classificacao.CHAVE].drop_duplicates().shape[0]
         validacao = (f"- **Validacao contra fonte** (do volume): propulsao contra o PBE -- {pbe}. "
                      f"Origem com fonte datada aberta: {com_fonte} modelos (aba `origem_fontes`).\n")
+    if "pendencias" in rascunho:
+        na_fila = int((rascunho["pendencias"] != "").sum())
+        por_regra = int(((rascunho["regras_aplicadas"] != "")
+                         & (rascunho["pendencias"] == "")).sum())
+        conhecida = rascunho["montagem_local"] != "desconhecido"
+        validacao += (f"- **Regras de adjudicacao** (`config/regras_adjudicacao.csv`): "
+                      f"{por_regra} linhas decididas so' por regra (aba `resolvido_por_regra`); "
+                      f"{na_fila} para decisao humana (aba `a_adjudicar`). `montagem_local` com "
+                      f"fonte em {int(conhecida.sum())} linhas; as outras {int((~conhecida).sum())} "
+                      "`desconhecido`.\n")
     modelos = rascunho[classificacao.CHAVE].drop_duplicates().shape[0]
     corpo = (
         "- **Estado: rascunho da fase 1, para adjudicacao. Nao e' dado** -- nada em "
@@ -265,8 +275,10 @@ def _classificacao() -> tuple[dict, str]:
         + validacao
         + f"- **Decisoes humanas preenchidas:** {decididas} de {len(rascunho)}.\n"
         "- **Arquivo:** `saidas/classificacao_rascunho.xlsx` (abas `leia_me`, `a_adjudicar`, "
-        "`questoes`, `validacao`, `regras`); regras em `config/regras_classificacao.csv`, "
-        "mapeamento do PBE em `config/pbe_propulsao.csv` e `config/pbe_modelos.csv`.\n"
+        "`resolvido_por_regra`, `montagem_local`, `questoes`, `regras_adjudicacao`, "
+        "`validacao`, `regras`); regras em `config/regras_classificacao.csv` e "
+        "`config/regras_adjudicacao.csv`, mapeamento do PBE em `config/pbe_propulsao.csv` e "
+        "`config/pbe_modelos.csv`, tipo de fonte em `config/tipo_fonte_dominio.csv`.\n"
     )
     return ({"produto": "classificacao (rascunho)",
              "arquivo": "saidas/classificacao_rascunho.xlsx", "linhas": len(rascunho),

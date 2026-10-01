@@ -1,6 +1,6 @@
 # Dicionario de dados -- `painel.parquet`
 
-Gerado em 2026-10-01T10:48:54+00:00 (UTC) por `src/etapa05_painel.py`.
+Gerado em 2026-10-01T15:04:43+00:00 (UTC) por `src/etapa05_painel.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: 54,179
@@ -91,7 +91,9 @@ Dois arquivos com a mesma unidade de tempo, **nunca colunas deste painel** -- a 
 
 **Limitacao da classificacao, registrada desde ja':** a fonte nao separa unidades por versao. Um modelo vendido em flex e em hibrido aparece como um numero so', e nao ha' como saber quantas unidades foram de cada. Por isso a propulsao sera' **conjunto** (`propulsao_oferecida`) e a eletrificacao tera' tres niveis (`nenhuma`, `parcial`, `total`). Somar as unidades dos modelos `parcial` como se fossem eletrificadas superestima a eletrificacao; soma-las como combustao a subestima. Contar unidades eletrificadas por propulsao exige fonte externa.
 
-**Regras e limitacoes decididas em 2026-10-01:** o hibrido leve (`mhev`) e o eletrico com extensor (`reev`) sao valores proprios da propulsao. Na derivacao de `eletrificacao`, modelo com `mhev` e combustao conta como `parcial` -- o hibrido leve nao roda em modo eletrico, e junta-lo a `hev` superestimaria a eletrificacao, omiti-lo a subestimaria; `total` exige so' tracao eletrica (`hev`, `phev`, `reev`, `bev`). A **transicao para o flex** (2003-2006) nao e' datada por modelo: os modelos que a atravessaram tem `gasolina+flex` na vigencia inteira -- precisao de mes seria falsa, e nenhum artigo planejado depende dela.
+**Regras e limitacoes decididas em 2026-10-01:** o hibrido leve (`mhev`) e o eletrico com extensor (`reev`) sao valores proprios da propulsao. Na derivacao de `eletrificacao`, modelo com `mhev` e combustao conta como `parcial` -- o hibrido leve nao roda em modo eletrico, e junta-lo a `hev` superestimaria a eletrificacao, omiti-lo a subestimaria; `total` exige so' tracao eletrica (`hev`, `phev`, `reev`, `bev`). A **transicao para o flex** (2003-2006) nao e' datada por modelo: os modelos que a atravessaram tem `gasolina+flex` na vigencia inteira -- precisao de mes seria falsa, e nenhum artigo planejado depende dela. A **montagem local** e' coluna propria, `montagem_local` (`fabricacao`, `ckd`, `skd`, `desconhecido`), separada da origem: um carro pode ser `nacional` na origem e `ckd` no modo de montagem, e kit e carro inteiro tem tratamento tributario diferente. O padrao e' `desconhecido`; so' muda com fonte que declara o modo.
+
+**Adjudicacao por regra:** o pesquisador aprova criterios (`config/regras_adjudicacao.csv`: o PBE Veicular acrescenta propulsao omitida; mantem-se o que o PBE nao podia ver; fonte de origem oficial ou de imprensa especializada que concorda ou ajusta a data e' aceita; contradicao, leitura inconclusiva ou fonte so' fraca vao a julgamento). So' o que os criterios nao decidem e' julgado linha a linha. A forca da fonte vem de `config/tipo_fonte_dominio.csv`.
 
 ## Reconstituicao
 

@@ -647,9 +647,8 @@ def anexar_montagem(rascunho: pd.DataFrame, montagem: pd.DataFrame
                 casos.append({**base, "vigencia": f"{linha['vigencia_inicio']} a "
                                                   f"{linha['vigencia_fim']}",
                               "origem_producao": origem_linha, "montagem_local": "desconhecido",
-                              "aplicado": "nao: a linha e' importado. Se a vigencia for dividida "
-                                          "na data da producao local (ver a_adjudicar), a parte "
-                                          "nacional recebe o modo da fonte"})
+                              "aplicado": "nao: a linha e' importado; o modo so' vale para a "
+                                          "parte de producao local"})
                 continue
             inteira = p_inicio <= v_inicio and p_fim >= v_fim
             cobertura = "vigencia inteira" if inteira else (

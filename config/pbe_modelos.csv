@@ -6,6 +6,7 @@ TOYOTA,YARIS HB,YARIS HATCHBACK,
 TOYOTA,YARIS SEDAN,YARIS SEDA,O PBE trunca SEDAN em SEDA.
 TOYOTA,YARIS SEDAN,YARIS SEDAN,
 TOYOTA,HILUX SW4,SW4,O PBE escreve so' SW4.
+TOYOTA,COROLLA GR,COROLLA HB GR,"Sem o apelido, o prefixo COROLLA casava o GR Corolla (hatch a gasolina) com a chave COROLLA e acrescentava gasolina ao seda'. Achado na rodada de regras de adjudicacao."
 VW,UP,UP!,
 VW,SPACE FOX,SPACEFOX,
 VW,FOX/CROSS FOX,CROSSFOX,

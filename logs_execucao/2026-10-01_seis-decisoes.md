@@ -304,7 +304,7 @@ a busca seria inútil.
     `proposta` fica para o que nenhuma checagem tocou. São o PBE que concorda
     com a propulsão, a origem confirmada por fonte forte fora da fila e a
     carroceria tirada do sub-segmento da Fenabrave.
-    - Com a leitura literal ("decidida por regra"), 83% do volume da
+    - Com a leitura literal ("decidida por regra"), 84% do volume da
       propulsão, que o PBE confirma, passaria por `proposta`.
   - **P2 e O4 dão `regra_fonte_fraca`.** A P2 mantém sem evidência positiva.
   - **`pendente` não é um dos quatro valores.** Marca o atributo que está em

@@ -9,6 +9,12 @@ codigo de combustivel e o texto da linha inteira, para auditoria.
 E' transcricao: nada e' mapeado aqui. O mapeamento para a taxonomia do projeto
 e o casamento com o painel ficam em `src/comum/validacao_classificacao.py`.
 
+Em 2017-2019 a celula do modelo quebra e o nome sai numa linha propria, acima
+da linha de dados (NOVO ONIX / CHEVROLET 1.0MT LS ... / (MY17)). Por isso cada
+linha de veiculo leva tambem `linha_acima`: a linha imediatamente anterior na
+mesma pagina, quando ela nao e' linha de veiculo nem cabecalho. O casamento com
+o painel so' a usa quando o nome da propria linha nao casa.
+
 Linha que tem motor e a trinca ar/direcao/combustivel mas nao foi lida vai
 para `saidas/pbe_linhas_nao_lidas.csv` -- quase sempre marca que falta em
 `config/pbe_marcas.csv`.
@@ -24,6 +30,7 @@ Uso:
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 
@@ -38,7 +45,12 @@ DIR_PBE = config.DIR_BRUTO / "pbe"
 # Cache por ano em logs/, que e' ignorado (sec.10.2): o PDF versionado reconstitui.
 CACHE = config.DIR_LOGS / "cache_pbe"
 COLUNAS = ["ano_pbe", "arquivo", "pagina", "categoria", "marca_pbe", "modelo_versao",
-           "motor", "tipo_propulsao", "marcador_nome", "combustivel", "texto_linha"]
+           "motor", "tipo_propulsao", "marcador_nome", "combustivel", "texto_linha",
+           "linha_acima"]
+# Cabecalho e rodape repetidos em toda pagina: nunca sao nome de modelo.
+CABECALHO = re.compile(r"WWW\.|INMETRO|CONPET|PROGRAMA BRASILEIRO|QUALIDADE E TECNOLOGIA|"
+                       r"ETIQUETAGEM|CATEGORIA|MARCA|MODELO|VERSAO|MOTOR|TRANSMISS|EMISS|"
+                       r"CONSUMO|COMBUST")
 
 
 def marcas_conhecidas() -> list[tuple[str, ...]]:
@@ -64,15 +76,23 @@ def linhas_do_ano(arquivo: Path, ano: str, refazer: bool) -> pd.DataFrame:
 def interpretar(linhas: pd.DataFrame, arquivo: str, ano: str, marcas):
     """Linhas de veiculo e linhas que pareciam de veiculo mas nao foram lidas."""
     lidas, nao_lidas = [], []
+    acima, pagina_anterior = "", None
     for pagina, texto in zip(linhas["pagina"], linhas["linha"]):
+        if pagina != pagina_anterior:
+            acima, pagina_anterior = "", pagina
         registro = pbe.ler_linha(texto, marcas)
         if registro:
-            lidas.append({"ano_pbe": ano, "arquivo": arquivo, "pagina": pagina, **registro})
+            lidas.append({"ano_pbe": ano, "arquivo": arquivo, "pagina": pagina, **registro,
+                          "linha_acima": acima})
+            acima = ""
             continue
         palavras = texto.split(" ")
         if pbe._trinca(palavras, 1):
             nao_lidas.append({"ano_pbe": ano, "arquivo": arquivo, "pagina": pagina,
                               "texto_linha": texto})
+            acima = ""
+        else:
+            acima = "" if CABECALHO.search(texto) else texto
     return (pd.DataFrame(lidas, columns=COLUNAS),
             pd.DataFrame(nao_lidas, columns=["ano_pbe", "arquivo", "pagina", "texto_linha"]))
 

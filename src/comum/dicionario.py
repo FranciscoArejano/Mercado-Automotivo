@@ -69,6 +69,24 @@ CAMPOS = [
 ]
 
 
+def _corte_pbe() -> str:
+    """A frase citavel do corte da P2, da cobertura calculada (se ja' existe)."""
+    if not config.PBE_COBERTURA.exists():
+        return ""
+    cobertura = pd.read_csv(config.PBE_COBERTURA)
+    acima = cobertura[cobertura["cobertura_pct"] >= 80]
+    if acima.empty:
+        return ""
+    corte = acima.iloc[0]
+    anterior = cobertura[cobertura["ano"] == corte["ano"] - 1]
+    antes = (f" (em {int(corte['ano']) - 1}, {anterior['cobertura_pct'].item():.1f}%)"
+             .replace(".", ",") if len(anterior) else "")
+    return (f"A ausencia no PBE so' foi tratada como informativa a partir de {int(corte['ano'])}, "
+            f"quando o programa passou a cobrir {corte['cobertura_pct']:.1f}%".replace(".", ",")
+            + f" do volume do painel{antes}; antes disso, a regra P2 mantem a proposta "
+            "(`saidas/pbe_cobertura_por_ano.csv`).")
+
+
 def escrever(painel: pd.DataFrame) -> None:
     meses = sorted(painel["mes_ref"].unique())
     chave = ["marca", "modelo", "segmento"]
@@ -196,19 +214,29 @@ def escrever(painel: pd.DataFrame) -> None:
         "`eletrificacao`, modelo com `mhev` e combustao conta como `parcial` -- o hibrido "
         "leve nao roda em modo eletrico, e junta-lo a `hev` superestimaria a eletrificacao, "
         "omiti-lo a subestimaria; `total` exige so' tracao eletrica (`hev`, `phev`, `reev`, "
-        "`bev`). A **transicao para o flex** (2003-2006) nao e' datada por modelo: os modelos "
+        "`bev`). `hibrido_indefinido` marca o modelo que o PBE poe em Hibrido sem que o nome da "
+        "versao ou fonte digam se e' leve ou pleno; conta como `mhev` -- nunca leva a `total`, "
+        "que exige evidencia positiva de tracao eletrica. A **transicao para o flex** (2003-2006) nao e' datada por modelo: os modelos "
         "que a atravessaram tem `gasolina+flex` na vigencia inteira -- precisao de mes seria "
-        "falsa, e nenhum artigo planejado depende dela. A **montagem local** e' coluna "
-        "propria, `montagem_local` (`fabricacao`, `ckd`, `skd`, `desconhecido`), separada "
-        "da origem: um carro pode ser `nacional` na origem e `ckd` no modo de montagem, e kit "
-        "e carro inteiro tem tratamento tributario diferente. O padrao e' `desconhecido`; so' "
-        "muda com fonte que declara o modo.\n\n",
+        "falsa, e nenhum artigo planejado depende dela. A **montagem local** e' atributo "
+        "proprio, `montagem_local` (`fabricacao`, `ckd`, `skd`, `desconhecido`, "
+        "`nao_se_aplica`), separado da origem e com periodo proprio (`montagem_inicio`, "
+        "`montagem_fim`): um carro pode ser `nacional` na origem e `ckd` no modo de montagem, e "
+        "kit e carro inteiro tem tratamento tributario diferente. O modo so' vale dentro do "
+        "periodo que a fonte declara; fora dele, `desconhecido`; carro importado e' "
+        "`nao_se_aplica`.\n\n",
         "**Adjudicacao por regra:** o pesquisador aprova criterios "
         "(`config/regras_adjudicacao.csv`: o PBE Veicular acrescenta propulsao omitida; mantem-se "
         "o que o PBE nao podia ver; fonte de origem oficial ou de imprensa especializada que "
         "concorda ou ajusta a data e' aceita; contradicao, leitura inconclusiva ou fonte so' "
         "fraca vao a julgamento). So' o que os criterios nao decidem e' julgado linha a linha. "
-        "A forca da fonte vem de `config/tipo_fonte_dominio.csv`.\n\n",
+        "A forca da fonte vem de `config/tipo_fonte_dominio.csv`. " + _corte_pbe() + "\n\n",
+        "**Regra da fase 2 e procedencia:** nenhuma linha e' descartada; por linha e atributo "
+        "vale a decisao humana, senao a decisao por regra, senao a proposta. A dimensao carrega, "
+        "por atributo, a procedencia do valor: `humana`, `regra_fonte_forte`, "
+        "`regra_fonte_fraca` ou `proposta` (nunca contestada nem confirmada). Um artigo que use "
+        "propulsao ou origem como variavel de tratamento pode se restringir a procedencia "
+        "forte e declarar quantas observacoes ficaram de fora.\n\n",
         "## Reconstituicao\n\n",
         "Todo numero se reconstitui a partir de tres coisas versionadas: os PDFs originais "
         "(hash em `dados/bruto/manifesto.csv`), `regras.csv` e os scripts de `src/`. "

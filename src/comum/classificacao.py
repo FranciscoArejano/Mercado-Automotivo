@@ -35,12 +35,17 @@ CHAVE = ["marca", "modelo", "segmento"]
 
 # `mhev` (hibrido leve) e `reev` (eletrico com extensor) entraram por decisao do
 # pesquisador em 2026-10-01, assim como `caminhao_leve` na carroceria.
-PROPULSOES = ("gasolina", "flex", "diesel", "mhev", "hev", "phev", "reev", "bev")
+# `hibrido_indefinido` (decisao 1 da rodada das seis decisoes): o PBE diz Hibrido
+# e nem o nome da versao nem fonte dizem se e' leve ou pleno.
+PROPULSOES = ("gasolina", "flex", "diesel", "mhev", "hibrido_indefinido", "hev", "phev", "reev",
+              "bev")
 # Tracao eletrica: o modelo so' com estas e' `total`.
 ELETRIFICADAS = frozenset({"hev", "phev", "reev", "bev"})
 # Contam para `parcial` mas nunca para `total`: o hibrido leve nao roda em modo
-# eletrico, entao sempre vem com combustao.
-ELETRIFICACAO_PARCIAL = frozenset({"mhev"})
+# eletrico, entao sempre vem com combustao. O `hibrido_indefinido` conta como
+# `mhev`, de proposito: `total` exige evidencia positiva de hibrido pleno, plug-in
+# ou eletrico.
+ELETRIFICACAO_PARCIAL = frozenset({"mhev", "hibrido_indefinido"})
 CARROCERIAS = ("hatch", "sedan", "suv", "picape", "minivan", "furgao", "caminhao_leve",
                "perua", "esportivo")
 # Carroceria da fonte que o conhecimento pode REFINAR, nao contradizer (regra
@@ -131,7 +136,8 @@ def eletrificacao(propulsao: str) -> str:
     """`total` so' tracao eletrica, `parcial` mistura, `nenhuma` so' combustao.
 
     Hibrido leve (`mhev`) conta como `parcial`, mesmo sem outra eletrificada ao
-    lado: juntar a `hev` superestimaria, omitir subestimaria.
+    lado: juntar a `hev` superestimaria, omitir subestimaria. `hibrido_indefinido`
+    conta como `mhev`.
     """
     conjunto = {p for p in propulsao.split("+") if p}
     if not conjunto:

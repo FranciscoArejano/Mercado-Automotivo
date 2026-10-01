@@ -87,13 +87,22 @@ def test_tipo_fonte_em_dia_com_o_mapeamento(fontes, montagem):
     mapa = tipo_fonte.carregar_mapa()
     assert set(mapa.values()) <= set(tipo_fonte.TIPOS)
     for quadro, coluna in ((fontes, "origem_fonte_url"), (montagem, "fonte_url")):
-        calculado = [tipo_fonte.tipo_de(u, mapa) for u in quadro[coluna]]
+        primarias = quadro["fonte_primaria"] if "fonte_primaria" in quadro else [""] * len(quadro)
+        calculado = [tipo_fonte.tipo_da_citacao(u, p, mapa)
+                     for u, p in zip(quadro[coluna], primarias)]
         sem_tipo = sorted({tipo_fonte.dominio(u) for u, t in zip(quadro[coluna], calculado)
                            if not t})
         assert not sem_tipo, f"dominios sem tipo: {sem_tipo}"
         defasados = [u for u, a, b in zip(quadro[coluna], quadro["tipo_fonte"], calculado)
                      if a != b]
         assert not defasados, ("tipo_fonte defasado; rode origem_fonte.py --tipos", defasados)
+
+
+def test_materia_que_repassa_vale_o_veiculo_original():
+    mapa = {"motorshow.com.br": "imprensa_especializada", "autossegredos.com.br": "blog_agregador"}
+    url = "https://motorshow.com.br/x"
+    assert tipo_fonte.tipo_da_citacao(url, "", mapa) == "imprensa_especializada"
+    assert tipo_fonte.tipo_da_citacao(url, "autossegredos.com.br", mapa) == "blog_agregador"
 
 
 def test_dominio_mais_especifico_vence():

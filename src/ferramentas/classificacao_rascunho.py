@@ -29,7 +29,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from comum import adjudicacao, classificacao, config, tipo_fonte  # noqa: E402
+from comum import adjudicacao, classificacao, config  # noqa: E402
 from comum import validacao_classificacao as validacao  # noqa: E402
 
 # A busca de fonte de origem cobre a origem `media`/`baixa` dos maiores modelos.
@@ -151,13 +151,16 @@ LEIA_ME = [
      "Por isso `propulsao_oferecida` e' conjunto e `eletrificacao` tem tres niveis. "
      "Contar unidades eletrificadas por propulsao exige fonte externa."),
     ("propulsao_oferecida",
-     "Conjunto de gasolina, flex, diesel, mhev, hev, phev, reev, bev, unido por '+'. O que "
-     "o modelo oferecia na vigencia, nao o que vendeu. `mhev` (hibrido leve) e `reev` "
-     "(eletrico com extensor) entraram por decisao de 2026-10-01."),
+     "Conjunto de gasolina, flex, diesel, mhev, hibrido_indefinido, hev, phev, reev, bev, unido "
+     "por '+'. O que o modelo oferecia na vigencia, nao o que vendeu. `mhev` (hibrido leve) e "
+     "`reev` (eletrico com extensor) entraram por decisao de 2026-10-01; `hibrido_indefinido` "
+     "(o PBE diz Hibrido, e nem o nome da versao nem fonte dizem se e' leve ou pleno) pela "
+     "decisao 1 das seis decisoes."),
     ("eletrificacao",
      "Derivada da propulsao: total = so' hev/phev/reev/bev; parcial = mistura, ou qualquer "
-     "conjunto com mhev (o hibrido leve nao roda em modo eletrico; junta-lo a hev "
-     "superestimaria, omiti-lo subestimaria); nenhuma = so' combustao. Vazia quando a "
+     "conjunto com mhev ou hibrido_indefinido (o hibrido leve nao roda em modo eletrico; junta-lo "
+     "a hev superestimaria, omiti-lo subestimaria; o indefinido conta como mhev, porque `total` "
+     "exige evidencia positiva de tracao eletrica); nenhuma = so' combustao. Vazia quando a "
      "propulsao esta' vazia."),
     ("carroceria",
      "hatch, sedan, suv, picape, minivan, furgao, caminhao_leve, perua, esportivo. Sai do "
@@ -184,11 +187,23 @@ LEIA_ME = [
      "`unidades_na_vigencia` e' so' da linha. As vigencias de um modelo cobrem todo "
      "mes com unidades e nao se sobrepoem (conferido pelo script)."),
     ("como preencher decisao_humana",
-     "`ok` aceita a linha como esta'. `atributo=valor; atributo=valor` corrige so' o "
-     "que for dito (ex.: `propulsao_oferecida=flex+hev; origem_producao=nacional`); o "
-     "resto fica como proposto. `dividir em AAAA-MM` pede nova vigencia a partir "
-     "daquele mes -- descreva os atributos de cada lado. Qualquer outro texto e' lido "
-     "a mao. Linha com decisao vazia nao entra na fase 2."),
+     "`ok` aceita a linha como esta' (numa linha de a_adjudicar, com o que as regras ja' "
+     "decidiram). `atributo=valor; atributo=valor` corrige so' o que for dito (ex.: "
+     "`propulsao_oferecida=flex+hev; origem_producao=nacional`). `dividir em AAAA-MM` pede nova "
+     "vigencia a partir daquele mes -- descreva os atributos de cada lado. Qualquer outro texto "
+     "e' lido a mao."),
+    ("regra da fase 2 (decisao 6)",
+     "Nenhuma linha e' descartada. Por linha e por atributo, a fase 2 le, nesta precedencia: "
+     "`decisao_humana`, se preenchida para o atributo; senao `decisao_por_regra`; senao a "
+     "proposta original. A dimensao final carrega, por atributo, a procedencia: `humana`, "
+     "`regra_fonte_forte` (regra com fonte oficial ou especializada, inclusive o valor que o PBE "
+     "ou fonte forte confirmou sem contestacao), `regra_fonte_fraca` (regra apoiada em fonte "
+     "fraca, ou a P2, que decide sem evidencia positiva) ou `proposta` (nunca contestada nem "
+     "confirmada por checagem nenhuma). As colunas `procedencia_*` da aba `classificacao` sao a "
+     "previa disso hoje; `pendente` marca o atributo em a_adjudicar ainda sem decisao humana -- "
+     "a fase 2 nao deve rodar com ele. Um artigo que use propulsao ou origem como variavel de "
+     "tratamento pode se restringir a `humana` e `regra_fonte_forte` e declarar quantos ficaram "
+     "de fora."),
     ("questoes",
      "A aba `questoes` lista o que a lista de valores ou a fonte nao resolvem (hibrido "
      "leve, REEV, caminhao leve e outras), com os modelos e o volume afetados. Sao "
@@ -198,24 +213,32 @@ LEIA_ME = [
      "refina o furgao da fonte); a transicao flex fica como esta' (gasolina+flex na "
      "vigencia inteira, limitacao conhecida); 'um nome, dois produtos' e 'um produto, duas "
      "chaves' seguem adiadas pela Parte 0. Ver a coluna `estado` da aba `questoes`."),
+    ("seis decisoes (rodada seguinte)",
+     "1: Hibrido sem HEV no nome vira hibrido_indefinido (regra P4), parcial na eletrificacao. "
+     "2: revista automotiva de consumo e' imprensa_especializada. 3: corte da P2 pela cobertura "
+     "do PBE (80% do volume). 4: montagem com periodo proprio e nao_se_aplica para importado. 5: "
+     "confirmacao por fonte fraca e' aceita (O4), e segunda fonte so' para complementa/ajusta_data "
+     "fracas em vigencias de 2014 em diante. 6: a regra da fase 2 (topico proprio)."),
     ("regras de adjudicacao",
      "O pesquisador aprova regras (aba `regras_adjudicacao`, de config/regras_adjudicacao.csv); "
      "o script as aplica; so' o que elas nao decidem vai para `a_adjudicar`. Propulsao: P1 (o "
-     "PBE acrescenta), P2 (o que o PBE nao pode ver), P3 (hibrido leve). Origem: O1 (fonte forte "
-     "que concorda), O2 (fonte forte que ajusta a data), O3 (contradiz, inconclusivo ou so' "
-     "fonte fraca: sempre humano). A proposta fica intacta; a decisao da regra vai em "
-     "`decisao_por_regra`, na sintaxe de `decisao_humana`."),
+     "PBE acrescenta), P2 (o que o PBE nao pode ver, com o corte de cobertura do PBE), P3 "
+     "(hibrido leve), P4 (Hibrido sem HEV no nome: hibrido_indefinido). Origem: O1 (fonte forte "
+     "que concorda), O2 (fonte forte que ajusta a data), O3 (contradiz e inconclusivo sempre "
+     "humanos; complementa ou ajusta_data so' com fonte fraca tambem), O4 (confirmacao por fonte "
+     "fraca: aceita, com procedencia regra_fonte_fraca). A proposta fica intacta; a decisao da "
+     "regra vai em `decisao_por_regra`, na sintaxe de `decisao_humana`."),
     ("a_adjudicar",
      "So' o que as regras nao decidem, maior volume primeiro. `motivo` diz por que cada regra "
      "nao decidiu (separados por ' | '); `na_fila_antes` diz se a linha ja' estava na fila da "
-     "rodada anterior ou entrou agora (O3: leitura apoiada so' em fonte fraca). "
+     "rodada anterior ou entrou agora. "
      "`decisao_por_regra` traz a parte que as regras ja' decidiram; `propulsao_apos_regras` e "
      "`origem_apos_regras` o valor depois delas. A decisao humana pode ser escrita ali ou na aba "
      "`classificacao`; `ok` numa linha parcial aceita o valor depois das regras."),
     ("resolvido_por_regra",
-     "Cada decisao de regra: id (P1, P2, O1, O2), atributo, valor antes e depois, a evidencia "
-     "(`base`) e a `ressalva` quando a regra decide pelo texto mas com condicao fraca (P2 por "
-     "condicao necessaria; P2 em modelo que o PBE, ja' existindo, nao listou). "
+     "Cada decisao de regra: id (P1, P2, P4, O1, O2, O4), a `forca` da evidencia (forte ou "
+     "fraca), atributo, valor antes e depois, a evidencia (`base`) e a `ressalva` quando a "
+     "regra decide com condicao fraca (P2 por condicao necessaria; O4, fonte_fraca). "
      "`situacao_da_linha`: resolvida (saiu da fila) ou parcial (algum outro motivo a mantem). "
      "Nada some: toda linha que saiu da fila esta' aqui."),
     ("tipo_fonte",
@@ -225,12 +248,19 @@ LEIA_ME = [
      "`python src/ferramentas/origem_fonte.py --tipos`. Na aba `classificacao`, "
      "`origem_tipos_fonte` junta os tipos das fontes do modelo."),
     ("montagem_local",
-     "fabricacao, ckd, skd ou desconhecido (padrao), separado de `origem_producao`: um carro pode "
-     "ser nacional na origem e ckd no modo de montagem. So' muda onde uma fonte, com trecho "
-     "copiado e verificado (dados/referencia/montagem_fontes.csv), declara o modo para um periodo "
-     "que toca a vigencia, e a linha nao e' importado. `montagem_cobertura` diz se a fonte cobre "
-     "a vigencia inteira ou so' parte. A aba `montagem_local` lista os casos com fonte, os que "
-     "nao foram aplicados e por que, e quantas linhas ficaram desconhecido."),
+     "fabricacao, ckd, skd, desconhecido ou nao_se_aplica, separado de `origem_producao`: um "
+     "carro pode ser nacional na origem e ckd no modo de montagem. Periodo proprio "
+     "(`montagem_inicio`, `montagem_fim`), no padrao de vigencia do mapa de grupos: o modo so' "
+     "vale dentro do periodo que uma fonte, com trecho copiado e verificado "
+     "(dados/referencia/montagem_fontes.csv), declara; fora dele, desconhecido; em vigencia "
+     "importado, nao_se_aplica (para o carro importado o modo de montagem local nao existe). A "
+     "aba `montagem_local` e' a tabela de periodos, com a contagem por modo ao lado e as fontes "
+     "de montagem no exterior (furgoes do Uruguai) registradas e nao aplicadas. Na aba "
+     "`classificacao`, `montagem_por_periodo` resume os periodos da linha."),
+    ("cobertura do PBE",
+     "Aba `pbe_cobertura` (e saidas/pbe_cobertura_por_ano.csv): por ano, a fracao do volume do "
+     "painel cujo modelo aparece na tabela do PBE daquele ano. O primeiro ano com 80% ou mais e' "
+     "o corte da P2 (decisao 3): antes dele, ausencia no PBE nao informa."),
     ("validacao contra o PBE",
      "Colunas `pbe_*`. O PBE Veicular (Inmetro, 2009-2026) lista por versao o tipo de "
      "propulsao (coluna propria desde 2021) e o combustivel. Casamento por marca e prefixo do "
@@ -272,9 +302,9 @@ DECISOES = {
                                          "conhecida, registrada no dicionario."),
     "um nome, dois produtos": ("adiada (Parte 0)", "Questao de `regras.csv`."),
     "montagem de conjuntos importados (SKD/CKD)": (
-        "decidida em 2026-10-01", "Coluna nova `montagem_local` (fabricacao, ckd, skd, "
-        "desconhecido), separada de `origem_producao`; padrao desconhecido, muda so' com fonte "
-        "que declara o modo."),
+        "decidida em 2026-10-01", "`montagem_local` (fabricacao, ckd, skd, desconhecido, "
+        "nao_se_aplica), separada de `origem_producao`, com periodo proprio; o modo so' vale no "
+        "periodo que a fonte cobre; importado e' nao_se_aplica."),
     "um produto, duas chaves": ("adiada (Parte 0)", "Questao de `regras.csv`."),
 }
 
@@ -335,46 +365,28 @@ def gerar():
                             validacao.resumo_validacao(rascunho, volume, top)],
                            ignore_index=True)
 
+    # cobertura do PBE por ano: o corte da P2 (decisao 3)
+    cobertura = validacao.cobertura_por_ano(painel, versoes, casado)
+    corte = validacao.ano_de_corte(cobertura)
+
     # regras de adjudicacao e montagem local
     fontes = adjudicacao.carregar_fontes()
-    com_regras, resolvido = adjudicacao.aplicar(rascunho, casado, fontes, top)
-    com_regras, casos_montagem = adjudicacao.anexar_montagem(
-        com_regras, adjudicacao.carregar_montagem())
+    com_regras, resolvido = adjudicacao.aplicar(rascunho, casado, fontes, top, corte,
+                                                adjudicacao.carregar_buscas())
+    montagem = adjudicacao.carregar_montagem()
+    com_regras, periodos = adjudicacao.periodos_montagem(
+        com_regras, montagem, painel[validacao.CHAVE + ["mes_ref", "unidades"]])
     fila = adjudicacao.a_adjudicar(com_regras, fila_antes)
     contas = adjudicacao.contas(fila_antes, com_regras, resolvido)
-    contas = pd.concat([contas, _sensibilidade(rascunho, casado, com_regras, top)],
-                       ignore_index=True)
     # decisao_por_regra e decisao_humana ficam sempre por ultimo
     fim = ["decisao_por_regra", "decisao_humana"]
     com_regras = com_regras[[c for c in com_regras.columns if c not in fim] + fim]
     return {"rascunho": com_regras, "fora": fora, "resumo": resumo, "fila": fila,
             "resumo_val": resumo_val, "casado": casado, "resolvido": resolvido,
-            "contas": contas, "casos_montagem": casos_montagem,
-            "resumo_montagem": adjudicacao.resumo_montagem(com_regras)}
-
-
-def _sensibilidade(rascunho: pd.DataFrame, casado: pd.DataFrame, com_regras: pd.DataFrame,
-                   top: int) -> pd.DataFrame:
-    """O que muda na fila com as duas leituras alternativas registradas no log."""
-    chave = validacao.CHAVE + ["vigencia_inicio"]
-    base = set(map(tuple, com_regras.loc[com_regras["pendencias"] != "", chave].to_numpy()))
-    linhas = []
-    for conta, kwargs in [
-        ("sensibilidade: revista automotiva de consumo como imprensa_geral",
-         {"fontes": adjudicacao.carregar_fontes(tipo_fonte.carregar_mapa(
-             rebaixar=frozenset({"revista_automotiva_de_consumo"})))}),
-        ("sensibilidade: P1 literal (hev de qualquer Hibrido do PBE)",
-         {"fontes": adjudicacao.carregar_fontes(), "p1_literal": True}),
-    ]:
-        outro, _ = adjudicacao.aplicar(rascunho, casado, top=top, **kwargs)
-        fila = set(map(tuple, outro.loc[outro["pendencias"] != "", chave].to_numpy()))
-        unidades = dict(zip(map(tuple, outro[chave].to_numpy()), outro["unidades_na_vigencia"]))
-        for rotulo, conjunto in (("voltam a' fila", fila - base), ("saem da fila", base - fila)):
-            if conjunto:
-                linhas.append({"conta": f"{conta}: {rotulo}", "linhas": len(conjunto),
-                               "unidades": int(sum(unidades[k] for k in conjunto)),
-                               "modelos": ", ".join(sorted({f"{k[0]}/{k[1]}" for k in conjunto}))})
-    return pd.DataFrame(linhas)
+            "contas": contas, "periodos_montagem": periodos,
+            "montagem_exterior": adjudicacao.exterior_montagem(montagem),
+            "resumo_montagem": adjudicacao.resumo_montagem(periodos),
+            "cobertura": cobertura, "corte": corte}
 
 
 def _casamento(rascunho: pd.DataFrame, casado: pd.DataFrame) -> pd.DataFrame:
@@ -432,11 +444,12 @@ def escrever(saida: dict, questoes: pd.DataFrame, volume_painel: int) -> None:
     with pd.ExcelWriter(config.CLASSIFICACAO_RASCUNHO, engine="xlsxwriter") as escritor:
         abas = [("leia_me", leia_me), ("a_adjudicar", fila),
                 ("resolvido_por_regra", saida["resolvido"]),
-                ("montagem_local", saida["casos_montagem"]), ("classificacao", rascunho),
+                ("montagem_local", saida["periodos_montagem"]), ("classificacao", rascunho),
                 ("questoes", questoes), ("regras_adjudicacao", adjudicacao.carregar_regras()),
                 ("contas_das_regras", saida["contas"]), ("validacao", resumo_val),
                 ("resumo", resumo), ("origem_fontes", validacao.carregar_fontes_origem()),
                 ("montagem_fontes", adjudicacao.carregar_montagem()),
+                ("pbe_cobertura", saida["cobertura"]),
                 ("tipo_fonte_dominio", pd.read_csv(config.TIPO_FONTE_DOMINIO, dtype=str,
                                                    keep_default_na=False)),
                 ("pbe_mapeamento", validacao.regras_propulsao()),
@@ -451,18 +464,25 @@ def escrever(saida: dict, questoes: pd.DataFrame, volume_painel: int) -> None:
             for i, coluna in enumerate(quadro.columns):
                 largura = max([len(str(coluna))] + [len(str(v)) for v in quadro[coluna].head(200)])
                 folha.set_column(i, i, min(max(largura, 8) + 1, 70))
-        # quantas linhas ficaram desconhecido, abaixo dos casos
-        inicio = len(saida["casos_montagem"]) + 3
+        # ao lado dos periodos: quantos ficaram desconhecido, e as fontes no exterior
+        coluna = len(saida["periodos_montagem"].columns) + 1
         saida["resumo_montagem"].to_excel(escritor, sheet_name="montagem_local", index=False,
-                                          startrow=inicio)
+                                          startcol=coluna)
+        saida["montagem_exterior"].to_excel(
+            escritor, sheet_name="montagem_local", index=False, startcol=coluna,
+            startrow=len(saida["resumo_montagem"]) + 3)
     resumo.to_csv(config.CLASSIFICACAO_RESUMO, index=False)
     resumo_val.to_csv(config.DIR_SAIDAS / "classificacao_validacao.csv", index=False)
     saida["contas"].to_csv(config.DIR_SAIDAS / "classificacao_regras_contas.csv", index=False)
     saida["resolvido"].to_csv(config.DIR_SAIDAS / "classificacao_resolvido_por_regra.csv",
                               index=False)
+    saida["periodos_montagem"].to_csv(config.DIR_SAIDAS / "classificacao_montagem_periodos.csv",
+                                      index=False)
+    saida["cobertura"].to_csv(config.PBE_COBERTURA, index=False)
     casado[casado["marca"] != ""][
-        ["ano_pbe", "pagina", "marca_pbe", "modelo_versao", "tipo_propulsao", "marcador_nome",
-         "combustivel", "valor_taxonomia", "regra_mapeamento", "marca", "modelo", "segmento"]
+        ["ano_pbe", "pagina", "marca_pbe", "modelo_versao", "linha_acima", "casou_por",
+         "tipo_propulsao", "marcador_nome", "combustivel", "valor_taxonomia", "regra_mapeamento",
+         "marca", "modelo", "segmento"]
     ].to_csv(config.DIR_SAIDAS / "pbe_casamento.csv", index=False)
 
 
@@ -495,8 +515,12 @@ def main() -> int:
     print(questoes[["tema", "estado", "modelos", "unidades"]].to_string(index=False))
     print("\nvalidacao contra fonte:")
     print(resumo_val.to_string(index=False))
+    print(f"\ncobertura do PBE (corte da P2: {saida['corte']}):")
+    print(saida["cobertura"].to_string(index=False))
     print("\nregras de adjudicacao:")
-    print(saida["contas"].drop(columns="modelos", errors="ignore").to_string(index=False))
+    print(saida["contas"].to_string(index=False))
+    print("\nmontagem local:")
+    print(saida["resumo_montagem"].to_string(index=False))
     print(f"\na adjudicar: {len(fila)} linhas")
     print(f"\ngravado {config.CLASSIFICACAO_RASCUNHO.relative_to(config.RAIZ)} e "
           f"{config.CLASSIFICACAO_RESUMO.relative_to(config.RAIZ)}")

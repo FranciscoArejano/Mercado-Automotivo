@@ -256,12 +256,18 @@ def _classificacao() -> tuple[dict, str]:
         na_fila = int((rascunho["pendencias"] != "").sum())
         por_regra = int(((rascunho["regras_aplicadas"] != "")
                          & (rascunho["pendencias"] == "")).sum())
-        conhecida = rascunho["montagem_local"] != "desconhecido"
+        com_modo = rascunho["montagem_por_periodo"].str.contains("fabricacao|ckd|skd", regex=True)
+        forte = {c: _pct(100 * unidades[rascunho[f"procedencia_{c}"].isin(
+                     ["humana", "regra_fonte_forte"])].sum() / total, 1)
+                 for c in ("propulsao", "carroceria", "origem")}
         validacao += (f"- **Regras de adjudicacao** (`config/regras_adjudicacao.csv`): "
                       f"{por_regra} linhas decididas so' por regra (aba `resolvido_por_regra`); "
-                      f"{na_fila} para decisao humana (aba `a_adjudicar`). `montagem_local` com "
-                      f"fonte em {int(conhecida.sum())} linhas; as outras {int((~conhecida).sum())} "
-                      "`desconhecido`.\n")
+                      f"{na_fila} para decisao humana (aba `a_adjudicar`). Montagem local com "
+                      f"modo de fonte em parte da vigencia de {int(com_modo.sum())} linhas "
+                      "(aba `montagem_local`, por periodo).\n"
+                      f"- **Procedencia forte ou humana** (previa, do volume): propulsao "
+                      f"{forte['propulsao']}%, carroceria {forte['carroceria']}%, origem "
+                      f"{forte['origem']}%.\n")
     modelos = rascunho[classificacao.CHAVE].drop_duplicates().shape[0]
     corpo = (
         "- **Estado: rascunho da fase 1, para adjudicacao. Nao e' dado** -- nada em "

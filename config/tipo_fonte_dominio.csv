@@ -17,11 +17,11 @@ dgabc.com.br,imprensa_geral,,Jornal regional (Grande ABC).
 dol.com.br,imprensa_geral,,Portal de jornal regional (Para); a noticia citada e' de segunda mao (Auto Segredos).
 baguete.com.br,imprensa_geral,,Portal de negocios e tecnologia.
 eleconomista.com.ar,imprensa_geral,,Jornal de economia argentino.
-vrum.com.br,imprensa_geral,,"Secao automotiva de jornal geral (Diarios Associados). Fronteira com imprensa_especializada."
+vrum.com.br,imprensa_geral,,Secao automotiva de jornal geral (Diarios Associados). Fronteira com imprensa_especializada.
 monitormercantil.com.br,imprensa_geral,,
 abcdoabc.com.br,imprensa_geral,,Portal regional.
 garagem360.com.br,blog_agregador,,Agregador (a sua avaliacao).
-comprecar.com.br,blog_agregador,,"Revista de classificados de carro; os textos citados reproduzem comunicados de imprensa da Mercedes."
+comprecar.com.br,blog_agregador,,Revista de classificados de carro; os textos citados reproduzem comunicados de imprensa da Mercedes.
 bmwblog.com,blog_agregador,blog_de_marca,
 gmauthority.com,blog_agregador,blog_de_marca,
 autoblog.com.uy,blog_agregador,,Blog automotivo uruguaio.
@@ -33,3 +33,6 @@ investnews.com.br,imprensa_geral,,Portal de negocios.
 canaltech.com.br,imprensa_geral,,Portal de tecnologia.
 gazetadopovo.com.br,imprensa_geral,,Jornal (Parana).
 infomoney.com.br,imprensa_geral,,Portal de negocios.
+automotiveworld.com,imprensa_especializada,industria,Noticias e analise da industria automotiva; a pagina citada reproduz comunicado da Mercedes.
+autoweb.com.ar,imprensa_especializada,revista_automotiva_de_consumo,"Site automotivo argentino, mesma classe da Parabrisas (decisao 2). A materia citada repassa o Autos Segredos: ver fonte_primaria."
+autossegredos.com.br,blog_agregador,,Blog de furos da industria. Nunca aberto diretamente nesta pesquisa: aparece como fonte primaria de materias que o repassam.

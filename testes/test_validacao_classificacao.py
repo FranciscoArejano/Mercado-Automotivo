@@ -66,6 +66,17 @@ def test_casamento_traduz_a_marca_e_tira_o_prefixo_novo():
     assert casado.loc[casado["modelo_versao"] == "XYZ", "marca"].item() == ""
 
 
+def test_casamento_usa_a_linha_de_cima_so_quando_o_nome_nao_casa():
+    """PBE 2017: NOVO ONIX numa linha, CHEVROLET 1.0MT LS ... na seguinte."""
+    chaves = _chaves(("GM", "ONIX", "automoveis"), ("GM", "PRISMA", "automoveis"))
+    versoes = pd.DataFrame([{**_versao("CHEVROLET", "LS"), "linha_acima": "NOVO ONIX"},
+                            {**_versao("CHEVROLET", "PRISMA LT"), "linha_acima": "NOVO ONIX"},
+                            {**_versao("CHEVROLET", "LS"), "linha_acima": "(MY17)"}])
+    casado = v.casar(versoes, chaves)
+    assert list(zip(casado["modelo"], casado["casou_por"])) == [
+        ("ONIX", "linha_acima"), ("PRISMA", "nome"), ("", "")]
+
+
 def _rascunho(*linhas):
     colunas = ["posicao", "marca", "modelo", "segmento", "vigencia_inicio", "vigencia_fim",
                "propulsao_oferecida", "unidades_na_vigencia", "observacao", "origem_producao",

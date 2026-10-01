@@ -11,7 +11,8 @@ ainda assim fraca para derrubar uma proposta. As regras de adjudicacao de origem
 
 As duas primeiras sao fortes. O mapeamento dominio -> tipo esta' em
 `config/tipo_fonte_dominio.csv`; e' julgamento, e o pesquisador edita. A coluna
-`tipo_fonte` de `dados/referencia/origem_fontes.csv` e' derivada dele -- o teste
+`tipo_fonte` de `dados/referencia/origem_fontes.csv` e' derivada dele (do dominio
+de `fonte_primaria`, quando a materia repassa outro veiculo) -- o teste
 confere que esta' em dia, e `python src/ferramentas/origem_fonte.py --tipos`
 regrava.
 """
@@ -33,15 +34,10 @@ def dominio(url: str) -> str:
     return host[4:] if host.startswith("www.") else host
 
 
-def carregar_mapa(rebaixar: frozenset[str] = frozenset()) -> dict[str, str]:
-    """dominio -> tipo. Subtipos em `rebaixar` viram `imprensa_geral`.
-
-    `rebaixar` serve ao teste de sensibilidade: o que muda se a revista
-    automotiva de consumo nao contar como imprensa especializada.
-    """
+def carregar_mapa() -> dict[str, str]:
+    """dominio -> tipo, de `config/tipo_fonte_dominio.csv`."""
     tabela = pd.read_csv(config.TIPO_FONTE_DOMINIO, dtype=str, keep_default_na=False)
-    return {d: ("imprensa_geral" if s in rebaixar else t)
-            for d, t, s in zip(tabela["dominio"], tabela["tipo_fonte"], tabela["subtipo"])}
+    return dict(zip(tabela["dominio"], tabela["tipo_fonte"]))
 
 
 def tipo_de(url: str, mapa: dict[str, str]) -> str:
@@ -51,9 +47,17 @@ def tipo_de(url: str, mapa: dict[str, str]) -> str:
     return mapa[max(candidatos, key=len)] if candidatos else ""
 
 
+def tipo_da_citacao(url: str, primaria: str, mapa: dict[str, str]) -> str:
+    """Tipo de uma citacao. Materia que repassa outro veiculo (`primaria`, o dominio
+    dele) vale o tipo do veiculo original: revista forte repassando blog e' blog."""
+    return tipo_de(f"https://{primaria}/", mapa) if primaria else tipo_de(url, mapa)
+
+
 def com_tipo(fontes: pd.DataFrame, mapa: dict[str, str]) -> pd.DataFrame:
     """As fontes com a coluna `tipo_fonte` (re)calculada, logo depois da URL."""
     saida = fontes.drop(columns=["tipo_fonte"], errors="ignore")
+    primarias = saida["fonte_primaria"] if "fonte_primaria" in saida else [""] * len(saida)
     posicao = list(saida.columns).index("origem_fonte_url") + 1
-    saida.insert(posicao, "tipo_fonte", [tipo_de(u, mapa) for u in saida["origem_fonte_url"]])
+    saida.insert(posicao, "tipo_fonte", [tipo_da_citacao(u, p, mapa) for u, p in
+                                         zip(saida["origem_fonte_url"], primarias)])
     return saida

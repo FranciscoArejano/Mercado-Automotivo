@@ -36,6 +36,10 @@ def _propostas(linhas):
     # hibrido leve: parcial, mesmo sem outra eletrificada (decisao de 2026-10-01)
     ("flex+mhev", "parcial"),
     ("gasolina+mhev", "parcial"),
+    # o PBE diz Hibrido, sem tipo: conta como mhev, nunca leva a total
+    ("hibrido_indefinido", "parcial"),
+    ("hev+hibrido_indefinido", "parcial"),
+    ("flex+hibrido_indefinido", "parcial"),
     ("", ""),
 ])
 def test_eletrificacao_derivada_do_conjunto(propulsao, esperado):

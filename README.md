@@ -248,6 +248,9 @@ artigo pode citar um commit. So' `logs/` continua ignorado.
 **Uma tag por rodada** (sec.10.3): `rodada-N`, anotada, com uma linha sobre o que
 mudou. O `validacao.md` declara na primeira linha o commit que o gerou -- entao
 "os numeros desta tabela saem de `rodada-4`" e' verificavel por quem ler.
+Enquanto o envio de tags estiver bloqueado no ambiente de execucao, cada tag fica
+registrada em `tags_pendentes.csv` (tag, commit, descricao), com uma linha por
+rodada acrescentada no fechamento, para ser criada no remoto por quem tiver acesso.
 
 Cada etapa escreve `logs/<etapa>.log` com contagem de linhas lidas e escritas.
 O pipeline e' idempotente: rodar duas vezes produz o mesmo resultado.

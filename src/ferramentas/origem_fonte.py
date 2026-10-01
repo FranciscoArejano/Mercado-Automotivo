@@ -135,6 +135,12 @@ def main() -> int:
     if not args.url or not args.nome:
         analisador.error("URL e --nome sao obrigatorios (ou use --tipos)")
 
+    if MANIFESTO.exists():
+        with MANIFESTO.open(encoding="utf-8", newline="") as fluxo:
+            if any(l["nome"] == args.nome for l in csv.DictReader(fluxo)):
+                print(f"{args.nome} ja' esta' no manifesto; escolha outro nome (uma pagina citada "
+                      "nao pode ser sobrescrita)", file=sys.stderr)
+                return 2
     texto = texto_da_pagina(baixar(args.url))
     if len(texto) < 300:
         print(f"texto curto demais ({len(texto)} caracteres): pagina bloqueada ou vazia; "

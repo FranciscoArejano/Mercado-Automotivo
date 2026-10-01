@@ -31,6 +31,9 @@ PREFIXOS_DESCARTAVEIS = ("THE NEW ", "ALL NEW ", "NOVO ", "NOVA ", "NEW ")
 ULTIMO_ANO_SEM_COLUNA = 2020
 
 ORDEM_CONFRONTO = ("contradiz", "ajusta_data", "inconclusivo", "complementa", "confirma")
+# Decisao 3: ausencia no PBE so' informa a partir do ano em que ele cobre esta
+# fracao do volume do painel.
+LIMIAR_COBERTURA = 80.0
 
 
 # ------------------------------------------------------------- propulsao
@@ -96,28 +99,41 @@ def _prefixo(texto: str, nome: str) -> bool:
     return texto == nome or texto.startswith(nome + " ") or texto.startswith(nome + "-")
 
 
+def _achar(texto: str, marcas_painel: list[str], nomes: dict) -> list[tuple]:
+    achadas: list[tuple] = []
+    for marca_painel in marcas_painel:
+        candidatos = nomes.get(marca_painel, [])
+        for tentativa in [texto] + [texto[len(p):] for p in PREFIXOS_DESCARTAVEIS
+                                    if texto.startswith(p)]:
+            melhor = next((len(n) for n, _ in candidatos if _prefixo(tentativa, n)), None)
+            if melhor is not None:
+                achadas += [c for n, c in candidatos if len(n) == melhor and _prefixo(tentativa, n)]
+                break
+    return list(dict.fromkeys(achadas))
+
+
 def casar(versoes: pd.DataFrame, chaves: pd.DataFrame) -> pd.DataFrame:
-    """Uma linha por (versao do PBE, chave do painel) casadas; sem casamento, chave vazia."""
+    """Uma linha por (versao do PBE, chave do painel) casadas; sem casamento, chave vazia.
+
+    `casou_por` diz como: pelo nome da propria linha, ou -- so' quando ele nao casa
+    -- pela linha de cima mais o nome (`linha_acima`, a celula quebrada de 2017-2019).
+    """
     marcas = marcas_pbe()
     nomes = nomes_do_painel(chaves)
     saida = []
     for registro in versoes.to_dict("records"):
-        texto = registro["modelo_versao"]
-        achadas: list[tuple] = []
-        for marca_painel in marcas.get(registro["marca_pbe"], []):
-            candidatos = nomes.get(marca_painel, [])
-            for tentativa in [texto] + [texto[len(p):] for p in PREFIXOS_DESCARTAVEIS
-                                        if texto.startswith(p)]:
-                melhor = next((len(n) for n, _ in candidatos if _prefixo(tentativa, n)), None)
-                if melhor is not None:
-                    achadas += [c for n, c in candidatos
-                                if len(n) == melhor and _prefixo(tentativa, n)]
-                    break
-        achadas = list(dict.fromkeys(achadas))
+        marcas_painel = marcas.get(registro["marca_pbe"], [])
+        achadas = _achar(registro["modelo_versao"], marcas_painel, nomes)
+        casou_por = "nome" if achadas else ""
+        acima = registro.get("linha_acima", "")
+        if not achadas and acima:
+            achadas = _achar(f"{acima} {registro['modelo_versao']}".strip(), marcas_painel, nomes)
+            casou_por = "linha_acima" if achadas else ""
         if not achadas:
-            saida.append({**registro, "marca": "", "modelo": "", "segmento": ""})
+            saida.append({**registro, "casou_por": "", "marca": "", "modelo": "", "segmento": ""})
         for marca, modelo, segmento in achadas:
-            saida.append({**registro, "marca": marca, "modelo": modelo, "segmento": segmento})
+            saida.append({**registro, "casou_por": casou_por, "marca": marca, "modelo": modelo,
+                          "segmento": segmento})
     return pd.DataFrame(saida)
 
 
@@ -202,6 +218,41 @@ def comparar_pbe(rascunho: pd.DataFrame, casado: pd.DataFrame) -> pd.DataFrame:
     for nome, valores in colunas.items():
         saida[nome] = pd.Series(valores)
     return saida
+
+
+def cobertura_por_ano(painel: pd.DataFrame, versoes: pd.DataFrame,
+                      casado: pd.DataFrame) -> pd.DataFrame:
+    """Por ano, a fracao do volume do painel cujo modelo aparece na tabela do PBE daquele ano.
+
+    Cobertura por modelo, nao por versao: o modelo conta inteiro se uma versao
+    dele esta' na tabela. Depende do casamento -- modelo que o PBE escreve de um
+    jeito que o casamento nao reconhece conta como ausente.
+    """
+    no_pbe = casado.loc[casado["marca"] != "", ["ano_pbe"] + CHAVE].drop_duplicates()
+    no_pbe = no_pbe.assign(ano=no_pbe["ano_pbe"].astype(int), no_pbe=True).drop(columns="ano_pbe")
+    volume = painel.groupby(["ano"] + CHAVE, as_index=False)["unidades"].sum()
+    juntos = volume.merge(no_pbe, on=["ano"] + CHAVE, how="left")
+    juntos["no_pbe"] = juntos["no_pbe"].eq(True)
+    tabela = versoes.groupby(versoes["ano_pbe"].astype(int)).size()
+    linhas = []
+    for ano, grupo in juntos.groupby("ano"):
+        dentro = grupo[grupo["no_pbe"]]
+        linhas.append({
+            "ano": int(ano), "versoes_na_tabela": int(tabela.get(ano, 0)),
+            "modelos_do_painel": len(grupo), "modelos_na_tabela": len(dentro),
+            "unidades_painel": int(grupo["unidades"].sum()),
+            "unidades_modelo_na_tabela": int(dentro["unidades"].sum()),
+            "cobertura_pct": round(100 * dentro["unidades"].sum() / grupo["unidades"].sum(), 1),
+        })
+    return pd.DataFrame(linhas)
+
+
+def ano_de_corte(cobertura: pd.DataFrame, limiar: float = LIMIAR_COBERTURA) -> int:
+    """Primeiro ano em que a cobertura do PBE atinge o limiar."""
+    atingem = cobertura.loc[cobertura["cobertura_pct"] >= limiar, "ano"]
+    if atingem.empty:
+        raise ValueError(f"o PBE nunca cobre {limiar}% do volume")
+    return int(atingem.min())
 
 
 # ---------------------------------------------------------------- origem

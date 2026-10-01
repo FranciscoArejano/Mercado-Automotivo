@@ -107,3 +107,24 @@ def test_phev_com_potencia_colada_e_marcador_phev():
     registro = pbe.ler_linha(linha, MARCAS)
     assert registro["tipo_propulsao"] == "HIBRIDO"
     assert registro["marcador_nome"] == "PHEV"
+
+
+def test_extracao_guarda_a_linha_de_cima_e_ignora_cabecalho():
+    """Linhas copiadas do texto extraido da tabela de 2017 (pagina 3) e do cabecalho."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src" / "ferramentas"))
+    import pandas as pd
+    import pbe_extracao
+
+    linhas = pd.DataFrame({"pagina": [3, 3, 3, 4, 4], "linha": [
+        "NOVO ONIX",
+        "COMPACTO CHEVROLET 1.0MT LS / 1.0MT LT 1.0L - 8V M-6 S E F 0,031 0,482 0,008 B 0 95 "
+        "8,8 10,5 12,9 15,3 1,56 A B SIM",
+        "(MY17)",
+        "WWW.INMETRO.GOV.BR WWW.CONPET.GOV.BR WWW.CONPET.GOV.BR",
+        "COMPACTO CHEVROLET 1.4MT ACT 1.4L - 8V M-6 S E F 0,029 0,549 0,013 B 0 102 8,3 9,4 "
+        "12,4 13,8 1,68 C B -",
+    ]})
+    lidas, _ = pbe_extracao.interpretar(linhas, "x.pdf", "2017", MARCAS)
+    assert list(lidas["linha_acima"]) == ["NOVO ONIX", ""]

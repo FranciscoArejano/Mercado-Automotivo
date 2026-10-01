@@ -10,22 +10,29 @@ Propulsao, contra o PBE (so' nas linhas que divergem dele, ou que estao ausentes
 dele entre os maiores modelos):
 
 - **P1** -- tipo que o PBE mostra e a proposta nao tem entra no conjunto. O
-  `Hibrido` do PBE so' entra como `hev` quando o nome da versao diz HEV: o PBE
-  rotula hibrido leve como Hibrido (Stonic MHEV, Forester MHEV, Sportage TMHEV
-  estao la' com o nome dizendo), entao sem o nome o rotulo nao escolhe entre
-  `hev` e `mhev`, e a linha vai para decisao humana. Tres artefatos conhecidos do
-  PBE tambem vao para decisao humana em vez de entrar: tipo que so' aparece num
+  `Hibrido` do PBE so' entra como `hev` quando o nome da versao diz HEV. Tres
+  artefatos conhecidos do PBE vao para decisao humana em vez de entrar: tipo que
+  so' aparece num
   ano dividido entre duas vigencias do modelo (cada ano vai para a vigencia com
   mais meses nele -- o Compass de 2016 e' das duas geracoes); combustao que so'
   aparece nas tabelas sem coluna de propulsao (ate' 2020), quando a proposta tem
   eletrificado (o Prius sem HYBRID no nome sai como gasolina); e combustao de
   versao cujo nome diz HYBRID (RAV4 S HYBRID esta' em Combustao em 2026).
+- **P4** -- `Hibrido` do PBE sem HEV no nome entra como `hibrido_indefinido`
+  (decisao 1 da rodada das seis decisoes). O PBE rotula hibrido leve como
+  Hibrido (Stonic MHEV, Forester MHEV, Sportage TMHEV estao la' com o nome
+  dizendo), entao o rotulo nao escolhe entre `hev` e `mhev`; na eletrificacao o
+  valor conta como `mhev` e nunca leva a `total`.
 - **P2** -- tipo que a proposta tem e o PBE nao mostra fica se e' anterior ao
-  primeiro ano do modelo no PBE. A proposta nao data cada tipo; a regra usa
-  a vigencia: inteira antes do primeiro ano (ou antes de 2009, quando o PBE
-  nao existia) mantem tudo; com pelo menos `MESES_ANTES_P2` meses antes do
-  primeiro ano mantem os tipos de combustao, com ressalva (condicao necessaria,
-  nao prova). Tipo eletrificado ausente do PBE vai sempre para decisao humana.
+  momento em que o PBE podia registra-lo. Desde a decisao 3, esse momento e' o
+  `corte`: o primeiro ano em que o PBE cobre `LIMIAR_COBERTURA`% do volume do
+  painel (`validacao_classificacao.cobertura_por_ano`). Antes dele, ausencia no
+  PBE nao informa. Linha ausente do PBE: vigencia inteira antes do corte mantem
+  tudo; senao, decisao humana. Linha que diverge: com pelo menos
+  `MESES_ANTES_P2` meses antes do primeiro ano do modelo no PBE e do corte
+  (o que vier antes), mantem os tipos de combustao, com ressalva (condicao
+  necessaria, nao prova). Tipo eletrificado ausente do PBE vai sempre para
+  decisao humana.
 - **P3** -- `Hibrido` do PBE contra `mhev` da proposta: fica `mhev` se o nome da
   versao declara hibrido leve (o mapeamento ja' faz isso, e essas linhas nem
   divergem); senao, decisao humana.
@@ -40,15 +47,27 @@ buscar fonte, e nas que tem fonte que contradiz ou ajusta a data):
   vigencia vai para o mes da fonte. Exige mes e evento efetivo (inicio, fim ou
   periodo de producao local); plano ou anuncio nao basta.
 - **O3** -- `contradiz` e `inconclusivo` vao sempre para decisao humana; leitura
-  apoiada so' em fonte fraca tambem.
+  `complementa` ou `ajusta_data` apoiada so' em fonte fraca tambem. Para essas,
+  em vigencia de 2014 em diante, busca-se segunda fonte (decisao 5); o registro
+  das buscas esta' em `dados/referencia/segunda_fonte_buscas.csv`.
+- **O4** -- leitura `confirma` apoiada so' em fonte fraca: aceita, marcada
+  `fonte_fraca` (decisao 5). Proposta e pagina da web nao sao evidencia
+  independente -- o conhecimento que gerou a proposta vem em parte da mesma web
+  --, por isso a marcacao acompanha o valor.
 
-A leitura de uma linha e' a pior entre as fontes do modelo (`ORDEM_CONFRONTO`).
+Cada decisao leva a `forca` da evidencia: `forte` (PBE; fonte oficial ou de
+imprensa especializada) ou `fraca` (P2, que decide sem evidencia positiva; O4).
+Dela sai a procedencia que a fase 2 vai carregar (decisao 6).
 
-Montagem local (`montagem_local`): `desconhecido` por padrao; so' muda onde
-`dados/referencia/montagem_fontes.csv` traz uma fonte, com trecho copiado, que
-declara o modo para um periodo que toca a vigencia, e a linha nao e'
-`importado` (montagem no exterior, como a dos furgoes do Uruguai, nao e' local).
-`montagem_cobertura` diz se a fonte cobre a vigencia inteira ou so' parte dela.
+A leitura de uma linha e' a pior entre as fontes do modelo (`ORDEM_CONFRONTO`): se
+alguma contradiz ou e' inconclusiva, essa; senao, a pior entre as fontes fortes,
+quando ha' alguma -- a segunda fonte forte decide no lugar da primeira, fraca.
+
+Montagem local: tabela de periodos propria (`periodos_montagem`, decisao 4).
+O modo (`fabricacao`, `ckd`, `skd`) so' vale dentro do periodo que uma fonte de
+`dados/referencia/montagem_fontes.csv`, com trecho copiado, declara; fora dele,
+`desconhecido`; em vigencia `importado`, `nao_se_aplica` (a montagem dos furgoes
+no Uruguai e' do pais de origem, nao local).
 """
 
 from __future__ import annotations
@@ -59,8 +78,9 @@ from dataclasses import dataclass, field
 import pandas as pd
 
 from . import classificacao, config, tipo_fonte
-from .validacao_classificacao import (CHAVE, ORDEM_CONFRONTO, PRIMEIRO_ANO_PBE,
-                                      ULTIMO_ANO_SEM_COLUNA, _meses_no_ano, casos_de_origem)
+from .validacao_classificacao import (CHAVE, LIMIAR_COBERTURA, ORDEM_CONFRONTO,
+                                      PRIMEIRO_ANO_PBE, ULTIMO_ANO_SEM_COLUNA, _meses_no_ano,
+                                      casos_de_origem)
 
 COMBUSTAO = frozenset({"gasolina", "flex", "diesel"})
 ELETRIFICADAS = frozenset({"mhev", "hev", "phev", "reev", "bev"})
@@ -73,21 +93,19 @@ EVENTOS_EFETIVOS = frozenset({"inicio_producao_local", "fim_producao_local",
                               "producao_local_periodo"})
 MES = re.compile(r"^\d{4}-\d{2}$")
 LOCAL = frozenset({"nacional", "ambos"})
-MODOS_MONTAGEM = ("fabricacao", "ckd", "skd", "desconhecido")
+MODOS_MONTAGEM = ("fabricacao", "ckd", "skd", "desconhecido", "nao_se_aplica")
+# Janela dos artigos de tarifa e eletrificacao: so' nela se busca segunda fonte.
+INICIO_JANELA_SEGUNDA_FONTE = "2014-01"
 
 
 def carregar_regras() -> pd.DataFrame:
     return pd.read_csv(config.REGRAS_ADJUDICACAO, dtype=str, keep_default_na=False)
 
 
-def carregar_fontes(mapa: dict[str, str] | None = None) -> pd.DataFrame:
-    """Fontes de origem com `tipo_fonte` recalculado pelo mapa dado.
-
-    O mapa padrao e' o de `config/tipo_fonte_dominio.csv`; outro mapa serve ao
-    teste de sensibilidade.
-    """
+def carregar_fontes() -> pd.DataFrame:
+    """Fontes de origem com `tipo_fonte` recalculado de `config/tipo_fonte_dominio.csv`."""
     fontes = pd.read_csv(config.ORIGEM_FONTES, dtype=str, keep_default_na=False)
-    return tipo_fonte.com_tipo(fontes, mapa if mapa is not None else tipo_fonte.carregar_mapa())
+    return tipo_fonte.com_tipo(fontes, tipo_fonte.carregar_mapa())
 
 
 # ------------------------------------------------------------- utilitarios
@@ -182,14 +200,13 @@ def _guarda_p1(tipo: str, versoes: pd.DataFrame, divididos: set[int],
 
 
 def propulsao(linha: pd.Series, casado_chave: pd.DataFrame | None, primeiro_ano: int | None,
-              linhas_modelo: pd.DataFrame, p1_literal: bool = False) -> Resultado:
-    """P1, P2 e P3 numa linha que diverge do PBE ou esta' ausente dele.
+              linhas_modelo: pd.DataFrame, corte: int) -> Resultado:
+    """P1, P2, P3 e P4 numa linha que diverge do PBE ou esta' ausente dele.
 
-    `p1_literal` aplica P1 tambem ao Hibrido sem HEV no nome (contrafactual
-    para o log; o padrao e' mandar para decisao humana).
+    `corte` e' o primeiro ano em que o PBE cobre `LIMIAR_COBERTURA`% do volume.
     """
     if linha["pbe_situacao"] == "ausente":
-        return _ausente(linha, primeiro_ano)
+        return _ausente(linha, primeiro_ano, corte)
     proposta = {p for p in linha["propulsao_oferecida"].split("+") if p}
     texto_proposta = linha["propulsao_oferecida"] or "(vazia)"
     so_pbe, so_proposta = _diferenca(linha["pbe_diferenca"])
@@ -197,46 +214,54 @@ def propulsao(linha: pd.Series, casado_chave: pd.DataFrame | None, primeiro_ano:
     divididos = _anos_divididos(linha, linhas_modelo, anos)
     r = Resultado()
     acrescentados: list[tuple[str, str]] = []
+    indefinidos = ""
 
     for tipo in _ordenados(so_pbe):
         versoes = _versoes(casado_chave, anos, tipo)
         nomes = _exemplos(versoes["modelo_versao"])
+        if versoes.empty:
+            r.pendencias.append(f"P1 nao decide: {tipo} sem versao do PBE nos anos da vigencia")
+            continue
         if tipo == "hev" and "mhev" in proposta:
             r.pendencias.append(
                 f"P3 nao decide: o PBE diz Hibrido sem declarar hibrido leve no nome ({nomes}); "
                 "a proposta diz mhev")
             continue
-        if tipo == "hev" and not p1_literal:
-            sem_hev = versoes[~versoes["marcador_nome"].str.split("+").apply(
-                lambda m: "HEV" in m)]
-            if len(versoes) == 0 or len(sem_hev):
-                r.pendencias.append(
-                    "P1 nao decide: o Hibrido do PBE sem HEV no nome pode ser hibrido leve "
-                    f"({_exemplos(sem_hev['modelo_versao'])}); hev ou mhev?")
-                continue
         guarda = _guarda_p1(tipo, versoes, divididos, proposta)
         if guarda:
             r.pendencias.append(f"P1 nao decide: {guarda}")
+            continue
+        if tipo == "hev":
+            com_hev = versoes["marcador_nome"].str.split("+").apply(lambda m: "HEV" in m)
+            if com_hev.any():
+                acrescentados.append(("hev", _exemplos(versoes.loc[com_hev, "modelo_versao"])))
+            if (~com_hev).any():
+                indefinidos = _exemplos(versoes.loc[~com_hev, "modelo_versao"])
             continue
         acrescentados.append((tipo, nomes))
 
     if acrescentados:
         novo = _ordenados(proposta | {t for t, _ in acrescentados})
-        ressalvas = []
-        if not proposta:
-            ressalvas.append("proposta vazia: o conjunto vem so' do PBE")
-        if any(t == "hev" for t, _ in acrescentados) and p1_literal:
-            ressalvas.append("hev de Hibrido sem HEV no nome (leitura literal)")
         r.resolucoes.append({
-            "regra": "P1", "antes": texto_proposta, "depois": "+".join(novo),
+            "regra": "P1", "forca": "forte", "antes": texto_proposta, "depois": "+".join(novo),
             "base": "; ".join(f"{t}: PBE {linha['pbe_anos']} ({n})" for t, n in acrescentados),
-            "ressalva": "; ".join(ressalvas)})
+            "ressalva": "proposta vazia: o conjunto vem so' do PBE" if not proposta else ""})
+        proposta = set(novo)
+    if indefinidos:
+        novo = _ordenados(proposta | {"hibrido_indefinido"})
+        r.resolucoes.append({
+            "regra": "P4", "forca": "forte", "antes": "+".join(_ordenados(proposta)) or "(vazia)",
+            "depois": "+".join(novo),
+            "base": f"Hibrido no PBE {linha['pbe_anos']} sem HEV no nome ({indefinidos})",
+            "ressalva": ""})
         proposta = set(novo)
 
-    meses_antes = 0
-    if primeiro_ano is not None:
-        meses_antes = max(0, min(_mes(f"{primeiro_ano}-01"), _mes(linha["vigencia_fim"]) + 1)
-                          - _mes(linha["vigencia_inicio"]))
+    limite = min(a for a in (primeiro_ano, corte) if a is not None)
+    meses_antes = max(0, min(_mes(f"{limite}-01"), _mes(linha["vigencia_fim"]) + 1)
+                      - _mes(linha["vigencia_inicio"]))
+    referencia = (f"{limite}, primeiro ano do modelo no PBE" if limite == primeiro_ano
+                  else f"{limite}, ano em que o PBE passou a cobrir {LIMIAR_COBERTURA:.0f}% do "
+                       "volume")
     mantidos = []
     for tipo in _ordenados(so_proposta):
         if tipo == "mhev" and "hev" in so_pbe:
@@ -246,17 +271,17 @@ def propulsao(linha: pd.Series, casado_chave: pd.DataFrame | None, primeiro_ano:
         elif tipo in COMBUSTAO:
             r.pendencias.append(
                 f"P2 nao decide: {tipo} so' na proposta; a vigencia tem {meses_antes} meses antes "
-                f"de {primeiro_ano}, primeiro ano do modelo no PBE (minimo {MESES_ANTES_P2})")
+                f"de {referencia} (minimo {MESES_ANTES_P2})")
         else:
             r.pendencias.append(
                 f"P2 nao decide: {tipo} so' na proposta; tipo eletrificado ausente do PBE vai "
                 "para decisao humana")
     if mantidos:
         r.resolucoes.append({
-            "regra": "P2", "antes": "+".join(_ordenados(proposta)),
+            "regra": "P2", "forca": "fraca", "antes": "+".join(_ordenados(proposta)),
             "depois": "+".join(_ordenados(proposta)),
             "base": f"mantem {'+'.join(mantidos)}: a vigencia tem {meses_antes} meses antes de "
-                    f"{primeiro_ano}, primeiro ano do modelo no PBE",
+                    f"{referencia}",
             "ressalva": "condicao necessaria, nao prova: a proposta nao data o tipo; conferir"})
 
     r.valor_apos_regras = "+".join(_ordenados(proposta))
@@ -265,20 +290,17 @@ def propulsao(linha: pd.Series, casado_chave: pd.DataFrame | None, primeiro_ano:
     return r
 
 
-def _ausente(linha: pd.Series, primeiro_ano: int | None) -> Resultado:
+def _ausente(linha: pd.Series, primeiro_ano: int | None, corte: int) -> Resultado:
     r = Resultado(valor_apos_regras=linha["propulsao_oferecida"])
     proposta = linha["propulsao_oferecida"]
     if not proposta:
         r.pendencias.append("propulsao sem proposta e modelo ausente do PBE nesta vigencia")
         return r
-    ressalva = ""
     if linha["vigencia_fim"] < f"{PRIMEIRO_ANO_PBE}-01":
         base = f"vigencia inteira anterior ao PBE ({PRIMEIRO_ANO_PBE})"
-    elif primeiro_ano is not None and linha["vigencia_fim"] < f"{primeiro_ano}-01":
-        base = f"vigencia inteira anterior a {primeiro_ano}, primeiro ano do modelo no PBE"
-        ressalva = (f"o PBE ja' existia em parte da vigencia (desde {PRIMEIRO_ANO_PBE}) e nao "
-                    "listou o modelo: P2 mantem pelo texto da regra, mas a razao dela (o PBE nao "
-                    "tinha como registrar) nao vale aqui")
+    elif linha["vigencia_fim"] < f"{corte}-01":
+        base = (f"vigencia inteira anterior a {corte}, ano em que o PBE passou a cobrir "
+                f"{LIMIAR_COBERTURA:.0f}% do volume: ausencia nao informativa")
     else:
         if primeiro_ano is None:
             detalhe = "o modelo nao aparece no PBE em ano nenhum"
@@ -286,10 +308,11 @@ def _ausente(linha: pd.Series, primeiro_ano: int | None) -> Resultado:
             detalhe = f"o modelo aparece no PBE desde {primeiro_ano}, mas nao nos anos desta vigencia"
         if linha.get("pbe_nota"):
             detalhe += f" ({linha['pbe_nota']})"
-        r.pendencias.append(f"ausente no PBE: {detalhe}")
+        r.pendencias.append(f"ausente no PBE com a vigencia depois de {corte}, quando a ausencia "
+                            f"passa a informar: {detalhe}")
         return r
-    r.resolucoes.append({"regra": "P2", "antes": proposta, "depois": proposta,
-                         "base": f"mantem tudo: {base}", "ressalva": ressalva})
+    r.resolucoes.append({"regra": "P2", "forca": "fraca", "antes": proposta, "depois": proposta,
+                         "base": f"mantem tudo: {base}", "ressalva": ""})
     r.decisao = _decisao_propulsao(proposta)
     return r
 
@@ -375,19 +398,46 @@ def _fronteiras(linhas_modelo: pd.DataFrame, evento: str, data: str) -> dict[int
     return mudancas
 
 
+def carregar_buscas() -> dict[tuple, dict]:
+    """Buscas de segunda fonte sem sucesso, por chave (decisao 5)."""
+    if not config.SEGUNDA_FONTE_BUSCAS.exists():
+        return {}
+    buscas = pd.read_csv(config.SEGUNDA_FONTE_BUSCAS, dtype=str, keep_default_na=False)
+    return {tuple(b[CHAVE]): b.to_dict() for _, b in buscas.iterrows()}
+
+
+def _nota_segunda_fonte(linha: pd.Series, leitura: str, busca: dict | None) -> str:
+    if leitura not in ("complementa", "ajusta_data"):
+        return ""
+    if linha["vigencia_inicio"] < INICIO_JANELA_SEGUNDA_FONTE:
+        return (f" -- vigencia anterior a {INICIO_JANELA_SEGUNDA_FONTE[:4]}: segunda fonte nao "
+                "buscada (decisao 5)")
+    if busca is None:
+        return " -- segunda fonte ainda nao buscada"
+    return f" -- segunda fonte buscada em {busca['data_busca']} e nao achada"
+
+
 def origem(linha: pd.Series, indice: int, fontes_chave: pd.DataFrame | None, caso: bool,
-           linhas_modelo: pd.DataFrame) -> Resultado | None:
-    """O1, O2 e O3 numa linha. None quando a linha esta' fora do universo de origem."""
+           linhas_modelo: pd.DataFrame, busca: dict | None = None) -> Resultado | None:
+    """O1 a O4 numa linha. None quando a linha esta' fora do universo de origem."""
     valor = linha["origem_producao"]
     if fontes_chave is None or fontes_chave.empty:
         if not caso:
             return None
         return Resultado(pendencias=["origem sem fonte"], valor_apos_regras=valor)
-    leitura = min(fontes_chave["confronto_com_proposta"], key=ORDEM_CONFRONTO.index)
-    if not caso and leitura not in ("contradiz", "ajusta_data"):
+    pior = min(fontes_chave["confronto_com_proposta"], key=ORDEM_CONFRONTO.index)
+    if not caso and pior not in ("contradiz", "ajusta_data"):
         return None
     r = Resultado(valor_apos_regras=valor)
-    de_leitura = fontes_chave[fontes_chave["confronto_com_proposta"] == leitura]
+    # contradiz e inconclusivo de qualquer fonte mandam (O3); fora isso, a fonte forte
+    # vem antes da fraca: a segunda fonte forte decide no lugar da primeira, fraca.
+    if pior in ("contradiz", "inconclusivo"):
+        consideradas = fontes_chave
+    else:
+        fortes_todas = fontes_chave[fontes_chave["tipo_fonte"].isin(tipo_fonte.FORTES)]
+        consideradas = fortes_todas if not fortes_todas.empty else fontes_chave
+    leitura = min(consideradas["confronto_com_proposta"], key=ORDEM_CONFRONTO.index)
+    de_leitura = consideradas[consideradas["confronto_com_proposta"] == leitura]
     fortes = de_leitura[de_leitura["tipo_fonte"].isin(tipo_fonte.FORTES)]
 
     if leitura in ("contradiz", "inconclusivo"):
@@ -397,8 +447,17 @@ def origem(linha: pd.Series, indice: int, fontes_chave: pd.DataFrame | None, cas
                             f"({_descrever(de_leitura)}){nota}")
         return r
     if fortes.empty:
+        if leitura == "confirma" and valor:
+            r.resolucoes.append({"regra": "O4", "forca": "fraca", "antes": f"origem_producao={valor}",
+                                 "depois": f"origem_producao={valor}",
+                                 "base": f"confirma, so' fonte fraca: {_descrever(de_leitura)}",
+                                 "ressalva": "fonte_fraca: proposta e pagina da web nao sao "
+                                             "evidencia independente"})
+            r.decisao = f"origem_producao={valor}"
+            return r
         r.pendencias.append(f"O3: leitura '{leitura.replace('_', ' ')}' apoiada so' em fonte "
-                            f"fraca ({_descrever(de_leitura)})")
+                            f"fraca ({_descrever(de_leitura)})"
+                            + _nota_segunda_fonte(linha, leitura, busca))
         return r
 
     if leitura == "ajusta_data":
@@ -421,11 +480,11 @@ def origem(linha: pd.Series, indice: int, fontes_chave: pd.DataFrame | None, cas
                 f"({fonte['tipo_fonte']}, {tipo_fonte.dominio(fonte['origem_fonte_url'])})")
         if indice in mudancas:
             atributo, antes, depois = mudancas[indice]
-            r.resolucoes.append({"regra": "O2", "antes": f"{atributo}={antes}",
+            r.resolucoes.append({"regra": "O2", "forca": "forte", "antes": f"{atributo}={antes}",
                                  "depois": f"{atributo}={depois}", "base": base, "ressalva": ""})
             r.decisao = f"{atributo}={depois}"
         else:
-            r.resolucoes.append({"regra": "O2", "antes": f"origem_producao={valor}",
+            r.resolucoes.append({"regra": "O2", "forca": "forte", "antes": f"origem_producao={valor}",
                                  "depois": f"origem_producao={valor}",
                                  "base": base + "; a fronteira ajustada nao toca esta vigencia",
                                  "ressalva": ""})
@@ -437,7 +496,7 @@ def origem(linha: pd.Series, indice: int, fontes_chave: pd.DataFrame | None, cas
         if not valor:
             r.pendencias.append("O1 nao decide: a fonte confirma, mas a proposta nao tem origem")
             return r
-        r.resolucoes.append({"regra": "O1", "antes": f"origem_producao={valor}",
+        r.resolucoes.append({"regra": "O1", "forca": "forte", "antes": f"origem_producao={valor}",
                              "depois": f"origem_producao={valor}", "base": f"confirma: {base}",
                              "ressalva": ""})
         r.decisao = f"origem_producao={valor}"
@@ -454,7 +513,7 @@ def origem(linha: pd.Series, indice: int, fontes_chave: pd.DataFrame | None, cas
             continue
         if valor and valor != indicado:
             continue
-        r.resolucoes.append({"regra": "O1", "antes": f"origem_producao={valor or '(vazia)'}",
+        r.resolucoes.append({"regra": "O1", "forca": "forte", "antes": f"origem_producao={valor or '(vazia)'}",
                              "depois": f"origem_producao={indicado}",
                              "base": f"complementa: {fonte['evento']} "
                                      f"{fonte['origem_data_fonte']} ({base})",
@@ -470,14 +529,77 @@ def origem(linha: pd.Series, indice: int, fontes_chave: pd.DataFrame | None, cas
 # ---------------------------------------------------------------- aplicacao
 
 
+# ------------------------------------------------------------- procedencia
+
+# Decisao 6: a dimensao final carrega, por atributo, de onde veio o valor.
+PROCEDENCIAS = ("humana", "regra_fonte_forte", "regra_fonte_fraca", "proposta")
+
+
+def _humana_toca(decisao: str, atributo: str) -> bool:
+    """A decisao humana fala deste atributo? `ok` e texto livre falam de todos."""
+    decisao = decisao.strip()
+    if not decisao:
+        return False
+    if "=" not in decisao:
+        return True
+    return any(parte.strip().startswith(f"{atributo}=") for parte in decisao.split(";"))
+
+
+def _procedencia(linha: pd.Series, atributo: str, resultado: Resultado | None,
+                 confirmacao: str) -> str:
+    """Procedencia de um atributo pela precedencia da fase 2 (humana, regra, proposta).
+
+    `pendente` (fora dos quatro valores) marca o atributo que esta' em
+    `a_adjudicar` sem decisao humana: a fase 2 nao deve rodar com ele. Fora do
+    universo das regras, o valor que uma checagem confirmou conta como decidido
+    pela regra da checagem (`confirmacao`: forte ou fraca); sem checagem que
+    confirme, e' `proposta`.
+    """
+    if _humana_toca(linha.get("decisao_humana", ""), atributo):
+        return "humana"
+    if resultado is not None and resultado.pendencias:
+        return "pendente"
+    if resultado is not None and resultado.decisao:
+        forcas = {res["forca"] for res in resultado.resolucoes}
+        return "regra_fonte_fraca" if "fraca" in forcas else "regra_fonte_forte"
+    if confirmacao:
+        return f"regra_fonte_{confirmacao}"
+    return "proposta"
+
+
+def procedencia_carroceria(linha: pd.Series) -> str:
+    """Carroceria: do sub-segmento da Fenabrave (regras S01-S10) ou do conhecimento."""
+    if _humana_toca(linha.get("decisao_humana", ""), "carroceria"):
+        return "humana"
+    parte = next((p for p in linha["fonte_da_proposta"].split(" | ")
+                  if p.startswith("carroceria:")), "")
+    if "sub-segmento da fonte" in parte and "refinada por conhecimento" not in parte:
+        return "regra_fonte_forte"
+    return "proposta"
+
+
+def _confirmacao_origem(fontes_chave: pd.DataFrame | None) -> str:
+    if fontes_chave is None or fontes_chave.empty:
+        return ""
+    confirmam = fontes_chave[fontes_chave["confronto_com_proposta"] == "confirma"]
+    if confirmam.empty or len(confirmam) < len(fontes_chave):
+        return ""  # alguma fonte nao confirma: sem confirmacao limpa
+    return "forte" if confirmam["tipo_fonte"].isin(tipo_fonte.FORTES).any() else "fraca"
+
+
+# ---------------------------------------------------------------- aplicacao
+
+
 def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, top: int,
-            p1_literal: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
+            corte: int, buscas: dict | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
     """(rascunho com colunas de regra, resolvido_por_regra).
 
     Colunas novas no rascunho: `regras_aplicadas`, `pendencias`,
-    `propulsao_apos_regras`, `origem_apos_regras`, `origem_tipos_fonte` e
-    `decisao_por_regra`.
+    `propulsao_apos_regras`, `origem_apos_regras`, `origem_tipos_fonte`,
+    `procedencia_propulsao`, `procedencia_carroceria`, `procedencia_origem` e
+    `decisao_por_regra`. `corte` e' o ano de corte da P2 (decisao 3).
     """
+    buscas = buscas or {}
     saida = rascunho.copy()
     no_pbe = casado[casado["marca"] != ""]
     por_chave = {k: g for k, g in no_pbe.groupby(CHAVE)}
@@ -488,16 +610,19 @@ def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, 
 
     resolvidos, colunas = [], {c: {} for c in ("regras_aplicadas", "pendencias",
                                                 "propulsao_apos_regras", "origem_apos_regras",
-                                                "origem_tipos_fonte", "decisao_por_regra")}
+                                                "origem_tipos_fonte", "procedencia_propulsao",
+                                                "procedencia_carroceria", "procedencia_origem",
+                                                "decisao_por_regra")}
     for indice, linha in saida.iterrows():
         chave = tuple(linha[CHAVE])
         resultados: list[tuple[str, Resultado]] = []
         if linha["pbe_situacao"] == "diverge" or (linha["pbe_situacao"] == "ausente"
                                                   and linha["posicao"] <= top):
             resultados.append(("propulsao_oferecida", propulsao(
-                linha, por_chave.get(chave), primeiro.get(chave), modelos[chave], p1_literal)))
+                linha, por_chave.get(chave), primeiro.get(chave), modelos[chave], corte)))
         fontes_chave = fontes_por_chave.get(chave)
-        r_origem = origem(linha, indice, fontes_chave, bool(casos[indice]), modelos[chave])
+        r_origem = origem(linha, indice, fontes_chave, bool(casos[indice]), modelos[chave],
+                          buscas.get(chave))
         if r_origem is not None:
             resultados.append(("origem_producao", r_origem))
 
@@ -505,7 +630,7 @@ def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, 
         for atributo, r in resultados:
             for res in r.resolucoes:
                 resolvidos.append({
-                    "regra": res["regra"], "atributo": atributo,
+                    "regra": res["regra"], "forca": res["forca"], "atributo": atributo,
                     "situacao_da_linha": "resolvida" if not pendencias else "parcial",
                     **{c: linha[c] for c in ("posicao", "marca", "modelo", "segmento",
                                              "vigencia_inicio", "vigencia_fim",
@@ -525,10 +650,18 @@ def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, 
             "+".join(t for t in tipo_fonte.TIPOS if t in set(fontes_chave["tipo_fonte"]))
         colunas["decisao_por_regra"][indice] = "; ".join(r.decisao for _, r in resultados
                                                          if r.decisao)
+        por_atributo = dict(resultados)
+        colunas["procedencia_propulsao"][indice] = _procedencia(
+            linha, "propulsao_oferecida", por_atributo.get("propulsao_oferecida"),
+            "forte" if linha["pbe_situacao"] == "concorda" else "")
+        colunas["procedencia_origem"][indice] = _procedencia(
+            linha, "origem_producao", por_atributo.get("origem_producao"),
+            _confirmacao_origem(fontes_chave) if linha["origem_producao"] else "")
+        colunas["procedencia_carroceria"][indice] = procedencia_carroceria(linha)
     for nome, valores in colunas.items():
         saida[nome] = pd.Series(valores)
     resolvido = pd.DataFrame(resolvidos, columns=[
-        "regra", "atributo", "situacao_da_linha", "posicao", "marca", "modelo", "segmento",
+        "regra", "forca", "atributo", "situacao_da_linha", "posicao", "marca", "modelo", "segmento",
         "vigencia_inicio", "vigencia_fim", "unidades_na_vigencia", "antes", "depois", "base",
         "ressalva"])
     return saida, resolvido
@@ -546,7 +679,7 @@ def a_adjudicar(com_regras: pd.DataFrame, fila_antes: pd.DataFrame) -> pd.DataFr
                "propulsao_oferecida", "propulsao_apos_regras", "pbe_propulsao", "pbe_anos",
                "pbe_diferenca", "pbe_nota", "origem_producao", "origem_apos_regras",
                "confianca_origem", "origem_confronto", "origem_tipos_fonte", "origem_data_fonte",
-               "origem_fonte_url", "montagem_local", "observacao", "decisao_por_regra",
+               "origem_fonte_url", "montagem_por_periodo", "observacao", "decisao_por_regra",
                "decisao_humana"]
     return fila.sort_values("unidades_na_vigencia", ascending=False, kind="stable")[colunas]
 
@@ -585,7 +718,7 @@ def contas(fila_antes: pd.DataFrame, com_regras: pd.DataFrame, resolvido: pd.Dat
         {"conta": "na fila depois das regras", "linhas": len(depois),
          "unidades": int(sum(unidades[k] for k in depois))},
     ]
-    for regra in ("P1", "P2", "P3", "O1", "O2"):
+    for regra in ("P1", "P2", "P3", "P4", "O1", "O2", "O4"):
         parte = resolvido[resolvido["regra"] == regra]
         linhas.append({"conta": f"decisoes da regra {regra} (linhas, inclusive parciais)",
                        "linhas": len(parte), "unidades": int(parte["unidades_na_vigencia"].sum())})
@@ -612,82 +745,111 @@ def _periodo_montagem(inicio: str, fim: str) -> tuple[int, int]:
     return primeiro, ultimo
 
 
-def anexar_montagem(rascunho: pd.DataFrame, montagem: pd.DataFrame
-                    ) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """(rascunho com `montagem_local` e `montagem_cobertura`, casos com fonte)."""
-    saida = rascunho.copy()
-    saida["montagem_local"] = "desconhecido"
-    saida["montagem_cobertura"] = ""
-    saida["montagem_fonte_url"] = ""
-    casos = []
-    for _, fonte in montagem.iterrows():
-        chave = tuple(fonte[CHAVE])
-        linhas = saida[(saida["marca"] == chave[0]) & (saida["modelo"] == chave[1])
-                       & (saida["segmento"] == chave[2])]
-        p_inicio, p_fim = _periodo_montagem(fonte["periodo_inicio"], fonte["periodo_fim"])
-        periodo = f"{_texto_mes(p_inicio)} a {_texto_mes(p_fim)}"
-        base = {"marca": chave[0], "modelo": chave[1], "segmento": chave[2],
-                "modo_na_fonte": fonte["montagem_local"], "onde": fonte["onde"],
-                "periodo_da_fonte": periodo, "tipo_fonte": fonte.get("tipo_fonte", ""),
-                "fonte_url": fonte["fonte_url"], "fonte_trecho": fonte["fonte_trecho"],
-                "observacao": fonte["observacao"]}
-        if fonte["onde"] != "brasil":
-            casos.append({**base, "vigencia": "", "origem_producao": "",
-                          "montagem_local": "", "aplicado": "nao: montagem no exterior; para o "
-                          "Brasil o modelo e' importado inteiro"})
+def _unidades_por_mes(unidades: pd.DataFrame) -> dict[tuple, pd.Series]:
+    """chave -> unidades por mes (indice inteiro de mes), do painel."""
+    quadro = unidades.assign(_m=unidades["mes_ref"].map(_mes))
+    return {k: g.groupby("_m")["unidades"].sum() for k, g in quadro.groupby(CHAVE)}
+
+
+def periodos_montagem(com_regras: pd.DataFrame, montagem: pd.DataFrame,
+                      unidades: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """(rascunho com `montagem_por_periodo`, tabela de periodos de montagem).
+
+    Decisao 4: a montagem tem periodo proprio (`montagem_inicio`, `montagem_fim`),
+    no padrao de vigencia do mapa de grupos. Dentro do periodo que uma fonte
+    cobre, o modo da fonte; fora dele, `desconhecido`; em vigencia `importado`,
+    `nao_se_aplica` -- para o carro importado o modo de montagem local nao existe.
+    Os periodos de cada modelo cobrem todos os meses das suas vigencias, sem
+    sobreposicao.
+    """
+    saida = com_regras.copy()
+    por_mes = _unidades_por_mes(unidades)
+    brasil = montagem[montagem["onde"] == "brasil"] if not montagem.empty else montagem
+    fontes_por_chave = {k: g for k, g in brasil.groupby(CHAVE)} if not brasil.empty else {}
+    periodos, resumos = [], {}
+    for indice, linha in saida.iterrows():
+        chave = tuple(linha[CHAVE])
+        v_inicio, v_fim = _mes(linha["vigencia_inicio"]), _mes(linha["vigencia_fim"])
+        origem_linha = linha.get("origem_apos_regras", linha["origem_producao"])
+        serie = por_mes.get(chave, pd.Series(dtype=int))
+        trechos = []  # (inicio, fim, fonte) recortados na vigencia
+        fontes = fontes_por_chave.get(chave)
+        for _, fonte in (fontes.iterrows() if fontes is not None else []):
+            p_inicio, p_fim = _periodo_montagem(fonte["periodo_inicio"], fonte["periodo_fim"])
+            if p_fim >= v_inicio and p_inicio <= v_fim:
+                trechos.append((max(p_inicio, v_inicio), min(p_fim, v_fim), fonte))
+        base = {c: linha[c] for c in CHAVE + ["vigencia_inicio", "vigencia_fim"]}
+        base["origem_producao"] = origem_linha
+
+        def periodo(inicio, fim, modo, fonte=None, procedencia="proposta", observacao=""):
+            periodos.append({
+                **base, "montagem_inicio": _texto_mes(inicio), "montagem_fim": _texto_mes(fim),
+                "montagem_local": modo,
+                "unidades": int(serie[(serie.index >= inicio) & (serie.index <= fim)].sum()),
+                "fonte_url": "" if fonte is None else fonte["fonte_url"],
+                "tipo_fonte": "" if fonte is None else fonte.get("tipo_fonte", ""),
+                "procedencia": procedencia, "observacao": observacao})
+
+        if origem_linha == "importado":
+            nota = "; ".join(
+                f"a fonte declara {f['montagem_local']} de {_texto_mes(a)} a {_texto_mes(b)}, "
+                "mas a linha e' importado" + (" (origem desta vigencia em a_adjudicar)"
+                                               if "O3" in linha.get("pendencias", "") else "")
+                for a, b, f in trechos)
+            periodo(v_inicio, v_fim, "nao_se_aplica",
+                    procedencia=linha.get("procedencia_origem", "proposta"), observacao=nota)
+            resumos[indice] = "nao_se_aplica"
             continue
-        tocadas = 0
-        for indice, linha in linhas.iterrows():
-            v_inicio, v_fim = _mes(linha["vigencia_inicio"]), _mes(linha["vigencia_fim"])
-            if p_fim < v_inicio or p_inicio > v_fim:
-                continue
-            tocadas += 1
-            origem_linha = linha.get("origem_apos_regras", linha["origem_producao"])
-            if origem_linha == "importado":
-                casos.append({**base, "vigencia": f"{linha['vigencia_inicio']} a "
-                                                  f"{linha['vigencia_fim']}",
-                              "origem_producao": origem_linha, "montagem_local": "desconhecido",
-                              "aplicado": "nao: a linha e' importado; o modo so' vale para a "
-                                          "parte de producao local"})
-                continue
-            inteira = p_inicio <= v_inicio and p_fim >= v_fim
-            cobertura = "vigencia inteira" if inteira else (
-                f"parcial: a fonte cobre {periodo}; vigencia {linha['vigencia_inicio']} a "
-                f"{linha['vigencia_fim']}")
-            atual = saida.at[indice, "montagem_local"]
-            if atual not in ("desconhecido", fonte["montagem_local"]):
-                saida.at[indice, "montagem_local"] = "desconhecido"
-                cobertura = f"fontes divergem ({atual} e {fonte['montagem_local']})"
+        pontos = sorted({v_inicio, v_fim + 1} | {a for a, _, _ in trechos}
+                        | {b + 1 for _, b, _ in trechos})
+        partes = []
+        for inicio, proximo in zip(pontos[:-1], pontos[1:]):
+            fim = proximo - 1
+            cobrem = [f for a, b, f in trechos if a <= inicio and b >= fim]
+            modos = {f["montagem_local"] for f in cobrem}
+            if not cobrem:
+                periodo(inicio, fim, "desconhecido")
+                modo = "desconhecido"
+            elif len(modos) > 1:
+                periodo(inicio, fim, "desconhecido",
+                        observacao=f"fontes divergem: {', '.join(sorted(modos))}")
+                modo = "desconhecido"
             else:
-                saida.at[indice, "montagem_local"] = fonte["montagem_local"]
-            saida.at[indice, "montagem_cobertura"] = cobertura
-            saida.at[indice, "montagem_fonte_url"] = fonte["fonte_url"]
-            casos.append({**base, "vigencia": f"{linha['vigencia_inicio']} a "
-                                              f"{linha['vigencia_fim']}",
-                          "origem_producao": linha["origem_producao"],
-                          "montagem_local": saida.at[indice, "montagem_local"],
-                          "aplicado": cobertura})
-        if not tocadas:
-            casos.append({**base, "vigencia": "", "origem_producao": "", "montagem_local": "",
-                          "aplicado": "nao: o periodo da fonte nao toca vigencia nenhuma"})
-    return saida, pd.DataFrame(casos)
+                fonte = cobrem[0]
+                forte = fonte.get("tipo_fonte", "") in tipo_fonte.FORTES
+                modo = fonte["montagem_local"]
+                periodo(inicio, fim, modo, fonte,
+                        "regra_fonte_forte" if forte else "regra_fonte_fraca",
+                        fonte.get("observacao", ""))
+            partes.append(f"{modo} {_texto_mes(inicio)} a {_texto_mes(fim)}")
+        resumos[indice] = partes[0].split(" ")[0] if len(partes) == 1 else "; ".join(partes)
+    saida["montagem_por_periodo"] = pd.Series(resumos)
+    colunas = CHAVE + ["vigencia_inicio", "vigencia_fim", "origem_producao", "montagem_inicio",
+                       "montagem_fim", "montagem_local", "unidades", "fonte_url", "tipo_fonte",
+                       "procedencia", "observacao"]
+    return saida, pd.DataFrame(periodos, columns=colunas)
 
 
-def resumo_montagem(com_montagem: pd.DataFrame) -> pd.DataFrame:
+def exterior_montagem(montagem: pd.DataFrame) -> pd.DataFrame:
+    """Fontes de montagem no exterior: registradas, nao aplicadas."""
+    if montagem.empty:
+        return montagem
+    return montagem[montagem["onde"] != "brasil"]
+
+
+def resumo_montagem(periodos: pd.DataFrame) -> pd.DataFrame:
+    total = periodos["unidades"].sum()
     linhas = []
-    total = com_montagem["unidades_na_vigencia"].sum()
     for rotulo, filtro in [
-        ("todas as linhas", slice(None)),
-        ("origem nacional ou ambos", com_montagem["origem_producao"].isin(LOCAL)),
-        ("origem importado", com_montagem["origem_producao"] == "importado"),
-        ("origem sem proposta", com_montagem["origem_producao"] == ""),
+        ("todos os periodos", periodos.index == periodos.index),
+        ("origem nacional ou ambos", periodos["origem_producao"].isin(LOCAL)),
+        ("origem importado", periodos["origem_producao"] == "importado"),
+        ("origem sem proposta", periodos["origem_producao"] == ""),
     ]:
-        parte = com_montagem[filtro] if not isinstance(filtro, slice) else com_montagem
+        parte = periodos[filtro]
         for modo in MODOS_MONTAGEM:
             sub = parte[parte["montagem_local"] == modo]
-            linhas.append({"recorte": rotulo, "montagem_local": modo,
-                           "modelo_vigencias": len(sub),
-                           "unidades": int(sub["unidades_na_vigencia"].sum()),
-                           "pct_do_classificado": round(100 * sub["unidades_na_vigencia"].sum()
-                                                        / total, 2)})
+            linhas.append({"recorte": rotulo, "montagem_local": modo, "periodos": len(sub),
+                           "unidades": int(sub["unidades"].sum()),
+                           "pct_do_classificado": round(100 * sub["unidades"].sum() / total, 2)})
     return pd.DataFrame(linhas)

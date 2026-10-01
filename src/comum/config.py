@@ -64,6 +64,8 @@ ORIGEM_FONTES = DIR_DADOS / "referencia" / "origem_fontes.csv"
 MONTAGEM_FONTES = DIR_DADOS / "referencia" / "montagem_fontes.csv"
 TIPO_FONTE_DOMINIO = DIR_CONFIG / "tipo_fonte_dominio.csv"
 REGRAS_ADJUDICACAO = DIR_CONFIG / "regras_adjudicacao.csv"
+SEGUNDA_FONTE_BUSCAS = DIR_DADOS / "referencia" / "segunda_fonte_buscas.csv"
+PBE_COBERTURA = DIR_SAIDAS / "pbe_cobertura_por_ano.csv"
 
 CANDIDATOS = DIR_SAIDAS / "candidatos.xlsx"
 VALIDACAO = DIR_SAIDAS / "validacao.md"

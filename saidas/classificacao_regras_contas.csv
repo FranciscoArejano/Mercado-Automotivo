@@ -1,20 +1,25 @@
-conta,linhas,unidades,modelos
-na fila antes das regras,163,12972416,
-saiu da fila por P1,15,2003893,
-saiu da fila por P2,11,1347645,
-saiu da fila por P2+O1,2,85345,
-saiu da fila por O2,2,451074,
-saiu da fila por P1+O1,2,577254,
-saiu da fila por P1+P2,1,91294,
-saiu da fila (total),33,4556505,
-ficou na fila,130,8415911,
-... com parte resolvida por regra,33,991751,
-entrou na fila nesta rodada,24,2763237,
-na fila depois das regras,154,11179148,
-"decisoes da regra P1 (linhas, inclusive parciais)",33,3075518,
-"decisoes da regra P2 (linhas, inclusive parciais)",27,1778365,
-"decisoes da regra P3 (linhas, inclusive parciais)",0,0,
-"decisoes da regra O1 (linhas, inclusive parciais)",16,1534414,
-"decisoes da regra O2 (linhas, inclusive parciais)",2,451074,
-sensibilidade: revista automotiva de consumo como imprensa_geral: voltam a' fila,6,829561,"GM/CRUZE HB, GM/CRUZE SEDAN, NISSAN/KICKS, VW/SPACE FOX"
-sensibilidade: P1 literal (hev de qualquer Hibrido do PBE): saem da fila,12,1329486,"BMW/X6, FIAT/TORO, GAC/GS4, JEEP/COMMANDER, JEEP/RENEGADE, LAND ROVER/DEFENDER, LAND ROVER/RANGE ROVER, M.BENZ/CLA200, M.BENZ/CLASSE E, M.BENZ/GLC, PORSCHE/911, VOLVO/XC40"
+conta,linhas,unidades
+na fila antes das regras,162,12552722
+saiu da fila por P2,19,1641489
+saiu da fila por P1,15,2003893
+saiu da fila por P4,9,1229351
+saiu da fila por P1+O1,5,595336
+saiu da fila por P2+O4,4,246604
+saiu da fila por P1+P4,3,100135
+saiu da fila por P2+O1,2,42458
+saiu da fila por O1,2,498586
+saiu da fila por O2,2,451074
+saiu da fila por P1+P2,1,91294
+saiu da fila por P4+O4,1,6013
+saiu da fila (total),63,6906233
+ficou na fila,99,5646489
+... com parte resolvida por regra,31,1258760
+entrou na fila nesta rodada,5,739875
+na fila depois das regras,104,6386364
+"decisoes da regra P1 (linhas, inclusive parciais)",33,3075518
+"decisoes da regra P2 (linhas, inclusive parciais)",37,2352348
+"decisoes da regra P3 (linhas, inclusive parciais)",0,0
+"decisoes da regra P4 (linhas, inclusive parciais)",18,1603165
+"decisoes da regra O1 (linhas, inclusive parciais)",23,2075510
+"decisoes da regra O2 (linhas, inclusive parciais)",2,451074
+"decisoes da regra O4 (linhas, inclusive parciais)",24,2289578

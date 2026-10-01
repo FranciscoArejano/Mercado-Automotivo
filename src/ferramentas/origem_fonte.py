@@ -10,8 +10,13 @@ imprime as frases que casam com a busca. O trecho registrado em
 guardado -- o teste `test_origem_fontes.py` confere. Assim a citacao continua
 verificavel mesmo que a pagina mude ou saia do ar.
 
+Com `--tipos`, nao abre nada: recalcula a coluna `tipo_fonte` de
+`origem_fontes.csv` a partir de `config/tipo_fonte_dominio.csv` (depois de o
+pesquisador editar o mapeamento).
+
 Uso:
     python src/ferramentas/origem_fonte.py URL --nome slug --busca "regex"
+    python src/ferramentas/origem_fonte.py --tipos
 """
 
 from __future__ import annotations
@@ -29,7 +34,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from comum import config  # noqa: E402
+import pandas as pd  # noqa: E402
+
+from comum import config, tipo_fonte  # noqa: E402
 
 DIR_PAGINAS = config.DIR_BRUTO / "origem_paginas"
 MANIFESTO = DIR_PAGINAS / "manifesto.csv"
@@ -100,12 +107,33 @@ def registrar(nome: str, url: str, texto: str) -> Path:
     return destino
 
 
+def regravar_tipos() -> int:
+    fontes = pd.read_csv(config.ORIGEM_FONTES, dtype=str, keep_default_na=False)
+    fontes = tipo_fonte.com_tipo(fontes, tipo_fonte.carregar_mapa())
+    sem = sorted({tipo_fonte.dominio(u) for u, t in
+                  zip(fontes["origem_fonte_url"], fontes["tipo_fonte"]) if not t})
+    fontes.to_csv(config.ORIGEM_FONTES, index=False)
+    print(fontes["tipo_fonte"].value_counts().to_string())
+    if sem:
+        print("dominios sem tipo em config/tipo_fonte_dominio.csv:", ", ".join(sem),
+              file=sys.stderr)
+        return 1
+    return 0
+
+
 def main() -> int:
     analisador = argparse.ArgumentParser(description=__doc__)
-    analisador.add_argument("url")
-    analisador.add_argument("--nome", required=True)
+    analisador.add_argument("url", nargs="?")
+    analisador.add_argument("--nome")
     analisador.add_argument("--busca", default="")
+    analisador.add_argument("--tipos", action="store_true",
+                            help="so' recalcular a coluna tipo_fonte de origem_fontes.csv")
     args = analisador.parse_args()
+
+    if args.tipos:
+        return regravar_tipos()
+    if not args.url or not args.nome:
+        analisador.error("URL e --nome sao obrigatorios (ou use --tipos)")
 
     texto = texto_da_pagina(baixar(args.url))
     if len(texto) < 300:

@@ -15,6 +15,7 @@ def regras():
     ("HIBRIDO", "G", "MHEV", "1.0", "mhev"),      # Kia Stonic MHEV, 2021
     ("COMBUSTAO", "G", "MHEV", "2.0", "mhev"),    # Subaru XV MHEV, 2021: o nome manda
     ("PLUG-IN", "G", "REEV", "1.5", "reev"),      # Leapmotor C10 REEV, 2026
+    ("HIBRIDO", "G", "PHEV", "2.0", "phev"),      # Range Rover PHEV, 2021: o nome manda
     ("HIBRIDO", "F", "", "1.8", "hev"),
     ("PLUG-IN", "G", "", "2.0", "phev"),
     ("ELETRICO", "E", "", "ELETRICO", "bev"),

@@ -1,26 +1,27 @@
 ordem,tipo_propulsao,combustivel,marcador_nome,valor,observacao
 1,*,*,MHEV,mhev,"O PBE nao tem categoria de hibrido leve e e' inconsistente: em 2021 o Kia Stonic MHEV e o Subaru Forester MHEV estao em Hibrido, o Subaru XV MHEV em Combustao. Onde a fabricante escreveu MHEV no nome, o nome manda."
 2,*,*,REEV,reev,"O PBE poe o eletrico com extensor em Plug-In (Leapmotor C10 REEV, 2026). Onde o nome diz REEV, o nome manda."
-3,HIBRIDO,*,*,hev,"Hibrido sem marcador de hibrido leve no nome. Pode ainda ser MHEV que a fabricante nao declarou no nome -- ver observacao da regra 1."
-4,HIBRIDO PLUG-IN,*,*,phev,
-5,PLUG-IN,*,*,phev,
-6,PLUGIN,*,*,phev,
-7,ELETRICO,*,*,bev,
-8,COMBUSTAO,G,*,gasolina,
-9,COMBUSTAO,F,*,flex,
-10,COMBUSTAO,D,*,diesel,
-11,COMBUSTAO,E,*,,"Combustao so' a etanol: nao ha' valor na lista. Fica sem mapeamento."
-12,,*,PHEV,phev,"Anos sem coluna de propulsao (ate' 2020): so' o nome da versao diz."
-13,,*,PLUG-IN,phev,
-14,,*,E-HYBRID,phev,"Porsche E-Hybrid e' plug-in."
-15,,*,HYBRID,hev,
-16,,*,HIBRIDO,hev,
-17,,*,HEV,hev,
-18,,*,BEV,bev,
-19,,*,EV,bev,
-20,,*,ELECTRIC,bev,
-21,,*,E-TRON,,"Ambiguo sem a coluna: o Audi e-tron e' eletrico, o A3 Sportback e-tron e' plug-in. Fica sem mapeamento."
-22,(motor ELETRICO),*,*,bev,"Anos sem coluna: motor escrito ELETRICO."
-23,,G,*,gasolina,"Anos sem coluna e sem marcador: combustao, pelo codigo de combustivel. Um hibrido que nao diga HYBRID no nome sai como gasolina aqui -- limitacao das tabelas ate' 2020."
-24,,F,*,flex,
-25,,D,*,diesel,
+3,*,*,PHEV,phev,"O PBE poe plug-in em Hibrido em alguns anos (Range Rover PHEV em 2021, Jaguar F-Pace PHEV em 2022). Onde o nome diz PHEV, o nome manda."
+4,HIBRIDO,*,*,hev,"Hibrido sem marcador de hibrido leve no nome. Pode ainda ser MHEV que a fabricante nao declarou no nome -- ver observacao da regra 1."
+5,HIBRIDO PLUG-IN,*,*,phev,
+6,PLUG-IN,*,*,phev,
+7,PLUGIN,*,*,phev,
+8,ELETRICO,*,*,bev,
+9,COMBUSTAO,G,*,gasolina,
+10,COMBUSTAO,F,*,flex,
+11,COMBUSTAO,D,*,diesel,
+12,COMBUSTAO,E,*,,"Combustao so' a etanol: nao ha' valor na lista. Fica sem mapeamento."
+13,,*,PHEV,phev,"Anos sem coluna de propulsao (ate' 2020): so' o nome da versao diz."
+14,,*,PLUG-IN,phev,
+15,,*,E-HYBRID,phev,"Porsche E-Hybrid e' plug-in."
+16,,*,HYBRID,hev,
+17,,*,HIBRIDO,hev,
+18,,*,HEV,hev,
+19,,*,BEV,bev,
+20,,*,EV,bev,
+21,,*,ELECTRIC,bev,
+22,,*,E-TRON,,"Ambiguo sem a coluna: o Audi e-tron e' eletrico, o A3 Sportback e-tron e' plug-in. Fica sem mapeamento."
+23,(motor ELETRICO),*,*,bev,"Anos sem coluna: motor escrito ELETRICO."
+24,,G,*,gasolina,"Anos sem coluna e sem marcador: combustao, pelo codigo de combustivel. Um hibrido que nao diga HYBRID no nome sai como gasolina aqui -- limitacao das tabelas ate' 2020."
+25,,F,*,flex,
+26,,D,*,diesel,

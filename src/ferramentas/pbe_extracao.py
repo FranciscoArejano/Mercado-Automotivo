@@ -7,7 +7,7 @@ versao (juntos -- ver `comum/pbe.py`), motor, tipo de propulsao como impresso,
 codigo de combustivel e o texto da linha inteira, para auditoria.
 
 E' transcricao: nada e' mapeado aqui. O mapeamento para a taxonomia do projeto
-e o casamento com o painel ficam em `src/ferramentas/pbe_validacao.py`.
+e o casamento com o painel ficam em `src/comum/validacao_classificacao.py`.
 
 Linha que tem motor e a trinca ar/direcao/combustivel mas nao foi lida vai
 para `saidas/pbe_linhas_nao_lidas.csv` -- quase sempre marca que falta em

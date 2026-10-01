@@ -39,10 +39,18 @@ PROPULSAO = {"COMBUSTAO", "HIBRIDO", "ELETRICO", "PLUG-IN", "PLUGIN", "HIBRIDO P
 # propulsao: o Kia Stonic MHEV de 2021 tem "MHEV" no nome e "Combustao" na
 # coluna. Ficam numa coluna propria, `marcador_nome`.
 MARCADORES_NOME = re.compile(
-    r"\b(T?MHEV|HEV|PHEV|BEV|REEV|EV|HYBRID|HIBRIDO|PLUG-?IN|E-HYBRID|ELECTRIC|ELETRICO|E-TRON)\b")
+    r"\b(T?MHEV|HEV|PHEV(?:\d+)?|BEV|REEV|EV|HYBRID|HIBRIDO|PLUG-?IN|E-HYBRID|ELECTRIC|ELETRICO|"
+    r"E-TRON)\b")
 # Grafias do mesmo marcador. A Kia escreve TMHEV (turbo hibrido leve) no
-# Sportage; sem isto ele saia como Hibrido pleno.
+# Sportage; sem isto ele saia como Hibrido pleno. A Land Rover cola a potencia
+# no marcador (RANGE ROVER SPORT PHEV404, 2021).
 SINONIMOS_MARCADOR = {"TMHEV": "MHEV"}
+
+
+def _marcador(texto: str) -> str:
+    if re.fullmatch(r"PHEV\d+", texto):
+        return "PHEV"
+    return SINONIMOS_MARCADOR.get(texto, texto)
 CODIGOS_AR = {"S", "N"}
 CODIGOS_DIRECAO = {"H", "E", "M", "E-H", "EH", "H-E"}
 COMBUSTIVEIS = {"G", "E", "F", "D"}
@@ -153,7 +161,7 @@ def ler_linha(linha: str, marcas: list[tuple[str, ...]]) -> dict | None:
         "motor": texto_motor,
         "tipo_propulsao": propulsao,
         "marcador_nome": "+".join(dict.fromkeys(
-            SINONIMOS_MARCADOR.get(m, m) for m in MARCADORES_NOME.findall(modelo_versao))),
+            _marcador(m) for m in MARCADORES_NOME.findall(modelo_versao))),
         "combustivel": combustivel,
         "texto_linha": linha,
     }

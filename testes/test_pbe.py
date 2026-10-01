@@ -97,3 +97,13 @@ def test_tmhev_da_kia_e_hibrido_leve():
     linha = ("EXTRA GRANDE KIA SPORTAGE TMHEV EX 1.6-16V HIBRIDO DCT-7 S E G 0,1")
     registro = pbe.ler_linha(linha, MARCAS)
     assert registro["marcador_nome"] == "MHEV"
+
+
+def test_phev_com_potencia_colada_e_marcador_phev():
+    """A Land Rover escreve PHEV404 no nome e o PBE de 2021 poe a versao em Hibrido.
+    Linha copiada do texto extraido da tabela de 2021."""
+    linha = ("FORA DE ESTRADA LAND ROVER RANGE ROVER SPORT PHEV404 HSE 2.0-16V A-8 S E HIBRIDO G "
+             "0,005 0,050 0,014 A \\ 76 \\ \\ 16,3 16,0 1,30 A B")
+    registro = pbe.ler_linha(linha, MARCAS)
+    assert registro["tipo_propulsao"] == "HIBRIDO"
+    assert registro["marcador_nome"] == "PHEV"

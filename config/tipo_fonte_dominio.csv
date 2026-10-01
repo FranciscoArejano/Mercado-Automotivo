@@ -1,0 +1,35 @@
+dominio,tipo_fonte,subtipo,observacao
+byd.com,oficial,montadora,Site da BYD Brasil.
+gwmmotors.com.br,oficial,montadora,Media center da GWM Brasil.
+media.jaguarlandrover.com,oficial,montadora,Sala de imprensa da Jaguar Land Rover.
+global.nissannews.com,oficial,montadora,Sala de imprensa global da Nissan.
+bmwgroup.jobs,oficial,montadora,Site de carreiras do BMW Group.
+gov.br,oficial,governo,
+autodata.com.br,imprensa_especializada,industria,Cobertura da industria automotiva (o exemplo da sua tabela).
+autoindustria.com.br,imprensa_especializada,industria,Cobertura da industria automotiva.
+motorshow.com.br,imprensa_especializada,revista_automotiva_de_consumo,"Revista Motor Show. Especializada em automovel, mas de consumo, nao de industria. FRONTEIRA: se o criterio for so' imprensa de industria, rebaixar para imprensa_geral -- o log mede quantas linhas isso devolveria a' fila."
+revistacarro.com.br,imprensa_especializada,revista_automotiva_de_consumo,Revista Carro. Mesma fronteira da Motor Show.
+autopapo.com.br,imprensa_especializada,revista_automotiva_de_consumo,Site do jornalista Boris Feldman. Mesma fronteira.
+parabrisas.perfil.com,imprensa_especializada,revista_automotiva_de_consumo,Revista automotiva argentina (grupo Perfil). Mesma fronteira.
+exame.com,imprensa_geral,,Revista de negocios.
+tribunapr.com.br,imprensa_geral,,Jornal regional (Parana).
+dgabc.com.br,imprensa_geral,,Jornal regional (Grande ABC).
+dol.com.br,imprensa_geral,,Portal de jornal regional (Para); a noticia citada e' de segunda mao (Auto Segredos).
+baguete.com.br,imprensa_geral,,Portal de negocios e tecnologia.
+eleconomista.com.ar,imprensa_geral,,Jornal de economia argentino.
+vrum.com.br,imprensa_geral,,"Secao automotiva de jornal geral (Diarios Associados). Fronteira com imprensa_especializada."
+monitormercantil.com.br,imprensa_geral,,
+abcdoabc.com.br,imprensa_geral,,Portal regional.
+garagem360.com.br,blog_agregador,,Agregador (a sua avaliacao).
+comprecar.com.br,blog_agregador,,"Revista de classificados de carro; os textos citados reproduzem comunicados de imprensa da Mercedes."
+bmwblog.com,blog_agregador,blog_de_marca,
+gmauthority.com,blog_agregador,blog_de_marca,
+autoblog.com.uy,blog_agregador,,Blog automotivo uruguaio.
+carzin.com.br,blog_agregador,,
+autoentusiastas.com.br,blog_agregador,,Site de entusiastas.
+autoo.com.br,blog_agregador,,
+marklines.com,imprensa_especializada,industria,Servico de dados e noticias da industria automotiva.
+investnews.com.br,imprensa_geral,,Portal de negocios.
+canaltech.com.br,imprensa_geral,,Portal de tecnologia.
+gazetadopovo.com.br,imprensa_geral,,Jornal (Parana).
+infomoney.com.br,imprensa_geral,,Portal de negocios.

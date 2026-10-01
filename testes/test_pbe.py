@@ -90,3 +90,10 @@ def test_motor_em_outra_linha_nao_perde_o_modelo():
     assert registro["motor"] == ""
     assert registro["tipo_propulsao"] == "PLUG-IN"
     assert registro["marcador_nome"] == "REEV"
+
+
+def test_tmhev_da_kia_e_hibrido_leve():
+    """A Kia escreve TMHEV no Sportage; sem o sinonimo ele virava Hibrido pleno. (Linha construida.)"""
+    linha = ("EXTRA GRANDE KIA SPORTAGE TMHEV EX 1.6-16V HIBRIDO DCT-7 S E G 0,1")
+    registro = pbe.ler_linha(linha, MARCAS)
+    assert registro["marcador_nome"] == "MHEV"

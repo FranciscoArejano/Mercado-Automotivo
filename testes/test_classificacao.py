@@ -32,6 +32,10 @@ def _propostas(linhas):
     ("gasolina+phev+bev", "parcial"),
     ("bev", "total"),
     ("hev+phev", "total"),
+    ("bev+reev", "total"),
+    # hibrido leve: parcial, mesmo sem outra eletrificada (decisao de 2026-10-01)
+    ("flex+mhev", "parcial"),
+    ("gasolina+mhev", "parcial"),
     ("", ""),
 ])
 def test_eletrificacao_derivada_do_conjunto(propulsao, esperado):
@@ -150,9 +154,9 @@ def test_modelo_sem_proposta_fica_vazio_com_confianca_baixa():
 def test_proposta_com_valor_fora_da_lista_e_recusada():
     painel = _painel([("2020-01", "X", "Y", "automoveis", "", 5000)])
     propostas = _propostas([
-        ("X", "Y", "automoveis", "", "", "flex+mhev", "", "", "media", "", "", ""),
+        ("X", "Y", "automoveis", "", "", "flex+hidrogenio", "", "", "media", "", "", ""),
     ])
-    with pytest.raises(ValueError, match="mhev"):
+    with pytest.raises(ValueError, match="hidrogenio"):
         classificacao.classificar(painel, propostas, classificacao.carregar_regras(), piso=1000)
 
 
@@ -202,3 +206,24 @@ def test_valor_vazio_no_rascunho_e_sempre_intencional():
             if linha[atributo] == "" and not any(p[confianca] == "baixa" for p in candidatas):
                 omissoes.append(f"{'/'.join(chave)} {linha['vigencia_inicio']}: {atributo}")
     assert not omissoes, omissoes
+
+
+def test_caminhao_leve_refina_o_furgao_da_fonte_e_nada_mais():
+    """S11: o conhecimento refina Furgoes para caminhao_leve; nao troca outra carroceria."""
+    painel = _painel([
+        ("2020-01", "HYUNDAI", "HR", "comerciais_leves", "Furgões", 5000),
+        ("2020-01", "FIAT", "STRADA", "comerciais_leves", "Pick-up's Pequenas", 5000),
+    ])
+    propostas = _propostas([
+        ("HYUNDAI", "HR", "comerciais_leves", "", "", "diesel", "caminhao_leve", "nacional",
+         "alta", "alta", "alta", ""),
+        ("FIAT", "STRADA", "comerciais_leves", "", "", "flex", "caminhao_leve", "nacional",
+         "alta", "alta", "alta", ""),
+    ])
+    rascunho, _ = classificacao.classificar(
+        painel, propostas, classificacao.carregar_regras(), piso=1000)
+    por_modelo = rascunho.set_index("modelo")
+    assert por_modelo.loc["HR", "carroceria"] == "caminhao_leve"
+    assert "S11" in por_modelo.loc["HR", "fonte_da_proposta"]
+    assert por_modelo.loc["STRADA", "carroceria"] == "picape"  # discordancia: fica a fonte
+    assert por_modelo.loc["STRADA", "confianca_carroceria"] == "media"

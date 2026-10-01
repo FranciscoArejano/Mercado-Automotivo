@@ -54,7 +54,7 @@ HONDA,CITY,automoveis,,,flex,,nacional,alta,,alta,
 MITSUBISHI,L200,comerciais_leves,,,diesel,,nacional,media,,alta,Catalao (HPE). Versoes a gasolina/flex podem ter existido.
 FIAT,PALIO WEEKEND,automoveis,,,gasolina+flex,,nacional,alta,,alta,
 FIAT,PUNTO,automoveis,,,flex,,nacional,alta,,alta,
-RENAULT,CLIO,automoveis,,,gasolina+flex,hatch,,media,alta,baixa,"Origem nao proposta: producao no Parana e na Argentina em periodos que nao sei datar."
+RENAULT,CLIO,automoveis,,,gasolina+flex,hatch,,media,alta,baixa,Origem nao proposta: producao no Parana e na Argentina em periodos que nao sei datar.
 VW,NIVUS,automoveis,,,flex,,nacional,alta,,alta,
 GM,COBALT,automoveis,,,flex,,nacional,alta,,alta,
 FIAT,CRONOS,automoveis,,,flex,,importado,alta,,alta,Argentina (Cordoba).
@@ -72,7 +72,7 @@ NISSAN,VERSA,automoveis,2020-08,2026-08,flex,,importado,media,,media,Nova geraca
 GM,CORSA SEDAN,automoveis,,,gasolina+flex,,nacional,alta,,alta,
 VW,UP,automoveis,,,flex,hatch,nacional,alta,alta,alta,Taubate.
 GM,MERIVA,automoveis,,,gasolina+flex,,nacional,alta,,alta,
-FIAT,PULSE,automoveis,,,flex,,nacional,media,,alta,"MHEV: versao mild hybrid 12V nos anos finais. Mild hybrid nao esta' na lista de valores -- ver questoes."
+FIAT,PULSE,automoveis,,,flex+mhev,,nacional,media,,alta,"MHEV (sistema 12V) nos anos finais, nao datado."
 PEUGEOT,206,automoveis,,,gasolina+flex,hatch,nacional,alta,alta,media,
 GM,ASTRA,automoveis,,,gasolina+flex,,nacional,alta,,alta,
 FORD,KA SEDAN,automoveis,,,flex,,nacional,alta,,alta,
@@ -85,7 +85,7 @@ VW,GOLF,automoveis,,,gasolina+flex+phev,,ambos,media,,media,Geracoes nacionais (
 VW,SPACE FOX,automoveis,,,flex,,importado,media,,media,Argentina (Pacheco).
 MITSUBISHI,PAJERO,automoveis,,,diesel+gasolina+flex,,ambos,media,,media,Nome agregado (TR4 Sport Full Dakar): parte nacional (Catalao) e parte importada.
 VW,AMAROK,comerciais_leves,,,diesel,,importado,alta,,alta,Argentina.
-FIAT,FASTBACK,automoveis,,,flex,,nacional,media,,alta,MHEV nos anos finais -- ver questoes.
+FIAT,FASTBACK,automoveis,,,flex+mhev,,nacional,media,,alta,"MHEV nos anos finais, nao datado."
 NISSAN,FRONTIER,comerciais_leves,2003-01,2008-12,diesel,,nacional,media,,baixa,Producao no Parana nos anos 2000 nao datada; origem deixada como nacional com confianca baixa.
 NISSAN,FRONTIER,comerciais_leves,2009-01,2026-08,diesel,,importado,media,,media,Mexico e depois Argentina.
 TOYOTA,ETIOS SEDAN,automoveis,,,flex,,nacional,alta,,alta,
@@ -103,16 +103,16 @@ FIAT,DUCATO,comerciais_leves,,,diesel,,nacional,alta,,alta,Sete Lagoas.
 RENAULT,OROCH,comerciais_leves,,,flex,,nacional,alta,,alta,
 VW,PARATI,automoveis,,,gasolina+flex,,nacional,alta,,alta,
 HYUNDAI,I30,automoveis,,,gasolina,,importado,media,,alta,
-HYUNDAI,HR,comerciais_leves,,,diesel,,nacional,alta,media,media,"CAOA, Anapolis. E' caminhao leve cabine-sobre-motor; a fonte o poe em Furgoes."
+HYUNDAI,HR,comerciais_leves,,,diesel,caminhao_leve,nacional,alta,alta,media,"CAOA, Anapolis. Caminhao leve cabine-sobre-motor; a fonte o poe em Furgoes (S11)."
 HYUNDAI,IX35,automoveis,,,gasolina+flex,,ambos,media,,media,Importado e depois CAOA Anapolis; datas nao propostas.
 NISSAN,SENTRA,automoveis,,,gasolina+flex,,importado,media,,alta,Mexico.
 FORD,FOCUS SEDAN,automoveis,,,gasolina+flex,,importado,media,,media,Argentina.
 VW,TERA,automoveis,,,flex,,nacional,alta,,alta,Taubate.
-CAOA CHERY,TIGGO 7,automoveis,,,gasolina+flex,,nacional,media,,media,"CAOA, Anapolis. Versoes MHEV e plug-in em anos recentes nao datadas -- ver questoes."
+CAOA CHERY,TIGGO 7,automoveis,,,gasolina+flex+mhev,,nacional,media,,media,"CAOA, Anapolis. MHEV em anos recentes, nao datado; versao plug-in nao verificada."
 FORD,FUSION,automoveis,,,gasolina+flex+hev,,importado,media,,alta,Mexico. Fusion Hybrid vendido por varios anos.
 BYD,DOLPHIN MINI,automoveis,,,bev,,importado,alta,,media,China. Montagem em Camacari (BA) iniciada nos anos finais; vigencia nao proposta.
 BYD,SONG,automoveis,,,phev,,importado,alta,,media,"Agrega Song Plus DM-i e Song Pro DM-i, ambos plug-in. Camacari nos anos finais, nao datado."
-CAOA CHERY,TIGGO 5X,automoveis,,,flex,,nacional,media,,media,CAOA Anapolis. Versao MHEV em anos recentes -- ver questoes.
+CAOA CHERY,TIGGO 5X,automoveis,,,flex+mhev,,nacional,media,,media,"CAOA Anapolis. MHEV em anos recentes, nao datado."
 GWM,HAVAL H6,automoveis,,,hev+phev,,importado,alta,,media,Producao em Iracemapolis iniciada nos anos finais; vigencia nao proposta.
 HONDA,WR-V,automoveis,,,flex,,nacional,alta,,media,A geracao de 2025 pode ser importada; nao confirmado.
 HONDA,CRV,automoveis,,,gasolina+flex,,importado,media,,alta,
@@ -138,7 +138,7 @@ NISSAN,LIVINA,automoveis,,,flex,,nacional,alta,,media,
 KIA,CERATO,automoveis,,,gasolina+flex,,importado,media,,alta,
 BYD,DOLPHIN,automoveis,,,bev,,importado,alta,,alta,
 CAOA CHERY,TIGGO 8,automoveis,,,gasolina+flex+phev,,nacional,media,,media,CAOA Anapolis. A versao plug-in pode ser importada.
-KIA,K2500,comerciais_leves,,,diesel,,importado,alta,media,media,Bongo. Caminhao leve; a fonte o poe em Furgoes.
+KIA,K2500,comerciais_leves,,,diesel,caminhao_leve,importado,alta,alta,media,Bongo: caminhao leve; a fonte o poe em Furgoes (S11).
 CITROEN,C3 AIRCROSS,automoveis,,,flex,,nacional,alta,,alta,
 HONDA,CITY HATCH,automoveis,,,flex,,nacional,alta,,alta,
 VW,TIGUAN,automoveis,,,gasolina,,importado,alta,,alta,
@@ -276,7 +276,7 @@ RAM,3500,comerciais_leves,,,diesel,,importado,alta,,alta,Mexico.
 AUDI,A5,automoveis,,,gasolina,,importado,alta,,alta,
 CHERY,FACE,automoveis,,,gasolina,,importado,media,,alta,
 BYD,SEAL,automoveis,,,bev,,importado,alta,,alta,
-CAOA CHERY,ARRIZO 6,automoveis,,,flex,,,media,,baixa,Origem nao proposta. Versao MHEV em anos recentes -- ver questoes.
+CAOA CHERY,ARRIZO 6,automoveis,,,flex+mhev,,,media,,baixa,"Origem nao proposta. MHEV em anos recentes, nao datado."
 HONDA,ZR-V,automoveis,,,gasolina,,importado,alta,,alta,Mexico.
 CHANA,SC,comerciais_leves,,,gasolina,,importado,media,,alta,
 CAOA CHERY,TIGGO 3X,automoveis,,,flex,,nacional,media,,media,CAOA Anapolis.
@@ -284,16 +284,16 @@ PORSCHE,911,automoveis,,,gasolina,,importado,alta,,alta,
 SUZUKI,SX4,automoveis,,,gasolina,,importado,alta,media,alta,E' um crossover/hatch; a fonte o poe em Monocab.
 SUBARU,FORESTER,automoveis,,,gasolina,,importado,alta,,alta,
 EFFA,V21,comerciais_leves,,,gasolina,,importado,media,,media,China.
-VW,MAN/EXPRESS,comerciais_leves,,,diesel,,nacional,alta,media,alta,"Resende. Delivery Express: caminhao leve, que a fonte poe em Furgoes."
+VW,MAN/EXPRESS,comerciais_leves,,,diesel,caminhao_leve,nacional,alta,alta,alta,Resende. Delivery Express: caminhao leve; a fonte o poe em Furgoes (S11).
 JAC,J6,automoveis,,,gasolina+flex,,importado,media,,alta,
-VW TRUCK E BUS,EXPRESS,comerciais_leves,,,diesel,,nacional,alta,media,alta,"Resende. Delivery Express: caminhao leve, que a fonte poe em Furgoes."
+VW TRUCK E BUS,EXPRESS,comerciais_leves,,,diesel,caminhao_leve,nacional,alta,alta,alta,Resende. Delivery Express: caminhao leve; a fonte o poe em Furgoes (S11).
 NISSAN,TIIDA SEDAN,automoveis,,,flex,,importado,media,,alta,Mexico.
 DODGE,RAM,comerciais_leves,,,diesel+gasolina,,importado,media,,alta,
 M.BENZ,CLASSE B,automoveis,,,gasolina,,importado,alta,,alta,
 NISSAN,V-DRIVE,automoveis,,,flex,,nacional,alta,,alta,Resende.
 FORD,BRONCO,automoveis,,,gasolina,,importado,alta,,alta,Bronco Sport (Mexico).
-VW,EXPRESS,comerciais_leves,,,diesel,,nacional,alta,media,alta,"Resende. Delivery Express: caminhao leve, que a fonte poe em Furgoes."
-IVECO,DAILY 30-130,comerciais_leves,,,diesel,furgao,nacional,alta,media,media,"Sete Lagoas. Sem sub-segmento na fonte; a Daily inclui chassi-cabine."
+VW,EXPRESS,comerciais_leves,,,diesel,caminhao_leve,nacional,alta,alta,alta,Resende. Delivery Express: caminhao leve; a fonte o poe em Furgoes (S11).
+IVECO,DAILY 30-130,comerciais_leves,,,diesel,furgao,nacional,alta,media,media,Sete Lagoas. Sem sub-segmento na fonte; a Daily inclui chassi-cabine.
 VW,JETTA VARIANT,automoveis,,,gasolina,,importado,alta,,alta,
 GWM,TANK 300,automoveis,,,hev,,importado,media,,media,
 TOYOTA,PRIUS,automoveis,,,hev,,importado,alta,,alta,
@@ -311,7 +311,7 @@ BMW,328,automoveis,2014-10,2019-05,gasolina+flex,,nacional,media,,media,Araquari
 M.BENZ,A 200,automoveis,,,gasolina,,importado,alta,,alta,
 RAM,1500,comerciais_leves,,,gasolina,,importado,alta,,alta,
 GM,OMEGA,automoveis,,,gasolina,,importado,alta,,alta,Australia (Holden).
-KIA,K2700,comerciais_leves,,,diesel,,importado,alta,media,media,"Bongo: caminhao leve, que a fonte poe em Furgoes."
+KIA,K2700,comerciais_leves,,,diesel,caminhao_leve,importado,alta,alta,media,Bongo: caminhao leve; a fonte o poe em Furgoes (S11).
 HAFEI,MINIVAN,comerciais_leves,,,gasolina,,importado,media,,media,China.
 CAOA CHERY,TIGGO,automoveis,,,,,,baixa,,baixa,Nome generico; nao se sabe qual Tiggo.
 IVECO,DAILY 35-150,comerciais_leves,,,diesel,,nacional,alta,,media,Sete Lagoas.
@@ -319,7 +319,7 @@ FIAT,MAREA,automoveis,,,gasolina+flex,,nacional,media,,alta,Betim.
 SSANGYONG,KYRONM,automoveis,,,diesel+gasolina,,importado,media,,alta,
 M.BENZ,CLASSE E,automoveis,,,gasolina,,importado,media,,alta,Versoes diesel e PHEV nao verificadas.
 SUZUKI,VITARA,automoveis,,,gasolina,,importado,alta,,media,
-LEAPMOTOR,C10,automoveis,,,bev,,importado,media,,alta,Existe versao REEV (eletrico com extensor a combustao) que a lista de valores nao tem -- ver questoes.
+LEAPMOTOR,C10,automoveis,,,bev+reev,,importado,media,,alta,Vendido em versao eletrica e em versao REEV (eletrico com extensor a combustao).
 TOYOTA,LAND CRUISE,automoveis,,,diesel+gasolina,,importado,media,,alta,
 BMW,X5,automoveis,,,gasolina+diesel+phev,,importado,media,,alta,
 CITROEN,C5,automoveis,,,gasolina,,importado,alta,,alta,
@@ -372,7 +372,7 @@ LIFAN,FOISON,comerciais_leves,,,gasolina,,importado,media,,media,
 EFFA,V22,comerciais_leves,,,gasolina,,importado,media,,media,China.
 IVECO,DAILY 35S14,comerciais_leves,,,diesel,,nacional,alta,,media,Sete Lagoas.
 GEELY,EX5,automoveis,,,bev,,importado,alta,,alta,
-IVECO,DAILY 30S13,comerciais_leves,,,diesel,furgao,nacional,alta,media,media,"Sete Lagoas. Sem sub-segmento na fonte; a Daily inclui chassi-cabine."
+IVECO,DAILY 30S13,comerciais_leves,,,diesel,furgao,nacional,alta,media,media,Sete Lagoas. Sem sub-segmento na fonte; a Daily inclui chassi-cabine.
 PORSCHE,PANAMERA,automoveis,,,gasolina+diesel+phev,,importado,media,,alta,
 BMW,325,automoveis,,,gasolina,,importado,alta,,alta,
 RELY,RELY PICK-UP,comerciais_leves,,,gasolina,,importado,media,,media,Marca da Chery.
@@ -390,7 +390,7 @@ BYD,SHARK,comerciais_leves,,,phev,picape,importado,alta,alta,media,Sem sub-segme
 SHINERAY,P TRUCKS,comerciais_leves,,,,,,baixa,baixa,baixa,Sem sub-segmento na fonte; produto nao identificado.
 CHERY,CELER SEDAN,automoveis,,,flex,,nacional,media,,media,Jacarei; primeiros meses possivelmente importados.
 HAFEI,START PICK UP,comerciais_leves,,,gasolina,picape,importado,media,media,media,Sem sub-segmento na fonte.
-FIAT,UNO,comerciais_leves,,,gasolina+flex,,nacional,media,media,alta,"Uno Furgao e derivados; a fonte o divide entre picape e furgao."
+FIAT,UNO,comerciais_leves,,,gasolina+flex,,nacional,media,media,alta,Uno Furgao e derivados; a fonte o divide entre picape e furgao.
 TOYOTA,HIACE,comerciais_leves,,,diesel,,importado,media,,alta,
 AUDI,TT,automoveis,,,gasolina,,importado,alta,,alta,
 VW,PASSAT VAR,automoveis,,,gasolina,,importado,alta,,alta,
@@ -403,7 +403,7 @@ M.BENZ,CLA180,automoveis,,,gasolina,,importado,alta,,alta,
 LIFAN,LF 320,automoveis,,,gasolina,,importado,media,,media,
 PORSCHE,CAYMAN,automoveis,,,gasolina,,importado,alta,,alta,
 HAFEI,ZHONGYI VAN,comerciais_leves,,,gasolina,,importado,media,,media,China.
-FOTON,AUMARK 1039,comerciais_leves,,,diesel,,,alta,baixa,baixa,"Caminhao leve sem sub-segmento na fonte; nenhum valor da lista serve. Origem nao proposta."
+FOTON,AUMARK 1039,comerciais_leves,,,diesel,caminhao_leve,,alta,alta,baixa,"Caminhao leve (linha Aumark), sem sub-segmento na fonte. Origem nao proposta."
 BMW,330I,automoveis,,,gasolina,,,media,,baixa,Origem nao proposta: producao em Araquari em parte do periodo.
 NISSAN,XTRAIL,automoveis,,,gasolina,,importado,alta,,alta,
 PEUGEOT,407,automoveis,,,gasolina,,importado,alta,,alta,
@@ -424,16 +424,16 @@ PORSCHE,TAYCAN,automoveis,,,bev,,importado,alta,,alta,
 BMW,M3,automoveis,,,gasolina,,importado,alta,,alta,
 VW,TOUAREG,automoveis,,,gasolina+diesel,,importado,media,,alta,
 M.BENZ,SPRINTER 317,comerciais_leves,,,diesel,furgao,importado,alta,media,media,"Argentina. Sem sub-segmento na fonte; o numero cobre furgao, chassi e micro-onibus."
-VOLVO,V40,automoveis,,,gasolina,,importado,alta,media,alta,"O nome cobre a V40 perua antiga (ate' ~2004) e o V40 hatch (2012-2019)."
+VOLVO,V40,automoveis,,,gasolina,,importado,alta,media,alta,O nome cobre a V40 perua antiga (ate' ~2004) e o V40 hatch (2012-2019).
 CITROEN,DS5,automoveis,,,gasolina,,importado,alta,media,alta,E' um hatch/crossover; a fonte o poe em Sedans Grandes.
 NISSAN,ALTIMA,automoveis,,,gasolina,,importado,alta,,alta,
 MAHINDRA,SCORPIO,automoveis,,,diesel,,nacional,media,,media,Montagem CKD em Manaus (Bramont) proposta.
-FOTON,AUMARK S 315,comerciais_leves,,,diesel,,,alta,baixa,baixa,"Caminhao leve sem sub-segmento na fonte; nenhum valor da lista serve. Origem nao proposta."
+FOTON,AUMARK S 315,comerciais_leves,,,diesel,caminhao_leve,,alta,alta,baixa,"Caminhao leve (linha Aumark), sem sub-segmento na fonte. Origem nao proposta."
 BMW,M2,automoveis,,,gasolina,,importado,alta,,alta,
 CHRYSLER,GCARAVAN,automoveis,,,gasolina,,importado,alta,,alta,
 JAC,T6,automoveis,,,gasolina,,importado,media,,alta,
 JETOUR,T2,automoveis,,,,suv,importado,baixa,media,media,Sem sub-segmento na fonte. Propulsao da versao vendida no Brasil nao conhecida.
-KIA,STONIC,automoveis,,,gasolina,,importado,media,,alta,E' hibrido leve (MHEV 48V) -- ver questoes.
+KIA,STONIC,automoveis,,,gasolina+mhev,,importado,media,,alta,Hibrido leve (MHEV 48V).
 JINBEI,M35,comerciais_leves,,,,,importado,baixa,baixa,media,Sem sub-segmento na fonte; produto nao identificado.
 VOLVO,V60,automoveis,,,gasolina,,importado,media,,alta,
 M.BENZ,VITO,comerciais_leves,,,diesel+gasolina,,importado,media,,media,Argentina.

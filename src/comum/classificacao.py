@@ -33,9 +33,19 @@ from . import config
 
 CHAVE = ["marca", "modelo", "segmento"]
 
-PROPULSOES = ("gasolina", "flex", "diesel", "hev", "phev", "bev")
-ELETRIFICADAS = frozenset({"hev", "phev", "bev"})
-CARROCERIAS = ("hatch", "sedan", "suv", "picape", "minivan", "furgao", "perua", "esportivo")
+# `mhev` (hibrido leve) e `reev` (eletrico com extensor) entraram por decisao do
+# pesquisador em 2026-10-01, assim como `caminhao_leve` na carroceria.
+PROPULSOES = ("gasolina", "flex", "diesel", "mhev", "hev", "phev", "reev", "bev")
+# Tracao eletrica: o modelo so' com estas e' `total`.
+ELETRIFICADAS = frozenset({"hev", "phev", "reev", "bev"})
+# Contam para `parcial` mas nunca para `total`: o hibrido leve nao roda em modo
+# eletrico, entao sempre vem com combustao.
+ELETRIFICACAO_PARCIAL = frozenset({"mhev"})
+CARROCERIAS = ("hatch", "sedan", "suv", "picape", "minivan", "furgao", "caminhao_leve",
+               "perua", "esportivo")
+# Carroceria da fonte que o conhecimento pode REFINAR, nao contradizer (regra
+# S11): a fonte poe caminhao leve em Furgoes porque nao tem a categoria.
+REFINAMENTOS = {("furgao", "caminhao_leve")}
 ORIGENS = ("nacional", "importado", "ambos")
 NIVEIS = ("alta", "media", "baixa")
 
@@ -118,14 +128,18 @@ def propulsao_por_nome(marca: str, modelo: str) -> tuple[str, str] | None:
 
 
 def eletrificacao(propulsao: str) -> str:
-    """`total` so' eletrificada, `parcial` mistura, `nenhuma` so' combustao."""
+    """`total` so' tracao eletrica, `parcial` mistura, `nenhuma` so' combustao.
+
+    Hibrido leve (`mhev`) conta como `parcial`, mesmo sem outra eletrificada ao
+    lado: juntar a `hev` superestimaria, omitir subestimaria.
+    """
     conjunto = {p for p in propulsao.split("+") if p}
     if not conjunto:
         return ""
     eletricas = conjunto & ELETRIFICADAS
     if eletricas == conjunto:
         return "total"
-    return "parcial" if eletricas else "nenhuma"
+    return "parcial" if eletricas or conjunto & ELETRIFICACAO_PARCIAL else "nenhuma"
 
 
 def ordenar_propulsao(propulsao: str) -> str:
@@ -318,7 +332,11 @@ def _linha(modelo: pd.Series, vigencia: Vigencia, linhas: pd.DataFrame,
         fonte_corpo = f"{FONTE_SUB_SEGMENTO} ({100 * fonte_sub['cobertura']:.0f}% das unidades)"
         if fonte_sub["nota"]:
             notas.append(fonte_sub["nota"])
-        if conhecida_corpo and conhecida_corpo != carroceria:
+        if (carroceria, conhecida_corpo) in REFINAMENTOS:
+            carroceria = conhecida_corpo
+            conf_corpo = conf_corpo_conhecida or "baixa"
+            fonte_corpo += f"; refinada por {FONTE_CONHECIMENTO} (S11)"
+        elif conhecida_corpo and conhecida_corpo != carroceria:
             conf_corpo = "media"
             notas.append(f"Conhecimento propoe {conhecida_corpo}; fica o valor da fonte")
         elif conf_corpo_conhecida and not conhecida_corpo:

@@ -1,4 +1,4 @@
-# Catalogo do repositorio -- dado do commit `dee1587-sujo`
+# Catalogo do repositorio -- dado do commit `aeeaa68`
 
 Gerado por `src/etapa10_catalogo.py` a cada execucao do pipeline. **Nao editar a mao**: janelas, linhas e contagens saem dos arquivos. O texto de usos esta' em `config/catalogo_usos.csv` e as fontes candidatas em `config/fontes_candidatas.csv`; edite la' e rode `python src/etapa10_catalogo.py`.
 

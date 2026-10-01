@@ -32,7 +32,8 @@ ETAPA = "etapa10_catalogo"
 
 # Caminhos cujo ultimo commit e' o "commit do dado".
 CAMINHOS_DE_DADO = ("dados/processado", "dados/referencia", "dados/bruto/manifesto.csv",
-                    "config", "regras.csv", "saidas/classificacao_rascunho.xlsx")
+                    "dados/bruto/pbe", "dados/bruto/origem_paginas", "config", "regras.csv",
+                    "saidas/classificacao_rascunho.xlsx")
 
 SEM_TEXTO = "(sem texto em `config/catalogo_usos.csv`)"
 
@@ -242,6 +243,15 @@ def _classificacao() -> tuple[dict, str]:
         f"{_pct(100 * unidades[rascunho['confianca'] == nivel].sum() / total, 1)}% do volume"
         for nivel in classificacao.NIVEIS)
     decididas = int((rascunho["decisao_humana"].str.strip() != "").sum())
+    validacao = ""
+    if "pbe_situacao" in rascunho:
+        pbe = "; ".join(
+            f"`{s}` {_pct(100 * unidades[rascunho['pbe_situacao'] == s].sum() / total, 1)}%"
+            for s in ("concorda", "diverge", "ausente"))
+        com_fonte = rascunho.loc[rascunho["origem_situacao"] == "com_fonte_datada",
+                                 classificacao.CHAVE].drop_duplicates().shape[0]
+        validacao = (f"- **Validacao contra fonte** (do volume): propulsao contra o PBE -- {pbe}. "
+                     f"Origem com fonte datada aberta: {com_fonte} modelos (aba `origem_fontes`).\n")
     modelos = rascunho[classificacao.CHAVE].drop_duplicates().shape[0]
     corpo = (
         "- **Estado: rascunho da fase 1, para adjudicacao. Nao e' dado** -- nada em "
@@ -252,9 +262,11 @@ def _classificacao() -> tuple[dict, str]:
         f"(volume acima de {_mil(config.PISO_CLASSIFICACAO)} unidades); "
         f"{_mil(len(fora))} modelos `nao_classificado`.\n"
         f"- **Confianca da proposta:** {por_nivel}.\n"
-        f"- **Decisoes humanas preenchidas:** {decididas} de {len(rascunho)}.\n"
-        "- **Arquivo:** `saidas/classificacao_rascunho.xlsx` (abas `leia_me`, `questoes`, "
-        "`regras`); regras em `config/regras_classificacao.csv`.\n"
+        + validacao
+        + f"- **Decisoes humanas preenchidas:** {decididas} de {len(rascunho)}.\n"
+        "- **Arquivo:** `saidas/classificacao_rascunho.xlsx` (abas `leia_me`, `a_adjudicar`, "
+        "`questoes`, `validacao`, `regras`); regras em `config/regras_classificacao.csv`, "
+        "mapeamento do PBE em `config/pbe_propulsao.csv` e `config/pbe_modelos.csv`.\n"
     )
     return ({"produto": "classificacao (rascunho)",
              "arquivo": "saidas/classificacao_rascunho.xlsx", "linhas": len(rascunho),
@@ -268,6 +280,12 @@ def _outros() -> str:
     linhas = [
         ["`dados/bruto/pdf/`", f"{pdfs} informes originais da Fenabrave, hash em "
                                 "`dados/bruto/manifesto.csv`"],
+        ["`dados/bruto/pbe/`", f"{len(list((config.DIR_BRUTO / 'pbe').glob('*.pdf')))} "
+                               "tabelas do PBE Veicular (Inmetro), com manifesto SHA-256; "
+                               "extracao em `saidas/pbe_versoes.csv`"],
+        ["`dados/bruto/origem_paginas/`",
+         f"{len(list((config.DIR_BRUTO / 'origem_paginas').glob('*.txt')))} paginas de fonte "
+         "de origem, abertas e guardadas, com SHA-256"],
         ["`regras.csv`", f"{len(regras)} regras de harmonizacao (rebatismo, desdobramento)"],
         ["`config/mapa_grupos.csv`", f"{len(mapa)} linhas marca-grupo com vigencia"],
         ["`dados/referencia/Vendas_Geral.xlsx`",

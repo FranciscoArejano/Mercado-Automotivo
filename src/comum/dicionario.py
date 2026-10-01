@@ -191,6 +191,14 @@ def escrever(painel: pd.DataFrame) -> None:
         "(`nenhuma`, `parcial`, `total`). Somar as unidades dos modelos `parcial` como se "
         "fossem eletrificadas superestima a eletrificacao; soma-las como combustao a "
         "subestima. Contar unidades eletrificadas por propulsao exige fonte externa.\n\n",
+        "**Regras e limitacoes decididas em 2026-10-01:** o hibrido leve (`mhev`) e o "
+        "eletrico com extensor (`reev`) sao valores proprios da propulsao. Na derivacao de "
+        "`eletrificacao`, modelo com `mhev` e combustao conta como `parcial` -- o hibrido "
+        "leve nao roda em modo eletrico, e junta-lo a `hev` superestimaria a eletrificacao, "
+        "omiti-lo a subestimaria; `total` exige so' tracao eletrica (`hev`, `phev`, `reev`, "
+        "`bev`). A **transicao para o flex** (2003-2006) nao e' datada por modelo: os modelos "
+        "que a atravessaram tem `gasolina+flex` na vigencia inteira -- precisao de mes seria "
+        "falsa, e nenhum artigo planejado depende dela.\n\n",
         "## Reconstituicao\n\n",
         "Todo numero se reconstitui a partir de tres coisas versionadas: os PDFs originais "
         "(hash em `dados/bruto/manifesto.csv`), `regras.csv` e os scripts de `src/`. "

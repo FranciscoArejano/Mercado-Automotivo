@@ -1,8 +1,8 @@
-# Catalogo do repositorio -- dado do commit `ad57dde`
+# Catalogo do repositorio -- dado do commit `54eaffa-sujo`
 
 Gerado por `src/etapa10_catalogo.py` a cada execucao do pipeline. **Nao editar a mao**: janelas, linhas e contagens saem dos arquivos. O texto de usos esta' em `config/catalogo_usos.csv` e as fontes candidatas em `config/fontes_candidatas.csv`; edite la' e rode `python src/etapa10_catalogo.py`.
 
-O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/processado`, `dados/referencia`, `dados/bruto/manifesto.csv`, `config`, `regras.csv`, `saidas/classificacao_rascunho.xlsx`); `-sujo` quer dizer que ha' alteracao nao comitada nesses caminhos, e o catalogo nao corresponde exatamente a nenhum commit.
+O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/processado`, `dados/referencia`, `dados/bruto/manifesto.csv`, `dados/bruto/pbe`, `dados/bruto/origem_paginas`, `config`, `regras.csv`, `saidas/classificacao_rascunho.xlsx`); `-sujo` quer dizer que ha' alteracao nao comitada nesses caminhos, e o catalogo nao corresponde exatamente a nenhum commit.
 
 ## Indice
 
@@ -81,9 +81,10 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 - **Estado: rascunho da fase 1, para adjudicacao. Nao e' dado** -- nada em `dados/processado/`.
 - **Unidade de observacao:** o modelo `(marca, modelo, segmento)` numa vigencia (`vigencia_inicio`, `vigencia_fim`).
 - **Linhas:** 438 modelo-vigencias de 409 modelos (volume acima de 1.000 unidades); 524 modelos `nao_classificado`.
-- **Confianca da proposta:** `alta` 173 linhas, 68,6% do volume; `media` 233 linhas, 30,0% do volume; `baixa` 32 linhas, 1,4% do volume.
+- **Confianca da proposta:** `alta` 176 linhas, 68,7% do volume; `media` 230 linhas, 29,9% do volume; `baixa` 32 linhas, 1,4% do volume.
+- **Validacao contra fonte** (do volume): propulsao contra o PBE -- `concorda` 82,5%; `diverge` 11,8%; `ausente` 5,7%. Origem com fonte datada aberta: 66 modelos (aba `origem_fontes`).
 - **Decisoes humanas preenchidas:** 0 de 438.
-- **Arquivo:** `saidas/classificacao_rascunho.xlsx` (abas `leia_me`, `questoes`, `regras`); regras em `config/regras_classificacao.csv`.
+- **Arquivo:** `saidas/classificacao_rascunho.xlsx` (abas `leia_me`, `a_adjudicar`, `questoes`, `validacao`, `regras`); regras em `config/regras_classificacao.csv`, mapeamento do PBE em `config/pbe_propulsao.csv` e `config/pbe_modelos.csv`.
 - **Ressalvas principais:** Hoje e' rascunho para adjudicacao, nao dado. Nada foi gravado em dados/processado/.
 
 ### Outros arquivos
@@ -91,6 +92,8 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 | arquivo | conteudo |
 |---|---|
 | `dados/bruto/pdf/` | 284 informes originais da Fenabrave, hash em `dados/bruto/manifesto.csv` |
+| `dados/bruto/pbe/` | 18 tabelas do PBE Veicular (Inmetro), com manifesto SHA-256; extracao em `saidas/pbe_versoes.csv` |
+| `dados/bruto/origem_paginas/` | 48 paginas de fonte de origem, abertas e guardadas, com SHA-256 |
 | `regras.csv` | 0 regras de harmonizacao (rebatismo, desdobramento) |
 | `config/mapa_grupos.csv` | 148 linhas marca-grupo com vigencia |
 | `dados/referencia/Vendas_Geral.xlsx` | controle independente (ESPEC sec.7), nao fonte |
@@ -139,8 +142,9 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 | Comex Stat (importação por NCM e origem) | API testada e acessível; sintaxe de filtro por capítulo a acertar |  |
 | Frota e idade do estoque (Senatran) | não testado |  |
 | Produção, exportação, emprego (Anfavea) | não testado |  |
-| PBE Veicular (consumo, CO₂) | não testado; exige crosswalk modelo–versão |  |
+| PBE Veicular (consumo, CO₂) | adquirido (18 tabelas, 2009-2026, em dados/bruto/pbe/) e lido para o tipo de propulsão por versão; consumo e CO₂ não extraídos; crosswalk modelo–versão não feito | Usado na validação da propulsão do rascunho de classificação (2026-10-01). As tabelas de 2025 e 2026 estão no site com rótulo de máscara. |
 | Preços por versão (FIPE) | não testado; exige o mesmo crosswalk |  |
 | Emplacamento por UF (Fenabrave, Dados Regionais) | granularidade não verificada |  |
 | Calendário de política (IPI, MP 1175, tarifa de eletrificados) | construção manual a partir de decretos |  |
+| Emplacamento de eletrificados por tipo de propulsão (ABVE) | não testado | É a única saída para contar unidades por propulsão, que a Fenabrave não separa. Sugerida pelo assistente, aceita em 2026-10-01. |
 

@@ -72,7 +72,7 @@ force.
 
 ## 3. Produtos esperados
 
-O pipeline entrega seis coisas. Nenhuma etapa sobrescreve a anterior.
+O pipeline entrega as coisas abaixo. Nenhuma etapa sobrescreve a anterior.
 
 | Produto | Descrição | versionado? |
 |---|---|---|
@@ -82,6 +82,10 @@ O pipeline entrega seis coisas. Nenhuma etapa sobrescreve a anterior.
 | `regras.csv` | Arquivo de decisões caso a caso. **O código lê; o humano escreve.** Se não existir, criar com cabeçalho e zero linhas, e seguir sem fundir nada. | sim |
 | `painel.parquet` | Produto final harmonizado, com dicionário de dados em `painel_dicionario.md`. | sim |
 | `validacao.md` | Relatório de validação (§6), gerado a cada execução. | sim |
+| `painel_canal.parquet` | Venda direta e varejo por modelo, top-50 por canal e segmento. Tabela separada, nunca colunas do painel; dicionário em `saidas/painel_canal_dicionario.md`. | sim |
+| `macro_mensal.parquet` | Séries mensais do BCB e do IBGE (crédito, juros, câmbio, preços, atividade), unidade `mes_ref`. Cada série documentada em `config/series_macro.csv`. | sim |
+| `CATALOGO.md` | Índice do repositório, gerado pelo pipeline a partir do dado; declara na primeira linha o commit do dado que descreve. | sim |
+| `saidas/classificacao_rascunho.xlsx` | Rascunho da dimensão de classificação de modelo (propulsão, carroceria, origem), com a validação contra o PBE Veicular e contra fontes datadas. **Proposta para adjudicação, não dado**: nada vai a `dados/processado/` antes da decisão humana. | sim |
 
 Todos versionados — ver §10.2. Reprocessar 12.916 páginas para conferir um número
 não é reprodutibilidade, é atrito: ter os números exatos que um commit produziu é
@@ -291,6 +295,14 @@ igual ao remoto. Se algo ficou de fora, dizer o que ficou e por quê — nunca
 encerrar deixando arquivo de valor apenas no container.
 
 ### Registro da mudança de decisão
+
+**01/10/2026 — §3 atualizada.** A tabela de produtos listava os seis da rodada 1.
+Entraram `painel_canal.parquet`, `macro_mensal.parquet`, `CATALOGO.md` e o rascunho
+de classificação, todos já versionados pela §10.2 (o `CATALOGO.md`, na raiz,
+também). Mudança autorizada pelo pesquisador em
+`PARA-O-CODE-classificacao-validacao.md`, §5.
+
+**17/09/2026 — derivados versionados.**
 
 Até 17/09/2026 os derivados ficavam fora do repositório, com a justificativa de
 que eram reconstituíveis a partir de `bruto/`. **A justificativa não estava

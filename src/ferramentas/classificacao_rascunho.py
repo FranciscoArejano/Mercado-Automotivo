@@ -29,7 +29,10 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from comum import classificacao, config  # noqa: E402
+from comum import classificacao, config, validacao_classificacao as validacao  # noqa: E402
+
+# A busca de fonte de origem cobre a origem `media`/`baixa` dos maiores modelos.
+TOP_ORIGEM = 241
 
 # Questoes que a lista de valores ou a fonte nao resolvem (sec.9.6). Os
 # modelos afetados e o volume sao calculados do rascunho, nao escritos aqui.
@@ -103,6 +106,17 @@ QUESTOES = [
      "O assistente nao soube propor a propulsao.",
      "preencher", "",
      lambda r: r["propulsao_oferecida"] == ""),
+    ("montagem de conjuntos importados (SKD/CKD)",
+     "Varias trocas de origem com fonte sao montagem de conjuntos importados: a BYD em "
+     "Camacari (conjuntos da China), o Spark EUV em Horizonte (SKD), o Land Rover de "
+     "Itatiaia no inicio (CKD), os furgoes do Uruguai (SKD). A GWM declara processo 'peca a "
+     "peca'. A lista de origem nao distingue montagem de fabricacao.",
+     "(a) SKD/CKD conta como `nacional`; (b) conta como `importado`; (c) acrescentar um valor "
+     "(`montagem_local`)",
+     "(c), ou (a) com coluna propria: para o artigo de tarifa, o kit tem aliquota diferente do "
+     "carro inteiro, e juntar os dois apaga exatamente a variacao que interessa.",
+     lambda r: r["origem_fonte_trecho"].str.contains("SKD|CKD|conjuntos|kits", regex=True)
+     | r["observacao"].str.contains("SKD|CKD", regex=True)),
     ("um nome, dois produtos",
      "O nome comercial cobre produtos diferentes em momentos diferentes (GM/SONIC "
      "hatch de 2012 e crossover de 2025; VOLVO/V40 perua e hatch). E' questao de "
@@ -136,13 +150,16 @@ LEIA_ME = [
      "Por isso `propulsao_oferecida` e' conjunto e `eletrificacao` tem tres niveis. "
      "Contar unidades eletrificadas por propulsao exige fonte externa."),
     ("propulsao_oferecida",
-     "Conjunto de gasolina, flex, diesel, hev, phev, bev, unido por '+'. O que o "
-     "modelo oferecia na vigencia, nao o que vendeu."),
+     "Conjunto de gasolina, flex, diesel, mhev, hev, phev, reev, bev, unido por '+'. O que "
+     "o modelo oferecia na vigencia, nao o que vendeu. `mhev` (hibrido leve) e `reev` "
+     "(eletrico com extensor) entraram por decisao de 2026-10-01."),
     ("eletrificacao",
-     "Derivada da propulsao: total = so' hev/phev/bev; parcial = mistura; nenhuma = "
-     "so' combustao. Vazia quando a propulsao esta' vazia."),
+     "Derivada da propulsao: total = so' hev/phev/reev/bev; parcial = mistura, ou qualquer "
+     "conjunto com mhev (o hibrido leve nao roda em modo eletrico; junta-lo a hev "
+     "superestimaria, omiti-lo subestimaria); nenhuma = so' combustao. Vazia quando a "
+     "propulsao esta' vazia."),
     ("carroceria",
-     "hatch, sedan, suv, picape, minivan, furgao, perua, esportivo. Sai do "
+     "hatch, sedan, suv, picape, minivan, furgao, caminhao_leve, perua, esportivo. Sai do "
      "sub-segmento em que a propria Fenabrave listou o modelo (regras S01-S10, aba "
      "`regras`); so' quando a fonte nao classifica e' que vem do conhecimento."),
     ("origem_producao",
@@ -175,15 +192,61 @@ LEIA_ME = [
      "A aba `questoes` lista o que a lista de valores ou a fonte nao resolvem (hibrido "
      "leve, REEV, caminhao leve e outras), com os modelos e o volume afetados. Sao "
      "decisoes de desenho, a tomar antes de adjudicar linha a linha."),
+    ("decisoes de 2026-10-01",
+     "mhev e reev entram na propulsao; caminhao_leve entra na carroceria (regra S11: "
+     "refina o furgao da fonte); a transicao flex fica como esta' (gasolina+flex na "
+     "vigencia inteira, limitacao conhecida); 'um nome, dois produtos' e 'um produto, duas "
+     "chaves' seguem adiadas pela Parte 0. Ver a coluna `estado` da aba `questoes`."),
+    ("a_adjudicar",
+     "So' o que ainda precisa de decisao humana, maior volume primeiro: divergencia com o "
+     "PBE; ausencia no PBE entre os {top} maiores; fonte de origem que contradiz a proposta "
+     "ou ajusta a data dela; e origem sem fonte datada nos casos que a rodada mandou buscar. "
+     "A coluna `motivo` diz qual. A decisao pode ser escrita ali ou na aba `classificacao`."),
+    ("validacao contra o PBE",
+     "Colunas `pbe_*`. O PBE Veicular (Inmetro, 2009-2026) lista por versao o tipo de "
+     "propulsao (coluna propria desde 2021) e o combustivel. Casamento por marca e prefixo do "
+     "modelo, versao ignorada; cada ano do PBE vai para a vigencia com mais meses naquele "
+     "ano. `pbe_situacao`: concorda (mesmo conjunto), diverge (`pbe_diferenca` diz o que "
+     "sobra de cada lado), ausente (o modelo nao aparece no PBE nos anos da vigencia -- "
+     "ausencia NAO e' evidencia de combustao). A gasolina da transicao flex, anterior ao "
+     "PBE, nao conta como divergencia. A proposta fica intacta ao lado."),
+    ("o que o PBE distingue",
+     "Combustao, Hibrido, Plug-In e Eletrico, mais o combustivel (G, F, D, E). NAO distingue "
+     "hibrido leve: o Kia Stonic MHEV e o Subaru Forester MHEV estao em Hibrido, o Subaru XV "
+     "MHEV em Combustao (2021). NAO distingue REEV: o Leapmotor C10 REEV esta' em Plug-In. "
+     "Onde o nome da versao diz MHEV ou REEV, o nome manda (aba `pbe_mapeamento`). Ate' "
+     "2020 nao ha' coluna de propulsao: hibrido sem marcador no nome sai como combustao."),
+    ("origem contra fonte datada",
+     "Colunas `origem_*`. Cada fonte foi aberta na rodada de validacao; o texto da pagina "
+     "esta' guardado em dados/bruto/origem_paginas/ e o trecho copiado aparece nele "
+     "literalmente (testado). `origem_confronto` (confirma, complementa, ajusta_data, "
+     "contradiz, inconclusivo) e' a LEITURA DO ASSISTENTE da fonte contra a proposta -- "
+     "confira o trecho antes de aceitar. Aba `origem_fontes` com todas as linhas."),
     ("regerar",
      "python src/ferramentas/classificacao_rascunho.py. O script recusa sobrescrever "
      "um rascunho que ja' tenha decisao preenchida."),
 ]
 
 
+# Decisoes do pesquisador sobre as questoes (PARA-O-CODE-classificacao-validacao, sec.1).
+DECISOES = {
+    "hibrido leve (MHEV)": ("decidida em 2026-10-01", "`mhev` entra na lista de propulsao; "
+                            "na eletrificacao conta como `parcial`."),
+    "eletrico com extensor (REEV)": ("decidida em 2026-10-01", "`reev` entra como valor proprio."),
+    "caminhao leve": ("decidida em 2026-10-01", "`caminhao_leve` entra na carroceria (regra "
+                      "S11). Daily e Sprinter ficam em furgao: o nome nao separa furgao de chassi."),
+    "transicao para o flex nao datada": ("decidida em 2026-10-01", "Fica como esta': "
+                                         "`gasolina+flex` na vigencia inteira. Limitacao "
+                                         "conhecida, registrada no dicionario."),
+    "um nome, dois produtos": ("adiada (Parte 0)", "Questao de `regras.csv`."),
+    "um produto, duas chaves": ("adiada (Parte 0)", "Questao de `regras.csv`."),
+}
+
+
 def _questoes(rascunho: pd.DataFrame) -> pd.DataFrame:
     linhas = []
     for tema, pergunta, opcoes, recomendacao, filtro in QUESTOES:
+        estado, decisao = DECISOES.get(tema, ("aberta", ""))
         afetados = rascunho[filtro(rascunho)]
         modelos = afetados.drop_duplicates(classificacao.CHAVE)
         linhas.append({
@@ -195,7 +258,8 @@ def _questoes(rascunho: pd.DataFrame) -> pd.DataFrame:
             "unidades": int(afetados["unidades_na_vigencia"].sum()),
             "exemplos": ", ".join(f"{m}/{n}" for m, n in
                                   modelos[["marca", "modelo"]].head(12).to_numpy()),
-            "decisao_humana": "",
+            "estado": estado,
+            "decisao_humana": decisao,
         })
     return pd.DataFrame(linhas)
 
@@ -208,7 +272,7 @@ def _decisoes_existentes() -> int:
     return int((anterior["decisao_humana"].str.strip() != "").sum())
 
 
-def gerar() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def gerar():
     painel = pd.read_parquet(config.PAINEL)
     propostas = pd.read_csv(config.PROPOSTA_CLASSIFICACAO, dtype=str, keep_default_na=False)
     regras = classificacao.carregar_regras()
@@ -216,23 +280,87 @@ def gerar() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         painel, propostas, regras, config.PISO_CLASSIFICACAO)
     volume = int(painel["unidades"].sum())
     resumo = classificacao.resumo_por_confianca(rascunho, volume)
-    return rascunho, fora, resumo
+
+    # validacao contra fonte: propulsao no PBE, origem em fontes datadas
+    versoes = pd.read_csv(config.PBE_VERSOES, dtype=str, keep_default_na=False)
+    regras_pbe = validacao.regras_propulsao()
+    mapeados = [validacao.mapear_propulsao(t, c, m, mo, regras_pbe) for t, c, m, mo in zip(
+        versoes["tipo_propulsao"], versoes["combustivel"], versoes["marcador_nome"],
+        versoes["motor"])]
+    versoes["valor_taxonomia"] = [v for v, _ in mapeados]
+    versoes["regra_mapeamento"] = [o for _, o in mapeados]
+    chaves = painel[validacao.CHAVE].drop_duplicates()
+    casado = validacao.casar(versoes, chaves)
+    rascunho = validacao.comparar_pbe(rascunho, casado)
+    rascunho = validacao.anexar_origem(rascunho, validacao.carregar_fontes_origem())
+    # decisao_humana fica sempre por ultimo
+    rascunho = rascunho[[c for c in rascunho.columns if c != "decisao_humana"]
+                        + ["decisao_humana"]]
+    top = TOP_ORIGEM
+    fila = validacao.a_adjudicar(rascunho, top)
+    resumo_val = pd.concat([_casamento(rascunho, casado),
+                            validacao.resumo_validacao(rascunho, volume, top)],
+                           ignore_index=True)
+    return rascunho, fora, resumo, fila, resumo_val, casado
 
 
-def escrever(rascunho, fora, resumo, questoes, volume_painel: int) -> None:
+def _casamento(rascunho: pd.DataFrame, casado: pd.DataFrame) -> pd.DataFrame:
+    """Taxa de casamento com o PBE, em modelos e em volume."""
+    no_pbe = set(map(tuple, casado.loc[casado["marca"] != "", validacao.CHAVE].to_numpy()))
+    modelos = rascunho.groupby(validacao.CHAVE, as_index=False).agg(
+        unidades=("unidades_na_vigencia", "sum"), ultimo=("vigencia_fim", "max"))
+    modelos["casado"] = [tuple(k) in no_pbe for k in modelos[validacao.CHAVE].to_numpy()]
+    total = modelos["unidades"].sum()
+    linhas = []
+    for nivel, parte in [
+        ("modelos classificados", modelos),
+        ("... com alguma versao no PBE (qualquer ano)", modelos[modelos["casado"]]),
+        ("modelos com vida depois de 2008 (o PBE comeca em 2009)",
+         modelos[modelos["ultimo"] >= "2009-01"]),
+        ("... com alguma versao no PBE", modelos[(modelos["ultimo"] >= "2009-01")
+                                                 & modelos["casado"]]),
+    ]:
+        linhas.append({"quadro": "casamento com o PBE", "nivel": nivel,
+                       "modelo_vigencias": "", "modelos": len(parte),
+                       "unidades": int(parte["unidades"].sum()),
+                       "pct_do_classificado": round(100 * parte["unidades"].sum() / total, 2)})
+    return pd.DataFrame(linhas)
+
+
+def _nao_casados(casado: pd.DataFrame, rascunho: pd.DataFrame) -> pd.DataFrame:
+    """Versoes do PBE de marcas do escopo que nao casaram com modelo nenhum."""
+    marcas_escopo = set(rascunho["marca"])
+    tradutor = validacao.marcas_pbe()
+    sem = casado[(casado["marca"] == "")
+                 & casado["marca_pbe"].map(lambda m: bool(set(tradutor.get(m, []))
+                                                          & marcas_escopo))].copy()
+    sem["inicio_do_nome"] = sem["modelo_versao"].str.split(" ").str[:2].str.join(" ")
+    return (sem.groupby(["marca_pbe", "inicio_do_nome"], as_index=False)
+            .agg(versoes=("modelo_versao", "size"),
+                 anos=("ano_pbe", lambda a: validacao._anos_compactos([int(x) for x in a])),
+                 exemplo=("modelo_versao", "first"))
+            .sort_values(["versoes"], ascending=False))
+
+
+def escrever(rascunho, fora, resumo, questoes, volume_painel: int, fila, resumo_val,
+             casado) -> None:
     regras = classificacao.carregar_regras()
     n_modelos = rascunho[classificacao.CHAVE].drop_duplicates().shape[0]
     pct = 100 * rascunho["unidades_na_vigencia"].sum() / volume_painel
     leia_me = pd.DataFrame(
         [(t, x.format(piso=f"{config.PISO_CLASSIFICACAO:,}".replace(",", "."),
                       n_modelos=n_modelos, pct=f"{pct:.2f}".replace(".", ","),
-                      n_fora=len(fora)))
+                      n_fora=len(fora), top=TOP_ORIGEM))
          for t, x in LEIA_ME], columns=["topico", "texto"])
 
     config.DIR_SAIDAS.mkdir(parents=True, exist_ok=True)
     with pd.ExcelWriter(config.CLASSIFICACAO_RASCUNHO, engine="xlsxwriter") as escritor:
-        abas = [("leia_me", leia_me), ("classificacao", rascunho), ("questoes", questoes),
-                ("resumo", resumo), ("regras", regras), ("nao_classificados", fora)]
+        abas = [("leia_me", leia_me), ("a_adjudicar", fila), ("classificacao", rascunho),
+                ("questoes", questoes), ("validacao", resumo_val), ("resumo", resumo),
+                ("origem_fontes", validacao.carregar_fontes_origem()),
+                ("pbe_mapeamento", validacao.regras_propulsao()),
+                ("pbe_nao_casados", _nao_casados(casado, rascunho)),
+                ("regras", regras), ("nao_classificados", fora)]
         for nome, quadro in abas:
             quadro.to_excel(escritor, sheet_name=nome, index=False)
             folha = escritor.sheets[nome]
@@ -243,6 +371,11 @@ def escrever(rascunho, fora, resumo, questoes, volume_painel: int) -> None:
                 largura = max([len(str(coluna))] + [len(str(v)) for v in quadro[coluna].head(200)])
                 folha.set_column(i, i, min(max(largura, 8) + 1, 70))
     resumo.to_csv(config.CLASSIFICACAO_RESUMO, index=False)
+    resumo_val.to_csv(config.DIR_SAIDAS / "classificacao_validacao.csv", index=False)
+    casado[casado["marca"] != ""][
+        ["ano_pbe", "pagina", "marca_pbe", "modelo_versao", "tipo_propulsao", "marcador_nome",
+         "combustivel", "valor_taxonomia", "regra_mapeamento", "marca", "modelo", "segmento"]
+    ].to_csv(config.DIR_SAIDAS / "pbe_casamento.csv", index=False)
 
 
 def main() -> int:
@@ -257,10 +390,10 @@ def main() -> int:
               "recuso sobrescrever sem --sobrescrever.", file=sys.stderr)
         return 2
 
-    rascunho, fora, resumo = gerar()
+    rascunho, fora, resumo, fila, resumo_val, casado = gerar()
     questoes = _questoes(rascunho)
     volume = int(pd.read_parquet(config.PAINEL, columns=["unidades"])["unidades"].sum())
-    escrever(rascunho, fora, resumo, questoes, volume)
+    escrever(rascunho, fora, resumo, questoes, volume, fila, resumo_val, casado)
 
     print(f"{len(rascunho)} linhas (modelo-vigencia) de "
           f"{rascunho[classificacao.CHAVE].drop_duplicates().shape[0]} modelos; "
@@ -268,7 +401,10 @@ def main() -> int:
     print("\nconfianca geral:")
     print(resumo[resumo["atributo"].str.startswith("geral")].to_string(index=False))
     print("\nquestoes:")
-    print(questoes[["tema", "modelos", "unidades"]].to_string(index=False))
+    print(questoes[["tema", "estado", "modelos", "unidades"]].to_string(index=False))
+    print("\nvalidacao contra fonte:")
+    print(resumo_val.to_string(index=False))
+    print(f"\na adjudicar: {len(fila)} linhas")
     print(f"\ngravado {config.CLASSIFICACAO_RASCUNHO.relative_to(config.RAIZ)} e "
           f"{config.CLASSIFICACAO_RESUMO.relative_to(config.RAIZ)}")
     return 0

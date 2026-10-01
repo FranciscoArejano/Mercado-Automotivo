@@ -2,7 +2,8 @@ fonte,estado,observacao
 "Comex Stat (importação por NCM e origem)",API testada e acessível; sintaxe de filtro por capítulo a acertar,
 "Frota e idade do estoque (Senatran)",não testado,
 "Produção, exportação, emprego (Anfavea)",não testado,
-"PBE Veicular (consumo, CO₂)",não testado; exige crosswalk modelo–versão,
+"PBE Veicular (consumo, CO₂)","adquirido (18 tabelas, 2009-2026, em dados/bruto/pbe/) e lido para o tipo de propulsão por versão; consumo e CO₂ não extraídos; crosswalk modelo–versão não feito","Usado na validação da propulsão do rascunho de classificação (2026-10-01). As tabelas de 2025 e 2026 estão no site com rótulo de máscara."
 Preços por versão (FIPE),não testado; exige o mesmo crosswalk,
 "Emplacamento por UF (Fenabrave, Dados Regionais)",granularidade não verificada,
 "Calendário de política (IPI, MP 1175, tarifa de eletrificados)",construção manual a partir de decretos,
+"Emplacamento de eletrificados por tipo de propulsão (ABVE)",não testado,"É a única saída para contar unidades por propulsão, que a Fenabrave não separa. Sugerida pelo assistente, aceita em 2026-10-01."

@@ -143,3 +143,75 @@ def test_montagem_campos_validos(montagem):
     orfas = [tuple(c) for c in montagem[["marca", "modelo", "segmento"]].to_numpy()
              if tuple(c) not in chaves]
     assert not orfas, orfas
+
+
+# ------------------------------------------- fontes da propulsao por ano
+
+TIPOS_DATA_PROPULSAO = {"lancamento", "producao", "presenca", "plano"}
+
+
+@pytest.fixture(scope="module")
+def propulsao():
+    if not config.PROPULSAO_FONTES.exists():
+        pytest.skip("sem fontes de propulsao")
+    return pd.read_csv(config.PROPULSAO_FONTES, dtype=str, keep_default_na=False)
+
+
+def test_propulsao_trecho_literal_e_pagina_no_manifesto(propulsao, manifesto):
+    faltando = []
+    for _, linha in propulsao.iterrows():
+        assert linha["pagina_salva"] in manifesto, linha["pagina_salva"]
+        assert linha["fonte_url"] == manifesto[linha["pagina_salva"]]["url"]
+        arquivo = DIR / f"{linha['pagina_salva']}.txt"
+        assert (hashlib.sha256(arquivo.read_bytes()).hexdigest()
+                == manifesto[linha["pagina_salva"]]["sha256_texto"])
+        texto = arquivo.read_text(encoding="utf-8")
+        for parte in linha["fonte_trecho"].split(" [...] "):
+            if parte not in texto:
+                faltando.append(f"{linha['marca']}/{linha['modelo']}: {parte[:60]}")
+    assert not faltando, faltando
+
+
+def test_propulsao_campos_validos(propulsao):
+    from comum import classificacao
+    from comum.propulsao_anual import COMBUSTAO
+    assert set(propulsao["tipo_data_fonte"]) <= TIPOS_DATA_PROPULSAO
+    eletrificados = set(classificacao.PROPULSOES) - COMBUSTAO
+    assert set(propulsao["tipo_propulsao"]) <= eletrificados
+    ruins = [d for d in propulsao["data_fonte"] if not MES.match(d) or not d]
+    assert not ruins, ruins
+    propostas = pd.read_csv(config.PROPOSTA_CLASSIFICACAO, dtype=str, keep_default_na=False)
+    chaves = set(map(tuple, propostas[["marca", "modelo", "segmento"]].to_numpy()))
+    orfas = [tuple(c) for c in propulsao[["marca", "modelo", "segmento"]].to_numpy()
+             if tuple(c) not in chaves]
+    assert not orfas, orfas
+
+
+def test_propulsao_tipo_fonte_em_dia(propulsao):
+    mapa = tipo_fonte.carregar_mapa()
+    calculado = [tipo_fonte.tipo_da_citacao(u, p, mapa)
+                 for u, p in zip(propulsao["fonte_url"], propulsao["fonte_primaria"])]
+    assert all(calculado), "dominio sem tipo; edite config/tipo_fonte_dominio.csv"
+    assert list(propulsao["tipo_fonte"]) == calculado, "rode origem_fonte.py --tipos"
+
+
+# --------------------------------------------- serie anual da ABVE (so' registro)
+
+
+def test_abve_trecho_literal_e_pagina_no_manifesto(manifesto):
+    caminho = config.DIR_DADOS / "referencia" / "abve_serie_anual.csv"
+    if not caminho.exists():
+        pytest.skip("sem serie da ABVE")
+    abve = pd.read_csv(caminho, dtype=str, keep_default_na=False)
+    faltando = []
+    for _, linha in abve.iterrows():
+        assert linha["fonte_url"] == manifesto[linha["pagina_salva"]]["url"]
+        arquivo = DIR / f"{linha['pagina_salva']}.txt"
+        assert (hashlib.sha256(arquivo.read_bytes()).hexdigest()
+                == manifesto[linha["pagina_salva"]]["sha256_texto"])
+        texto = arquivo.read_text(encoding="utf-8")
+        for parte in linha["fonte_trecho"].split(" [...] "):
+            if parte not in texto:
+                faltando.append(f"{linha['ano']}: {parte[:60]}")
+        assert f"{int(linha['eletrificados_leves']):,}".replace(",", ".") in linha["fonte_trecho"]
+    assert not faltando, faltando

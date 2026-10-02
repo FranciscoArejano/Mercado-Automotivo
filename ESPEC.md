@@ -204,6 +204,19 @@ Além dele:
   de D3 (3%, 5%, 10%), lado a lado. Se a ordenação dos anos mudar entre limiares,
   destacar — é achado metodológico relevante, não detalhe.
 
+**Toda dimensão nova passa por um uso-teste antes de ser declarada pronta.**
+Construir a série mais óbvia que um artigo faria com ela — para a
+classificação, a participação de cada nível de eletrificação nas vendas, ano a
+ano — e conferir se ela é plausível. Uma série que muda de patamar sem evento
+que a explique é sinal de defeito de construção, não de achado.
+
+(Acrescentada em 2026-10-02, depois que a primeira série de eletrificação deu
+`parcial` de 8,7% em 2018: a propulsão por vigência é o conjunto do que foi
+oferecido em algum momento dela, e não serve para série anual. Para a
+classificação, o uso-teste é gravado a cada execução da etapa 11 em
+`saidas/classificacao_uso_teste.csv`, pela vigência e pela tabela anual, lado a
+lado.)
+
 ---
 
 ## 7. Referência cruzada com a base existente

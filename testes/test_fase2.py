@@ -29,9 +29,9 @@ def test_precedencia_humana_regra_proposta():
                    decisao_humana="origem_producao=importado")
     final = fase2.linha_final(linha)
     assert (final["origem_producao"], final["procedencia_origem"]) == ("importado", "humana")
-    assert final["propulsao_oferecida"] == "flex+hibrido_indefinido"
+    assert final["propulsao_na_vigencia"] == "flex+hibrido_indefinido"
     assert final["procedencia_propulsao"] == "regra_fonte_forte"
-    assert final["eletrificacao"] == "parcial"
+    assert final["eletrificacao_na_vigencia"] == "parcial"
     assert (final["carroceria"], final["procedencia_carroceria"]) == ("hatch", "regra_fonte_forte")
 
 
@@ -39,16 +39,25 @@ def test_pendente_mostra_a_proposta_original():
     linha = _linha(propulsao_oferecida="flex+mhev", propulsao_apos_regras="flex+mhev+phev",
                    procedencia_propulsao="pendente", pendencias="P3 nao decide: x")
     final = fase2.linha_final(linha)
-    assert (final["propulsao_oferecida"], final["procedencia_propulsao"]) == ("flex+mhev",
-                                                                              "pendente")
+    assert (final["propulsao_na_vigencia"], final["procedencia_propulsao"]) == ("flex+mhev",
+                                                                                "pendente")
 
 
 def test_ok_aceita_o_valor_depois_das_regras():
     linha = _linha(propulsao_oferecida="flex+mhev", propulsao_apos_regras="flex+mhev+phev",
                    procedencia_propulsao="pendente", decisao_humana="ok")
     final = fase2.linha_final(linha)
-    assert final["propulsao_oferecida"] == "flex+mhev+phev"
+    assert final["propulsao_na_vigencia"] == "flex+mhev+phev"
     assert {final["procedencia_propulsao"], final["procedencia_origem"]} == {"humana"}
+
+
+def test_decisao_aceita_o_nome_da_dimensao():
+    assert fase2.ler_decisao("propulsao_na_vigencia=flex+hev") == {
+        "propulsao_oferecida": "flex+hev"}
+    final = fase2.linha_final(_linha(decisao_humana="propulsao_na_vigencia=flex+hev"))
+    assert (final["propulsao_na_vigencia"], final["eletrificacao_na_vigencia"]) == (
+        "flex+hev", "parcial")
+    assert "propulsao_oferecida" not in final and "eletrificacao" not in final
 
 
 def test_recusa_pendente_em_linha_com_decisao_humana():

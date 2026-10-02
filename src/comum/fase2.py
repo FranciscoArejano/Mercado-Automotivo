@@ -20,6 +20,12 @@ Nenhuma linha e' descartada. Cada atributo leva a procedencia do valor:
 
 Os modelos abaixo do piso de volume entram com atributos vazios e procedencia
 `nao_classificado`: nenhuma chave do painel fica sem linha.
+
+Na dimensao, a propulsao se chama `propulsao_na_vigencia` (e a eletrificacao,
+`eletrificacao_na_vigencia`): e' o conjunto de tudo o que foi oferecido em algum
+momento da vigencia, e nao serve para serie temporal -- para isso ha'
+`classificacao_propulsao_anual` (`comum/propulsao_anual.py`). O rascunho mantem
+`propulsao_oferecida`, e a decisao humana aceita os dois nomes.
 """
 
 from __future__ import annotations
@@ -43,9 +49,14 @@ PROCEDENCIA_COLUNA = {"propulsao_oferecida": "procedencia_propulsao",
                       "carroceria": "procedencia_carroceria",
                       "origem_producao": "procedencia_origem"}
 ORIGENS = ("nacional", "importado", "ambos")
+# nome no rascunho -> nome na dimensao (rodada "propulsao no tempo")
+NA_DIMENSAO = {"propulsao_oferecida": "propulsao_na_vigencia",
+               "eletrificacao": "eletrificacao_na_vigencia"}
+SINONIMOS = {v: k for k, v in NA_DIMENSAO.items()}
 CAMPOS_DECISAO = set(ATRIBUTOS) | {"eletrificacao", "vigencia_inicio", "vigencia_fim"}
 MES = re.compile(r"^\d{4}-\d{2}$")
-COLUNAS = CHAVE + ["vigencia_inicio", "vigencia_fim", "propulsao_oferecida", "eletrificacao",
+COLUNAS = CHAVE + ["vigencia_inicio", "vigencia_fim", "propulsao_na_vigencia",
+                   "eletrificacao_na_vigencia",
                    "procedencia_propulsao", "carroceria", "procedencia_carroceria",
                    "origem_producao", "procedencia_origem", "vigencia_ajustada_por",
                    "regras_aplicadas", "vigencia_inicio_rascunho"]
@@ -72,6 +83,7 @@ def ler_decisao(texto: str) -> dict:
         if "=" not in parte:
             raise DecisaoInvalida(f"nao estruturada: {texto!r}")
         campo, valor = (x.strip() for x in parte.split("=", 1))
+        campo = SINONIMOS.get(campo, campo)
         if campo not in CAMPOS_DECISAO:
             raise DecisaoInvalida(f"campo desconhecido {campo!r} em {texto!r}")
         _validar_valor(campo, valor, texto)
@@ -106,12 +118,13 @@ def linha_final(linha: pd.Series) -> dict:
             valor, procedencia = regra[atributo], linha[coluna_proc]
         else:
             valor, procedencia = linha[atributo], linha[coluna_proc]
-        saida[atributo] = valor
+        saida[NA_DIMENSAO.get(atributo, atributo)] = valor
         saida[PROCEDENCIA_COLUNA[atributo]] = procedencia
     if "eletrificacao" in humana:
-        saida["eletrificacao"] = humana["eletrificacao"]
+        saida["eletrificacao_na_vigencia"] = humana["eletrificacao"]
     else:
-        saida["eletrificacao"] = classificacao.eletrificacao(saida["propulsao_oferecida"])
+        saida["eletrificacao_na_vigencia"] = classificacao.eletrificacao(
+            saida["propulsao_na_vigencia"])
     ajustada = ""
     for limite in ("vigencia_inicio", "vigencia_fim"):
         if limite in humana:
@@ -148,7 +161,8 @@ def dimensao(rascunho: pd.DataFrame, nao_classificados: pd.DataFrame,
         if not inicio:
             inicio, fim = meses.get(tuple(modelo[CHAVE]), ("", ""))
         linhas.append({
-            **{c: modelo[c] for c in CHAVE}, "vigencia_inicio": inicio, "vigencia_fim": fim, "propulsao_oferecida": "", "eletrificacao": "",
+            **{c: modelo[c] for c in CHAVE}, "vigencia_inicio": inicio, "vigencia_fim": fim,
+            "propulsao_na_vigencia": "", "eletrificacao_na_vigencia": "",
             "procedencia_propulsao": "nao_classificado", "carroceria": "",
             "procedencia_carroceria": "nao_classificado", "origem_producao": "",
             "procedencia_origem": "nao_classificado", "vigencia_ajustada_por": "",
@@ -213,9 +227,10 @@ def problemas_de_fidelidade(dim: pd.DataFrame, rascunho: pd.DataFrame) -> list[s
                 esperado = regra.get(atributo, linha[atributo])
             else:
                 continue
-            if final[atributo] != esperado:
+            coluna = NA_DIMENSAO.get(atributo, atributo)
+            if final[coluna] != esperado:
                 problemas.append(f"{'/'.join(final[CHAVE])} {final['vigencia_inicio']}: "
-                                 f"{atributo} {final[atributo]!r} no dado, {esperado!r} no "
+                                 f"{coluna} {final[coluna]!r} no dado, {esperado!r} no "
                                  "rascunho")
     return problemas
 

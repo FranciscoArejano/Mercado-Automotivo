@@ -200,7 +200,12 @@ def escrever(painel: pd.DataFrame) -> None:
         "documentada em `config/series_macro.csv`, com a coluna `natureza_e_ressalvas`.\n",
         "- `classificacao.parquet` -- propulsao, eletrificacao, carroceria e origem da "
         "producao por modelo e vigencia, com a procedencia de cada atributo; e "
-        "`classificacao_montagem.parquet`, o modo de montagem local por periodo. Gravadas "
+        "`classificacao_montagem.parquet`, o modo de montagem local por periodo; e "
+        "`classificacao_propulsao_anual.parquet`, os tipos de propulsao oferecidos em cada "
+        "ano -- **a tabela para serie temporal**: `propulsao_na_vigencia` e "
+        "`eletrificacao_na_vigencia` sao o conjunto de tudo que foi oferecido em algum "
+        "momento da vigencia, e numa serie anual inflam o `parcial` dos anos anteriores a' "
+        "chegada da versao eletrificada. Gravadas "
         "pela etapa 11 a partir do rascunho adjudicado "
         "(`saidas/classificacao_rascunho.xlsx`), que e' a fonte de verdade. Dicionario proprio "
         "em `saidas/classificacao_dicionario.md`; leia a advertencia sobre procedencia antes "
@@ -208,7 +213,8 @@ def escrever(painel: pd.DataFrame) -> None:
         "**Limitacao da classificacao, registrada desde ja':** a fonte nao separa unidades "
         "por versao. Um modelo vendido em flex e em hibrido aparece como um numero so', e "
         "nao ha' como saber quantas unidades foram de cada. Por isso a propulsao sera' "
-        "**conjunto** (`propulsao_oferecida`) e a eletrificacao tera' tres niveis "
+        "**conjunto** (`propulsao_na_vigencia`, e por ano `propulsao_no_ano`) e a "
+        "eletrificacao tera' tres niveis "
         "(`nenhuma`, `parcial`, `total`). Somar as unidades dos modelos `parcial` como se "
         "fossem eletrificadas superestima a eletrificacao; soma-las como combustao a "
         "subestima. Contar unidades eletrificadas por propulsao exige fonte externa.\n\n",
@@ -244,6 +250,12 @@ def escrever(painel: pd.DataFrame) -> None:
         "volume que ficou de fora.** As datas de troca de origem usam o lancamento quando a "
         "fonte o da', senao a producao: os meses entre producao e lancamento sao imprecisos "
         "por construcao, e num estudo de evento ficam fora da janela.\n\n",
+        "**Propulsao no tempo (2026-10-02):** cada tipo eletrificado entra no ano da fonte "
+        "datada de lancamento (`dados/referencia/propulsao_fontes.csv`), senao no da primeira "
+        "tabela do PBE que o mostra -- se um ano com coluna de propulsao (2021 em diante) "
+        "mostrava o modelo sem ele --, senao no inicio da vigencia, marcado "
+        "`vigencia_sem_datacao`; combustao segue a vigencia. Toda dimensao nova passa por um "
+        "uso-teste antes de ser declarada pronta (`saidas/classificacao_uso_teste.csv`).\n\n",
         "## Reconstituicao\n\n",
         "Todo numero se reconstitui a partir de tres coisas versionadas: os PDFs originais "
         "(hash em `dados/bruto/manifesto.csv`), `regras.csv` e os scripts de `src/`. "

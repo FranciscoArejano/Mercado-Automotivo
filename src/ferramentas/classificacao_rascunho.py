@@ -495,7 +495,7 @@ def escrever(saida: dict, questoes: pd.DataFrame, volume_painel: int) -> None:
         ["ano_pbe", "pagina", "marca_pbe", "modelo_versao", "linha_acima", "casou_por",
          "tipo_propulsao", "marcador_nome", "combustivel", "valor_taxonomia", "regra_mapeamento",
          "marca", "modelo", "segmento"]
-    ].to_csv(config.DIR_SAIDAS / "pbe_casamento.csv", index=False)
+    ].to_csv(config.PBE_CASAMENTO, index=False)
 
 
 def main() -> int:

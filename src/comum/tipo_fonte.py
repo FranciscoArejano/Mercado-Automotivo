@@ -53,11 +53,12 @@ def tipo_da_citacao(url: str, primaria: str, mapa: dict[str, str]) -> str:
     return tipo_de(f"https://{primaria}/", mapa) if primaria else tipo_de(url, mapa)
 
 
-def com_tipo(fontes: pd.DataFrame, mapa: dict[str, str]) -> pd.DataFrame:
+def com_tipo(fontes: pd.DataFrame, mapa: dict[str, str],
+             coluna_url: str = "origem_fonte_url") -> pd.DataFrame:
     """As fontes com a coluna `tipo_fonte` (re)calculada, logo depois da URL."""
     saida = fontes.drop(columns=["tipo_fonte"], errors="ignore")
     primarias = saida["fonte_primaria"] if "fonte_primaria" in saida else [""] * len(saida)
-    posicao = list(saida.columns).index("origem_fonte_url") + 1
+    posicao = list(saida.columns).index(coluna_url) + 1
     saida.insert(posicao, "tipo_fonte", [tipo_da_citacao(u, p, mapa) for u, p in
-                                         zip(saida["origem_fonte_url"], primarias)])
+                                         zip(saida[coluna_url], primarias)])
     return saida

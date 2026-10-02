@@ -108,14 +108,21 @@ def registrar(nome: str, url: str, texto: str) -> Path:
 
 
 def regravar_tipos() -> int:
-    fontes = pd.read_csv(config.ORIGEM_FONTES, dtype=str, keep_default_na=False)
-    fontes = tipo_fonte.com_tipo(fontes, tipo_fonte.carregar_mapa())
-    sem = sorted({tipo_fonte.dominio(u) for u, t in
-                  zip(fontes["origem_fonte_url"], fontes["tipo_fonte"]) if not t})
-    fontes.to_csv(config.ORIGEM_FONTES, index=False)
-    print(fontes["tipo_fonte"].value_counts().to_string())
+    mapa = tipo_fonte.carregar_mapa()
+    sem: set[str] = set()
+    for caminho, coluna in ((config.ORIGEM_FONTES, "origem_fonte_url"),
+                            (config.PROPULSAO_FONTES, "fonte_url")):
+        if not caminho.exists():
+            continue
+        fontes = pd.read_csv(caminho, dtype=str, keep_default_na=False)
+        fontes = tipo_fonte.com_tipo(fontes, mapa, coluna)
+        sem |= {tipo_fonte.dominio(u) for u, t in zip(fontes[coluna], fontes["tipo_fonte"])
+                if not t}
+        fontes.to_csv(caminho, index=False)
+        print(caminho.name)
+        print(fontes["tipo_fonte"].value_counts().to_string())
     if sem:
-        print("dominios sem tipo em config/tipo_fonte_dominio.csv:", ", ".join(sem),
+        print("dominios sem tipo em config/tipo_fonte_dominio.csv:", ", ".join(sorted(sem)),
               file=sys.stderr)
         return 1
     return 0
@@ -127,7 +134,8 @@ def main() -> int:
     analisador.add_argument("--nome")
     analisador.add_argument("--busca", default="")
     analisador.add_argument("--tipos", action="store_true",
-                            help="so' recalcular a coluna tipo_fonte de origem_fontes.csv")
+                            help="so' recalcular a coluna tipo_fonte de origem_fontes.csv e "
+                                 "propulsao_fontes.csv")
     args = analisador.parse_args()
 
     if args.tipos:

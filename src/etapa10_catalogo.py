@@ -221,6 +221,24 @@ def _macro(usos: dict[str, dict]) -> tuple[dict, str, list[list]]:
     return resumo, corpo, usos_series
 
 
+def _propulsao_anual() -> str:
+    """A tabela de propulsao por ano, quando gravada."""
+    if not config.CLASSIFICACAO_PROPULSAO_ANUAL.exists():
+        return ""
+    anual = pd.read_parquet(config.CLASSIFICACAO_PROPULSAO_ANUAL)
+    entradas = pd.read_csv(config.CLASSIFICACAO_PROPULSAO_ENTRADAS)
+    eletrificados = entradas[~entradas["tipo"].isin(["gasolina", "flex", "diesel"])]
+    sem = int((eletrificados["fonte_temporal"] == "vigencia_sem_datacao").sum())
+    return (
+        "- **Serie temporal de propulsao:** `dados/processado/classificacao_propulsao_anual"
+        f".parquet`, {_mil(len(anual))} linhas `(marca, modelo, segmento, ano)` com os tipos "
+        "oferecidos no ano (`propulsao_no_ano`, `eletrificacao_no_ano`). "
+        "`propulsao_na_vigencia` e `eletrificacao_na_vigencia` sao o conjunto de tudo que foi "
+        "oferecido em algum momento da vigencia -- nao usar em serie temporal. Dos "
+        f"{len(eletrificados)} tipos eletrificados (vigencia x tipo), {sem} entram sem "
+        "datacao (`vigencia_sem_datacao`); uso-teste em `saidas/classificacao_uso_teste.csv`.\n")
+
+
 def _dimensao_classificacao() -> tuple[dict, str]:
     """A dimensao gravada pela etapa 11 (fase 2)."""
     dim = pd.read_parquet(config.CLASSIFICACAO)
@@ -258,6 +276,7 @@ def _dimensao_classificacao() -> tuple[dict, str]:
         f"- **Montagem local:** `dados/processado/classificacao_montagem.parquet`, "
         f"{_mil(len(montagem))} periodos, {len(com_modo)} deles com modo declarado por "
         "fonte (`fabricacao`, `ckd`, `skd`); o resto e' `desconhecido` ou `nao_se_aplica`.\n"
+        + _propulsao_anual() +
         "- **Arquivos:** dicionario em `saidas/classificacao_dicionario.md`; procedencia por "
         "atributo em `saidas/classificacao_procedencia.csv`; regras em "
         "`config/regras_classificacao.csv` e `config/regras_adjudicacao.csv`; mapeamento do PBE "

@@ -51,7 +51,7 @@ valida; 11 depois do painel; 10 por ultimo, porque descreve todas.
 | 7 | `etapa07_referencia_cruzada.py` | Confronto com `Vendas_Geral.xlsx` (controle, nao fonte) | `saidas/referencia_cruzada.md` |
 | 8 | `etapa08_macro.py` | Series mensais do BCB e do IBGE, em tabela separada | `macro_mensal.parquet`, `saidas/macro_series.csv` |
 | 9 | `etapa09_canal.py` | Venda direta e varejo por modelo (top-50 por canal) | `painel_canal.parquet`, `saidas/painel_canal_dicionario.md` |
-| 11 | `etapa11_classificacao.py` | Dimensao de classificacao de modelo (fase 2): le o rascunho adjudicado, aplica a precedencia e valida | `classificacao.parquet`, `classificacao_montagem.parquet`, `saidas/classificacao_dicionario.md` |
+| 11 | `etapa11_classificacao.py` | Dimensao de classificacao de modelo (fase 2): le o rascunho adjudicado, aplica a precedencia e valida; deriva a propulsao por ano e grava o uso-teste | `classificacao.parquet`, `classificacao_montagem.parquet`, `classificacao_propulsao_anual.parquet`, `saidas/classificacao_dicionario.md`, `saidas/classificacao_uso_teste.csv` |
 | 10 | `etapa10_catalogo.py` | Indice do repositorio, calculado do dado | `CATALOGO.md` |
 
 ## Arquivos que o humano escreve

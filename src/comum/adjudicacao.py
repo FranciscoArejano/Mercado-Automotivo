@@ -35,7 +35,9 @@ dele entre os maiores modelos):
   decisao humana.
 - **P3** -- `Hibrido` do PBE contra `mhev` da proposta: fica `mhev` se o nome da
   versao declara hibrido leve (o mapeamento ja' faz isso, e essas linhas nem
-  divergem); senao, decisao humana.
+  divergem). Senao, desde a resposta 4 da fase 2, a mesma logica da P4: entra
+  `hibrido_indefinido`, e o `mhev` da proposta -- conhecimento, nao fonte -- sai, a
+  menos que o PBE o declare no nome de outra versao da vigencia.
 
 Origem, contra fontes datadas (nas linhas que a rodada de validacao mandou
 buscar fonte, e nas que tem fonte que contradiz ou ajusta a data):
@@ -80,7 +82,7 @@ import pandas as pd
 from . import classificacao, config, tipo_fonte
 from .validacao_classificacao import (CHAVE, LIMIAR_COBERTURA, ORDEM_CONFRONTO,
                                       PRIMEIRO_ANO_PBE, ULTIMO_ANO_SEM_COLUNA, _meses_no_ano,
-                                      casos_de_origem)
+                                      casos_de_origem, fontes_por_linha)
 
 COMBUSTAO = frozenset({"gasolina", "flex", "diesel"})
 ELETRIFICADAS = frozenset({"mhev", "hev", "phev", "reev", "bev"})
@@ -94,7 +96,8 @@ EVENTOS_EFETIVOS = frozenset({"inicio_producao_local", "fim_producao_local",
 MES = re.compile(r"^\d{4}-\d{2}$")
 LOCAL = frozenset({"nacional", "ambos"})
 MODOS_MONTAGEM = ("fabricacao", "ckd", "skd", "desconhecido", "nao_se_aplica")
-# Janela dos artigos de tarifa e eletrificacao: so' nela se busca segunda fonte.
+# Janela dos artigos de tarifa e eletrificacao: so' na vigencia que a toca se busca
+# segunda fonte (resposta 6 da fase 2: tocar, nao comecar).
 INICIO_JANELA_SEGUNDA_FONTE = "2014-01"
 
 
@@ -215,6 +218,7 @@ def propulsao(linha: pd.Series, casado_chave: pd.DataFrame | None, primeiro_ano:
     r = Resultado()
     acrescentados: list[tuple[str, str]] = []
     indefinidos = ""
+    p3 = ""
 
     for tipo in _ordenados(so_pbe):
         versoes = _versoes(casado_chave, anos, tipo)
@@ -222,12 +226,16 @@ def propulsao(linha: pd.Series, casado_chave: pd.DataFrame | None, primeiro_ano:
         if versoes.empty:
             r.pendencias.append(f"P1 nao decide: {tipo} sem versao do PBE nos anos da vigencia")
             continue
-        if tipo == "hev" and "mhev" in proposta:
-            r.pendencias.append(
-                f"P3 nao decide: o PBE diz Hibrido sem declarar hibrido leve no nome ({nomes}); "
-                "a proposta diz mhev")
-            continue
         guarda = _guarda_p1(tipo, versoes, divididos, proposta)
+        if tipo == "hev" and "mhev" in proposta:
+            com_hev = versoes["marcador_nome"].str.split("+").apply(lambda m: "HEV" in m)
+            if guarda or com_hev.any():
+                r.pendencias.append(
+                    f"P3 nao decide: {guarda or 'o PBE diz HEV no nome'} ({nomes}); a proposta "
+                    "diz mhev")
+                continue
+            p3 = nomes
+            continue
         if guarda:
             r.pendencias.append(f"P1 nao decide: {guarda}")
             continue
@@ -246,6 +254,20 @@ def propulsao(linha: pd.Series, casado_chave: pd.DataFrame | None, primeiro_ano:
             "regra": "P1", "forca": "forte", "antes": texto_proposta, "depois": "+".join(novo),
             "base": "; ".join(f"{t}: PBE {linha['pbe_anos']} ({n})" for t, n in acrescentados),
             "ressalva": "proposta vazia: o conjunto vem so' do PBE" if not proposta else ""})
+        proposta = set(novo)
+    if p3:
+        # resposta 4 da fase 2: o mhev da proposta e' conhecimento, nao fonte; fica so' se
+        # o PBE declara hibrido leve no nome de alguma versao desta vigencia
+        sem_fonte = "mhev" in so_proposta
+        novo = _ordenados((proposta - ({"mhev"} if sem_fonte else set()))
+                          | {"hibrido_indefinido"})
+        r.resolucoes.append({
+            "regra": "P3", "forca": "forte", "antes": "+".join(_ordenados(proposta)),
+            "depois": "+".join(novo),
+            "base": (f"Hibrido no PBE {linha['pbe_anos']} sem marcador de hibrido leve ({p3}); "
+                     + ("o mhev da proposta nao tem fonte e sai" if sem_fonte
+                        else "o mhev fica: o PBE o declara no nome de outra versao")),
+            "ressalva": "sobe para mhev se uma fonte declarar hibrido leve"})
         proposta = set(novo)
     if indefinidos:
         novo = _ordenados(proposta | {"hibrido_indefinido"})
@@ -409,11 +431,14 @@ def carregar_buscas() -> dict[tuple, dict]:
 def _nota_segunda_fonte(linha: pd.Series, leitura: str, busca: dict | None) -> str:
     if leitura not in ("complementa", "ajusta_data"):
         return ""
-    if linha["vigencia_inicio"] < INICIO_JANELA_SEGUNDA_FONTE:
-        return (f" -- vigencia anterior a {INICIO_JANELA_SEGUNDA_FONTE[:4]}: segunda fonte nao "
-                "buscada (decisao 5)")
+    if linha["vigencia_fim"] < INICIO_JANELA_SEGUNDA_FONTE:
+        return (f" -- vigencia inteira antes de {INICIO_JANELA_SEGUNDA_FONTE[:4]}: segunda fonte "
+                "nao buscada (decisao 5)")
     if busca is None:
         return " -- segunda fonte ainda nao buscada"
+    if busca.get("resultado") == "forte_achada":
+        return (f" -- segunda fonte forte achada em {busca['data_busca']}, mas ela nao trata "
+                "desta vigencia")
     return f" -- segunda fonte buscada em {busca['data_busca']} e nao achada"
 
 
@@ -461,11 +486,16 @@ def origem(linha: pd.Series, indice: int, fontes_chave: pd.DataFrame | None, cas
         return r
 
     if leitura == "ajusta_data":
-        utilizaveis = [f for _, f in fortes.iterrows() if f["evento"] in EVENTOS_EFETIVOS
-                       and all(MES.match(p) for p in f["origem_data_fonte"].split("/"))]
+        # resposta 2 da fase 2: data de lancamento quando a fonte a da', senao de producao
+        utilizaveis = sorted(
+            (f for _, f in fortes.iterrows() if f["evento"] in EVENTOS_EFETIVOS
+             and f.get("tipo_data_fonte", "producao") in ("lancamento", "producao")
+             and all(MES.match(p) for p in f["origem_data_fonte"].split("/"))),
+            key=lambda f: f.get("tipo_data_fonte", "producao") != "lancamento")
         if not utilizaveis:
-            motivo = ("plano ou anuncio, nao evento efetivo"
-                      if not fortes["evento"].isin(EVENTOS_EFETIVOS).any()
+            efetivas = fortes[fortes["evento"].isin(EVENTOS_EFETIVOS)
+                              & (fortes.get("tipo_data_fonte", "producao") != "plano")]
+            motivo = ("plano ou anuncio, nao evento efetivo" if efetivas.empty
                       else "data sem mes")
             r.pendencias.append(f"O2 nao decide: {motivo} ({_descrever(fortes)}, "
                                 f"{'; '.join(fortes['origem_data_fonte'].replace('', 'sem data'))})")
@@ -476,7 +506,8 @@ def origem(linha: pd.Series, indice: int, fontes_chave: pd.DataFrame | None, cas
             r.pendencias.append("O2 nao decide: a data da fonte nao corresponde a uma fronteira "
                                 "de origem nas vigencias propostas")
             return r
-        base = (f"{fonte['evento']} {fonte['origem_data_fonte']} "
+        base = (f"{fonte['evento']} {fonte['origem_data_fonte']}, data de "
+                f"{fonte.get('tipo_data_fonte', 'producao')} "
                 f"({fonte['tipo_fonte']}, {tipo_fonte.dominio(fonte['origem_fonte_url'])})")
         if indice in mudancas:
             atributo, antes, depois = mudancas[indice]
@@ -604,7 +635,8 @@ def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, 
     no_pbe = casado[casado["marca"] != ""]
     por_chave = {k: g for k, g in no_pbe.groupby(CHAVE)}
     primeiro = {k: int(g["ano_pbe"].astype(int).min()) for k, g in por_chave.items()}
-    fontes_por_chave = {k: g for k, g in fontes.groupby(CHAVE)} if not fontes.empty else {}
+    # cada fonte vale so' para as vigencias de que trata (resposta 3 da fase 2)
+    fontes_da_linha = fontes_por_linha(saida, fontes)
     modelos = {k: g for k, g in saida.groupby(CHAVE, sort=False)}
     casos = casos_de_origem(saida, top)
 
@@ -620,7 +652,7 @@ def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, 
                                                   and linha["posicao"] <= top):
             resultados.append(("propulsao_oferecida", propulsao(
                 linha, por_chave.get(chave), primeiro.get(chave), modelos[chave], corte)))
-        fontes_chave = fontes_por_chave.get(chave)
+        fontes_chave = fontes_da_linha.get(indice)
         r_origem = origem(linha, indice, fontes_chave, bool(casos[indice]), modelos[chave],
                           buscas.get(chave))
         if r_origem is not None:

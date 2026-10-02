@@ -68,12 +68,23 @@ def test_p4_hibrido_indefinido_nunca_leva_a_total():
     assert r.decisao == "propulsao_oferecida=hibrido_indefinido; eletrificacao=parcial"
 
 
-def test_p3_hibrido_contra_mhev_vai_para_humano():
+def test_p3_hibrido_contra_mhev_vira_hibrido_indefinido():
+    """Resposta 4 da fase 2: o mhev da proposta e' conhecimento; sem fonte, sai."""
     linha = _linha(propulsao_oferecida="flex+mhev",
                    pbe_diferenca="so' no PBE: hev; so' na proposta: mhev", pbe_anos="2025")
     r = adj.propulsao(linha, _versoes((2025, "hev", "PULSE AUDACE HYB", "")), 2021,
                       _modelo(linha), CORTE)
-    assert len(r.pendencias) == 1 and r.pendencias[0].startswith("P3 nao decide")
+    assert not r.pendencias and r.resolucoes[0]["regra"] == "P3"
+    assert r.decisao == "propulsao_oferecida=flex+hibrido_indefinido; eletrificacao=parcial"
+
+
+def test_p3_mantem_mhev_que_o_pbe_declara_em_outra_versao():
+    """Stonic: uma versao diz MHEV no nome, outras so' Hibrido."""
+    linha = _linha(propulsao_oferecida="mhev", pbe_diferenca="so' no PBE: hev", pbe_anos="2022")
+    r = adj.propulsao(linha, _versoes((2022, "hev", "STONIC LX", ""), (2022, "mhev", "STONIC MHEV",
+                                                                         "MHEV")),
+                      2021, _modelo(linha), CORTE)
+    assert r.valor_apos_regras == "mhev+hibrido_indefinido"
 
 
 def test_p2_mantem_combustao_com_doze_meses_antes_do_primeiro_ano():
@@ -157,6 +168,39 @@ def _fontes(*linhas) -> pd.DataFrame:
                           "confronto_com_proposta": c,
                           "origem_fonte_url": f"https://exemplo{i}.com/x"}
                          for i, (e, d, t, c) in enumerate(linhas)])
+
+
+def test_o2_prefere_a_data_de_lancamento():
+    """Resposta 2 da fase 2: lancamento quando a fonte o da', senao producao."""
+    importado = _linha(vigencia_inicio="2011-01", vigencia_fim="2014-03",
+                       origem_producao="importado")
+    nacional = _linha(vigencia_inicio="2014-04")
+    modelo = _modelo(importado, nacional)
+    fontes = _fontes(("inicio_producao_local", "2015-01", "imprensa_especializada", "ajusta_data"),
+                     ("inicio_producao_local", "2015-03", "imprensa_especializada", "ajusta_data"))
+    fontes["tipo_data_fonte"] = ["producao", "lancamento"]
+    r = adj.origem(nacional, 1, fontes, True, modelo)
+    assert r.decisao == "vigencia_inicio=2015-03" and "lancamento" in r.resolucoes[0]["base"]
+    fontes["tipo_data_fonte"] = ["plano", "plano"]
+    r = adj.origem(nacional, 1, fontes, True, modelo)
+    assert "plano" in r.pendencias[0]
+
+
+def test_fonte_cobre_so_as_vigencias_do_periodo_dela():
+    """Resposta 3 da fase 2: a fonte de 2020 do Tracker nao trata do Tracker de 2003-2009."""
+    vig = pd.DataFrame([
+        {"vigencia_inicio": "2003-01", "vigencia_fim": "2009-12", "origem_producao": "importado"},
+        {"vigencia_inicio": "2013-01", "vigencia_fim": "2020-02", "origem_producao": "importado"},
+        {"vigencia_inicio": "2020-03", "vigencia_fim": "2026-08", "origem_producao": "nacional"},
+    ], index=[10, 11, 12])
+    inicio = {"evento": "inicio_producao_local", "origem_data_fonte": "2020-01"}
+    assert validacao.vigencias_cobertas(inicio, vig) == {11, 12}
+    ponto = {"evento": "producao_local_confirmada", "origem_data_fonte": "2020-03"}
+    assert validacao.vigencias_cobertas(ponto, vig) == {12}
+    periodo = {"evento": "importacao_confirmada", "origem_data_fonte": "2004/2008"}
+    assert validacao.vigencias_cobertas(periodo, vig) == {10}
+    sem_data = {"evento": "importacao_confirmada", "origem_data_fonte": ""}
+    assert validacao.vigencias_cobertas(sem_data, vig) == {10, 11, 12}
 
 
 def test_o1_confirma_com_fonte_forte_e_o4_com_fonte_fraca():
@@ -271,14 +315,20 @@ def test_fonte_forte_vem_antes_da_fraca_salvo_contradicao():
 
 
 def test_o3_diz_se_a_segunda_fonte_foi_buscada():
+    """Resposta 6 da fase 2: a janela de 2014 vale para a vigencia que a toca."""
     fraca = _fontes(("inicio_producao_local", "2013", "blog_agregador", "ajusta_data"))
-    antiga = _linha(vigencia_inicio="2012-01")
-    assert "anterior a 2014" in adj.origem(antiga, 0, fraca, True, _modelo(antiga)).pendencias[0]
+    antiga = _linha(vigencia_inicio="2003-01", vigencia_fim="2005-12")
+    assert "antes de 2014" in adj.origem(antiga, 0, fraca, True, _modelo(antiga)).pendencias[0]
+    toca = _linha(vigencia_inicio="2005-04", vigencia_fim="2025-07")
+    assert "ainda nao buscada" in adj.origem(toca, 0, fraca, True, _modelo(toca)).pendencias[0]
     nova = _linha(vigencia_inicio="2014-04")
     assert "ainda nao buscada" in adj.origem(nova, 0, fraca, True, _modelo(nova)).pendencias[0]
-    busca = {"data_busca": "2026-10-01"}
+    busca = {"data_busca": "2026-10-01", "resultado": "so_fraca"}
     r = adj.origem(nova, 0, fraca, True, _modelo(nova), busca)
     assert "buscada em 2026-10-01 e nao achada" in r.pendencias[0]
+    achada = {"data_busca": "2026-10-01", "resultado": "forte_achada"}
+    r = adj.origem(nova, 0, fraca, True, _modelo(nova), achada)
+    assert "nao trata desta vigencia" in r.pendencias[0]
 
 
 # ---------------------------------------------------------------- procedencia

@@ -264,13 +264,108 @@ def carregar_fontes_origem() -> pd.DataFrame:
     return pd.read_csv(config.ORIGEM_FONTES, dtype=str, keep_default_na=False)
 
 
+LOCAL = frozenset({"nacional", "ambos"})
+# Distancia maxima, em meses, entre a data de um evento de transicao e a fronteira
+# de origem das vigencias propostas para a fonte tratar dessa fronteira.
+TOLERANCIA_FRONTEIRA = 24
+
+
+def _mes_n(texto: str) -> int:
+    return int(texto[:4]) * 12 + int(texto[5:7]) - 1
+
+
+def intervalo_da_data(data: str) -> tuple[int, int] | None:
+    """(primeiro, ultimo) mes, como inteiros, de uma data de fonte; None sem data.
+
+    Aceita AAAA, AAAA-MM, AAAA-S1/S2 e periodos A/B de qualquer desses.
+    """
+    if not data:
+        return None
+
+    def limites(parte: str) -> tuple[int, int]:
+        if re.fullmatch(r"\d{4}-\d{2}", parte):
+            return _mes_n(parte), _mes_n(parte)
+        ano = int(parte[:4])
+        if parte.endswith("-S1"):
+            return ano * 12, ano * 12 + 5
+        if parte.endswith("-S2"):
+            return ano * 12 + 6, ano * 12 + 11
+        return ano * 12, ano * 12 + 11
+
+    inicio, _, fim = data.partition("/")
+    return limites(inicio)[0], limites(fim or inicio)[1]
+
+
+def vigencias_cobertas(fonte, linhas_modelo: pd.DataFrame) -> set:
+    """Indices das vigencias do modelo de que a fonte trata (resposta 3 da fase 2).
+
+    A fonte vale para o periodo que ela trata: as vigencias que se sobrepoem a' data
+    (ou ao periodo) dela. Evento de transicao -- inicio ou fim de producao local,
+    plano ou anuncio dele -- trata tambem das duas vigencias em volta da fronteira
+    de origem (nao local -> local, ou o contrario) mais proxima da data, ate'
+    `TOLERANCIA_FRONTEIRA` meses. Fonte sem data trata de todas as vigencias.
+    """
+    intervalo = intervalo_da_data(fonte["origem_data_fonte"])
+    if intervalo is None:
+        return set(linhas_modelo.index)
+    inicio, fim = intervalo
+    ordenadas = linhas_modelo.sort_values("vigencia_inicio")
+    v_inicio = ordenadas["vigencia_inicio"].map(_mes_n)
+    v_fim = ordenadas["vigencia_fim"].map(_mes_n)
+    cobertas = {i for i in ordenadas.index if v_inicio[i] <= fim and v_fim[i] >= inicio}
+    evento = fonte["evento"]
+    sentidos = []
+    if "inicio" in evento or evento in ("plano_producao_local", "anuncio_producao_local"):
+        sentidos.append(("entra", inicio))
+    if "fim" in evento:
+        sentidos.append(("sai", fim))
+    if evento == "producao_local_periodo":
+        sentidos += [("entra", inicio), ("sai", fim)]
+    local = ordenadas["origem_producao"].isin(LOCAL)
+    pares = list(zip(ordenadas.index[:-1], ordenadas.index[1:]))
+    for sentido, mes in sentidos:
+        if sentido == "entra":
+            transicoes = [(a, b) for a, b in pares if not local[a] and local[b]]
+        else:
+            transicoes = [(a, b) for a, b in pares if local[a] and not local[b]]
+        candidatos = [(abs(v_inicio[b] - mes), a, b) for a, b in transicoes]
+        if candidatos:
+            distancia, a, b = min(candidatos)
+            if distancia <= TOLERANCIA_FRONTEIRA:
+                cobertas |= {a, b}
+    if not cobertas:  # a data cai num buraco da serie: a vigencia mais proxima
+        distancia = {i: min(abs(v_inicio[i] - fim), abs(v_fim[i] - inicio))
+                     for i in ordenadas.index}
+        cobertas = {min(distancia, key=distancia.get)}
+    return cobertas
+
+
+def fontes_por_linha(rascunho: pd.DataFrame, fontes: pd.DataFrame) -> dict:
+    """indice da linha -> fontes que tratam daquela vigencia (`vigencias_cobertas`)."""
+    if fontes.empty:
+        return {}
+    modelos = {k: g for k, g in rascunho.groupby(CHAVE, sort=False)}
+    por_linha: dict = {}
+    for chave, grupo in fontes.groupby(CHAVE):
+        linhas_modelo = modelos.get(chave)
+        if linhas_modelo is None:
+            continue
+        for posicao, fonte in grupo.iterrows():
+            for indice in vigencias_cobertas(fonte, linhas_modelo):
+                por_linha.setdefault(indice, []).append(posicao)
+    return {i: fontes.loc[posicoes] for i, posicoes in por_linha.items()}
+
+
 def anexar_origem(rascunho: pd.DataFrame, fontes: pd.DataFrame) -> pd.DataFrame:
-    """Fontes datadas de origem por modelo, sem tocar em `origem_producao`."""
+    """Fontes datadas de origem por vigencia, sem tocar em `origem_producao`.
+
+    Cada fonte vai so' para as vigencias de que trata (`vigencias_cobertas`).
+    """
     saida = rascunho.copy()
-    por_chave = {k: g for k, g in fontes.groupby(CHAVE)} if not fontes.empty else {}
+    por_linha = fontes_por_linha(saida, fontes)
     urls, trechos, datas, confrontos, situacoes = [], [], [], [], []
-    for linha in saida[CHAVE].itertuples(index=False, name=None):
-        grupo = por_chave.get(linha)
+    for indice in saida.index:
+        grupo = por_linha.get(indice)
         if grupo is None:
             urls.append(""); trechos.append(""); datas.append("")
             confrontos.append(""); situacoes.append("sem_fonte")

@@ -71,6 +71,9 @@ def test_pagina_guardada_bate_com_o_manifesto_e_com_a_url(fontes, manifesto):
 
 def test_campos_validos(fontes):
     assert set(fontes["confronto_com_proposta"]) <= CONFRONTOS
+    assert set(fontes["tipo_data_fonte"]) <= {"lancamento", "producao", "plano"}
+    planos = fontes["evento"].str.startswith(("plano_", "anuncio_"))
+    assert (fontes.loc[planos, "tipo_data_fonte"] == "plano").all()
     ruins = [d for d in fontes["origem_data_fonte"] if not DATA.match(d)]
     assert not ruins, ruins
 

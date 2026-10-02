@@ -29,7 +29,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from comum import adjudicacao, classificacao, config  # noqa: E402
+from comum import adjudicacao, classificacao, config, fase2  # noqa: E402
 from comum import validacao_classificacao as validacao  # noqa: E402
 
 # A busca de fonte de origem cobre a origem `media`/`baixa` dos maiores modelos.
@@ -192,18 +192,21 @@ LEIA_ME = [
      "`propulsao_oferecida=flex+hev; origem_producao=nacional`). `dividir em AAAA-MM` pede nova "
      "vigencia a partir daquele mes -- descreva os atributos de cada lado. Qualquer outro texto "
      "e' lido a mao."),
-    ("regra da fase 2 (decisao 6)",
-     "Nenhuma linha e' descartada. Por linha e por atributo, a fase 2 le, nesta precedencia: "
-     "`decisao_humana`, se preenchida para o atributo; senao `decisao_por_regra`; senao a "
-     "proposta original. A dimensao final carrega, por atributo, a procedencia: `humana`, "
+    ("regra da fase 2",
+     "A fase 2 roda (etapa 11 do pipeline) e grava dados/processado/classificacao.parquet e "
+     "classificacao_montagem.parquet. Nenhuma linha e' descartada. Por linha e por atributo: "
+     "`decisao_humana`, se preenchida para o atributo (`ok` vale para todos); senao "
+     "`decisao_por_regra`; senao a proposta original. Procedencia, por atributo: `humana`, "
      "`regra_fonte_forte` (regra com fonte oficial ou especializada, inclusive o valor que o PBE "
      "ou fonte forte confirmou sem contestacao), `regra_fonte_fraca` (regra apoiada em fonte "
-     "fraca, ou a P2, que decide sem evidencia positiva) ou `proposta` (nunca contestada nem "
-     "confirmada por checagem nenhuma). As colunas `procedencia_*` da aba `classificacao` sao a "
-     "previa disso hoje; `pendente` marca o atributo em a_adjudicar ainda sem decisao humana -- "
-     "a fase 2 nao deve rodar com ele. Um artigo que use propulsao ou origem como variavel de "
-     "tratamento pode se restringir a `humana` e `regra_fonte_forte` e declarar quantos ficaram "
-     "de fora."),
+     "fraca, ou a P2, sem evidencia positiva), `proposta` (nunca tocada por checagem) ou "
+     "`pendente` (contestada e ainda nao decidida; o valor e' a proposta original). As colunas "
+     "`procedencia_*` da aba `classificacao` sao essa procedencia. Linha com decisao humana nao "
+     "pode deixar atributo `pendente` (use `ok` ou decida cada um); texto livre e `dividir em` "
+     "nao se aplicam sozinhos e fazem a etapa falhar ate' serem reescritos. Este rascunho e' a "
+     "fonte de verdade: ninguem edita o parquet. Um artigo que use propulsao ou origem como "
+     "variavel de tratamento deve restringir-se a `humana` e `regra_fonte_forte` e declarar a "
+     "fracao do volume que ficou de fora."),
     ("questoes",
      "A aba `questoes` lista o que a lista de valores ou a fonte nao resolvem (hibrido "
      "leve, REEV, caminhao leve e outras), com os modelos e o volume afetados. Sao "
@@ -223,7 +226,8 @@ LEIA_ME = [
      "O pesquisador aprova regras (aba `regras_adjudicacao`, de config/regras_adjudicacao.csv); "
      "o script as aplica; so' o que elas nao decidem vai para `a_adjudicar`. Propulsao: P1 (o "
      "PBE acrescenta), P2 (o que o PBE nao pode ver, com o corte de cobertura do PBE), P3 "
-     "(hibrido leve), P4 (Hibrido sem HEV no nome: hibrido_indefinido). Origem: O1 (fonte forte "
+     "(Hibrido contra mhev da proposta: hibrido_indefinido), P4 (Hibrido sem HEV no nome: "
+     "hibrido_indefinido). Origem: O1 (fonte forte "
      "que concorda), O2 (fonte forte que ajusta a data), O3 (contradiz e inconclusivo sempre "
      "humanos; complementa ou ajusta_data so' com fonte fraca tambem), O4 (confirmacao por fonte "
      "fraca: aceita, com procedencia regra_fonte_fraca). A proposta fica intacta; a decisao da "
@@ -373,9 +377,17 @@ def gerar():
     fontes = adjudicacao.carregar_fontes()
     com_regras, resolvido = adjudicacao.aplicar(rascunho, casado, fontes, top, corte,
                                                 adjudicacao.carregar_buscas())
+    # a montagem e' calculada sobre as vigencias depois das regras (a O2 move fronteiras),
+    # as mesmas que a fase 2 grava
     montagem = adjudicacao.carregar_montagem()
-    com_regras, periodos = adjudicacao.periodos_montagem(
-        com_regras, montagem, painel[validacao.CHAVE + ["mes_ref", "unidades"]])
+    apos_regras = com_regras.copy()
+    for indice, decisao in apos_regras["decisao_por_regra"].items():
+        for limite, valor in fase2.ler_decisao(decisao).items():
+            if limite.startswith("vigencia_"):
+                apos_regras.at[indice, limite] = valor
+    apos_regras, periodos = adjudicacao.periodos_montagem(
+        apos_regras, montagem, painel[validacao.CHAVE + ["mes_ref", "unidades"]])
+    com_regras["montagem_por_periodo"] = apos_regras["montagem_por_periodo"]
     fila = adjudicacao.a_adjudicar(com_regras, fila_antes)
     contas = adjudicacao.contas(fila_antes, com_regras, resolvido)
     # decisao_por_regra e decisao_humana ficam sempre por ultimo

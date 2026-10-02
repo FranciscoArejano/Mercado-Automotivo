@@ -562,8 +562,9 @@ def origem(linha: pd.Series, indice: int, fontes_chave: pd.DataFrame | None, cas
 
 # ------------------------------------------------------------- procedencia
 
-# Decisao 6: a dimensao final carrega, por atributo, de onde veio o valor.
-PROCEDENCIAS = ("humana", "regra_fonte_forte", "regra_fonte_fraca", "proposta")
+# Decisao 6: a dimensao final carrega, por atributo, de onde veio o valor; `pendente`
+# entrou como quinto valor na fase 2.
+PROCEDENCIAS = ("humana", "regra_fonte_forte", "regra_fonte_fraca", "proposta", "pendente")
 
 
 def _humana_toca(decisao: str, atributo: str) -> bool:
@@ -580,8 +581,8 @@ def _procedencia(linha: pd.Series, atributo: str, resultado: Resultado | None,
                  confirmacao: str) -> str:
     """Procedencia de um atributo pela precedencia da fase 2 (humana, regra, proposta).
 
-    `pendente` (fora dos quatro valores) marca o atributo que esta' em
-    `a_adjudicar` sem decisao humana: a fase 2 nao deve rodar com ele. Fora do
+    `pendente` e' o quinto valor (resposta da fase 2): o atributo esta' em
+    `a_adjudicar` sem decisao humana, e o dado mostra a proposta original. Fora do
     universo das regras, o valor que uma checagem confirmou conta como decidido
     pela regra da checagem (`confirmacao`: forte ou fraca); sem checagem que
     confirme, e' `proposta`.

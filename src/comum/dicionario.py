@@ -198,10 +198,13 @@ def escrever(painel: pd.DataFrame) -> None:
         "sobre o nivel antes de usar.\n",
         "- `macro_mensal.parquet` -- credito, juros, cambio, precos e atividade. Cada serie "
         "documentada em `config/series_macro.csv`, com a coluna `natureza_e_ressalvas`.\n",
-        "- **Classificacao de modelo** (propulsao, carroceria, origem da producao) -- "
-        "**ainda nao existe como dado**. A fase 1 produziu so' um rascunho para "
-        "adjudicacao, `saidas/classificacao_rascunho.xlsx`; nada foi gravado em "
-        "`dados/processado/`.\n\n",
+        "- `classificacao.parquet` -- propulsao, eletrificacao, carroceria e origem da "
+        "producao por modelo e vigencia, com a procedencia de cada atributo; e "
+        "`classificacao_montagem.parquet`, o modo de montagem local por periodo. Gravadas "
+        "pela etapa 11 a partir do rascunho adjudicado "
+        "(`saidas/classificacao_rascunho.xlsx`), que e' a fonte de verdade. Dicionario proprio "
+        "em `saidas/classificacao_dicionario.md`; leia a advertencia sobre procedencia antes "
+        "de usar.\n\n",
         "**Limitacao da classificacao, registrada desde ja':** a fonte nao separa unidades "
         "por versao. Um modelo vendido em flex e em hibrido aparece como um numero so', e "
         "nao ha' como saber quantas unidades foram de cada. Por isso a propulsao sera' "
@@ -234,9 +237,13 @@ def escrever(painel: pd.DataFrame) -> None:
         "**Regra da fase 2 e procedencia:** nenhuma linha e' descartada; por linha e atributo "
         "vale a decisao humana, senao a decisao por regra, senao a proposta. A dimensao carrega, "
         "por atributo, a procedencia do valor: `humana`, `regra_fonte_forte`, "
-        "`regra_fonte_fraca` ou `proposta` (nunca contestada nem confirmada). Um artigo que use "
-        "propulsao ou origem como variavel de tratamento pode se restringir a procedencia "
-        "forte e declarar quantas observacoes ficaram de fora.\n\n",
+        "`regra_fonte_fraca`, `proposta` (nunca tocada por checagem) ou `pendente` (contestada "
+        "e ainda nao decidida; o valor e' a proposta original); `nao_classificado` abaixo do "
+        "piso. **Um artigo que use propulsao ou origem como variavel de tratamento deve "
+        "restringir-se as procedencias `humana` e `regra_fonte_forte`, e declarar a fracao do "
+        "volume que ficou de fora.** As datas de troca de origem usam o lancamento quando a "
+        "fonte o da', senao a producao: os meses entre producao e lancamento sao imprecisos "
+        "por construcao, e num estudo de evento ficam fora da janela.\n\n",
         "## Reconstituicao\n\n",
         "Todo numero se reconstitui a partir de tres coisas versionadas: os PDFs originais "
         "(hash em `dados/bruto/manifesto.csv`), `regras.csv` e os scripts de `src/`. "

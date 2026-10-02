@@ -221,14 +221,56 @@ def _macro(usos: dict[str, dict]) -> tuple[dict, str, list[list]]:
     return resumo, corpo, usos_series
 
 
+def _dimensao_classificacao() -> tuple[dict, str]:
+    """A dimensao gravada pela etapa 11 (fase 2)."""
+    dim = pd.read_parquet(config.CLASSIFICACAO)
+    montagem = pd.read_parquet(config.CLASSIFICACAO_MONTAGEM)
+    volume = pd.read_csv(config.CLASSIFICACAO_PROCEDENCIA)
+    classificadas = dim[dim["vigencia_inicio_rascunho"] != ""]
+    modelos = classificadas[classificacao.CHAVE].drop_duplicates().shape[0]
+    fila = pd.read_excel(config.CLASSIFICACAO_RASCUNHO, sheet_name="a_adjudicar", dtype=str,
+                         keep_default_na=False)
+    pct = volume.pivot(index="procedencia", columns="atributo", values="pct_do_volume")
+    linhas_tabela = ["| procedencia | propulsao | carroceria | origem |", "|---|---:|---:|---:|"]
+    for procedencia in pct.index:
+        p = pct.loc[procedencia]
+        if p.sum() > 0:
+            linhas_tabela.append(f"| `{procedencia}` | {_pct(p['propulsao'], 1)}% | "
+                                 f"{_pct(p['carroceria'], 1)}% | {_pct(p['origem'], 1)}% |")
+    com_modo = montagem[montagem["montagem_local"].isin(["fabricacao", "ckd", "skd"])]
+    janela = f"{dim['vigencia_inicio'].min()} a {dim['vigencia_fim'].max()}"
+    corpo = (
+        "- **Estado: dimensao gravada (fase 2)** pela etapa 11, a partir do rascunho "
+        "adjudicado `saidas/classificacao_rascunho.xlsx`, que e' a fonte de verdade da "
+        "adjudicacao. Ninguem edita o parquet a' mao.\n"
+        "- **Unidade de observacao:** o modelo `(marca, modelo, segmento)` numa vigencia "
+        "(`vigencia_inicio`, `vigencia_fim`); juncao com o painel pela chave e o mes.\n"
+        f"- **Linhas:** {_mil(len(dim))} -- {_mil(len(classificadas))} vigencias de "
+        f"{_mil(modelos)} modelos classificados e {_mil(len(dim) - len(classificadas))} modelos "
+        f"abaixo do piso de {_mil(config.PISO_CLASSIFICACAO)} unidades (`nao_classificado`). Toda "
+        "chave do painel tem linha em todo mes com unidades (validado a cada execucao).\n"
+        "- **Procedencia, do volume do painel:**\n\n" + "\n".join(linhas_tabela) + "\n\n"
+        "- **Advertencia:** um artigo que use propulsao ou origem como variavel de tratamento "
+        "deve restringir-se as procedencias `humana` e `regra_fonte_forte`, e declarar a fracao "
+        "do volume que ficou de fora.\n"
+        f"- **Pendentes:** {len(fila)} linhas em `a_adjudicar`; o dado as mostra com a proposta "
+        "original e procedencia `pendente`.\n"
+        f"- **Montagem local:** `dados/processado/classificacao_montagem.parquet`, "
+        f"{_mil(len(montagem))} periodos, {len(com_modo)} deles com modo declarado por "
+        "fonte (`fabricacao`, `ckd`, `skd`); o resto e' `desconhecido` ou `nao_se_aplica`.\n"
+        "- **Arquivos:** dicionario em `saidas/classificacao_dicionario.md`; procedencia por "
+        "atributo em `saidas/classificacao_procedencia.csv`; regras em "
+        "`config/regras_classificacao.csv` e `config/regras_adjudicacao.csv`; mapeamento do PBE "
+        "em `config/pbe_propulsao.csv` e `config/pbe_modelos.csv`; tipo de fonte em "
+        "`config/tipo_fonte_dominio.csv`.\n"
+    )
+    return ({"produto": "classificacao", "arquivo": "dados/processado/classificacao.parquet",
+             "linhas": len(dim), "janela": janela}, corpo)
+
+
 def _classificacao() -> tuple[dict, str]:
-    dimensoes = sorted(config.DIR_PROCESSADO.glob("classificacao*.parquet"))
-    if dimensoes:
-        dimensao = pd.read_parquet(dimensoes[0])
-        corpo = (f"- **Dimensao adjudicada:** `{dimensoes[0].relative_to(config.RAIZ)}`, "
-                 f"{_mil(len(dimensao))} linhas.\n")
-        return ({"produto": "classificacao", "arquivo": str(dimensoes[0].relative_to(config.RAIZ)),
-                 "linhas": len(dimensao), "janela": "--"}, corpo)
+    if config.CLASSIFICACAO.exists():
+        return _dimensao_classificacao()
     if not config.CLASSIFICACAO_RASCUNHO.exists():
         return ({"produto": "classificacao", "arquivo": "--", "linhas": 0,
                  "janela": "--"}, "- Nao existe nem rascunho.\n")

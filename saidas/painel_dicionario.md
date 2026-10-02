@@ -1,6 +1,6 @@
 # Dicionario de dados -- `painel.parquet`
 
-Gerado em 2026-10-01T19:19:50+00:00 (UTC) por `src/etapa05_painel.py`.
+Gerado em 2026-10-02T16:04:11+00:00 (UTC) por `src/etapa05_painel.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: 54,179
@@ -87,7 +87,7 @@ Dois arquivos com a mesma unidade de tempo, **nunca colunas deste painel** -- a 
 
 - `painel_canal.parquet` -- venda direta e varejo por modelo, top-50 por segmento. Dicionario proprio em `saidas/painel_canal_dicionario.md`; leia a advertencia sobre o nivel antes de usar.
 - `macro_mensal.parquet` -- credito, juros, cambio, precos e atividade. Cada serie documentada em `config/series_macro.csv`, com a coluna `natureza_e_ressalvas`.
-- **Classificacao de modelo** (propulsao, carroceria, origem da producao) -- **ainda nao existe como dado**. A fase 1 produziu so' um rascunho para adjudicacao, `saidas/classificacao_rascunho.xlsx`; nada foi gravado em `dados/processado/`.
+- `classificacao.parquet` -- propulsao, eletrificacao, carroceria e origem da producao por modelo e vigencia, com a procedencia de cada atributo; e `classificacao_montagem.parquet`, o modo de montagem local por periodo. Gravadas pela etapa 11 a partir do rascunho adjudicado (`saidas/classificacao_rascunho.xlsx`), que e' a fonte de verdade. Dicionario proprio em `saidas/classificacao_dicionario.md`; leia a advertencia sobre procedencia antes de usar.
 
 **Limitacao da classificacao, registrada desde ja':** a fonte nao separa unidades por versao. Um modelo vendido em flex e em hibrido aparece como um numero so', e nao ha' como saber quantas unidades foram de cada. Por isso a propulsao sera' **conjunto** (`propulsao_oferecida`) e a eletrificacao tera' tres niveis (`nenhuma`, `parcial`, `total`). Somar as unidades dos modelos `parcial` como se fossem eletrificadas superestima a eletrificacao; soma-las como combustao a subestima. Contar unidades eletrificadas por propulsao exige fonte externa.
 
@@ -95,7 +95,7 @@ Dois arquivos com a mesma unidade de tempo, **nunca colunas deste painel** -- a 
 
 **Adjudicacao por regra:** o pesquisador aprova criterios (`config/regras_adjudicacao.csv`: o PBE Veicular acrescenta propulsao omitida; mantem-se o que o PBE nao podia ver; fonte de origem oficial ou de imprensa especializada que concorda ou ajusta a data e' aceita; contradicao, leitura inconclusiva ou fonte so' fraca vao a julgamento). So' o que os criterios nao decidem e' julgado linha a linha. A forca da fonte vem de `config/tipo_fonte_dominio.csv`. A ausencia no PBE so' foi tratada como informativa a partir de 2016, quando o programa passou a cobrir 95,5% do volume do painel (em 2015, 75,2%); antes disso, a regra P2 mantem a proposta (`saidas/pbe_cobertura_por_ano.csv`).
 
-**Regra da fase 2 e procedencia:** nenhuma linha e' descartada; por linha e atributo vale a decisao humana, senao a decisao por regra, senao a proposta. A dimensao carrega, por atributo, a procedencia do valor: `humana`, `regra_fonte_forte`, `regra_fonte_fraca` ou `proposta` (nunca contestada nem confirmada). Um artigo que use propulsao ou origem como variavel de tratamento pode se restringir a procedencia forte e declarar quantas observacoes ficaram de fora.
+**Regra da fase 2 e procedencia:** nenhuma linha e' descartada; por linha e atributo vale a decisao humana, senao a decisao por regra, senao a proposta. A dimensao carrega, por atributo, a procedencia do valor: `humana`, `regra_fonte_forte`, `regra_fonte_fraca`, `proposta` (nunca tocada por checagem) ou `pendente` (contestada e ainda nao decidida; o valor e' a proposta original); `nao_classificado` abaixo do piso. **Um artigo que use propulsao ou origem como variavel de tratamento deve restringir-se as procedencias `humana` e `regra_fonte_forte`, e declarar a fracao do volume que ficou de fora.** As datas de troca de origem usam o lancamento quando a fonte o da', senao a producao: os meses entre producao e lancamento sao imprecisos por construcao, e num estudo de evento ficam fora da janela.
 
 ## Reconstituicao
 

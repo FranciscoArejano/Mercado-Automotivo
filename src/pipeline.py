@@ -37,6 +37,8 @@ ETAPAS = [
     (9, "etapa09_canal", "painel de canal de venda"),
     (6, "etapa06_validacao", "validacao"),
     (7, "etapa07_referencia_cruzada", "referencia cruzada"),
+    # A dimensao de classificacao le o rascunho adjudicado e o painel.
+    (11, "etapa11_classificacao", "dimensao de classificacao de modelo"),
     # O catalogo descreve o que as outras produziram: vem por ultimo.
     (10, "etapa10_catalogo", "catalogo do repositorio"),
 ]

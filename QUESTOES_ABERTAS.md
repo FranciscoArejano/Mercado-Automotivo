@@ -42,6 +42,7 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | Canal | Ranking por marca | **não extraído, de propósito** — gráfico, percentual, redundante |
 | Canal | Participação de canal: o top-50 é neutro? | **não em automóveis (viés +1,3 pp e instável); sim em comerciais leves** |
 | Macro | Dimensão macro mensal | **17 séries; o IPCA de usado é índice de depreciação** |
+| Classificação | Dimensão de modelo gravada (fase 2) | **gravada com procedência por atributo; origem 81% sem checagem — próxima frente** |
 
 ---
 
@@ -731,6 +732,33 @@ distingue as duas exclusões: censura à esquerda invalida a **entrada** e
 descarta o modelo como *sucessor*; censura à direita invalida a **saída** e o
 descarta como *quem sai*. Um modelo vivo no primeiro mês continua podendo sair
 — é o caso do Prisma. `testes/test_candidatos.py` trava o comportamento.
+
+---
+
+## Classificação de modelo: a origem é a próxima frente
+
+A fase 2 gravou `dados/processado/classificacao.parquet` com a procedência de
+cada atributo (ver `saidas/classificacao_dicionario.md`). A propulsão está 92%
+do volume em `regra_fonte_forte` (o PBE confirma), mas a **origem da produção
+está 81% em `proposta`** — nunca checada.
+
+- Os maiores casos são Gol, Strada, Uno, Palio, Onix, Fox, Celta, HB20: carros
+  nacionais além de dúvida razoável, mas sem fonte.
+- Hoje, um artigo que use origem com procedência forte fica com cerca de 5% do
+  volume (4,9% na dimensão gravada em 2026-10-02).
+
+**Abordagem proposta pelo pesquisador, não executada:** fonte por fábrica, não
+por modelo.
+
+- Uns 20 a 25 complexos industriais respondem por quase toda a produção
+  nacional, e cada um tem histórico publicado listando os modelos que produziu.
+  A linha do tempo de Anchieta, já usada, é um exemplo.
+- Uma fonte forte por fábrica confirma a origem de dezenas de modelos de uma
+  vez. É a mesma ideia das regras de adjudicação: subir do caso para o critério.
+
+Para executar, a fonte da fábrica entraria em `origem_fontes.csv` uma vez por
+modelo que ela cita, com o período de produção. A regra de cobertura
+(`vigencias_cobertas`) já restringe cada fonte às vigências do período dela.
 
 ---
 

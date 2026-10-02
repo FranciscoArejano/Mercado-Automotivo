@@ -1,8 +1,8 @@
 # Validacao do painel de vendas de veiculos 0 km
 
-**Commit: `ea82c57`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
+**Commit: `56947e7`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
 
-Gerado em 2026-10-02T16:06:09+00:00 (UTC) por `src/etapa06_validacao.py`.
+Gerado em 2026-10-02T20:46:50+00:00 (UTC) por `src/etapa06_validacao.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: painel bruto 54,183 / painel 54,179 / visao por modelo 53,700

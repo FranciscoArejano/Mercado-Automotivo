@@ -1,4 +1,4 @@
-# Catalogo do repositorio -- dado do commit `ea82c57`
+# Catalogo do repositorio -- dado do commit `56947e7`
 
 Gerado por `src/etapa10_catalogo.py` a cada execucao do pipeline. **Nao editar a mao**: janelas, linhas e contagens saem dos arquivos. O texto de usos esta' em `config/catalogo_usos.csv` e as fontes candidatas em `config/fontes_candidatas.csv`; edite la' e rode `python src/etapa10_catalogo.py`.
 
@@ -94,6 +94,7 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 - **Advertencia:** um artigo que use propulsao ou origem como variavel de tratamento deve restringir-se as procedencias `humana` e `regra_fonte_forte`, e declarar a fracao do volume que ficou de fora.
 - **Pendentes:** 97 linhas em `a_adjudicar`; o dado as mostra com a proposta original e procedencia `pendente`.
 - **Montagem local:** `dados/processado/classificacao_montagem.parquet`, 968 periodos, 6 deles com modo declarado por fonte (`fabricacao`, `ckd`, `skd`); o resto e' `desconhecido` ou `nao_se_aplica`.
+- **Serie temporal de propulsao:** `dados/processado/classificacao_propulsao_anual.parquet`, 5.896 linhas `(marca, modelo, segmento, ano)` com os tipos oferecidos no ano (`propulsao_no_ano`, `eletrificacao_no_ano`). `propulsao_na_vigencia` e `eletrificacao_na_vigencia` sao o conjunto de tudo que foi oferecido em algum momento da vigencia -- nao usar em serie temporal. Dos 90 tipos eletrificados (vigencia x tipo), 3 entram sem datacao (`vigencia_sem_datacao`); uso-teste em `saidas/classificacao_uso_teste.csv`.
 - **Arquivos:** dicionario em `saidas/classificacao_dicionario.md`; procedencia por atributo em `saidas/classificacao_procedencia.csv`; regras em `config/regras_classificacao.csv` e `config/regras_adjudicacao.csv`; mapeamento do PBE em `config/pbe_propulsao.csv` e `config/pbe_modelos.csv`; tipo de fonte em `config/tipo_fonte_dominio.csv`.
 - **Ressalvas principais:** Hoje e' rascunho para adjudicacao, nao dado. Nada foi gravado em dados/processado/.
 
@@ -103,7 +104,7 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 |---|---|
 | `dados/bruto/pdf/` | 284 informes originais da Fenabrave, hash em `dados/bruto/manifesto.csv` |
 | `dados/bruto/pbe/` | 18 tabelas do PBE Veicular (Inmetro), com manifesto SHA-256; extracao em `saidas/pbe_versoes.csv` |
-| `dados/bruto/origem_paginas/` | 79 paginas de fonte de origem, abertas e guardadas, com SHA-256 |
+| `dados/bruto/origem_paginas/` | 119 paginas de fonte de origem, abertas e guardadas, com SHA-256 |
 | `regras.csv` | 0 regras de harmonizacao (rebatismo, desdobramento) |
 | `config/mapa_grupos.csv` | 148 linhas marca-grupo com vigencia |
 | `dados/referencia/Vendas_Geral.xlsx` | controle independente (ESPEC sec.7), nao fonte |
@@ -156,5 +157,5 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 | Preços por versão (FIPE) | não testado; exige o mesmo crosswalk |  |
 | Emplacamento por UF (Fenabrave, Dados Regionais) | granularidade não verificada |  |
 | Calendário de política (IPI, MP 1175, tarifa de eletrificados) | construção manual a partir de decretos |  |
-| Emplacamento de eletrificados por tipo de propulsão (ABVE) | não testado | É a única saída para contar unidades por propulsão, que a Fenabrave não separa. Sugerida pelo assistente, aceita em 2026-10-01. |
+| Emplacamento de eletrificados por tipo de propulsão (ABVE) | testado em 2026-10-02: abve.org.br acessível; a série completa (desde 2012, por tecnologia, mensal) está só no painel Power BI do ABVE Data, que não se lê sem navegador; os comunicados mensais e anuais trazem em texto as unidades do ano por tecnologia e a participação. Série anual 2016-2026 registrada em dados/referencia/abve_serie_anual.csv; comparação em saidas/abve_comparacao.csv | É a única saída para contar unidades por propulsão, que a Fenabrave não separa. Sugerida pelo assistente, aceita em 2026-10-01. A definição de eletrificado muda: 2024 inclui MHEV (e 3.828 micro-híbridos), 2025 exclui. Nenhuma dimensão construída a partir dela (rodada propulsão no tempo). |
 

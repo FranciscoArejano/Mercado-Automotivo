@@ -202,7 +202,8 @@ def escrever(painel: pd.DataFrame) -> None:
         "producao por modelo e vigencia, com a procedencia de cada atributo; e "
         "`classificacao_montagem.parquet`, o modo de montagem local por periodo; e "
         "`classificacao_propulsao_anual.parquet`, os tipos de propulsao oferecidos em cada "
-        "ano -- **a tabela para serie temporal**: `propulsao_na_vigencia` e "
+        "vigencia e ano, nas leituras longa e curta -- **a tabela para serie temporal**: "
+        "`propulsao_na_vigencia` e "
         "`eletrificacao_na_vigencia` sao o conjunto de tudo que foi oferecido em algum "
         "momento da vigencia, e numa serie anual inflam o `parcial` dos anos anteriores a' "
         "chegada da versao eletrificada. Gravadas "
@@ -256,6 +257,12 @@ def escrever(painel: pd.DataFrame) -> None:
         "mostrava o modelo sem ele --, senao no inicio da vigencia, marcado "
         "`vigencia_sem_datacao`; combustao segue a vigencia. Toda dimensao nova passa por um "
         "uso-teste antes de ser declarada pronta (`saidas/classificacao_uso_teste.csv`).\n\n",
+        "**Propulsao e comex (2026-10-04):** a regra P5 troca `hibrido_indefinido` por `mhev` "
+        "ou `hev` quando fonte forte declara o tipo do hibrido. A saida de cada tipo (inclusive "
+        "combustao) e' modelada como a entrada, em duas leituras: a longa mantem o tipo ate' a "
+        "primeira ausencia no PBE (de 2021 em diante) ou fonte de fim de venda; a curta, ate' a "
+        "ultima presenca. A banda da eletrificacao (piso, teto, teto sem MHEV, teto estrito) "
+        "fica em `saidas/eletrificacao_banda.csv`.\n\n",
         "## Reconstituicao\n\n",
         "Todo numero se reconstitui a partir de tres coisas versionadas: os PDFs originais "
         "(hash em `dados/bruto/manifesto.csv`), `regras.csv` e os scripts de `src/`. "

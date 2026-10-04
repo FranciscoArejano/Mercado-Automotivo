@@ -376,7 +376,8 @@ def gerar():
     # regras de adjudicacao e montagem local
     fontes = adjudicacao.carregar_fontes()
     com_regras, resolvido = adjudicacao.aplicar(rascunho, casado, fontes, top, corte,
-                                                adjudicacao.carregar_buscas())
+                                                adjudicacao.carregar_buscas(),
+                                                adjudicacao.carregar_hibridos())
     # a montagem e' calculada sobre as vigencias depois das regras (a O2 move fronteiras),
     # as mesmas que a fase 2 grava
     montagem = adjudicacao.carregar_montagem()

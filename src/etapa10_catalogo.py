@@ -226,17 +226,20 @@ def _propulsao_anual() -> str:
     if not config.CLASSIFICACAO_PROPULSAO_ANUAL.exists():
         return ""
     anual = pd.read_parquet(config.CLASSIFICACAO_PROPULSAO_ANUAL)
-    entradas = pd.read_csv(config.CLASSIFICACAO_PROPULSAO_ENTRADAS)
-    eletrificados = entradas[~entradas["tipo"].isin(["gasolina", "flex", "diesel"])]
+    tipos = pd.read_csv(config.CLASSIFICACAO_PROPULSAO_TIPOS)
+    eletrificados = tipos[~tipos["tipo"].isin(["gasolina", "flex", "diesel"])]
     sem = int((eletrificados["fonte_temporal"] == "vigencia_sem_datacao").sum())
+    saidas = int(tipos["fonte_saida"].fillna("").ne("").sum())
     return (
         "- **Serie temporal de propulsao:** `dados/processado/classificacao_propulsao_anual"
-        f".parquet`, {_mil(len(anual))} linhas `(marca, modelo, segmento, ano)` com os tipos "
-        "oferecidos no ano (`propulsao_no_ano`, `eletrificacao_no_ano`). "
-        "`propulsao_na_vigencia` e `eletrificacao_na_vigencia` sao o conjunto de tudo que foi "
-        "oferecido em algum momento da vigencia -- nao usar em serie temporal. Dos "
-        f"{len(eletrificados)} tipos eletrificados (vigencia x tipo), {sem} entram sem "
-        "datacao (`vigencia_sem_datacao`); uso-teste em `saidas/classificacao_uso_teste.csv`.\n")
+        f".parquet`, {_mil(len(anual))} linhas `(marca, modelo, segmento, vigencia_inicio, ano)` "
+        "com os tipos oferecidos no ano em duas leituras (`propulsao_no_ano` longa, "
+        "`propulsao_no_ano_curta`). `propulsao_na_vigencia` e `eletrificacao_na_vigencia` sao o "
+        "conjunto de tudo que foi oferecido em algum momento da vigencia -- nao usar em serie "
+        f"temporal. Dos {len(eletrificados)} tipos eletrificados (vigencia x tipo), {sem} entram "
+        f"sem datacao (`vigencia_sem_datacao`); {saidas} tipos tem evidencia de saida. Banda da "
+        "eletrificacao (piso e tres tetos) em `saidas/eletrificacao_banda.csv`; uso-teste em "
+        "`saidas/classificacao_uso_teste.csv`.\n")
 
 
 def _dimensao_classificacao() -> tuple[dict, str]:

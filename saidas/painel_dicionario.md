@@ -1,6 +1,6 @@
 # Dicionario de dados -- `painel.parquet`
 
-Gerado em 2026-10-02T20:46:35+00:00 (UTC) por `src/etapa05_painel.py`.
+Gerado em 2026-10-04T03:37:39+00:00 (UTC) por `src/etapa05_painel.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: 54,179
@@ -87,7 +87,7 @@ Dois arquivos com a mesma unidade de tempo, **nunca colunas deste painel** -- a 
 
 - `painel_canal.parquet` -- venda direta e varejo por modelo, top-50 por segmento. Dicionario proprio em `saidas/painel_canal_dicionario.md`; leia a advertencia sobre o nivel antes de usar.
 - `macro_mensal.parquet` -- credito, juros, cambio, precos e atividade. Cada serie documentada em `config/series_macro.csv`, com a coluna `natureza_e_ressalvas`.
-- `classificacao.parquet` -- propulsao, eletrificacao, carroceria e origem da producao por modelo e vigencia, com a procedencia de cada atributo; e `classificacao_montagem.parquet`, o modo de montagem local por periodo; e `classificacao_propulsao_anual.parquet`, os tipos de propulsao oferecidos em cada ano -- **a tabela para serie temporal**: `propulsao_na_vigencia` e `eletrificacao_na_vigencia` sao o conjunto de tudo que foi oferecido em algum momento da vigencia, e numa serie anual inflam o `parcial` dos anos anteriores a' chegada da versao eletrificada. Gravadas pela etapa 11 a partir do rascunho adjudicado (`saidas/classificacao_rascunho.xlsx`), que e' a fonte de verdade. Dicionario proprio em `saidas/classificacao_dicionario.md`; leia a advertencia sobre procedencia antes de usar.
+- `classificacao.parquet` -- propulsao, eletrificacao, carroceria e origem da producao por modelo e vigencia, com a procedencia de cada atributo; e `classificacao_montagem.parquet`, o modo de montagem local por periodo; e `classificacao_propulsao_anual.parquet`, os tipos de propulsao oferecidos em cada vigencia e ano, nas leituras longa e curta -- **a tabela para serie temporal**: `propulsao_na_vigencia` e `eletrificacao_na_vigencia` sao o conjunto de tudo que foi oferecido em algum momento da vigencia, e numa serie anual inflam o `parcial` dos anos anteriores a' chegada da versao eletrificada. Gravadas pela etapa 11 a partir do rascunho adjudicado (`saidas/classificacao_rascunho.xlsx`), que e' a fonte de verdade. Dicionario proprio em `saidas/classificacao_dicionario.md`; leia a advertencia sobre procedencia antes de usar.
 
 **Limitacao da classificacao, registrada desde ja':** a fonte nao separa unidades por versao. Um modelo vendido em flex e em hibrido aparece como um numero so', e nao ha' como saber quantas unidades foram de cada. Por isso a propulsao sera' **conjunto** (`propulsao_na_vigencia`, e por ano `propulsao_no_ano`) e a eletrificacao tera' tres niveis (`nenhuma`, `parcial`, `total`). Somar as unidades dos modelos `parcial` como se fossem eletrificadas superestima a eletrificacao; soma-las como combustao a subestima. Contar unidades eletrificadas por propulsao exige fonte externa.
 
@@ -98,6 +98,8 @@ Dois arquivos com a mesma unidade de tempo, **nunca colunas deste painel** -- a 
 **Regra da fase 2 e procedencia:** nenhuma linha e' descartada; por linha e atributo vale a decisao humana, senao a decisao por regra, senao a proposta. A dimensao carrega, por atributo, a procedencia do valor: `humana`, `regra_fonte_forte`, `regra_fonte_fraca`, `proposta` (nunca tocada por checagem) ou `pendente` (contestada e ainda nao decidida; o valor e' a proposta original); `nao_classificado` abaixo do piso. **Um artigo que use propulsao ou origem como variavel de tratamento deve restringir-se as procedencias `humana` e `regra_fonte_forte`, e declarar a fracao do volume que ficou de fora.** As datas de troca de origem usam o lancamento quando a fonte o da', senao a producao: os meses entre producao e lancamento sao imprecisos por construcao, e num estudo de evento ficam fora da janela.
 
 **Propulsao no tempo (2026-10-02):** cada tipo eletrificado entra no ano da fonte datada de lancamento (`dados/referencia/propulsao_fontes.csv`), senao no da primeira tabela do PBE que o mostra -- se um ano com coluna de propulsao (2021 em diante) mostrava o modelo sem ele --, senao no inicio da vigencia, marcado `vigencia_sem_datacao`; combustao segue a vigencia. Toda dimensao nova passa por um uso-teste antes de ser declarada pronta (`saidas/classificacao_uso_teste.csv`).
+
+**Propulsao e comex (2026-10-04):** a regra P5 troca `hibrido_indefinido` por `mhev` ou `hev` quando fonte forte declara o tipo do hibrido. A saida de cada tipo (inclusive combustao) e' modelada como a entrada, em duas leituras: a longa mantem o tipo ate' a primeira ausencia no PBE (de 2021 em diante) ou fonte de fim de venda; a curta, ate' a ultima presenca. A banda da eletrificacao (piso, teto, teto sem MHEV, teto estrito) fica em `saidas/eletrificacao_banda.csv`.
 
 ## Reconstituicao
 

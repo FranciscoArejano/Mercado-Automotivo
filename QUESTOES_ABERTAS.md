@@ -762,32 +762,42 @@ modelo que ela cita, com o período de produção. A regra de cobertura
 
 ## Propulsão no tempo: o que a tabela anual ainda não resolve
 
-`classificacao_propulsao_anual.parquet` (rodada de 2026-10-02) dá a cada tipo
-eletrificado um ano de entrada. Ficou aberto:
+`classificacao_propulsao_anual.parquet` dá a cada tipo de cada vigência um ano
+de entrada e um de saída, nas leituras longa e curta (rodadas de 2026-10-02 e
+2026-10-04).
 
-1. **A saída de um tipo não é modelada.** Um tipo entra e fica até o fim da
-   vigência. O PBE de 2021 e 2022 mostra o Outlander sem phev (a fonte dá
-   produção do híbrido em 2014-2016). Uma coluna do O POVO de dezembro de 2021
-   anuncia o fim da importação do XC40 híbrido em 2022. Datar a saída é o mesmo
-   trabalho da entrada, ao contrário.
-2. **Três tipos sem datação** (`vigencia_sem_datacao`, 1,1% das unidades
-   eletrificadas): o híbrido leve do XC40 (B4), o phev do A3 e o hev do Cayenne
-   (os dois últimos `pendente`). Para A3 e Cayenne só achei anúncio, não venda.
-3. **Ano com duas vigências une as duas.** Desde 2015, isso pega o Corolla de
-   2019 (gasolina+flex até setembro, flex+hev depois) e o RAV4 de 2019. O ano
-   inteiro sai `parcial`, e o `total` de 2019 cai de 0,16% para 0,03%.
-4. **Duas fontes dizem híbrido leve onde o tipo é `hibrido_indefinido`.** O
-   Discovery Sport D200 é "MHEV" e o CLA 200 tem "sistema elétrico de 48 volts".
-   Passar a `mhev` é decisão humana no rascunho, e a eletrificação fica igual.
-5. **Entradas que podem ser anteriores à fonte.** O X5 xDrive40e e o Panamera S
+**Fechado na rodada de 2026-10-04:**
+
+- a saída de tipos (inclusive combustão), modelada como a entrada;
+- a linha por vigência-ano, no lugar da união das vigências do ano;
+- a regra P5, que dá o tipo do híbrido quando fonte forte o declara: 16
+  vigências viraram `mhev` e uma `hev`.
+
+**Fica como limitação**, por decisão do pesquisador (pouco volume ou limite da
+Fenabrave; a banda entre as leituras longa e curta cobre parte disso):
+
+1. **Três tipos sem datação** (`vigencia_sem_datacao`): o híbrido leve do XC40
+   (B4), o phev do A3 e o hev do Cayenne (os dois últimos `pendente`). Para A3 e
+   Cayenne só achei anúncio, não venda.
+2. **Entradas que podem ser anteriores à fonte.** O X5 xDrive40e e o Panamera S
    E-Hybrid da primeira geração, se foram vendidos aqui, não têm fonte
    brasileira datada. O mesmo vale para o S60 e o Cayenne, onde a data é de
    presença à venda e não de lançamento.
-6. **ABVE: a participação acumulada de 2026 não fecha.** O comunicado de agosto
+3. **Chaves que juntam modelos.** DISCOVERY inclui o Discovery Sport, e RANGE
+   ROVER inclui o Sport e o Velar. Entrada e saída valem para a chave.
+
+**Ainda aberto:**
+
+4. **Quatro `hibrido_indefinido` sem fonte que decida a P5:**
+   - 911 T-Hybrid: só imprensa geral, e o sistema de 400 V não é nem leve nem
+     pleno. Está em `a_adjudicar` como aviso.
+   - XC40 B4, Defender e X6: nenhuma fonte brasileira encontrada.
+5. **ABVE: a participação acumulada de 2026 não fecha.** O comunicado de agosto
    publica 20,2% no ano. As 328.477 unidades sobre os 1.888.019 leves da
    Fenabrave de janeiro a agosto dão 17,4%; agosto sozinho fecha (21,8%). Os
-   dois valores caem entre o piso e o teto. A definição de eletrificado da ABVE
-   também muda entre anos: 2024 inclui MHEV, 2025 não.
+   20,2% ficam acima do `teto_estrito` (18,7%), e os 17,4% dentro da banda. A
+   definição de eletrificado da ABVE também muda entre anos: 2024 inclui MHEV,
+   2025 não.
 
 ---
 

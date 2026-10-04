@@ -147,7 +147,7 @@ def test_montagem_campos_validos(montagem):
 
 # ------------------------------------------- fontes da propulsao por ano
 
-TIPOS_DATA_PROPULSAO = {"lancamento", "producao", "presenca", "plano"}
+TIPOS_DATA_PROPULSAO = {"lancamento", "producao", "presenca", "plano", "fim"}
 
 
 @pytest.fixture(scope="module")
@@ -177,7 +177,10 @@ def test_propulsao_campos_validos(propulsao):
     from comum.propulsao_anual import COMBUSTAO
     assert set(propulsao["tipo_data_fonte"]) <= TIPOS_DATA_PROPULSAO
     eletrificados = set(classificacao.PROPULSOES) - COMBUSTAO
-    assert set(propulsao["tipo_propulsao"]) <= eletrificados
+    # entrada datada so' de tipo eletrificado; fim de venda vale para qualquer tipo
+    entradas = propulsao[propulsao["tipo_data_fonte"] != "fim"]
+    assert set(entradas["tipo_propulsao"]) <= eletrificados
+    assert set(propulsao["tipo_propulsao"]) <= set(classificacao.PROPULSOES)
     ruins = [d for d in propulsao["data_fonte"] if not MES.match(d) or not d]
     assert not ruins, ruins
     propostas = pd.read_csv(config.PROPOSTA_CLASSIFICACAO, dtype=str, keep_default_na=False)
@@ -215,3 +218,57 @@ def test_abve_trecho_literal_e_pagina_no_manifesto(manifesto):
                 faltando.append(f"{linha['ano']}: {parte[:60]}")
         assert f"{int(linha['eletrificados_leves']):,}".replace(",", ".") in linha["fonte_trecho"]
     assert not faltando, faltando
+
+
+def test_propulsao_fonte_aponta_para_tipo_que_a_vigencia_tem(propulsao):
+    """Quando a P5 troca o rotulo de um tipo, a fonte de entrada dele acompanha."""
+    if not config.CLASSIFICACAO.exists():
+        pytest.skip("dimensao ainda nao gravada")
+    dim = pd.read_parquet(config.CLASSIFICACAO)
+    tipos = {}
+    for _, v in dim.iterrows():
+        tipos.setdefault((v["marca"], v["modelo"], v["segmento"]), set()).update(
+            filter(None, v["propulsao_na_vigencia"].split("+")))
+    soltas = [(r["modelo"], r["tipo_propulsao"]) for _, r in propulsao.iterrows()
+              if r["tipo_data_fonte"] != "plano"
+              and r["tipo_propulsao"] not in tipos.get((r["marca"], r["modelo"], r["segmento"]),
+                                                       set())]
+    assert not soltas, soltas
+
+
+# ------------------------------------------- fontes do tipo de hibrido (P5)
+
+
+@pytest.fixture(scope="module")
+def hibridos():
+    if not config.HIBRIDO_FONTES.exists():
+        pytest.skip("sem fontes de hibrido")
+    return pd.read_csv(config.HIBRIDO_FONTES, dtype=str, keep_default_na=False)
+
+
+def test_hibrido_trecho_literal_e_pagina_no_manifesto(hibridos, manifesto):
+    faltando = []
+    for _, linha in hibridos.iterrows():
+        assert linha["fonte_url"] == manifesto[linha["pagina_salva"]]["url"]
+        arquivo = DIR / f"{linha['pagina_salva']}.txt"
+        assert (hashlib.sha256(arquivo.read_bytes()).hexdigest()
+                == manifesto[linha["pagina_salva"]]["sha256_texto"])
+        texto = arquivo.read_text(encoding="utf-8")
+        for parte in linha["fonte_trecho"].split(" [...] "):
+            if parte not in texto:
+                faltando.append(f"{linha['marca']}/{linha['modelo']}: {parte[:60]}")
+    assert not faltando, faltando
+
+
+def test_hibrido_campos_validos_e_tipo_fonte_em_dia(hibridos):
+    from comum import adjudicacao
+    assert set(hibridos["tipo_declarado"]) <= set(adjudicacao.TIPOS_DECLARADOS)
+    ruins = [d for d in hibridos["data_fonte"] if not MES.match(d)]
+    assert not ruins, ruins
+    mapa = tipo_fonte.carregar_mapa()
+    calculado = [tipo_fonte.tipo_da_citacao(u, p, mapa)
+                 for u, p in zip(hibridos["fonte_url"], hibridos["fonte_primaria"])]
+    assert all(calculado) and list(hibridos["tipo_fonte"]) == calculado
+    propostas = pd.read_csv(config.PROPOSTA_CLASSIFICACAO, dtype=str, keep_default_na=False)
+    chaves = set(map(tuple, propostas[["marca", "modelo", "segmento"]].to_numpy()))
+    assert {tuple(c) for c in hibridos[["marca", "modelo", "segmento"]].to_numpy()} <= chaves

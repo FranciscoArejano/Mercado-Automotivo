@@ -4,18 +4,20 @@ da classificacao, ano a ano. So' registra e compara: nao constroi dimensao.
 
 Entrada: `dados/referencia/abve_serie_anual.csv` (unidades de eletrificados leves
 por ano, com o trecho copiado de cada comunicado guardado),
-`saidas/classificacao_uso_teste.csv` (participacao de cada nivel de
-eletrificacao, gravada pela etapa 11) e `saidas/cobertura.csv` (total publicado
-pela fonte, mes a mes, para o denominador).
+`saidas/eletrificacao_banda.csv` (piso e tetos, gravados pela etapa 11) e
+`saidas/cobertura.csv` (total publicado pela fonte, mes a mes, para o
+denominador).
 
 A participacao da ABVE e' recalculada sobre o total publicado pela Fenabrave para
 automoveis e comerciais leves nos meses do ano (`saidas/cobertura.csv`), o mesmo
 mercado que a ABVE cita; a participacao que o comunicado publica fica ao lado,
 e a diferenca entre as duas e' sinalizada.
-O piso e' `total` (modelos so' com tracao eletrica) e o teto, `total + parcial`
-(todas as unidades dos modelos que oferecem algum tipo eletrificado); a ABVE
-conta unidades eletrificadas, entao deve cair entre os dois. Fora disso e'
-sinal de problema de um lado ou do outro.
+A banda vem de `saidas/eletrificacao_banda.csv`, nas leituras longa e curta. A
+ABVE muda de definicao, entao cada ano usa o teto da sua (rodada propulsao e
+comex): 2024, que inclui MHEV, o `teto`; os demais, sem MHEV, o `teto_sem_mhev`.
+A ABVE deve cair entre o menor piso e o maior teto da definicao dela, entre as
+duas leituras. A posicao em relacao ao `teto_estrito` (sem os modelos so' leves
+ou indefinidos) vai ao lado: acima dele, ha' hibrido pleno entre os indefinidos.
 
 Saida: `saidas/abve_comparacao.csv`.
 
@@ -42,11 +44,12 @@ def _numero(texto: str) -> float | None:
     return float(texto.replace(",", ".")) if texto else None
 
 
+ANOS_COM_MHEV = {2024}  # definicao da ABVE que inclui MHEV
+
+
 def comparar() -> pd.DataFrame:
     abve = pd.read_csv(ABVE, dtype=str, keep_default_na=False)
-    uso = pd.read_csv(config.CLASSIFICACAO_USO_TESTE)
-    largura = {c: uso.pivot(index="ano", columns="nivel", values=c)
-               for c in ("pct_pela_vigencia", "pct_anual")}
+    banda = pd.read_csv(config.ELETRIFICACAO_BANDA)
     cobertura = pd.read_csv(config.DIR_SAIDAS / "cobertura.csv")
     cobertura = cobertura[cobertura["segmento"].isin(["automoveis", "comerciais_leves"])]
     linhas = []
@@ -62,14 +65,18 @@ def comparar() -> pd.DataFrame:
                  "mercado_fenabrave": mercado, "abve_pct": round(pct, 2),
                  "abve_pct_publicada": publicada if publicada is not None else "",
                  "publicada_nao_fecha": publicada is not None and abs(publicada - pct) > 0.5}
-        if ano in largura["pct_anual"].index:
-            anual, vig = largura["pct_anual"].loc[ano], largura["pct_pela_vigencia"].loc[ano]
+        do_ano_banda = banda[banda["ano"] == ano].set_index("leitura")
+        if len(do_ano_banda):
+            teto = "teto" if ano in ANOS_COM_MHEV else "teto_sem_mhev"
             linha.update({
-                "piso_total": anual["total"],
-                "teto_total_mais_parcial": round(anual["total"] + anual["parcial"], 2),
-                "teto_antes_pela_vigencia": round(vig["total"] + vig["parcial"], 2)})
-            linha["dentro"] = (linha["piso_total"] <= linha["abve_pct"]
-                               <= linha["teto_total_mais_parcial"])
+                "teto_da_definicao": teto,
+                "piso_min": do_ano_banda["piso"].min(),
+                "teto_max": do_ano_banda[teto].max(),
+                "teto_estrito_longa": do_ano_banda.loc["longa", "teto_estrito"],
+                "teto_estrito_curta": do_ano_banda.loc["curta", "teto_estrito"]})
+            linha["dentro"] = linha["piso_min"] <= linha["abve_pct"] <= linha["teto_max"]
+            linha["acima_do_teto_estrito"] = linha["abve_pct"] > do_ano_banda[
+                "teto_estrito"].max()
         linhas.append(linha)
     return pd.DataFrame(linhas)
 

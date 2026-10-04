@@ -390,3 +390,54 @@ def test_conta_da_fila_saiu_ficou_entrou():
     assert contas["ficou na fila"] == 1
     assert contas["entrou na fila nesta rodada"] == 1
     assert contas["na fila depois das regras"] == 2
+
+
+# ------------------------------------------------------- P5: hibrido leve ou pleno
+
+
+def _hibridos(*linhas) -> pd.DataFrame:
+    """(tipo_declarado, tipo_fonte, data)"""
+    return pd.DataFrame([{"marca": "M", "modelo": "X", "segmento": "automoveis",
+                          "tipo_declarado": t, "tipo_fonte": f, "data_fonte": d,
+                          "pagina_salva": f"p{i}"} for i, (t, f, d) in enumerate(linhas)])
+
+
+def test_p5_fonte_forte_declara_leve_ou_pleno():
+    novo, res, aviso = adj.p5("flex+diesel+hibrido_indefinido",
+                              _hibridos(("mhev", "imprensa_especializada", "2026-03")))
+    assert (novo, res["regra"], res["forca"], aviso) == ("flex+diesel+mhev", "P5", "forte", "")
+    novo, _, _ = adj.p5("hibrido_indefinido", _hibridos(("hev", "oficial", "")))
+    assert novo == "hev"
+
+
+def test_p5_nao_decide_com_fonte_fraca_contradicao_ou_sistema_ambiguo():
+    for fontes, motivo in (
+            (_hibridos(("mhev", "imprensa_geral", "")), "fraca"),
+            (_hibridos(("mhev", "oficial", ""), ("hev", "imprensa_especializada", "")),
+             "contradizem"),
+            (_hibridos(("ambiguo", "imprensa_especializada", "")), "ambiguo")):
+        novo, res, aviso = adj.p5("flex+hibrido_indefinido", fontes)
+        assert novo == "flex+hibrido_indefinido" and res is None and motivo in aviso
+
+
+def test_p5_fonte_fraca_que_concorda_com_a_forte_nao_atrapalha():
+    novo, _, aviso = adj.p5("flex+hibrido_indefinido", _hibridos(
+        ("mhev", "imprensa_geral", ""), ("mhev", "imprensa_especializada", "")))
+    assert (novo, aviso) == ("flex+mhev", "")
+
+
+def test_p5_fonte_trata_so_da_vigencia_da_data():
+    fontes = _hibridos(("mhev", "oficial", "2022-06"))
+    velha = _linha(vigencia_inicio="2010-01", vigencia_fim="2019-12")
+    nova = _linha(vigencia_inicio="2020-01", vigencia_fim="2026-08")
+    assert adj.hibridos_da_linha(velha, fontes) is None
+    assert len(adj.hibridos_da_linha(nova, fontes)) == 1
+    # ate' 12 meses antes do inicio ainda conta (anuncio antes das vendas)
+    assert len(adj.hibridos_da_linha(_linha(vigencia_inicio="2023-03"), fontes)) == 1
+
+
+def test_aviso_da_p5_vai_a_fila_sem_tornar_a_propulsao_pendente():
+    com_regras = pd.DataFrame([
+        {**_linha(), "pendencias": "", "avisos": "P5 nao decide: x"},
+        {**_linha(modelo="Y"), "pendencias": "", "avisos": ""}])
+    assert adj._na_fila(com_regras).tolist() == [True, False]

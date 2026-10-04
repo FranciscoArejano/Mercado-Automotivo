@@ -1,0 +1,22 @@
+marca,modelo,segmento,tipo,ano_fonte,pbe_ano,diferenca,comparavel
+BMW,X3,automoveis,phev,2020,2021,1,False
+BMW,X5,automoveis,phev,2020,2021,1,False
+FORD,FUSION,automoveis,hev,2010,2011,1,False
+HONDA,ACCORD,automoveis,hev,2021,2021,0,True
+HONDA,CIVIC,automoveis,hev,2023,2023,0,True
+LAND ROVER,DISCOVERY,automoveis,mhev,2022,2021,-1,True
+LAND ROVER,RANGE ROVER,automoveis,phev,2020,2021,1,False
+M.BENZ,CLA200,automoveis,mhev,2023,2024,1,True
+MINI,COOPER,automoveis,bev,2021,2021,0,True
+MITSUBISHI,OUTLANDER,automoveis,phev,2014,2025,11,False
+PEUGEOT,208,automoveis,bev,2021,2021,0,True
+PORSCHE,CAYENNE,automoveis,phev,2016,2021,5,False
+PORSCHE,PANAMERA,automoveis,phev,2017,2021,4,False
+RENAULT,KANGOO,automoveis,bev,2013,2021,8,False
+RENAULT,KANGOO,comerciais_leves,bev,2013,2021,8,False
+TOYOTA,COROLLA,automoveis,hev,2019,2021,2,False
+VOLVO,S60,automoveis,phev,2019,2021,2,False
+VOLVO,XC40,automoveis,phev,2020,2021,1,False
+VOLVO,XC60,automoveis,phev,2018,2021,3,False
+VOLVO,XC90,automoveis,phev,2017,2021,4,False
+VW,GOLF,automoveis,phev,2019,2021,2,False

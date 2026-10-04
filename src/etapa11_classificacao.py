@@ -14,11 +14,15 @@ Produtos:
   local, com procedencia propria;
 - `dados/processado/classificacao_propulsao_anual.parquet` -- os tipos de
   propulsao oferecidos em cada ano, uma linha por `(marca, modelo, segmento,
-  ano)` com unidades; e' a tabela para serie temporal (`comum/propulsao_anual.py`),
-  com o ano de entrada de cada tipo em `saidas/classificacao_propulsao_entradas.csv`;
+  vigencia_inicio, ano)` com unidades, nas leituras longa e curta; e' a tabela
+  para serie temporal (`comum/propulsao_anual.py`), com a entrada e a saida de
+  cada tipo em `saidas/classificacao_propulsao_tipos.csv` e a defasagem medida
+  do PBE em `saidas/classificacao_pbe_defasagem.csv`;
 - `saidas/classificacao_uso_teste.csv` -- o uso-teste da ESPEC: participacao de
   cada nivel de eletrificacao nas unidades, por ano, pelo conjunto da vigencia e
-  pela tabela anual, lado a lado;
+  pela tabela anual nas duas leituras;
+- `saidas/eletrificacao_banda.csv` -- piso e tres tetos da eletrificacao, por ano
+  e leitura;
 - `saidas/classificacao_procedencia.csv` -- fracao do volume do painel em cada
   procedencia, por atributo (juncao de teste);
 - `saidas/classificacao_dicionario.md` -- dicionario da dimensao.
@@ -28,8 +32,9 @@ mes com unidades, ou vigencias se sobrepuserem; um valor `humana` ou `regra_*`
 diferir do rascunho; um modo de montagem com fonte diferir do rascunho; ou uma
 decisao humana nao puder ser aplicada (texto livre, `dividir em`, ou atributo
 deixado `pendente` numa linha com decisao humana); ou a tabela anual tiver
-chave-ano sem linha, unidades diferentes do painel, tipo fora da vigencia, tipo
-que some dentro da vigencia, ou ultimo ano da vigencia sem o conjunto inteiro.
+vigencia-ano sem linha, unidades diferentes do painel nos meses da vigencia,
+tipo fora da vigencia, leitura curta com tipo que a longa nao tem, ano sem
+propulsao, ou intervalo de tipo fora de ordem.
 
 Uso:
     python src/etapa11_classificacao.py
@@ -86,9 +91,10 @@ def executar() -> int:
         problemas += fase2.problemas_de_montagem(montagem, do_rascunho)
     casado = pd.read_csv(config.PBE_CASAMENTO, dtype=str, keep_default_na=False)
     fontes = pd.read_csv(config.PROPULSAO_FONTES, dtype=str, keep_default_na=False)
-    entradas = propulsao_anual.tabela_de_entradas(dim, casado, fontes)
-    anual = propulsao_anual.anual(dim, entradas, painel)
-    problemas += propulsao_anual.problemas(anual, dim, painel)
+    defasagem, direcao = propulsao_anual.defasagem_pbe(fontes, casado)
+    tipos = propulsao_anual.tabela_de_tipos(dim, casado, fontes, direcao)
+    anual = propulsao_anual.anual(dim, tipos, painel)
+    problemas += propulsao_anual.problemas(anual, dim, tipos, painel)
     if problemas:
         for problema in problemas[:50]:
             logger.error(problema)
@@ -97,26 +103,32 @@ def executar() -> int:
 
     volume = fase2.volume_por_procedencia(dim, painel)
     uso = propulsao_anual.uso_teste(dim, anual, painel)
+    banda = propulsao_anual.banda(anual, painel)
     config.DIR_PROCESSADO.mkdir(parents=True, exist_ok=True)
     dim.to_parquet(config.CLASSIFICACAO, index=False)
     montagem.to_parquet(config.CLASSIFICACAO_MONTAGEM, index=False)
     anual.to_parquet(config.CLASSIFICACAO_PROPULSAO_ANUAL, index=False)
-    entradas.to_csv(config.CLASSIFICACAO_PROPULSAO_ENTRADAS, index=False)
+    tipos.to_csv(config.CLASSIFICACAO_PROPULSAO_TIPOS, index=False)
+    defasagem.to_csv(config.CLASSIFICACAO_PBE_DEFASAGEM, index=False)
     uso.to_csv(config.CLASSIFICACAO_USO_TESTE, index=False)
+    banda.to_csv(config.ELETRIFICACAO_BANDA, index=False)
     volume.to_csv(config.CLASSIFICACAO_PROCEDENCIA, index=False)
     config.CLASSIFICACAO_DICIONARIO.write_text(
-        dicionario(dim, montagem, volume, anual, entradas, uso), encoding="utf-8")
+        dicionario(dim, montagem, volume, anual, tipos, banda, defasagem, direcao),
+        encoding="utf-8")
     logger.info("dimensao: %d linhas (%d classificadas, %d abaixo do piso); montagem: %d "
                 "periodos", len(dim), int((dim["vigencia_inicio_rascunho"] != "").sum()),
                 int((dim["vigencia_inicio_rascunho"] == "").sum()), len(montagem))
     for _, linha in volume[volume["unidades"] > 0].iterrows():
         logger.info("%-10s %-18s %5.2f%%", linha["atributo"], linha["procedencia"],
                     linha["pct_do_volume"])
-    eletrificados = entradas[~entradas["tipo"].isin(propulsao_anual.COMBUSTAO)]
-    logger.info("propulsao anual: %d linhas; entrada dos %d tipos eletrificados: %s",
+    eletrificados = tipos[~tipos["tipo"].isin(propulsao_anual.COMBUSTAO)]
+    logger.info("propulsao anual: %d linhas; entrada dos %d tipos eletrificados: %s; "
+                "%d tipos com evidencia de saida; defasagem do PBE: direcao %d",
                 len(anual), len(eletrificados),
                 ", ".join(f"{f} {n}" for f, n in
-                          eletrificados["fonte_temporal"].value_counts().items()))
+                          eletrificados["fonte_temporal"].value_counts().items()),
+                int((tipos["fonte_saida"] != "").sum()), direcao)
     logger.info("gravado %s, %s e %s", log.caminho_relativo(config.CLASSIFICACAO),
                 log.caminho_relativo(config.CLASSIFICACAO_MONTAGEM),
                 log.caminho_relativo(config.CLASSIFICACAO_PROPULSAO_ANUAL))
@@ -159,34 +171,36 @@ AVISO_VIGENCIA = ("conjunto de tudo que foi oferecido em algum momento da vigên
                   "em série temporal; para isso, `classificacao_propulsao_anual`.")
 
 
-def _tabela_uso_teste(uso: pd.DataFrame) -> str:
-    linhas = ["| ano | nenhuma (vigencia) | parcial (vigencia) | total (vigencia) | "
-              "nenhuma (anual) | parcial (anual) | total (anual) |",
-              "|---|---:|---:|---:|---:|---:|---:|"]
-    for (ano, meses), g in uso.groupby(["ano", "meses"]):
-        p = g.set_index("nivel")
-        rotulo = str(ano) if meses == 12 else f"{ano} (jan a {MESES[meses - 1]})"
-        linhas.append(f"| {rotulo} | " + " | ".join(
-            f"{_pct(p.loc[n, c])}%" for c in ("pct_pela_vigencia", "pct_anual")
-            for n in ("nenhuma", "parcial", "total")) + " |")
+def _rotulo(ano: int, meses: int) -> str:
+    return str(ano) if meses == 12 else f"{ano} (jan a {MESES[meses - 1]})"
+
+
+def _tabela_banda(banda: pd.DataFrame) -> str:
+    linhas = ["| ano | leitura | piso | teto | teto_sem_mhev | teto_estrito |",
+              "|---|---|---:|---:|---:|---:|"]
+    for _, b in banda.sort_values(["ano", "leitura"], ascending=[True, False]).iterrows():
+        linhas.append(f"| {_rotulo(b['ano'], b['meses'])} | {b['leitura']} | "
+                      + " | ".join(f"{_pct(b[c])}%" for c in propulsao_anual.TETOS) + " |")
     return "\n".join(linhas)
 
 
-def _tabela_fonte_temporal(anual: pd.DataFrame, entradas: pd.DataFrame) -> str:
-    eletrificados = entradas[~entradas["tipo"].isin(propulsao_anual.COMBUSTAO)]
-    tipos = eletrificados["fonte_temporal"].value_counts()
-    com = anual[anual["eletrificacao_no_ano"].isin(["parcial", "total"])]
-    volume = com.groupby("fonte_temporal")["unidades"].sum()
-    linhas = ["| fonte_temporal | tipos eletrificados (vigencia x tipo) | % das unidades "
-              "eletrificadas (parcial + total) |", "|---|---:|---:|"]
+def _tabela_fonte_temporal(tipos: pd.DataFrame) -> str:
+    eletrificados = tipos[~tipos["tipo"].isin(propulsao_anual.COMBUSTAO)]
+    contagem = eletrificados["fonte_temporal"].value_counts()
+    linhas = ["| fonte_temporal | tipos eletrificados (vigencia x tipo) |", "|---|---:|"]
     for fonte in reversed(propulsao_anual.FONTES_TEMPORAIS):
-        linhas.append(f"| `{fonte}` | {int(tipos.get(fonte, 0))} | "
-                      f"{_pct(100 * volume.get(fonte, 0) / max(volume.sum(), 1))}% |")
+        linhas.append(f"| `{fonte}` | {int(contagem.get(fonte, 0))} |")
     return "\n".join(linhas)
 
 
 def dicionario(dim: pd.DataFrame, montagem: pd.DataFrame, volume: pd.DataFrame,
-               anual: pd.DataFrame, entradas: pd.DataFrame, uso: pd.DataFrame) -> str:
+               anual: pd.DataFrame, tipos: pd.DataFrame, banda: pd.DataFrame,
+               defasagem: pd.DataFrame, direcao: int) -> str:
+    saidas = tipos[tipos["fonte_saida"] != ""]
+    comparaveis = defasagem[defasagem["comparavel"]]
+    texto_direcao = {0: "sem direcao dominante: as duas leituras ficam com `pbe_ano`",
+                     1: "o PBE vem depois do mercado: a longa entra em `pbe_ano - 1`",
+                     -1: "o PBE vem antes do mercado: a curta entra em `pbe_ano + 1`"}[direcao]
     classificadas = dim[dim["vigencia_inicio_rascunho"] != ""]
     modelos = classificadas[fase2.CHAVE].drop_duplicates().shape[0]
     agora = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -259,54 +273,71 @@ Fracao do volume do painel, por atributo (juncao de teste, gravada em
 
 ## `classificacao_propulsao_anual.parquet`
 
-Uma linha por `(marca, modelo, segmento, ano)` com unidades no painel:
-{len(anual):,} linhas. Juncao com o painel: pela chave e pelo ano de `mes_ref`.
-Construida em `src/comum/propulsao_anual.py` a partir de `classificacao.parquet`,
-do casamento PBE->painel (`saidas/pbe_casamento.csv`) e das fontes datadas de
-`dados/referencia/propulsao_fontes.csv`; o ano de entrada de cada tipo, vigencia
-a vigencia, fica em `saidas/classificacao_propulsao_entradas.csv`.
+Uma linha por `(marca, modelo, segmento, vigencia_inicio, ano)` com unidades no
+painel nos meses daquela vigencia naquele ano: {len(anual):,} linhas. Juncao com o
+painel: pela chave, pela vigencia (`vigencia_inicio <= mes_ref <= vigencia_fim`) e
+pelo ano de `mes_ref`. Construida em `src/comum/propulsao_anual.py` a partir de
+`classificacao.parquet`, do casamento PBE->painel (`saidas/pbe_casamento.csv`) e
+das fontes datadas de `dados/referencia/propulsao_fontes.csv`. A entrada e a saida
+de cada tipo, vigencia a vigencia, nas duas leituras, ficam em
+`saidas/classificacao_propulsao_tipos.csv`, com os anos de presenca e de
+ausencia que as sustentam.
 
 | coluna | tipo | descricao |
 |---|---|---|
 | `marca`, `modelo`, `segmento` | texto | chave do painel |
+| `vigencia_inicio`, `vigencia_fim` | texto AAAA-MM | a vigencia da classificacao |
 | `ano` | inteiro | ano civil |
-| `unidades` | inteiro | unidades do modelo no ano (soma do painel) |
-| `propulsao_no_ano` | texto | tipos oferecidos **naquele ano** (em algum momento dele), unidos por '+' |
+| `unidades` | inteiro | unidades do painel nos meses da vigencia no ano |
+| `propulsao_no_ano` | texto | tipos oferecidos no ano, **leitura longa**: cada tipo dura o maximo que a evidencia permite |
 | `eletrificacao_no_ano` | texto | derivada de `propulsao_no_ano` pelas regras de sempre: `hibrido_indefinido` e `mhev` nunca levam a `total` |
-| `fonte_temporal` | texto | de onde vem o ano de entrada dos tipos eletrificados do ano, o mais fraco deles: `vigencia_sem_datacao` < `pbe_ano` < `fonte_datada` < `vigencia` (so' combustao, ou modelo so' eletrificado) |
-| `entrada_dos_tipos` | texto | `tipo=ano fonte` de cada tipo do ano |
-| `procedencia_propulsao` | texto | herdada da vigencia; com duas vigencias no ano, a mais fraca |
-| `vigencias` | texto | `vigencia_inicio` das vigencias com unidades no ano, separados por ';' |
+| `propulsao_no_ano_curta`, `eletrificacao_no_ano_curta` | texto | o mesmo na **leitura curta**: o minimo que a evidencia permite |
+| `fonte_temporal` | texto | de onde vem a entrada dos tipos eletrificados do ano (leitura longa), o mais fraco deles: `vigencia_sem_datacao` < `pbe_ano` < `fonte_datada` < `vigencia` (so' combustao, ou modelo so' eletrificado) |
+| `entrada_dos_tipos` | texto | `tipo=ano fonte` de cada tipo do ano (`longa/curta` quando diferem) |
+| `saida_dos_tipos` | texto | tipos da vigencia com evidencia de saida: ultimo ano em cada leitura e de onde vem a ausencia (`pbe`, `fonte`) |
+| `procedencia_propulsao` | texto | herdada da vigencia |
 
-Ano de entrada de cada tipo:
+**Entrada de cada tipo.** Combustao: o inicio da vigencia. Eletrificado: (1) fonte
+datada de lancamento, producao ou presenca a' venda -- `plano` nao conta -- que
+manda sobre o PBE (`fonte_datada`); (2) senao, o ano da primeira tabela do PBE em
+que uma versao daquele tipo aparece (`pbe_ano`), desde que um ano com coluna de
+propulsao (2021 em diante), dentro da vigencia e antes dela, mostre o modelo sem o
+tipo -- o marcador no nome prova presenca, nao ausencia; (3) senao, o inicio da
+vigencia (`vigencia_sem_datacao`). Vigencia so' com tipos eletrificados: o
+primeiro a entrar, no inicio dela (`vigencia`).
 
-- **combustao** (gasolina, flex, diesel): o inicio da vigencia (a P2 decidiu o
-  que valia antes do PBE; a transicao flex segue sem data);
-- **eletrificado** (hev, phev, bev, reev, mhev, hibrido_indefinido): (1) fonte
-  datada de lancamento, producao ou presenca a' venda, com o trecho copiado da
-  pagina guardada -- `plano` nao conta -- e, onde existe, manda sobre o PBE
-  (`fonte_datada`); (2) senao, o ano da primeira tabela do PBE em que uma versao
-  daquele tipo aparece para o modelo (`pbe_ano`), desde que haja, dentro da
-  vigencia e antes dela, um ano com coluna de propulsao (2021 em diante) em que
-  o modelo esta' na tabela sem o tipo -- o marcador no nome prova presenca, nao
-  ausencia; (3) senao, o inicio da vigencia (`vigencia_sem_datacao`);
-- vigencia so' com tipos eletrificados: o primeiro a entrar, no inicio dela
-  (`vigencia`).
+**Defasagem do PBE**, medida nos tipos com fonte datada e ano de PBE
+(`saidas/classificacao_pbe_defasagem.csv`, {len(defasagem)} tipos, {len(comparaveis)}
+comparaveis -- fonte de 2021 em diante): {texto_direcao}.
 
-O tipo fica ate' o fim da vigencia: a saida de um tipo nao e' modelada. O ano de
-PBE se aproxima do ano-modelo e pode estar um ano a' frente da chegada ao
-mercado. Num ano com duas vigencias, os tipos sao a uniao das duas.
+**Saida de cada tipo**, com as mesmas fontes. Presenca: o tipo no PBE do ano, fonte
+datada ou o ano de entrada. Ausencia, so' de 2021 em diante: o modelo no PBE do
+ano com versao de outro tipo da vigencia e sem o tipo, ou fonte datada de fim de
+venda ou de importacao. Modelo ausente do PBE nao informa; tipo que some e volta
+e' lacuna. Leitura longa: o tipo fica ate' o ano da primeira ausencia depois da
+ultima presenca; curta: ate' o ano da ultima presenca. Sem ausencia, as duas o
+mantem ate' o fim da vigencia. Ano em que a leitura curta ficaria sem tipo (lacuna
+do PBE entre a saida de um tipo e a entrada do seguinte) leva os tipos da longa.
+{len(saidas)} tipos tem evidencia de saida. Cada ano de PBE vale para a vigencia
+com mais meses nele.
 
-{_tabela_fonte_temporal(anual, entradas)}
+{_tabela_fonte_temporal(tipos)}
 
-### Uso-teste
+### Uso-teste e banda da eletrificacao
 
-A serie mais obvia que um artigo faria com a classificacao -- participacao de
-cada nivel de eletrificacao nas unidades, por ano -- pelo conjunto da vigencia
-(o uso errado) e pela tabela anual. Gravada em `saidas/classificacao_uso_teste.csv`.
-`nao_classificado` completa os 100%.
+A serie mais obvia que um artigo faria com a classificacao -- participacao de cada
+nivel de eletrificacao nas unidades, por ano -- pelo conjunto da vigencia (o uso
+errado) e pela tabela anual nas duas leituras, em `saidas/classificacao_uso_teste.csv`.
+A banda, em `saidas/eletrificacao_banda.csv` (% das unidades do painel):
 
-{_tabela_uso_teste(uso)}
+- `piso`: `total`;
+- `teto`: `total` + `parcial`;
+- `teto_sem_mhev`: tira do `parcial` a vigencia-ano cujo unico tipo eletrificado e'
+  `mhev` (a definicao da ABVE desde 2025);
+- `teto_estrito`: tira a vigencia-ano cujos tipos eletrificados sao so' `mhev` ou
+  `hibrido_indefinido`.
+
+{_tabela_banda(banda)}
 
 ## `classificacao_montagem.parquet`
 

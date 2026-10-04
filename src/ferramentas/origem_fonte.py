@@ -111,7 +111,8 @@ def regravar_tipos() -> int:
     mapa = tipo_fonte.carregar_mapa()
     sem: set[str] = set()
     for caminho, coluna in ((config.ORIGEM_FONTES, "origem_fonte_url"),
-                            (config.PROPULSAO_FONTES, "fonte_url")):
+                            (config.PROPULSAO_FONTES, "fonte_url"),
+                            (config.HIBRIDO_FONTES, "fonte_url")):
         if not caminho.exists():
             continue
         fontes = pd.read_csv(caminho, dtype=str, keep_default_na=False)

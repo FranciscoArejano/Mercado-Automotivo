@@ -23,6 +23,14 @@ dele entre os maiores modelos):
   Hibrido (Stonic MHEV, Forester MHEV, Sportage TMHEV estao la' com o nome
   dizendo), entao o rotulo nao escolhe entre `hev` e `mhev`; na eletrificacao o
   valor conta como `mhev` e nunca leva a `total`.
+- **P5** -- fonte que declara o tipo do hibrido (rodada propulsao e comex):
+  `hibrido_indefinido` vira `mhev` quando fonte forte (oficial ou especializada)
+  da vigencia declara hibrido leve ("MHEV", "hibrido leve", 12 V ou 48 V com
+  motor-gerador), e `hev` quando declara hibrido pleno. So' fonte fraca, fontes
+  que se contradizem ou sistema ambiguo (48 V que tambem roda so' no eletrico):
+  fica `hibrido_indefinido` e a linha vai a `a_adjudicar` como aviso, sem virar
+  `pendente`. Fontes em `dados/referencia/hibrido_fontes.csv`. O ano de entrada
+  do tipo nao muda.
 - **P2** -- tipo que a proposta tem e o PBE nao mostra fica se e' anterior ao
   momento em que o PBE podia registra-lo. Desde a decisao 3, esse momento e' o
   `corte`: o primeiro ano em que o PBE cobre `LIMIAR_COBERTURA`% do volume do
@@ -157,6 +165,9 @@ class Resultado:
     """O que as regras fizeram com um atributo de uma linha."""
     resolucoes: list[dict] = field(default_factory=list)  # (regra, antes, depois, base, ressalva)
     pendencias: list[str] = field(default_factory=list)   # motivos para decisao humana
+    # vao ao rascunho para revisao sem tornar o atributo `pendente` (P5 que nao decide:
+    # o valor fica o das outras regras)
+    avisos: list[str] = field(default_factory=list)
     decisao: str = ""                                     # `atributo=valor`, se decidido inteiro
     valor_apos_regras: str = ""
 
@@ -341,6 +352,72 @@ def _ausente(linha: pd.Series, primeiro_ano: int | None, corte: int) -> Resultad
 
 def _decisao_propulsao(valor: str) -> str:
     return f"propulsao_oferecida={valor}; eletrificacao={classificacao.eletrificacao(valor)}"
+
+
+# ------------------------------------------------- P5: hibrido leve ou pleno
+
+TIPOS_DECLARADOS = ("mhev", "hev", "ambiguo")
+TOLERANCIA_HIBRIDO = 12  # meses antes do inicio da vigencia em que a fonte ainda trata dela
+
+
+def carregar_hibridos() -> pd.DataFrame:
+    if not config.HIBRIDO_FONTES.exists():
+        return pd.DataFrame(columns=CHAVE + ["tipo_declarado", "data_fonte", "tipo_fonte",
+                                             "pagina_salva"])
+    return pd.read_csv(config.HIBRIDO_FONTES, dtype=str, keep_default_na=False)
+
+
+def hibridos_da_linha(linha: pd.Series, fontes_chave: pd.DataFrame | None) -> pd.DataFrame | None:
+    """As fontes do tipo de hibrido que tratam desta vigencia.
+
+    Fonte datada trata da vigencia que contem a data, aceitando ate'
+    `TOLERANCIA_HIBRIDO` meses antes do inicio (o anuncio de lancamento vem antes
+    das vendas); fonte sem data trata de todas as vigencias do modelo.
+    """
+    if fontes_chave is None or fontes_chave.empty:
+        return None
+    inicio, fim = _mes(linha["vigencia_inicio"]), _mes(linha["vigencia_fim"])
+
+    def cobre(data: str) -> bool:
+        if not data:
+            return True
+        primeiro = _mes(data if len(data) == 7 else f"{data}-01")
+        ultimo = _mes(data if len(data) == 7 else f"{data}-12")
+        return ultimo >= inicio - TOLERANCIA_HIBRIDO and primeiro <= fim
+    cobertas = fontes_chave[fontes_chave["data_fonte"].apply(cobre)]
+    return cobertas if len(cobertas) else None
+
+
+def p5(valor: str, fontes: pd.DataFrame | None) -> tuple[str, dict | None, str]:
+    """(valor, resolucao, aviso) da P5 num conjunto com `hibrido_indefinido`.
+
+    Fonte forte (oficial ou especializada) que declara hibrido leve troca
+    `hibrido_indefinido` por `mhev`; que declara pleno, por `hev`. Fica
+    `hibrido_indefinido`, com aviso para o rascunho, quando so' ha' fonte fraca,
+    quando as fontes se contradizem ou quando alguma descreve sistema ambiguo.
+    """
+    if "hibrido_indefinido" not in valor.split("+") or fontes is None:
+        return valor, None, ""
+    declarados = set(fontes["tipo_declarado"])
+    paginas = ", ".join(dict.fromkeys(fontes["pagina_salva"]))
+    if "ambiguo" in declarados:
+        return valor, None, (f"P5 nao decide: fonte descreve sistema ambiguo ({paginas}); "
+                             "fica hibrido_indefinido")
+    if len(declarados) > 1:
+        return valor, None, (f"P5 nao decide: fontes se contradizem ({paginas}); fica "
+                             "hibrido_indefinido")
+    fortes = fontes[fontes["tipo_fonte"].isin(tipo_fonte.FORTES)]
+    if fortes.empty:
+        return valor, None, (f"P5 nao decide: fonte unica e fraca ({paginas}); fica "
+                             "hibrido_indefinido")
+    tipo = declarados.pop()
+    novo = "+".join(_ordenados((set(valor.split("+")) - {"hibrido_indefinido"}) | {tipo}))
+    resolucao = {
+        "regra": "P5", "forca": "forte", "antes": valor, "depois": novo,
+        "base": (f"fonte declara {'hibrido leve' if tipo == 'mhev' else 'hibrido pleno'} "
+                 f"({', '.join(dict.fromkeys(fortes['pagina_salva']))})"),
+        "ressalva": "o ano de entrada do tipo nao muda; so' o rotulo"}
+    return novo, resolucao, ""
 
 
 # ------------------------------------------------------------------- origem
@@ -623,15 +700,18 @@ def _confirmacao_origem(fontes_chave: pd.DataFrame | None) -> str:
 
 
 def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, top: int,
-            corte: int, buscas: dict | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
+            corte: int, buscas: dict | None = None, hibridos: pd.DataFrame | None = None
+            ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """(rascunho com colunas de regra, resolvido_por_regra).
 
-    Colunas novas no rascunho: `regras_aplicadas`, `pendencias`,
+    Colunas novas no rascunho: `regras_aplicadas`, `pendencias`, `avisos`,
     `propulsao_apos_regras`, `origem_apos_regras`, `origem_tipos_fonte`,
     `procedencia_propulsao`, `procedencia_carroceria`, `procedencia_origem` e
     `decisao_por_regra`. `corte` e' o ano de corte da P2 (decisao 3).
     """
     buscas = buscas or {}
+    hibridos_por_chave = ({} if hibridos is None or hibridos.empty
+                          else {k: g for k, g in hibridos.groupby(CHAVE)})
     saida = rascunho.copy()
     no_pbe = casado[casado["marca"] != ""]
     por_chave = {k: g for k, g in no_pbe.groupby(CHAVE)}
@@ -641,7 +721,7 @@ def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, 
     modelos = {k: g for k, g in saida.groupby(CHAVE, sort=False)}
     casos = casos_de_origem(saida, top)
 
-    resolvidos, colunas = [], {c: {} for c in ("regras_aplicadas", "pendencias",
+    resolvidos, colunas = [], {c: {} for c in ("regras_aplicadas", "pendencias", "avisos",
                                                 "propulsao_apos_regras", "origem_apos_regras",
                                                 "origem_tipos_fonte", "procedencia_propulsao",
                                                 "procedencia_carroceria", "procedencia_origem",
@@ -653,6 +733,17 @@ def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, 
                                                   and linha["posicao"] <= top):
             resultados.append(("propulsao_oferecida", propulsao(
                 linha, por_chave.get(chave), primeiro.get(chave), modelos[chave], corte)))
+        r_propulsao = dict(resultados).get("propulsao_oferecida")
+        if r_propulsao is not None:
+            novo, resolucao, aviso = p5(r_propulsao.valor_apos_regras, hibridos_da_linha(
+                linha, hibridos_por_chave.get(chave)))
+            if resolucao:
+                r_propulsao.resolucoes.append(resolucao)
+                r_propulsao.valor_apos_regras = novo
+                if not r_propulsao.pendencias:
+                    r_propulsao.decisao = _decisao_propulsao(novo)
+            if aviso:
+                r_propulsao.avisos.append(aviso)
         fontes_chave = fontes_da_linha.get(indice)
         r_origem = origem(linha, indice, fontes_chave, bool(casos[indice]), modelos[chave],
                           buscas.get(chave))
@@ -673,6 +764,7 @@ def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, 
         colunas["regras_aplicadas"][indice] = "+".join(dict.fromkeys(
             res["regra"] for _, r in resultados for res in r.resolucoes))
         colunas["pendencias"][indice] = " | ".join(pendencias)
+        colunas["avisos"][indice] = " | ".join(a for _, r in resultados for a in r.avisos)
         colunas["propulsao_apos_regras"][indice] = next(
             (r.valor_apos_regras for a, r in resultados if a == "propulsao_oferecida"),
             linha["propulsao_oferecida"])
@@ -703,10 +795,11 @@ def aplicar(rascunho: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame, 
 def a_adjudicar(com_regras: pd.DataFrame, fila_antes: pd.DataFrame) -> pd.DataFrame:
     """So' o que as regras nao decidem, maior volume primeiro."""
     antes = set(map(tuple, fila_antes[CHAVE + ["vigencia_inicio"]].to_numpy()))
-    fila = com_regras[com_regras["pendencias"] != ""].copy()
+    fila = com_regras[_na_fila(com_regras)].copy()
     fila["na_fila_antes"] = ["sim" if tuple(k) in antes else "nao, entrou nesta rodada"
                              for k in fila[CHAVE + ["vigencia_inicio"]].to_numpy()]
-    fila = fila.rename(columns={"pendencias": "motivo"})
+    fila["motivo"] = [" | ".join(m for m in (p, a) if m)
+                      for p, a in zip(fila["pendencias"], _avisos(fila))]
     colunas = ["motivo", "na_fila_antes", "regras_aplicadas", "posicao", "marca", "modelo",
                "segmento", "vigencia_inicio", "vigencia_fim", "unidades_na_vigencia",
                "propulsao_oferecida", "propulsao_apos_regras", "pbe_propulsao", "pbe_anos",
@@ -717,12 +810,21 @@ def a_adjudicar(com_regras: pd.DataFrame, fila_antes: pd.DataFrame) -> pd.DataFr
     return fila.sort_values("unidades_na_vigencia", ascending=False, kind="stable")[colunas]
 
 
+def _avisos(quadro: pd.DataFrame) -> pd.Series:
+    return quadro["avisos"] if "avisos" in quadro else pd.Series("", index=quadro.index)
+
+
+def _na_fila(com_regras: pd.DataFrame) -> pd.Series:
+    """Linha vai a `a_adjudicar` com pendencia (atributo `pendente`) ou com aviso da P5."""
+    return (com_regras["pendencias"] != "") | (_avisos(com_regras) != "")
+
+
 def contas(fila_antes: pd.DataFrame, com_regras: pd.DataFrame, resolvido: pd.DataFrame
            ) -> pd.DataFrame:
     """A conta da rodada: quantas linhas sairam da fila, por regra, e quantas ficaram."""
     chave = CHAVE + ["vigencia_inicio"]
     antes = set(map(tuple, fila_antes[chave].to_numpy()))
-    depois = set(map(tuple, com_regras.loc[com_regras["pendencias"] != "", chave].to_numpy()))
+    depois = set(map(tuple, com_regras.loc[_na_fila(com_regras), chave].to_numpy()))
     saiu = antes - depois
     regras_da_linha = {tuple(k): r for k, r in zip(com_regras[chave].to_numpy(),
                                                    com_regras["regras_aplicadas"])}
@@ -751,7 +853,7 @@ def contas(fila_antes: pd.DataFrame, com_regras: pd.DataFrame, resolvido: pd.Dat
         {"conta": "na fila depois das regras", "linhas": len(depois),
          "unidades": int(sum(unidades[k] for k in depois))},
     ]
-    for regra in ("P1", "P2", "P3", "P4", "O1", "O2", "O4"):
+    for regra in ("P1", "P2", "P3", "P4", "P5", "O1", "O2", "O4"):
         parte = resolvido[resolvido["regra"] == regra]
         linhas.append({"conta": f"decisoes da regra {regra} (linhas, inclusive parciais)",
                        "linhas": len(parte), "unidades": int(parte["unidades_na_vigencia"].sum())})

@@ -1,8 +1,8 @@
 # Validacao do painel de vendas de veiculos 0 km
 
-**Commit: `56947e7`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
+**Commit: `b20ec56`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
 
-Gerado em 2026-10-02T20:46:50+00:00 (UTC) por `src/etapa06_validacao.py`.
+Gerado em 2026-10-04T04:40:26+00:00 (UTC) por `src/etapa06_validacao.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: painel bruto 54,183 / painel 54,179 / visao por modelo 53,700
@@ -1041,6 +1041,17 @@ Os que nao sao coincidencia confirmada, todos de uma ou duas unidades -- imateri
 
 O **ranking por marca** existe na fonte e **nao foi extraido**. E' grafico de barras com rotulo rotacionado e paineis sobrepostos, em percentual e nao em unidades -- e e' redundante: participacao de canal por marca sai de agregar este painel. Numero lido do rotulo de um grafico nao se defende em artigo; numero agregado de tabela de texto, com cobertura declarada, se defende. Registrado em `QUESTOES_ABERTAS.md` para ninguem tomar isso por esquecimento.
 
-## 13. Situacao
+## 13. Comercio exterior de veiculos (Comex Stat)
+
+Tabela de fatos **separada**: `comex_veiculos.parquet`, gravada pela etapa 12 a partir das respostas da API guardadas em `dados/bruto/comex/`. Janela 1997-01 a 2026-08, 73,316 linhas.
+
+| conferencia                                                                                                                                                                            |   casos |   falhas |
+|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------:|---------:|
+| soma sobre paises = consulta sem pais (fluxo x NCM x ano)                                                                                                                              |    1634 |        0 |
+| meses faltando na janela 1997-01 a 2026-08 (fluxo x posicao)                                                                                                                           |       4 |        0 |
+| NCMs fora das somas de unidades (unidade estatistica nao e' unidade): nenhuma                                                                                                          |      48 |        0 |
+| diagnostico, nao falha: unidades importadas leves em linhas com menos de 500 kg por unidade (saidas/comex_diagnostico_peso.csv); anos acima de 10%: 2001, 2003, 2006, 2019, 2020, 2021 |      30 |        0 |
+
+## 14. Situacao
 
 Todas as verificacoes obrigatorias passaram.

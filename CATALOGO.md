@@ -1,8 +1,8 @@
-# Catalogo do repositorio -- dado do commit `56947e7`
+# Catalogo do repositorio -- dado do commit `b20ec56`
 
 Gerado por `src/etapa10_catalogo.py` a cada execucao do pipeline. **Nao editar a mao**: janelas, linhas e contagens saem dos arquivos. O texto de usos esta' em `config/catalogo_usos.csv` e as fontes candidatas em `config/fontes_candidatas.csv`; edite la' e rode `python src/etapa10_catalogo.py`.
 
-O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/processado`, `dados/referencia`, `dados/bruto/manifesto.csv`, `dados/bruto/pbe`, `dados/bruto/origem_paginas`, `config`, `regras.csv`, `saidas/classificacao_rascunho.xlsx`); `-sujo` quer dizer que ha' alteracao nao comitada nesses caminhos, e o catalogo nao corresponde exatamente a nenhum commit.
+O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/processado`, `dados/referencia`, `dados/bruto/manifesto.csv`, `dados/bruto/pbe`, `dados/bruto/origem_paginas`, `dados/bruto/comex`, `config`, `regras.csv`, `saidas/classificacao_rascunho.xlsx`); `-sujo` quer dizer que ha' alteracao nao comitada nesses caminhos, e o catalogo nao corresponde exatamente a nenhum commit.
 
 ## Indice
 
@@ -13,6 +13,7 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 | painel_canal | `dados/processado/painel_canal.parquet` | 48.996 | 2003-01..2026-08 |
 | macro_mensal | `dados/processado/macro_mensal.parquet` | 284 | 2003-01..2026-08 |
 | classificacao | `dados/processado/classificacao.parquet` | 962 | 2003-01 a 2026-08 |
+| comex_veiculos | `dados/processado/comex_veiculos.parquet` | 73.316 | 1997-01 a 2026-08 |
 
 ## Parte A -- o que existe
 
@@ -92,11 +93,21 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 | `regra_fonte_fraca` | 4,1% | 0,0% | 7,3% |
 
 - **Advertencia:** um artigo que use propulsao ou origem como variavel de tratamento deve restringir-se as procedencias `humana` e `regra_fonte_forte`, e declarar a fracao do volume que ficou de fora.
-- **Pendentes:** 97 linhas em `a_adjudicar`; o dado as mostra com a proposta original e procedencia `pendente`.
+- **Pendentes:** 98 linhas em `a_adjudicar`; o dado as mostra com a proposta original e procedencia `pendente`.
 - **Montagem local:** `dados/processado/classificacao_montagem.parquet`, 968 periodos, 6 deles com modo declarado por fonte (`fabricacao`, `ckd`, `skd`); o resto e' `desconhecido` ou `nao_se_aplica`.
-- **Serie temporal de propulsao:** `dados/processado/classificacao_propulsao_anual.parquet`, 5.896 linhas `(marca, modelo, segmento, ano)` com os tipos oferecidos no ano (`propulsao_no_ano`, `eletrificacao_no_ano`). `propulsao_na_vigencia` e `eletrificacao_na_vigencia` sao o conjunto de tudo que foi oferecido em algum momento da vigencia -- nao usar em serie temporal. Dos 90 tipos eletrificados (vigencia x tipo), 3 entram sem datacao (`vigencia_sem_datacao`); uso-teste em `saidas/classificacao_uso_teste.csv`.
+- **Serie temporal de propulsao:** `dados/processado/classificacao_propulsao_anual.parquet`, 5.912 linhas `(marca, modelo, segmento, vigencia_inicio, ano)` com os tipos oferecidos no ano em duas leituras (`propulsao_no_ano` longa, `propulsao_no_ano_curta`). `propulsao_na_vigencia` e `eletrificacao_na_vigencia` sao o conjunto de tudo que foi oferecido em algum momento da vigencia -- nao usar em serie temporal. Dos 90 tipos eletrificados (vigencia x tipo), 3 entram sem datacao (`vigencia_sem_datacao`); 97 tipos tem evidencia de saida. Banda da eletrificacao (piso e tres tetos) em `saidas/eletrificacao_banda.csv`; uso-teste em `saidas/classificacao_uso_teste.csv`.
 - **Arquivos:** dicionario em `saidas/classificacao_dicionario.md`; procedencia por atributo em `saidas/classificacao_procedencia.csv`; regras em `config/regras_classificacao.csv` e `config/regras_adjudicacao.csv`; mapeamento do PBE em `config/pbe_propulsao.csv` e `config/pbe_modelos.csv`; tipo de fonte em `config/tipo_fonte_dominio.csv`.
-- **Ressalvas principais:** Hoje e' rascunho para adjudicacao, nao dado. Nada foi gravado em dados/processado/.
+- **Ressalvas principais:** Dimensao gravada (etapa 11) a partir do rascunho adjudicado. Origem ainda e' quase toda `proposta`; um artigo que use propulsao ou origem como tratamento deve restringir-se as procedencias `humana` e `regra_fonte_forte` e declarar a fracao que ficou de fora.
+
+### `comex_veiculos`
+
+- **Estado: dimensao gravada** pela etapa 12, a partir das respostas do Comex Stat (MDIC) guardadas em `dados/bruto/comex/` com SHA-256 no manifesto.
+- **Unidade de observacao:** fluxo (importacao, exportacao) x NCM x pais x mes, posicoes 8703 (automoveis) e 8704 (veiculos de carga); tabela separada do painel.
+- **Linhas:** 73.316; 48 NCMs, 178 paises.
+- **NCMs:** `config/ncm_veiculos.csv`, com `grupo_propulsao_ncm` (as subposicoes de eletrificados existem desde 2017-01 em 8703 e 2022-04 em 8704; antes, `sem_separacao`) e `leve` (8704 com peso em carga maxima ate' 5 t; nao casa exatamente com os comerciais leves da Fenabrave).
+- **Ressalvas:** o hibrido leve nao tem NCM propria; kit SKD ou CKD entra na NCM do veiculo completo, entao a importacao pode incluir kits para montagem local.
+- **Conferencias:** 0 falhas em `saidas/comex_validacao.csv`; dicionario em `saidas/comex_dicionario.md`.
+- **Ressalvas principais:** Antes das subposicoes de eletrificados (2017-01 em 8703, 2022-04 em 8704) nenhuma NCM separa o eletrificado. Kit SKD ou CKD entra na NCM do veiculo completo. Em 2001, 2003, 2006 e 2019-2021 parte relevante das unidades esta' em linhas com menos de 500 kg por unidade, que nao descrevem veiculo completo (saidas/comex_diagnostico_peso.csv).
 
 ### Outros arquivos
 
@@ -104,7 +115,7 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 |---|---|
 | `dados/bruto/pdf/` | 284 informes originais da Fenabrave, hash em `dados/bruto/manifesto.csv` |
 | `dados/bruto/pbe/` | 18 tabelas do PBE Veicular (Inmetro), com manifesto SHA-256; extracao em `saidas/pbe_versoes.csv` |
-| `dados/bruto/origem_paginas/` | 119 paginas de fonte de origem, abertas e guardadas, com SHA-256 |
+| `dados/bruto/origem_paginas/` | 137 paginas de fonte de origem, abertas e guardadas, com SHA-256 |
 | `regras.csv` | 0 regras de harmonizacao (rebatismo, desdobramento) |
 | `config/mapa_grupos.csv` | 148 linhas marca-grupo com vigencia |
 | `dados/referencia/Vendas_Geral.xlsx` | controle independente (ESPEC sec.7), nao fonte |
@@ -122,7 +133,8 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 | `painel_bruto` | Auditoria e reconstituicao: cada numero volta ao PDF e a' pagina de origem. Reprocessar com outras regras de harmonizacao sem reler os informes. | Analise direta: marca como publicada, grafias cruas, sem harmonizacao, com as duplicatas publicadas pela fonte ainda dentro (marcadas). |
 | `painel_canal` | Composicao dentro do canal e dentro do ano: que modelos dependem de venda direta (locadora, frotista, PCD) e quais do varejo. Participacao da venda direta no nivel, so' em comerciais leves. | Nivel entre anos em automoveis (o U da cobertura). Participacao de venda direta em automoveis como nivel. Ranking de marca (descartado de proposito). Ausencia no top-50 nao e' zero. |
 | `macro_mensal` | Controles e choques mensais para o painel: credito (juros, prazo, inadimplencia, saldo, concessoes), cambio, Selic, inflacao e atividade; preco relativo do automovel novo, do usado e dos combustiveis. | Preco por modelo ou por versao. Qualquer mes fora da janela efetiva de cada serie. |
-| `classificacao` | Depois da adjudicacao (fase 2): eletrificacao da oferta, SUVizacao por carroceria, nacional contra importado, e as regras de elegibilidade de politica que dependem desses atributos. | Unidades por versao ou por propulsao: a fonte nao separa. Eletrificacao 'parcial' nao diz quantas unidades foram eletrificadas. |
+| `classificacao` | Eletrificacao da oferta por ano (classificacao_propulsao_anual, leituras longa e curta, e a banda piso-teto em saidas/eletrificacao_banda.csv), SUVizacao por carroceria, nacional contra importado, e as regras de elegibilidade de politica que dependem desses atributos. | Unidades por versao ou por propulsao: a fonte nao separa. Eletrificacao 'parcial' nao diz quantas unidades foram eletrificadas. Serie temporal pela propulsao da vigencia (propulsao_na_vigencia): e' o conjunto do que foi oferecido em algum momento dela. |
+| `comex_veiculos` | Importacao e exportacao mensal de automoveis (8703) e veiculos de carga (8704) por NCM e pais desde 1997: origem do que se importa, peso de cada pais, exportacoes como proxy de producao exportada, e, desde 2017 (8703) e 2022 (8704), a separacao entre combustao, hibrido, plug-in e eletrico puro na fronteira. | Vendas: importado entra no estoque antes de ser emplacado. Modelo ou marca: a NCM nao identifica o veiculo. Hibrido leve: nao tem NCM propria. Comerciais leves no sentido da Fenabrave: `leve` segue o peso em carga maxima da NCM. |
 
 ### Series macro
 
@@ -150,7 +162,7 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 
 | fonte | estado | observacao |
 |---|---|---|
-| Comex Stat (importação por NCM e origem) | API testada e acessível; sintaxe de filtro por capítulo a acertar |  |
+| Comex Stat (importação por NCM e origem) | construída | Dimensão comex_veiculos.parquet (etapa 12, rodada propulsão e comex): importação e exportação mensal de 8703 e 8704 por NCM e país, 1997 a 2026-08, bruto em dados/bruto/comex com SHA-256. A quantidade só vem com ncm nos details, e o período filtra ano e mês separadamente (uma consulta por ano). A API limita o ritmo (HTTP 429). |
 | Frota e idade do estoque (Senatran) | não testado |  |
 | Produção, exportação, emprego (Anfavea) | não testado |  |
 | PBE Veicular (consumo, CO₂) | adquirido (18 tabelas, 2009-2026, em dados/bruto/pbe/) e lido para o tipo de propulsão por versão; consumo e CO₂ não extraídos; crosswalk modelo–versão não feito | Usado na validação da propulsão do rascunho de classificação (2026-10-01). As tabelas de 2025 e 2026 estão no site com rótulo de máscara. |

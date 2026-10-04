@@ -1,6 +1,6 @@
 # Dicionario de dados -- `classificacao.parquet`, `classificacao_propulsao_anual.parquet` e `classificacao_montagem.parquet`
 
-Gerado em 2026-10-04T03:35:06+00:00 (UTC) por `src/etapa11_classificacao.py`, a partir de
+Gerado em 2026-10-04T03:55:42+00:00 (UTC) por `src/etapa11_classificacao.py`, a partir de
 `saidas/classificacao_rascunho.xlsx`. **O rascunho e' a fonte de verdade da
 adjudicacao:** uma decisao se escreve nele, e a etapa roda de novo. Ninguem
 edita o parquet a' mao.
@@ -162,10 +162,10 @@ A banda, em `saidas/eletrificacao_banda.csv` (% das unidades do painel):
 | 2022 | longa | 0,2% | 11,8% | 10,7% | 10,6% |
 | 2022 | curta | 0,4% | 10,2% | 9,1% | 9,1% |
 | 2023 | longa | 1,8% | 10,6% | 9,3% | 9,3% |
-| 2023 | curta | 1,8% | 10,5% | 9,2% | 9,2% |
-| 2024 | longa | 4,8% | 13,4% | 11,1% | 11,1% |
-| 2024 | curta | 4,8% | 13,4% | 11,1% | 11,1% |
-| 2025 | longa | 6,8% | 20,6% | 15,9% | 15,8% |
+| 2023 | curta | 1,8% | 10,6% | 9,3% | 9,3% |
+| 2024 | longa | 4,8% | 13,7% | 11,4% | 11,4% |
+| 2024 | curta | 4,8% | 13,7% | 11,4% | 11,4% |
+| 2025 | longa | 6,8% | 21,1% | 16,3% | 16,3% |
 | 2025 | curta | 6,8% | 18,1% | 13,4% | 13,4% |
 | 2026 (jan a ago) | longa | 13,2% | 28,2% | 18,8% | 18,7% |
 | 2026 (jan a ago) | curta | 13,2% | 28,1% | 18,7% | 18,6% |

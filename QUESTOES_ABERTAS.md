@@ -43,6 +43,7 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | Canal | Participação de canal: o top-50 é neutro? | **não em automóveis (viés +1,3 pp e instável); sim em comerciais leves** |
 | Macro | Dimensão macro mensal | **17 séries; o IPCA de usado é índice de depreciação** |
 | Classificação | Dimensão de modelo gravada (fase 2) | **gravada com procedência por atributo; origem 81% sem checagem — próxima frente** |
+| Comex | Comércio exterior de veículos (Comex Stat), 1997–2026-08 | **construída; peso baixo e distância de origem registrados, não resolvidos** |
 
 ---
 
@@ -798,6 +799,32 @@ Fenabrave; a banda entre as leituras longa e curta cobre parte disso):
    20,2% ficam acima do `teto_estrito` (18,7%), e os 17,4% dentro da banda. A
    definição de eletrificado da ABVE também muda entre anos: 2024 inclui MHEV,
    2025 não.
+
+---
+
+## Comércio exterior: o que os uso-testes registram
+
+`comex_veiculos.parquet` (rodada de 2026-10-04) passou nas três conferências
+pedidas. Os uso-testes deixaram registros, descritos sem explicação e sem
+reclassificar nada:
+
+1. **Linhas que não pesam como carro.** Há linhas (NCM × país × mês) com menos
+   de 500 kg por unidade. Passam de 10% das unidades importadas leves em 2001,
+   2003, 2006 e 2019–2021; em 2006 são 67,8%, quase tudo da 87032310 do México.
+   Estão marcadas (`comum.comex.peso_baixo`, `saidas/comex_diagnostico_peso.csv`)
+   e não filtradas. **Filtrar ou não é decisão do pesquisador.**
+2. **Importação de BEV acima do painel só-`bev`** em todos os anos de 2017 a
+   2026. A diferença acumulada é de 141.470 unidades (99.959 sem as linhas de
+   peso baixo), e desde 2024 a razão fica entre 1,03 (2025) e 1,51 (2024).
+3. **Importação total (8703 + 8704 leve) acima do `importado` do painel.** Sem
+   as linhas de peso baixo, a razão mínima chega a 1,3 em 2007, 2008 e 2026. Os
+   modelos `nacional` por `proposta` de maior volume nesses anos estão em
+   `saidas/comex_origem_candidatos.csv`. A origem não foi mexida.
+4. **Limites da NCM, registrados e não separados:**
+   - o `leve` (8704 até 5 t) não é o comercial leve da Fenabrave, e a 87046000 e
+     a 87049000 ficam `indeterminado`;
+   - o MHEV não tem NCM própria;
+   - kits SKD/CKD entram na NCM do veículo completo.
 
 ---
 

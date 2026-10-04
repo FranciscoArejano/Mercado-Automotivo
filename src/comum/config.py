@@ -63,6 +63,11 @@ CLASSIFICACAO_PROPULSAO_ANUAL = DIR_PROCESSADO / "classificacao_propulsao_anual.
 CLASSIFICACAO_PROPULSAO_TIPOS = DIR_SAIDAS / "classificacao_propulsao_tipos.csv"
 CLASSIFICACAO_PBE_DEFASAGEM = DIR_SAIDAS / "classificacao_pbe_defasagem.csv"
 ELETRIFICACAO_BANDA = DIR_SAIDAS / "eletrificacao_banda.csv"
+# comercio exterior de veiculos (Comex Stat)
+NCM_VEICULOS = DIR_CONFIG / "ncm_veiculos.csv"
+COMEX_VEICULOS = DIR_PROCESSADO / "comex_veiculos.parquet"
+COMEX_VALIDACAO = DIR_SAIDAS / "comex_validacao.csv"
+COMEX_DICIONARIO = DIR_SAIDAS / "comex_dicionario.md"
 CLASSIFICACAO_USO_TESTE = DIR_SAIDAS / "classificacao_uso_teste.csv"
 CATALOGO_USOS = DIR_CONFIG / "catalogo_usos.csv"
 FONTES_CANDIDATAS = DIR_CONFIG / "fontes_candidatas.csv"

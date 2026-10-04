@@ -35,10 +35,13 @@ ETAPAS = [
     (5, "etapa05_painel", "painel harmonizado"),
     (8, "etapa08_macro", "dimensao macro mensal"),
     (9, "etapa09_canal", "painel de canal de venda"),
+    # A dimensao de classificacao le o rascunho adjudicado e o painel; o comercio
+    # exterior le o bruto do Comex Stat e, no uso-teste, a classificacao. A etapa 6
+    # valida o que as duas produziram, entao rodam antes dela.
+    (11, "etapa11_classificacao", "dimensao de classificacao de modelo"),
+    (12, "etapa12_comex", "comercio exterior de veiculos (Comex Stat)"),
     (6, "etapa06_validacao", "validacao"),
     (7, "etapa07_referencia_cruzada", "referencia cruzada"),
-    # A dimensao de classificacao le o rascunho adjudicado e o painel.
-    (11, "etapa11_classificacao", "dimensao de classificacao de modelo"),
     # O catalogo descreve o que as outras produziram: vem por ultimo.
     (10, "etapa10_catalogo", "catalogo do repositorio"),
 ]

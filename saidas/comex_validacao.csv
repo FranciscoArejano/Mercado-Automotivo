@@ -1,0 +1,5 @@
+conferencia,casos,falhas
+soma sobre paises = consulta sem pais (fluxo x NCM x ano),1634,0
+meses faltando na janela 1997-01 a 2026-08 (fluxo x posicao),4,0
+NCMs fora das somas de unidades (unidade estatistica nao e' unidade): nenhuma,48,0
+"diagnostico, nao falha: unidades importadas leves em linhas com menos de 500 kg por unidade (saidas/comex_diagnostico_peso.csv); anos acima de 10%: 2001, 2003, 2006, 2019, 2020, 2021",30,0

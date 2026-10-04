@@ -32,7 +32,8 @@ ETAPA = "etapa10_catalogo"
 
 # Caminhos cujo ultimo commit e' o "commit do dado".
 CAMINHOS_DE_DADO = ("dados/processado", "dados/referencia", "dados/bruto/manifesto.csv",
-                    "dados/bruto/pbe", "dados/bruto/origem_paginas", "config", "regras.csv",
+                    "dados/bruto/pbe", "dados/bruto/origem_paginas", "dados/bruto/comex",
+                    "config", "regras.csv",
                     "saidas/classificacao_rascunho.xlsx")
 
 SEM_TEXTO = "(sem texto em `config/catalogo_usos.csv`)"
@@ -290,6 +291,37 @@ def _dimensao_classificacao() -> tuple[dict, str]:
              "linhas": len(dim), "janela": janela}, corpo)
 
 
+def _comex() -> tuple[dict, str]:
+    """A dimensao de comercio exterior (etapa 12)."""
+    if not config.COMEX_VEICULOS.exists():
+        return ({"produto": "comex_veiculos", "arquivo": "--", "linhas": 0,
+                 "janela": "nao construida"},
+                "- **Estado:** nao construida; rode `python src/etapa12_comex.py`.\n")
+    dados = pd.read_parquet(config.COMEX_VEICULOS)
+    ncms = pd.read_csv(config.NCM_VEICULOS, dtype=str, keep_default_na=False)
+    validacao = pd.read_csv(config.COMEX_VALIDACAO)
+    janela = f"{dados['mes_ref'].min()} a {dados['mes_ref'].max()}"
+    separa = ncms.groupby("posicao")["separa_eletrificados_desde"].first().to_dict()
+    corpo = (
+        "- **Estado: dimensao gravada** pela etapa 12, a partir das respostas do Comex Stat "
+        "(MDIC) guardadas em `dados/bruto/comex/` com SHA-256 no manifesto.\n"
+        "- **Unidade de observacao:** fluxo (importacao, exportacao) x NCM x pais x mes, "
+        "posicoes 8703 (automoveis) e 8704 (veiculos de carga); tabela separada do painel.\n"
+        f"- **Linhas:** {_mil(len(dados))}; {dados['ncm'].nunique()} NCMs, "
+        f"{dados['pais'].nunique()} paises.\n"
+        f"- **NCMs:** `config/ncm_veiculos.csv`, com `grupo_propulsao_ncm` (as subposicoes de "
+        f"eletrificados existem desde {separa.get('8703', '')} em 8703 e "
+        f"{separa.get('8704', '') or '--'} em 8704; antes, `sem_separacao`) e `leve` (8704 com "
+        "peso em carga maxima ate' 5 t; nao casa exatamente com os comerciais leves da "
+        "Fenabrave).\n"
+        "- **Ressalvas:** o hibrido leve nao tem NCM propria; kit SKD ou CKD entra na NCM do "
+        "veiculo completo, entao a importacao pode incluir kits para montagem local.\n"
+        f"- **Conferencias:** {int(validacao['falhas'].sum())} falhas em "
+        f"`saidas/comex_validacao.csv`; dicionario em `saidas/comex_dicionario.md`.\n")
+    return ({"produto": "comex_veiculos", "arquivo": "dados/processado/comex_veiculos.parquet",
+             "linhas": len(dados), "janela": janela}, corpo)
+
+
 def _classificacao() -> tuple[dict, str]:
     if config.CLASSIFICACAO.exists():
         return _dimensao_classificacao()
@@ -400,6 +432,9 @@ def gerar() -> str:
     resumo_class, corpo_class = _classificacao()
     resumos.append(resumo_class)
     secoes.append(("classificacao", resumo_class["arquivo"], corpo_class))
+    resumo_comex, corpo_comex = _comex()
+    resumos.append(resumo_comex)
+    secoes.append(("comex_veiculos", resumo_comex["arquivo"], corpo_comex))
 
     texto = [
         f"# Catalogo do repositorio -- dado do commit `{commit_do_dado()}`\n\n",

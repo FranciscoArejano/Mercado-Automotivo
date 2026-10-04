@@ -37,8 +37,9 @@ Parametros ficam em `src/comum/config.py` e aceitam variavel de ambiente
 
 ## As etapas
 
-Rodam na ordem de dependencia, nao na numerica: 8 e 9 antes de 6, que as
-valida; 11 depois do painel; 10 por ultimo, porque descreve todas.
+Rodam na ordem de dependencia, nao na numerica: 8, 9, 11 e 12 antes de 6, que
+as valida (11 depois do painel; 12 depois de 11, que o uso-teste do comercio
+exterior usa); 10 por ultimo, porque descreve todas.
 
 | # | Script | O que faz | Produto |
 |---|---|---|---|
@@ -52,6 +53,7 @@ valida; 11 depois do painel; 10 por ultimo, porque descreve todas.
 | 8 | `etapa08_macro.py` | Series mensais do BCB e do IBGE, em tabela separada | `macro_mensal.parquet`, `saidas/macro_series.csv` |
 | 9 | `etapa09_canal.py` | Venda direta e varejo por modelo (top-50 por canal) | `painel_canal.parquet`, `saidas/painel_canal_dicionario.md` |
 | 11 | `etapa11_classificacao.py` | Dimensao de classificacao de modelo (fase 2): le o rascunho adjudicado, aplica a precedencia e valida; deriva a propulsao por vigencia e ano (leituras longa e curta) e grava o uso-teste e a banda da eletrificacao | `classificacao.parquet`, `classificacao_montagem.parquet`, `classificacao_propulsao_anual.parquet`, `saidas/classificacao_dicionario.md`, `saidas/classificacao_uso_teste.csv`, `saidas/eletrificacao_banda.csv` |
+| 12 | `etapa12_comex.py` | Importacao e exportacao mensal de veiculos por NCM e pais (Comex Stat), com conferencias e uso-teste; o bruto vem de `src/ferramentas/comex_baixar.py` e a tabela de NCMs de `src/ferramentas/comex_ncm.py` | `comex_veiculos.parquet`, `config/ncm_veiculos.csv`, `saidas/comex_dicionario.md` |
 | 10 | `etapa10_catalogo.py` | Indice do repositorio, calculado do dado | `CATALOGO.md` |
 
 ## Arquivos que o humano escreve

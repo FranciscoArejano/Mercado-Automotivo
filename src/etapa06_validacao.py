@@ -1327,7 +1327,23 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
         partes.append("\n## 12. Canal de venda\n\n_Nao disponivel: rode "
                       "`python src/etapa09_canal.py`._\n")
 
-    partes.append("\n## 13. Situacao\n\n")
+    # ------------------------------------------- 13. comercio exterior
+    if config.COMEX_VALIDACAO.exists() and config.COMEX_VEICULOS.exists():
+        conferencias = pd.read_csv(config.COMEX_VALIDACAO)
+        comex_dados = pd.read_parquet(config.COMEX_VEICULOS, columns=["mes_ref", "fluxo"])
+        partes.append(
+            "\n## 13. Comercio exterior de veiculos (Comex Stat)\n\n"
+            "Tabela de fatos **separada**: `comex_veiculos.parquet`, gravada pela etapa 12 a "
+            "partir das respostas da API guardadas em `dados/bruto/comex/`. Janela "
+            f"{comex_dados['mes_ref'].min()} a {comex_dados['mes_ref'].max()}, "
+            f"{len(comex_dados):,} linhas.\n\n" + _tabela(conferencias))
+        if int(conferencias["falhas"].sum()):
+            falhas.append("conferencias do comercio exterior com falha")
+    else:
+        partes.append("\n## 13. Comercio exterior de veiculos (Comex Stat)\n\n"
+                      "_Nao disponivel: rode `python src/etapa12_comex.py`._\n")
+
+    partes.append("\n## 14. Situacao\n\n")
     if falhas:
         partes.append("**Validacao FALHOU:**\n\n" + "".join(f"- {f}\n" for f in falhas))
     else:

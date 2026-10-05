@@ -14,8 +14,12 @@ Com `--tipos`, nao abre nada: recalcula a coluna `tipo_fonte` de
 `origem_fontes.csv` a partir de `config/tipo_fonte_dominio.csv` (depois de o
 pesquisador editar o mapeamento).
 
+Paginas com acento fora do UTF-8 (os atos do Planalto vem em windows-1252) sao
+decodificadas pelo charset declarado ou por windows-1252.
+
 Uso:
     python src/ferramentas/origem_fonte.py URL --nome slug --busca "regex"
+    python src/ferramentas/origem_fonte.py URL --nome slug --pasta politicas_paginas
     python src/ferramentas/origem_fonte.py --tipos
 """
 
@@ -40,6 +44,10 @@ from comum import config, tipo_fonte  # noqa: E402
 
 DIR_PAGINAS = config.DIR_BRUTO / "origem_paginas"
 MANIFESTO = DIR_PAGINAS / "manifesto.csv"
+# `--pasta`: outra pasta de paginas guardadas, com manifesto proprio (o calendario
+# de politicas guarda em `dados/bruto/politicas_paginas/`)
+PASTAS = {"origem_paginas": DIR_PAGINAS,
+          "politicas_paginas": config.DIR_BRUTO / "politicas_paginas"}
 CAMPOS = ["nome", "url", "sha256_texto", "caracteres", "data_acesso"]
 IGNORAR = {"script", "style", "noscript", "svg", "head", "nav", "footer", "form"}
 BLOCO = {"p", "div", "br", "li", "h1", "h2", "h3", "h4", "h5", "tr", "section",
@@ -78,6 +86,30 @@ def texto_da_pagina(conteudo: str) -> str:
 
 
 def baixar(url: str) -> str:
+    return decodificar(baixar_bytes(url))
+
+
+def texto_de(url: str) -> str:
+    """Texto da pagina: HTML pelo extrator de texto; PDF (atos do Banco Central, do
+    Contran, do Conama) pagina a pagina, pelo pdfplumber."""
+    conteudo = baixar_bytes(url)
+    if conteudo.lstrip()[:5] == b"%PDF-":
+        return texto_do_pdf(conteudo)
+    return texto_da_pagina(decodificar(conteudo))
+
+
+def texto_do_pdf(conteudo: bytes) -> str:
+    import io
+
+    import pdfplumber
+    with pdfplumber.open(io.BytesIO(conteudo)) as pdf:
+        paginas = [pagina.extract_text() or "" for pagina in pdf.pages]
+    linhas = [re.sub(r"[ \t]+", " ", linha).strip()
+              for linha in "\n".join(paginas).splitlines()]
+    return "\n".join(linha for linha in linhas if linha)
+
+
+def baixar_bytes(url: str) -> bytes:
     feito = subprocess.run(
         ["curl", "-sSL", "--compressed", "--max-time", "60", "-A",
          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -85,22 +117,39 @@ def baixar(url: str) -> str:
         capture_output=True, timeout=90)
     if feito.returncode != 0:
         raise RuntimeError(f"curl falhou ({feito.returncode}): {feito.stderr.decode()[:200]}")
-    return feito.stdout.decode("utf-8", errors="replace")
+    return feito.stdout
 
 
-def registrar(nome: str, url: str, texto: str) -> Path:
-    DIR_PAGINAS.mkdir(parents=True, exist_ok=True)
-    destino = DIR_PAGINAS / f"{nome}.txt"
+def decodificar(conteudo: bytes) -> str:
+    """UTF-8 quando o conteudo e' UTF-8 valido; senao o charset declarado na pagina,
+    ou windows-1252 (os atos do Planalto vem assim, sem declarar)."""
+    try:
+        return conteudo.decode("utf-8")
+    except UnicodeDecodeError:
+        pass
+    declarado = re.search(rb'charset=["\']?([A-Za-z0-9_-]+)', conteudo[:5000])
+    for nome in ([declarado.group(1).decode()] if declarado else []) + ["cp1252"]:
+        try:
+            return conteudo.decode(nome)
+        except (LookupError, UnicodeDecodeError):
+            continue
+    return conteudo.decode("utf-8", errors="replace")
+
+
+def registrar(nome: str, url: str, texto: str, pasta: Path = DIR_PAGINAS) -> Path:
+    pasta.mkdir(parents=True, exist_ok=True)
+    manifesto = pasta / "manifesto.csv"
+    destino = pasta / f"{nome}.txt"
     destino.write_text(f"URL: {url}\n\n{texto}\n", encoding="utf-8")
     linhas = []
-    if MANIFESTO.exists():
-        with MANIFESTO.open(encoding="utf-8", newline="") as fluxo:
+    if manifesto.exists():
+        with manifesto.open(encoding="utf-8", newline="") as fluxo:
             linhas = [l for l in csv.DictReader(fluxo) if l["nome"] != nome]
     linhas.append({"nome": nome, "url": url,
                    "sha256_texto": hashlib.sha256(destino.read_bytes()).hexdigest(),
                    "caracteres": len(texto),
                    "data_acesso": datetime.now(timezone.utc).strftime("%Y-%m-%d")})
-    with MANIFESTO.open("w", encoding="utf-8", newline="") as fluxo:
+    with manifesto.open("w", encoding="utf-8", newline="") as fluxo:
         escritor = csv.DictWriter(fluxo, fieldnames=CAMPOS)
         escritor.writeheader()
         escritor.writerows(sorted(linhas, key=lambda l: l["nome"]))
@@ -134,6 +183,7 @@ def main() -> int:
     analisador.add_argument("url", nargs="?")
     analisador.add_argument("--nome")
     analisador.add_argument("--busca", default="")
+    analisador.add_argument("--pasta", choices=sorted(PASTAS), default="origem_paginas")
     analisador.add_argument("--tipos", action="store_true",
                             help="so' recalcular a coluna tipo_fonte de origem_fontes.csv e "
                                  "propulsao_fontes.csv")
@@ -144,18 +194,20 @@ def main() -> int:
     if not args.url or not args.nome:
         analisador.error("URL e --nome sao obrigatorios (ou use --tipos)")
 
-    if MANIFESTO.exists():
-        with MANIFESTO.open(encoding="utf-8", newline="") as fluxo:
+    pasta = PASTAS[args.pasta]
+    manifesto = pasta / "manifesto.csv"
+    if manifesto.exists():
+        with manifesto.open(encoding="utf-8", newline="") as fluxo:
             if any(l["nome"] == args.nome for l in csv.DictReader(fluxo)):
                 print(f"{args.nome} ja' esta' no manifesto; escolha outro nome (uma pagina citada "
                       "nao pode ser sobrescrita)", file=sys.stderr)
                 return 2
-    texto = texto_da_pagina(baixar(args.url))
+    texto = texto_de(args.url)
     if len(texto) < 300:
         print(f"texto curto demais ({len(texto)} caracteres): pagina bloqueada ou vazia; "
               "nada gravado", file=sys.stderr)
         return 2
-    destino = registrar(args.nome, args.url, texto)
+    destino = registrar(args.nome, args.url, texto, pasta)
     print(f"gravado {destino.relative_to(config.RAIZ)} ({len(texto)} caracteres)")
     if args.busca:
         padrao = re.compile(args.busca, re.IGNORECASE)

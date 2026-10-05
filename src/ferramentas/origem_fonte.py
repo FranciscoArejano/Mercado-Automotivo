@@ -97,7 +97,18 @@ def texto_de(url: str, colunas: int = 1) -> str:
     conteudo = baixar_bytes(url)
     if conteudo.lstrip()[:5] == b"%PDF-":
         return texto_do_pdf(conteudo, colunas)
+    if conteudo.lstrip()[:1] == b"{":
+        return texto_de_normativo(conteudo)
     return texto_da_pagina(decodificar(conteudo))
+
+
+def texto_de_normativo(conteudo: bytes) -> str:
+    """Resposta da API de normativos do Banco Central (`api/conteudo/app/normativos`):
+    titulo, data e o texto do ato, que vem em HTML dentro do JSON."""
+    import json
+    dado = json.loads(conteudo)["conteudo"][0]
+    return "\n".join([dado["Titulo"], dado["DataTexto"],
+                      texto_da_pagina(dado["Texto"])])
 
 
 def texto_do_pdf(conteudo: bytes, colunas: int = 1) -> str:
@@ -108,8 +119,10 @@ def texto_do_pdf(conteudo: bytes, colunas: int = 1) -> str:
         paginas = []
         for pagina in pdf.pages:
             largura = pagina.width / colunas
-            paginas += [pagina.crop((i * largura, 0, (i + 1) * largura, pagina.height))
-                        .extract_text() or "" for i in range(colunas)]
+            x0, topo, _, base = pagina.bbox
+            paginas += [pagina.crop((x0 + i * largura, topo, x0 + (i + 1) * largura, base),
+                                    strict=False).extract_text() or ""
+                        for i in range(colunas)]
     linhas = [re.sub(r"[ \t]+", " ", linha).strip()
               for linha in "\n".join(paginas).splitlines()]
     return "\n".join(linha for linha in linhas if linha)

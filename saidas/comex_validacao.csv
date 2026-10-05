@@ -2,4 +2,7 @@ conferencia,casos,falhas
 soma sobre paises = consulta sem pais (fluxo x NCM x ano),1634,0
 meses faltando na janela 1997-01 a 2026-08 (fluxo x posicao),4,0
 NCMs fora das somas de unidades (unidade estatistica nao e' unidade): nenhuma,48,0
-"diagnostico, nao falha: unidades importadas leves em linhas com menos de 500 kg por unidade (saidas/comex_diagnostico_peso.csv); anos acima de 10%: 2001, 2003, 2006, 2019, 2020, 2021",30,0
+unidades_ajustadas = unidades nas linhas com ajuste `publicada`,71281,0
+"linhas com menos de 500 kg por unidade publicada, estimadas pelo peso: 4,227,631 unidades publicadas viram 168,672; sem referencia de peso, mantidas publicadas: 1",2036,0
+"fora do agregado de carros (agregado_carros = nao): 87031000, 87041000, 87041010, 87041090, 87042210, 87042220, 87042230, 87042290, 87042310, 87042320, 87042330, 87042340, 87042390, 87043210, 87043220, 87043230, 87043290, 87046000, 87049000",48,0
+"diagnostico, nao falha: unidades publicadas do agregado de carros importado em linhas com menos de 500 kg por unidade (saidas/comex_diagnostico_peso.csv); anos acima de 10%: 2001, 2003, 2006, 2019, 2020, 2021",30,0

@@ -9,8 +9,10 @@ decididas por regra declarada).
 Produtos:
 - `dados/processado/comex_veiculos.parquet` -- importacao e exportacao mensal por
   NCM e pais: `mes_ref`, `ano`, `mes`, `fluxo`, `ncm`, `pais`, `fob_usd`, `kg`,
-  `unidades` (vazio onde a unidade estatistica da NCM nao e' unidade). As colunas
-  da tabela de NCMs vem por juncao;
+  `unidades` (publicada; vazio onde a unidade estatistica da NCM nao e' unidade),
+  `unidades_ajustadas` e `ajuste_unidades` (a quantidade estimada pelo peso nas
+  linhas com menos de 500 kg por unidade). As colunas da tabela de NCMs vem por
+  juncao;
 - `saidas/comex_validacao.csv` -- as conferencias (soma sobre paises contra a
   consulta sem pais, meses faltando, NCMs fora das somas de unidades);
 - `saidas/comex_uso_teste_bev.csv`, `comex_uso_teste_origem.csv`,
@@ -80,62 +82,77 @@ def problemas_da_tabela(ncms: pd.DataFrame, calculada: pd.DataFrame) -> list[str
 # ------------------------------------------------------------- uso-teste
 
 
-def _importacao_leve(dados: pd.DataFrame, ncms: pd.DataFrame) -> pd.DataFrame:
-    """Importacao de 8703 e de 8704 leve, com as colunas da tabela de NCMs e a marca
-    de peso baixo por unidade."""
+def _agregado(dados: pd.DataFrame, ncms: pd.DataFrame) -> pd.DataFrame:
+    """Importacao do agregado de carros -- 8703 sem 8703.10, e 8704 leve
+    (`agregado_carros` da tabela de NCMs) --, com a marca de peso baixo."""
     juntos = dados[dados["fluxo"] == "importacao"].merge(ncms, on="ncm")
-    juntos = juntos[(juntos["posicao"] == "8703") | (juntos["leve"] == "sim")]
+    juntos = juntos[juntos["agregado_carros"] == "sim"]
     return juntos.assign(peso_baixo=comex.peso_baixo(juntos))
 
 
+def _soma(quadro: pd.DataFrame, por, coluna: str) -> pd.Series:
+    return quadro.groupby(por)[coluna].sum().astype(int)
+
+
 def diagnostico_peso(dados: pd.DataFrame, ncms: pd.DataFrame) -> pd.DataFrame:
-    """Por ano: unidades importadas (8703 + 8704 leve) em linhas com menos de
-    `comex.KG_MINIMO` kg por unidade."""
-    imp = _importacao_leve(dados, ncms)
+    """Por ano, no agregado de carros importado: unidades publicadas em linhas com
+    menos de `comex.KG_MINIMO` kg por unidade, e o que viram pelo peso."""
+    imp = _agregado(dados, ncms)
     linhas = []
     for ano, g in imp.groupby("ano"):
         baixo = g[g["peso_baixo"]]
         principal = (baixo.groupby(["ncm", "pais"])["unidades"].sum().sort_values()
                      .tail(1))
-        linhas.append({"ano": ano, "unidades": int(g["unidades"].sum()),
+        publicadas = int(g["unidades"].sum())
+        linhas.append({"ano": ano, "unidades": publicadas,
                        "unidades_peso_baixo": int(baixo["unidades"].sum()),
                        "pct_peso_baixo": round(100 * baixo["unidades"].sum()
-                                               / max(int(g["unidades"].sum()), 1), 1),
+                                               / max(publicadas, 1), 1),
+                       "peso_baixo_estimadas_pelo_peso": int(
+                           baixo["unidades_ajustadas"].sum()),
+                       "unidades_ajustadas": int(g["unidades_ajustadas"].sum()),
                        "maior_caso": (f"{principal.index[0][0]} {principal.index[0][1]} "
                                       f"({int(principal.iloc[0])})") if len(principal) else ""})
     return pd.DataFrame(linhas)
 
 
+def _razao(a: int, b: int):
+    return round(a / b, 2) if b else None
+
+
 def uso_teste_bev(dados: pd.DataFrame, ncms: pd.DataFrame, anual: pd.DataFrame
                   ) -> pd.DataFrame:
-    """Importacao de eletricos puros contra as unidades do painel de vigencia-ano so'
-    `bev` na leitura longa, 2017 em diante."""
-    importacao = _importacao_leve(dados, ncms)
+    """Importacao de eletricos puros (unidades ajustadas, e a publicada ao lado)
+    contra as unidades do painel de vigencia-ano so' `bev` na leitura longa, 2017 em
+    diante."""
+    importacao = _agregado(dados, ncms)
     bev = importacao[importacao["grupo_propulsao_ncm"] == "bev"]
-    imp = bev.groupby("ano")["unidades"].sum()
-    imp_pesado = bev[~bev["peso_baixo"]].groupby("ano")["unidades"].sum()
+    ajustada = _soma(bev, "ano", "unidades_ajustadas")
+    publicada = _soma(bev, "ano", "unidades")
     painel = anual[anual["propulsao_no_ano"] == "bev"].groupby("ano")["unidades"].sum()
     linhas = []
-    acumulada = 0
+    acumulada = acumulada_pub = 0
     for ano in range(2017, int(dados["ano"].max()) + 1):
-        i, p = int(imp.get(ano, 0)), int(painel.get(ano, 0))
+        i, i_pub, p = (int(ajustada.get(ano, 0)), int(publicada.get(ano, 0)),
+                       int(painel.get(ano, 0)))
         acumulada += i - p
-        sem_baixo = int(imp_pesado.get(ano, 0))
-        linhas.append({"ano": ano, "importacao_bev": i,
-                       "importacao_bev_sem_peso_baixo": sem_baixo, "painel_so_bev": p,
-                       "razao": round(i / p, 2) if p else None,
-                       "razao_sem_peso_baixo": round(sem_baixo / p, 2) if p else None,
-                       "diferenca_acumulada": acumulada})
+        acumulada_pub += i_pub - p
+        linhas.append({"ano": ano, "importacao_bev": i, "importacao_bev_publicada": i_pub,
+                       "painel_so_bev": p, "razao": _razao(i, p),
+                       "razao_publicada": _razao(i_pub, p),
+                       "diferenca_acumulada": acumulada,
+                       "diferenca_acumulada_publicada": acumulada_pub})
     return pd.DataFrame(linhas)
 
 
 def uso_teste_origem(dados: pd.DataFrame, ncms: pd.DataFrame, dim: pd.DataFrame,
                      painel: pd.DataFrame) -> pd.DataFrame:
-    """Importacao anual (8703 + 8704 leve) contra as unidades do painel de vigencias
-    `importado`, com `ambos` contado como 0% e como 100%."""
-    importacao = _importacao_leve(dados, ncms)
-    imp = importacao.groupby("ano")["unidades"].sum()
-    imp_pesado = importacao[~importacao["peso_baixo"]].groupby("ano")["unidades"].sum()
+    """Importacao anual do agregado de carros (unidades ajustadas, e a publicada ao
+    lado) contra as unidades do painel de vigencias `importado`, com `ambos` contado
+    como 0% e como 100%."""
+    importacao = _agregado(dados, ncms)
+    ajustada = _soma(importacao, "ano", "unidades_ajustadas")
+    publicada = _soma(importacao, "ano", "unidades")
     meses = painel.groupby(CHAVE + ["mes_ref"], as_index=False)["unidades"].sum()
     juntos = meses.merge(dim[CHAVE + ["vigencia_inicio", "vigencia_fim", "origem_producao"]],
                          on=CHAVE)
@@ -150,26 +167,26 @@ def uso_teste_origem(dados: pd.DataFrame, ncms: pd.DataFrame, dim: pd.DataFrame,
             continue
         p = por.loc[ano]
         importado, ambos = int(p.get("importado", 0)), int(p.get("ambos", 0))
-        i = int(imp.get(ano, 0))
-        linhas.append({"ano": ano, "importacao": i,
-                       "importacao_sem_peso_baixo": int(imp_pesado.get(ano, 0)),
+        i, i_pub = int(ajustada.get(ano, 0)), int(publicada.get(ano, 0))
+        linhas.append({"ano": ano, "importacao": i, "importacao_publicada": i_pub,
                        "painel_importado_min": importado,
                        "painel_importado_max": importado + ambos,
                        "painel_nao_classificado": int(p.get("", 0)),
                        "painel_total": int(p.sum()),
-                       "razao_min": round(i / (importado + ambos), 2) if importado + ambos
-                       else None,
-                       "razao_max": round(i / importado, 2) if importado else None})
+                       "razao_min": _razao(i, importado + ambos),
+                       "razao_max": _razao(i, importado),
+                       "razao_min_publicada": _razao(i_pub, importado + ambos),
+                       "razao_max_publicada": _razao(i_pub, importado)})
     return pd.DataFrame(linhas)
 
 
-RAZAO_GRANDE = 1.3  # importacao 30% acima do maximo do painel importado, sem peso baixo
+RAZAO_GRANDE = 1.3  # importacao ajustada 30% acima do maximo do painel importado
 
 
 def anos_de_distancia(origem: pd.DataFrame) -> list[int]:
-    """Anos em que a importacao, mesmo sem as linhas de peso baixo, passa o maximo do
-    painel importado (`ambos` a 100%) em `RAZAO_GRANDE` ou mais."""
-    razao = origem["importacao_sem_peso_baixo"] / origem["painel_importado_max"]
+    """Anos em que a importacao (unidades ajustadas) passa o maximo do painel
+    importado (`ambos` a 100%) em `RAZAO_GRANDE` ou mais."""
+    razao = origem["importacao"] / origem["painel_importado_max"]
     return origem.loc[razao >= RAZAO_GRANDE, "ano"].astype(int).tolist()
 
 
@@ -192,10 +209,14 @@ def candidatos_da_origem(dim: pd.DataFrame, painel: pd.DataFrame, anos: list[int
 
 
 def paises_top10(dados: pd.DataFrame, ncms: pd.DataFrame) -> pd.DataFrame:
-    imp = _importacao_leve(dados, ncms)
-    por = imp.groupby(["ano", "pais"], as_index=False)["unidades"].sum()
-    so_8703 = (imp[imp["posicao"] == "8703"].groupby(["ano", "pais"])["unidades"].sum()
-               .rename("unidades_8703"))
+    """Os 10 primeiros paises de origem por ano, pelas unidades ajustadas do agregado
+    de carros; ao lado, a publicada e a parte de 8703 (sem 8703.10)."""
+    imp = _agregado(dados, ncms)
+    por = (imp.groupby(["ano", "pais"])[["unidades_ajustadas", "unidades"]].sum().astype(int)
+           .rename(columns={"unidades_ajustadas": "unidades",
+                            "unidades": "unidades_publicadas"}).reset_index())
+    so_8703 = (imp[imp["posicao"] == "8703"].groupby(["ano", "pais"])["unidades_ajustadas"]
+               .sum().rename("unidades_8703"))
     por = por.merge(so_8703, on=["ano", "pais"], how="left").fillna({"unidades_8703": 0})
     por["unidades_8703"] = por["unidades_8703"].astype(int)
     por["posicao_no_ano"] = por.groupby("ano")["unidades"].rank(ascending=False,
@@ -236,6 +257,16 @@ def executar() -> int:
         return 1
 
     dados = comex.produto(com_pais, ncms)
+    baixas = comex.peso_baixo(dados)
+    estimadas = dados[dados["ajuste_unidades"] == "estimada_pelo_peso"]
+    publicadas = dados[dados["ajuste_unidades"] == "publicada"]
+    sem_referencia = dados[baixas & (dados["ajuste_unidades"] == "publicada")]
+    divergem = publicadas[publicadas["unidades_ajustadas"] != publicadas["unidades"]]
+    if len(divergem) or len(estimadas) + len(sem_referencia) != int(baixas.sum()):
+        logger.error("unidades ajustadas fora da regra: %d linhas publicadas com valor "
+                     "diferente; nada gravado", len(divergem))
+        return 1
+    fora_do_agregado = ncms[ncms["agregado_carros"] != "sim"]
     validacao = pd.DataFrame([
         {"conferencia": "soma sobre paises = consulta sem pais (fluxo x NCM x ano)",
          "casos": len(conferencia), "falhas": len(diferentes)},
@@ -244,6 +275,16 @@ def executar() -> int:
             ["fluxo", "posicao"]).ngroups, "falhas": len(faltando)},
         {"conferencia": "NCMs fora das somas de unidades (unidade estatistica nao e' "
                         f"unidade): {', '.join(fora_da_soma['ncm']) or 'nenhuma'}",
+         "casos": len(ncms), "falhas": 0},
+        {"conferencia": "unidades_ajustadas = unidades nas linhas com ajuste `publicada`",
+         "casos": len(publicadas), "falhas": len(divergem)},
+        {"conferencia": (f"linhas com menos de {comex.KG_MINIMO} kg por unidade publicada, "
+                         f"estimadas pelo peso: {int(estimadas['unidades'].sum()):,} unidades "
+                         f"publicadas viram {int(estimadas['unidades_ajustadas'].sum()):,}; "
+                         f"sem referencia de peso, mantidas publicadas: {len(sem_referencia)}"),
+         "casos": int(baixas.sum()), "falhas": 0},
+        {"conferencia": ("fora do agregado de carros (agregado_carros = nao): "
+                         + ", ".join(fora_do_agregado["ncm"])),
          "casos": len(ncms), "falhas": 0},
     ])
 
@@ -258,9 +299,10 @@ def executar() -> int:
     peso = diagnostico_peso(dados, ncms)
     altos = peso[peso["pct_peso_baixo"] > 10]["ano"].tolist()
     validacao = pd.concat([validacao, pd.DataFrame([{
-        "conferencia": (f"diagnostico, nao falha: unidades importadas leves em linhas com menos "
-                        f"de {comex.KG_MINIMO} kg por unidade (saidas/comex_diagnostico_peso.csv); "
-                        f"anos acima de 10%: {', '.join(map(str, altos)) or 'nenhum'}"),
+        "conferencia": (f"diagnostico, nao falha: unidades publicadas do agregado de carros "
+                        f"importado em linhas com menos de {comex.KG_MINIMO} kg por unidade "
+                        f"(saidas/comex_diagnostico_peso.csv); anos acima de 10%: "
+                        f"{', '.join(map(str, altos)) or 'nenhum'}"),
         "casos": len(peso), "falhas": 0}])], ignore_index=True)
 
     config.DIR_PROCESSADO.mkdir(parents=True, exist_ok=True)
@@ -311,7 +353,9 @@ juncao e' do codigo de analise.
 | `pais` | texto | pais de origem (importacao) ou de destino (exportacao), nome do Comex Stat |
 | `fob_usd` | inteiro | valor FOB em dolares |
 | `kg` | inteiro | peso liquido em kg |
-| `unidades` | inteiro | quantidade estatistica, so' onde a unidade estatistica da NCM e' "{comex.UNIDADE}"; vazio nas demais |
+| `unidades` | inteiro | quantidade estatistica **publicada**, so' onde a unidade estatistica da NCM e' "{comex.UNIDADE}"; vazio nas demais |
+| `unidades_ajustadas` | inteiro | a publicada; nas linhas com menos de {comex.KG_MINIMO} kg por unidade publicada, o peso dividido pelo kg por unidade de referencia (mesma NCM, fluxo e ano, nas linhas plausiveis; sem ela, a da NCM em todos os anos), arredondado. **Padrao para contar carros** |
+| `ajuste_unidades` | texto | `publicada` ou `estimada_pelo_peso` |
 
 ## `config/ncm_veiculos.csv`
 
@@ -330,15 +374,21 @@ regra (`src/comum/comex.py`):
   2022 (8704.4x e 8704.5x) nao distinguem hibrido com e sem recarga externa (o
   texto oficial nao fala de recarga): ficam `hev`.
 - `leve`: {NOTA_LEVE}
+- `agregado_carros`: `sim` para 8703 menos 8703.10 (neve, golfe e semelhantes; em
+  2025, 12.908 unidades importadas, quase todas da China, a 36 kg cada) e para o
+  8704 leve. Ficam fora 8703.10, o 8704 nao leve e os dois `indeterminado`
+  (8704.60 e 8704.90). E' o agregado dos uso-testes.
 
 **Duas coisas que a NCM nao diz.** {NOTA_MHEV} {NOTA_KITS}
 
 **Peso por unidade.** Em alguns anos, parte das unidades importadas esta' em linhas
-(NCM x pais x mes) com menos de {comex.KG_MINIMO} kg por unidade, o que nao descreve
-veiculo completo: 2001, 2003 e 2006 (mais de 30% das unidades leves) e 2019 a
-2021 (10% a 17%). O produto nao filtra nada; `saidas/comex_diagnostico_peso.csv`
-mede, e o uso-teste mostra as series com e sem essas linhas
-(`comum.comex.peso_baixo`).
+(NCM x pais x mes) com menos de {comex.KG_MINIMO} kg por unidade publicada:
+2001, 2003 e 2006 (mais de 30% das unidades do agregado) e 2019 a 2021 (10% a
+17%). Nas maiores, o pesquisador conferiu que valor e peso sao de carro e a
+quantidade nao (na India, em 2019, a quantidade e' o peso). `unidades` fica como
+publicada; `unidades_ajustadas` estima essas linhas pelo peso
+(`comum.comex.ajustar_unidades`), e e' o padrao dos uso-testes, com a publicada
+ao lado. `saidas/comex_diagnostico_peso.csv` mede o peso de cada ano.
 
 {_tabela_ncms(ncms)}
 
@@ -348,6 +398,7 @@ mede, e o uso-teste mostra as series com e sem essas linhas
 
 ## Uso-teste
 
+Todos sobre o agregado de carros e com `unidades_ajustadas`, a publicada ao lado:
 `saidas/comex_uso_teste_bev.csv` (importacao de eletricos puros contra o painel so'
 `bev`), `saidas/comex_uso_teste_origem.csv` (importacao contra o painel `importado`,
 com `ambos` a 0% e a 100%) e `saidas/comex_paises_top10.csv`. Descritos no registro

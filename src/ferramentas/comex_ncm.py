@@ -8,7 +8,9 @@ as duas colunas decididas por regra (`comum/comex.py`):
 - `grupo_propulsao_ncm`, pelo texto da subposicao (`GRUPO_POR_PREFIXO`), com
   `sem_separacao` para NCM que so' existiu antes das subposicoes de
   eletrificados da sua posicao (`separa_eletrificados_desde`);
-- `leve` (so' 8704): `sim` quando a descricao limita o peso em carga maxima a 5 t.
+- `leve` (so' 8704): `sim` quando a descricao limita o peso em carga maxima a 5 t;
+- `agregado_carros`: `sim` para 8703 menos 8703.10 (neve, golfe e semelhantes) e
+  para o 8704 leve -- o agregado dos uso-testes.
 
 A coluna `criterio` diz a regra de cada linha. A etapa 12 confere que a tabela
 versionada continua batendo com o bruto (NCM, unidade, periodo).
@@ -42,6 +44,10 @@ def criterio(linha) -> str:
                        "nao": "nao leve: acima de 5 t ou dumper",
                        "indeterminado": "leve indeterminado: descricao sem limite de peso"}[
                            linha["leve"]])
+    if linha["agregado_carros"] != "sim":
+        partes.append("fora do agregado de carros"
+                      + (": neve, golfe e semelhantes" if linha["ncm"].startswith("870310")
+                         else ""))
     return "; ".join(partes)
 
 

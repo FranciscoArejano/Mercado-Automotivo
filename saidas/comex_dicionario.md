@@ -1,6 +1,6 @@
 # Dicionario de dados -- `comex_veiculos.parquet`
 
-Gerado em 2026-10-04T04:39:46+00:00 (UTC) por `src/etapa12_comex.py`, a partir das respostas do Comex
+Gerado em 2026-10-05T15:27:09+00:00 (UTC) por `src/etapa12_comex.py`, a partir das respostas do Comex
 Stat (API `https://api-comexstat.mdic.gov.br/general`) guardadas em
 `dados/bruto/comex/` com SHA-256 no manifesto.
 
@@ -17,7 +17,9 @@ juncao e' do codigo de analise.
 | `pais` | texto | pais de origem (importacao) ou de destino (exportacao), nome do Comex Stat |
 | `fob_usd` | inteiro | valor FOB em dolares |
 | `kg` | inteiro | peso liquido em kg |
-| `unidades` | inteiro | quantidade estatistica, so' onde a unidade estatistica da NCM e' "NUMERO (UNIDADE)"; vazio nas demais |
+| `unidades` | inteiro | quantidade estatistica **publicada**, so' onde a unidade estatistica da NCM e' "NUMERO (UNIDADE)"; vazio nas demais |
+| `unidades_ajustadas` | inteiro | a publicada; nas linhas com menos de 500 kg por unidade publicada, o peso dividido pelo kg por unidade de referencia (mesma NCM, fluxo e ano, nas linhas plausiveis; sem ela, a da NCM em todos os anos), arredondado. **Padrao para contar carros** |
+| `ajuste_unidades` | texto | `publicada` ou `estimada_pelo_peso` |
 
 ## `config/ncm_veiculos.csv`
 
@@ -36,15 +38,21 @@ regra (`src/comum/comex.py`):
   2022 (8704.4x e 8704.5x) nao distinguem hibrido com e sem recarga externa (o
   texto oficial nao fala de recarga): ficam `hev`.
 - `leve`: so' 8704; segue a descricao da NCM: `sim` quando o peso em carga maxima nao passa de 5 t. Nao casa exatamente com os comerciais leves da Fenabrave, que classifica por modelo. Ficam `indeterminado` o residual 8704.90 e o eletrico 8704.60, cuja descricao nao da faixa de peso.
+- `agregado_carros`: `sim` para 8703 menos 8703.10 (neve, golfe e semelhantes; em
+  2025, 12.908 unidades importadas, quase todas da China, a 36 kg cada) e para o
+  8704 leve. Ficam fora 8703.10, o 8704 nao leve e os dois `indeterminado`
+  (8704.60 e 8704.90). E' o agregado dos uso-testes.
 
 **Duas coisas que a NCM nao diz.** O hibrido leve (MHEV) nao tem NCM propria: pode estar em 8703.40 ou nas NCMs de combustao. Nao se supoe nenhum dos dois. Kit SKD ou CKD de um veiculo entra na NCM do veiculo completo (regra geral 2a do SH): a importacao pode incluir kits para montagem local. Isso se registra, nao se separa.
 
 **Peso por unidade.** Em alguns anos, parte das unidades importadas esta' em linhas
-(NCM x pais x mes) com menos de 500 kg por unidade, o que nao descreve
-veiculo completo: 2001, 2003 e 2006 (mais de 30% das unidades leves) e 2019 a
-2021 (10% a 17%). O produto nao filtra nada; `saidas/comex_diagnostico_peso.csv`
-mede, e o uso-teste mostra as series com e sem essas linhas
-(`comum.comex.peso_baixo`).
+(NCM x pais x mes) com menos de 500 kg por unidade publicada:
+2001, 2003 e 2006 (mais de 30% das unidades do agregado) e 2019 a 2021 (10% a
+17%). Nas maiores, o pesquisador conferiu que valor e peso sao de carro e a
+quantidade nao (na India, em 2019, a quantidade e' o peso). `unidades` fica como
+publicada; `unidades_ajustadas` estima essas linhas pelo peso
+(`comum.comex.ajustar_unidades`), e e' o padrao dos uso-testes, com a publicada
+ao lado. `saidas/comex_diagnostico_peso.csv` mede o peso de cada ano.
 
 | NCM | grupo | leve | periodo | descricao |
 |---|---|---|---|---|
@@ -99,15 +107,19 @@ mede, e o uso-teste mostra as series com e sem essas linhas
 
 ## Conferencias (`saidas/comex_validacao.csv`)
 
-| conferencia                                                                                                                                                                            |   casos |   falhas |
-|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------:|---------:|
-| soma sobre paises = consulta sem pais (fluxo x NCM x ano)                                                                                                                              |    1634 |        0 |
-| meses faltando na janela 1997-01 a 2026-08 (fluxo x posicao)                                                                                                                           |       4 |        0 |
-| NCMs fora das somas de unidades (unidade estatistica nao e' unidade): nenhuma                                                                                                          |      48 |        0 |
-| diagnostico, nao falha: unidades importadas leves em linhas com menos de 500 kg por unidade (saidas/comex_diagnostico_peso.csv); anos acima de 10%: 2001, 2003, 2006, 2019, 2020, 2021 |      30 |        0 |
+| conferencia                                                                                                                                                                                                                                      |   casos |   falhas |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------:|---------:|
+| soma sobre paises = consulta sem pais (fluxo x NCM x ano)                                                                                                                                                                                        |    1634 |        0 |
+| meses faltando na janela 1997-01 a 2026-08 (fluxo x posicao)                                                                                                                                                                                     |       4 |        0 |
+| NCMs fora das somas de unidades (unidade estatistica nao e' unidade): nenhuma                                                                                                                                                                    |      48 |        0 |
+| unidades_ajustadas = unidades nas linhas com ajuste `publicada`                                                                                                                                                                                  |   71281 |        0 |
+| linhas com menos de 500 kg por unidade publicada, estimadas pelo peso: 4,227,631 unidades publicadas viram 168,672; sem referencia de peso, mantidas publicadas: 1                                                                               |    2036 |        0 |
+| fora do agregado de carros (agregado_carros = nao): 87031000, 87041000, 87041010, 87041090, 87042210, 87042220, 87042230, 87042290, 87042310, 87042320, 87042330, 87042340, 87042390, 87043210, 87043220, 87043230, 87043290, 87046000, 87049000 |      48 |        0 |
+| diagnostico, nao falha: unidades publicadas do agregado de carros importado em linhas com menos de 500 kg por unidade (saidas/comex_diagnostico_peso.csv); anos acima de 10%: 2001, 2003, 2006, 2019, 2020, 2021                                 |      30 |        0 |
 
 ## Uso-teste
 
+Todos sobre o agregado de carros e com `unidades_ajustadas`, a publicada ao lado:
 `saidas/comex_uso_teste_bev.csv` (importacao de eletricos puros contra o painel so'
 `bev`), `saidas/comex_uso_teste_origem.csv` (importacao contra o painel `importado`,
 com `ambos` a 0% e a 100%) e `saidas/comex_paises_top10.csv`. Descritos no registro

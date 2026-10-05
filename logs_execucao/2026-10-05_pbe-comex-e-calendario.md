@@ -286,4 +286,159 @@ Nenhuma outra chave mudou de tipo eletrificado em nenhum ano.
   piso. Passou a exigir chave do painel. O teste de tipo da vigência ignora
   chave sem propulsão classificada.
 
-__PARTE2__
+---
+
+## Parte 2 — Comex: as linhas de peso baixo
+
+### O que eu conferi
+
+**A referência.** A sua tabela sai do produto quando a referência é a média
+ponderada (kg somados sobre unidades somadas) das linhas plausíveis da mesma
+NCM, no mesmo fluxo e no mesmo ano.
+
+| linha | publicadas | estimadas | US$ por unidade estimada |
+|---|---:|---:|---:|
+| Argentina, 2001, 87032210 | 222.440 | 779 | 9.143 |
+| México, 2006, 87032310 | 306.783 | 2.745 | 13.714 |
+| Alemanha, 2003, 87032310 | 29.144 | 9.440 | 13.926 |
+| Japão, 2026, 87041010 (dumper) | 578.363 | 5 | 809.700 |
+| Índia, 2019, 87038000 | 9.621 (= 9.621 kg) | 6 | 8.928 |
+
+- As diferenças de preço vêm do arredondamento.
+- No dumper japonês, divido o FOB pelas 5 unidades inteiras. O seu número
+  (773.045) parece dividido pela estimativa sem arredondar.
+- Com a referência dos dois fluxos juntos, os números não batem (Argentina 843,
+  México 3.061). Por isso fiquei com o fluxo.
+
+### O que mudou no dado
+
+**`unidades` continua como publicada.** As duas colunas novas:
+
+- **`unidades_ajustadas`** (Int64):
+  - igual à publicada com 500 kg ou mais por unidade;
+  - abaixo disso, o peso dividido pelo kg por unidade de referência,
+    arredondado para inteiro (meio para cima).
+- **`ajuste_unidades`:** `publicada` ou `estimada_pelo_peso`. Fica vazio onde
+  `unidades` é vazio, o que hoje não acontece.
+
+**A referência, em ordem:**
+
+1. mesma NCM, fluxo e ano, nas linhas plausíveis;
+2. sem ela, a mesma NCM e fluxo em todos os anos;
+3. depois, a NCM nos dois fluxos.
+
+O terceiro degrau é meu: você não disse o que fazer sem referência nenhuma, e
+ele não é usado nesta rodada. Uma linha não tem referência em nenhum degrau:
+exportação de 87037000 para o México em 2022-11, 3 unidades em 60 kg (a NCM
+inteira é essa linha). Ela fica com a publicada e aparece na validação.
+
+**Contas** (`saidas/comex_validacao.csv`):
+
+- 2.036 linhas abaixo de 500 kg por unidade. 2.035 foram estimadas: 4.227.631
+  unidades publicadas viraram 168.672.
+- 71.281 linhas `publicada`, todas com a ajustada igual à publicada. A etapa 12
+  falha se não for assim.
+- Nove linhas de exportação têm 0 kg com quantidade positiva (FOB de US$ 1 a
+  US$ 1.461). A estimativa delas é 0.
+
+**O agregado de carros** é a coluna nova `agregado_carros` em
+`config/ncm_veiculos.csv`: `sim` para 8703 menos 8703.10, e para o 8704 leve.
+Ficam fora:
+
+- 8703.10;
+- os 16 do 8704 não leve;
+- os dois `indeterminado` (87046000 e 87049000).
+
+Conferi a sua conta do 8703.10 em 2025: 12.908 unidades, 12.894 da China, a 36
+kg cada.
+
+### Uso-testes refeitos, com unidades ajustadas (a publicada ao lado)
+
+**1. BEV importado contra o painel só-`bev` (leitura longa)**
+
+| ano | importação ajustada | publicada | painel só `bev` | razão | razão publicada | dif. acumulada | dif. acumulada publicada |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 2017 | 43 | 50 | 0 | – | – | 43 | 50 |
+| 2018 | 138 | 167 | 0 | – | – | 181 | 217 |
+| 2019 | 805 | 27.024 | 0 | – | – | 986 | 27.241 |
+| 2020 | 773 | 6.573 | 76 | 10,17 | 86,49 | 1.683 | 33.738 |
+| 2021 | 3.162 | 11.963 | 818 | 3,87 | 14,62 | 4.027 | 44.883 |
+| 2022 | 9.394 | 9.411 | 1.197 | 7,85 | 7,86 | 12.224 | 53.097 |
+| 2023 | 28.441 | 28.823 | 12.721 | 2,24 | 2,27 | 27.944 | 69.199 |
+| 2024 | 80.553 | 80.589 | 53.493 | 1,51 | 1,51 | 55.004 | 96.295 |
+| 2025 | 68.207 | 68.236 | 66.140 | 1,03 | 1,03 | 57.071 | 98.391 |
+| 2026 (jan a ago) | 168.711 | 168.720 | 125.641 | 1,34 | 1,34 | 100.141 | 141.470 |
+
+- O ajuste muda 2019–2021: o salto de 2019 some (805 em vez de 27.024).
+- De 2022 em diante, quase nada muda.
+- A diferença acumulada cai de 141.470 para 100.141.
+- O painel não mudou nesta parte. O 208 ganhou `bev`, mas o 208 tem `flex`, e
+  esta série é só das vigência-anos só-`bev`.
+
+**2. Importação do agregado de carros contra o painel `importado`** (`ambos` a
+0% e a 100%)
+
+| ano | ajustada | publicada | razão mín–máx | razão publicada |
+|---|---:|---:|---|---|
+| 2003 | 72.985 | 92.792 | 1,20–1,81 | 1,52–2,30 |
+| 2004 | 70.031 | 71.485 | 0,97–1,40 | 0,99–1,43 |
+| 2005 | 96.162 | 98.086 | 1,10–1,43 | 1,12–1,46 |
+| 2006 | 178.261 | 508.274 | **1,35**–1,63 | 3,85–4,66 |
+| 2007 | 290.675 | 292.828 | **1,32**–1,62 | 1,33–1,64 |
+| 2008 | 429.496 | 434.465 | **1,48**–1,83 | 1,50–1,85 |
+| 2009 | 475.649 | 480.731 | 1,17–1,39 | 1,18–1,41 |
+| 2010 | 699.276 | 702.264 | 1,22–1,39 | 1,22–1,40 |
+| 2011 | 930.633 | 932.812 | 1,25–1,40 | 1,26–1,40 |
+| 2012 | 726.784 | 730.690 | 1,05–1,18 | 1,06–1,19 |
+| 2013 | 704.678 | 710.278 | 1,28–1,46 | 1,29–1,47 |
+| 2014 | 577.458 | 583.127 | 1,16–1,40 | 1,18–1,42 |
+| 2015 | 383.829 | 387.880 | 1,17–1,49 | 1,18–1,50 |
+| 2016 | 231.966 | 235.717 | 0,92–1,17 | 0,93–1,19 |
+| 2017 | 242.483 | 248.635 | 0,98–1,19 | 1,01–1,22 |
+| 2018 | 342.405 | 347.124 | 1,08–1,23 | 1,09–1,24 |
+| 2019 | 283.322 | 313.685 | 1,01–1,13 | 1,12–1,25 |
+| 2020 | 165.842 | 198.094 | 0,88–0,97 | 1,05–1,16 |
+| 2021 | 263.574 | 302.077 | 1,13–1,22 | 1,30–1,39 |
+| 2022 | 289.079 | 294.249 | 1,18–1,24 | 1,20–1,26 |
+| 2023 | 367.223 | 375.767 | 1,22–1,24 | 1,24–1,27 |
+| 2024 | 516.680 | 529.850 | 1,26–1,30 | 1,29–1,34 |
+| 2025 | 509.996 | 526.640 | 1,23–1,27 | 1,27–1,31 |
+| 2026 (jan a ago) | 588.298 | 602.466 | **1,48**–1,50 | 1,52–1,54 |
+
+**Anos de distância grande:** razão mínima, com as ajustadas, de 1,3 ou mais.
+
+- Passam **2006, 2007, 2008 e 2026**.
+- O 2006 entrou: antes eu tirava as linhas leves, e agora elas contam pelo peso
+  (14.612 unidades).
+- Os candidatos (`nacional` por `proposta`, maior volume) estão em
+  `saidas/comex_origem_candidatos.csv`. Em 2006 são os mesmos carros de
+  2007–2008 (Gol, Palio, Uno, Fox…).
+- Não reclassifiquei nada.
+- A importação sai um pouco abaixo da rodada passada também nos anos sem linhas
+  leves (2025: 526.640 publicadas, contra 539.548), porque o 8703.10 saiu do
+  agregado.
+
+**3. Países de origem** (`saidas/comex_paises_top10.csv`). Colunas: `unidades`
+ajustadas, `unidades_publicadas` e `unidades_8703`, que é 8703 sem 8703.10,
+ajustado.
+
+- **Argentina** é a primeira em todos os anos de 1997 a 2024, **inclusive
+  2006**. Com a publicada, o México liderava 2006 pelas 306.783 unidades do
+  dumper de peso. Ajustado, o México fica em segundo (22.073).
+- **China** é a primeira em 2025 e 2026.
+- **2025, ajustado:**
+  - China 212.390 (publicada 228.450; só 8703: 207.351);
+  - Argentina 191.649;
+  - México 40.848.
+  - O seu número da China (241.344) inclui as 12.894 unidades de 8703.10, que
+    agora saem.
+- **2026 (jan a ago):** China 391.838 (66,6% do ano), Argentina 116.676, México
+  38.480.
+
+### Erros e correções desta parte
+
+- **CRLF de novo**, agora em `config/catalogo_usos.csv`, ao trocar o texto de
+  uso do Comex. Restaurei antes do commit e passei a conferir o fim de linha de
+  todos os arquivos tocados.
+
+__PARTE3__

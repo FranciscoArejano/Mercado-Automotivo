@@ -43,7 +43,7 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | Canal | Participação de canal: o top-50 é neutro? | **não em automóveis (viés +1,3 pp e instável); sim em comerciais leves** |
 | Macro | Dimensão macro mensal | **17 séries; o IPCA de usado é índice de depreciação** |
 | Classificação | Dimensão de modelo gravada (fase 2) | **gravada com procedência por atributo; origem 81% sem checagem — próxima frente** |
-| Comex | Comércio exterior de veículos (Comex Stat), 1997–2026-08 | **construída; peso baixo e distância de origem registrados, não resolvidos** |
+| Comex | Comércio exterior de veículos (Comex Stat), 1997–2026-08 | **construída; peso baixo ajustado pelo peso; distância de origem registrada, não resolvida** |
 
 ---
 
@@ -836,25 +836,37 @@ Fenabrave; a banda entre as leituras longa e curta cobre parte disso):
 
 `comex_veiculos.parquet` (rodada de 2026-10-04) passou nas três conferências
 pedidas. Os uso-testes deixaram registros, descritos sem explicação e sem
-reclassificar nada:
+reclassificar nada.
 
-1. **Linhas que não pesam como carro.** Há linhas (NCM × país × mês) com menos
-   de 500 kg por unidade. Passam de 10% das unidades importadas leves em 2001,
-   2003, 2006 e 2019–2021; em 2006 são 67,8%, quase tudo da 87032310 do México.
-   Estão marcadas (`comum.comex.peso_baixo`, `saidas/comex_diagnostico_peso.csv`)
-   e não filtradas. **Filtrar ou não é decisão do pesquisador.**
-2. **Importação de BEV acima do painel só-`bev`** em todos os anos de 2017 a
-   2026. A diferença acumulada é de 141.470 unidades (99.959 sem as linhas de
-   peso baixo), e desde 2024 a razão fica entre 1,03 (2025) e 1,51 (2024).
-3. **Importação total (8703 + 8704 leve) acima do `importado` do painel.** Sem
-   as linhas de peso baixo, a razão mínima chega a 1,3 em 2007, 2008 e 2026. Os
-   modelos `nacional` por `proposta` de maior volume nesses anos estão em
+**Fechado na rodada de 2026-10-05:** as linhas com menos de 500 kg por unidade
+publicada. O pesquisador conferiu que nelas valor e peso são de carro e a
+quantidade não.
+
+- `unidades` continua como publicada;
+- `unidades_ajustadas` estima essas linhas pelo peso, com a referência da mesma
+  NCM, fluxo e ano: 2.035 linhas, 4,23 milhões de unidades publicadas viram
+  168.672;
+- o agregado de carros tira 8703.10 (neve, golfe) e o 8704 não leve ou sem peso
+  na descrição;
+- os uso-testes usam as ajustadas, com a publicada ao lado.
+
+**Continua registrado:**
+
+1. **Importação de BEV acima do painel só-`bev`** em todos os anos de 2017 a
+   2026. Com unidades ajustadas, a diferença acumulada é de 100.141 unidades (a
+   publicada dá 141.470); desde 2024, a razão fica entre 1,03 (2025) e 1,51
+   (2024).
+2. **Importação do agregado de carros acima do `importado` do painel.** Com
+   unidades ajustadas, a razão mínima chega a 1,3 em 2006, 2007, 2008 e 2026.
+   Os modelos `nacional` por `proposta` de maior volume nesses anos estão em
    `saidas/comex_origem_candidatos.csv`. A origem não foi mexida.
-4. **Limites da NCM, registrados e não separados:**
-   - o `leve` (8704 até 5 t) não é o comercial leve da Fenabrave, e a 87046000 e
-     a 87049000 ficam `indeterminado`;
+3. **Limites da NCM, registrados e não separados:**
+   - o `leve` (8704 até 5 t) não é o comercial leve da Fenabrave;
    - o MHEV não tem NCM própria;
    - kits SKD/CKD entram na NCM do veículo completo.
+4. **Uma linha sem referência de peso** (exportação, 87037000, 2022-11, 3
+   unidades em 60 kg): não há linha plausível da NCM em nenhum ano ou fluxo, e
+   ela fica com a publicada.
 
 ---
 

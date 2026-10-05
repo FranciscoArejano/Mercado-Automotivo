@@ -100,3 +100,61 @@ def test_produto_e_tabela_batem_com_o_bruto(versionados):
     assert set(ncms["grupo_propulsao_ncm"]) <= set(comex.GRUPOS)
     fora = set(ncms.loc[ncms["unidade_estatistica"] != comex.UNIDADE, "ncm"])
     assert dados.loc[dados["ncm"].isin(fora), "unidades"].isna().all()
+
+
+# --------------------------------------- unidades ajustadas pelo peso (rodada 11)
+
+
+def _produto(*itens):
+    """(fluxo, ncm, ano, pais, kg, unidades)."""
+    return pd.DataFrame([{"fluxo": f, "ncm": n, "ano": a, "pais": p, "kg": kg,
+                          "unidades": u, "fob_usd": 0} for f, n, a, p, kg, u in itens]
+                        ).astype({"unidades": "Int64"})
+
+
+def test_linha_plausivel_fica_publicada_e_a_leve_vira_peso_sobre_referencia():
+    dados = _produto(("importacao", "87032310", 2006, "Alemanha", 1_200_000, 1000),
+                     ("importacao", "87032310", 2006, "Japao", 1_400_000, 1000),
+                     ("importacao", "87032310", 2006, "Mexico", 3_900_000, 300_000))
+    saida = comex.ajustar_unidades(dados).set_index("pais")
+    # referencia: (1,2 + 1,4 milhao de kg) / 2.000 unidades = 1.300 kg
+    assert saida.loc["Mexico", "unidades_ajustadas"] == 3000
+    assert saida.loc["Mexico", "ajuste_unidades"] == "estimada_pelo_peso"
+    assert saida.loc["Mexico", "unidades"] == 300_000
+    assert (saida.loc[["Alemanha", "Japao"], "unidades_ajustadas"] == [1000, 1000]).all()
+    assert set(saida.loc[["Alemanha", "Japao"], "ajuste_unidades"]) == {"publicada"}
+
+
+def test_sem_referencia_no_ano_usa_a_da_ncm_e_sem_nenhuma_fica_a_publicada():
+    dados = _produto(("importacao", "87038000", 2018, "Japao", 1_600_000, 1000),
+                     ("importacao", "87038000", 2019, "India", 9621, 9621),
+                     ("exportacao", "87037000", 2022, "Mexico", 60, 3))
+    saida = comex.ajustar_unidades(dados).set_index("pais")
+    assert saida.loc["India", "unidades_ajustadas"] == 6       # 9.621 kg / 1.600 kg
+    assert saida.loc["Mexico", "unidades_ajustadas"] == 3
+    assert saida.loc["Mexico", "ajuste_unidades"] == "publicada"
+
+
+def test_agregado_de_carros_tira_neve_e_golfe_e_o_8704_nao_leve():
+    assert comex.agregado_carros("87031000", "") == "nao"
+    assert comex.agregado_carros("87032310", "") == "sim"
+    assert comex.agregado_carros("87042110", "sim") == "sim"
+    assert comex.agregado_carros("87046000", "indeterminado") == "nao"
+    assert comex.agregado_carros("87042210", "nao") == "nao"
+
+
+def test_produto_versionado_ajusta_so_as_linhas_leves(versionados):
+    dados, ncms = versionados
+    baixo = comex.peso_baixo(dados)
+    publicadas = dados[~baixo & dados["unidades"].notna()]
+    assert (publicadas["unidades_ajustadas"] == publicadas["unidades"]).all()
+    assert set(dados["ajuste_unidades"]) <= set(comex.AJUSTES) | {""}
+    estimadas = dados[dados["ajuste_unidades"] == "estimada_pelo_peso"]
+    assert len(estimadas) and baixo[estimadas.index].all()
+    # India 2019, 87038000: a quantidade publicada e' o peso
+    india = dados[(dados["pais"] == "Índia") & (dados["ano"] == 2019)
+                  & (dados["ncm"] == "87038000")]
+    assert int(india["unidades"].sum()) == int(india["kg"].sum()) == 9621
+    assert int(india["unidades_ajustadas"].sum()) < 10
+    assert set(ncms.loc[ncms["agregado_carros"] == "nao", "ncm"]) >= {"87031000", "87046000",
+                                                                      "87049000"}

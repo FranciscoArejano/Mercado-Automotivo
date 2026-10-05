@@ -5,6 +5,10 @@ resposta da API por fluxo x posicao x ano, com e sem pais. Aqui ficam a leitura
 dessas respostas, as regras da tabela de NCMs (`config/ncm_veiculos.csv`) e as
 conferencias.
 
+As unidades publicadas ficam em `unidades`. Em `unidades_ajustadas`, as linhas com
+menos de 500 kg por unidade tem a quantidade estimada pelo peso
+(`ajustar_unidades`): nelas valor e peso sao de carro, e a quantidade nao.
+
 Duas coisas que a NCM nao diz, e que o dicionario repete:
 
 - **onde cai o hibrido leve** -- pode estar em 8703.40 ou nas NCMs de combustao;
@@ -27,7 +31,12 @@ DIR = config.DIR_BRUTO / "comex"
 NOME = re.compile(r"^(importacao|exportacao)_(8703|8704)_(\d{4})_(pais|total)\.json$")
 UNIDADE = "NUMERO (UNIDADE)"
 GRUPOS = ("centelha", "diesel", "hev", "phev", "bev", "outros", "sem_separacao")
-COLUNAS = ["mes_ref", "ano", "mes", "fluxo", "ncm", "pais", "fob_usd", "kg", "unidades"]
+COLUNAS = ["mes_ref", "ano", "mes", "fluxo", "ncm", "pais", "fob_usd", "kg", "unidades",
+           "unidades_ajustadas", "ajuste_unidades"]
+AJUSTES = ("publicada", "estimada_pelo_peso")
+# fora do agregado de carros: 8703.10 (neve, golfe e semelhantes) e o 8704 que nao e'
+# leve ou cujo peso a descricao nao da'
+FORA_DO_AGREGADO = ("870310",)
 
 # prefixo da NCM -> grupo de propulsao, pelo texto oficial da subposicao (SH 2017 em
 # 8703, SH 2022 em 8704). Ordem: o prefixo mais longo vence.
@@ -78,6 +87,15 @@ def leve_da_ncm(ncm: str, descricao: str) -> str:
     if re.search(r"(<=|não superior a|nao superior a)\s*5\b", texto):
         return "sim"
     return "indeterminado"
+
+
+def agregado_carros(ncm: str, leve: str) -> str:
+    """`sim` se a NCM entra no agregado de carros: 8703 menos 8703.10, e 8704 leve."""
+    if ncm.startswith(FORA_DO_AGREGADO):
+        return "nao"
+    if ncm.startswith("8703"):
+        return "sim"
+    return "sim" if leve == "sim" else "nao"
 
 
 def grupo_no_mes(grupo: str, separa_desde: str, mes_ref: str) -> str:
@@ -134,6 +152,7 @@ def tabela_de_ncms(com_pais: pd.DataFrame, unidades: dict[str, tuple[str, str]]
                                                                + r["descricao_curta"]),
             "grupo_propulsao_ncm": grupo_da_ncm(r["ncm"]),
             "separa_eletrificados_desde": separa[r["posicao"]]})
+        linhas[-1]["agregado_carros"] = agregado_carros(r["ncm"], linhas[-1]["leve"])
     tabela = pd.DataFrame(linhas)
     # NCM que so' existiu antes da separacao nunca separou nada
     antes = (tabela["separa_eletrificados_desde"] != "") & (
@@ -143,7 +162,8 @@ def tabela_de_ncms(com_pais: pd.DataFrame, unidades: dict[str, tuple[str, str]]
 
 
 def produto(com_pais: pd.DataFrame, ncms: pd.DataFrame) -> pd.DataFrame:
-    """`comex_veiculos.parquet`: unidades so' onde a unidade estatistica e' unidade."""
+    """`comex_veiculos.parquet`: unidades so' onde a unidade estatistica e' unidade, e
+    as unidades ajustadas pelo peso (`ajustar_unidades`)."""
     unidade = dict(zip(ncms["ncm"], ncms["unidade_estatistica"]))
     saida = com_pais.assign(
         ano=com_pais["mes_ref"].str[:4].astype(int),
@@ -151,7 +171,56 @@ def produto(com_pais: pd.DataFrame, ncms: pd.DataFrame) -> pd.DataFrame:
         unidades=[q if unidade.get(n) == UNIDADE else pd.NA
                   for n, q in zip(com_pais["ncm"], com_pais["quantidade"])])
     saida["unidades"] = saida["unidades"].astype("Int64")
+    saida = ajustar_unidades(saida)
     return saida[COLUNAS].sort_values(["fluxo", "mes_ref", "ncm", "pais"]).reset_index(drop=True)
+
+
+def referencias_de_peso(dados: pd.DataFrame) -> dict[str, dict]:
+    """kg por unidade de referencia, nas linhas plausiveis (`KG_MINIMO` ou mais por
+    unidade): por (fluxo, NCM, ano), por (fluxo, NCM) em todos os anos e por NCM nos
+    dois fluxos. Media ponderada: kg somados sobre unidades somadas."""
+    unidades = dados["unidades"].astype("float")
+    plausivel = dados[(unidades > 0) & (dados["kg"] / unidades >= KG_MINIMO)].assign(
+        u=lambda d: d["unidades"].astype("float"))
+    def media(chaves):
+        g = plausivel.groupby(chaves)[["kg", "u"]].sum()
+        return (g["kg"] / g["u"]).to_dict()
+    return {"ano": media(["fluxo", "ncm", "ano"]), "ncm": media(["fluxo", "ncm"]),
+            "ncm_dois_fluxos": media(["ncm"])}
+
+
+def ajustar_unidades(dados: pd.DataFrame) -> pd.DataFrame:
+    """`unidades_ajustadas` e `ajuste_unidades` (decisao do pesquisador, rodada "pbe,
+    comex e calendario").
+
+    Nas linhas com menos de `KG_MINIMO` kg por unidade publicada, valor e peso sao de
+    carro e a quantidade nao: a unidade ajustada e' o peso dividido pelo kg por
+    unidade de referencia da mesma NCM, no mesmo fluxo e ano (linhas plausiveis),
+    arredondado para inteiro. Sem referencia no ano, a da NCM em todos os anos; sem
+    ela, a da NCM nos dois fluxos; sem nenhuma, fica a publicada. Nas demais linhas, a
+    ajustada e' a publicada. `unidades` continua como publicada.
+    """
+    saida = dados.copy()
+    refs = referencias_de_peso(saida)
+    baixo = peso_baixo(saida)
+    ajustadas, ajuste = [], []
+    for (fluxo, ncm, ano, kg, publicada, b) in zip(
+            saida["fluxo"], saida["ncm"], saida["ano"], saida["kg"], saida["unidades"], baixo):
+        if not b:
+            ajustadas.append(publicada)
+            ajuste.append("publicada" if not pd.isna(publicada) else "")
+            continue
+        ref = (refs["ano"].get((fluxo, ncm, ano)) or refs["ncm"].get((fluxo, ncm))
+               or refs["ncm_dois_fluxos"].get(ncm))
+        if ref is None:
+            ajustadas.append(publicada)
+            ajuste.append("publicada")
+            continue
+        ajustadas.append(int(kg / ref + 0.5))
+        ajuste.append("estimada_pelo_peso")
+    saida["unidades_ajustadas"] = pd.array(ajustadas, dtype="Int64")
+    saida["ajuste_unidades"] = ajuste
+    return saida
 
 
 def conferencia_paises(com_pais: pd.DataFrame, sem_pais: pd.DataFrame) -> pd.DataFrame:
@@ -181,11 +250,12 @@ KG_MINIMO = 500  # abaixo disso por unidade, a linha nao pesa como veiculo compl
 
 
 def peso_baixo(dados: pd.DataFrame) -> pd.Series:
-    """Linhas (NCM x pais x mes) com menos de `KG_MINIMO` kg por unidade.
+    """Linhas (NCM x pais x mes) com menos de `KG_MINIMO` kg por unidade publicada.
 
-    Diagnostico, nao filtro: o carro mais leve passa de 800 kg, entao a linha
-    abaixo disso nao descreve veiculo completo -- pode ser kit, peca registrada
-    como unidade ou erro de quantidade. A etapa 12 so' mede e descreve.
+    O carro mais leve passa de 800 kg, entao a linha abaixo disso nao descreve
+    veiculo completo. O pesquisador conferiu as maiores: valor e peso sao de carro,
+    a quantidade e' que esta' errada (na India, em 2019, a quantidade e' o peso).
+    Por isso `ajustar_unidades` estima a quantidade pelo peso.
     """
     unidades = dados["unidades"].astype("float")
     return (unidades > 0) & (dados["kg"] / unidades < KG_MINIMO)

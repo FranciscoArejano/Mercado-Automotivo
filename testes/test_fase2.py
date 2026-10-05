@@ -159,3 +159,57 @@ def test_modelo_so_com_zeros_leva_os_meses_do_painel():
     assert (dim.iloc[0]["vigencia_inicio"], dim.iloc[0]["vigencia_fim"]) == ("2004-02", "2004-07")
     sem = fase2.dimensao(pd.DataFrame(columns=_linha().index), fora)
     assert any("sem mes" in p for p in fase2.problemas_de_cobertura(sem, painel))
+
+
+# --------------------------- decisao versionada e pendente explicito (rodada 11)
+
+
+def test_pendente_explicito_deixa_o_atributo_pendente_e_decide_o_outro():
+    """O 2008: propulsao decidida pelo pesquisador, origem contestada e pendente."""
+    linha = _linha(propulsao_oferecida="flex+bev", propulsao_apos_regras="flex+bev",
+                   procedencia_propulsao="pendente", procedencia_origem="pendente",
+                   decisao_humana="propulsao_oferecida=flex; origem_producao=pendente")
+    final = fase2.linha_final(linha)
+    assert (final["propulsao_na_vigencia"], final["procedencia_propulsao"]) == ("flex", "humana")
+    assert (final["origem_producao"], final["procedencia_origem"]) == ("nacional", "pendente")
+
+
+def test_pendente_explicito_so_em_atributo_pendente():
+    linha = _linha(decisao_humana="propulsao_oferecida=flex; origem_producao=pendente")
+    with pytest.raises(fase2.DecisaoInvalida, match="nao esta' pendente"):
+        fase2.linha_final(linha)
+
+
+def test_decisoes_versionadas_vao_para_a_linha_do_rascunho():
+    rascunho = pd.DataFrame([_linha(), _linha(modelo="Y")])
+    decisoes = pd.DataFrame([{"marca": "M", "modelo": "Y", "segmento": "automoveis",
+                              "vigencia_inicio": "2015-01", "decisao_humana": "ok",
+                              "data_decisao": "", "origem": "", "observacao": ""}])
+    saida = fase2.aplicar_decisoes_humanas(rascunho, decisoes)
+    assert list(saida["decisao_humana"]) == ["", "ok"]
+    with pytest.raises(fase2.DecisaoInvalida, match="nao e' linha"):
+        fase2.aplicar_decisoes_humanas(rascunho, decisoes.assign(vigencia_inicio="2016-01"))
+    with pytest.raises(fase2.DecisaoInvalida):
+        fase2.aplicar_decisoes_humanas(rascunho, decisoes.assign(decisao_humana="acho que sim"))
+
+
+def test_decisoes_versionadas_estao_no_rascunho_e_no_dado():
+    if not config.CLASSIFICACAO.exists():
+        pytest.skip("dimensao ainda nao gravada")
+    decisoes = fase2.carregar_decisoes_humanas()
+    rascunho = pd.read_excel(config.CLASSIFICACAO_RASCUNHO, sheet_name="classificacao",
+                             dtype=str, keep_default_na=False)
+    indice = rascunho.set_index(["marca", "modelo", "segmento", "vigencia_inicio"])
+    dim = pd.read_parquet(config.CLASSIFICACAO)
+    for _, d in decisoes.iterrows():
+        chave = (d["marca"], d["modelo"], d["segmento"], d["vigencia_inicio"])
+        assert indice.loc[chave, "decisao_humana"] == d["decisao_humana"]
+        linha = dim[(dim["marca"] == d["marca"]) & (dim["modelo"] == d["modelo"])
+                    & (dim["vigencia_inicio_rascunho"] == d["vigencia_inicio"])]
+        decidido = fase2.ler_decisao(d["decisao_humana"])
+        for atributo, valor in decidido.items():
+            if atributo in fase2.PROCEDENCIA_COLUNA:
+                esperado = "pendente" if valor == "pendente" else "humana"
+                assert linha[fase2.PROCEDENCIA_COLUNA[atributo]].item() == esperado
+    peugeot = dim[(dim["marca"] == "PEUGEOT") & (dim["modelo"] == "2008")]
+    assert peugeot["propulsao_na_vigencia"].tolist() == ["flex"]

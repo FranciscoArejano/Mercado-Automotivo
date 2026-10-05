@@ -1,0 +1,119 @@
+ano_pbe,marca_pbe,modelo_versao,valor_taxonomia,marca,modelo,segmento,relacao,chave_viva,prefixo_pbe,decisao,observacao
+2023,BMW,IX1 XDRIVE30,bev,BMW,X1,automoveis,prefixo,True,IX1,sem_evidencia,Regra 4: o painel nao tem chave IX1 e a planilha nao traz o iX1 a' parte.
+2024,BMW,IX1 EDRIVE20,bev,BMW,X1,automoveis,prefixo,True,IX1,sem_evidencia,Regra 4: o painel nao tem chave IX1 e a planilha nao traz o iX1 a' parte.
+2024,BMW,IX1 XDRIVE30,bev,BMW,X1,automoveis,prefixo,True,IX1,sem_evidencia,Regra 4: o painel nao tem chave IX1 e a planilha nao traz o iX1 a' parte.
+2025,BMW,IX1 EDRIVE20,bev,BMW,X1,automoveis,prefixo,True,IX1,sem_evidencia,Regra 4: o painel nao tem chave IX1 e a planilha nao traz o iX1 a' parte.
+2025,BMW,IX1 XDRIVE30,bev,BMW,X1,automoveis,prefixo,True,IX1,sem_evidencia,Regra 4: o painel nao tem chave IX1 e a planilha nao traz o iX1 a' parte.
+2026,BMW,IX1 EDRIVE20,bev,BMW,X1,automoveis,prefixo,True,IX1,sem_evidencia,Regra 4: o painel nao tem chave IX1 e a planilha nao traz o iX1 a' parte.
+2026,BMW,IX1 XDRIVE30,bev,BMW,X1,automoveis,prefixo,True,IX1,sem_evidencia,Regra 4: o painel nao tem chave IX1 e a planilha nao traz o iX1 a' parte.
+2024,BMW,IX2 XDRIVE30,bev,BMW,X2,automoveis,prefixo,False,,,
+2025,BMW,IX2 XDRIVE30 MSP,bev,BMW,X2,automoveis,prefixo,False,,,
+2026,BMW,IX2 XDRIVE30 MSP,bev,BMW,X2,automoveis,prefixo,False,,,
+2022,BMW,IX3 -,bev,BMW,X3,automoveis,prefixo,True,IX3,nao_casa,"Regra 3 (a planilha nao soma): em 2023-02, o X3 do painel (53) = BMW X3 da planilha (53), com o iX3 (10) a' parte. Nos outros meses com iX3 na planilha (2023-06 a 2023-08) o painel nao tem X3."
+2023,BMW,IX3 -,bev,BMW,X3,automoveis,prefixo,True,IX3,nao_casa,"Regra 3 (a planilha nao soma): em 2023-02, o X3 do painel (53) = BMW X3 da planilha (53), com o iX3 (10) a' parte. Nos outros meses com iX3 na planilha (2023-06 a 2023-08) o painel nao tem X3."
+2024,BMW,IX3 -,bev,BMW,X3,automoveis,prefixo,True,IX3,nao_casa,"Regra 3 (a planilha nao soma): em 2023-02, o X3 do painel (53) = BMW X3 da planilha (53), com o iX3 (10) a' parte. Nos outros meses com iX3 na planilha (2023-06 a 2023-08) o painel nao tem X3."
+2026,BMW,IX3 50 XDRIVE MSP,bev,BMW,X3,automoveis,prefixo,False,IX3,nao_casa,"Regra 3 (a planilha nao soma): em 2023-02, o X3 do painel (53) = BMW X3 da planilha (53), com o iX3 (10) a' parte. Nos outros meses com iX3 na planilha (2023-06 a 2023-08) o painel nao tem X3."
+2023,BYD,ET3 ---,bev,BYD,T3,comerciais_leves,prefixo,True,ET3,sem_evidencia,Regra 4: o painel nao tem chave ET3 e a planilha so' traz T3.
+2024,BYD,ET3 ---,bev,BYD,T3,comerciais_leves,prefixo,True,ET3,sem_evidencia,Regra 4: o painel nao tem chave ET3 e a planilha so' traz T3.
+2025,BYD,ET3 ---,bev,BYD,T3,comerciais_leves,prefixo,True,ET3,sem_evidencia,Regra 4: o painel nao tem chave ET3 e a planilha so' traz T3.
+2026,BYD,ET3 ---,bev,BYD,T3,comerciais_leves,prefixo,False,ET3,sem_evidencia,Regra 4: o painel nao tem chave ET3 e a planilha so' traz T3.
+2021,CAOA CHERY,ARRIZO5 E E,bev,CAOA CHERY,ARRIZO 5,automoveis,mesmo_nome,True,ARRIZO5 E,sem_evidencia,"Regra 4, por evidencia contraditoria: em 2019-09 o Arrizo 5 do painel (301) = Arrizo 5 da planilha (191) + Arrizo 5e (110), e em 2019-10 o painel (210) = Arrizo 5 da planilha (210), com o 5e (110) a' parte."
+2021,CAOA CHERY,ARRIZO5 E E,bev,CHERY,ARRIZO 5,automoveis,mesmo_nome,True,ARRIZO5 E,sem_evidencia,"Regra 4, por evidencia contraditoria: em 2019-09 o Arrizo 5 do painel (301) = Arrizo 5 da planilha (191) + Arrizo 5e (110), e em 2019-10 o painel (210) = Arrizo 5 da planilha (210), com o 5e (110) a' parte."
+2022,CITROEN,E-JUMPY CARGO,bev,CITROEN,JUMPY,comerciais_leves,prefixo,True,E-JUMPY,sem_evidencia,Regra 4: o painel nao tem chave E-JUMPY e a planilha nao traz o e-Jumpy a' parte.
+2023,CITROEN,E-JUMPY CARGO,bev,CITROEN,JUMPY,comerciais_leves,prefixo,True,E-JUMPY,sem_evidencia,Regra 4: o painel nao tem chave E-JUMPY e a planilha nao traz o e-Jumpy a' parte.
+2024,CITROEN,E-JUMPY CARGO,bev,CITROEN,JUMPY,comerciais_leves,prefixo,True,E-JUMPY,sem_evidencia,Regra 4: o painel nao tem chave E-JUMPY e a planilha nao traz o e-Jumpy a' parte.
+2025,CITROEN,E-JUMPY CARGO,bev,CITROEN,JUMPY,comerciais_leves,prefixo,True,E-JUMPY,sem_evidencia,Regra 4: o painel nao tem chave E-JUMPY e a planilha nao traz o e-Jumpy a' parte.
+2026,CITROEN,E-JUMPY CARGO,bev,CITROEN,JUMPY,comerciais_leves,prefixo,True,E-JUMPY,sem_evidencia,Regra 4: o painel nao tem chave E-JUMPY e a planilha nao traz o e-Jumpy a' parte.
+2022,FIAT,E-SCUDO CARGO,bev,FIAT,SCUDO,comerciais_leves,prefixo,True,E-SCUDO,sem_evidencia,Regra 4: o painel nao tem chave E-SCUDO e a planilha nao traz o e-Scudo a' parte.
+2023,FIAT,E-SCUDO CARGO,bev,FIAT,SCUDO,comerciais_leves,prefixo,True,E-SCUDO,sem_evidencia,Regra 4: o painel nao tem chave E-SCUDO e a planilha nao traz o e-Scudo a' parte.
+2024,FIAT,E-SCUDO CARGO,bev,FIAT,SCUDO,comerciais_leves,prefixo,True,E-SCUDO,sem_evidencia,Regra 4: o painel nao tem chave E-SCUDO e a planilha nao traz o e-Scudo a' parte.
+2025,FIAT,E-SCUDO CARGO,bev,FIAT,SCUDO,comerciais_leves,prefixo,True,E-SCUDO,sem_evidencia,Regra 4: o painel nao tem chave E-SCUDO e a planilha nao traz o e-Scudo a' parte.
+2021,JAGUAR,F-PACE PHEV,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2021,JAGUAR,F-PACE PHEV RDYN S,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2021,JAGUAR,F-PACE PHEV RDYN SE,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2021,JAGUAR,F-PACE PHEV RDYNHSE,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2021,JAGUAR,F-PACE PHEV SE,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE P340,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE P340,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE P340 RDYN S,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE P340 RDYN S,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE P340 RDYN SE,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE P340 RDYN SE,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE P340 RDYNHSE,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE P340 RDYNHSE,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE P340 SE,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE P340 SE,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE PHEV,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE PHEV RDYN S,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE PHEV RDYN SE,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE PHEV RDYNHSE,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2022,JAGUAR,F-PACE PHEV SE,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JAGUAR,F-PACE P340,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JAGUAR,F-PACE P340 RDYN S,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JAGUAR,F-PACE P340 RDYN SE,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JAGUAR,F-PACE P340 RDYNHSE,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JAGUAR,F-PACE P340 SE,hev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JAGUAR,F-PACE PHEV,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JAGUAR,F-PACE PHEV RDYN S,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JAGUAR,F-PACE PHEV RDYN SE,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JAGUAR,F-PACE PHEV RDYNHSE,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JAGUAR,F-PACE PHEV SE,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2024,JAGUAR,F-PACE PHEV RD SE,phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2024,JAGUAR,F-PACE PHEV RD SE (LC4133),phev,JAGUAR,FPACE,automoveis,mesmo_nome,False,,,
+2023,JEEP,G CHEROKEE 4XE,phev,JEEP,CHEROKEE,automoveis,contem,False,,,
+2024,JEEP,G CHEROKEE 4XE,phev,JEEP,CHEROKEE,automoveis,contem,False,,,
+2021,LEXUS,ES300H -,hev,LEXUS,ES300,automoveis,sufixo,True,ES300H,sem_evidencia,Regra 4: o painel nao tem chave ES300H e a planilha so' traz Lexus ES.
+2022,LEXUS,ES300H -,hev,LEXUS,ES300,automoveis,sufixo,True,ES300H,sem_evidencia,Regra 4: o painel nao tem chave ES300H e a planilha so' traz Lexus ES.
+2022,LEXUS,ES300H -,hev,LEXUS,ES300,automoveis,sufixo,True,ES300H,sem_evidencia,Regra 4: o painel nao tem chave ES300H e a planilha so' traz Lexus ES.
+2023,LEXUS,ES300H -,hev,LEXUS,ES300,automoveis,sufixo,True,ES300H,sem_evidencia,Regra 4: o painel nao tem chave ES300H e a planilha so' traz Lexus ES.
+2024,LEXUS,ES300H -,hev,LEXUS,ES300,automoveis,sufixo,True,ES300H,sem_evidencia,Regra 4: o painel nao tem chave ES300H e a planilha so' traz Lexus ES.
+2023,MERCEDES-BENZ,A200 AMG LINE,hev,M.BENZ,A 200,automoveis,mesmo_nome,False,,,
+2024,MERCEDES-BENZ,A200 AMG LINE,hev,M.BENZ,A 200,automoveis,mesmo_nome,False,,,
+2025,MERCEDES-BENZ,A200 AMG LINE,hev,M.BENZ,A 200,automoveis,mesmo_nome,False,,,
+2021,MERCEDES-BENZ,AMG GT43,hev,M.BENZ,AMG GT,automoveis,sufixo,False,,,
+2021,MERCEDES-BENZ,AMG GT43 2011,hev,M.BENZ,AMG GT,automoveis,sufixo,False,,,
+2025,MERCEDES-BENZ,AMG CLA45S 4M,hev,M.BENZ,CLA45,automoveis,sufixo,True,AMG CLA45S,sem_evidencia,Regra 4: o painel nao tem chave CLA45S e a planilha so' traz CLA.
+2021,MERCEDES-BENZ,AMG CLS53,hev,M.BENZ,CLS,automoveis,sufixo,False,,,
+2021,MERCEDES-BENZ,AMG GLE63S 4M COUPE,hev,M.BENZ,COUPE,automoveis,contem,False,,,
+2023,MERCEDES-BENZ,AMG GLE63 S CO COUPE,hev,M.BENZ,COUPE,automoveis,contem,False,,,
+2024,MERCEDES-BENZ,AMG GLC43 COUPE (2025),hev,M.BENZ,COUPE,automoveis,contem,False,,,
+2024,MERCEDES-BENZ,AMG GLE63 S CO COUPE,hev,M.BENZ,COUPE,automoveis,contem,False,,,
+2024,MERCEDES-BENZ,GLE450D 4M COUPE,hev,M.BENZ,COUPE,automoveis,contem,False,,,
+2025,MERCEDES-BENZ,AMG GLE 63 S CO COUPE,hev,M.BENZ,COUPE,automoveis,contem,False,,,
+2025,MERCEDES-BENZ,GLE450D 4M COUPE,hev,M.BENZ,COUPE,automoveis,contem,False,,,
+2025,MERCEDES-BENZ,GLE450D 4M COUPE,hev,M.BENZ,COUPE,automoveis,contem,False,,,
+2026,MERCEDES-BENZ,AMG GLE63 S CO COUPE,hev,M.BENZ,COUPE,automoveis,contem,False,,,
+2024,MERCEDES-BENZ,AMG GLC43 2025,hev,M.BENZ,GLC,automoveis,sufixo,True,AMG GLC43,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLC e a planilha nao separa o AMG (so' GLC e, em 2023-02, GLC COUPE). O apelido AMG GLC -> GLC, de rodada anterior, nao passou por este teste."
+2024,MERCEDES-BENZ,AMG GLC43 COUPE (2025),hev,M.BENZ,GLC,automoveis,sufixo,True,AMG GLC43,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLC e a planilha nao separa o AMG (so' GLC e, em 2023-02, GLC COUPE). O apelido AMG GLC -> GLC, de rodada anterior, nao passou por este teste."
+2026,MERCEDES-BENZ,AMG GLC43,hev,M.BENZ,GLC,automoveis,sufixo,True,AMG GLC43,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLC e a planilha nao separa o AMG (so' GLC e, em 2023-02, GLC COUPE). O apelido AMG GLC -> GLC, de rodada anterior, nao passou por este teste."
+2026,MERCEDES-BENZ,AMG GLC43,hev,M.BENZ,GLC,automoveis,sufixo,True,AMG GLC43,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLC e a planilha nao separa o AMG (so' GLC e, em 2023-02, GLC COUPE). O apelido AMG GLC -> GLC, de rodada anterior, nao passou por este teste."
+2026,MERCEDES-BENZ,AMG GLC43 CO,hev,M.BENZ,GLC,automoveis,sufixo,True,AMG GLC43,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLC e a planilha nao separa o AMG (so' GLC e, em 2023-02, GLC COUPE). O apelido AMG GLC -> GLC, de rodada anterior, nao passou por este teste."
+2026,MERCEDES-BENZ,AMG GLC63S EP,phev,M.BENZ,GLC,automoveis,sufixo,True,AMG GLC63S,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLC e a planilha nao separa o AMG (so' GLC e, em 2023-02, GLC COUPE). O apelido AMG GLC -> GLC, de rodada anterior, nao passou por este teste."
+2021,MERCEDES-BENZ,AMG GLE53 4M,hev,M.BENZ,GLE,automoveis,sufixo,False,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2021,MERCEDES-BENZ,AMG GLE63S 4M COUPE,hev,M.BENZ,GLE,automoveis,sufixo,False,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2022,MERCEDES-BENZ,AMG GLE53 4M,hev,M.BENZ,GLE,automoveis,sufixo,True,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2023,MERCEDES-BENZ,AMG GLE53 4M,hev,M.BENZ,GLE,automoveis,sufixo,True,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2023,MERCEDES-BENZ,AMG GLE63 S CO COUPE,hev,M.BENZ,GLE,automoveis,sufixo,True,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2024,MERCEDES-BENZ,AMG GLE53 4M,hev,M.BENZ,GLE,automoveis,sufixo,True,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2024,MERCEDES-BENZ,AMG GLE63 S CO COUPE,hev,M.BENZ,GLE,automoveis,sufixo,True,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2025,MERCEDES-BENZ,AMG GLE 53 4M,hev,M.BENZ,GLE,automoveis,mesmo_nome,False,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2025,MERCEDES-BENZ,AMG GLE 53 4M,hev,M.BENZ,GLE,automoveis,mesmo_nome,False,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2025,MERCEDES-BENZ,AMG GLE 63 S CO COUPE,hev,M.BENZ,GLE,automoveis,mesmo_nome,False,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2026,MERCEDES-BENZ,AMG GLE53 4M,hev,M.BENZ,GLE,automoveis,sufixo,False,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2026,MERCEDES-BENZ,AMG GLE63 S CO COUPE,hev,M.BENZ,GLE,automoveis,sufixo,False,AMG GLE,sem_evidencia,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+2022,PEUGEOT,E-EXPERT CARGO,bev,PEUGEOT,EXPERT,comerciais_leves,prefixo,True,E-EXPERT,sem_evidencia,Regra 4: o painel nao tem chave E-EXPERT e a planilha nao traz o e-Expert a' parte.
+2023,PEUGEOT,E-EXPERT CARGO,bev,PEUGEOT,EXPERT,comerciais_leves,prefixo,True,E-EXPERT,sem_evidencia,Regra 4: o painel nao tem chave E-EXPERT e a planilha nao traz o e-Expert a' parte.
+2024,PEUGEOT,E-EXPERT CARGO,bev,PEUGEOT,EXPERT,comerciais_leves,prefixo,True,E-EXPERT,sem_evidencia,Regra 4: o painel nao tem chave E-EXPERT e a planilha nao traz o e-Expert a' parte.
+2025,PEUGEOT,E-EXPERT CARGO,bev,PEUGEOT,EXPERT,comerciais_leves,prefixo,True,E-EXPERT,sem_evidencia,Regra 4: o painel nao tem chave E-EXPERT e a planilha nao traz o e-Expert a' parte.
+2026,PEUGEOT,E-EXPERT CARGO,bev,PEUGEOT,EXPERT,comerciais_leves,prefixo,True,E-EXPERT,sem_evidencia,Regra 4: o painel nao tem chave E-EXPERT e a planilha nao traz o e-Expert a' parte.
+2026,SUZUKI,E-VITARA 4STY 2WD,bev,SUZUKI,VITARA,automoveis,prefixo,False,,,
+2026,SUZUKI,E-VITARA 4STY 4WD,bev,SUZUKI,VITARA,automoveis,prefixo,False,,,
+2021,TOYOTA,RAV4H S AWD CNT,hev,TOYOTA,RAV4,automoveis,sufixo,True,RAV4H,sem_evidencia,Regra 4: o painel nao tem chave RAV4H e a planilha so' traz RAV4.
+2021,TOYOTA,RAV4H SXAWD CNT,hev,TOYOTA,RAV4,automoveis,sufixo,True,RAV4H,sem_evidencia,Regra 4: o painel nao tem chave RAV4H e a planilha so' traz RAV4.
+2022,TOYOTA,RAV4H S AWD CNT,hev,TOYOTA,RAV4,automoveis,sufixo,True,RAV4H,sem_evidencia,Regra 4: o painel nao tem chave RAV4H e a planilha so' traz RAV4.
+2022,TOYOTA,RAV4H SXAWD CNT,hev,TOYOTA,RAV4,automoveis,sufixo,True,RAV4H,sem_evidencia,Regra 4: o painel nao tem chave RAV4H e a planilha so' traz RAV4.
+2023,TOYOTA,RAV4H S AWD CNT,hev,TOYOTA,RAV4,automoveis,sufixo,True,RAV4H,sem_evidencia,Regra 4: o painel nao tem chave RAV4H e a planilha so' traz RAV4.
+2023,TOYOTA,RAV4H SXAWD CNT,hev,TOYOTA,RAV4,automoveis,sufixo,True,RAV4H,sem_evidencia,Regra 4: o painel nao tem chave RAV4H e a planilha so' traz RAV4.
+2024,TOYOTA,RAV4H S AWD CNT,hev,TOYOTA,RAV4,automoveis,sufixo,True,RAV4H,sem_evidencia,Regra 4: o painel nao tem chave RAV4H e a planilha so' traz RAV4.
+2024,TOYOTA,RAV4H SXAWD CNT,hev,TOYOTA,RAV4,automoveis,sufixo,True,RAV4H,sem_evidencia,Regra 4: o painel nao tem chave RAV4H e a planilha so' traz RAV4.
+2026,VOLVO,ES90 TWIN PE ULT,bev,VOLVO,S90,automoveis,prefixo,False,,,

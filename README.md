@@ -52,7 +52,7 @@ exterior usa); 10 por ultimo, porque descreve todas.
 | 7 | `etapa07_referencia_cruzada.py` | Confronto com `Vendas_Geral.xlsx` (controle, nao fonte) | `saidas/referencia_cruzada.md` |
 | 8 | `etapa08_macro.py` | Series mensais do BCB e do IBGE, em tabela separada | `macro_mensal.parquet`, `saidas/macro_series.csv` |
 | 9 | `etapa09_canal.py` | Venda direta e varejo por modelo (top-50 por canal) | `painel_canal.parquet`, `saidas/painel_canal_dicionario.md` |
-| 11 | `etapa11_classificacao.py` | Dimensao de classificacao de modelo (fase 2): le o rascunho adjudicado, aplica a precedencia e valida; deriva a propulsao por vigencia e ano (leituras longa e curta) e grava o uso-teste e a banda da eletrificacao | `classificacao.parquet`, `classificacao_montagem.parquet`, `classificacao_propulsao_anual.parquet`, `saidas/classificacao_dicionario.md`, `saidas/classificacao_uso_teste.csv`, `saidas/eletrificacao_banda.csv` |
+| 11 | `etapa11_classificacao.py` | Dimensao de classificacao de modelo (fase 2): le o rascunho adjudicado, aplica a precedencia e valida; deriva a propulsao por vigencia e ano (leituras longa e curta) e grava o uso-teste e a banda da eletrificacao | `classificacao.parquet`, `classificacao_montagem.parquet`, `classificacao_propulsao_anual.parquet`, `saidas/classificacao_dicionario.md`, `saidas/classificacao_uso_teste.csv`, `saidas/eletrificacao_banda.csv`, `saidas/pbe_variantes_sem_evidencia.csv` |
 | 12 | `etapa12_comex.py` | Importacao e exportacao mensal de veiculos por NCM e pais (Comex Stat), com conferencias e uso-teste; o bruto vem de `src/ferramentas/comex_baixar.py` e a tabela de NCMs de `src/ferramentas/comex_ncm.py` | `comex_veiculos.parquet`, `config/ncm_veiculos.csv`, `saidas/comex_dicionario.md` |
 | 10 | `etapa10_catalogo.py` | Indice do repositorio, calculado do dado | `CATALOGO.md` |
 
@@ -68,6 +68,8 @@ exterior usa); 10 por ultimo, porque descreve todas.
 | `config/regras_classificacao.csv` | Regras auditaveis da classificacao de modelo: carroceria pelo sub-segmento da fonte, propulsao por marcador no nome. |
 | `config/catalogo_usos.csv` | O que cada produto e cada serie sustenta, para o `CATALOGO.md`. |
 | `config/fontes_candidatas.csv` | Fontes mapeadas e nao construidas, com o estado de cada uma. |
+| `config/decisoes_humanas.csv` | Decisoes do pesquisador sobre linhas do rascunho de classificacao, na sintaxe de `decisao_humana`. O gerador do rascunho as copia a cada execucao. |
+| `config/pbe_modelos.csv` | Nomes que o PBE escreve de outro jeito (`casa`) e a decisao de cada variante eletrificada sem casamento (`nao_casa`, `sem_evidencia`), com a evidencia na observacao. |
 
 `dados/referencia/classificacao_proposta_assistente.csv` nao e' do humano: e' a
 proposta do assistente, por conhecimento, que alimenta o rascunho de
@@ -107,7 +109,7 @@ Nao fazem parte do pipeline; rodam sob demanda.
 | `src/ferramentas/robustez_grupos.py` | Recalcula a concentracao com outra convencao de grupo (por padrao Kia separada da Hyundai). |
 | `src/ferramentas/diagnostico_retroacao.py` | Le os informes de 2003-2013 **sem escrever no painel** e reporta, ano a ano, onde a extracao degrada e como a agregacao da fonte deriva. |
 | `src/ferramentas/diagnostico_canal.py` | Fase 1 do canal de venda: mede, informe a informe, o que as tabelas de canal trazem, sem gravar dimensao. |
-| `src/ferramentas/classificacao_rascunho.py` | Fase 1 da classificacao de modelo: `saidas/classificacao_rascunho.xlsx`, uma proposta por modelo-vigencia para adjudicacao. Recusa sobrescrever rascunho com decisao preenchida. |
+| `src/ferramentas/classificacao_rascunho.py` | Fase 1 da classificacao de modelo: `saidas/classificacao_rascunho.xlsx`, uma proposta por modelo-vigencia para adjudicacao, com as decisoes de `config/decisoes_humanas.csv`; e `saidas/pbe_variantes_candidatos.csv`, as versoes eletrificadas do PBE sem casamento que tem nome de chave. Recusa sobrescrever decisao preenchida que nao esteja versionada. |
 
 ## O que o pipeline nunca faz
 

@@ -74,7 +74,8 @@ def nomes_do_painel(chaves: pd.DataFrame) -> dict[str, list[tuple[str, tuple]]]:
     """marca do painel -> [(nome normalizado, chave)], com apelidos.
 
     Nome com barra (FOX/CROSS FOX) vale por cada parte. Apelidos explicitos,
-    para nomes que o PBE escreve de outro jeito, ficam em `config/pbe_modelos.csv`.
+    para nomes que o PBE escreve de outro jeito, ficam em `config/pbe_modelos.csv`
+    (as linhas com `decisao` = `casa`).
     """
     nomes: dict[str, list[tuple[str, tuple]]] = {}
     for marca, modelo, segmento in chaves[CHAVE].itertuples(index=False):
@@ -84,6 +85,10 @@ def nomes_do_painel(chaves: pd.DataFrame) -> dict[str, list[tuple[str, tuple]]]:
             nomes.setdefault(marca, []).append((forma, chave))
     if config.PBE_MODELOS.exists():
         apelidos = pd.read_csv(config.PBE_MODELOS, dtype=str, keep_default_na=False)
+        # so' as linhas `casa`; `nao_casa` e `sem_evidencia` sao decisoes da auditoria
+        # de variantes (`comum/pbe_variantes.py`), nao apelidos
+        if "decisao" in apelidos.columns:
+            apelidos = apelidos[apelidos["decisao"].isin(["", "casa"])]
         for _, a in apelidos.iterrows():
             alvo = chaves[(chaves["marca"] == a["marca_painel"])
                           & (chaves["modelo"] == a["modelo_painel"])]

@@ -183,8 +183,10 @@ def test_propulsao_campos_validos(propulsao):
     assert set(propulsao["tipo_propulsao"]) <= set(classificacao.PROPULSOES)
     ruins = [d for d in propulsao["data_fonte"] if not MES.match(d) or not d]
     assert not ruins, ruins
-    propostas = pd.read_csv(config.PROPOSTA_CLASSIFICACAO, dtype=str, keep_default_na=False)
-    chaves = set(map(tuple, propostas[["marca", "modelo", "segmento"]].to_numpy()))
+    # chave do painel, mesmo abaixo do piso de classificacao: as fontes do E-2008
+    # tratam da chave E2008 (rodada "pbe, comex e calendario")
+    painel = pd.read_parquet(config.PAINEL, columns=["marca", "modelo", "segmento"])
+    chaves = set(map(tuple, painel.drop_duplicates().to_numpy()))
     orfas = [tuple(c) for c in propulsao[["marca", "modelo", "segmento"]].to_numpy()
              if tuple(c) not in chaves]
     assert not orfas, orfas
@@ -229,10 +231,11 @@ def test_propulsao_fonte_aponta_para_tipo_que_a_vigencia_tem(propulsao):
     for _, v in dim.iterrows():
         tipos.setdefault((v["marca"], v["modelo"], v["segmento"]), set()).update(
             filter(None, v["propulsao_na_vigencia"].split("+")))
+    # chave abaixo do piso nao tem propulsao classificada: a fonte fica registrada
     soltas = [(r["modelo"], r["tipo_propulsao"]) for _, r in propulsao.iterrows()
               if r["tipo_data_fonte"] != "plano"
-              and r["tipo_propulsao"] not in tipos.get((r["marca"], r["modelo"], r["segmento"]),
-                                                       set())]
+              and tipos.get((r["marca"], r["modelo"], r["segmento"]))
+              and r["tipo_propulsao"] not in tipos[(r["marca"], r["modelo"], r["segmento"])]]
     assert not soltas, soltas
 
 

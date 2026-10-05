@@ -34,9 +34,15 @@ comex"):
   fonte datada de fim de venda ou de importacao (`fim`). Modelo ausente do PBE
   nao informa nada; tipo que some e volta e' lacuna, nao saida -- conta so' a
   ausencia depois da ultima presenca;
+- **guarda** (rodada "pbe, comex e calendario"): ausencia no PBE nao prova saida
+  no ano em que ha', sem casamento, versao da mesma marca e do mesmo tipo cujo
+  nome contem o da chave e que nao tem decisao de casamento
+  (`comum/pbe_variantes.py`): o `E-208 GT` fora da chave 208 nao tira o `bev`;
 - **longa**: o tipo fica ate' o ano da primeira ausencia depois da ultima
   presenca (o estoque do ano-modelo anterior ainda vende) e sai no seguinte;
-- **curta**: fica ate' o ano da ultima presenca e sai no seguinte;
+- **curta**: fica ate' o ano da ultima presenca e sai no seguinte. Na combustao,
+  sem fonte datada de fim, a curta segue a longa ate' 2020: antes da coluna de
+  propulsao, a ausencia de presenca no PBE nao data a saida;
 - sem evidencia de ausencia, as duas mantem o tipo ate' o fim da vigencia.
 
 Cada ano de PBE vale para a vigencia com mais meses nele. A tabela anual tem uma
@@ -68,7 +74,8 @@ COLUNAS = CHAVE_ANUAL + ["vigencia_fim", "unidades", "propulsao_no_ano",
                          "saida_dos_tipos", "procedencia_propulsao"]
 COLUNAS_TIPOS = CHAVE + ["vigencia_inicio", "vigencia_fim", "tipo", "entrada_longa",
                          "entrada_curta", "fonte_temporal", "ultimo_ano_longo",
-                         "ultimo_ano_curto", "fonte_saida", "anos_presenca", "anos_ausencia"]
+                         "ultimo_ano_curto", "fonte_saida", "anos_presenca", "anos_ausencia",
+                         "anos_guardados"]
 
 
 def _ano(mes: str) -> int:
@@ -151,13 +158,16 @@ def defasagem_pbe(fontes: pd.DataFrame, casado: pd.DataFrame
 
 
 def tipos_da_vigencia(vigencia: pd.Series, outras: pd.DataFrame, pbe: pd.DataFrame,
-                      fontes: pd.DataFrame, direcao: int = 0) -> list[dict]:
+                      fontes: pd.DataFrame, direcao: int = 0,
+                      guardados: set[tuple[int, str]] | None = None) -> list[dict]:
     """Uma linha por tipo da vigencia: entrada e ultimo ano, nas duas leituras.
 
     `outras`: as vigencias do modelo (para repartir os anos de PBE); `pbe`: linhas
     do casamento da chave, com `ano`; `fontes`: linhas de `propulsao_fontes.csv` da
-    chave; `direcao`: a de `defasagem_pbe`.
+    chave; `direcao`: a de `defasagem_pbe`; `guardados`: (ano, valor do PBE) em que
+    ha' versao candidata sem decisao de casamento (`pbe_variantes.guardas`).
     """
+    guardados = guardados or set()
     inicio, fim = _ano(vigencia["vigencia_inicio"]), _ano(vigencia["vigencia_fim"])
     tipos = [t for t in vigencia["propulsao_na_vigencia"].split("+") if t]
     # a entrada olha o modelo inteiro no PBE (o tipo visto antes da vigencia entra no
@@ -205,6 +215,8 @@ def tipos_da_vigencia(vigencia: pd.Series, outras: pd.DataFrame, pbe: pd.DataFra
         com_outro = set(meus.loc[meus["valor_taxonomia"].isin(outras_familias), "ano"])
         ausencia = {a for a in na_tabela if a >= PRIMEIRO_ANO_COLUNA and a not in com_tipo
                     and a in com_outro}
+        guardado = {a for a in ausencia if any((a, v) in guardados for v in familia)}
+        ausencia -= guardado
         fim_fonte = set(_fontes_do_tipo(fontes, tipo, (DATA_DE_FIM,), inicio, fim))
         ausencia |= fim_fonte
         ultima = max(presenca)
@@ -217,6 +229,9 @@ def tipos_da_vigencia(vigencia: pd.Series, outras: pd.DataFrame, pbe: pd.DataFra
         else:
             ultimo_longo = ultimo_curto = fim
             origem = ""
+        if tipo in COMBUSTAO and not fim_fonte:
+            # antes da coluna de propulsao o PBE nao data a saida da combustao
+            ultimo_curto = max(ultimo_curto, min(ultimo_longo, PRIMEIRO_ANO_COLUNA - 1))
         linhas.append({
             **{c: vigencia[c] for c in CHAVE}, "vigencia_inicio": vigencia["vigencia_inicio"],
             "vigencia_fim": vigencia["vigencia_fim"], "tipo": tipo,
@@ -224,15 +239,22 @@ def tipos_da_vigencia(vigencia: pd.Series, outras: pd.DataFrame, pbe: pd.DataFra
             "fonte_temporal": fonte, "ultimo_ano_longo": min(ultimo_longo, fim),
             "ultimo_ano_curto": min(ultimo_curto, fim), "fonte_saida": origem,
             "anos_presenca": ";".join(map(str, sorted(presenca))),
-            "anos_ausencia": ";".join(map(str, sorted(ausencia)))})
+            "anos_ausencia": ";".join(map(str, sorted(ausencia))),
+            "anos_guardados": ";".join(map(str, sorted(guardado)))})
     return linhas
 
 
 def tabela_de_tipos(dim: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFrame,
-                    direcao: int = 0) -> pd.DataFrame:
-    """Uma linha por (vigencia, tipo), com entrada e ultimo ano nas duas leituras."""
+                    direcao: int = 0, guardas: pd.DataFrame | None = None) -> pd.DataFrame:
+    """Uma linha por (vigencia, tipo), com entrada e ultimo ano nas duas leituras.
+    `guardas`: `pbe_variantes.guardas` (chave, ano, valor_taxonomia)."""
     pbe = casado[casado["marca"] != ""].assign(ano=lambda c: c["ano_pbe"].astype(int))
     pbe_por_chave = {k: g for k, g in pbe.groupby(CHAVE)}
+    guardados: dict[tuple, set] = {}
+    if guardas is not None:
+        for r in guardas.itertuples(index=False):
+            guardados.setdefault((r.marca, r.modelo, r.segmento), set()).add(
+                (int(r.ano), r.valor_taxonomia))
     fontes_por_chave = {k: g for k, g in fontes.groupby(CHAVE)}
     classificadas = dim[dim["propulsao_na_vigencia"] != ""]
     vigencias_por_chave = {k: g for k, g in classificadas.groupby(CHAVE)}
@@ -241,7 +263,8 @@ def tabela_de_tipos(dim: pd.DataFrame, casado: pd.DataFrame, fontes: pd.DataFram
         chave = tuple(vigencia[CHAVE])
         linhas += tipos_da_vigencia(vigencia, vigencias_por_chave[chave],
                                     pbe_por_chave.get(chave, pbe.iloc[0:0]),
-                                    fontes_por_chave.get(chave, fontes.iloc[0:0]), direcao)
+                                    fontes_por_chave.get(chave, fontes.iloc[0:0]), direcao,
+                                    guardados.get(chave, set()))
     return pd.DataFrame(linhas, columns=COLUNAS_TIPOS)
 
 

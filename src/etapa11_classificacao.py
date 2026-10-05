@@ -50,7 +50,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from comum import adjudicacao, config, fase2, log, propulsao_anual  # noqa: E402
+from comum import adjudicacao, config, fase2, log, pbe_variantes, propulsao_anual  # noqa: E402
 
 ETAPA = "etapa11_classificacao"
 ADVERTENCIA = ("Um artigo que use propulsao ou origem como variavel de tratamento deve "
@@ -92,7 +92,9 @@ def executar() -> int:
     casado = pd.read_csv(config.PBE_CASAMENTO, dtype=str, keep_default_na=False)
     fontes = pd.read_csv(config.PROPULSAO_FONTES, dtype=str, keep_default_na=False)
     defasagem, direcao = propulsao_anual.defasagem_pbe(fontes, casado)
-    tipos = propulsao_anual.tabela_de_tipos(dim, casado, fontes, direcao)
+    variantes = pbe_variantes.ler_candidatos()
+    tipos = propulsao_anual.tabela_de_tipos(dim, casado, fontes, direcao,
+                                            pbe_variantes.guardas(variantes))
     anual = propulsao_anual.anual(dim, tipos, painel)
     problemas += propulsao_anual.problemas(anual, dim, tipos, painel)
     if problemas:
@@ -112,6 +114,8 @@ def executar() -> int:
     defasagem.to_csv(config.CLASSIFICACAO_PBE_DEFASAGEM, index=False)
     uso.to_csv(config.CLASSIFICACAO_USO_TESTE, index=False)
     banda.to_csv(config.ELETRIFICACAO_BANDA, index=False)
+    sem_evidencia = pbe_variantes.sem_evidencia(variantes, tipos, propulsao_anual.FAMILIA_PBE)
+    sem_evidencia.to_csv(config.PBE_VARIANTES_SEM_EVIDENCIA, index=False)
     volume.to_csv(config.CLASSIFICACAO_PROCEDENCIA, index=False)
     config.CLASSIFICACAO_DICIONARIO.write_text(
         dicionario(dim, montagem, volume, anual, tipos, banda, defasagem, direcao),
@@ -129,6 +133,14 @@ def executar() -> int:
                 ", ".join(f"{f} {n}" for f, n in
                           eletrificados["fonte_temporal"].value_counts().items()),
                 int((tipos["fonte_saida"] != "").sum()), direcao)
+    sem_decisao = variantes[variantes["chave_viva"] & (variantes["decisao"] == "")]
+    logger.info("variantes do PBE sem casamento: %d familias sem evidencia; a guarda "
+                "descartou ausencia em %d tipos; %d pares versao-chave sem decisao em "
+                "config/pbe_modelos.csv",
+                len(sem_evidencia), int((tipos["anos_guardados"] != "").sum()), len(sem_decisao))
+    if len(sem_decisao):
+        logger.warning("versoes sem decisao (entram na guarda e na lista): %s",
+                       "; ".join(sorted(set(sem_decisao["modelo_versao"]))))
     logger.info("gravado %s, %s e %s", log.caminho_relativo(config.CLASSIFICACAO),
                 log.caminho_relativo(config.CLASSIFICACAO_MONTAGEM),
                 log.caminho_relativo(config.CLASSIFICACAO_PROPULSAO_ANUAL))
@@ -320,6 +332,14 @@ mantem ate' o fim da vigencia. Ano em que a leitura curta ficaria sem tipo (lacu
 do PBE entre a saida de um tipo e a entrada do seguinte) leva os tipos da longa.
 {len(saidas)} tipos tem evidencia de saida. Cada ano de PBE vale para a vigencia
 com mais meses nele.
+
+**Guarda da saida.** Ausencia no PBE nao prova saida no ano em que ha', sem
+casamento, versao da mesma marca e do mesmo tipo cujo nome contem o da chave e
+sem decisao de casamento em `config/pbe_modelos.csv`
+(`saidas/pbe_variantes_sem_evidencia.csv`; {int((tipos["anos_guardados"] != "").sum())}
+tipos tiveram ausencia descartada). **Combustao na leitura curta:** sem fonte
+datada de fim, a curta segue a longa ate' 2020 -- antes da coluna de propulsao, a
+falta de presenca no PBE nao data a saida da combustao.
 
 {_tabela_fonte_temporal(tipos)}
 

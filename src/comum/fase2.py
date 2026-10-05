@@ -4,9 +4,13 @@ O rascunho (`saidas/classificacao_rascunho.xlsx`) e' a fonte de verdade da
 adjudicacao: a fase 2 o le e ninguem edita o parquet a' mao. Por linha e por
 atributo, nesta precedencia (decisao 6 das seis decisoes):
 
-1. `decisao_humana`, se preenchida para o atributo (`ok` vale para todos);
+1. `decisao_humana`, se preenchida para o atributo (`ok` vale para todos;
+   `atributo=pendente` deixa o atributo pendente de proposito);
 2. senao, `decisao_por_regra`;
 3. senao, a proposta original.
+
+As decisoes do pesquisador ficam versionadas em `config/decisoes_humanas.csv`; o
+gerador do rascunho as copia para `decisao_humana` (`aplicar_decisoes_humanas`).
 
 Nenhuma linha e' descartada. Cada atributo leva a procedencia do valor:
 
@@ -54,6 +58,11 @@ NA_DIMENSAO = {"propulsao_oferecida": "propulsao_na_vigencia",
                "eletrificacao": "eletrificacao_na_vigencia"}
 SINONIMOS = {v: k for k, v in NA_DIMENSAO.items()}
 CAMPOS_DECISAO = set(ATRIBUTOS) | {"eletrificacao", "vigencia_inicio", "vigencia_fim"}
+# `atributo=pendente`: o pesquisador decidiu outro atributo da linha e deixa este
+# pendente de proposito (rodada "pbe, comex e calendario": o 2008 tem a propulsao
+# decidida e a origem ainda contestada). Sem isso, decisao humana que deixa atributo
+# pendente continua sendo erro.
+PENDENTE_EXPLICITO = "pendente"
 MES = re.compile(r"^\d{4}-\d{2}$")
 COLUNAS = CHAVE + ["vigencia_inicio", "vigencia_fim", "propulsao_na_vigencia",
                    "eletrificacao_na_vigencia",
@@ -92,6 +101,8 @@ def ler_decisao(texto: str) -> dict:
 
 
 def _validar_valor(campo: str, valor: str, texto: str) -> None:
+    if campo in ATRIBUTOS and valor == PENDENTE_EXPLICITO:
+        return
     if campo == "propulsao_oferecida":
         tipos = [t for t in valor.split("+") if t]
         if not tipos or any(t not in classificacao.PROPULSOES for t in tipos):
@@ -110,7 +121,13 @@ def linha_final(linha: pd.Series) -> dict:
     regra = ler_decisao(linha["decisao_por_regra"])
     saida = {c: linha[c] for c in CHAVE}
     for atributo, (apos_regras, coluna_proc) in ATRIBUTOS.items():
-        if atributo in humana:
+        if humana.get(atributo) == PENDENTE_EXPLICITO:
+            if linha[coluna_proc] != "pendente":
+                raise DecisaoInvalida(
+                    f"{linha['marca']}/{linha['modelo']} {linha['vigencia_inicio']}: "
+                    f"{atributo}=pendente numa linha em que o atributo nao esta' pendente")
+            valor, procedencia = linha[atributo], "pendente"
+        elif atributo in humana:
             valor, procedencia = humana[atributo], "humana"
         elif humana.get("ok"):
             valor, procedencia = linha[apos_regras], "humana"
@@ -134,8 +151,9 @@ def linha_final(linha: pd.Series) -> dict:
             ajustada = ajustada or "regra"
         else:
             saida[limite] = linha[limite]
-    if humana and any(saida[c] == "pendente" for c in PROCEDENCIA_COLUNA.values()):
-        pendentes = [a for a, c in PROCEDENCIA_COLUNA.items() if saida[c] == "pendente"]
+    pendentes = [a for a, c in PROCEDENCIA_COLUNA.items()
+                 if saida[c] == "pendente" and humana.get(a) != PENDENTE_EXPLICITO]
+    if humana and pendentes:
         raise DecisaoInvalida(
             f"{linha['marca']}/{linha['modelo']} {linha['vigencia_inicio']}: a decisao humana "
             f"{linha['decisao_humana']!r} deixa pendente {', '.join(pendentes)} -- use `ok` ou "
@@ -220,6 +238,8 @@ def problemas_de_fidelidade(dim: pd.DataFrame, rascunho: pd.DataFrame) -> list[s
             procedencia = final[PROCEDENCIA_COLUNA[atributo]]
             if procedencia == "humana":
                 esperado = humana.get(atributo, linha[apos_regras])
+            elif humana.get(atributo) == PENDENTE_EXPLICITO:
+                esperado = linha[atributo]
             elif procedencia.startswith("regra_"):
                 if linha[coluna_proc] != procedencia:
                     problemas.append(f"{'/'.join(final[CHAVE])}: {atributo} {procedencia} no "
@@ -296,3 +316,37 @@ def problemas_de_montagem(final: pd.DataFrame, rascunho_periodos: pd.DataFrame) 
     return [f"{'/'.join(k[:3])} mes {k[3]}: {no_rascunho.get(k)} no rascunho, {no_dado.get(k)} "
             "no dado" for k in set(no_rascunho) | set(no_dado)
             if no_rascunho.get(k) != no_dado.get(k)]
+
+
+# ----------------------------------------------------- decisoes versionadas
+
+COLUNAS_DECISOES = CHAVE + ["vigencia_inicio", "decisao_humana", "data_decisao", "origem",
+                            "observacao"]
+
+
+def carregar_decisoes_humanas(caminho=None) -> pd.DataFrame:
+    from . import config
+    caminho = caminho or config.DECISOES_HUMANAS
+    if not caminho.exists():
+        return pd.DataFrame(columns=COLUNAS_DECISOES)
+    return pd.read_csv(caminho, dtype=str, keep_default_na=False)
+
+
+def aplicar_decisoes_humanas(rascunho: pd.DataFrame, decisoes: pd.DataFrame) -> pd.DataFrame:
+    """Copia cada decisao versionada para `decisao_humana` da linha do rascunho (chave e
+    `vigencia_inicio` do rascunho). Decisao sem linha, repetida ou fora da sintaxe e'
+    erro: o rascunho mudou e a decisao precisa ser revista."""
+    saida = rascunho.copy()
+    indice = {tuple(k): i for i, k in zip(saida.index,
+                                          saida[CHAVE + ["vigencia_inicio"]].to_numpy())}
+    vistas = set()
+    for _, d in decisoes.iterrows():
+        chave = tuple(d[CHAVE + ["vigencia_inicio"]])
+        if chave in vistas:
+            raise DecisaoInvalida(f"decisao repetida para {'/'.join(chave)}")
+        vistas.add(chave)
+        if chave not in indice:
+            raise DecisaoInvalida(f"decisao para {'/'.join(chave)}, que nao e' linha do rascunho")
+        ler_decisao(d["decisao_humana"])
+        saida.at[indice[chave], "decisao_humana"] = d["decisao_humana"]
+    return saida

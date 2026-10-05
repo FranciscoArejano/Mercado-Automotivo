@@ -10,8 +10,12 @@ da decisao humana.
 
 Nao e' etapa do pipeline de proposito: o pipeline roda sozinho e sobrescreve,
 e este arquivo vai receber a letra do pesquisador. Por isso tambem ha' guarda:
-se o rascunho existente tiver qualquer `decisao_humana` preenchida, o script
-recusa sobrescrever sem `--sobrescrever`.
+se o rascunho existente tiver `decisao_humana` preenchida que nao esteja em
+`config/decisoes_humanas.csv`, o script recusa sobrescrever sem `--sobrescrever`.
+As decisoes versionadas nesse arquivo voltam para `decisao_humana` a cada execucao.
+
+Grava tambem `saidas/pbe_variantes_candidatos.csv`: as versoes eletrificadas do PBE
+sem casamento que tem nome de chave, com a decisao de `config/pbe_modelos.csv`.
 
 Uso:
     python src/ferramentas/classificacao_rascunho.py
@@ -29,7 +33,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from comum import adjudicacao, classificacao, config, fase2  # noqa: E402
+from comum import adjudicacao, classificacao, config, fase2, pbe_variantes  # noqa: E402
 from comum import validacao_classificacao as validacao  # noqa: E402
 
 # A busca de fonte de origem cobre a origem `media`/`baixa` dos maiores modelos.
@@ -189,9 +193,11 @@ LEIA_ME = [
     ("como preencher decisao_humana",
      "`ok` aceita a linha como esta' (numa linha de a_adjudicar, com o que as regras ja' "
      "decidiram). `atributo=valor; atributo=valor` corrige so' o que for dito (ex.: "
-     "`propulsao_oferecida=flex+hev; origem_producao=nacional`). `dividir em AAAA-MM` pede nova "
+     "`propulsao_oferecida=flex+hev; origem_producao=nacional`). `atributo=pendente` deixa um "
+     "atributo pendente de proposito quando outro foi decidido. `dividir em AAAA-MM` pede nova "
      "vigencia a partir daquele mes -- descreva os atributos de cada lado. Qualquer outro texto "
-     "e' lido a mao."),
+     "e' lido a mao. As decisoes ja' passadas a limpo ficam em config/decisoes_humanas.csv, e "
+     "o gerador as copia para esta coluna a cada execucao."),
     ("regra da fase 2",
      "A fase 2 roda (etapa 11 do pipeline) e grava dados/processado/classificacao.parquet e "
      "classificacao_montagem.parquet. Nenhuma linha e' descartada. Por linha e por atributo: "
@@ -335,11 +341,17 @@ def _questoes(rascunho: pd.DataFrame) -> pd.DataFrame:
 
 
 def _decisoes_existentes() -> int:
+    """Decisoes preenchidas no rascunho que nao estao em `config/decisoes_humanas.csv`:
+    so' essas se perderiam ao regerar."""
     if not config.CLASSIFICACAO_RASCUNHO.exists():
         return 0
     anterior = pd.read_excel(config.CLASSIFICACAO_RASCUNHO, sheet_name="classificacao",
                              dtype=str, keep_default_na=False)
-    return int((anterior["decisao_humana"].str.strip() != "").sum())
+    versionadas = {tuple(k) for k in fase2.carregar_decisoes_humanas()[
+        classificacao.CHAVE + ["vigencia_inicio", "decisao_humana"]].to_numpy()}
+    preenchidas = anterior[anterior["decisao_humana"].str.strip() != ""]
+    return sum(tuple(k) not in versionadas for k in preenchidas[
+        classificacao.CHAVE + ["vigencia_inicio", "decisao_humana"]].to_numpy())
 
 
 def gerar():
@@ -361,6 +373,9 @@ def gerar():
     versoes["regra_mapeamento"] = [o for _, o in mapeados]
     chaves = painel[validacao.CHAVE].drop_duplicates()
     casado = validacao.casar(versoes, chaves)
+    # versoes eletrificadas sem casamento que tem nome de chave (auditoria de variantes)
+    variantes = pbe_variantes.candidatos(casado, chaves, painel, validacao.marcas_pbe(),
+                                         pbe_variantes.carregar_decisoes())
     rascunho = validacao.comparar_pbe(rascunho, casado)
     rascunho = validacao.anexar_origem(rascunho, validacao.carregar_fontes_origem())
     top = TOP_ORIGEM
@@ -389,6 +404,7 @@ def gerar():
     apos_regras, periodos = adjudicacao.periodos_montagem(
         apos_regras, montagem, painel[validacao.CHAVE + ["mes_ref", "unidades"]])
     com_regras["montagem_por_periodo"] = apos_regras["montagem_por_periodo"]
+    com_regras = fase2.aplicar_decisoes_humanas(com_regras, fase2.carregar_decisoes_humanas())
     fila = adjudicacao.a_adjudicar(com_regras, fila_antes)
     contas = adjudicacao.contas(fila_antes, com_regras, resolvido)
     # decisao_por_regra e decisao_humana ficam sempre por ultimo
@@ -399,7 +415,7 @@ def gerar():
             "contas": contas, "periodos_montagem": periodos,
             "montagem_exterior": adjudicacao.exterior_montagem(montagem),
             "resumo_montagem": adjudicacao.resumo_montagem(periodos),
-            "cobertura": cobertura, "corte": corte}
+            "cobertura": cobertura, "corte": corte, "variantes": variantes}
 
 
 def _casamento(rascunho: pd.DataFrame, casado: pd.DataFrame) -> pd.DataFrame:
@@ -492,6 +508,7 @@ def escrever(saida: dict, questoes: pd.DataFrame, volume_painel: int) -> None:
     saida["periodos_montagem"].to_csv(config.DIR_SAIDAS / "classificacao_montagem_periodos.csv",
                                       index=False)
     saida["cobertura"].to_csv(config.PBE_COBERTURA, index=False)
+    saida["variantes"].to_csv(config.PBE_VARIANTES_CANDIDATOS, index=False)
     casado[casado["marca"] != ""][
         ["ano_pbe", "pagina", "marca_pbe", "modelo_versao", "linha_acima", "casou_por",
          "tipo_propulsao", "marcador_nome", "combustivel", "valor_taxonomia", "regra_mapeamento",
@@ -534,6 +551,14 @@ def main() -> int:
     print(saida["contas"].to_string(index=False))
     print("\nmontagem local:")
     print(saida["resumo_montagem"].to_string(index=False))
+    variantes = saida["variantes"]
+    sem_decisao = variantes[variantes["chave_viva"] & (variantes["decisao"] == "")]
+    print(f"\nvariantes do PBE sem casamento: {len(variantes)} pares versao-chave, "
+          f"{int(variantes['chave_viva'].sum())} com a chave viva no ano; "
+          f"{len(sem_decisao)} sem decisao em config/pbe_modelos.csv")
+    if len(sem_decisao):
+        print(sem_decisao[["marca", "modelo", "ano_pbe", "modelo_versao", "relacao"]]
+              .to_string(index=False))
     print(f"\na adjudicar: {len(fila)} linhas")
     print(f"\ngravado {config.CLASSIFICACAO_RASCUNHO.relative_to(config.RAIZ)} e "
           f"{config.CLASSIFICACAO_RESUMO.relative_to(config.RAIZ)}")

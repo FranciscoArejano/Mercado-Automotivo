@@ -77,6 +77,12 @@ PBE_MODELOS = DIR_CONFIG / "pbe_modelos.csv"
 PBE_PROPULSAO = DIR_CONFIG / "pbe_propulsao.csv"
 PBE_VERSOES = DIR_SAIDAS / "pbe_versoes.csv"
 PBE_CASAMENTO = DIR_SAIDAS / "pbe_casamento.csv"
+# versoes eletrificadas sem casamento com nome de chave (auditoria de variantes)
+PBE_VARIANTES_CANDIDATOS = DIR_SAIDAS / "pbe_variantes_candidatos.csv"
+PBE_VARIANTES_SEM_EVIDENCIA = DIR_SAIDAS / "pbe_variantes_sem_evidencia.csv"
+# decisoes do pesquisador, versionadas: o gerador do rascunho as leva para
+# `decisao_humana` a cada execucao
+DECISOES_HUMANAS = DIR_CONFIG / "decisoes_humanas.csv"
 ORIGEM_FONTES = DIR_DADOS / "referencia" / "origem_fontes.csv"
 MONTAGEM_FONTES = DIR_DADOS / "referencia" / "montagem_fontes.csv"
 # fontes datadas da chegada de cada tipo eletrificado (tabela de propulsao por ano)

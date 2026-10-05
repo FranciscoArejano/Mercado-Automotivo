@@ -1218,6 +1218,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2014,13,KIA,CERATO KOUP,,nome,,,G,gasolina,24,KIA,CERATO,automoveis
 2014,13,KIA,CERATO KOUP,,nome,,,G,gasolina,24,KIA,CERATO,automoveis
 2014,13,MERCEDES-BENZ,C 200,TURBO,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
+2014,13,MERCEDES-BENZ,CLA 200,AVANGARDE,nome,,,G,gasolina,24,M.BENZ,CLA200,automoveis
 2014,13,MERCEDES-BENZ,GLA 200,,nome,,,G,gasolina,24,M.BENZ,CLASSE GLA,automoveis
 2014,13,MITSUBISHI,LANCER,,nome,,,G,gasolina,24,MITSUBISHI,LANCER,automoveis
 2014,13,MITSUBISHI,LANCER,,nome,,,G,gasolina,24,MITSUBISHI,LANCER,automoveis
@@ -5468,6 +5469,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2020,13,HONDA,ACCORD,EXTRA,nome,,,G,gasolina,24,HONDA,ACCORD,automoveis
 2020,13,TOYOTA,CAMRY,EXTRA,nome,,,G,gasolina,24,TOYOTA,CAMRY,automoveis
 2020,13,MERCEDES-BENZ,CLA250,EXTRA,nome,,,G,gasolina,24,M.BENZ,CLA250,automoveis
+2020,13,MERCEDES-BENZ,AMG CLA35 4MATIC,EXTRA,nome,,,G,gasolina,24,M.BENZ,CLA35,automoveis
 2020,13,MERCEDES-BENZ,C180,EXTRA,nome,,,G,gasolina,24,M.BENZ,C180,automoveis
 2020,13,MERCEDES-BENZ,E300,EXTRA,nome,,,G,gasolina,24,M.BENZ,CLASSE E,automoveis
 2020,14,MERCEDES-BENZ,AMG GT63S 4MATIC,EXTRA,nome,,,G,gasolina,24,M.BENZ,AMG GT63S,automoveis
@@ -6084,6 +6086,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2020,46,MINI,COOPER,,nome,,,G,gasolina,24,MINI,COOPER,automoveis
 2020,46,MERCEDES-BENZ,C300,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2020,46,MERCEDES-BENZ,SLC 300,,nome,,,G,gasolina,24,M.BENZ,SLC 300,automoveis
+2020,46,MERCEDES-BENZ,AMG S63 4M,,nome,,,G,gasolina,24,M.BENZ,S63,automoveis
 2020,46,BMW,M2,,nome,,,G,gasolina,24,BMW,M2,automoveis
 2020,46,BMW,430I,,nome,,,G,gasolina,24,BMW,430I,automoveis
 2020,46,BMW,745LE,,nome,,,G,gasolina,24,BMW,745LE,automoveis
@@ -6415,6 +6418,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2021,6,AUDI,Q5 S-LINE,,nome,COMBUSTAO,,G,gasolina,9,AUDI,Q5,automoveis
 2021,6,AUDI,Q5 S-LINE BLACK,,nome,COMBUSTAO,,G,gasolina,9,AUDI,Q5,automoveis
 2021,6,AUDI,RS-E TRON GT -,,nome,ELETRICO,,E,bev,8,AUDI,RS,automoveis
+2021,6,AUDI,E-TRON GT -,,nome,ELETRICO,E-TRON,E,bev,8,AUDI,E TRON GT,automoveis
 2021,6,BMW,320I -,,nome,COMBUSTAO,,G,gasolina,9,BMW,320I,automoveis
 2021,6,BMW,M5 -,,nome,COMBUSTAO,,G,gasolina,9,BMW,M5,automoveis
 2021,6,BMW,M5 COMPETITION,,nome,COMBUSTAO,,G,gasolina,9,BMW,M5,automoveis
@@ -6441,6 +6445,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2021,6,JAGUAR,XE P250 SE,,nome,COMBUSTAO,,G,gasolina,9,JAGUAR,XE,automoveis
 2021,6,JAGUAR,XE P250 R-DYN HSE,,nome,COMBUSTAO,,G,gasolina,9,JAGUAR,XE,automoveis
 2021,6,JAGUAR,XE P250 R-DYN S,,nome,COMBUSTAO,,G,gasolina,9,JAGUAR,XE,automoveis
+2021,7,MERCEDES-BENZ,AMG CLA35 4MATIC,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLA35,automoveis
 2021,7,MERCEDES-BENZ,C200 AVANTGARDE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2021,7,MERCEDES-BENZ,C200 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2021,7,MERCEDES-BENZ,C300 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
@@ -7147,6 +7152,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2022,1,MINI,COOPER S 5P,,nome,COMBUSTAO,,G,gasolina,9,MINI,COOPER,automoveis
 2022,1,MINI,JCW HATCH 3P,,nome,COMBUSTAO,,G,gasolina,9,MINI,JCW,automoveis
 2022,1,MINI,COOPER S 3P,,nome,COMBUSTAO,,G,gasolina,9,MINI,COOPER,automoveis
+2022,1,PEUGEOT,E-208 GT,,nome,ELETRICO,,E,bev,8,PEUGEOT,208,automoveis
 2022,1,PEUGEOT,208 ACTIVE AT1,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
 2022,1,PEUGEOT,208 ALLURE AT,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
 2022,1,PEUGEOT,208 GRIFFE AT,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
@@ -7339,6 +7345,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2022,2,MERCEDES-BENZ,C200 AVANT,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2022,2,MERCEDES-BENZ,C200 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2022,2,MERCEDES-BENZ,C300 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
+2022,2,MERCEDES-BENZ,AMG CLA35 4MATIC,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLA35,automoveis
 2022,2,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLASSE E,automoveis
 2022,2,PORSCHE,MACAN S,,nome,COMBUSTAO,,G,gasolina,9,PORSCHE,MACAN,automoveis
 2022,2,PORSCHE,MACAN GTS,,nome,COMBUSTAO,,G,gasolina,9,PORSCHE,MACAN,automoveis
@@ -7879,6 +7886,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2023,1,MINI,COOPER (06/23) S 3P,,nome,COMBUSTAO,,G,gasolina,9,MINI,COOPER,automoveis
 2023,1,MINI,JCW (06/23) HATCH 3P,,nome,COMBUSTAO,,G,gasolina,9,MINI,JCW,automoveis
 2023,1,MINI,COOPER (06/23) S 5P,,nome,COMBUSTAO,,G,gasolina,9,MINI,COOPER,automoveis
+2023,1,PEUGEOT,E-208 GT,,nome,ELETRICO,,E,bev,8,PEUGEOT,208,automoveis
 2023,1,PEUGEOT,208 ACTIVE AT1,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
 2023,1,PEUGEOT,208 ALLURE AT,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
 2023,1,PEUGEOT,208 GRIFFE AT,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
@@ -8105,6 +8113,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2023,4,AUDI,RS Q8 (MY23),,nome,HIBRIDO,,G,hev,4,AUDI,RS,automoveis
 2023,4,AUDI,RS 5 SPORTBACK COMPETITION PLUS,,nome,COMBUSTAO,,G,gasolina,9,AUDI,RS,automoveis
 2023,4,AUDI,RS 5 SPORTBACK -,,nome,COMBUSTAO,,G,gasolina,9,AUDI,RS,automoveis
+2023,4,AUDI,E-TRON GT -,,nome,ELETRICO,E-TRON,E,bev,8,AUDI,E TRON GT,automoveis
 2023,4,BMW,420I CABRIO,,nome,COMBUSTAO,,G,gasolina,9,BMW,420I,automoveis
 2023,4,BMW,530E -,,nome,PLUG-IN,,G,phev,6,BMW,530E,automoveis
 2023,4,BMW,330E -,,nome,PLUG-IN,,G,phev,6,BMW,330E,automoveis
@@ -8135,6 +8144,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2023,5,MERCEDES-BENZ,CLA250 ADV,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLA250,automoveis
 2023,5,MERCEDES-BENZ,C200 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2023,5,MERCEDES-BENZ,C300 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
+2023,5,MERCEDES-BENZ,AMG CLA35 4MATIC,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLA35,automoveis
 2023,5,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLASSE E,automoveis
 2023,5,NISSAN,SENTRA SENSE,,nome,COMBUSTAO,,G,gasolina,9,NISSAN,SENTRA,automoveis
 2023,5,NISSAN,SENTRA EXCLUSIVE,,nome,COMBUSTAO,,G,gasolina,9,NISSAN,SENTRA,automoveis
@@ -8615,6 +8625,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2023,14,FORD,NOVA RANGER 4X4 XLS,,nome,COMBUSTAO,,D,diesel,11,FORD,RANGER,comerciais_leves
 2023,14,FORD,F150 LARIAT,,nome,COMBUSTAO,,G,gasolina,9,FORD,F150,comerciais_leves
 2023,14,FORD,F150 PLATINUM,,nome,COMBUSTAO,,G,gasolina,9,FORD,F150,comerciais_leves
+2023,14,JAC,IEV330P IEV330P,,nome,ELETRICO,,E,bev,8,JAC,IEV 330P,comerciais_leves
 2023,14,JEEP,GLADIATOR RUBICON,,nome,COMBUSTAO,,G,gasolina,9,JEEP,GLADIATOR,comerciais_leves
 2023,14,MITSUBISHI,L200 TRITON OUTDOOR GLX,,nome,COMBUSTAO,,D,diesel,11,MITSUBISHI,L200,comerciais_leves
 2023,14,MITSUBISHI,L200 TRITON OUTDOOR GLS,,nome,COMBUSTAO,,D,diesel,11,MITSUBISHI,L200,comerciais_leves
@@ -8757,6 +8768,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2024,1,MINI,COOPER S 3P,,nome,COMBUSTAO,,G,gasolina,9,MINI,COOPER,automoveis
 2024,1,MINI,JCW HATCH 3P,,nome,COMBUSTAO,,G,gasolina,9,MINI,JCW,automoveis
 2024,1,MINI,COOPER S 5P,,nome,COMBUSTAO,,G,gasolina,9,MINI,COOPER,automoveis
+2024,1,PEUGEOT,E-208 GT,,nome,ELETRICO,,E,bev,8,PEUGEOT,208,automoveis
 2024,1,PEUGEOT,208 STYLE MT,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
 2024,1,PEUGEOT,208 LIKE MT,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
 2024,1,PEUGEOT,208 ROADTRIP A,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
@@ -8950,6 +8962,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2024,4,AUDI,Q7 PERFORMANCE,,nome,HIBRIDO,,G,hev,4,AUDI,Q7,automoveis
 2024,4,AUDI,Q7 PERFORMANCE BLACK,,nome,HIBRIDO,,G,hev,4,AUDI,Q7,automoveis
 2024,4,AUDI,RS Q8 -,,nome,HIBRIDO,,G,hev,4,AUDI,RS,automoveis
+2024,5,AUDI,E-TRON GT -,,nome,ELETRICO,E-TRON,E,bev,8,AUDI,E TRON GT,automoveis
 2024,5,AUDI,RS E-TRON GT -,,nome,ELETRICO,E-TRON,E,bev,8,AUDI,RS,automoveis
 2024,5,BMW,420I CABRIO,,nome,COMBUSTAO,,G,gasolina,9,BMW,420I,automoveis
 2024,5,BMW,420I CABRIO,,nome,COMBUSTAO,,G,gasolina,9,BMW,420I,automoveis
@@ -8988,10 +9001,12 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2024,5,JAC,E-J7 E-J7,,nome,ELETRICO,,E,bev,8,JAC,E-J7,automoveis
 2024,5,MERCEDES-BENZ,C200 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2024,5,MERCEDES-BENZ,C300 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
+2024,5,MERCEDES-BENZ,AMG CLA35 4MATIC,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLA35,automoveis
 2024,5,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLASSE E,automoveis
 2024,5,MERCEDES-BENZ,CLA200 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA200,automoveis
 2024,6,MERCEDES-BENZ,CLA200 PROGRESSIVE,FOSSIL FOSSIL FOSSIL (KM/L) (KM/L) (KM/L) (KM/L) (KM/L E) (KM/L E) RELATIVA ABSOLUTA,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA200,automoveis
 2024,6,MERCEDES-BENZ,CLA250,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLA250,automoveis
+2024,6,MERCEDES-BENZ,AMG CLA35 4M,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA35,automoveis
 2024,6,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE E,automoveis
 2024,6,MERCEDES-BENZ,AMG C63S EP,,nome,PLUG-IN,,G,phev,6,M.BENZ,AMG C63S,automoveis
 2024,6,MERCEDES-BENZ,AMG C63S EP F1,,nome,PLUG-IN,,G,phev,6,M.BENZ,AMG C63S,automoveis
@@ -9438,6 +9453,9 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2024,13,FIAT,SCUDO MULTI TD,,nome,COMBUSTAO,,D,diesel,11,FIAT,SCUDO,comerciais_leves
 2024,13,FORD,TRANSIT 350 F,,nome,COMBUSTAO,,D,diesel,11,FORD,TRANSIT,comerciais_leves
 2024,13,FORD,TRANSIT 350 FL,,nome,COMBUSTAO,,D,diesel,11,FORD,TRANSIT,comerciais_leves
+2024,13,FORD,E-TRANSIT 350 F,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2024,13,FORD,E-TRANSIT 350 FB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2024,13,FORD,E-TRANSIT 350 FL,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
 2024,13,HYUNDAI,HR HDB 4WD,,nome,COMBUSTAO,,D,diesel,11,HYUNDAI,HR,comerciais_leves
 2024,13,JAC,EJV5.5 CARGO,,nome,ELETRICO,,E,bev,8,JAC,EJV5.5,comerciais_leves
 2024,13,KIA,BONGO K2500 4X4 SC HD SC 4WD,,nome,COMBUSTAO,,D,diesel,11,KIA,BONGO,comerciais_leves
@@ -9530,6 +9548,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2024,14,FORD,NOVA RANGER 4X4 LTD,,nome,COMBUSTAO,,D,diesel,11,FORD,RANGER,comerciais_leves
 2024,14,FORD,NOVA RANGER 4X4 LTD+,,nome,COMBUSTAO,,D,diesel,11,FORD,RANGER,comerciais_leves
 2024,14,FORD,RANGER RAPTOR RAPTOR,,nome,COMBUSTAO,,G,gasolina,9,FORD,RANGER,comerciais_leves
+2024,15,JAC,IEV330P IEV330,,nome,ELETRICO,,E,bev,8,JAC,IEV 330P,comerciais_leves
 2024,15,JAC,HUNTER HUNTER AT,,nome,COMBUSTAO,,D,diesel,11,JAC,HUNTER,comerciais_leves
 2024,15,JAC,HUNTER HUNTER HD 4X4 AT,,nome,COMBUSTAO,,D,diesel,11,JAC,HUNTER,comerciais_leves
 2024,15,JAC,HUNTER HUNTER HD AT,,nome,COMBUSTAO,,D,diesel,11,JAC,HUNTER,comerciais_leves
@@ -9592,6 +9611,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2024,16,JAGUAR,F-TYPE 300RD CB,,nome,COMBUSTAO,,G,gasolina,9,JAGUAR,F-TYPE,automoveis
 2024,16,JAGUAR,F-TYPE 300CB 75,,nome,COMBUSTAO,,G,gasolina,9,JAGUAR,F-TYPE,automoveis
 2024,16,JAGUAR,F-TYPE 300CP 75,,nome,COMBUSTAO,,G,gasolina,9,JAGUAR,F-TYPE,automoveis
+2024,16,MERCEDES-BENZ,AMG SL63S EP,,nome,PLUG-IN,,G,phev,6,M.BENZ,SL63S,automoveis
 2024,16,MCLAREN,ARTURA ----,,nome,PLUG-IN,,G,phev,6,MCLAREN,ARTURA,automoveis
 2024,16,PORSCHE,BOXSTER --,,nome,COMBUSTAO,,G,gasolina,9,PORSCHE,BOXSTER,automoveis
 2024,16,PORSCHE,BOXSTER T,,nome,COMBUSTAO,,G,gasolina,9,PORSCHE,BOXSTER,automoveis
@@ -9680,6 +9700,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2025,1,PEUGEOT,208 ACTIVE MT,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
 2025,1,PEUGEOT,208 ALLUR,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
 2025,1,PEUGEOT,208 GT,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
+2025,1,PEUGEOT,E-208 GT,,nome,ELETRICO,,E,bev,8,PEUGEOT,208,automoveis
 2025,1,AUDI,A3 SPOTBACK PEFORMANCE (ED.0),,nome,COMBUSTAO,,G,gasolina,9,AUDI,A3,automoveis
 2025,1,AUDI,A3 SPOTBACK PERFORMANCE BLACK (ED.0),,nome,COMBUSTAO,,G,gasolina,9,AUDI,A3,automoveis
 2025,1,AUDI,A3 SPOTBACK PEFORMANCE,,nome,COMBUSTAO,,G,gasolina,9,AUDI,A3,automoveis
@@ -9827,6 +9848,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2025,4,TOYOTA,COROLLA ALTIS HV,,nome,HIBRIDO,,F,hev,4,TOYOTA,COROLLA,automoveis
 2025,4,TOYOTA,COROLLA APREMIUMH,,nome,HIBRIDO,,F,hev,4,TOYOTA,COROLLA,automoveis
 2025,4,TOYOTA,COROLLA GLI HEV,,nome,HIBRIDO,HEV,F,hev,4,TOYOTA,COROLLA,automoveis
+2025,4,AUDI,E-TRON GT -,,nome,ELETRICO,E-TRON,E,bev,8,AUDI,E TRON GT,automoveis
 2025,4,AUDI,RS E-TRON GT -,,nome,ELETRICO,E-TRON,E,bev,8,AUDI,RS,automoveis
 2025,4,AUDI,Q5 SUV ADVANCED (ED.0),,nome,COMBUSTAO,,G,gasolina,9,AUDI,Q5,automoveis
 2025,4,AUDI,Q5 SUV S LINE (ED.0),,nome,COMBUSTAO,,G,gasolina,9,AUDI,Q5,automoveis
@@ -9885,6 +9907,9 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2025,5,MERCEDES-BENZ,C 300 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2025,5,MERCEDES-BENZ,AMG C 63S EP F1,,nome,PLUG-IN,,G,phev,6,M.BENZ,CLASSE C,automoveis
 2025,5,MERCEDES-BENZ,AMG C 63S EP,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
+2025,5,MERCEDES-BENZ,CLA 200 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA200,automoveis
+2025,5,MERCEDES-BENZ,CLA 200 PROGRESSIVE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA200,automoveis
+2025,5,MERCEDES-BENZ,AMG CLA35 4M,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA35,automoveis
 2025,5,MERCEDES-BENZ,AMG GLC 43,,nome,HIBRIDO,,G,hev,4,M.BENZ,GLC,automoveis
 2025,5,MERCEDES-BENZ,AMG GLC 43 COUPE,,nome,PLUG-IN,,G,phev,6,M.BENZ,GLC,automoveis
 2025,5,MERCEDES-BENZ,AMG GLC 63S EP,,nome,HIBRIDO,,G,hev,4,M.BENZ,GLC,automoveis
@@ -9892,6 +9917,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2025,5,MERCEDES-BENZ,AMG GLC 43,,nome,HIBRIDO,,G,hev,4,M.BENZ,GLC,automoveis
 2025,5,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE E,automoveis
 2025,5,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLASSE E,automoveis
+2025,6,MERCEDES-BENZ,AMG S63 EP,,nome,HIBRIDO,,G,hev,4,M.BENZ,S63,automoveis
 2025,6,MITSUBISHI,OUTLANDER HPE-S E,,nome,PLUG-IN,,G,phev,6,MITSUBISHI,OUTLANDER,automoveis
 2025,6,MITSUBISHI,OUTLANDER SIGNATURE E,,nome,PLUG-IN,,G,phev,6,MITSUBISHI,OUTLANDER,automoveis
 2025,6,PORSCHE,MACAN GTS,,nome,COMBUSTAO,,G,gasolina,9,PORSCHE,MACAN,automoveis
@@ -10210,12 +10236,21 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2025,10,FIAT,DUCATO MXCARGO13M,,nome,COMBUSTAO,,D,diesel,11,FIAT,DUCATO,comerciais_leves
 2025,10,FIAT,DUCATO FURGAO 13M,,nome,COMBUSTAO,,D,diesel,11,FIAT,DUCATO,comerciais_leves
 2025,10,FIAT,DUCATO MULTI 13M,,nome,COMBUSTAO,,D,diesel,11,FIAT,DUCATO,comerciais_leves
+2025,10,FORD,E-TRANSIT F35MMAB,LUX 8M3 / LUX PRO 8M3,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2025,10,FORD,E-TRANSIT F35MAAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2025,10,FORD,E-TRANSIT F35LMAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2025,10,FORD,E-TRANSIT F35LAAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2025,10,FORD,E-TRANSIT F35EAAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2025,10,FORD,E-TRANSIT C35LBAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2025,10,FORD,E-TRANSIT C35EBAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
 2025,10,FORD,TRANSIT F35LAMA,,nome,COMBUSTAO,,D,diesel,11,FORD,TRANSIT,comerciais_leves
 2025,10,FORD,TRANSIT F35MMMA,,nome,COMBUSTAO,,D,diesel,11,FORD,TRANSIT,comerciais_leves
 2025,10,FORD,TRANSIT F35MAMA,,nome,COMBUSTAO,,D,diesel,11,FORD,TRANSIT,comerciais_leves
 2025,10,FORD,TRANSIT F38LAMA,,nome,COMBUSTAO,,D,diesel,11,FORD,TRANSIT,comerciais_leves
 2025,10,JAC,EJV5.5 CARGO,,nome,ELETRICO,,E,bev,8,JAC,EJV5.5,comerciais_leves
 2025,10,KIA,BONGO K2500 4X4 SC HD SC 4WD,,nome,COMBUSTAO,,D,diesel,11,KIA,BONGO,comerciais_leves
+2025,10,MERCEDES-BENZ,320 ESPRINTER F,,nome,ELETRICO,,E,bev,8,M.BENZ,ESPRINTER 320,comerciais_leves
+2025,10,MERCEDES-BENZ,320 ESPRINTER C,,nome,ELETRICO,,E,bev,8,M.BENZ,ESPRINTER 320,comerciais_leves
 2025,10,PEUGEOT,EXPERT CARGO,,nome,COMBUSTAO,,D,diesel,11,PEUGEOT,EXPERT,comerciais_leves
 2025,10,PEUGEOT,EXPERT VITRE,,nome,COMBUSTAO,,D,diesel,11,PEUGEOT,EXPERT,comerciais_leves
 2025,10,PEUGEOT,BOXER 16L LUXO,,nome,COMBUSTAO,,D,diesel,11,PEUGEOT,BOXER,comerciais_leves
@@ -10315,6 +10350,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2025,12,FOTON,TUNLAND V9,,nome,HIBRIDO,,D,hev,4,FOTON,TUNLAND,comerciais_leves
 2025,12,GWM,POER P30 EXC,,nome,COMBUSTAO,,D,diesel,11,GWM,POER,comerciais_leves
 2025,12,GWM,POER P30 TRL,,nome,COMBUSTAO,,D,diesel,11,GWM,POER,comerciais_leves
+2025,12,JAC,IEV330P IEV330,,nome,ELETRICO,,E,bev,8,JAC,IEV 330P,comerciais_leves
 2025,12,JAC,HUNTER HUNTER AT,,nome,COMBUSTAO,,D,diesel,11,JAC,HUNTER,comerciais_leves
 2025,12,JAC,HUNTER HUNTER HD 4X4 AT,,nome,COMBUSTAO,,D,diesel,11,JAC,HUNTER,comerciais_leves
 2025,12,JAC,HUNTER HUNTER HD AT,,nome,COMBUSTAO,,D,diesel,11,JAC,HUNTER,comerciais_leves
@@ -10374,6 +10410,8 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2025,13,MERCEDES-BENZ,AMG GT63S EP 2P,,nome,PLUG-IN,,G,phev,6,M.BENZ,AMG GT63S,automoveis
 2025,13,MERCEDES-BENZ,AMG GT63S EP,,nome,PLUG-IN,,G,phev,6,M.BENZ,AMG GT63S,automoveis
 2025,13,MERCEDES-BENZ,AMG GT63S EP 2P,,nome,PLUG-IN,,G,phev,6,M.BENZ,AMG GT63S,automoveis
+2025,13,MERCEDES-BENZ,AMG SL63S EP,,nome,PLUG-IN,,G,phev,6,M.BENZ,SL63S,automoveis
+2025,13,MERCEDES-BENZ,AMG SL63S EP,,nome,PLUG-IN,,G,phev,6,M.BENZ,SL63S,automoveis
 2025,13,MG,CYBERSTER 77 KWH AWD,,nome,ELETRICO,,E,bev,8,MG,CYBERSTER,automoveis
 2025,13,PORSCHE,911 CARRERA S,,nome,COMBUSTAO,,G,gasolina,9,PORSCHE,911,automoveis
 2025,13,PORSCHE,911 CARRERA SC,,nome,COMBUSTAO,,G,gasolina,9,PORSCHE,911,automoveis
@@ -10442,6 +10480,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2026,1,PEUGEOT,208 ALLUR,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
 2026,1,PEUGEOT,208 GT,,nome,COMBUSTAO,,F,flex,10,PEUGEOT,208,automoveis
 2026,1,PEUGEOT,208 GT HYBRID,,nome,HIBRIDO,HYBRID,F,hev,4,PEUGEOT,208,automoveis
+2026,1,PEUGEOT,E-208 GT,,nome,ELETRICO,,E,bev,8,PEUGEOT,208,automoveis
 2026,1,AUDI,A3 SPOTBACK PEFORMANCE,,nome,COMBUSTAO,,G,gasolina,9,AUDI,A3,automoveis
 2026,1,AUDI,A3 SPOTBACK PERFORMANCE BLACK,,nome,COMBUSTAO,,G,gasolina,9,AUDI,A3,automoveis
 2026,1,BYD,DOLPHIN GS 180EV,,nome,ELETRICO,,E,bev,8,BYD,DOLPHIN,automoveis
@@ -10652,11 +10691,13 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2026,4,LEAPMOTOR,C10 DESIGN,ELETRICO,nome,ELETRICO,,E,bev,8,LEAPMOTOR,C10,automoveis
 2026,4,MERCEDES-BENZ,CLA200 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA200,automoveis
 2026,4,MERCEDES-BENZ,CLA200 PROGRESSIVE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA200,automoveis
+2026,4,MERCEDES-BENZ,AMG CLA35 4M,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA35,automoveis
 2026,4,MERCEDES-BENZ,C200 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2026,4,MERCEDES-BENZ,C300 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2026,4,MERCEDES-BENZ,AMG C63S EP F1,,nome,PLUG-IN,,G,phev,6,M.BENZ,AMG C63S,automoveis
 2026,4,MERCEDES-BENZ,AMG C63S EP,,nome,PLUG-IN,,G,phev,6,M.BENZ,AMG C63S,automoveis
 2026,4,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE E,automoveis
+2026,4,MERCEDES-BENZ,AMG S63 EP,,nome,PLUG-IN,,G,phev,6,M.BENZ,S63,automoveis
 2026,4,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE E,automoveis
 2026,4,MITSUBISHI,OUTLANDER HPE-S E,,nome,PLUG-IN,,G,phev,6,MITSUBISHI,OUTLANDER,automoveis
 2026,4,MITSUBISHI,OUTLANDER SIGNATURE E,,nome,PLUG-IN,,G,phev,6,MITSUBISHI,OUTLANDER,automoveis
@@ -11012,6 +11053,13 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2026,7,FIAT,FIORINO ENDURANCE,,nome,COMBUSTAO,,F,flex,10,FIAT,FIORINO,comerciais_leves
 2026,7,FIAT,SCUDO MULTI TD,,nome,COMBUSTAO,,D,diesel,11,FIAT,SCUDO,comerciais_leves
 2026,7,FIAT,SCUDO CARGO TD,,nome,COMBUSTAO,,D,diesel,11,FIAT,SCUDO,comerciais_leves
+2026,7,FORD,E-TRANSIT F35MMAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2026,7,FORD,E-TRANSIT F35MAAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2026,7,FORD,E-TRANSIT F35LMAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2026,7,FORD,E-TRANSIT F35LAAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2026,7,FORD,E-TRANSIT F35EAAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2026,7,FORD,E-TRANSIT C35LBAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
+2026,7,FORD,E-TRANSIT C35EBAB,,nome,ELETRICO,,E,bev,8,FORD,ETRANSIT,comerciais_leves
 2026,7,FORD,TRANSIT F35LAMA,,nome,COMBUSTAO,,D,diesel,11,FORD,TRANSIT,comerciais_leves
 2026,7,FORD,TRANSIT F35MMMA,,nome,COMBUSTAO,,D,diesel,11,FORD,TRANSIT,comerciais_leves
 2026,7,FORD,TRANSIT F35MAMA,,nome,COMBUSTAO,,D,diesel,11,FORD,TRANSIT,comerciais_leves
@@ -11021,6 +11069,8 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2026,8,JAC,EJV5.5 CARGO,,nome,ELETRICO,,E,bev,8,JAC,EJV5.5,comerciais_leves
 2026,8,KIA,BONGO K2500 4X4 SC HD SC 4WD,,nome,COMBUSTAO,,D,diesel,11,KIA,BONGO,comerciais_leves
 2026,8,KIA,BONGO K2500 4X4 SC HDDL 4WD,,nome,COMBUSTAO,,D,diesel,11,KIA,BONGO,comerciais_leves
+2026,8,MERCEDES-BENZ,320 E SPRINTER FURGAO,,nome,ELETRICO,,E,bev,8,M.BENZ,ESPRINTER 320,comerciais_leves
+2026,8,MERCEDES-BENZ,320 E SPRINTER CHASSI,,nome,ELETRICO,,E,bev,8,M.BENZ,ESPRINTER 320,comerciais_leves
 2026,8,PEUGEOT,BOXER 16L LUXO,,nome,COMBUSTAO,,D,diesel,11,PEUGEOT,BOXER,comerciais_leves
 2026,8,PEUGEOT,BOXER COMFORT,,nome,COMBUSTAO,,D,diesel,11,PEUGEOT,BOXER,comerciais_leves
 2026,8,PEUGEOT,BOXER CARGO PK,,nome,COMBUSTAO,,D,diesel,11,PEUGEOT,BOXER,comerciais_leves
@@ -11129,6 +11179,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2026,9,GWM,POER P30 TRL (MY27),,nome,COMBUSTAO,,D,diesel,11,GWM,POER,comerciais_leves
 2026,9,GWM,POER P30 PRO (MY27),,nome,COMBUSTAO,,D,diesel,11,GWM,POER,comerciais_leves
 2026,9,GWM,POER P30 PRO,,nome,COMBUSTAO,,D,diesel,11,GWM,POER,comerciais_leves
+2026,9,JAC,IEV330P IEV330,,nome,ELETRICO,,E,bev,8,JAC,IEV 330P,comerciais_leves
 2026,9,JAC,HUNTER HUNTER AT,,nome,COMBUSTAO,,D,diesel,11,JAC,HUNTER,comerciais_leves
 2026,9,JAC,HUNTER HUNTER 4WORK,,nome,COMBUSTAO,,D,diesel,11,JAC,HUNTER,comerciais_leves
 2026,9,JAC,HUNTER HUNTER HD 4X4 AT C,,nome,COMBUSTAO,,D,diesel,11,JAC,HUNTER,comerciais_leves
@@ -11195,6 +11246,7 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2026,9,FORD,MUSTANG GT AT,,nome,COMBUSTAO,,G,gasolina,9,FORD,MUSTANG,automoveis
 2026,9,MCLAREN,ARTURA,,nome,PLUG-IN,,G,phev,6,MCLAREN,ARTURA,automoveis
 2026,9,MCLAREN,ARTURA SPIDER,,nome,PLUG-IN,,G,phev,6,MCLAREN,ARTURA,automoveis
+2026,9,MERCEDES-BENZ,AMG SL63S EP,,nome,PLUG-IN,,G,phev,6,M.BENZ,SL63S,automoveis
 2026,9,MERCEDES-BENZ,AMG GT63S EP 2P,,nome,PLUG-IN,,G,phev,6,M.BENZ,AMG GT63S,automoveis
 2026,9,MERCEDES-BENZ,AMG GT63S EP,,nome,PLUG-IN,,G,phev,6,M.BENZ,AMG GT63S,automoveis
 2026,9,MG,CYBERSTER 77 KWH AWD,,nome,ELETRICO,,E,bev,8,MG,CYBERSTER,automoveis

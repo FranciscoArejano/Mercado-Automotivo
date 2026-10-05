@@ -1,0 +1,14 @@
+marca,modelo,segmento,valor_taxonomia,prefixo_pbe,versoes,anos_pbe,relacao,decisao,ausencia_descartada,observacao
+BMW,X1,automoveis,bev,IX1,IX1 EDRIVE20; IX1 XDRIVE30,"2023, 2024, 2025, 2026",prefixo,sem_evidencia,,Regra 4: o painel nao tem chave IX1 e a planilha nao traz o iX1 a' parte.
+BYD,T3,comerciais_leves,bev,ET3,ET3 ---,"2023, 2024, 2025",prefixo,sem_evidencia,,Regra 4: o painel nao tem chave ET3 e a planilha so' traz T3.
+CAOA CHERY,ARRIZO 5,automoveis,bev,ARRIZO5 E,ARRIZO5 E E,2021,mesmo_nome,sem_evidencia,bev 2020-03: 2021,"Regra 4, por evidencia contraditoria: em 2019-09 o Arrizo 5 do painel (301) = Arrizo 5 da planilha (191) + Arrizo 5e (110), e em 2019-10 o painel (210) = Arrizo 5 da planilha (210), com o 5e (110) a' parte."
+CHERY,ARRIZO 5,automoveis,bev,ARRIZO5 E,ARRIZO5 E E,2021,mesmo_nome,sem_evidencia,,"Regra 4, por evidencia contraditoria: em 2019-09 o Arrizo 5 do painel (301) = Arrizo 5 da planilha (191) + Arrizo 5e (110), e em 2019-10 o painel (210) = Arrizo 5 da planilha (210), com o 5e (110) a' parte."
+CITROEN,JUMPY,comerciais_leves,bev,E-JUMPY,E-JUMPY CARGO,"2022, 2023, 2024, 2025, 2026",prefixo,sem_evidencia,,Regra 4: o painel nao tem chave E-JUMPY e a planilha nao traz o e-Jumpy a' parte.
+FIAT,SCUDO,comerciais_leves,bev,E-SCUDO,E-SCUDO CARGO,"2022, 2023, 2024, 2025",prefixo,sem_evidencia,,Regra 4: o painel nao tem chave E-SCUDO e a planilha nao traz o e-Scudo a' parte.
+LEXUS,ES300,automoveis,hev,ES300H,ES300H -,"2021, 2022, 2023, 2024",sufixo,sem_evidencia,,Regra 4: o painel nao tem chave ES300H e a planilha so' traz Lexus ES.
+M.BENZ,CLA45,automoveis,hev,AMG CLA45S,AMG CLA45S 4M,2025,sufixo,sem_evidencia,,Regra 4: o painel nao tem chave CLA45S e a planilha so' traz CLA.
+M.BENZ,GLC,automoveis,hev,AMG GLC43,AMG GLC43; AMG GLC43 2025; AMG GLC43 CO; AMG GLC43 COUPE (2025),"2024, 2026",sufixo,sem_evidencia,,"Regra 4: o painel nao tem chave AMG GLC e a planilha nao separa o AMG (so' GLC e, em 2023-02, GLC COUPE). O apelido AMG GLC -> GLC, de rodada anterior, nao passou por este teste."
+M.BENZ,GLC,automoveis,phev,AMG GLC63S,AMG GLC63S EP,2026,sufixo,sem_evidencia,,"Regra 4: o painel nao tem chave AMG GLC e a planilha nao separa o AMG (so' GLC e, em 2023-02, GLC COUPE). O apelido AMG GLC -> GLC, de rodada anterior, nao passou por este teste."
+M.BENZ,GLE,automoveis,hev,AMG GLE,AMG GLE53 4M; AMG GLE63 S CO COUPE,"2022, 2023, 2024",sufixo,sem_evidencia,,"Regra 4: o painel nao tem chave AMG GLE e a planilha nao separa o AMG (so' GLE e, em 2023-02, GLE COUPE)."
+PEUGEOT,EXPERT,comerciais_leves,bev,E-EXPERT,E-EXPERT CARGO,"2022, 2023, 2024, 2025, 2026",prefixo,sem_evidencia,,Regra 4: o painel nao tem chave E-EXPERT e a planilha nao traz o e-Expert a' parte.
+TOYOTA,RAV4,automoveis,hev,RAV4H,RAV4H S AWD CNT; RAV4H SXAWD CNT,"2021, 2022, 2023, 2024",sufixo,sem_evidencia,,Regra 4: o painel nao tem chave RAV4H e a planilha so' traz RAV4.

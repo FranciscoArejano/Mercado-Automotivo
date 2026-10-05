@@ -1,6 +1,6 @@
 # Dicionario de dados -- `classificacao.parquet`, `classificacao_propulsao_anual.parquet` e `classificacao_montagem.parquet`
 
-Gerado em 2026-10-04T03:55:42+00:00 (UTC) por `src/etapa11_classificacao.py`, a partir de
+Gerado em 2026-10-05T15:21:50+00:00 (UTC) por `src/etapa11_classificacao.py`, a partir de
 `saidas/classificacao_rascunho.xlsx`. **O rascunho e' a fonte de verdade da
 adjudicacao:** uma decisao se escreve nele, e a etapa roda de novo. Ninguem
 edita o parquet a' mao.
@@ -50,11 +50,11 @@ Fracao do volume do painel, por atributo (juncao de teste, gravada em
 
 | procedencia | propulsao | carroceria | origem |
 |---|---:|---:|---:|
-| `humana` | 0,0% | 0,0% | 0,0% |
+| `humana` | 0,1% | 0,0% | 0,0% |
 | `regra_fonte_forte` | 92,0% | 79,4% | 4,9% |
 | `regra_fonte_fraca` | 4,1% | 0,0% | 7,3% |
 | `proposta` | 0,5% | 20,4% | 81,1% |
-| `pendente` | 3,4% | 0,0% | 6,6% |
+| `pendente` | 3,2% | 0,0% | 6,6% |
 | `nao_classificado` | 0,1% | 0,1% | 0,1% |
 
 ### Limitacoes
@@ -108,7 +108,7 @@ vigencia (`vigencia_sem_datacao`). Vigencia so' com tipos eletrificados: o
 primeiro a entrar, no inicio dela (`vigencia`).
 
 **Defasagem do PBE**, medida nos tipos com fonte datada e ano de PBE
-(`saidas/classificacao_pbe_defasagem.csv`, 21 tipos, 6
+(`saidas/classificacao_pbe_defasagem.csv`, 22 tipos, 7
 comparaveis -- fonte de 2021 em diante): sem direcao dominante: as duas leituras ficam com `pbe_ano`.
 
 **Saida de cada tipo**, com as mesmas fontes. Presenca: o tipo no PBE do ano, fonte
@@ -119,13 +119,21 @@ e' lacuna. Leitura longa: o tipo fica ate' o ano da primeira ausencia depois da
 ultima presenca; curta: ate' o ano da ultima presenca. Sem ausencia, as duas o
 mantem ate' o fim da vigencia. Ano em que a leitura curta ficaria sem tipo (lacuna
 do PBE entre a saida de um tipo e a entrada do seguinte) leva os tipos da longa.
-97 tipos tem evidencia de saida. Cada ano de PBE vale para a vigencia
+95 tipos tem evidencia de saida. Cada ano de PBE vale para a vigencia
 com mais meses nele.
+
+**Guarda da saida.** Ausencia no PBE nao prova saida no ano em que ha', sem
+casamento, versao da mesma marca e do mesmo tipo cujo nome contem o da chave e
+sem decisao de casamento em `config/pbe_modelos.csv`
+(`saidas/pbe_variantes_sem_evidencia.csv`; 1
+tipos tiveram ausencia descartada). **Combustao na leitura curta:** sem fonte
+datada de fim, a curta segue a longa ate' 2020 -- antes da coluna de propulsao, a
+falta de presenca no PBE nao data a saida da combustao.
 
 | fonte_temporal | tipos eletrificados (vigencia x tipo) |
 |---|---:|
 | `vigencia` | 30 |
-| `fonte_datada` | 22 |
+| `fonte_datada` | 21 |
 | `pbe_ano` | 35 |
 | `vigencia_sem_datacao` | 3 |
 
@@ -159,16 +167,16 @@ A banda, em `saidas/eletrificacao_banda.csv` (% das unidades do painel):
 | 2020 | curta | 0,2% | 2,7% | 2,7% | 2,7% |
 | 2021 | longa | 0,1% | 5,5% | 5,5% | 5,5% |
 | 2021 | curta | 0,1% | 5,3% | 5,3% | 5,3% |
-| 2022 | longa | 0,2% | 11,8% | 10,7% | 10,6% |
-| 2022 | curta | 0,4% | 10,2% | 9,1% | 9,1% |
-| 2023 | longa | 1,8% | 10,6% | 9,3% | 9,3% |
-| 2023 | curta | 1,8% | 10,6% | 9,3% | 9,3% |
-| 2024 | longa | 4,8% | 13,7% | 11,4% | 11,4% |
-| 2024 | curta | 4,8% | 13,7% | 11,4% | 11,4% |
-| 2025 | longa | 6,8% | 21,1% | 16,3% | 16,3% |
-| 2025 | curta | 6,8% | 18,1% | 13,4% | 13,4% |
-| 2026 (jan a ago) | longa | 13,2% | 28,2% | 18,8% | 18,7% |
-| 2026 (jan a ago) | curta | 13,2% | 28,1% | 18,7% | 18,6% |
+| 2022 | longa | 0,2% | 11,5% | 10,4% | 10,4% |
+| 2022 | curta | 0,4% | 11,5% | 10,4% | 10,4% |
+| 2023 | longa | 1,8% | 11,8% | 10,6% | 10,6% |
+| 2023 | curta | 1,8% | 11,8% | 10,6% | 10,6% |
+| 2024 | longa | 4,8% | 14,1% | 11,9% | 11,9% |
+| 2024 | curta | 4,8% | 14,1% | 11,9% | 11,9% |
+| 2025 | longa | 6,8% | 21,0% | 16,3% | 16,2% |
+| 2025 | curta | 6,8% | 18,5% | 13,8% | 13,8% |
+| 2026 (jan a ago) | longa | 13,2% | 28,2% | 19,0% | 18,9% |
+| 2026 (jan a ago) | curta | 13,2% | 28,1% | 18,9% | 18,9% |
 
 ## `classificacao_montagem.parquet`
 

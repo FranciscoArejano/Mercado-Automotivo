@@ -174,3 +174,46 @@ def test_toro_compass_e_renegade_nao_sao_parciais_antes_do_hibrido(versionados):
         assert tabela.loc[chave + (2018,), "eletrificacao_no_ano"] == "nenhuma"
         assert tabela.loc[chave + (chegada - 1,), "eletrificacao_no_ano"] == "nenhuma"
         assert tabela.loc[chave + (chegada,), "eletrificacao_no_ano"] == "parcial"
+
+
+# ------------------------------ guarda e curta na combustao (rodada 11)
+
+
+def test_guarda_versao_sem_casamento_do_tipo_impede_a_saida():
+    """O 208: o PBE lista o E-208 GT fora da chave; sem a guarda, o bev sairia."""
+    pbe = _pbe((2021, "flex"), (2021, "bev"), (2022, "flex"), (2023, "flex"), (2024, "flex"))
+    vig = _vig("flex+bev", inicio="2020-01")
+    sem = pa.tipos_da_vigencia(vig, pd.DataFrame([vig]), pbe, _fontes())
+    com = pa.tipos_da_vigencia(vig, pd.DataFrame([vig]), pbe, _fontes(),
+                               guardados={(2022, "bev"), (2023, "bev"), (2024, "bev")})
+    bev_sem = next(t for t in sem if t["tipo"] == "bev")
+    bev_com = next(t for t in com if t["tipo"] == "bev")
+    assert bev_sem["ultimo_ano_longo"] == 2022
+    assert bev_com["ultimo_ano_longo"] == bev_com["ultimo_ano_curto"] == 2026
+    assert bev_com["anos_guardados"] == "2022;2023;2024"
+    # versao sem casamento de outro tipo nao segura nada
+    outro = pa.tipos_da_vigencia(vig, pd.DataFrame([vig]), pbe, _fontes(),
+                                 guardados={(2022, "hev")})
+    assert next(t for t in outro if t["tipo"] == "bev")["ultimo_ano_longo"] == 2022
+
+
+def test_curta_da_combustao_segue_a_longa_ate_2020_sem_fonte_de_fim():
+    # gasolina so' no inicio da vigencia; o PBE de 2021 mostra so' flex
+    pbe = _pbe((2021, "flex"), (2022, "flex"))
+    t = _tipos(_vig("gasolina+flex", inicio="2003-01"), pbe)
+    assert (t["gasolina"]["ultimo_ano_longo"], t["gasolina"]["ultimo_ano_curto"]) == (2021, 2020)
+    # com fonte datada de fim, a curta pode sair antes
+    fim = _tipos(_vig("gasolina+flex", inicio="2003-01"), pbe,
+                 _fontes(("gasolina", "2008", "fim")))["gasolina"]
+    assert (fim["ultimo_ano_longo"], fim["ultimo_ano_curto"]) == (2008, 2003)
+
+
+def test_combustao_na_curta_nao_muda_nivel_de_eletrificacao_versionado():
+    """A regra so' mexe em combustao: nenhum ano de 2020 para tras fica sem tipo de
+    combustao na curta enquanto a longa o tem."""
+    if not config.CLASSIFICACAO_PROPULSAO_TIPOS.exists():
+        pytest.skip("tabela de tipos ainda nao gravada")
+    tipos = pd.read_csv(config.CLASSIFICACAO_PROPULSAO_TIPOS, keep_default_na=False)
+    combustao = tipos[tipos["tipo"].isin(pa.COMBUSTAO) & (tipos["fonte_saida"] != "fonte")]
+    curta, longa = combustao["ultimo_ano_curto"], combustao["ultimo_ano_longo"]
+    assert (curta >= longa.clip(upper=pa.PRIMEIRO_ANO_COLUNA - 1)).all()

@@ -774,6 +774,18 @@ de entrada e um de saída, nas leituras longa e curta (rodadas de 2026-10-02 e
 - a regra P5, que dá o tipo do híbrido quando fonte forte o declara: 16
   vigências viraram `mhev` e uma `hev`.
 
+**Fechado na rodada de 2026-10-05 (PBE, comex e calendário):**
+
+- o casamento com o PBE perdia versões elétricas escritas de outro nome. O
+  `E-208 GT` passou a casar com a chave 208 (a planilha soma); as fontes do
+  E-2008 passaram para a chave E2008; o 2008 ficou `flex` por decisão do
+  pesquisador (`config/decisoes_humanas.csv`);
+- a auditoria das versões eletrificadas sem casamento: cada nome tem decisão em
+  `config/pbe_modelos.csv` (`casa`, `nao_casa`, `sem_evidencia`), e os sem
+  evidência estão em `saidas/pbe_variantes_sem_evidencia.csv`;
+- a guarda da saída (versão sem casamento do mesmo tipo não deixa a ausência
+  virar saída) e a leitura curta da combustão até 2020 (segue a longa).
+
 **Fica como limitação**, por decisão do pesquisador (pouco volume ou limite da
 Fenabrave; a banda entre as leituras longa e curta cobre parte disso):
 
@@ -793,12 +805,30 @@ Fenabrave; a banda entre as leituras longa e curta cobre parte disso):
    - 911 T-Hybrid: só imprensa geral, e o sistema de 400 V não é nem leve nem
      pleno. Está em `a_adjudicar` como aviso.
    - XC40 B4, Defender e X6: nenhuma fonte brasileira encontrada.
-5. **ABVE: a participação acumulada de 2026 não fecha.** O comunicado de agosto
+5. **Treze famílias de variantes sem evidência** (`saidas/pbe_variantes_sem_evidencia.csv`):
+   iX1, eT3, Arrizo 5e (a planilha soma em 2019-09 e não soma em 2019-10),
+   e-Jumpy, e-Scudo, e-Expert, ES 300h, AMG CLA 45 S, AMG GLC 43, AMG GLC 63 S,
+   AMG GLE e RAV4 híbrido. Não casam; a guarda impede que virem saída.
+6. **Apelidos antigos sem o teste de variante.** `AMG C`, `AMG GLA`, `AMG E` e
+   `AMG GLC` casam com as chaves-base desde rodadas anteriores, sem evidência
+   de planilha. As versões `AMG GLC43` e `AMG GLC63S`, que só diferem pelo
+   espaço, ficaram `sem_evidencia` pelo teste novo. As duas coisas não são
+   coerentes entre si; decidir se os apelidos antigos passam pelo teste.
+7. **O 2008 de 2026.** O PBE de 2026 lista o `2008 GT HYBRID` (HIBRIDO), que a
+   P4 tornava `hibrido_indefinido`. A decisão "o 2008 fica `flex`" o tira. Se
+   a intenção era só tirar o `bev`, a decisão vira
+   `propulsao_oferecida=flex+hibrido_indefinido` e o teto de 2026 sobe 0,28
+   ponto.
+8. **Decisão humana parcial.** A decisão do 2008 decide a propulsão e deixa a
+   origem (contestada pela O3) `pendente` de propósito, com
+   `origem_producao=pendente`. A regra da fase 2 recusava decisão humana com
+   atributo pendente; agora recusa só quando o pendente não está escrito.
+9. **ABVE: a participação acumulada de 2026 não fecha.** O comunicado de agosto
    publica 20,2% no ano. As 328.477 unidades sobre os 1.888.019 leves da
    Fenabrave de janeiro a agosto dão 17,4%; agosto sozinho fecha (21,8%). Os
-   20,2% ficam acima do `teto_estrito` (18,7%), e os 17,4% dentro da banda. A
-   definição de eletrificado da ABVE também muda entre anos: 2024 inclui MHEV,
-   2025 não.
+   20,2% ficam acima do `teto_estrito` (18,9% depois do conserto do 208; era
+   18,7%), e os 17,4% dentro da banda. A definição de eletrificado da ABVE
+   também muda entre anos: 2024 inclui MHEV, 2025 não.
 
 ---
 

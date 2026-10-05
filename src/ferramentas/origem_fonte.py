@@ -89,21 +89,27 @@ def baixar(url: str) -> str:
     return decodificar(baixar_bytes(url))
 
 
-def texto_de(url: str) -> str:
+def texto_de(url: str, colunas: int = 1) -> str:
     """Texto da pagina: HTML pelo extrator de texto; PDF (atos do Banco Central, do
-    Contran, do Conama) pagina a pagina, pelo pdfplumber."""
+    Contran, do Conama, paginas do Diario Oficial) pagina a pagina, pelo pdfplumber.
+    `colunas`: PDF diagramado em colunas (o Diario Oficial) e' lido faixa a faixa,
+    da esquerda para a direita, para as linhas de colunas vizinhas nao se misturarem."""
     conteudo = baixar_bytes(url)
     if conteudo.lstrip()[:5] == b"%PDF-":
-        return texto_do_pdf(conteudo)
+        return texto_do_pdf(conteudo, colunas)
     return texto_da_pagina(decodificar(conteudo))
 
 
-def texto_do_pdf(conteudo: bytes) -> str:
+def texto_do_pdf(conteudo: bytes, colunas: int = 1) -> str:
     import io
 
     import pdfplumber
     with pdfplumber.open(io.BytesIO(conteudo)) as pdf:
-        paginas = [pagina.extract_text() or "" for pagina in pdf.pages]
+        paginas = []
+        for pagina in pdf.pages:
+            largura = pagina.width / colunas
+            paginas += [pagina.crop((i * largura, 0, (i + 1) * largura, pagina.height))
+                        .extract_text() or "" for i in range(colunas)]
     linhas = [re.sub(r"[ \t]+", " ", linha).strip()
               for linha in "\n".join(paginas).splitlines()]
     return "\n".join(linha for linha in linhas if linha)
@@ -184,6 +190,8 @@ def main() -> int:
     analisador.add_argument("--nome")
     analisador.add_argument("--busca", default="")
     analisador.add_argument("--pasta", choices=sorted(PASTAS), default="origem_paginas")
+    analisador.add_argument("--colunas", type=int, default=1,
+                            help="PDF em colunas: le cada pagina em N faixas verticais")
     analisador.add_argument("--tipos", action="store_true",
                             help="so' recalcular a coluna tipo_fonte de origem_fontes.csv e "
                                  "propulsao_fontes.csv")
@@ -202,7 +210,7 @@ def main() -> int:
                 print(f"{args.nome} ja' esta' no manifesto; escolha outro nome (uma pagina citada "
                       "nao pode ser sobrescrita)", file=sys.stderr)
                 return 2
-    texto = texto_de(args.url)
+    texto = texto_de(args.url, args.colunas)
     if len(texto) < 300:
         print(f"texto curto demais ({len(texto)} caracteres): pagina bloqueada ou vazia; "
               "nada gravado", file=sys.stderr)

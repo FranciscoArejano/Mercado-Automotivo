@@ -1,4 +1,9 @@
 nome,url,sha256_texto,caracteres,data_acesso
+camex_86_2014_dou,https://pesquisa.in.gov.br/imprensa/servlet/INPDFViewer?jornal=1&pagina=20&data=19/09/2014&captchafield=firstAccess,bcc7c67d69d6ec1ef41fa35fc50d30e84e37787b207f5c96069e98df85092ca6,9414,2026-10-05
+camex_86_2014_dou_p21,https://pesquisa.in.gov.br/imprensa/servlet/INPDFViewer?jornal=1&pagina=21&data=19/09/2014&captchafield=firstAccess,861498d8ddcbc1995b514532b4b3163a5514f99f0a4f1e808115daf55624ab20,12345,2026-10-05
+camex_97_2015_dou,https://pesquisa.in.gov.br/imprensa/servlet/INPDFViewer?jornal=1&pagina=2&data=27/10/2015&captchafield=firstAccess,badd79ac9c6567b31f852990ef3cdb2f562e091c2dcb43c68b379a6ff543e33a,8877,2026-10-05
+camex_97_2015_dou_p1,https://pesquisa.in.gov.br/imprensa/servlet/INPDFViewer?jornal=1&pagina=1&data=27/10/2015&captchafield=firstAccess,4ca8fa03bba827fda58b8a096a5ba7a0a62a2418bc890ae51b26fb59117985c7,7627,2026-10-05
+camex_97_2015_dou_p3,https://pesquisa.in.gov.br/imprensa/servlet/INPDFViewer?jornal=1&pagina=3&data=27/10/2015&captchafield=firstAccess,27bf53d4ec770c5d5ec64cd896f5f189b72acb2a20dea842d9f7ecc8fa32561a,12157,2026-10-05
 dec_10979_2022,https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/decreto/D10979.htm,4519f60268f79181c19f266612c0fe8e0e05290f85736d8d009d307f4b7e7e9d,11440,2026-10-05
 dec_11047_2022,https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/decreto/D11047.htm,3aeca9c6f9f1a654bdeba56fe365f11240b9865b9f37335804f78fb7bf217f26,1279,2026-10-05
 dec_11055_2022,https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/decreto/D11055.htm,ffea9678f204f947bc2c698467509b863316371feefb9ec2ac7a55ebedd8582a,1316,2026-10-05
@@ -23,6 +28,9 @@ dec_7971_2013,https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/decreto/d
 dec_8168_2013,https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/decreto/d8168.htm,16a9d68c9ab08253d7c27e766a94a0fcecc3625e6f48503e6daac5790f6cb9bd,4392,2026-10-05
 dec_8279_2014,https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/decreto/d8279.htm,8ca7640d1f544996623a9ba619b4def6ae6a246c4a5fefd3ee8a4dcea5ddcb21,4398,2026-10-05
 dec_9442_2018,https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/decreto/D9442.htm,c4e3e6b9690f920b57913fb4509e87d6a12e480b036806b469ecabfe5bde9cef,3749,2026-10-05
+gecex_532_2023,https://www.gov.br/mdic/pt-br/assuntos/camex/resolucoes/gecex/resolucoes/resolucao-gecex-no-532-de-20-de-novembro-de-2023,49bbf5d79aeb8deba054f6d6823ff4731f6189721566122ead34598981800968,11603,2026-10-05
+gecex_774_2025,https://www.gov.br/mdic/pt-br/assuntos/camex/resolucoes/gecex/resolucoes/resolucao-gecex-no-774-de-30-de-julho-de-2025,e9e57fd5cd3b30731d19a7a9d8a575289250f130002e9d6185c90d51dd5ed0a2,4171,2026-10-05
+gecex_927_2026,https://www.gov.br/mdic/pt-br/assuntos/camex/resolucoes/gecex/resolucoes/resolucao-gecex-no-927-de-29-de-junho-de-2026,bc9e16ba2fe1b9149ffddde8bc94c07c2eac08cbb9c1ee93965e934040e23e2c,3073,2026-10-05
 lei_12715_2012,https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12715.htm,68f589973f38f2c590bdedb93c54586545e61710a98bf13abec1db9c024f61b5,139808,2026-10-05
 lei_13755_2018,https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/L13755.htm,3b75a031bb430fcc134363e35c273cc3feb74d00c895964b3427892acbfdd38d,73022,2026-10-05
 lei_14902_2024,https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/l14902.htm,35c52680db6cf89359688b198b345512252d7b9ec99f22ae6c1517cc53710cb4,53001,2026-10-05

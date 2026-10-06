@@ -40,6 +40,8 @@ ETAPAS = [
     # valida o que as duas produziram, entao rodam antes dela.
     (11, "etapa11_classificacao", "dimensao de classificacao de modelo"),
     (12, "etapa12_comex", "comercio exterior de veiculos (Comex Stat)"),
+    # O calendario de politicas le, no uso-teste, o painel e o comercio exterior.
+    (13, "etapa13_politicas", "calendario de politicas"),
     (6, "etapa06_validacao", "validacao"),
     (7, "etapa07_referencia_cruzada", "referencia cruzada"),
     # O catalogo descreve o que as outras produziram: vem por ultimo.

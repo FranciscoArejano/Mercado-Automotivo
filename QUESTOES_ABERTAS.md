@@ -44,6 +44,8 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | Macro | Dimensão macro mensal | **17 séries; o IPCA de usado é índice de depreciação** |
 | Classificação | Dimensão de modelo gravada (fase 2) | **gravada com procedência por atributo; origem 81% sem checagem — próxima frente** |
 | Comex | Comércio exterior de veículos (Comex Stat), 1997–2026-08 | **construída; peso baixo ajustado pelo peso; distância de origem registrada, não resolvida** |
+| Calendário | Calendário de políticas, 2008–2026 | **construído: 50 atos e 216 alíquotas, só fonte oficial; 25 de 61 datas sem movimento, a conferir** |
+| Motorização | Cilindrada por versão (coluna `motor` do PBE) | **próxima dimensão; não construída** |
 
 ---
 
@@ -869,6 +871,61 @@ quantidade não.
    ela fica com a publicada.
 
 ---
+
+## Calendário de políticas: o que ficou fora ou inferido
+
+`politicas_mensal.parquet` (rodada 11, 2026-10-05) tem 50 atos de 2008 a 2026,
+cada um com trecho literal de página oficial guardada (Planalto, DOU pelo
+visualizador de PDF da Imprensa Nacional, gov.br, Banco Central). As alíquotas
+são só as que o próprio ato fixa.
+
+**Fora, por falta de página oficial aberta:**
+
+1. **O fim da quota de carros do desconto patrocinado de 2023.** A notícia do
+   MDIC diz 7/7/2023; as notícias do gov.br pedem autenticação, e a matéria do
+   DOU em in.gov.br dá 403. O ato fica com o prazo da própria MP (120 dias, até
+   3/10/2023).
+2. **O protocolo do acordo com a Argentina entre 1/7/2013 e 30/6/2014.** O
+   Decreto 6.500 vai até 30/6/2013 e o 8.278 começa em 1/7/2014; o ato do meio
+   não foi aberto.
+3. **O IOF depois de 2015.** O Decreto 8.392 (0,0082% ao dia para pessoa
+   física, desde 22/1/2015) fica sem fim; mudanças posteriores não foram
+   procuradas.
+4. **As alíquotas de gasolina e de comercial leve (8704) em 2013-2014.** Os
+   decretos do ciclo trazem as tabelas; só as de flex foram registradas.
+5. **O Decreto 10.923/2021 (a TIPI de 2022)** não foi guardado. As alíquotas de
+   8703.40/60/80 sob as reduções gerais de 2022 (10.979, 11.055, 11.158) não
+   estão registradas.
+
+**Inferido, com a inferência na observação do ato:**
+
+6. **O fim da Camex 97 em 31/12/2023.** A Gecex 532 tira os eletrificados do
+   Anexo V da Gecex 272/2021 a partir de 1/1/2024; a passagem dos Ex da Camex 97
+   para a Gecex 272 (e a mudança de NCM de 2017) não foi aberta.
+
+**Do uso-teste das datas** (`saidas/politicas_uso_teste.csv`): 25 das 61 datas
+não mostram movimento além do sazonal (limiar de 10 pontos contra as mesmas
+janelas do ano anterior). A lista e a leitura estão no log da rodada. O
+movimento sazonal de referência pode estar contaminado por política do ano
+anterior: o desconto de junho de 2023 compara com 2022, ano do corte de IPI de
+maio.
+
+## Motorização: a próxima dimensão (não construída)
+
+A coluna `motor` de `saidas/pbe_versoes.csv` traz a cilindrada por versão. Ela
+dá a faixa de cilindrada que define a alíquota de IPI (até 1.000 cm³, 1.000 a
+2.000, acima de 2.000) e casa com as NCMs de 8703. Registrado aqui como
+próxima dimensão, por pedido da rodada 11; nada foi construído.
+
+O que se sabe da coluna:
+
+- a cilindrada lê-se no começo do campo (`1.0`, `2.0-16V`, `1.0T`) em todas as
+  versões de 2009 a 2016, menos duas de 2014, e em 78% a 96% das de 2017 a 2026;
+- os elétricos vêm como `ELETRICO` (186 versões em 2026);
+- o resto é campo vazio (120 versões, quase todas de 2017 a 2019), código do
+  fabricante (`T270`, `T200`, `TF200`) ou vírgula decimal (`3,0-24V`);
+- a versão casa com a chave do painel pelo mesmo casamento da propulsão, então
+  herda a cobertura e as famílias sem evidência dele.
 
 ## O que continua aberto
 

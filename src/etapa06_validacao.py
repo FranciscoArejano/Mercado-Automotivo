@@ -1343,7 +1343,25 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
         partes.append("\n## 13. Comercio exterior de veiculos (Comex Stat)\n\n"
                       "_Nao disponivel: rode `python src/etapa12_comex.py`._\n")
 
-    partes.append("\n## 14. Situacao\n\n")
+    # ------------------------------------------- 14. calendario de politicas
+    if config.POLITICAS_VALIDACAO.exists() and config.POLITICAS_MENSAL.exists():
+        conferencias = pd.read_csv(config.POLITICAS_VALIDACAO)
+        mensal = pd.read_parquet(config.POLITICAS_MENSAL, columns=["mes_ref", "ato_id"])
+        partes.append(
+            "\n## 14. Calendario de politicas\n\n"
+            "Tabela **separada**: `politicas_mensal.parquet` (um ato em vigor por mes), "
+            "gravada pela etapa 13 a partir de `dados/referencia/politicas_atos.csv` e "
+            "`politicas_aliquotas.csv`, cada linha com trecho literal de pagina oficial "
+            "guardada em `dados/bruto/politicas_paginas/`. "
+            f"{mensal['ato_id'].nunique()} atos, {mensal['mes_ref'].min()} a "
+            f"{mensal['mes_ref'].max()}, {len(mensal):,} linhas.\n\n" + _tabela(conferencias))
+        if int(conferencias["falhas"].sum()):
+            falhas.append("conferencias do calendario de politicas com falha")
+    else:
+        partes.append("\n## 14. Calendario de politicas\n\n"
+                      "_Nao disponivel: rode `python src/etapa13_politicas.py`._\n")
+
+    partes.append("\n## 15. Situacao\n\n")
     if falhas:
         partes.append("**Validacao FALHOU:**\n\n" + "".join(f"- {f}\n" for f in falhas))
     else:

@@ -33,6 +33,7 @@ ETAPA = "etapa10_catalogo"
 # Caminhos cujo ultimo commit e' o "commit do dado".
 CAMINHOS_DE_DADO = ("dados/processado", "dados/referencia", "dados/bruto/manifesto.csv",
                     "dados/bruto/pbe", "dados/bruto/origem_paginas", "dados/bruto/comex",
+                    "dados/bruto/politicas_paginas",
                     "config", "regras.csv",
                     "saidas/classificacao_rascunho.xlsx")
 
@@ -327,6 +328,41 @@ def _comex() -> tuple[dict, str]:
              "linhas": len(dados), "janela": janela}, corpo)
 
 
+def _politicas() -> tuple[dict, str]:
+    """O calendario de politicas (etapa 13)."""
+    if not config.POLITICAS_MENSAL.exists():
+        return ({"produto": "politicas_mensal", "arquivo": "--", "linhas": 0,
+                 "janela": "nao construida"},
+                "- **Estado:** nao construida; rode `python src/etapa13_politicas.py`.\n")
+    mensal = pd.read_parquet(config.POLITICAS_MENSAL)
+    atos = pd.read_csv(config.POLITICAS_ATOS, dtype=str, keep_default_na=False)
+    aliquotas = pd.read_csv(config.POLITICAS_ALIQUOTAS, dtype=str, keep_default_na=False)
+    validacao = pd.read_csv(config.POLITICAS_VALIDACAO)
+    paginas = len(list(config.POLITICAS_PAGINAS.glob("*.txt")))
+    temas = atos.groupby("tema").size().to_dict()
+    tributos = aliquotas.groupby("tributo").size().to_dict()
+    janela = f"{mensal['mes_ref'].min()} a {mensal['mes_ref'].max()}"
+    corpo = (
+        "- **Estado: dimensao gravada** pela etapa 13, a partir de duas tabelas de "
+        "referencia escritas a' mao (`dados/referencia/politicas_atos.csv`, "
+        "`politicas_aliquotas.csv`), cada linha com trecho literal de uma das "
+        f"{paginas} paginas oficiais guardadas em `dados/bruto/politicas_paginas/` "
+        "(Planalto, Diario Oficial, gov.br, Banco Central), com SHA-256 no manifesto.\n"
+        "- **Unidade de observacao:** mes x ato em vigor; junta ao painel pelo `mes_ref`.\n"
+        f"- **Atos:** {len(atos)} -- "
+        + ", ".join(f"{t} {n}" for t, n in temas.items()) + ".\n"
+        f"- **Aliquotas:** {len(aliquotas)} linhas, so' as que o proprio ato fixa ("
+        + ", ".join(f"{t} {n}" for t, n in tributos.items())
+        + "); NCM com os pontos da TIPI, prefixo da NCM do Comex Stat.\n"
+        "- **Ressalvas:** nao e' a TIPI inteira; `vigencia_fim` vazia quer dizer em vigor ou "
+        "fim nao confirmado em pagina aberta; o uso-teste "
+        "(`saidas/politicas_uso_teste.csv`) marca datas sem movimento, nao estima efeito.\n"
+        f"- **Conferencias:** {int(validacao['falhas'].sum())} falhas em "
+        "`saidas/politicas_validacao.csv`; dicionario em `saidas/politicas_dicionario.md`.\n")
+    return ({"produto": "politicas_mensal", "arquivo": "dados/processado/politicas_mensal.parquet",
+             "linhas": len(mensal), "janela": janela}, corpo)
+
+
 def _classificacao() -> tuple[dict, str]:
     if config.CLASSIFICACAO.exists():
         return _dimensao_classificacao()
@@ -405,6 +441,9 @@ def _outros() -> str:
         ["`dados/bruto/origem_paginas/`",
          f"{len(list((config.DIR_BRUTO / 'origem_paginas').glob('*.txt')))} paginas de fonte "
          "de origem, abertas e guardadas, com SHA-256"],
+        ["`dados/bruto/politicas_paginas/`",
+         f"{len(list(config.POLITICAS_PAGINAS.glob('*.txt')))} paginas oficiais do calendario "
+         "de politicas, abertas e guardadas, com SHA-256"],
         ["`regras.csv`", f"{len(regras)} regras de harmonizacao (rebatismo, desdobramento)"],
         ["`config/mapa_grupos.csv`", f"{len(mapa)} linhas marca-grupo com vigencia"],
         ["`dados/referencia/Vendas_Geral.xlsx`",
@@ -440,6 +479,9 @@ def gerar() -> str:
     resumo_comex, corpo_comex = _comex()
     resumos.append(resumo_comex)
     secoes.append(("comex_veiculos", resumo_comex["arquivo"], corpo_comex))
+    resumo_politicas, corpo_politicas = _politicas()
+    resumos.append(resumo_politicas)
+    secoes.append(("politicas_mensal", resumo_politicas["arquivo"], corpo_politicas))
 
     texto = [
         f"# Catalogo do repositorio -- dado do commit `{commit_do_dado()}`\n\n",

@@ -339,9 +339,8 @@ MITSUBISHI,LANCER,automoveis,2011-12,2014-12,Japão,,,
 MITSUBISHI,LANCER,automoveis,2015-01,2020-09,Brasil,hpe_catalao,,
 MITSUBISHI,OUTLANDER,automoveis,2007-06,2013-12,Japão,,,
 MITSUBISHI,OUTLANDER,automoveis,2014-01,2022-12,Brasil,hpe_catalao,,
-MITSUBISHI,PAJERO,automoveis,2003-01,2020-12,Brasil,hpe_catalao,,"Pajero TR4, Sport e Dakar de Catalao."
-MITSUBISHI,PAJERO,automoveis,2003-01,2020-12,Japão,,,Pajero Full importado.
-MITSUBISHI,PAJERO,automoveis,2021-01,2025-09,Tailândia,,,Pajero Sport importado da Tailandia; inicio incerto.
+MITSUBISHI,PAJERO,automoveis,2003-01,2025-09,Brasil,hpe_catalao,,"Pajero TR4, Sport e Dakar de Catalao."
+MITSUBISHI,PAJERO,automoveis,2003-01,2025-09,Japão,,,Pajero Full importado.
 MITSUBISHI,TRITON,comerciais_leves,2025-01,2026-08,Brasil,hpe_catalao,,
 NISSAN,ALTIMA,automoveis,2013-12,2015-12,Estados Unidos,,,
 NISSAN,FRONTIER,comerciais_leves,2003-01,2016-12,Brasil,nissan_sjp,,Incerto depois de 2008.
@@ -410,11 +409,10 @@ RENAULT,CLIO SEDAN,automoveis,2003-01,2007-12,Brasil,renault_sjp,,
 RENAULT,CLIO SEDAN,automoveis,2008-01,2009-09,Argentina,,,
 RENAULT,DUSTER,automoveis,2011-10,2026-08,Brasil,renault_sjp,,
 RENAULT,FLUENCE,automoveis,2010-10,2023-03,Argentina,,,
-RENAULT,KANGOO,automoveis,2003-01,2018-12,Argentina,,,"Santa Isabel, Cordoba."
-RENAULT,KANGOO,automoveis,2019-01,2023-10,França,,,Incerto: poucas unidades entre 2019 e 2023.
-RENAULT,KANGOO,comerciais_leves,2003-01,2018-12,Argentina,,,"Santa Isabel, Cordoba."
-RENAULT,KANGOO,comerciais_leves,2019-01,2023-12,França,,,Incerto: poucas unidades entre 2019 e 2023.
-RENAULT,KANGOO,comerciais_leves,2024-01,2026-08,Argentina,,,Volta como importado da Argentina em 2024.
+RENAULT,KANGOO,automoveis,2003-01,2018-12,Argentina,,,
+RENAULT,KANGOO,automoveis,2019-01,2023-10,França,,,
+RENAULT,KANGOO,comerciais_leves,2003-01,2018-12,Argentina,,,
+RENAULT,KANGOO,comerciais_leves,2019-01,2026-08,França,,,
 RENAULT,KARDIAN,automoveis,2024-03,2026-08,Brasil,renault_sjp,,
 RENAULT,KWID,automoveis,2017-06,2026-08,Brasil,renault_sjp,,
 RENAULT,LOGAN,automoveis,2007-05,2026-02,Brasil,renault_sjp,,

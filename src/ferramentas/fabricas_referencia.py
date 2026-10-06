@@ -839,6 +839,51 @@ linha("gm_sjc", "GM|CLASSIC|a", "2012-11", "2013-02", PL, DEC, "2012-11", "gm_cl
       "irá deixar de produzir o Classic na unidade em fevereiro de 2013 [...] o restante continua "
       "na produção do Classic até fevereiro.", "Fonte fraca (imprensa geral).")
 
+# ---- 2023 a 2026 (lote 7)
+linha("fiat_betim", "FIAT|ARGO|a", "2017-01", "2026-06", PL, INI, "2026-06",
+      "fiat_argo_750mil_autoindustria",
+      "Em Betim, produção do Fiat Argo atinge 750 mil unidades [...] Lançado em 2017 e com "
+      "fabricação inteiramente nacional")
+linha("fiat_betim", "FIAT|FASTBACK|a", "2022-09", "2026-06", PL, DUR, "2026-06",
+      "fiat_fastback_200mil_autoindustria",
+      "Próximo de completar quatro anos de mercado, em setembro próximo, o Fastback superou as "
+      "200 mil unidades produzidas. O primeiro e ainda único SUV coupé da Fiat no Brasil é "
+      "fabricado no Polo Automotivo Stellantis de Betim, MG",
+      "Quatro anos contados para tras de setembro de 2026.")
+linha("fiat_betim", "FIAT|PULSE|a", "2021-01", "2026-06", PL, INI, "2026-06",
+      "fiat_pulse_250mil_autopapo",
+      "Fiat Pulse alcança 250 mil unidades produzidas e 200 mil vendidas no Brasil Fabricado em "
+      "Betim (MG) [...] Fiat Pulse foi lançado em 2021")
+linha("stellantis_goiana", "FIAT|TORO|c", "2016-01", "2026-05", PL, INI, "2026-05",
+      "fiat_toro_2026_autoindustria",
+      "modelo que está à frente do segmento desde 2016, quando foi lançado, poucos meses depois "
+      "da apresentação da Oroch, e que alcançou 650 mil unidades produzidas desde então na "
+      "fábrica da Stellantis de Goiana, PE.")
+linha("stellantis_goiana", "RAM|RAMPAGE|c", "2026-05", "2026-05", PL, PTO, "2026-05",
+      "fiat_toro_2026_autoindustria",
+      "A Rampage, também produzida pela Stellantis em Goiana")
+linha("gm_scs", ["GM|TRACKER|a", "GM|SPIN|a", "GM|MONTANA|c"], "2025-12", "2025-12", PL, PTO,
+      "2025-12", "gm_scs_visitas_autodata_97631",
+      "A General Motors abriu as portas da sua fábrica instalada em São Caetano do Sul, SP, para "
+      "visitas guiadas. É a primeira vez que o público em geral poderá conhecer de perto as etapas "
+      "de produção dos modelos Chevrolet Tracker, Spin e Montana.")
+linha("gm_scs", "GM|TRACKER|a", "2025-07", "2025-07", PL, PTO, "2025-07",
+      "gm_tracker_2026_revistacarro",
+      "o Chevrolet Tracker 2026 foi revelado por inteiro, uma vez que já começou a ser fabricado "
+      "em São Caetano do Sul.")
+linha("nissan_resende", "NISSAN|KICKS|a", "2025-04", "2025-04", PL, PTO, "2025-04",
+      "nissan_kicks_nova_geracao_autodata_86823",
+      "A Nissan deu início à produção da nova geração do Kicks em sua fábrica brasileira [...] é "
+      "maior do que a geração anterior, agora batizada de Kicks Play – e que segue em linha em "
+      "Resende.", "A chave KICKS agrega as duas geracoes.")
+linha("", "GWM|HAVAL H6|a", "2025-11", "2025-11", AB, PTO, "2025-11",
+      "gwm_h6_transicao_autoindustria",
+      "O modelo segue também vindo da China e entre o final deste ano e início do próximo a "
+      "montadora fará a transição do importado para o nacional", pais="China")
+linha("gwm_iracemapolis", "GWM|HAVAL H6|a", "2025-11", "2025-11", PL, PTO, "2025-11",
+      "gwm_h6_transicao_autoindustria",
+      "o novo Haval H6 já está em processo de montagem na fábrica da GWM em Iracemápolis, SP.")
+
 # ---- paginas de origem_paginas (rodadas anteriores), relidas como fabrica x modelo
 linha("byd_camacari", "BYD|DOLPHIN MINI|a", "2025-10", "2025-11", PL, INI, "2025-11",
       "byd_camacari_autodata_96403",

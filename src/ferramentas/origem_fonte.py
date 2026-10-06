@@ -89,14 +89,16 @@ def baixar(url: str) -> str:
     return decodificar(baixar_bytes(url))
 
 
-def texto_de(url: str, colunas: int = 1) -> str:
+def texto_de(url: str, colunas: int = 1, paginas: tuple[int, int] | None = None) -> str:
     """Texto da pagina: HTML pelo extrator de texto; PDF (atos do Banco Central, do
     Contran, do Conama, paginas do Diario Oficial) pagina a pagina, pelo pdfplumber.
     `colunas`: PDF diagramado em colunas (o Diario Oficial) e' lido faixa a faixa,
-    da esquerda para a direita, para as linhas de colunas vizinhas nao se misturarem."""
-    conteudo = baixar_bytes(url)
+    da esquerda para a direita, para as linhas de colunas vizinhas nao se misturarem.
+    `paginas`: (primeira, ultima), contadas de 1, para guardar so' parte de um PDF longo
+    (a TIPI inteira tem 400 paginas; o capitulo 87 tem quatro)."""
+    conteudo = baixar_bytes(url.split("#")[0])
     if conteudo.lstrip()[:5] == b"%PDF-":
-        return texto_do_pdf(conteudo, colunas)
+        return texto_do_pdf(conteudo, colunas, paginas)
     if conteudo.lstrip()[:1] == b"{":
         return texto_de_normativo(conteudo)
     return texto_da_pagina(decodificar(conteudo))
@@ -111,13 +113,15 @@ def texto_de_normativo(conteudo: bytes) -> str:
                       texto_da_pagina(dado["Texto"])])
 
 
-def texto_do_pdf(conteudo: bytes, colunas: int = 1) -> str:
+def texto_do_pdf(conteudo: bytes, colunas: int = 1,
+                 faixa: tuple[int, int] | None = None) -> str:
     import io
 
     import pdfplumber
     with pdfplumber.open(io.BytesIO(conteudo)) as pdf:
         paginas = []
-        for pagina in pdf.pages:
+        escolhidas = pdf.pages if faixa is None else pdf.pages[faixa[0] - 1:faixa[1]]
+        for pagina in escolhidas:
             largura = pagina.width / colunas
             x0, topo, _, base = pagina.bbox
             paginas += [pagina.crop((x0 + i * largura, topo, x0 + (i + 1) * largura, base),
@@ -205,6 +209,9 @@ def main() -> int:
     analisador.add_argument("--pasta", choices=sorted(PASTAS), default="origem_paginas")
     analisador.add_argument("--colunas", type=int, default=1,
                             help="PDF em colunas: le cada pagina em N faixas verticais")
+    analisador.add_argument("--paginas", default="",
+                            help="PDF longo: so' as paginas A-B (contadas de 1); a URL "
+                                 "registrada leva #page=A")
     analisador.add_argument("--tipos", action="store_true",
                             help="so' recalcular a coluna tipo_fonte de origem_fontes.csv e "
                                  "propulsao_fontes.csv")
@@ -223,12 +230,14 @@ def main() -> int:
                 print(f"{args.nome} ja' esta' no manifesto; escolha outro nome (uma pagina citada "
                       "nao pode ser sobrescrita)", file=sys.stderr)
                 return 2
-    texto = texto_de(args.url, args.colunas)
+    faixa = tuple(int(x) for x in args.paginas.split("-")) if args.paginas else None
+    url = f"{args.url.split('#')[0]}#page={faixa[0]}" if faixa else args.url
+    texto = texto_de(url, args.colunas, faixa)
     if len(texto) < 300:
         print(f"texto curto demais ({len(texto)} caracteres): pagina bloqueada ou vazia; "
               "nada gravado", file=sys.stderr)
         return 2
-    destino = registrar(args.nome, args.url, texto, pasta)
+    destino = registrar(args.nome, url, texto, pasta)
     print(f"gravado {destino.relative_to(config.RAIZ)} ({len(texto)} caracteres)")
     if args.busca:
         padrao = re.compile(args.busca, re.IGNORECASE)

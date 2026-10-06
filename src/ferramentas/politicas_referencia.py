@@ -303,12 +303,14 @@ ato("credito_2015_iof_dec8392", "credito", "decreto", "8.392", "2015-01-20", "20
     "de sua publicação [...] publicado no DOU de 21.1.2015",
     "IOF diario de 0,0041% para 0,0082%. Mudancas posteriores do IOF nao foram procuradas.")
 ato("credito_2010_bcb_circ3515", "credito", "circular", "BCB 3.515", "2010-12-03", "2010-12-03",
-    "2010-12-06", "2011-11-11", "", "aumenta",
+    "2010-12-06", "", "", "aumenta",
     "financiamento de veiculo a pessoa fisica com prazo acima de 24 meses", "bcb_circular_3515",
     "Deve ser aplicado FPR de 150% (cento e cinquenta por cento) às exposições relativas a "
     "operações de crédito",
     "Fator de ponderacao de 150% no capital para credito a pessoa fisica contratado a partir de "
-    "6/12/2010 com prazo acima de 24 meses; veiculo isento conforme prazo e entrada.")
+    "6/12/2010 com prazo acima de 24 meses; veiculo isento conforme prazo e entrada. A "
+    "Circular 3.563 (11/11/2011) isenta o veiculo de ate' 60 meses, mas nao revoga esta: "
+    "fim nao procurado.")
 ato("credito_2011_bcb_circ3563", "credito", "circular", "BCB 3.563", "2011-11-11", "2011-11-11",
     "2011-11-11", "", "credito_2010_bcb_circ3515", "reduz",
     "financiamento de veiculo a pessoa fisica", "bcb_circular_3563",

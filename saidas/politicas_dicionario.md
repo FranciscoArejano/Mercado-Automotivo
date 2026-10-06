@@ -49,7 +49,7 @@ vale ate' a vespera do posterior; cronograma substituido antes de valer fica for
 | `aliquota_pct` | em %, com virgula decimal. IPI de 2012 a 2017: a TIPI ja' inclui os 30 pontos do Inovar-Auto (37 = 7 + 30); a empresa habilitada tinha a reducao. IOF: % ao dia |
 | `ato_id`, `pagina_salva`, `fonte_trecho` | ato, pagina (o anexo, quando a tabela esta' nele) e trecho literal |
 
-## `dados/processado/politicas_mensal.parquet` (1,747 linhas, 2008-01 a 2026-08)
+## `dados/processado/politicas_mensal.parquet` (1,924 linhas, 2008-01 a 2026-08)
 
 Uma linha por mes e ato em vigor. Junta ao painel pelo `mes_ref`; um mes tem varios
 atos.
@@ -86,4 +86,4 @@ anteriores, difere da do ano anterior em 10 pontos ou mais.
 | aliquota: tributo, NCM no formato da TIPI, ato existente, trecho literal, uma aliquota por periodo (NCM x categoria)           |     216 |        0 |
 | ato sem nenhum mes na janela 2003-01 a 2026-08: nenhum                                                                         |      50 |        0 |
 | registro, nao falha: paginas guardadas que nenhum ato ou aliquota cita: dec_11047_2022                                         |      55 |        0 |
-| registro, nao falha: atos sem vigencia_fim (em vigor, ou fim nao confirmado): 10                                               |      50 |        0 |
+| registro, nao falha: atos sem vigencia_fim (em vigor, ou fim nao confirmado): 11                                               |      50 |        0 |

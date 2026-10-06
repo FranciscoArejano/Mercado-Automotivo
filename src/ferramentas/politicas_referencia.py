@@ -60,6 +60,50 @@ def ato(id, tema, instrumento, numero, data_ato, data_pub, ini, fim, altera, sen
                   observacao=obs))
 
 
+# ------------------------------------------------------------------ IPI 2002-2007
+ato("ipi_2002_dec4317", "ipi", "decreto", "4.317", "2002-07-31", "2002-08-01", "2002-08-01",
+    "2002-12-31", "", "reduz", "automoveis flex: a mesma aliquota dos carros a alcool (NC 87-2)",
+    "dec_4317_2002",
+    "Ficam fixadas nos percentuais indicados as alíquotas referentes aos automóveis de "
+    "passageiros e veículos de uso misto, com motor a álcool ou com motor que utilize alternativa "
+    "ou simultaneamente gasolina e álcool (flexible fuel engine)",
+    "Equiparacao do flex ao alcool (pista da rodada 12). Antes da janela do painel: revogado a "
+    "partir de 1/1/2003 pelo Decreto 4.542, cuja TIPI mantem o flex na NC (87-2).")
+ato("ipi_2003_dec4542", "ipi", "decreto", "4.542", "2002-12-26", "2002-12-27", "2003-01-01",
+    "2006-12-31", "ipi_2002_dec4317", "regulamenta", "TIPI de 2003 (aliquotas de base)",
+    "dec_4542_2002",
+    "Este Decreto entra em vigor na data de sua publicação, produzindo efeitos a partir de 1o de "
+    "janeiro de 2003",
+    "TIPI de 2003; o capitulo 87 esta' em dec_4542_2002_anexo17, que a Presidencia publica com "
+    "as notas das alteracoes posteriores. 1.000 cm3 a 9%; gasolina de 1.000 a 2.000 cm3 a 15%; "
+    "flex a 13% (20% acima de 2.000 cm3). Substituida pela TIPI de 2007 (Decreto 6.006).")
+ato("ipi_2003_dec4800", "ipi", "decreto", "4.800", "2003-08-05", "2003-08-06", "2003-08-06",
+    "2003-11-30", "ipi_2003_dec4542", "reduz", "automoveis ate 2.000 cm3 e comerciais leves",
+    "dec_4800_2003",
+    "Da data de vigência deste Decreto até 31 de outubro de 2003 [...] Art. 5º Este Decreto entra "
+    "em vigor na data de sua publicação",
+    "1.000 cm3 de 9 para 5% (6% em novembro); gasolina de 1.000 a 2.000 cm3 de 15 para 11% (12%); "
+    "flex de 13 para 9% (10%). O art. 4o restabelecia a TIPI em 1/12/2003; o Decreto 4.902 "
+    "prorrogou.")
+ato("ipi_2003_dec4902", "ipi", "decreto", "4.902", "2003-11-28", "2003-12-01", "2003-12-01",
+    "2004-02-29", "ipi_2003_dec4800", "prorroga", "automoveis ate 2.000 cm3 e comerciais leves",
+    "dec_4902_2003", "no período de 1º de dezembro de 2003 a 29 de fevereiro de 2004",
+    "1.000 cm3 a 6%; gasolina de 1.000 a 2.000 cm3 a 12%; flex a 10%. Nenhum ato prorroga: em "
+    "marco e abril de 2004 vale a TIPI de 2003 (9, 15 e 13%) ate' o Decreto 5.058.")
+ato("ipi_2004_dec5058", "ipi", "decreto", "5.058", "2004-04-30", "2004-04-30", "2004-05-01",
+    "2006-12-31", "ipi_2003_dec4542", "reduz", "automoveis (aliquota permanente)",
+    "dec_5058_2004",
+    "Este Decreto entra em vigor na data de sua publicação, produzindo efeitos a partir de 1o de "
+    "maio de 2004",
+    "1.000 cm3 a 7%; gasolina de 1.000 a 2.000 cm3 a 13%; flex a 11% (18% acima de 2.000 cm3). "
+    "As mesmas aliquotas ficam na TIPI de 2007.")
+ato("ipi_2007_dec6006", "ipi", "decreto", "6.006", "2006-12-28", "2006-12-29", "2007-01-01",
+    "", "ipi_2003_dec4542", "regulamenta", "TIPI de 2007 (aliquotas de base)", "dec_6006_2006",
+    "Este Decreto entra em vigor na data de sua publicação, produzindo efeitos a partir de 1o de "
+    "janeiro de 2007",
+    "TIPI de 2007; capitulo 87 em dec_6006_2006_secaoxvii. Foi substituida pela TIPI de 2012 "
+    "(Decreto 7.660), que nao foi guardada: fim nao confirmado em pagina aberta.")
+
 # ------------------------------------------------------------------ IPI 2008-2010
 ato("ipi_2008_dec6687", "ipi", "decreto", "6.687", "2008-12-11", "2008-12-12", "2008-12-12",
     "2009-03-31", "", "reduz",
@@ -133,17 +177,35 @@ ato("ipi_2014_dec8279", "ipi", "decreto", "8.279", "2014-06-30", "2014-07-01", "
     "1.000 cm3 a 33 e flex a 39 ate 31/12/2014; aliquota cheia (37 e 41) a partir de 1/1/2015.")
 
 # ------------------------------------------------------------------ IPI 2018-2025
-ato("ipi_2018_dec9442", "ipi", "decreto", "9.442", "2018-07-05", "2018-07-06", "2018-11-01", "",
-    "", "reduz", "automoveis hibridos e eletricos (8703.40, 8703.60, 8703.80)", "dec_9442_2018",
+ato("ipi_2018_dec9442", "ipi", "decreto", "9.442", "2018-07-05", "2018-07-06", "2018-11-01",
+    "2022-04-30", "ipi_2017_dec8950", "reduz",
+    "automoveis hibridos e eletricos (8703.40, 8703.60, 8703.80)", "dec_9442_2018",
     "Este Decreto entra em vigor a partir do primeiro dia do quarto mês subsequente ao de sua "
     "publicação",
     "Aliquota pela eficiencia energetica e pela massa: 9% a 20% (hibridos), 7% a 18% "
     "(eletricos). Vigencia em 1/11/2018: quarto mes depois de julho de 2018. As aliquotas do "
-    "proprio ato valem ate' 24/2/2022; dai' em diante a estrutura segue com as reducoes gerais "
-    "da TIPI (10.979, 11.055, 11.158), cujas aliquotas para 8703.40/60/80 nao foram registradas. "
-    "Fim do ato nao confirmado em pagina aberta.")
+    "proprio ato valem ate' 24/2/2022 (o Decreto 10.979 as reduz em 18,5%); revogado a partir de "
+    "1/5/2022 pelo Decreto 10.923 (art. 5o, pagina dec_10923_2021).")
+ato("ipi_2017_dec8950", "ipi", "decreto", "8.950", "2016-12-29", "2016-12-30", "2017-01-01",
+    "2022-04-30", "", "regulamenta", "TIPI de 2017 (aliquotas de base)", "dec_8950_2016",
+    "Este Decreto entra em vigor na data de sua publicação, produzindo efeitos a partir de 1º de "
+    "janeiro de 2017",
+    "Capitulo 87 em dec_8950_2016_anexo_cap87 (paginas 385 a 389 do PDF da TIPI). Em 2017 a "
+    "gasolina tem os 30 pontos do Inovar-Auto (NC 87-6); de 2018 em diante valem as aliquotas de "
+    "base (1.000 cm3 a 7%, gasolina a 13%, flex a 11%). As reducoes de um ou dois pontos por "
+    "eficiencia (NC 87-7 a 87-11) nao entram na tabela. Fim: revogado a partir de 1/5/2022 pelo "
+    "Decreto 10.923 (art. 5o, redacao do Decreto 11.021).")
+ato("ipi_2022_dec10923", "ipi", "decreto", "10.923", "2021-12-30", "", "2022-05-01",
+    "2022-07-31", "ipi_2017_dec8950", "regulamenta", "TIPI de 2022 (aliquotas de base)",
+    "dec_10923_2021", "Este Decreto entra em vigor na data de sua publicação e produz efeitos a "
+    "partir de 1º de maio de 2022. (Redação dada pelo Decreto nº 11.021, de 2022) [...] "
+    "(Revogado pelo Decreto nº 11.158, de 2022)",
+    "Efeito em 1/5/2022 (era 1/4/2022 na redacao original), o mesmo dia em que o Decreto 11.055 "
+    "da' novo anexo a esta TIPI: as aliquotas do anexo original (dec_10923_2021_anexo_cap87) "
+    "nunca valeram sozinhas e nao entram na tabela de aliquotas. A pagina do Planalto da' a "
+    "publicacao no 'DOU de 31.12.2022', erro evidente; a data fica vazia. Revogado pelo 11.158.")
 ato("ipi_2022_dec10979", "ipi", "decreto", "10.979", "2022-02-25", "2022-02-25", "2022-02-25",
-    "2022-04-30", "", "reduz", "toda a TIPI; 18,5% na posicao 87.03", "dec_10979_2022",
+    "2022-04-30", "ipi_2017_dec8950", "reduz", "toda a TIPI; 18,5% na posicao 87.03", "dec_10979_2022",
     "I - 18,5% (dezoitos inteiros e cinco décimos por cento) para os produtos classificados nos "
     "códigos da posição 87.03",
     "Revogado a partir de 1/5/2022 pelo Decreto 11.055, que mantem a reducao de 18,5% nos "
@@ -238,8 +300,17 @@ ato("ii_2026_gecex927", "imposto_importacao", "resolucao", "Gecex 927", "2026-06
     "Novas quotas a 0% (US$ 84,5 mi hibrido, 281 mi plug-in, 97,5 mi eletrico) de jul a dez/2026.")
 
 # --------------------------------------------------------- acordos automotivos
+ato("acordo_2002_mex_dec4458", "acordo_automotivo", "decreto", "4.458", "2002-11-05", "2002-11-06",
+    "2002-11-06", "2012-03-18", "", "cria",
+    "comercio automotivo com o Mexico (ACE-55, apendice Brasil-Mexico)", "dec_4458_2002",
+    "Ano 1 1,1 % 112 000 7 000 119 000 Ano 2 0 % 131 900 8 400 140 300 Ano 3 0 % 153 600 Ano 4 0 % "
+    "174 300 Ano 5 0 % Livre Comércio",
+    "Automoveis: tarifa de 1,1% no ano 1 dentro da quota de 119 mil, 0% nos anos 2 a 4 com "
+    "quotas, livre comercio no ano 5. Os anos contam da entrada em vigor do acordo entre Brasil e "
+    "Mexico, que o decreto nao data (vigencia aqui: a publicacao do decreto). Fim INFERIDO: as "
+    "quotas do Decreto 7.706 a partir de 19/3/2012.")
 ato("acordo_2012_mex_dec7706", "acordo_automotivo", "decreto", "7.706", "2012-03-29", "2012-03-30",
-    "2012-03-19", "2015-03-18", "", "cria", "importacao de veiculos leves do Mexico (ACE-55)",
+    "2012-03-19", "2015-03-18", "acordo_2002_mex_dec4458", "cria", "importacao de veiculos leves do Mexico (ACE-55)",
     "dec_7706_2012",
     "De 19 de março de 2012 a 18 de março de 2013 US$ 1,450 bilhão",
     "Quotas anuais a tarifa zero: US$ 1,450, 1,560 e 1,640 bilhao; livre comercio previsto "
@@ -248,8 +319,35 @@ ato("acordo_2015_mex_dec8419", "acordo_automotivo", "decreto", "8.419", "2015-03
     "2015-03-19", "2019-03-18", "acordo_2012_mex_dec7706", "prorroga", "ACE-55 com o Mexico",
     "dec_8419_2015", "A partir de 19 de março de 2019 Livre Comércio",
     "Quotas de 2015 a 2019; livre comercio a partir de 19/3/2019.")
+ato("acordo_2002_arg_dec4510", "acordo_automotivo", "decreto", "4.510", "2002-12-11", "2002-12-12",
+    "2000-08-01", "2005-12-31", "", "regulamenta", "comercio automotivo com a Argentina (ACE-14)",
+    "dec_4510_2002",
+    "O presente Protocolo está em vigor desde 1º de agosto de 2000 [...] terá vigência até 31 de "
+    "dezembro de 2005 [...] 2003 137,5 62,5 2,2 2004 141,2 58,8 2,4 2005 144,4 55,6 2,6",
+    "Trigesimo primeiro protocolo (Politica Automotiva Comum): flex de 2,2 em 2003, 2,4 em 2004 "
+    "e 2,6 em 2005; livre comercio previsto para 1/1/2006, que nao veio.")
+ato("acordo_2006_arg_dec5663", "acordo_automotivo", "decreto", "5.663", "2006-01-09", "2006-01-10",
+    "2006-01-01", "2006-03-01", "acordo_2002_arg_dec4510", "prorroga", "ACE-14 com a Argentina",
+    "dec_5663_2006",
+    "Prorrogar por um período de SESSENTA (60) dias, contados a partir de 1o de janeiro de 2006, a "
+    "vigência do Trigésimo Primeiro Protocolo Adicional com as condições de aplicação estabelecidas "
+    "para o ano 2005",
+    "Trigesimo segundo protocolo: 60 dias com as condicoes de 2005 (fim em 1/3/2006).")
+ato("acordo_2006_arg_dec5716", "acordo_automotivo", "decreto", "5.716", "2006-03-09", "2006-03-10",
+    "2006-03-02", "2006-06-30", "acordo_2006_arg_dec5663", "prorroga", "ACE-14 com a Argentina",
+    "dec_5716_2006",
+    "Durante o período compreendido entre 2 de março de 2006 até 30 de junho de 2006 serão "
+    "mantidas as condições estabelecidas no Trigésimo Primeiro Protocolo Adicional "
+    "correspondentes ao ano de 2005",
+    "Trigesimo terceiro protocolo.")
+ato("acordo_2006_arg_dec5835", "acordo_automotivo", "decreto", "5.835", "2006-07-06", "2006-07-07",
+    "2006-07-01", "2008-06-30", "acordo_2006_arg_dec5716", "regulamenta", "ACE-14 com a Argentina",
+    "dec_5835_2006",
+    "a partir de 1º de julho de 2006 até 30 junho de 2008 [...] deverá observar um coeficiente de "
+    "desvio anual não superior a 1,95",
+    "Trigesimo quinto protocolo: flex de 1,95 de julho de 2006 a junho de 2008.")
 ato("acordo_2008_arg_dec6500", "acordo_automotivo", "decreto", "6.500", "2008-07-02", "2008-07-03",
-    "2008-07-03", "2013-06-30", "", "regulamenta", "comercio automotivo com a Argentina (ACE-14)",
+    "2008-07-03", "2013-06-30", "acordo_2006_arg_dec5835", "regulamenta", "comercio automotivo com a Argentina (ACE-14)",
     "dec_6500_2008",
     "coeficiente de desvio sobre as exportações anual – flex – não superior a 1,95",
     "Flex de 1,95 (Brasil superavitario); livre comercio previsto para 1/7/2013.")
@@ -275,8 +373,22 @@ ato("acordo_2020_arg_dec10343", "acordo_automotivo", "decreto", "10.343", "2020-
     "Flex de 1,8 (jul/2020-jun/2023), 1,9, 2, 2,5 e 3; livre comercio a partir de 1/7/2029.")
 
 # ------------------------------------------------------------------- credito
+ato("credito_2002_iof_dec4494", "credito", "decreto", "4.494", "2002-12-03", "2002-12-04",
+    "2002-12-04", "2007-12-16", "", "regulamenta", "IOF do credito a pessoa fisica",
+    "dec_4494_2002", "2. mutuário pessoa física: 0,0041% ao dia",
+    "Regulamento do IOF de 2002: 0,0041% ao dia para pessoa fisica. Substituido pelo "
+    "regulamento de 2007 (Decreto 6.306).")
+ato("credito_2007_iof_dec6306", "credito", "decreto", "6.306", "2007-12-14", "2007-12-17",
+    "2007-12-17", "", "credito_2002_iof_dec4494", "regulamenta", "IOF do credito a pessoa fisica",
+    "dec_6306_2007",
+    "Este Decreto entra em vigor na data de sua publicação [...] 2. mutuário pessoa física: "
+    "0,0082%; (Redação dada pelo Decreto nº 8.392, de 2015) (Vigência) b) quando ficar definido",
+    "Regulamento do IOF em vigor (texto compilado, acessado nesta rodada): 0,0041% ao dia ate' o "
+    "Decreto 6.339; depois as aliquotas mudam pelos decretos que o alteram. A ultima redacao da "
+    "aliquota da pessoa fisica e' a do Decreto 8.392/2015: as mudancas de 2025 sao da pessoa "
+    "juridica.")
 ato("credito_2008_iof_dec6339", "credito", "decreto", "6.339", "2008-01-03", "2008-01-03",
-    "2008-01-03", "2008-12-11", "", "aumenta", "IOF do credito a pessoa fisica", "dec_6339_2008",
+    "2008-01-03", "2008-12-11", "credito_2007_iof_dec6306", "aumenta", "IOF do credito a pessoa fisica", "dec_6339_2008",
     "pessoa física: 0,0082% ao dia", "IOF diario de 0,0041% para 0,0082%.")
 ato("credito_2008_iof_dec6691", "credito", "decreto", "6.691", "2008-12-11", "2008-12-12",
     "2008-12-12", "2011-04-08", "credito_2008_iof_dec6339", "reduz", "IOF do credito a pessoa fisica",
@@ -301,7 +413,8 @@ ato("credito_2015_iof_dec8392", "credito", "decreto", "8.392", "2015-01-20", "20
     "dec_8392_2015",
     "mutuário pessoa física: 0,0082% ao dia [...] Este Decreto entra em vigor um dia após a data "
     "de sua publicação [...] publicado no DOU de 21.1.2015",
-    "IOF diario de 0,0041% para 0,0082%. Mudancas posteriores do IOF nao foram procuradas.")
+    "IOF diario de 0,0041% para 0,0082%. Ultima mudanca da aliquota da pessoa fisica, pelo "
+    "texto compilado do Decreto 6.306 (rodada 12).")
 ato("credito_2010_bcb_circ3515", "credito", "circular", "BCB 3.515", "2010-12-03", "2010-12-03",
     "2010-12-06", "", "", "aumenta",
     "financiamento de veiculo a pessoa fisica com prazo acima de 24 meses", "bcb_circular_3515",
@@ -365,39 +478,126 @@ POR_ID = {a["id"]: a for a in A}
 R = []
 
 
-def linha(tributo, ncm, categoria, ini, fim, aliq, ato, trecho, pagina=None):
-    R.append(dict(tributo=tributo, ncm=ncm, categoria=categoria, vigencia_inicio=ini,
-                  vigencia_fim=fim, aliquota_pct=aliq, ato_id=ato,
-                  pagina_salva=pagina or POR_ID[ato]["pagina_salva"], fonte_trecho=trecho))
+def linha(tributo, ncm, categoria, ini, fim, aliq, ato, trecho, pagina=None, categoria_ipi="",
+          derivada="nao", obs=""):
+    R.append(dict(tributo=tributo, ncm=ncm, categoria=categoria, categoria_ipi=categoria_ipi,
+                  vigencia_inicio=ini, vigencia_fim=fim, aliquota_pct=aliq,
+                  aliquota_efetiva_habilitada="", ato_id=ato,
+                  pagina_salva=pagina or POR_ID[ato]["pagina_salva"], fonte_trecho=trecho,
+                  reducao_ato_id="", reducao_pagina="", reducao_trecho="", derivada=derivada,
+                  observacao=obs))
 
 
-C1 = "ate 1.000 cm3"
-C1F = "ate 1.000 cm3, flex ou alcool"
-C2G = "gasolina, 1.000 a 1.500 cm3, ate 6 passageiros"
-C3G = "gasolina, 1.500 a 2.000 cm3, ate 6 passageiros (Ex 01)"
-C4G = "gasolina, 1.500 a 3.000 cm3, ate 6 passageiros"
-C2F = "flex ou alcool, 1.000 a 1.500 cm3"
-C3F = "flex ou alcool, 1.500 a 2.000 cm3, ate 6 passageiros (Ex 01)"
-C4F = "flex ou alcool, 1.500 a 3.000 cm3, ate 6 passageiros, acima de 2.000 cm3"
+# ---------------------------------------------------------- IPI: categorias principais
+# Uma linha por categoria e periodo (`categoria_ipi`, a lista de `politicas.CATEGORIAS_IPI`).
+# O codigo da TIPI que a linha cita vai em `ncm`: 8703.21.00 (codigo, vale para qualquer
+# combustivel que nenhuma Nota Complementar trate a' parte) ou 8703.21 (NC do flex).
+G1, F1, G2, F2, G3, F3, G4, F4 = (politicas.CATEGORIAS_IPI[k] for k in
+                                  ("g1", "f1", "g2", "f2", "g3", "f3", "g4", "f4"))
+TODOS1 = (G1, F1)  # o codigo 8703.21.00 sem NC do flex: vale para os dois
+
+
+def ipi(cats, ncm, ini, fim, aliq, ato, trecho, pagina=None, derivada="nao", obs=""):
+    for cat in ([cats] if isinstance(cats, str) else cats):
+        linha("ipi", ncm, cat, ini, fim, aliq, ato, trecho, pagina, categoria_ipi=cat,
+              derivada=derivada, obs=obs)
+
+
+def colunas(ato, cab, periodos, linhas_tabela, pagina=None):
+    """Tabela com uma coluna por periodo: cada linha literal ('8703.21 32 33,5 37 7') da'
+    os valores das ultimas colunas, na ordem dos periodos."""
+    for cats, ncm, texto_linha in linhas_tabela:
+        valores = texto_linha.split()[-len(periodos):]
+        for (ini, fim), valor in zip(periodos, valores):
+            ipi(cats, ncm, ini, fim, valor, ato, f"{cab} [...] {texto_linha}", pagina)
+
+
+# ---- TIPI de 2003 (Decreto 4.542): de 1/1/2003 ate' o Decreto 4.800; de novo em marco e
+# abril de 2004, depois do Decreto 4.902 e antes do 5.058
+a, p = "ipi_2003_dec4542", "dec_4542_2002_anexo17"
+for ini, fim, obs in (("2003-01-01", "2003-08-05", ""),
+                      ("2004-03-01", "2004-04-30",
+                       "TIPI restabelecida ao fim do Decreto 4.902 (29/2/2004), ate' o 5.058.")):
+    ipi(TODOS1, "8703.21.00", ini, fim, "9", a,
+        "8703.21.00 --De cilindrada não superior a 1.000cm³ 9", p, obs=obs)
+    ipi(G2, "8703.22.10", ini, fim, "15", a,
+        "8703.22.10 Com capacidade de transporte de pessoas sentadas inferior ou igual a 6, "
+        "incluído o condutor 15", p, obs=obs)
+    ipi(G3, "8703.23.10 Ex 01", ini, fim, "15", a,
+        "Ex 01 – De cilindrada superior a 1.500 cm³, mas não superior a 2.000 cm³ 15", p, obs=obs)
+    ipi(F2, "8703.22", ini, fim, "13", a, "CODIGO NCM ALÍQUOTA % 8703.22 13", p, obs=obs)
+    ipi(F3, "8703.23.10 Ex 01", ini, fim, "13", a, "8703.23.10 Ex 01 13", p, obs=obs)
+ipi(G4, "8703.23.10", "2003-01-01", "2006-12-31", "25", a,
+    "8703.23.10 Com capacidade de transporte de pessoas sentadas inferior ou igual a 6, "
+    "incluído o condutor 25", p)
+ipi(F4, "8703.23.10", "2003-01-01", "2004-04-30", "20", a,
+    "CODIGO NCM ALÍQUOTA % 8703.22 13 Vide Decreto nº 4.902/03 8703.23.10 20", p)
+
+# ---- 2003: Decreto 4.800 (agosto a novembro) e 4.902 (dezembro a fevereiro de 2004)
+a = "ipi_2003_dec4800"
+per = (("2003-08-06", "2003-10-31"), ("2003-11-01", "2003-11-30"))
+colunas(a, "Da data de vigência deste Decreto até 31 de outubro de 2003 De 1º a 30 de novembro "
+           "2003", per, [(TODOS1, "8703.21.00", "8703.21.00 5 6"), (G2, "8703.22", "8703.22 11 12"),
+                         (G3, "8703.23.10 Ex 01", "8703.23.10 Ex 01 11 12")])
+colunas(a, "Da data de vigência deste Decreto até 31 de outubro de 2003 De 1º a 30 de novembro de "
+           "2003", per, [(F2, "8703.22", "8703.22 9 10"),
+                         (F3, "8703.23.10 Ex 01", "8703.23.10 Ex 01 9 10")])
+a, i, f = "ipi_2003_dec4902", "2003-12-01", "2004-02-29"
+flex = ("Ficam reduzidas para dez por cento, no período de 1º de dezembro de 2003 a 29 de "
+        "fevereiro de 2004, as alíquotas do Imposto sobre Produtos Industrializados - IPI, "
+        "incidentes sobre os produtos classificados sob os códigos 8703.22, 8703.23.10 Ex-01")
+ipi(F2, "8703.22", i, f, "10", a, flex)
+ipi(F3, "8703.23.10 Ex 01", i, f, "10", a, flex)
+gas = "CODIGO ALÍQUOTA % 8703.21.00 6 8703.22 12 8703.23.10 Ex 01 12"
+ipi(TODOS1, "8703.21.00", i, f, "6", a, gas)
+ipi(G2, "8703.22", i, f, "12", a, gas)
+ipi(G3, "8703.23.10 Ex 01", i, f, "12", a, gas)
+
+# ---- 2004: Decreto 5.058 (aliquota permanente de maio de 2004 ate' a TIPI de 2007)
+a, i, f = "ipi_2004_dec5058", "2004-05-01", "2006-12-31"
+gas = "8703.21.00 7 3307.30.00 22 8703.22 13 3307.4 22 8703.23.10 Ex 01 13"
+ipi(TODOS1, "8703.21.00", i, f, "7", a, gas)
+ipi(G2, "8703.22", i, f, "13", a, gas)
+ipi(G3, "8703.23.10 Ex 01", i, f, "13", a, gas)
+flex = "Código NCM Alíquota (%) 8703.22 11 8703.23.10 18 8703.23.10 Ex 01 11"
+ipi(F2, "8703.22", i, f, "11", a, flex)
+ipi(F3, "8703.23.10 Ex 01", i, f, "11", a, flex)
+ipi(F4, "8703.23.10", i, f, "18", a, flex)
+
+# ---- TIPI de 2007 (Decreto 6.006): sem fim aqui; cada categoria vai ate' o ato seguinte
+a, p, i = "ipi_2007_dec6006", "dec_6006_2006_secaoxvii", "2007-01-01"
+ipi(TODOS1, "8703.21.00", i, "", "7", a, "8703.21.00 --De cilindrada não superior a 1.000cm³ 7", p)
+ipi(G2, "8703.22.10", i, "", "13", a,
+    "8703.22.10 Com capacidade de transporte de pessoas sentadas inferior ou igual a seis, "
+    "incluído o motorista 13", p)
+ipi(G3, "8703.23.10 Ex 01", i, "", "13", a,
+    "Ex 01 – De cilindrada superior a 1.500 cm³, mas não superior a 2.000 cm³ 13", p)
+ipi(G4, "8703.23.10", i, "", "25", a,
+    "8703.23.10 Com capacidade de transporte de pessoas sentadas inferior ou igual a seis, "
+    "incluído o motorista 25", p)
+flex = "CODIGO NCM ALÍQUOTA % 8703.22 11 8703.23.10 18 8703.23.10 Ex 01 11"
+ipi(F2, "8703.22", i, "", "11", a, flex, p)
+ipi(F3, "8703.23.10 Ex 01", i, "", "11", a, flex, p)
+ipi(F4, "8703.23.10", i, "", "18", a, flex, p)
+
+# ---- 2008-2010
 NC_FLEX_2008 = ("NC (87-2) Ficam fixadas nos percentuais indicados as alíquotas referentes aos "
                 "automóveis de passageiros e veículos de uso misto, com motor a álcool")
-
-# ---------------------------------------------------------------- 2008-2010
 a, i, f = "ipi_2008_dec6687", "2008-12-12", "2009-03-31"
-linha("ipi", "8703.21.00", C1, i, f, "0", a, "ANEXO I Código TIPI Alíquota (%) 8703.21.00 0")
-linha("ipi", "8703.22.10", C2G, i, f, "6,5", a, "8703.21.00 0 8703.22.10 6,5")
-linha("ipi", "8703.23.10 Ex 01", C3G, i, f, "6,5", a, "8703.23.10 Ex 01 6,5")
-linha("ipi", "8703.22", C2F, i, f, "5,5", a, f"{NC_FLEX_2008} [...] 8703.22 5,5")
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "5,5", a, f"{NC_FLEX_2008} [...] 8703.23.10 Ex 01 5,5")
-linha("ipi", "8703.23.10", C4F, i, f, "18", a, f"{NC_FLEX_2008} [...] 8703.23.10 18")
+ipi(TODOS1, "8703.21.00", i, f, "0", a, "ANEXO I Código TIPI Alíquota (%) 8703.21.00 0")
+ipi(G2, "8703.22.10", i, f, "6,5", a, "8703.21.00 0 8703.22.10 6,5")
+ipi(G3, "8703.23.10 Ex 01", i, f, "6,5", a, "8703.23.10 Ex 01 6,5")
+ipi(F2, "8703.22", i, f, "5,5", a, f"{NC_FLEX_2008} [...] 8703.22 5,5")
+ipi(F3, "8703.23.10 Ex 01", i, f, "5,5", a, f"{NC_FLEX_2008} [...] 8703.23.10 Ex 01 5,5")
+ipi(F4, "8703.23.10", i, f, "18", a, f"{NC_FLEX_2008} [...] 8703.23.10 18")
 
 a, i, f = "ipi_2009_dec6809", "2009-04-01", "2009-06-30"
-linha("ipi", "8703.21.00", C1, i, f, "0", a, "ANEXO II Código TIPI [...] 8703.21.00 0")
-linha("ipi", "8703.22.10", C2G, i, f, "6,5", a, "8703.21.00 0 8703.22.10 6,5")
-linha("ipi", "8703.23.10 Ex 01", C3G, i, f, "6,5", a, "8703.23.10 Ex 01 6,5")
-linha("ipi", "8703.22", C2F, i, f, "5,5", a, "ANEXO IV “NC (87-2) Ficam fixadas [...] 8703.22 5,5")
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "5,5", a, "8703.23.10 Ex 01 5,5")
-linha("ipi", "8703.23.10", C4F, i, f, "18", a, "8703.23.10 18")
+ipi(TODOS1, "8703.21.00", i, f, "0", a, "ANEXO II Código TIPI Alíquota (%) 8703.21.00 0")
+ipi(G2, "8703.22.10", i, f, "6,5", a, "8703.21.00 0 8703.22.10 6,5")
+ipi(G3, "8703.23.10 Ex 01", i, f, "6,5", a, "8703.23.10 Ex 01 6,5")
+ipi(F2, "8703.22", i, f, "5,5", a, "ANEXO IV “NC (87-2) Ficam fixadas [...] 8703.22 5,5")
+ipi(F3, "8703.23.10 Ex 01", i, f, "5,5", a, "8703.23.10 Ex 01 5,5")
+ipi(F4, "8703.23.10", i, f, "18", a, "8703.22 5,5 8703.23.10 18")
 
 a = "ipi_2009_dec6890"
 for cab, ini, fim, v1, v2 in [
@@ -407,139 +607,289 @@ for cab, ini, fim, v1, v2 in [
         ("De 1o a 31 de dezembro de 2009", "2009-12-01", "2009-12-31", "5,0", "11,0"),
         ("A partir de 1o de janeiro de 2010", "2010-01-01", "2011-12-15", "7", "13")]:
     bloco = f"{cab} NCM ALÍQUOTA (%) 8703.21.00 {v1} 8703.22.10 {v2}"
-    linha("ipi", "8703.21.00", C1 + ", gasolina", ini, fim, v1, a, bloco)
-    linha("ipi", "8703.22.10", C2G, ini, fim, v2, a, bloco)
-    linha("ipi", "8703.23.10 Ex 01", C3G, ini, fim, v2, a,
-          f"{bloco} 8703.22.90 {v2} 8703.23.10 Ex 01 {v2}")
+    ipi(TODOS1, "8703.21.00", ini, fim, v1, a, bloco)
+    ipi(G2, "8703.22.10", ini, fim, v2, a, bloco)
+    ipi(G3, "8703.23.10 Ex 01", ini, fim, v2, a, f"{bloco} 8703.22.90 {v2} 8703.23.10 Ex 01 {v2}")
 for cab, ini, fim, v in [("Até 30 de setembro de 2009 “NC (87-2)", "2009-07-01", "2009-09-30", "5,5"),
                          ("De 1oa 31 de outubro de 2009 NC (87-2)", "2009-10-01", "2009-10-31", "6,5"),
-                         ("De 1o a 30 de novembro de 2009 NC (87-2)", "2009-11-01", "2009-11-30", "7,5")]:
-    linha("ipi", "8703.22", C2F, ini, fim, v, a, f"{cab} [...] 8703.22 {v} 8703.23.10 18")
-    linha("ipi", "8703.23.10 Ex 01", C3F, ini, fim, v, a, f"{cab} [...] 8703.23.10 Ex 01 {v}")
+                         ("De 1o a 30 de novembro de 2009 NC (87-2)", "2009-11-01", "2009-11-30", "7,5"),
+                         ("De 1o a 31 de dezembro de 2009 NC (87-2)", "2009-12-01", "2009-12-31", "9,0"),
+                         ("A partir de 1o de janeiro de 2010 NC (87-2)", "2010-01-01", "2011-12-15", "11")]:
+    ipi(F2, "8703.22", ini, fim, v, a, f"{cab} [...] 8703.22 {v} 8703.23.10 18")
+    ipi(F3, "8703.23.10 Ex 01", ini, fim, v, a, f"{cab} [...] 8703.23.10 Ex 01 {v}")
+    ipi(F4, "8703.23.10", ini, fim, "18", a, f"{cab} [...] 8703.22 {v} 8703.23.10 18")
 
 a = "ipi_2009_dec7017"
 for cab, ini, fim, v1, v2 in [("De 1o a 31 de dezembro de 2009:", "2009-12-01", "2009-12-31", "3", "7,5"),
                               ("De 1o de janeiro a 31 de março de 2010:", "2010-01-01", "2010-03-31", "3", "7,5"),
                               ("A partir de 1o de abril de 2010:", "2010-04-01", "2011-12-15", "7", "11")]:
-    linha("ipi", "8703.21", C1F, ini, fim, v1, a, f"{cab} [...] 8703.21 {v1} 8703.22 {v2}")
-    linha("ipi", "8703.22", C2F, ini, fim, v2, a, f"{cab} [...] 8703.21 {v1} 8703.22 {v2}")
-    linha("ipi", "8703.23.10 Ex 01", C3F, ini, fim, v2, a, f"{cab} [...] 8703.23.10 Ex 01 {v2}")
+    ipi(F1, "8703.21", ini, fim, v1, a, f"{cab} [...] 8703.21 {v1} 8703.22 {v2}")
+    ipi(F2, "8703.22", ini, fim, v2, a, f"{cab} [...] 8703.21 {v1} 8703.22 {v2}")
+    ipi(F3, "8703.23.10 Ex 01", ini, fim, v2, a, f"{cab} [...] 8703.23.10 Ex 01 {v2}")
+    ipi(F4, "8703.23.10", ini, fim, "18", a, f"{cab} [...] 8703.22 {v2} 8703.23.10 18")
 
-# ---------------------------------------------------------------- 2011-2014
-# as faixas que o Decreto 7.725 reduz a partir de 22/5/2012 param na vespera
+# ---- 2011-2014
 a, i, f = "ipi_2011_dec7567", "2011-12-16", "2012-12-31"
-v = "2012-05-21"
 cab = "De 16 de dezembro de 2011 a 31 de dezembro de 2012"
-linha("ipi", "8703.21.00", C1, i, v, "37", a, f"{cab} [...] 8703.21.00 37")
-linha("ipi", "8703.22.10", C2G, i, v, "43", a, f"{cab} [...] 8703.22.10 43")
-linha("ipi", "8703.23.10", C4G, i, f, "55", a, f"{cab} [...] 8703.23.10 55")
-linha("ipi", "8703.22", C2F, i, v, "41", a, f"{cab}: NC (87-2) [...] 8703.22 41")
-linha("ipi", "8703.23.10 Ex 01", C3F, i, v, "41", a, f"{cab}: NC (87-2) [...] 8703.23.10 Ex 01 41")
+gas = (f"{cab}: Código NCM Alíquota (%) Código NCM Alíquota (%) 8701.20.00 30 8704.21.30 Ex01 34 "
+       "8703.21.00 37")
+ipi(G1, "8703.21.00", i, f, "37", a, gas)
+ipi(G2, "8703.22.10", i, f, "43", a, f"{gas} [...] 8703.22.10 43")
+ipi(G3, "8703.23.10 Ex 01", i, f, "43", a, f"{gas} [...] 8703.23.10 Ex01 43")
+ipi(G4, "8703.23.10", i, f, "55", a, f"{gas} [...] 8703.23.10 55")
+flex = (f"{cab}: NC (87-2) [...] Código NCM ALÍQUOTA (%) 8703.21 37 8703.22 41 8703.23.10 48 "
+        "8703.23.10 Ex 01 41")
+for cat, ncm, v in ((F1, "8703.21", "37"), (F2, "8703.22", "41"), (F3, "8703.23.10 Ex 01", "41"),
+                    (F4, "8703.23.10", "48")):
+    ipi(cat, ncm, i, f, v, a, flex)
 
-# gasolina ate 1.000 cm3 na NC (87-7) dos tres decretos de 2012 (tabela em duas colunas:
-# 8703.21.00 fica ao lado de 8704.21.90 Ex 02)
-for a, i, f in (("ipi_2012_dec7725", "2012-05-22", "2012-08-31"),
-                ("ipi_2012_dec7796", "2012-09-01", "2012-10-31"),
-                ("ipi_2012_dec7834", "2012-11-01", "2012-12-31")):
-    linha("ipi", "8703.21.00", C1 + ", gasolina", i, f, "30", a,
-          "NOTA COMPLEMENTAR NC (87-7) DA TIPI Até [...] 8703.21.00 30 8704.21.90 Ex 02 5")
+a = "ipi_2012_dec7725"
+colunas(a, "Até 21/05/2012 De 22/05/2012 até 31/08/2012 De 1º /09/2012 até 31/12/2012 A partir de "
+           "1º /01/2013",
+        (("2012-05-22", "2012-08-31"), ("2012-09-01", "2012-12-31"), ("2013-01-01", "")),
+        [(F1, "8703.21.00", "8703.21.00 37 30 37 7"), (F2, "8703.22", "8703.22 41 35,5 41 11"),
+         (F4, "8703.23.10", "8703.23.10 48 48 48 18"),
+         (F3, "8703.23.10 Ex 01", "8703.23.10 Ex 01 41 35,5 41 11")])
+i, f = "2012-05-22", "2012-08-31"
+ipi(G1, "8703.21.00", i, f, "30", a,
+    "NOTA COMPLEMENTAR NC (87-7) DA TIPI Até [...] 8703.21.00 30 8704.21.90 Ex 02 5")
+ipi(G2, "8703.22.10", i, f, "36,5", a, "De 22 de maio até 31 de agosto de 2012 [...] 8703.22.10 36,5")
+ipi(G3, "8703.23.10 Ex 01", i, f, "36,5", a,
+    "De 22 de maio até 31 de agosto de 2012 [...] 8703.23.10 Ex 01 36,5")
 
-a, i, f = "ipi_2012_dec7725", "2012-05-22", "2012-08-31"
-cab = "De 22/05/2012 até 31/08/2012"
-linha("ipi", "8703.21.00", C1F, i, f, "30", a, f"{cab} [...] 8703.21.00 37 30 37 7")
-linha("ipi", "8703.22", C2F, i, f, "35,5", a, f"{cab} [...] 8703.22 41 35,5 41 11")
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "35,5", a, f"{cab} [...] 8703.23.10 Ex 01 41 35,5 41 11")
-linha("ipi", "8703.22.10", C2G, i, f, "36,5", a,
-      "De 22 de maio até 31 de agosto de 2012 [...] 8703.22.10 36,5")
-
-a, i, f = "ipi_2012_dec7796", "2012-09-01", "2012-10-31"
-cab = "Até 31/10/2012 De 1º /11/2012 até 31/12/2012"
-linha("ipi", "8703.21.00", C1F, i, f, "30", a, f"{cab} [...] 8703.21.00 30 37 7")
-linha("ipi", "8703.22", C2F, i, f, "35,5", a, f"{cab} [...] 8703.22 35,5 41 11")
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "35,5", a, f"{cab} [...] 8703.23.10 Ex 01 35,5 41 11")
-linha("ipi", "8703.22.10", C2G, i, f, "36,5", a, "NOTA COMPLEMENTAR NC (87-7) DA TIPI Até [...] 8703.22.10 36,5")
+a = "ipi_2012_dec7796"
+colunas(a, "Até 31/10/2012 De 1º /11/2012 até 31/12/2012 A partir de 1º /01/2013",
+        (("2012-09-01", "2012-10-31"), ("2012-11-01", "2012-12-31"), ("2013-01-01", "")),
+        [(F1, "8703.21.00", "8703.21.00 30 37 7"), (F2, "8703.22", "8703.22 35,5 41 11"),
+         (F4, "8703.23.10", "8703.23.10 48 48 18"),
+         (F3, "8703.23.10 Ex 01", "8703.23.10 Ex 01 35,5 41 11")])
+i, f = "2012-09-01", "2012-10-31"
+ipi(G1, "8703.21.00", i, f, "30", a,
+    "NOTA COMPLEMENTAR NC (87-7) DA TIPI Até [...] 8703.21.00 30 8704.21.90 Ex 02 5")
+ipi(G2, "8703.22.10", i, f, "36,5", a, "NOTA COMPLEMENTAR NC (87-7) DA TIPI Até [...] 8703.22.10 36,5")
+ipi(G3, "8703.23.10 Ex 01", i, f, "36,5", a,
+    "NOTA COMPLEMENTAR NC (87-7) DA TIPI Até [...] 8703.23.10 Ex 01 36,5")
 
 a, i, f = "ipi_2012_dec7834", "2012-11-01", "2012-12-31"
-cab = "Código TIPI Alíquota (%) 8703.21.00 30 8703.22 35,5"
-linha("ipi", "8703.21.00", C1F, i, f, "30", a, cab)
-linha("ipi", "8703.22", C2F, i, f, "35,5", a, cab)
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "35,5", a, "8703.23.10 Ex 01 35,5")
-linha("ipi", "8703.22.10", C2G, i, f, "36,5", a, "8703.22.10 36,5")
+flex = "Código TIPI Alíquota (%) 8703.21.00 30 8703.22 35,5 8703.23.10 48 8703.23.10 Ex 01 35,5"
+for cat, ncm, v in ((F1, "8703.21.00", "30"), (F2, "8703.22", "35,5"), (F4, "8703.23.10", "48"),
+                    (F3, "8703.23.10 Ex 01", "35,5")):
+    ipi(cat, ncm, i, f, v, a, flex)
+ipi(G1, "8703.21.00", i, f, "30", a,
+    "NOTA COMPLEMENTAR NC (87-7) DA TIPI Até [...] 8703.21.00 30 8704.21.90 Ex 02 5")
+ipi(G2, "8703.22.10", i, f, "36,5", a, "NOTA COMPLEMENTAR NC (87-7) DA TIPI Até [...] 8703.22.10 36,5")
+ipi(G3, "8703.23.10 Ex 01", i, f, "36,5", a,
+    "NOTA COMPLEMENTAR NC (87-7) DA TIPI Até [...] 8703.23.10 Ex 01 36,5")
 
-a, i, f = "ipi_2013_dec7879", "2013-01-01", "2013-03-31"
-cab = "De 1º /01/2013 até 31/03/2013 De 1º /04/2013 até 30/06/2013"
-linha("ipi", "8703.21", C1F, i, f, "32", a, f"{cab} [...] 8703.21 32 33,5 37 7")
-linha("ipi", "8703.22", C2F, i, f, "37", a, f"{cab} [...] 8703.22 37 39 41 11")
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "37", a, f"{cab} [...] 8703.23.10 Ex 01 37 39 41 11")
 
-a, i, f = "ipi_2013_dec7971", "2013-04-01", "2013-12-31"
-cab = "De 1º /04/2013 até 31/12/2013 De 1º /01/2014 até 31/12/2017"
-linha("ipi", "8703.21", C1F, i, f, "32", a, f"{cab} [...] 8703.21 32 37 7")
-linha("ipi", "8703.22", C2F, i, f, "37", a, f"{cab} [...] 8703.22 37 41 11")
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "37", a, f"{cab} [...] 8703.23.10 Ex 01 37 41 11")
+def ciclo(a, cab_flex, cab_gas, per_flex, per_gas, flex, gas):
+    """Decretos de 2013-2014: tabela do flex (NC 87-4) e da gasolina (NC 87-7)."""
+    colunas(a, cab_flex, per_flex, [(F1, "8703.21", f"8703.21 {flex[0]}"),
+                                    (F2, "8703.22", f"8703.22 {flex[1]}"),
+                                    (F4, "8703.23.10", f"8703.23.10 {flex[2]}"),
+                                    (F3, "8703.23.10 Ex 01", f"8703.23.10 Ex 01 {flex[1]}")])
+    colunas(a, cab_gas, per_gas, [(G1, "8703.21.00", f"8703.21.00 {gas[0]}"),
+                                  (G2, "8703.22.10", f"8703.22.10 {gas[1]}"),
+                                  (G4, "8703.23.10", f"8703.23.10 {gas[2]}"),
+                                  (G3, "8703.23.10 Ex 01", f"8703.23.10 Ex 01 {gas[1]}")])
 
-a, i, f = "ipi_2014_dec8168", "2014-01-01", "2014-06-30"
-cab = "De 1º /1/2014 até 30/6/2014 De 1º /7/2014 até 31/12/2017"
-linha("ipi", "8703.21", C1F, i, f, "33", a, f"{cab} [...] 8703.21 33 37 7")
-linha("ipi", "8703.22", C2F, i, f, "39", a, f"{cab} [...] 8703.22 39 41 11")
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "39", a, f"{cab} [...] 8703.23.10 Ex 01 39 41 11")
 
-a = "ipi_2014_dec8279"
-cab = "De 1º /7/2014 até 31/12/2014 De 1º /1/2015 até 31/12/2017 A partir de 1º /1/2018"
-for ini, fim, v1, v2 in [("2014-07-01", "2014-12-31", "33", "39"), ("2015-01-01", "2017-12-31", "37", "41"),
-                         ("2018-01-01", "2022-02-24", "7", "11")]:
-    linha("ipi", "8703.21", C1F, ini, fim, v1, a, f"{cab} [...] 8703.21 33 37 7")
-    linha("ipi", "8703.22", C2F, ini, fim, v2, a, f"{cab} [...] 8703.22 39 41 11")
-    linha("ipi", "8703.23.10 Ex 01", C3F, ini, fim, v2, a, f"{cab} [...] 8703.23.10 Ex 01 39 41 11")
+ciclo("ipi_2013_dec7879",
+      "De 1º /01/2013 até 31/03/2013 De 1º /04/2013 até 30/06/2013 De 1º /07/2013 até 31/12/2017 "
+      "A partir de 1º /01/2018",
+      "De 1º /01/2013 até 3103/2013 De 1º /04/2013 até 30/06/2013 De 1º /07/2013 até 31/12/2017",
+      (("2013-01-01", "2013-03-31"), ("2013-04-01", "2013-06-30"), ("2013-07-01", "2017-12-31"),
+       ("2018-01-01", "")),
+      (("2013-01-01", "2013-03-31"), ("2013-04-01", "2013-06-30"), ("2013-07-01", "2017-12-31")),
+      ("32 33,5 37 7", "37 39 41 11", "48 48 48 18"), ("32 33,5 37", "38 40 43", "55 55 55"))
+ciclo("ipi_2013_dec7971",
+      "De 1º /04/2013 até 31/12/2013 De 1º /01/2014 até 31/12/2017 A partir de 1º /01/2018",
+      "De 1º /04/2013 até 31/12/2013 De 1º /01/2014 até 31/12/2017",
+      (("2013-04-01", "2013-12-31"), ("2014-01-01", "2017-12-31"), ("2018-01-01", "")),
+      (("2013-04-01", "2013-12-31"), ("2014-01-01", "2017-12-31")),
+      ("32 37 7", "37 41 11", "48 48 18"), ("32 37", "38 43", "55 55"))
+ciclo("ipi_2014_dec8168",
+      "De 1º /1/2014 até 30/6/2014 De 1º /7/2014 até 31/12/2017 A partir de 1º /1/2018",
+      "De 1º /1/2014 até 30/6/2014 De 1º /7/2014 até 31/12/2017",
+      (("2014-01-01", "2014-06-30"), ("2014-07-01", "2017-12-31"), ("2018-01-01", "")),
+      (("2014-01-01", "2014-06-30"), ("2014-07-01", "2017-12-31")),
+      ("33 37 7", "39 41 11", "48 48 18"), ("33 37", "40 43", "55 55"))
+ciclo("ipi_2014_dec8279",
+      "De 1º /7/2014 até 31/12/2014 De 1º /1/2015 até 31/12/2017 A partir de 1º /1/2018",
+      "De 1º /7/2014 até 31/12/2014 De 1º /1/2015 até 31/12/2017",
+      (("2014-07-01", "2014-12-31"), ("2015-01-01", "2017-12-31"), ("2018-01-01", "")),
+      (("2014-07-01", "2014-12-31"), ("2015-01-01", "2017-12-31")),
+      ("33 37 7", "39 41 11", "48 48 18"), ("33 37", "40 43", "55 55"))
 
-# ---------------------------------------------------------------- 2018-2025
-a = "ipi_2018_dec9442"
-t = texto(POR_ID[a]["pagina_salva"])
-inicio_nc = t.index("NC (87-6) Ficam fixadas")
-for codigos, rotulo, bloco_ini, bloco_fim in [
-        (("8703.40.00", "8703.60.00"), "hibrido (sem e com recarga externa)",
-         "8703.40.00 e 8703.60.00 EE", "8703.80.00 EE"),
-        (("8703.80.00",), "eletrico", "8703.80.00 EE", "Ficam reduzidas em dois pontos")]:
-    i0 = t.index(bloco_ini, inicio_nc)
-    bloco = t[i0:t.index(bloco_fim, i0 + 5)]
-    for faixa in re.finditer(r"(EE [^M]+?) (MOM menor ou igual a 1400 (\d+) MOM maior que 1400 e "
-                             r"menor ou igual a 1700 (\d+) MOM maior que 1700 (\d+))", bloco):
-        ee = faixa.group(1)
-        for mom, valor in zip(("massa ate 1400 kg", "massa de 1400 a 1700 kg", "massa acima de 1700 kg"),
-                              faixa.group(3, 4, 5)):
-            for codigo in codigos:
-                linha("ipi", codigo, f"{rotulo}, {ee} MJ/km, {mom}", "2018-11-01", "2022-02-24",
-                      valor, a, f"{ee} {faixa.group(2)}")
+# ---- TIPI de 2017 (Decreto 8.950): 2017 com os 30 pontos (NC 87-6 e 87-4); de 2018 ate' a
+# TIPI de 2022, as aliquotas de base
+a, p = "ipi_2017_dec8950", "dec_8950_2016_anexo_cap87"
+i, f = "2017-01-01", "2017-12-31"
+gas = ("NC (87-6) Ficam fixadas nos percentuais indicados as alíquotas relativas aos produtos "
+       "classificados nos códigos a seguir especificados [...] 8703.21.00 37 8703.22 43 "
+       "8703.23.10 55 8703.23.10 Ex 01 43")
+ipi(TODOS1, "8703.21.00", i, f, "37", a, gas, p)
+ipi(G2, "8703.22", i, f, "43", a, gas, p)
+ipi(G4, "8703.23.10", i, f, "55", a, gas, p)
+ipi(G3, "8703.23.10 Ex 01", i, f, "43", a, gas, p)
+colunas(a, "CÓDIGO DA TIPI De 1º/1/2017 até 31/12/2017 A partir de 1º/01/2018",
+        (("2017-01-01", "2017-12-31"), ("2018-01-01", "2022-02-24")),
+        [(F2, "8703.22", "8703.22 41 11"), (F4, "8703.23.10", "8703.23.10 48 18"),
+         (F3, "8703.23.10 Ex 01", "8703.23.10 Ex 01 41 11")], p)
 
+
+def base_tipi(a, p, i, f, fim_motorista):
+    """Aliquotas de base do capitulo 87 (TIPI de 2017 e de 2022)."""
+    ipi(TODOS1, "8703.21.00", i, f, "7", a,
+        "8703.21.00 -- De cilindrada não superior a 1.000 cm3 7", p)
+    ipi(G2, "8703.22.10", i, f, "13", a,
+        "8703.22.10 Com capacidade de transporte de pessoas sentadas inferior ou igual a seis, "
+        f"incluindo o motorista 13", p)
+    ipi(G3, "8703.23.10 Ex 01", i, f, "13", a,
+        "Ex 01 - De cilindrada superior a 1.500 cm³, mas não superior a 2.000 cm³ 13", p)
+    ipi(G4, "8703.23.10", i, f, "25", a,
+        "8703.23.10 Com capacidade de transporte de pessoas sentadas inferior ou igual a seis, "
+        f"incluindo o motorista 25", p)
+
+
+base_tipi(a, p, "2018-01-01", "2022-02-24", "")
+# A TIPI de 2022 (Decreto 10.923) so' produz efeito em 1/5/2022, o mesmo dia em que o Decreto
+# 11.055 da' a ela o anexo novo: as aliquotas do anexo original nunca valeram sozinhas.
+
+# ---- 2022: Decretos 10.979, 11.055 e 11.158
 a, i, f = "ipi_2022_dec10979", "2022-02-25", "2022-04-30"
-cab = "(flexible fuel engine), classificados nos códigos a seguir especificados: CÓDIGO DA TIPI ALÍQUOTA % 8703.22 8,965"
-linha("ipi", "8703.22", C2F, i, f, "8,965", a, cab)
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "8,965", a, "8703.23.10 Ex 01 8,965")
-linha("ipi", "8703.23.10", C4F, i, f, "14,67", a, "8703.22 8,965 8703.23.10 14,67")
+cab = ("(flexible fuel engine), classificados nos códigos a seguir especificados: CÓDIGO DA TIPI "
+       "ALÍQUOTA % 8703.22 8,965 8703.23.10 14,67 8703.23.10 Ex 01 8,965")
+ipi(F2, "8703.22", i, f, "8,965", a, cab)
+ipi(F3, "8703.23.10 Ex 01", i, f, "8,965", a, cab)
+ipi(F4, "8703.23.10", i, f, "14,67", a, cab)
+reducao = ("I - 18,5% (dezoitos inteiros e cinco décimos por cento) para os produtos "
+           "classificados nos códigos da posição 87.03")
+for cats, ncm, base, valor in ((TODOS1, "8703.21.00", "7", "5,705"), (G2, "8703.22.10", "13", "10,595"),
+                               (G3, "8703.23.10 Ex 01", "13", "10,595"),
+                               (G4, "8703.23.10", "25", "20,375")):
+    ipi(cats, ncm, i, f, valor, a, reducao, derivada="sim",
+        obs=f"Derivada: o ato reduz em 18,5% as aliquotas da posicao 87.03 e nao lista este "
+            f"codigo; 18,5% sobre {base} (TIPI de 2017, Decreto 8.950) = {valor}.")
 
-a, i, f = "ipi_2022_dec11055", "2022-05-01", "2022-07-31"
-p = "dec_11055_2022_anexo"
-linha("ipi", "8703.21.00", C1, i, f, "5,71", a, "8703.21.00 -- De cilindrada não superior a 1.000 cm3 5,71", p)
-linha("ipi", "8703.22.10", C2G, i, f, "10,6", a,
-      "8703.22.10 Com capacidade de transporte de pessoas sentadas inferior ou igual a seis, "
-      "incluindo o motorista 10,6", p)
-linha("ipi", "8703.22", C2F, i, f, "8,97", a, "CÓDIGO DA TIPI 8703.22 8,97", p)
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "8,97", a, "8703.23.10 Ex 01 8,97", p)
+a, i, f, p = "ipi_2022_dec11055", "2022-05-01", "2022-07-31", "dec_11055_2022_anexo"
+ipi(TODOS1, "8703.21.00", i, f, "5,71", a,
+    "8703.21.00 -- De cilindrada não superior a 1.000 cm3 5,71", p)
+ipi(G2, "8703.22.10", i, f, "10,6", a,
+    "8703.22.10 Com capacidade de transporte de pessoas sentadas inferior ou igual a seis, "
+    "incluindo o motorista 10,6", p)
+ipi(G3, "8703.23.10 Ex 01", i, f, "10,6", a,
+    "Ex 01 - De cilindrada superior a 1.500 cm³, mas não superior a 2.000 cm³ 10,6", p)
+ipi(G4, "8703.23.10", i, f, "20,38", a,
+    "8703.23.10 Com capacidade de transporte de pessoas sentadas inferior ou igual a seis, "
+    "incluindo o motorista 20,38", p)
+flex = "ALÍQUOTA (%) CÓDIGO DA TIPI 8703.22 8,97 8703.23.10 14,67 8703.23.10 Ex 01 8,97"
+ipi(F2, "8703.22", i, f, "8,97", a, flex, p)
+ipi(F4, "8703.23.10", i, f, "14,67", a, flex, p)
+ipi(F3, "8703.23.10 Ex 01", i, f, "8,97", a, flex, p)
 
-a, i, f = "ipi_2022_dec11158", "2022-08-01", "2025-10-31"
-p = "dec_11158_2022_anexo4"
-linha("ipi", "8703.21.00", C1, i, f, "5,27", a, "8703.21. ‐‐ De cilindrada não superior a 1.000 cm3 00 5,27", p)
-linha("ipi", "8703.22.10", C2G, i, f, "9,78", a,
-      "8703.22. Com capacidade de transporte de pessoas sentadas inferior ou 10 igual a seis, "
-      "incluindo o motorista 9,78", p)
-linha("ipi", "8703.22", C2F, i, f, "8,28", a, "8703.22 8,28 8703.23.10 13,55", p)
-linha("ipi", "8703.23.10 Ex 01", C3F, i, f, "8,28", a, "8703.23.10 Ex 01 8,28", p)
-linha("ipi", "8703.23.10", C4F, i, f, "13,55", a, "8703.22 8,28 8703.23.10 13,55", p)
+a, i, f, p = "ipi_2022_dec11158", "2022-08-01", "2025-10-31", "dec_11158_2022_anexo4"
+ipi(TODOS1, "8703.21.00", i, f, "5,27", a,
+    "8703.21. ‐‐ De cilindrada não superior a 1.000 cm3 00 5,27", p)
+ipi(G2, "8703.22.10", i, f, "9,78", a,
+    "8703.22. Com capacidade de transporte de pessoas sentadas inferior ou 10 igual a seis, "
+    "incluindo o motorista 9,78", p)
+ipi(G3, "8703.23.10 Ex 01", i, f, "9,78", a,
+    "Ex 01 ‐ De cilindrada superior a 1.500 cm³, mas não superior a 2.000 cm³ 9,78", p)
+ipi(G4, "8703.23.10", i, f, "18,81", a,
+    "8703.23. Com capacidade de transporte de pessoas sentadas inferior ou 10 igual a seis, "
+    "incluindo o motorista 18,81", p)
+flex = "ALÍQUOTA (%) CÓDIGO DA TIPI 8703.22 8,28 8703.23.10 13,55 8703.23.10 Ex 01 8,28"
+ipi(F2, "8703.22", i, f, "8,28", a, flex, p)
+ipi(F4, "8703.23.10", i, f, "13,55", a, flex, p)
+ipi(F3, "8703.23.10 Ex 01", i, f, "8,28", a, flex, p)
 
+# ---- 2025: IPI Verde (Decreto 12.549), aliquota base antes de acrescimos e decrescimos
 a, i = "ipi_2025_dec12549", "2025-11-01"
-base = "aliquota base do IPI Verde (antes de acrescimos e decrescimos)"
-for codigo in ("8703.21.00", "8703.22.10", "8703.23.10", "8703.40.00", "8703.80.00"):
-    linha("ipi", codigo, base, i, "", "6,30", a, f"{codigo} 6,30")
+VERDE = ("Aliquota base do IPI Verde; o ato soma ou subtrai pontos por fonte de energia (flex 0; "
+         "gasolina, hibrido e eletrico com valores proprios), eficiencia e reciclabilidade.")
+for cats, codigo in ((TODOS1, "8703.21.00"), ((G2, F2), "8703.22.10"),
+                     ((G3, F3, G4, F4), "8703.23.10")):
+    ipi(cats, codigo, i, "", "6,30", a, f"{codigo} 6,30", obs=VERDE)
+
+# ---------------------------------------------------- IPI: hibridos e eletricos (8703.40-80)
+E40, E60, E80 = (politicas.CATEGORIAS_IPI[k] for k in ("e40", "e60", "e80"))
+EE_HIBRIDO = ("EE ate 1,10 MJ/km", "EE de 1,10 a 1,68 MJ/km", "EE acima de 1,68 MJ/km")
+EE_ELETRICO = ("EE ate 0,66 MJ/km", "EE de 0,66 a 1,35 MJ/km", "EE acima de 1,35 MJ/km")
+MASSAS = ("massa ate 1400 kg", "massa de 1400 a 1700 kg", "massa acima de 1700 kg")
+MOM = re.compile(r"MOM (?:menor ou igual a 1400|maior que 1400 e menor ou(?: igual a 1700)?|"
+                 r"maior que 1700) (\d+(?:,\d+)?)")
+EE_OBS = ("Tabela lida em ordem: o texto do PDF embaralha as colunas, mas os 18 valores vem "
+          "na ordem eficiencia x massa, primeiro 8703.40/8703.60 e depois 8703.80. Flex ou "
+          "alcool tem dois pontos a menos.")
+
+
+def tabela_ee(a, pagina, marca_ini, marca_fim, ini, fim, obs=EE_OBS):
+    t = texto(pagina)
+    i0 = t.index(normal(marca_ini))
+    segmento = t[i0:t.index(normal(marca_fim), i0)]
+    achados = list(MOM.finditer(segmento))
+    assert len(achados) == 18, (a, len(achados))
+    for k, m in enumerate(achados):
+        grupo, banda, massa = k // 9, (k % 9) // 3, k % 3
+        alvos = ((E40, "8703.40.00"), (E60, "8703.60.00")) if grupo == 0 else ((E80, "8703.80.00"),)
+        faixa = (EE_HIBRIDO if grupo == 0 else EE_ELETRICO)[banda]
+        for cat, codigo in alvos:
+            linha("ipi", codigo, f"{faixa}, {MASSAS[massa]}", ini, fim, m.group(1), a,
+                  f"{marca_ini} [...] {m.group(0)}", pagina, categoria_ipi=cat, obs=obs)
+
+
+tabela_ee("ipi_2018_dec9442", "dec_9442_2018", "NC (87-6) Ficam fixadas",
+          "Ficam reduzidas em dois pontos", "2018-11-01", "2022-02-24")
+tabela_ee("ipi_2022_dec10979", "dec_10979_2022", "8703.40.00 e 8703.60.00 EE",
+          "Ficam reduzidas em dois pontos", "2022-02-25", "2022-04-30")
+tabela_ee("ipi_2022_dec11055", "dec_11055_2022_anexo",
+          "EFICIÊNCIA ENERGÉTICA (EE) CÓDIGO DA MASSA", "Ficam reduzidas em dois pontos",
+          "2022-05-01", "2022-07-31")
+tabela_ee("ipi_2022_dec11158", "dec_11158_2022_anexo4", "CÓDIGO EFICIÊNCIA DA TIPI ENERGÉTICA",
+          "Ficam reduzidas em dois pontos", "2022-08-01", "2025-10-31")
+for cat, codigo in ((E40, "8703.40.00"), (E60, "8703.60.00"), (E80, "8703.80.00")):
+    linha("ipi", codigo, "aliquota base do IPI Verde", "2025-11-01", "", "6,30",
+          "ipi_2025_dec12549", f"{codigo} 6,30", categoria_ipi=cat, obs=VERDE)
+
+# ------------------------------------------- IPI: aliquota efetiva da empresa habilitada
+# De 16/12/2011 a 31/12/2017 a TIPI inclui os 30 pontos; a empresa habilitada tem a reducao
+# que o proprio ato da'. Fora desse periodo, a efetiva e' a nominal.
+RED_7567_GAS = ("ANEXO III (Redação dada pelo Decreto nº 7.604, de 2011) De 16 de dezembro de "
+                "2011 a 31 de dezembro de 2012: Código NCM Redução (em pontos percentuais)")
+RED_7567_FLEX = ("Redução para os produtos de que trata a NC (87-2): Código NCM Redução (em pontos "
+                 "percentuais) 8703.21 30 8703.22 30 8703.23.10 30 8703.23.10 Ex 01 30")
+CODIGO_RED_GAS = {G1: "8703.21.00 30", G2: "8703.22.10 30", G3: "8703.23.10 Ex01 30",
+                  G4: "8703.23.10 30"}
+RED_7819 = ("§ 1º O valor do crédito presumido a ser utilizado para o pagamento de que trata o "
+            "caput fica limitado ao valor correspondente ao que resultaria da aplicação de trinta "
+            "por cento sobre a base de cálculo prevista na legislação do IPI")
+OBS_7819 = ("Inovar-Auto: a reducao vem do credito presumido, limitado a 30% da base de calculo "
+            "(art. 14, par. 1o); a efetiva e' a menor possivel, que a empresa so' alcanca com "
+            "credito bastante.")
+
+
+def efetiva_habilitada(r: dict) -> None:
+    if r["tributo"] != "ipi":
+        return
+    ini, fim = r["vigencia_inicio"], r["vigencia_fim"] or "9999-12-31"
+    if fim < "2011-12-16" or ini > "2017-12-31":
+        r["aliquota_efetiva_habilitada"] = r["aliquota_pct"]
+        return
+    assert "2011-12-16" <= ini and fim <= "2017-12-31", (r["ato_id"], ini, fim)
+    nominal = float(r["aliquota_pct"].replace(",", "."))
+    efetiva = f"{max(nominal - 30, 0):g}".replace(".", ",")
+    r["aliquota_efetiva_habilitada"] = efetiva
+    if fim <= "2012-12-31":
+        r["reducao_ato_id"], r["reducao_pagina"] = "ipi_2011_dec7567", "dec_7567_2011"
+        r["reducao_trecho"] = (RED_7567_FLEX if r["categoria_ipi"] in (F1, F2, F3, F4)
+                               else f"{RED_7567_GAS} [...] {CODIGO_RED_GAS[r['categoria_ipi']]}")
+    else:
+        assert ini >= "2013-01-01", (r["ato_id"], ini)
+        r["reducao_ato_id"], r["reducao_pagina"] = "regime_2012_dec7819", "dec_7819_2012"
+        r["reducao_trecho"] = RED_7819
+        r["observacao"] = (r["observacao"] + " " + OBS_7819).strip()
+
 
 # ------------------------------------------------------------- imposto de importacao
 def ex_camex(a, paginas, ini, fim, codigos):
@@ -593,34 +943,39 @@ ex_gecex("ii_2025_gecex774", "gecex_774_2025")
 ex_gecex("ii_2026_gecex927", "gecex_927_2026")
 
 # ------------------------------------------------------------------------ IOF
-for a, v in [("credito_2008_iof_dec6339", "0,0082"), ("credito_2008_iof_dec6691", "0,0041"),
+for a, v in [("credito_2002_iof_dec4494", "0,0041"), ("credito_2007_iof_dec6306", "0,0041"),
+             ("credito_2008_iof_dec6339", "0,0082"), ("credito_2008_iof_dec6691", "0,0041"),
              ("credito_2011_iof_dec7458", "0,0082"), ("credito_2011_iof_dec7632", "0,0068"),
              ("credito_2012_iof_dec7726", "0,0041 "), ("credito_2015_iof_dec8392", "0,0082")]:
+    fim = "2008-01-02" if a == "credito_2007_iof_dec6306" else POR_ID[a]["vigencia_fim"]
     linha("iof", "", "credito a pessoa fisica, aliquota diaria", POR_ID[a]["vigencia_inicio"],
-          POR_ID[a]["vigencia_fim"], v.strip(), a, f"pessoa física: {v}% ao dia")
+          fim, v.strip(), a, f"pessoa física: {v}% ao dia")
 
 
 
 def uma_por_periodo(linhas: list[dict]) -> list[dict]:
     """Uma aliquota por periodo. A linha nao comeca antes do seu ato; quando um ato
-    posterior fixa de novo a mesma NCM e categoria, a linha do anterior vale ate' a
-    vespera do posterior, e sai se nem chegou a valer (cronograma substituido antes de
-    valer)."""
+    posterior fixa de novo a mesma linha (mesma categoria; fora do IPI, mesma NCM e
+    categoria) num periodo que cruza o dela, a linha do anterior vale ate' a vespera da
+    do posterior, e sai se nem chegou a valer (cronograma substituido antes de valer)."""
     inicio = {a["id"]: a["vigencia_inicio"] for a in A}
     for r in linhas:
         r["vigencia_inicio"] = max(r["vigencia_inicio"], inicio[r["ato_id"]])
+    chave = politicas.chave_da_aliquota
     saida = []
     for r in linhas:
         for s in linhas:
-            if ((s["tributo"], s["ncm"], s["categoria"]) != (r["tributo"], r["ncm"], r["categoria"])
-                    or inicio[s["ato_id"]] <= inicio[r["ato_id"]]):
+            if chave(s) != chave(r) or inicio[s["ato_id"]] <= inicio[r["ato_id"]]:
                 continue
-            if not r["vigencia_fim"] or r["vigencia_fim"] >= s["vigencia_inicio"]:
-                vespera = (date.fromisoformat(inicio[s["ato_id"]]) - timedelta(days=1)).isoformat()
-                r["vigencia_fim"] = min(r["vigencia_fim"] or vespera, vespera)
+            cruza = ((not s["vigencia_fim"] or r["vigencia_inicio"] <= s["vigencia_fim"])
+                     and (not r["vigencia_fim"] or s["vigencia_inicio"] <= r["vigencia_fim"]))
+            if not cruza:
+                continue
+            vespera = (date.fromisoformat(s["vigencia_inicio"]) - timedelta(days=1)).isoformat()
+            r["vigencia_fim"] = min(r["vigencia_fim"] or vespera, vespera)
         if r["vigencia_fim"] and r["vigencia_fim"] < r["vigencia_inicio"]:
             print(f"fora (substituida antes de valer): {r['ato_id']} {r['ncm']} "
-                  f"{r['vigencia_inicio']}")
+                  f"{r['categoria']} {r['vigencia_inicio']}")
             continue
         saida.append(r)
     return saida
@@ -629,16 +984,22 @@ def uma_por_periodo(linhas: list[dict]) -> list[dict]:
 def conferir(linhas: list[dict]) -> list[str]:
     erros = []
     for r in linhas:
-        t = texto(r["pagina_salva"])
-        for parte in r["fonte_trecho"].split(" [...] "):
-            if normal(parte) not in t:
-                erros.append(f"{r.get('id') or r['ato_id']}: {parte[:100]}")
+        for pagina, trecho in ((r["pagina_salva"], r["fonte_trecho"]),
+                               (r.get("reducao_pagina", ""), r.get("reducao_trecho", ""))):
+            if not trecho:
+                continue
+            t = texto(pagina)
+            for parte in trecho.split(" [...] "):
+                if normal(parte) not in t:
+                    erros.append(f"{r.get('id') or r['ato_id']} ({pagina}): {parte[:100]}")
     return erros
 
 
 def main() -> int:
     global R
     R = uma_por_periodo(R)
+    for r in R:
+        efetiva_habilitada(r)
     erros = conferir(A) + conferir(R)
     if erros:
         print("\n".join(erros), file=sys.stderr)

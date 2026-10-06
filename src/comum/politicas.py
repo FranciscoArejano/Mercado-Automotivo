@@ -36,8 +36,24 @@ from . import config, periodo, tipo_fonte
 COLUNAS_ATOS = ["id", "tema", "instrumento", "numero", "data_ato", "data_publicacao",
                 "vigencia_inicio", "vigencia_fim", "altera_id", "sentido", "alcance",
                 "fonte_url", "tipo_fonte", "pagina_salva", "fonte_trecho", "observacao"]
-COLUNAS_ALIQUOTAS = ["tributo", "ncm", "categoria", "vigencia_inicio", "vigencia_fim",
-                     "aliquota_pct", "ato_id", "pagina_salva", "fonte_trecho"]
+COLUNAS_ALIQUOTAS = ["tributo", "ncm", "categoria", "categoria_ipi", "vigencia_inicio",
+                     "vigencia_fim", "aliquota_pct", "aliquota_efetiva_habilitada", "ato_id",
+                     "pagina_salva", "fonte_trecho", "reducao_ato_id", "reducao_pagina",
+                     "reducao_trecho", "derivada", "observacao"]
+# categorias principais do IPI: cada uma precisa de aliquota em todos os meses em que existe
+CATEGORIAS_IPI = {
+    "g1": "ate 1.000 cm3, gasolina", "f1": "ate 1.000 cm3, flex ou alcool",
+    "g2": "1.000 a 1.500 cm3, gasolina", "f2": "1.000 a 1.500 cm3, flex ou alcool",
+    "g3": "1.500 a 2.000 cm3, gasolina", "f3": "1.500 a 2.000 cm3, flex ou alcool",
+    "g4": "acima de 2.000 cm3, gasolina", "f4": "acima de 2.000 cm3, flex ou alcool",
+    "e40": "8703.40 (hibrido sem recarga externa)", "e60": "8703.60 (hibrido com recarga externa)",
+    "e80": "8703.80 (eletrico)"}
+# desde quando cada categoria existe na janela (as de combustao, desde o inicio do painel)
+INICIO_CATEGORIA = {**{k: None for k in ("g1", "f1", "g2", "f2", "g3", "f3", "g4", "f4")},
+                    "e40": "2018-11-01", "e60": "2018-11-01", "e80": "2018-11-01"}
+# periodo em que a TIPI inclui os 30 pontos e a empresa habilitada tem reducao
+PERIODO_HABILITADA = ("2011-12-16", "2017-12-31")
+REDUCAO_HABILITADA = 30
 COLUNAS_MENSAL = ["mes_ref", "ano", "mes", "ato_id", "tema", "sentido", "instrumento",
                   "numero", "vigencia_inicio", "vigencia_fim", "comeca_no_mes",
                   "termina_no_mes", "dias_em_vigor", "fracao_do_mes"]
@@ -85,6 +101,11 @@ def carregar_aliquotas(caminho: Path | None = None) -> pd.DataFrame:
 
 def carregar_manifesto(pasta: Path | None = None) -> pd.DataFrame:
     return _ler((pasta or config.POLITICAS_PAGINAS) / "manifesto.csv")
+
+
+def paginas_citadas(atos: pd.DataFrame, aliquotas: pd.DataFrame) -> set[str]:
+    return (set(atos["pagina_salva"]) | set(aliquotas["pagina_salva"])
+            | (set(aliquotas["reducao_pagina"]) - {""}))
 
 
 def textos(paginas, pasta: Path | None = None) -> dict[str, str]:
@@ -204,6 +225,14 @@ def problemas_das_aliquotas(aliquotas: pd.DataFrame, atos: pd.DataFrame,
             saida.append(f"{rotulo}: fim antes do inicio")
         if not re.match(r"^\d+(,\d+)?$", r.aliquota_pct):
             saida.append(f"{rotulo}: aliquota {r.aliquota_pct!r} fora do formato")
+        if r.derivada not in ("sim", "nao"):
+            saida.append(f"{rotulo}: derivada {r.derivada!r}")
+        if r.derivada == "sim" and not r.observacao:
+            saida.append(f"{rotulo}: aliquota derivada sem a regra na observacao")
+        if r.tributo == "ipi":
+            saida += _problemas_do_ipi(r, rotulo, ids, paginas, texto)
+        elif r.categoria_ipi or r.aliquota_efetiva_habilitada or r.reducao_ato_id:
+            saida.append(f"{rotulo}: campos do IPI fora do IPI")
         if r.pagina_salva not in paginas:
             saida.append(f"{rotulo}: pagina fora do manifesto")
         elif r.pagina_salva not in texto:
@@ -215,11 +244,78 @@ def problemas_das_aliquotas(aliquotas: pd.DataFrame, atos: pd.DataFrame,
     return saida
 
 
-def sobreposicoes(aliquotas: pd.DataFrame) -> list[str]:
-    """Uma aliquota por periodo: a mesma NCM e categoria nao tem dois periodos que se
-    cruzam (cronograma que outro ato substituiu antes de valer fica fora)."""
+def chave_da_aliquota(r) -> tuple:
+    """A linha que um ato posterior substitui: no IPI, a mesma categoria (principal e a
+    faixa); fora dele, a mesma NCM e categoria."""
+    if r["tributo"] == "ipi" and r["categoria_ipi"]:
+        return (r["tributo"], r["categoria_ipi"], r["categoria"])
+    return (r["tributo"], r["ncm"], r["categoria"])
+
+
+def _numero(valor: str) -> float:
+    return float(valor.replace(",", "."))
+
+
+def _problemas_do_ipi(r, rotulo: str, ids: set, paginas: set, texto: dict) -> list[str]:
+    """Categoria principal, aliquota efetiva da habilitada e o trecho da reducao."""
     saida = []
-    for (tributo, ncm, categoria), g in aliquotas.groupby(["tributo", "ncm", "categoria"]):
+    if r.categoria_ipi not in CATEGORIAS_IPI.values():
+        saida.append(f"{rotulo}: categoria_ipi {r.categoria_ipi!r} fora da lista")
+    if not re.match(r"^\d+(,\d+)?$", r.aliquota_efetiva_habilitada):
+        return saida + [f"{rotulo}: aliquota efetiva {r.aliquota_efetiva_habilitada!r}"]
+    ini, fim = PERIODO_HABILITADA
+    dentro = ini <= r.vigencia_inicio and (r.vigencia_fim or "9999") <= fim
+    nominal, efetiva = _numero(r.aliquota_pct), _numero(r.aliquota_efetiva_habilitada)
+    if dentro:
+        if not (r.reducao_ato_id and r.reducao_trecho):
+            saida.append(f"{rotulo}: periodo dos 30 pontos sem a reducao da habilitada")
+        elif abs(efetiva - max(nominal - REDUCAO_HABILITADA, 0)) > 1e-9:
+            saida.append(f"{rotulo}: efetiva {efetiva} nao e' a nominal menos 30")
+        if r.reducao_ato_id and r.reducao_ato_id not in ids:
+            saida.append(f"{rotulo}: reducao de ato inexistente")
+        if r.reducao_pagina not in paginas:
+            saida.append(f"{rotulo}: pagina da reducao fora do manifesto")
+        elif r.reducao_pagina in texto:
+            for parte in partes_ausentes(r.reducao_trecho, texto[r.reducao_pagina]):
+                saida.append(f"{rotulo}: trecho da reducao fora da pagina: {parte[:60]!r}")
+    else:
+        if r.reducao_ato_id or abs(efetiva - nominal) > 1e-9:
+            saida.append(f"{rotulo}: fora de {ini}..{fim} a efetiva e' a nominal, sem reducao")
+        if r.vigencia_inicio < ini <= (r.vigencia_fim or "9999"):
+            saida.append(f"{rotulo}: periodo cruza o inicio dos 30 pontos")
+    return saida
+
+
+def lacunas_do_ipi(aliquotas: pd.DataFrame, primeiro: str, ultimo: str) -> list[dict]:
+    """Periodos sem aliquota em cada categoria principal, de `primeiro` (ou do inicio da
+    categoria) ao fim de `ultimo` (AAAA-MM)."""
+    from datetime import timedelta
+    ipi = aliquotas[aliquotas["tributo"] == "ipi"]
+    fim_janela = date.fromisoformat(f"{ultimo}-{_dias(ultimo):02d}")
+    saida = []
+    for chave, rotulo in CATEGORIAS_IPI.items():
+        inicio = date.fromisoformat(INICIO_CATEGORIA[chave] or f"{primeiro}-01")
+        linhas = ipi[ipi["categoria_ipi"] == rotulo]
+        periodos = sorted((date.fromisoformat(i), date.fromisoformat(f) if f else fim_janela)
+                          for i, f in zip(linhas["vigencia_inicio"], linhas["vigencia_fim"]))
+        coberto = inicio - timedelta(days=1)
+        for i, f in periodos:
+            if i > coberto + timedelta(days=1) and coberto < fim_janela:
+                saida.append({"categoria": rotulo, "de": str(coberto + timedelta(days=1)),
+                              "ate": str(min(i - timedelta(days=1), fim_janela))})
+            coberto = max(coberto, f)
+        if coberto < fim_janela:
+            saida.append({"categoria": rotulo, "de": str(coberto + timedelta(days=1)),
+                          "ate": str(fim_janela)})
+    return saida
+
+
+def sobreposicoes(aliquotas: pd.DataFrame) -> list[str]:
+    """Uma aliquota por periodo: a mesma chave (`chave_da_aliquota`) nao tem dois periodos
+    que se cruzam (cronograma que outro ato substituiu antes de valer fica fora)."""
+    saida = []
+    chaves = aliquotas.apply(chave_da_aliquota, axis=1)
+    for (tributo, ncm, categoria), g in aliquotas.groupby(chaves):
         g = g.sort_values("vigencia_inicio")
         anterior = None
         for r in g.itertuples():
@@ -246,6 +342,8 @@ def mensal(atos: pd.DataFrame, primeiro: str, ultimo: str) -> pd.DataFrame:
     for r in atos.itertuples():
         inicio = r.vigencia_inicio[:7]
         fim = r.vigencia_fim[:7] if r.vigencia_fim else ultimo
+        if max(inicio, primeiro) > min(fim, ultimo):
+            continue  # ato antecedente (acaba antes da janela) ou posterior a ela
         for mes in periodo.intervalo(max(inicio, primeiro), min(fim, ultimo)):
             total = _dias(mes)
             dia_ini = int(r.vigencia_inicio[8:]) if mes == inicio else 1

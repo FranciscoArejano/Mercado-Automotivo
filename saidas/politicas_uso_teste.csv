@@ -1,4 +1,19 @@
 ato_id,tema,instrumento,numero,data,evento,serie,media_3m_antes,mes_do_ato,media_3m_depois,var_mes_pct,var_depois_pct,var_mes_ano_anterior_pct,var_depois_ano_anterior_pct,movimento
+acordo_2002_arg_dec4510,acordo_automotivo,decreto,4.510,2000-08-01,inicio do ato,"importacao do agregado de carros vinda de Argentina, unidades ajustadas",8774.0,10714.0,10730.0,22.1,22.3,-22.9,-11.5,sim
+ipi_2002_dec4317,ipi,decreto,4.317,2002-08-01,inicio do ato,vendas do painel (automoveis e comerciais leves),,,,,,,,fora da serie
+acordo_2002_mex_dec4458,acordo_automotivo,decreto,4.458,2002-11-06,inicio do ato,"importacao do agregado de carros vinda de México, unidades ajustadas",,,,,,-42.3,31.0,fora da serie
+credito_2002_iof_dec4494,credito,decreto,4.494,2002-12-04,inicio do ato,vendas do painel (automoveis e comerciais leves),,,,,,,,fora da serie
+ipi_2003_dec4542,ipi,decreto,4.542,2003-01-01,inicio do ato,vendas do painel (automoveis e comerciais leves),,,,,,,,fora da serie
+ipi_2003_dec4800,ipi,decreto,4.800,2003-08-06,inicio do ato,vendas do painel (automoveis e comerciais leves),99350.0,93743.0,124137.0,-5.6,24.9,,,sem ano anterior
+ipi_2003_dec4800,ipi,decreto,4.800,2003-11-01,mudanca de aliquota fixada pelo ato,vendas do painel (automoveis e comerciais leves),114384.0,123001.0,120014.0,7.5,4.9,,,sem ano anterior
+ipi_2003_dec4902,ipi,decreto,4.902,2003-12-01,inicio do ato,vendas do painel (automoveis e comerciais leves),124137.0,161126.0,110417.0,29.8,-11.1,,,sem ano anterior
+ipi_2003_dec4542,ipi,decreto,4.542,2004-03-01,mudanca de aliquota fixada pelo ato,vendas do painel (automoveis e comerciais leves),120014.0,132336.0,114419.0,10.3,-4.7,,,sem ano anterior
+ipi_2004_dec5058,ipi,decreto,5.058,2004-05-01,inicio do ato,vendas do painel (automoveis e comerciais leves),112353.0,114440.0,123057.0,1.9,9.5,-3.4,-5.2,sim
+acordo_2006_arg_dec5663,acordo_automotivo,decreto,5.663,2006-01-01,inicio do ato,"importacao do agregado de carros vinda de Argentina, unidades ajustadas",6185.0,2718.0,5833.0,-56.1,-5.7,-27.9,12.6,sim
+acordo_2006_arg_dec5716,acordo_automotivo,decreto,5.716,2006-03-02,inicio do ato,"importacao do agregado de carros vinda de Argentina, unidades ajustadas",3375.0,7268.0,8441.0,115.3,150.1,24.7,45.0,sim
+acordo_2006_arg_dec5835,acordo_automotivo,decreto,5.835,2006-07-01,inicio do ato,"importacao do agregado de carros vinda de Argentina, unidades ajustadas",8441.0,9937.0,11142.0,17.7,32.0,-10.0,0.9,sim
+ipi_2007_dec6006,ipi,decreto,6.006,2007-01-01,inicio do ato,vendas do painel (automoveis e comerciais leves),178269.0,144811.0,163887.0,-18.8,-8.1,-17.4,-13.7,nao
+credito_2007_iof_dec6306,credito,decreto,6.306,2007-12-17,inicio do ato,vendas do painel (automoveis e comerciais leves),216187.0,229977.0,204576.0,6.4,-5.4,19.6,-4.7,sim
 credito_2008_iof_dec6339,credito,decreto,6.339,2008-01-03,inicio do ato,vendas do painel (automoveis e comerciais leves),228540.0,203880.0,218714.0,-10.8,-4.3,-18.8,-8.1,nao
 acordo_2008_arg_dec6500,acordo_automotivo,decreto,6.500,2008-07-03,inicio do ato,"importacao do agregado de carros vinda de Argentina, unidades ajustadas",19946.0,27186.0,26529.0,36.3,33.0,22.2,72.1,sim
 credito_2008_iof_dec6691,credito,decreto,6.691,2008-12-12,inicio do ato,vendas do painel (automoveis e comerciais leves),213358.0,181782.0,211989.0,-14.8,-0.6,6.4,-5.4,sim
@@ -39,13 +54,15 @@ acordo_2015_mex_dec8419,acordo_automotivo,decreto,8.419,2015-03-19,inicio do ato
 acordo_2015_arg_dec8477,acordo_automotivo,decreto,8.477,2015-07-01,inicio do ato,"importacao do agregado de carros vinda de Argentina, unidades ajustadas",20091.0,16390.0,16430.0,-18.4,-18.2,-13.6,-16.6,nao
 ii_2015_camex97,imposto_importacao,resolucao,Camex 97,2015-10-27,inicio do ato,"importacao das NCMs do ato (87032210, 87032310, 87039000), unidades ajustadas",20369.0,15894.0,10355.0,-22.0,-49.2,-1.1,-19.3,sim
 acordo_2016_arg_dec8797,acordo_automotivo,decreto,8.797,2016-07-01,inicio do ato,"importacao do agregado de carros vinda de Argentina, unidades ajustadas",14878.0,8692.0,10833.0,-41.6,-27.2,-18.4,-18.2,sim
-ipi_2014_dec8279,ipi,decreto,8.279,2018-01-01,mudanca de aliquota fixada pelo ato,vendas do painel (automoveis e comerciais leves),197795.0,174591.0,186160.0,-11.7,-5.9,-18.1,-10.9,nao
+ipi_2017_dec8950,ipi,decreto,8.950,2017-01-01,inicio do ato,vendas do painel (automoveis e comerciais leves),174432.0,142818.0,155458.0,-18.1,-10.9,-24.3,-20.4,nao
+ipi_2017_dec8950,ipi,decreto,8.950,2018-01-01,mudanca de aliquota fixada pelo ato,vendas do painel (automoveis e comerciais leves),197795.0,174591.0,186160.0,-11.7,-5.9,-18.1,-10.9,nao
 regime_2018_mp843,regime_automotivo,medida provisoria,843,2018-07-06,inicio do ato,vendas do painel (automoveis e comerciais leves),198425.0,206949.0,227815.0,4.3,14.8,0.9,12.6,nao
 ipi_2018_dec9442,ipi,decreto,9.442,2018-11-01,inicio do ato,vendas do painel (automoveis e comerciais leves),227815.0,219624.0,200098.0,-3.6,-12.2,-1.4,-11.2,nao
 regime_2018_lei13755,regime_automotivo,lei,13.755,2018-12-11,inicio do ato,vendas do painel (automoveis e comerciais leves),221895.0,222782.0,191724.0,0.4,-13.6,4.7,-9.9,nao
 acordo_2020_arg_dec10343,acordo_automotivo,decreto,10.343,2020-07-01,inicio do ato,"importacao do agregado de carros vinda de Argentina, unidades ajustadas",3248.0,5926.0,10774.0,82.4,231.7,0.5,-1.3,sim
 regulacao_2022_conama492_l7,regulacao,resolucao,Conama 492 (L7),2022-01-01,inicio do ato,vendas do painel (automoveis e comerciais leves),166540.0,115608.0,129300.0,-30.6,-22.4,-25.1,-23.3,nao
 ipi_2022_dec10979,ipi,decreto,10.979,2022-02-25,inicio do ato,vendas do painel (automoveis e comerciais leves),155529.0,119299.0,147325.0,-23.3,-5.3,-22.0,-15.3,sim
+ipi_2022_dec10923,ipi,decreto,10.923,2022-05-01,inicio do ato,vendas do painel (automoveis e comerciais leves),129300.0,173375.0,174696.0,34.1,35.1,5.2,-2.3,sim
 ipi_2022_dec11055,ipi,decreto,11.055,2022-05-01,inicio do ato,vendas do painel (automoveis e comerciais leves),129300.0,173375.0,174696.0,34.1,35.1,5.2,-2.3,sim
 ipi_2022_dec11158,ipi,decreto,11.158,2022-08-01,inicio do ato,vendas do painel (automoveis e comerciais leves),168368.0,192359.0,178625.0,14.2,6.1,-6.4,-10.6,sim
 programa_2023_mp1175,programa_desconto,medida provisoria,1.175,2023-06-06,inicio do ato,vendas do painel (automoveis e comerciais leves),166590.0,178300.0,197826.0,7.0,18.7,11.4,21.9,nao

@@ -53,7 +53,7 @@ def executar(inicio: str = config.PERIODO_INICIO, fim: str = config.PERIODO_FIM)
     atos = politicas.carregar_atos()
     aliquotas = politicas.carregar_aliquotas()
     manifesto = politicas.carregar_manifesto()
-    texto = politicas.textos(set(atos["pagina_salva"]) | set(aliquotas["pagina_salva"]))
+    texto = politicas.textos(politicas.paginas_citadas(atos, aliquotas))
 
     p_paginas = politicas.problemas_das_paginas(manifesto)
     p_atos = politicas.problemas_dos_atos(atos, manifesto, texto)
@@ -66,8 +66,12 @@ def executar(inicio: str = config.PERIODO_INICIO, fim: str = config.PERIODO_FIM)
         return 1
 
     mensal = politicas.mensal(atos, inicio, fim)
-    sem_mes = sorted(set(atos["id"]) - set(mensal["ato_id"]))
-    citadas = set(atos["pagina_salva"]) | set(aliquotas["pagina_salva"])
+    antecedentes = sorted(atos.loc[(atos["vigencia_fim"] != "")
+                                   & (atos["vigencia_fim"] < f"{inicio}-01"), "id"])
+    sem_mes = sorted(set(atos["id"]) - set(mensal["ato_id"]) - set(antecedentes))
+    lacunas = politicas.lacunas_do_ipi(aliquotas, inicio, fim)
+    derivadas = aliquotas[aliquotas["derivada"] == "sim"]
+    citadas = politicas.paginas_citadas(atos, aliquotas)
     nao_citadas = sorted(set(manifesto["nome"]) - citadas)
     abertos = atos[atos["vigencia_fim"] == ""]
     validacao = pd.DataFrame([
@@ -82,14 +86,28 @@ def executar(inicio: str = config.PERIODO_INICIO, fim: str = config.PERIODO_FIM)
         {"conferencia": f"ato sem nenhum mes na janela {inicio} a {fim}: "
                         f"{', '.join(sem_mes) or 'nenhum'}", "casos": len(atos),
          "falhas": len(sem_mes)},
+        {"conferencia": "IPI: categoria principal sem aliquota em algum mes (de "
+                        f"{inicio} ou do inicio da categoria a {fim}): "
+                        + ("; ".join(f"{l['categoria']} {l['de']} a {l['ate']}" for l in lacunas)
+                           or "nenhuma"),
+         "casos": len(politicas.CATEGORIAS_IPI), "falhas": len(lacunas)},
+        {"conferencia": "registro, nao falha: aliquotas derivadas (o ato fixa uma reducao "
+                        f"percentual, nao a aliquota): {len(derivadas)}",
+         "casos": len(aliquotas), "falhas": 0},
+        {"conferencia": "registro, nao falha: atos antecedentes (acabam antes da janela): "
+                        f"{', '.join(antecedentes) or 'nenhum'}", "casos": len(atos), "falhas": 0},
         {"conferencia": "registro, nao falha: paginas guardadas que nenhum ato ou aliquota "
                         f"cita: {', '.join(nao_citadas) or 'nenhuma'}",
          "casos": len(manifesto), "falhas": 0},
         {"conferencia": "registro, nao falha: atos sem vigencia_fim (em vigor, ou fim nao "
                         f"confirmado): {len(abertos)}", "casos": len(atos), "falhas": 0},
     ])
-    if sem_mes:
-        logger.error("atos fora da janela: %s; nada gravado", sem_mes)
+    if sem_mes or lacunas:
+        for l in lacunas:
+            logger.error("IPI sem aliquota: %s de %s a %s", l["categoria"], l["de"], l["ate"])
+        if sem_mes:
+            logger.error("atos fora da janela: %s", sem_mes)
+        logger.error("nada gravado")
         return 1
 
     comex = pd.read_parquet(config.COMEX_VEICULOS,
@@ -125,6 +143,8 @@ def _atos_por_tema(atos: pd.DataFrame) -> str:
 def dicionario(atos: pd.DataFrame, aliquotas: pd.DataFrame, mensal: pd.DataFrame,
                validacao: pd.DataFrame, uso: pd.DataFrame) -> str:
     por_tributo = aliquotas.groupby("tributo").size().to_dict()
+    inicio_janela = mensal["mes_ref"].min()
+    categorias = ", ".join(f"`{c}`" for c in politicas.CATEGORIAS_IPI.values())
     sem_mov = uso[uso["movimento"] == "nao"]
     return f"""# Dicionario -- calendario de politicas
 
@@ -157,17 +177,27 @@ URL e SHA-256 do texto no manifesto. Noticia ajudou a achar ato, nunca e' citada
 ## `dados/referencia/politicas_aliquotas.csv` ({len(aliquotas)} linhas: {", ".join(f"{k} {v}" for k, v in por_tributo.items())})
 
 So' as aliquotas que o proprio ato fixa -- nao e' a TIPI inteira. Uma aliquota por
-periodo: a linha de um ato que um ato posterior fixa de novo (mesma NCM e categoria)
-vale ate' a vespera do posterior; cronograma substituido antes de valer fica fora.
+periodo: a linha de um ato que um ato posterior fixa de novo (no IPI, a mesma categoria;
+fora dele, a mesma NCM e categoria) vale ate' a vespera da do posterior; cronograma
+substituido antes de valer fica fora.
+
+**IPI completo.** Cada categoria principal (`categoria_ipi`) tem aliquota em todos os meses
+em que existe: as de combustao de {inicio_janela} em diante, as de 8703.40, 8703.60 e
+8703.80 desde 11/2018. A etapa falha se faltar um mes.
 
 | coluna | conteudo |
 |---|---|
 | `tributo` | `ipi`, `ii` (imposto de importacao), `iof` |
 | `ncm` | com os pontos da TIPI e, quando ha', o Ex (`8703.23.10 Ex 01`, `8703.80.00 Ex 007`). Os digitos sem os pontos sao prefixo da NCM do Comex Stat (`comex_veiculos.parquet`). Vazia no IOF |
-| `categoria` | faixa de cilindrada e combustivel (IPI), descricao do Ex e quota (II) |
+| `categoria` | no IPI, a categoria principal (combustao) ou a faixa de eficiencia e massa (eletrificados); no II, a descricao do Ex e a quota |
+| `categoria_ipi` | so' no IPI: {categorias} |
 | `vigencia_inicio`, `vigencia_fim` | periodo da aliquota |
-| `aliquota_pct` | em %, com virgula decimal. IPI de 2012 a 2017: a TIPI ja' inclui os 30 pontos do Inovar-Auto (37 = 7 + 30); a empresa habilitada tinha a reducao. IOF: % ao dia |
+| `aliquota_pct` | nominal, em %, com virgula decimal. IOF: % ao dia |
+| `aliquota_efetiva_habilitada` | so' no IPI. De 16/12/2011 a 31/12/2017 a TIPI inclui 30 pontos; a efetiva da empresa habilitada e' a nominal menos a reducao que o proprio ato da' (30 pontos: Decreto 7.567 em 2011-2012; teto do credito presumido do Inovar-Auto, Decreto 7.819, em 2013-2017). Fora desse periodo, igual a' nominal |
+| `reducao_ato_id`, `reducao_pagina`, `reducao_trecho` | o ato, a pagina e o trecho literal que fixam a reducao da habilitada |
+| `derivada` | `sim` quando o ato fixa uma reducao percentual e nao a aliquota (a regra esta' na observacao): 18,5% do Decreto 10.979 sobre a TIPI de 2017 nos codigos que ele nao lista |
 | `ato_id`, `pagina_salva`, `fonte_trecho` | ato, pagina (o anexo, quando a tabela esta' nele) e trecho literal |
+| `observacao` | regra da derivada, leitura da tabela de eficiencia, base do IPI Verde |
 
 ## `dados/processado/politicas_mensal.parquet` ({len(mensal):,} linhas, {mensal['mes_ref'].min()} a {mensal['mes_ref'].max()})
 

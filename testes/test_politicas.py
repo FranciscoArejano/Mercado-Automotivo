@@ -72,6 +72,27 @@ def test_atos_e_aliquotas_sem_problema(atos, aliquotas, manifesto, textos):
     assert politicas.problemas_das_aliquotas(aliquotas, atos, manifesto, textos) == []
 
 
+def test_ipi_completo_e_efetiva_da_habilitada(aliquotas):
+    """Cada categoria principal tem aliquota em todos os meses; de 16/12/2011 a 31/12/2017 a
+    efetiva da habilitada e' a nominal menos 30, com o trecho da reducao; fora, igual."""
+    assert politicas.lacunas_do_ipi(aliquotas, config.PERIODO_INICIO, config.PERIODO_FIM) == []
+    ipi = aliquotas[aliquotas["tributo"] == "ipi"]
+    assert set(ipi["categoria_ipi"]) == set(politicas.CATEGORIAS_IPI.values())
+    for r in ipi.itertuples():
+        nominal = float(r.aliquota_pct.replace(",", "."))
+        efetiva = float(r.aliquota_efetiva_habilitada.replace(",", "."))
+        if "2011-12-16" <= r.vigencia_inicio <= "2017-12-31":
+            assert efetiva == nominal - 30 and r.reducao_trecho, (r.ato_id, r.ncm)
+        else:
+            assert efetiva == nominal and not r.reducao_ato_id, (r.ato_id, r.ncm)
+    # o 1.000 cm3 a gasolina em meados de 2012: 30% na TIPI, zero para a habilitada
+    meio_2012 = ipi[(ipi["categoria_ipi"] == politicas.CATEGORIAS_IPI["g1"])
+                    & (ipi["vigencia_inicio"] == "2012-05-22")]
+    assert meio_2012[["aliquota_pct", "aliquota_efetiva_habilitada"]].values.tolist() == [["30", "0"]]
+    derivadas = ipi[ipi["derivada"] == "sim"]
+    assert set(derivadas["ato_id"]) == {"ipi_2022_dec10979"} and derivadas["observacao"].all()
+
+
 def test_formato_das_ncms(aliquotas):
     for r in aliquotas.itertuples():
         if r.tributo == "iof":
@@ -83,9 +104,11 @@ def test_formato_das_ncms(aliquotas):
 
 def test_mensal_cobre_cada_ato(atos):
     mensal = politicas.mensal(atos, config.PERIODO_INICIO, config.PERIODO_FIM)
-    assert set(mensal["ato_id"]) == set(atos["id"])
+    antecedentes = set(atos.loc[(atos["vigencia_fim"] != "")
+                                & (atos["vigencia_fim"] < f"{config.PERIODO_INICIO}-01"), "id"])
+    assert set(mensal["ato_id"]) == set(atos["id"]) - antecedentes
     assert not mensal.duplicated(["mes_ref", "ato_id"]).any()
-    for r in atos.itertuples():
+    for r in atos[~atos["id"].isin(antecedentes)].itertuples():
         meses = mensal.loc[mensal["ato_id"] == r.id, "mes_ref"]
         assert meses.min() == max(r.vigencia_inicio[:7], config.PERIODO_INICIO), r.id
         fim = r.vigencia_fim[:7] if r.vigencia_fim else config.PERIODO_FIM
@@ -130,6 +153,23 @@ def test_mensal_conta_dias_do_primeiro_e_do_ultimo_mes():
     b = m[m["ato_id"] == "b"]
     assert list(b["mes_ref"]) == ["2015-01", "2015-02", "2015-03"]
     assert not b["termina_no_mes"].any()
+
+
+def test_lacuna_de_categoria_e_apontada():
+    rotulo = politicas.CATEGORIAS_IPI["g1"]
+    linhas = []
+    for chave, cat in politicas.CATEGORIAS_IPI.items():
+        ini = politicas.INICIO_CATEGORIA[chave] or "2003-01-01"
+        if cat == rotulo:
+            linhas += [{"tributo": "ipi", "categoria_ipi": cat, "vigencia_inicio": ini,
+                        "vigencia_fim": "2009-03-31"},
+                       {"tributo": "ipi", "categoria_ipi": cat, "vigencia_inicio": "2009-05-01",
+                        "vigencia_fim": ""}]
+        else:
+            linhas.append({"tributo": "ipi", "categoria_ipi": cat, "vigencia_inicio": ini,
+                           "vigencia_fim": ""})
+    lacunas = politicas.lacunas_do_ipi(_aliquotas(*linhas), "2003-01", "2026-08")
+    assert lacunas == [{"categoria": rotulo, "de": "2009-04-01", "ate": "2009-04-30"}]
 
 
 def test_sobreposicao_de_aliquotas_e_apontada():

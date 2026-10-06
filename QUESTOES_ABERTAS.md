@@ -44,7 +44,7 @@ pesquisador; abaixo, o que ficou decidido, o que o código faz agora, e o que
 | Macro | Dimensão macro mensal | **17 séries; o IPCA de usado é índice de depreciação** |
 | Classificação | Dimensão de modelo gravada (fase 2) | **gravada com procedência por atributo; origem 81% sem checagem — próxima frente** |
 | Comex | Comércio exterior de veículos (Comex Stat), 1997–2026-08 | **construída; peso baixo ajustado pelo peso; distância de origem registrada, não resolvida** |
-| Calendário | Calendário de políticas, 2008–2026 | **construído: 50 atos e 216 alíquotas, só fonte oficial; 25 de 61 datas sem movimento, a conferir** |
+| Calendário | Calendário de políticas, 2003–2026 | **construído: 65 atos e 422 alíquotas, só fonte oficial; IPI completo mês a mês; 27 de 78 datas sem movimento, a conferir** |
 | Motorização | Cilindrada por versão (coluna `motor` do PBE) | **próxima dimensão; não construída** |
 
 ---
@@ -884,10 +884,33 @@ quantidade não.
 
 ## Calendário de políticas: o que ficou fora ou inferido
 
-`politicas_mensal.parquet` (rodada 11, 2026-10-05) tem 50 atos de 2008 a 2026,
-cada um com trecho literal de página oficial guardada (Planalto, DOU pelo
+`politicas_mensal.parquet` tem, desde a rodada 12, 65 atos de 2003 a 2026, cada
+um com trecho literal de página oficial guardada (Planalto, DOU pelo
 visualizador de PDF da Imprensa Nacional, gov.br, Banco Central). As alíquotas
 são só as que o próprio ato fixa.
+
+**Fechado na rodada 12:**
+
+- **2003 a 2007.** Os atos do período:
+  - IPI: TIPI de 2003, Decretos 4.800 e 4.902, 5.058, TIPI de 2007;
+  - o flex equiparado ao álcool em 2002 (Decreto 4.317, antecedente da janela);
+  - ACE-55 com o México;
+  - protocolos 31, 32, 33 e 35 do ACE-14 com a Argentina;
+  - regulamentos do IOF de 2002 e 2007.
+- **IPI completo.** As oito categorias de combustão (até 1.000, 1.000–1.500,
+  1.500–2.000 e acima de 2.000 cm³, gasolina e flex) têm alíquota em todos os
+  meses de 2003-01 a 2026-08, e 8703.40, 8703.60 e 8703.80 desde 11/2018. A
+  etapa 13 falha se faltar mês. Entraram a gasolina de 2013–2014 e as TIPI de
+  2017 e 2022.
+- **Alíquota efetiva da habilitada**, de 16/12/2011 a 31/12/2017, com o trecho
+  da redução: Decreto 7.567 em 2011–2012 e teto do crédito presumido do
+  Inovar-Auto em 2013–2017.
+- **O IOF depois de 2015.** O texto compilado do Decreto 6.306 mostra que a
+  alíquota da pessoa física não muda depois do 8.392; as mudanças de 2025 são
+  da pessoa jurídica.
+- **A TIPI de 2022** só produz efeito em 1/5/2022 (Decreto 11.021), o dia em que
+  o 11.055 lhe dá anexo novo. Até 24/2/2022 valem a TIPI de 2017 e o Decreto
+  9.442.
 
 **Fora, por falta de página oficial aberta:**
 
@@ -898,30 +921,29 @@ são só as que o próprio ato fixa.
 2. **O protocolo do acordo com a Argentina entre 1/7/2013 e 30/6/2014.** O
    Decreto 6.500 vai até 30/6/2013 e o 8.278 começa em 1/7/2014; o ato do meio
    não foi aberto.
-3. **O IOF depois de 2015.** O Decreto 8.392 (0,0082% ao dia para pessoa
-   física, desde 22/1/2015) fica sem fim; mudanças posteriores não foram
-   procuradas.
-4. **As alíquotas de gasolina e de comercial leve (8704) em 2013-2014.** Os
-   decretos do ciclo trazem as tabelas; só as de flex foram registradas.
-5. **O Decreto 10.923/2021 (a TIPI de 2022)** não foi guardado. As alíquotas de
-   8703.40/60/80 sob as reduções gerais de 2022 (10.979, 11.055, 11.158) não
-   estão registradas.
-6. **2003 a 2007.** As pistas da rodada começam em 2008, e nenhum ato anterior
-   foi procurado. A tabela mensal começa em 2008-01; um mês sem ato antes disso
-   não quer dizer mês sem política.
+3. **A TIPI de 2012 (Decreto 7.660)** não foi guardada. A TIPI de 2007 fica sem
+   fim, e as linhas de 2012 vêm do Decreto 7.567, com os mesmos valores.
+4. **As alíquotas de comercial leve (8704)** não estão registradas.
+5. **Imposto de importação e crédito em 2003–2007.** Não achei ato que mude o
+   imposto de importação de automóveis nem medida de crédito do Banco Central
+   nesses anos. Não procurei além das pistas.
 
 **Inferido, com a inferência na observação do ato:**
 
-7. **O fim da Camex 97 em 31/12/2023.** A Gecex 532 tira os eletrificados do
+6. **O fim da Camex 97 em 31/12/2023.** A Gecex 532 tira os eletrificados do
    Anexo V da Gecex 272/2021 a partir de 1/1/2024; a passagem dos Ex da Camex 97
    para a Gecex 272 (e a mudança de NCM de 2017) não foi aberta.
+7. **O início do ACE-55 entre Brasil e México.** O decreto não data a entrada em
+   vigor, e os anos 1 a 5 das quotas contam dela. A vigência ficou na
+   publicação do decreto (6/11/2002). O fim é o início das quotas do Decreto
+   7.706, em 2012.
 
-**Do uso-teste das datas** (`saidas/politicas_uso_teste.csv`): 25 das 61 datas
+**Do uso-teste das datas** (`saidas/politicas_uso_teste.csv`): 27 das 78 datas
 não mostram movimento além do sazonal (limiar de 10 pontos contra as mesmas
-janelas do ano anterior). A lista e a leitura estão no log da rodada. O
-movimento sazonal de referência pode estar contaminado por política do ano
-anterior: o desconto de junho de 2023 compara com 2022, ano do corte de IPI de
-maio.
+janelas do ano anterior). Em 2003 não há ano anterior no painel. A lista e a
+leitura estão nos logs das rodadas 11 e 12. O movimento sazonal de referência
+pode estar contaminado por política do ano anterior: o desconto de junho de 2023
+compara com 2022, ano do corte de IPI de maio.
 
 ## Motorização: a próxima dimensão (não construída)
 

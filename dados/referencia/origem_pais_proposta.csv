@@ -1,0 +1,504 @@
+marca,modelo,segmento,periodo_inicio,periodo_fim,pais,fabrica_id,pais_do_kit,observacao
+AUDI,A3,automoveis,2003-01,2006-12,Brasil,audi_sjp,,A3 de primeira geracao montado em Sao Jose dos Pinhais ate 2006.
+AUDI,A3,automoveis,2007-01,2026-08,Alemanha,,,Sportback de Ingolstadt.
+AUDI,A3 SEDAN,automoveis,2014-01,2015-09,Hungria,,,Sedan de Gyor antes da producao local.
+AUDI,A3 SEDAN,automoveis,2015-10,2020-12,Brasil,audi_sjp,,Producao em Sao Jose dos Pinhais; fim incerto.
+AUDI,A3 SEDAN,automoveis,2021-01,2026-08,Hungria,,,Nova geracao importada; incerto.
+AUDI,A4,automoveis,2003-01,2025-12,Alemanha,,,
+AUDI,A4 AVANT,automoveis,2003-01,2020-08,Alemanha,,,
+AUDI,A5,automoveis,2008-11,2026-08,Alemanha,,,
+AUDI,Q3,automoveis,2012-10,2016-02,Espanha,,,Primeira geracao de Martorell.
+AUDI,Q3,automoveis,2016-03,2020-12,Brasil,audi_sjp,,
+AUDI,Q3,automoveis,2021-01,2021-12,Hungria,,,Segunda geracao importada antes da retomada local; incerto.
+AUDI,Q3,automoveis,2022-01,2025-05,Brasil,audi_sjp,,Retomada em Sao Jose dos Pinhais; incerto.
+AUDI,Q5,automoveis,2010-01,2017-12,Alemanha,,,
+AUDI,Q5,automoveis,2018-01,2024-07,México,,,San Jose Chiapa.
+AUDI,TT,automoveis,2007-06,2022-01,Hungria,,,
+BMW,318,automoveis,2011-09,2012-12,Alemanha,,,
+BMW,320,automoveis,2003-01,2014-09,Alemanha,,,
+BMW,320,automoveis,2014-10,2019-12,Brasil,bmw_araquari,,
+BMW,320I,automoveis,2008-01,2014-09,Alemanha,,,
+BMW,320I,automoveis,2014-10,2026-08,Brasil,bmw_araquari,,
+BMW,325,automoveis,2005-05,2011-12,Alemanha,,,
+BMW,328,automoveis,2008-01,2014-09,Alemanha,,,
+BMW,328,automoveis,2014-10,2019-05,Brasil,bmw_araquari,,
+BMW,330E,automoveis,2020-04,2026-08,Brasil,bmw_araquari,,Incerto.
+BMW,330I,automoveis,2006-04,2019-05,Alemanha,,,
+BMW,330I,automoveis,2019-06,2020-12,Brasil,bmw_araquari,,Incerto.
+BMW,M2,automoveis,2017-01,2022-12,Alemanha,,,
+BMW,M2,automoveis,2023-01,2026-08,México,,,San Luis Potosi.
+BMW,M3,automoveis,2003-02,2026-08,Alemanha,,,
+BMW,X1,automoveis,2010-01,2014-09,Alemanha,,,
+BMW,X1,automoveis,2014-10,2026-08,Brasil,bmw_araquari,,
+BMW,X3,automoveis,2004-01,2010-12,Áustria,,,Magna Steyr.
+BMW,X3,automoveis,2011-01,2018-02,Estados Unidos,,,Spartanburg.
+BMW,X3,automoveis,2018-03,2024-11,Brasil,bmw_araquari,,
+BMW,X4,automoveis,2015-01,2018-12,Estados Unidos,,,
+BMW,X4,automoveis,2019-01,2023-12,Brasil,bmw_araquari,,Incerto.
+BMW,X5,automoveis,2003-01,2023-12,Estados Unidos,,,
+BMW,X6,automoveis,2008-12,2023-02,Estados Unidos,,,
+BMW,Z4,automoveis,2006-12,2016-12,Estados Unidos,,,
+BMW,Z4,automoveis,2017-01,2021-12,Áustria,,,
+BYD,DOLPHIN,automoveis,2023-07,2026-08,China,,,
+BYD,DOLPHIN MINI,automoveis,2024-03,2026-08,China,,,
+BYD,DOLPHIN MINI,automoveis,2025-10,2026-08,Brasil,byd_camacari,China,SKD em Camacari ao lado da importacao.
+BYD,KING,automoveis,2024-06,2026-08,China,,,
+BYD,KING,automoveis,2025-10,2026-08,Brasil,byd_camacari,China,SKD em Camacari ao lado da importacao.
+BYD,SEAL,automoveis,2023-07,2026-08,China,,,
+BYD,SHARK,comerciais_leves,2024-10,2026-08,China,,,
+BYD,SONG,automoveis,2024-07,2026-08,China,,,
+BYD,SONG,automoveis,2025-10,2026-08,Brasil,byd_camacari,China,SKD em Camacari ao lado da importacao.
+BYD,SONG PLUS,automoveis,2023-02,2024-06,China,,,
+BYD,YUAN,automoveis,2024-08,2026-08,China,,,
+BYD,YUAN PLUS,automoveis,2023-01,2024-07,China,,,
+CAOA CHANGAN,UNIT-T,automoveis,2026-06,2026-08,China,,,
+CAOA CHERY,ARRIZO 5,automoveis,2020-03,2022-01,Brasil,chery_jacarei,,
+CAOA CHERY,ARRIZO 6,automoveis,2020-07,2026-08,China,,,Incerto: pode ter sido montado em Anapolis.
+CAOA CHERY,TIGGO,automoveis,2020-03,2021-04,Brasil,chery_jacarei,,Tiggo 2.
+CAOA CHERY,TIGGO 2,automoveis,2021-05,2021-12,Brasil,chery_jacarei,,
+CAOA CHERY,TIGGO 3X,automoveis,2021-07,2022-12,Brasil,chery_jacarei,,Incerto entre Jacarei e Anapolis.
+CAOA CHERY,TIGGO 5X,automoveis,2020-03,2026-08,Brasil,caoa_anapolis,,
+CAOA CHERY,TIGGO 7,automoveis,2020-03,2026-08,Brasil,caoa_anapolis,,
+CAOA CHERY,TIGGO 8,automoveis,2020-12,2026-08,Brasil,caoa_anapolis,,
+CHANA,SC,comerciais_leves,2007-07,2020-09,China,,,
+CHERY,ARRIZO 5,automoveis,2019-01,2020-02,Brasil,chery_jacarei,,
+CHERY,CELER,automoveis,2015-05,2018-02,Brasil,chery_jacarei,,
+CHERY,CELER SEDAN,automoveis,2014-01,2014-07,China,,,Antes da inauguracao de Jacarei.
+CHERY,CELER SEDAN,automoveis,2014-08,2018-12,Brasil,chery_jacarei,,
+CHERY,CIELO SEDAN,automoveis,2010-05,2013-08,China,,,
+CHERY,FACE,automoveis,2010-03,2011-12,China,,,
+CHERY,QQ,automoveis,2011-01,2014-12,China,,,
+CHERY,QQ,automoveis,2015-01,2020-12,Brasil,chery_jacarei,,
+CHERY,TIGGO,automoveis,2009-11,2020-02,China,,,
+CHERY,TIGGO 5X,automoveis,2019-02,2020-02,Brasil,chery_jacarei,,
+CHERY,TIGGO 7,automoveis,2019-07,2020-02,Brasil,caoa_anapolis,,
+CHRYSLER,300C,automoveis,2006-01,2014-03,Canadá,,,
+CHRYSLER,GCARAVAN,automoveis,2004-01,2023-01,Canadá,,,
+CITROEN,AIRCROSS,automoveis,2016-01,2026-04,Brasil,stellantis_porto_real,,
+CITROEN,BASALT,automoveis,2024-11,2026-08,Brasil,stellantis_porto_real,,
+CITROEN,C3,automoveis,2003-01,2026-08,Brasil,stellantis_porto_real,,
+CITROEN,C3 AIRCROSS,automoveis,2010-09,2025-12,Brasil,stellantis_porto_real,,
+CITROEN,C3 PICASSO,automoveis,2011-02,2016-08,Brasil,stellantis_porto_real,,
+CITROEN,C4,automoveis,2006-10,2026-01,França,,,Incerto: parte do hatch pode ter vindo da Argentina.
+CITROEN,C4 CACTUS,automoveis,2018-10,2024-05,Brasil,stellantis_porto_real,,
+CITROEN,C4 PALLAS,automoveis,2007-05,2024-07,Argentina,,,El Palomar.
+CITROEN,C4 PICASSO,automoveis,2008-05,2019-09,Espanha,,,Vigo.
+CITROEN,C4L,automoveis,2013-09,2022-05,Argentina,,,"C4 Lounge, El Palomar."
+CITROEN,C5,automoveis,2003-01,2012-05,França,,,
+CITROEN,DS5,automoveis,2013-01,2016-04,França,,,
+CITROEN,JUMPER,comerciais_leves,2003-01,2026-08,Brasil,iveco_sete_lagoas,,Incerto: pode ter vindo da Italia em parte do periodo.
+CITROEN,JUMPY,comerciais_leves,2017-10,2026-08,Uruguai,,,Montagem no Uruguai (nao e montagem local).
+CITROEN,XSARA PICASSO,automoveis,2003-01,2012-12,Brasil,stellantis_porto_real,,
+DODGE,JOURNEY,automoveis,2008-08,2017-02,México,,,Toluca.
+DODGE,RAM,comerciais_leves,2003-05,2019-09,México,,,
+EFFA,M100,automoveis,2008-04,2021-02,China,,,
+EFFA,V21,comerciais_leves,2017-02,2026-08,China,,,
+EFFA,V22,comerciais_leves,2016-11,2026-08,China,,,
+FIAT,500,automoveis,2009-01,2011-12,Polônia,,,Tychy.
+FIAT,500,automoveis,2012-01,2016-12,México,,,Toluca.
+FIAT,ARGO,automoveis,2017-06,2026-08,Brasil,fiat_betim,,
+FIAT,BRAVO,automoveis,2011-04,2017-02,Brasil,fiat_betim,,
+FIAT,CRONOS,automoveis,2018-01,2026-08,Argentina,,,Cordoba.
+FIAT,DOBLO,automoveis,2003-01,2026-04,Brasil,fiat_betim,,
+FIAT,DOBLO,comerciais_leves,2003-01,2024-01,Brasil,fiat_betim,,
+FIAT,DUCATO,comerciais_leves,2003-01,2026-08,Brasil,iveco_sete_lagoas,,
+FIAT,FASTBACK,automoveis,2022-09,2026-08,Brasil,fiat_betim,,
+FIAT,FIORINO,comerciais_leves,2003-01,2026-08,Brasil,fiat_betim,,
+FIAT,FREEMONT,automoveis,2011-09,2016-11,México,,,Toluca.
+FIAT,IDEA,automoveis,2005-07,2026-05,Brasil,fiat_betim,,
+FIAT,LINEA,automoveis,2008-05,2016-12,Brasil,fiat_betim,,
+FIAT,MAREA,automoveis,2003-01,2010-01,Brasil,fiat_betim,,
+FIAT,MAREA WEEKEND,automoveis,2003-01,2017-09,Brasil,fiat_betim,,
+FIAT,MOBI,automoveis,2016-03,2026-08,Brasil,fiat_betim,,
+FIAT,PALIO,automoveis,2003-01,2026-03,Brasil,fiat_betim,,
+FIAT,PALIO WEEKEND,automoveis,2003-01,2026-06,Brasil,fiat_betim,,
+FIAT,PULSE,automoveis,2021-11,2026-08,Brasil,fiat_betim,,
+FIAT,PUNTO,automoveis,2007-08,2017-12,Brasil,fiat_betim,,
+FIAT,SCUDO,comerciais_leves,2022-06,2026-08,Uruguai,,,Montagem no Uruguai.
+FIAT,SIENA,automoveis,2003-01,2026-03,Brasil,fiat_betim,,
+FIAT,STILO,automoveis,2003-01,2010-05,Brasil,fiat_betim,,
+FIAT,STRADA,comerciais_leves,2003-01,2026-08,Brasil,fiat_betim,,
+FIAT,TITANO,comerciais_leves,2024-02,2025-12,Uruguai,,,Incerto.
+FIAT,TITANO,comerciais_leves,2025-01,2026-08,Argentina,,,Cordoba; incerto.
+FIAT,TORO,comerciais_leves,2015-12,2026-08,Brasil,stellantis_goiana,,
+FIAT,UNO,automoveis,2003-01,2026-06,Brasil,fiat_betim,,
+FIAT,UNO,comerciais_leves,2003-01,2021-07,Brasil,fiat_betim,,
+FIAT,WEEKEND,automoveis,2014-07,2026-07,Brasil,fiat_betim,,
+FORD,BRONCO,automoveis,2022-01,2025-12,México,,,"Bronco Sport, Hermosillo."
+FORD,COURIER,comerciais_leves,2003-01,2019-05,Brasil,ford_sbc,,
+FORD,ECOSPORT,automoveis,2003-01,2021-11,Brasil,ford_camacari,,
+FORD,EDGE,automoveis,2009-01,2015-12,Canadá,,,
+FORD,F150,comerciais_leves,2003-01,2026-08,Estados Unidos,,,
+FORD,F250,comerciais_leves,2003-01,2025-03,Brasil,ford_sbc,,
+FORD,FIESTA,automoveis,2003-01,2014-12,Brasil,ford_camacari,,Fiesta Rocam; incerto entre Camacari e Sao Bernardo.
+FORD,FIESTA,automoveis,2015-01,2019-12,Brasil,ford_sbc,,New Fiesta hatch.
+FORD,FIESTA SEDAN,automoveis,2004-08,2026-04,Brasil,ford_camacari,,
+FORD,FOCUS,automoveis,2003-01,2022-01,Argentina,,,General Pacheco.
+FORD,FOCUS SEDAN,automoveis,2003-01,2020-02,Argentina,,,
+FORD,FUSION,automoveis,2006-04,2022-09,México,,,Hermosillo.
+FORD,KA,automoveis,2003-01,2014-06,Brasil,ford_sbc,,
+FORD,KA,automoveis,2014-07,2026-08,Brasil,ford_camacari,,
+FORD,KA SEDAN,automoveis,2014-10,2026-04,Brasil,ford_camacari,,
+FORD,MAVERICK,comerciais_leves,2021-11,2026-08,México,,,
+FORD,MUSTANG,automoveis,2005-02,2026-08,Estados Unidos,,,
+FORD,NEW FIESTA,automoveis,2010-08,2019-08,México,,,
+FORD,RANGER,comerciais_leves,2003-01,2026-08,Argentina,,,
+FORD,TERRITORY,automoveis,2020-10,2026-08,China,,,
+FORD,TRANSIT,comerciais_leves,2008-10,2021-12,Turquia,,,
+FORD,TRANSIT,comerciais_leves,2022-01,2026-08,Uruguai,,,Montagem no Uruguai.
+FOTON,AUMARK 1039,comerciais_leves,2013-02,2023-06,China,,,
+FOTON,AUMARK S 315,comerciais_leves,2025-08,2026-08,China,,,
+GAC,AION UT,automoveis,2026-07,2026-08,China,,,
+GAC,GS4,automoveis,2026-01,2026-05,China,,,
+GEELY,EX2,automoveis,2025-11,2026-08,China,,,
+GEELY,EX5,automoveis,2026-05,2026-06,China,,,
+GEELY,EX5 EM-I,automoveis,2026-07,2026-08,China,,,
+GM,AGILE,automoveis,2009-08,2014-12,Argentina,,,Rosario.
+GM,ASTRA,automoveis,2003-01,2011-12,Brasil,gm_scs,,Fabrica incerta.
+GM,ASTRA SEDAN,automoveis,2003-01,2016-01,Brasil,gm_scs,,Fabrica incerta.
+GM,BLAZER,automoveis,2003-01,2012-12,Brasil,gm_sjc,,
+GM,CAMARO,automoveis,2010-01,2015-12,Canadá,,,
+GM,CAMARO,automoveis,2016-01,2024-12,Estados Unidos,,,
+GM,CAPTIVA,automoveis,2008-07,2016-12,México,,,
+GM,CELTA,automoveis,2003-01,2026-06,Brasil,gm_gravatai,,
+GM,CLASSIC,automoveis,2003-01,2013-12,Brasil,gm_sjc,,Parte pode ter vindo de Rosario desde 2010.
+GM,CLASSIC,automoveis,2014-01,2026-08,Argentina,,,Rosario.
+GM,COBALT,automoveis,2011-12,2026-02,Brasil,gm_scs,,Fabrica incerta.
+GM,CORSA,automoveis,2003-01,2012-12,Brasil,gm_sjc,,Fabrica incerta.
+GM,CORSA SEDAN,automoveis,2003-01,2025-11,Brasil,gm_sjc,,Fabrica incerta.
+GM,CRUZE HB,automoveis,2012-01,2016-05,Brasil,gm_scs,,
+GM,CRUZE HB,automoveis,2016-06,2026-08,Argentina,,,
+GM,CRUZE SEDAN,automoveis,2011-01,2016-05,Brasil,gm_scs,,
+GM,CRUZE SEDAN,automoveis,2016-06,2026-08,Argentina,,,
+GM,EQUINOX,automoveis,2017-11,2025-12,México,,,
+GM,MALIBU,automoveis,2010-06,2014-02,Estados Unidos,,,
+GM,MERIVA,automoveis,2003-01,2021-10,Brasil,gm_scs,,
+GM,MONTANA,comerciais_leves,2003-09,2026-08,Brasil,gm_scs,,
+GM,OMEGA,automoveis,2003-01,2012-12,Austrália,,,
+GM,ONIX,automoveis,2012-11,2026-08,Brasil,gm_gravatai,,
+GM,ONIX PLUS,automoveis,2019-09,2026-08,Brasil,gm_gravatai,,
+GM,PRISMA,automoveis,2006-09,2026-08,Brasil,gm_gravatai,,
+GM,S10,comerciais_leves,2003-01,2026-08,Brasil,gm_sjc,,
+GM,SILVERADO,comerciais_leves,2003-01,2021-12,Brasil,gm_sjc,,
+GM,SILVERADO,comerciais_leves,2022-01,2026-08,México,,,
+GM,SONIC,automoveis,2012-01,2014-12,México,,,
+GM,SONIC,automoveis,2025-01,2026-08,Brasil,gm_gravatai,,
+GM,SONIC SEDAN,automoveis,2012-07,2014-12,México,,,
+GM,SPARK,automoveis,2026-03,2026-08,Brasil,gm_horizonte,China,SKD.
+GM,SPIN,automoveis,2012-08,2026-08,Brasil,gm_scs,,Fabrica incerta no inicio.
+GM,TRACKER,automoveis,2003-01,2009-12,Argentina,,,Incerto.
+GM,TRACKER,automoveis,2013-01,2020-02,México,,,
+GM,TRACKER,automoveis,2020-03,2026-08,Brasil,gm_scs,,
+GM,TRAILBLAZER,automoveis,2013-01,2025-11,Brasil,gm_sjc,,
+GM,VECTRA,automoveis,2003-01,2022-04,Brasil,gm_scs,,Fabrica incerta.
+GM,VECTRA HATCH,automoveis,2007-09,2010-07,Brasil,gm_scs,,Fabrica incerta.
+GM,ZAFIRA,automoveis,2003-01,2012-12,Brasil,gm_sjc,,Fabrica incerta.
+GWM,HAVAL H6,automoveis,2023-05,2026-08,Tailândia,,,Incerto entre Tailandia e China.
+GWM,HAVAL H6,automoveis,2025-08,2026-08,Brasil,gwm_iracemapolis,,
+GWM,HAVAL H9,automoveis,2025-11,2026-08,Brasil,gwm_iracemapolis,,
+GWM,ORA 03,automoveis,2023-12,2026-07,Tailândia,,,Incerto.
+GWM,POER,comerciais_leves,2025-08,2026-08,Brasil,gwm_iracemapolis,,
+GWM,TANK 300,automoveis,2025-05,2026-08,China,,,Incerto.
+HAFEI,MINI,comerciais_leves,2008-10,2019-01,China,,,
+HAFEI,MINIVAN,comerciais_leves,2008-10,2017-07,China,,,
+HAFEI,RUIYI,comerciais_leves,2008-05,2019-06,China,,,
+HAFEI,START PICK UP,comerciais_leves,2011-10,2020-07,China,,,
+HAFEI,TOWNER,comerciais_leves,2010-04,2021-07,China,,,
+HAFEI,ZHONGYI VAN,comerciais_leves,2008-05,2022-02,China,,,
+HONDA,ACCORD,automoveis,2003-04,2004-12,Estados Unidos,,,
+HONDA,ACCORD,automoveis,2005-01,2007-12,México,,,
+HONDA,ACCORD,automoveis,2008-01,2026-08,Japão,,,Incerto.
+HONDA,CITY,automoveis,2009-07,2020-12,Brasil,honda_sumare,,
+HONDA,CITY,automoveis,2021-01,2026-08,Brasil,honda_itirapina,,
+HONDA,CITY HATCH,automoveis,2022-02,2026-08,Brasil,honda_itirapina,,
+HONDA,CIVIC,automoveis,2003-01,2021-12,Brasil,honda_sumare,,
+HONDA,CIVIC,automoveis,2022-01,2026-08,Japão,,,Incerto.
+HONDA,CRV,automoveis,2003-01,2007-12,Japão,,,
+HONDA,CRV,automoveis,2008-01,2016-12,México,,,El Salto.
+HONDA,CRV,automoveis,2017-01,2019-01,Estados Unidos,,,Incerto.
+HONDA,FIT,automoveis,2003-04,2019-01,Brasil,honda_sumare,,
+HONDA,FIT,automoveis,2019-02,2026-08,Brasil,honda_itirapina,,
+HONDA,HR-V,automoveis,2015-03,2019-12,Brasil,honda_sumare,,
+HONDA,HR-V,automoveis,2020-01,2026-08,Brasil,honda_itirapina,,
+HONDA,WR-V,automoveis,2017-03,2019-11,Brasil,honda_sumare,,
+HONDA,WR-V,automoveis,2019-12,2026-08,Brasil,honda_itirapina,,
+HONDA,ZR-V,automoveis,2023-12,2025-11,China,,,Incerto.
+HYUNDAI,AZERA,automoveis,2008-01,2021-03,Coreia do Sul,,,
+HYUNDAI,CRETA,automoveis,2017-01,2026-08,Brasil,hyundai_piracicaba,,
+HYUNDAI,ELANTRA,automoveis,2003-01,2024-09,Coreia do Sul,,,
+HYUNDAI,H100,comerciais_leves,2003-01,2018-07,Coreia do Sul,,,
+HYUNDAI,HB20,automoveis,2012-10,2026-08,Brasil,hyundai_piracicaba,,
+HYUNDAI,HB20S,automoveis,2013-02,2026-08,Brasil,hyundai_piracicaba,,
+HYUNDAI,HR,comerciais_leves,2005-04,2006-12,Coreia do Sul,,,
+HYUNDAI,HR,comerciais_leves,2007-01,2026-04,Brasil,caoa_anapolis,,
+HYUNDAI,I20,automoveis,2026-07,2026-08,Índia,,,Incerto.
+HYUNDAI,I30,automoveis,2009-06,2026-02,Coreia do Sul,,,
+HYUNDAI,I30 SW,automoveis,2011-01,2024-09,Coreia do Sul,,,
+HYUNDAI,IX35,automoveis,2010-06,2013-10,Coreia do Sul,,,
+HYUNDAI,IX35,automoveis,2013-11,2021-12,Brasil,caoa_anapolis,,
+HYUNDAI,SANTAFE,automoveis,2003-01,2018-04,Coreia do Sul,,,
+HYUNDAI,SONATA,automoveis,2011-01,2013-12,Coreia do Sul,,,
+HYUNDAI,TUCSON,automoveis,2005-04,2010-12,Coreia do Sul,,,
+HYUNDAI,TUCSON,automoveis,2010-01,2019-12,Brasil,caoa_anapolis,,
+HYUNDAI,TUCSON,automoveis,2020-01,2025-07,Coreia do Sul,,,
+HYUNDAI,VELOSTER,automoveis,2011-10,2011-11,Coreia do Sul,,,
+HYUNDAI,VERACRUZ,automoveis,2007-06,2013-09,Coreia do Sul,,,
+IVECO,DAILY,comerciais_leves,2005-01,2026-08,Brasil,iveco_sete_lagoas,,
+IVECO,DAILY 30-130,comerciais_leves,2020-04,2026-08,Brasil,iveco_sete_lagoas,,
+IVECO,DAILY 30S13,comerciais_leves,2018-06,2023-08,Brasil,iveco_sete_lagoas,,
+IVECO,DAILY 35-150,comerciais_leves,2020-03,2023-10,Brasil,iveco_sete_lagoas,,
+IVECO,DAILY 3514,comerciais_leves,2007-10,2019-02,Brasil,iveco_sete_lagoas,,
+IVECO,DAILY 35S14,comerciais_leves,2008-03,2021-09,Brasil,iveco_sete_lagoas,,
+JAC,E-JS1,automoveis,2022-01,2024-02,China,,,
+JAC,J3,automoveis,2011-03,2012-11,China,,,
+JAC,J3 TURIN,automoveis,2011-05,2018-02,China,,,
+JAC,J5,automoveis,2011-09,2017-08,China,,,
+JAC,J6,automoveis,2011-08,2019-03,China,,,
+JAC,T40,automoveis,2017-12,2019-03,China,,,
+JAC,T5,automoveis,2016-04,2018-07,China,,,
+JAC,T6,automoveis,2015-07,2016-05,China,,,
+JAGUAR,XE,automoveis,2016-01,2019-12,Reino Unido,,,
+JEEP,CHEROKEE,automoveis,2003-01,2017-10,Estados Unidos,,,
+JEEP,COMMANDER,automoveis,2021-10,2026-08,Brasil,stellantis_goiana,,
+JEEP,COMPASS,automoveis,2012-01,2016-08,Estados Unidos,,,
+JEEP,COMPASS,automoveis,2016-09,2026-08,Brasil,stellantis_goiana,,
+JEEP,RENEGADE,automoveis,2015-04,2026-08,Brasil,stellantis_goiana,,
+JETOUR,T2,automoveis,2026-08,2026-08,China,,,
+JINBEI,M35,comerciais_leves,2009-02,2021-09,China,,,
+JINBEI,TOPIC,comerciais_leves,2010-10,2018-05,China,,,
+KIA,BESTA,comerciais_leves,2003-01,2021-05,Coreia do Sul,,,
+KIA,CADENZA,automoveis,2011-01,2013-05,Coreia do Sul,,,
+KIA,CARNIVAL,automoveis,2008-01,2026-08,Coreia do Sul,,,
+KIA,CERATO,automoveis,2006-02,2016-12,Coreia do Sul,,,
+KIA,CERATO,automoveis,2017-01,2025-01,México,,,Forte de Pesqueria.
+KIA,K2500,comerciais_leves,2007-10,2026-08,Coreia do Sul,,,Incerto: parte pode ter sido montada no Uruguai.
+KIA,K2700,comerciais_leves,2003-01,2019-08,Coreia do Sul,,,
+KIA,MAGENTIS,automoveis,2006-12,2010-12,Coreia do Sul,,,
+KIA,MOHAVE,automoveis,2009-04,2013-02,Coreia do Sul,,,
+KIA,OPTIMA,automoveis,2012-04,2015-02,Coreia do Sul,,,
+KIA,PICANTO,automoveis,2006-08,2018-04,Coreia do Sul,,,
+KIA,SORENTO,automoveis,2004-04,2016-12,Coreia do Sul,,,
+KIA,SOUL,automoveis,2009-07,2017-03,Coreia do Sul,,,
+KIA,SPORTAGE,automoveis,2003-01,2024-02,Coreia do Sul,,,
+KIA,STONIC,automoveis,2022-03,2023-08,Coreia do Sul,,,
+LAND ROVER,DEFENDER,automoveis,2003-01,2019-12,Reino Unido,,,
+LAND ROVER,DEFENDER,automoveis,2020-01,2023-10,Eslováquia,,,
+LAND ROVER,DISCOVERY,automoveis,2003-01,2024-12,Reino Unido,,,
+LAND ROVER,DISCOVERY,automoveis,2016-06,2024-12,Brasil,jlr_itatiaia,Reino Unido,Discovery Sport em Itatiaia ao lado do importado.
+LAND ROVER,EVOQUE,automoveis,2011-01,2016-05,Reino Unido,,,
+LAND ROVER,EVOQUE,automoveis,2016-06,2026-08,Brasil,jlr_itatiaia,Reino Unido,
+LAND ROVER,FREELANDER,automoveis,2003-11,2015-04,Reino Unido,,,
+LAND ROVER,RANGE ROVER,automoveis,2003-03,2023-07,Reino Unido,,,
+LEAPMOTOR,C10,automoveis,2026-01,2026-08,China,,,
+LIFAN,FOISON,comerciais_leves,2014-06,2020-07,China,,,
+LIFAN,LF 320,automoveis,2011-01,2011-09,China,,,
+LIFAN,LF 530,automoveis,2015-01,2018-12,China,,,
+LIFAN,LF 620,automoveis,2010-08,2013-12,China,,,
+LIFAN,X60,automoveis,2013-07,2018-12,China,,,Incerto: pode ter sido montado no Uruguai.
+M.BENZ,A 200,automoveis,2005-10,2018-12,Alemanha,,,
+M.BENZ,C 250,automoveis,2011-06,2016-01,Alemanha,,,
+M.BENZ,C180,automoveis,2003-01,2015-12,Alemanha,,,
+M.BENZ,CLA180,automoveis,2018-01,2019-12,Hungria,,,
+M.BENZ,CLA200,automoveis,2014-01,2026-08,Hungria,,,
+M.BENZ,CLA250,automoveis,2015-02,2023-11,Hungria,,,
+M.BENZ,CLASSE A,automoveis,2003-01,2005-08,Brasil,mb_juiz_de_fora,,
+M.BENZ,CLASSE A,automoveis,2005-09,2018-12,Alemanha,,,
+M.BENZ,CLASSE A,automoveis,2019-01,2020-12,México,,,Classe A sedan de Aguascalientes.
+M.BENZ,CLASSE A,automoveis,2021-01,2025-09,Alemanha,,,
+M.BENZ,CLASSE B,automoveis,2006-02,2018-10,Alemanha,,,
+M.BENZ,CLASSE C,automoveis,2003-01,2016-02,Alemanha,,,
+M.BENZ,CLASSE C,automoveis,2016-03,2020-12,Brasil,mb_iracemapolis,,
+M.BENZ,CLASSE C,automoveis,2021-01,2026-08,Alemanha,,,
+M.BENZ,CLASSE CLC,automoveis,2009-02,2011-02,Brasil,mb_juiz_de_fora,,
+M.BENZ,CLASSE E,automoveis,2003-01,2026-08,Alemanha,,,
+M.BENZ,CLASSE GLA,automoveis,2015-05,2016-08,Alemanha,,,
+M.BENZ,CLASSE GLA,automoveis,2016-09,2020-12,Brasil,mb_iracemapolis,,
+M.BENZ,CLASSE GLA,automoveis,2021-01,2023-04,Alemanha,,,
+M.BENZ,CLASSE GLB,automoveis,2021-01,2023-08,México,,,
+M.BENZ,CLASSE M,automoveis,2003-01,2014-02,Estados Unidos,,,
+M.BENZ,GLC,automoveis,2016-04,2025-11,Alemanha,,,
+M.BENZ,SLK,automoveis,2004-10,2016-12,Alemanha,,,
+M.BENZ,SPRINTER,comerciais_leves,2003-01,2025-12,Argentina,,,Virrey del Pino.
+M.BENZ,SPRINTER 311,comerciais_leves,2003-03,2022-04,Argentina,,,
+M.BENZ,SPRINTER 313,comerciais_leves,2003-01,2022-03,Argentina,,,
+M.BENZ,SPRINTER 314,comerciais_leves,2009-04,2023-08,Argentina,,,
+M.BENZ,SPRINTER 315,comerciais_leves,2022-05,2025-09,Argentina,,,
+M.BENZ,SPRINTER 317,comerciais_leves,2025-04,2026-08,Argentina,,,
+M.BENZ,SPRINTER 413,comerciais_leves,2003-01,2019-05,Argentina,,,
+M.BENZ,SPRINTER 416,comerciais_leves,2019-11,2023-11,Argentina,,,
+M.BENZ,VITO,comerciais_leves,2015-12,2021-09,Argentina,,,
+MAHINDRA,SCORPIO,automoveis,2008-01,2010-12,Brasil,mahindra_manaus,Índia,Montagem da Bramont em Manaus; incerto.
+MINI,COOPER,automoveis,2003-04,2025-10,Reino Unido,,,
+MINI,COOPER SCYMAN,automoveis,2011-01,2013-04,Áustria,,,Countryman da Magna Steyr.
+MITSUBISHI,AIRTREK,automoveis,2003-05,2009-07,Japão,,,
+MITSUBISHI,ASX,automoveis,2010-12,2013-12,Japão,,,
+MITSUBISHI,ASX,automoveis,2014-01,2020-12,Brasil,hpe_catalao,,
+MITSUBISHI,ECLIPSE CROSS,automoveis,2019-01,2026-08,Brasil,hpe_catalao,,
+MITSUBISHI,L200,comerciais_leves,2003-01,2026-02,Brasil,hpe_catalao,,
+MITSUBISHI,LANCER,automoveis,2011-12,2014-12,Japão,,,
+MITSUBISHI,LANCER,automoveis,2015-01,2020-09,Brasil,hpe_catalao,,
+MITSUBISHI,OUTLANDER,automoveis,2007-06,2013-12,Japão,,,
+MITSUBISHI,OUTLANDER,automoveis,2014-01,2022-12,Brasil,hpe_catalao,,
+MITSUBISHI,PAJERO,automoveis,2003-01,2020-12,Brasil,hpe_catalao,,"Pajero TR4, Sport e Dakar de Catalao."
+MITSUBISHI,PAJERO,automoveis,2003-01,2020-12,Japão,,,Pajero Full importado.
+MITSUBISHI,PAJERO,automoveis,2021-01,2025-09,Tailândia,,,Pajero Sport importado da Tailandia; inicio incerto.
+MITSUBISHI,TRITON,comerciais_leves,2025-01,2026-08,Brasil,hpe_catalao,,
+NISSAN,ALTIMA,automoveis,2013-12,2015-12,Estados Unidos,,,
+NISSAN,FRONTIER,comerciais_leves,2003-01,2016-12,Brasil,nissan_sjp,,Incerto depois de 2008.
+NISSAN,FRONTIER,comerciais_leves,2017-01,2018-06,México,,,
+NISSAN,FRONTIER,comerciais_leves,2018-07,2026-08,Argentina,,,Cordoba.
+NISSAN,KAIT,automoveis,2026-01,2026-08,Brasil,nissan_resende,,
+NISSAN,KICKS,automoveis,2016-07,2017-03,México,,,
+NISSAN,KICKS,automoveis,2017-04,2026-08,Brasil,nissan_resende,,
+NISSAN,LEAF,automoveis,2020-10,2024-09,Japão,,,
+NISSAN,LIVINA,automoveis,2009-02,2023-06,Brasil,renault_sjp,,Incerto entre Sao Jose dos Pinhais e Resende.
+NISSAN,MARCH,automoveis,2011-01,2014-03,México,,,
+NISSAN,MARCH,automoveis,2014-04,2021-12,Brasil,nissan_resende,,
+NISSAN,PATHFINDER,automoveis,2003-01,2010-08,Espanha,,,Incerto.
+NISSAN,SENTRA,automoveis,2004-08,2026-08,México,,,
+NISSAN,TIIDA,automoveis,2011-03,2012-09,México,,,
+NISSAN,TIIDA SEDAN,automoveis,2010-06,2011-12,México,,,
+NISSAN,V-DRIVE,automoveis,2020-08,2022-06,Brasil,nissan_resende,,
+NISSAN,VERSA,automoveis,2011-01,2015-02,México,,,
+NISSAN,VERSA,automoveis,2015-03,2020-07,Brasil,nissan_resende,,
+NISSAN,VERSA,automoveis,2020-08,2026-08,México,,,
+NISSAN,XTERRA,automoveis,2003-05,2008-12,Brasil,nissan_sjp,,
+NISSAN,XTRAIL,automoveis,2005-05,2010-08,Japão,,,
+OMODA JAECOO,JAECOO 7,automoveis,2025-07,2026-08,China,,,
+OMODA JAECOO,OMODA 5,automoveis,2025-11,2026-08,China,,,
+PEUGEOT,2008,automoveis,2015-04,2023-11,Brasil,stellantis_porto_real,,
+PEUGEOT,2008,automoveis,2023-12,2026-08,Argentina,,,El Palomar.
+PEUGEOT,206,automoveis,2003-01,2012-05,Brasil,stellantis_porto_real,,
+PEUGEOT,206SW,automoveis,2003-07,2008-12,Brasil,stellantis_porto_real,,
+PEUGEOT,207,automoveis,2008-04,2026-03,Brasil,stellantis_porto_real,,
+PEUGEOT,207 SEDAN,automoveis,2008-04,2013-12,Argentina,,,207 Compact de El Palomar.
+PEUGEOT,207 SW,automoveis,2008-08,2013-06,Brasil,stellantis_porto_real,,
+PEUGEOT,208,automoveis,2013-01,2019-12,Brasil,stellantis_porto_real,,
+PEUGEOT,208,automoveis,2020-01,2026-08,Argentina,,,
+PEUGEOT,3008,automoveis,2011-01,2021-03,França,,,
+PEUGEOT,307,automoveis,2003-01,2005-12,França,,,
+PEUGEOT,307,automoveis,2006-01,2010-05,Argentina,,,
+PEUGEOT,307 SEDAN,automoveis,2006-07,2013-07,Argentina,,,
+PEUGEOT,307SW,automoveis,2003-03,2014-02,França,,,
+PEUGEOT,308,automoveis,2012-06,2018-12,Argentina,,,
+PEUGEOT,407,automoveis,2005-08,2009-12,França,,,
+PEUGEOT,408,automoveis,2011-01,2019-12,Argentina,,,
+PEUGEOT,BOXER,comerciais_leves,2003-01,2026-08,Brasil,iveco_sete_lagoas,,Incerto.
+PEUGEOT,EXPERT,comerciais_leves,2017-10,2026-08,Uruguai,,,Montagem no Uruguai.
+PEUGEOT,HOGGAR,comerciais_leves,2010-04,2014-12,Brasil,stellantis_porto_real,,
+PEUGEOT,PARTNER,comerciais_leves,2003-01,2022-12,Argentina,,,
+PEUGEOT,PARTNER,comerciais_leves,2023-01,2026-08,Brasil,fiat_betim,,"Partner Rapid, derivado do Fiorino."
+PORSCHE,911,automoveis,2003-08,2026-08,Alemanha,,,
+PORSCHE,BOXSTER,automoveis,2004-02,2026-08,Alemanha,,,
+PORSCHE,CAYENNE,automoveis,2003-04,2025-05,Alemanha,,,
+PORSCHE,CAYMAN,automoveis,2006-02,2026-08,Alemanha,,,
+PORSCHE,MACAN,automoveis,2022-03,2025-04,Alemanha,,,
+PORSCHE,PANAMERA,automoveis,2010-01,2026-08,Alemanha,,,
+PORSCHE,TAYCAN,automoveis,2021-01,2026-04,Alemanha,,,
+RAM,1500,comerciais_leves,2021-04,2026-08,Estados Unidos,,,
+RAM,2500,comerciais_leves,2016-04,2026-08,México,,,
+RAM,3500,comerciais_leves,2022-04,2026-08,México,,,
+RAM,CLASSIC,comerciais_leves,2022-10,2024-09,Estados Unidos,,,Incerto.
+RAM,DAKOTA,comerciais_leves,2026-01,2026-08,Argentina,,,Cordoba.
+RAM,RAMPAGE,comerciais_leves,2023-06,2026-08,Brasil,stellantis_goiana,,
+RELY,RELY PICK-UP,comerciais_leves,2012-12,2021-02,China,,,
+RENAULT,BOREAL,automoveis,2025-11,2026-08,Brasil,renault_sjp,,
+RENAULT,CAPTUR,automoveis,2017-01,2022-12,Brasil,renault_sjp,,
+RENAULT,CLIO,automoveis,2003-01,2007-12,Brasil,renault_sjp,,
+RENAULT,CLIO,automoveis,2008-01,2021-04,Argentina,,,Cordoba.
+RENAULT,CLIO SEDAN,automoveis,2003-01,2007-12,Brasil,renault_sjp,,
+RENAULT,CLIO SEDAN,automoveis,2008-01,2009-09,Argentina,,,
+RENAULT,DUSTER,automoveis,2011-10,2026-08,Brasil,renault_sjp,,
+RENAULT,FLUENCE,automoveis,2010-10,2023-03,Argentina,,,
+RENAULT,KANGOO,automoveis,2003-01,2018-12,Argentina,,,"Santa Isabel, Cordoba."
+RENAULT,KANGOO,automoveis,2019-01,2023-10,França,,,Incerto: poucas unidades entre 2019 e 2023.
+RENAULT,KANGOO,comerciais_leves,2003-01,2018-12,Argentina,,,"Santa Isabel, Cordoba."
+RENAULT,KANGOO,comerciais_leves,2019-01,2023-12,França,,,Incerto: poucas unidades entre 2019 e 2023.
+RENAULT,KANGOO,comerciais_leves,2024-01,2026-08,Argentina,,,Volta como importado da Argentina em 2024.
+RENAULT,KARDIAN,automoveis,2024-03,2026-08,Brasil,renault_sjp,,
+RENAULT,KWID,automoveis,2017-06,2026-08,Brasil,renault_sjp,,
+RENAULT,LOGAN,automoveis,2007-05,2026-02,Brasil,renault_sjp,,
+RENAULT,MASTER,comerciais_leves,2003-01,2026-08,Brasil,renault_sjp,,Fabrica de utilitarios do complexo.
+RENAULT,MEGANE,automoveis,2003-01,2005-12,Argentina,,,
+RENAULT,MEGANE,automoveis,2006-01,2011-05,Brasil,renault_sjp,,
+RENAULT,MEGANE GT,automoveis,2006-02,2017-11,Brasil,renault_sjp,,Megane Grand Tour.
+RENAULT,OROCH,comerciais_leves,2015-08,2026-08,Brasil,renault_sjp,,
+RENAULT,SANDERO,automoveis,2007-10,2025-02,Brasil,renault_sjp,,
+RENAULT,SCENIC,automoveis,2003-01,2010-12,Brasil,renault_sjp,,
+RENAULT,SYMBOL,automoveis,2009-02,2013-12,Argentina,,,
+SHINERAY,P TRUCKS,comerciais_leves,2012-02,2025-07,China,,,
+SMART,FORTWO,automoveis,2005-06,2011-02,França,,,
+SSANGYONG,ACTYON,automoveis,2008-01,2013-03,Coreia do Sul,,,
+SSANGYONG,KORANDO,automoveis,2003-01,2014-08,Coreia do Sul,,,
+SSANGYONG,KYRONM,automoveis,2007-09,2012-12,Coreia do Sul,,,
+SUBARU,FORESTER,automoveis,2003-01,2017-09,Japão,,,
+SUZUKI,GVITARA,automoveis,2003-01,2016-12,Japão,,,
+SUZUKI,JIMNY,automoveis,2003-01,2011-12,Japão,,,
+SUZUKI,JIMNY,automoveis,2012-01,2022-02,Brasil,hpe_catalao,,
+SUZUKI,SX4,automoveis,2009-03,2016-11,Japão,,,
+SUZUKI,VITARA,automoveis,2003-02,2015-12,Japão,,,
+SUZUKI,VITARA,automoveis,2016-01,2019-12,Hungria,,,
+TOYOTA,CAMRY,automoveis,2004-01,2024-06,Japão,,,
+TOYOTA,COROLLA,automoveis,2003-01,2026-08,Brasil,toyota_indaiatuba,,
+TOYOTA,COROLLA CROSS,automoveis,2021-04,2026-08,Brasil,toyota_sorocaba,,
+TOYOTA,ETIOS HB,automoveis,2012-09,2024-11,Brasil,toyota_sorocaba,,
+TOYOTA,ETIOS SEDAN,automoveis,2012-09,2026-02,Brasil,toyota_sorocaba,,
+TOYOTA,FIELDER,automoveis,2004-04,2018-05,Brasil,toyota_indaiatuba,,
+TOYOTA,HIACE,comerciais_leves,2008-03,2026-08,Japão,,,
+TOYOTA,HILUX,comerciais_leves,2003-01,2026-08,Argentina,,,Zarate.
+TOYOTA,HILUX SW4,automoveis,2003-01,2026-08,Argentina,,,Zarate.
+TOYOTA,LAND CRUISE,automoveis,2003-05,2009-12,Japão,,,
+TOYOTA,PRIUS,automoveis,2006-05,2021-02,Japão,,,
+TOYOTA,RAV4,automoveis,2003-01,2026-08,Japão,,,
+TOYOTA,YARIS CROSS,automoveis,2026-02,2026-08,Brasil,toyota_sorocaba,,
+TOYOTA,YARIS HB,automoveis,2018-06,2025-12,Brasil,toyota_sorocaba,,
+TOYOTA,YARIS SEDAN,automoveis,2018-05,2026-08,Brasil,toyota_sorocaba,,
+TROLLER,T4,automoveis,2003-01,2021-11,Brasil,troller_horizonte,,
+VOLVO,EX30,automoveis,2024-05,2026-01,China,,,
+VOLVO,S60,automoveis,2011-07,2021-12,Suécia,,,
+VOLVO,V40,automoveis,2003-04,2019-12,Bélgica,,,
+VOLVO,V60,automoveis,2011-12,2020-11,Suécia,,,
+VOLVO,XC40,automoveis,2018-06,2024-03,Bélgica,,,
+VOLVO,XC60,automoveis,2009-01,2025-12,Suécia,,,
+VOLVO,XC90,automoveis,2003-03,2024-01,Suécia,,,
+VW,AMAROK,comerciais_leves,2010-03,2026-08,Argentina,,,General Pacheco.
+VW,BEETLE,automoveis,2007-01,2008-03,México,,,Puebla.
+VW,BORA,automoveis,2003-01,2024-03,México,,,
+VW,EXPRESS,comerciais_leves,2018-03,2020-08,Brasil,vwco_resende,,
+VW,FOX/CROSS FOX,automoveis,2003-10,2022-01,Brasil,vw_sjp,,
+VW,GOL,automoveis,2003-01,2026-07,Brasil,vw_taubate,,Tambem produzido na Anchieta em parte do periodo.
+VW,GOLF,automoveis,2003-01,2013-12,Brasil,vw_sjp,,
+VW,GOLF,automoveis,2014-01,2015-12,México,,,
+VW,GOLF,automoveis,2016-01,2019-12,Brasil,vw_sjp,,
+VW,GOLF,automoveis,2020-01,2026-08,Alemanha,,,
+VW,GOLF VARIANT,automoveis,2015-05,2018-12,México,,,
+VW,GOLF VARIANT,automoveis,2019-01,2021-09,Alemanha,,,
+VW,JETTA,automoveis,2006-10,2026-08,México,,,Puebla.
+VW,JETTA VARIANT,automoveis,2008-02,2012-12,México,,,
+VW,JETTA VARIANT,automoveis,2013-01,2018-04,Alemanha,,,Incerto.
+VW,KOMBI,comerciais_leves,2003-01,2025-01,Brasil,vw_anchieta,,
+VW,MAN/EXPRESS,comerciais_leves,2020-09,2023-06,Brasil,vwco_resende,,
+VW,NIVUS,automoveis,2020-07,2026-08,Brasil,vw_anchieta,,
+VW,PARATI,automoveis,2003-01,2026-02,Brasil,vw_taubate,,Fabrica incerta.
+VW,PASSAT,automoveis,2003-01,2020-11,Alemanha,,,
+VW,PASSAT VAR,automoveis,2006-09,2012-06,Alemanha,,,
+VW,POLO,automoveis,2003-01,2026-08,Brasil,vw_anchieta,,
+VW,POLO,automoveis,2023-01,2026-08,Brasil,vw_taubate,,Polo Track; o Polo tambem segue na Anchieta.
+VW,POLO SEDAN,automoveis,2003-01,2024-01,Brasil,vw_anchieta,,
+VW,SANTANA,automoveis,2003-01,2026-03,Brasil,vw_anchieta,,
+VW,SAVEIRO,comerciais_leves,2003-01,2015-12,Brasil,vw_sjp,,Fabrica incerta.
+VW,SAVEIRO,comerciais_leves,2016-01,2026-08,Brasil,vw_anchieta,,
+VW,SPACE FOX,automoveis,2006-03,2024-02,Argentina,,,Suran de General Pacheco.
+VW,SPACECROSS,automoveis,2012-01,2017-11,Argentina,,,
+VW,T CROSS,automoveis,2019-04,2026-08,Brasil,vw_sjp,,
+VW,TAOS,automoveis,2021-06,2025-06,Argentina,,,
+VW,TAOS,automoveis,2025-01,2026-08,México,,,
+VW,TERA,automoveis,2025-06,2026-08,Brasil,vw_taubate,,
+VW,TIGUAN,automoveis,2009-08,2017-12,Alemanha,,,
+VW,TIGUAN,automoveis,2018-01,2026-06,México,,,
+VW,TOUAREG,automoveis,2004-02,2009-12,Eslováquia,,,
+VW,UP,automoveis,2013-12,2025-05,Brasil,vw_taubate,,
+VW,VIRTUS,automoveis,2017-12,2026-08,Brasil,vw_anchieta,,
+VW,VIRTUS,automoveis,2025-01,2026-08,Brasil,vw_sjp,,Segunda linha desde 2025.
+VW,VOYAGE,automoveis,2003-04,2026-07,Brasil,vw_taubate,,
+VW TRUCK E BUS,EXPRESS,comerciais_leves,2023-07,2026-08,Brasil,vwco_resende,,

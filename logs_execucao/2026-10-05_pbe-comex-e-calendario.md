@@ -617,7 +617,7 @@ casos pequenos.
 - MP 843 e MP 1.205: a data da lei de conversão;
 - Camex 86: 26/10/2015, porque a Camex 97 dá nova redação aos mesmos Ex.
 
-**Sem fim:** dez atos. Estão em vigor ou o fim não foi confirmado, e a
+**Sem fim:** onze atos. Estão em vigor ou o fim não foi confirmado, e a
 observação diz qual. O Decreto 9.442 é um deles. As alíquotas dele valem até
 24/02/2022; daí em diante a estrutura segue com as reduções gerais de 2022, que
 não registrei para 8703.40/60/80.

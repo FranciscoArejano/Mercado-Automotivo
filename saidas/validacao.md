@@ -1,8 +1,8 @@
 # Validacao do painel de vendas de veiculos 0 km
 
-**Commit: `b20ec56`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
+**Commit: `290bacf`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
 
-Gerado em 2026-10-04T04:40:26+00:00 (UTC) por `src/etapa06_validacao.py`.
+Gerado em 2026-10-06T02:27:45+00:00 (UTC) por `src/etapa06_validacao.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: painel bruto 54,183 / painel 54,179 / visao por modelo 53,700
@@ -1045,13 +1045,29 @@ O **ranking por marca** existe na fonte e **nao foi extraido**. E' grafico de ba
 
 Tabela de fatos **separada**: `comex_veiculos.parquet`, gravada pela etapa 12 a partir das respostas da API guardadas em `dados/bruto/comex/`. Janela 1997-01 a 2026-08, 73,316 linhas.
 
-| conferencia                                                                                                                                                                            |   casos |   falhas |
-|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------:|---------:|
-| soma sobre paises = consulta sem pais (fluxo x NCM x ano)                                                                                                                              |    1634 |        0 |
-| meses faltando na janela 1997-01 a 2026-08 (fluxo x posicao)                                                                                                                           |       4 |        0 |
-| NCMs fora das somas de unidades (unidade estatistica nao e' unidade): nenhuma                                                                                                          |      48 |        0 |
-| diagnostico, nao falha: unidades importadas leves em linhas com menos de 500 kg por unidade (saidas/comex_diagnostico_peso.csv); anos acima de 10%: 2001, 2003, 2006, 2019, 2020, 2021 |      30 |        0 |
+| conferencia                                                                                                                                                                                                                                      |   casos |   falhas |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------:|---------:|
+| soma sobre paises = consulta sem pais (fluxo x NCM x ano)                                                                                                                                                                                        |    1634 |        0 |
+| meses faltando na janela 1997-01 a 2026-08 (fluxo x posicao)                                                                                                                                                                                     |       4 |        0 |
+| NCMs fora das somas de unidades (unidade estatistica nao e' unidade): nenhuma                                                                                                                                                                    |      48 |        0 |
+| unidades_ajustadas = unidades nas linhas com ajuste `publicada`                                                                                                                                                                                  |   71281 |        0 |
+| linhas com menos de 500 kg por unidade publicada, estimadas pelo peso: 4,227,631 unidades publicadas viram 168,672; sem referencia de peso, mantidas publicadas: 1                                                                               |    2036 |        0 |
+| fora do agregado de carros (agregado_carros = nao): 87031000, 87041000, 87041010, 87041090, 87042210, 87042220, 87042230, 87042290, 87042310, 87042320, 87042330, 87042340, 87042390, 87043210, 87043220, 87043230, 87043290, 87046000, 87049000 |      48 |        0 |
+| diagnostico, nao falha: unidades publicadas do agregado de carros importado em linhas com menos de 500 kg por unidade (saidas/comex_diagnostico_peso.csv); anos acima de 10%: 2001, 2003, 2006, 2019, 2020, 2021                                 |      30 |        0 |
 
-## 14. Situacao
+## 14. Calendario de politicas
+
+Tabela **separada**: `politicas_mensal.parquet` (um ato em vigor por mes), gravada pela etapa 13 a partir de `dados/referencia/politicas_atos.csv` e `politicas_aliquotas.csv`, cada linha com trecho literal de pagina oficial guardada em `dados/bruto/politicas_paginas/`. 50 atos, 2008-01 a 2026-08, 1,924 linhas.
+
+| conferencia                                                                                                                    |   casos |   falhas |
+|:-------------------------------------------------------------------------------------------------------------------------------|--------:|---------:|
+| pagina guardada: arquivo presente, SHA-256 do manifesto, primeira linha com a URL                                              |      55 |        0 |
+| ato: campos nas listas, datas validas, altera_id existente, pagina no manifesto com a mesma URL, fonte oficial, trecho literal |      50 |        0 |
+| aliquota: tributo, NCM no formato da TIPI, ato existente, trecho literal, uma aliquota por periodo (NCM x categoria)           |     216 |        0 |
+| ato sem nenhum mes na janela 2003-01 a 2026-08: nenhum                                                                         |      50 |        0 |
+| registro, nao falha: paginas guardadas que nenhum ato ou aliquota cita: dec_11047_2022                                         |      55 |        0 |
+| registro, nao falha: atos sem vigencia_fim (em vigor, ou fim nao confirmado): 11                                               |      50 |        0 |
+
+## 15. Situacao
 
 Todas as verificacoes obrigatorias passaram.

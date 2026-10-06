@@ -24,27 +24,28 @@ M.BENZ,CLASSE C,C200,casa,
 M.BENZ,CLASSE C,C 200,casa,
 M.BENZ,CLASSE C,C300,casa,
 M.BENZ,CLASSE C,C 300,casa,
-M.BENZ,CLASSE C,AMG C,casa,
+M.BENZ,CLASSE C,AMG C,sem_evidencia,"Rodada 12 (sec. 1.4), teste de inclusao: regra 1 nao se aplica (as versoes AMG C 63 e C 63 S de 2016-2021 nao tem chave propria viva: AMG C63S so' existe de 2024 a 2026); a planilha nao separa o AMG da Classe C (regras 2 e 3). Regra 4: sem evidencia. Era casa desde rodada anterior, sem teste; o AMG C 63S EP de 2025 vai para a chave AMG C63S (linha abaixo)."
 M.BENZ,C 250,C250,casa,
 M.BENZ,CLASSE GLA,GLA200,casa,
 M.BENZ,CLASSE GLA,GLA 200,casa,
 M.BENZ,CLASSE GLA,GLA250,casa,
-M.BENZ,CLASSE GLA,AMG GLA,casa,
+M.BENZ,CLASSE GLA,AMG GLA,sem_evidencia,"Rodada 12 (sec. 1.4), teste de inclusao: o AMG GLA 45 4M (PBE 2016) nao tem chave propria e a planilha nao separa o AMG (so' GLA). Regra 4: sem evidencia. Era casa desde rodada anterior, sem teste."
 M.BENZ,CLASSE E,E200,casa,
 M.BENZ,CLASSE E,E250,casa,
 M.BENZ,CLASSE E,E300,casa,
 M.BENZ,CLASSE E,E 300,casa,
-M.BENZ,CLASSE E,AMG E,casa,
+M.BENZ,CLASSE E,AMG E,sem_evidencia,"Rodada 12 (sec. 1.4), teste de inclusao: nenhuma versao do PBE comeca com AMG E seguido de espaco (AMG E63S e AMG E53, de 2020-2021, nao casavam por este apelido); sem chave propria e sem linha AMG na planilha. Regra 4: sem evidencia. Era casa desde rodada anterior, sem teste."
 M.BENZ,GLC,GLC250,casa,
 M.BENZ,GLC,GLC300,casa,
 M.BENZ,GLC,GLC 300,casa,
-M.BENZ,GLC,AMG GLC,casa,
+M.BENZ,GLC,AMG GLC,sem_evidencia,"Rodada 12 (sec. 1.4), teste de inclusao: as versoes AMG GLC 43, GLC 43 COUPE e GLC 63S EP (PBE 2025) nao tem chave propria e a planilha nao separa o AMG (so' GLC e, em 2023-02, GLC COUPE). Regra 4: sem evidencia, como AMG GLC43 e AMG GLC63S. Era casa desde rodada anterior, sem teste; a grafia com espaco escapava da decisao das outras duas."
 PEUGEOT,208,E-208,casa,"Regra 2 do teste de variantes (a planilha soma): em 2023-02, o 208 do painel (1.163) = Peugeot 208 da planilha (1.160) + Peugeot e-208 (3). Rodada pbe-comex-e-calendario."
 AUDI,E TRON GT,E-TRON GT,casa,"Regra 1 (chave propria): o nome da versao e' o da chave, com hifen no lugar do espaco."
 FORD,ETRANSIT,E-TRANSIT,casa,"Regra 1 (chave propria): o nome da versao e' o da chave, com hifen."
 FORD,TRANSIT,E-TRANSIT,nao_casa,"Regra 1: a variante eletrica tem chave propria no painel (ETRANSIT) e nao entra na chave-base."
 JAC,IEV 330P,IEV330P,casa,"Regra 1 (chave propria): o nome da versao e' o da chave, sem o espaco."
 M.BENZ,CLA200,CLA 200,casa,"Regra 1 (chave propria): o nome da versao e' o da chave, com espaco."
+M.BENZ,AMG C63S,AMG C 63S,casa,"Rodada 12 (sec. 1.4), regra 1 (chave propria): o AMG C 63S EP do PBE 2025 e' o AMG C63S do painel (2024-2026), escrito com espaco; antes casava com CLASSE C pelo apelido AMG C."
 M.BENZ,CLA35,AMG CLA35,casa,"Regra 1 (chave propria): o nome da versao e' o da chave, com o AMG da linha na frente."
 M.BENZ,S63,AMG S63,casa,"Regra 1 (chave propria): o nome da versao e' o da chave, com o AMG da linha na frente."
 M.BENZ,SL63S,AMG SL63S,casa,"Regra 1 (chave propria): o nome da versao e' o da chave, com o AMG da linha na frente."

@@ -1,6 +1,6 @@
 # Dicionario de dados -- `classificacao.parquet`, `classificacao_propulsao_anual.parquet` e `classificacao_montagem.parquet`
 
-Gerado em 2026-10-05T15:21:50+00:00 (UTC) por `src/etapa11_classificacao.py`, a partir de
+Gerado em 2026-10-06T14:53:41+00:00 (UTC) por `src/etapa11_classificacao.py`, a partir de
 `saidas/classificacao_rascunho.xlsx`. **O rascunho e' a fonte de verdade da
 adjudicacao:** uma decisao se escreve nele, e a etapa roda de novo. Ninguem
 edita o parquet a' mao.
@@ -51,7 +51,7 @@ Fracao do volume do painel, por atributo (juncao de teste, gravada em
 | procedencia | propulsao | carroceria | origem |
 |---|---:|---:|---:|
 | `humana` | 0,1% | 0,0% | 0,0% |
-| `regra_fonte_forte` | 92,0% | 79,4% | 4,9% |
+| `regra_fonte_forte` | 91,9% | 79,4% | 4,9% |
 | `regra_fonte_fraca` | 4,1% | 0,0% | 7,3% |
 | `proposta` | 0,5% | 20,4% | 81,1% |
 | `pendente` | 3,2% | 0,0% | 6,6% |
@@ -119,7 +119,7 @@ e' lacuna. Leitura longa: o tipo fica ate' o ano da primeira ausencia depois da
 ultima presenca; curta: ate' o ano da ultima presenca. Sem ausencia, as duas o
 mantem ate' o fim da vigencia. Ano em que a leitura curta ficaria sem tipo (lacuna
 do PBE entre a saida de um tipo e a entrada do seguinte) leva os tipos da longa.
-95 tipos tem evidencia de saida. Cada ano de PBE vale para a vigencia
+92 tipos tem evidencia de saida. Cada ano de PBE vale para a vigencia
 com mais meses nele.
 
 **Guarda da saida.** Ausencia no PBE nao prova saida no ano em que ha', sem
@@ -134,8 +134,8 @@ falta de presenca no PBE nao data a saida da combustao.
 |---|---:|
 | `vigencia` | 30 |
 | `fonte_datada` | 21 |
-| `pbe_ano` | 35 |
-| `vigencia_sem_datacao` | 3 |
+| `pbe_ano` | 32 |
+| `vigencia_sem_datacao` | 5 |
 
 ### Uso-teste e banda da eletrificacao
 
@@ -173,10 +173,10 @@ A banda, em `saidas/eletrificacao_banda.csv` (% das unidades do painel):
 | 2023 | curta | 1,8% | 11,8% | 10,6% | 10,6% |
 | 2024 | longa | 4,8% | 14,1% | 11,9% | 11,9% |
 | 2024 | curta | 4,8% | 14,1% | 11,9% | 11,9% |
-| 2025 | longa | 6,8% | 21,0% | 16,3% | 16,2% |
-| 2025 | curta | 6,8% | 18,5% | 13,8% | 13,8% |
-| 2026 (jan a ago) | longa | 13,2% | 28,2% | 19,0% | 18,9% |
-| 2026 (jan a ago) | curta | 13,2% | 28,1% | 18,9% | 18,9% |
+| 2025 | longa | 6,8% | 20,9% | 16,2% | 16,2% |
+| 2025 | curta | 6,8% | 18,5% | 13,8% | 13,7% |
+| 2026 (jan a ago) | longa | 13,2% | 28,5% | 19,0% | 18,9% |
+| 2026 (jan a ago) | curta | 13,2% | 28,4% | 18,9% | 18,9% |
 
 ## `classificacao_montagem.parquet`
 

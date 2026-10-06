@@ -174,6 +174,22 @@ def test_pendente_explicito_deixa_o_atributo_pendente_e_decide_o_outro():
     assert (final["origem_producao"], final["procedencia_origem"]) == ("nacional", "pendente")
 
 
+def test_p5_resolve_o_hibrido_indefinido_da_decisao_humana():
+    """Rodada 12: o 2008 fica `flex+hibrido_indefinido` por decisao; a P5, com fonte,
+    troca o rotulo. Sem P5 na linha, a decisao fica como foi escrita."""
+    decisao = "propulsao_oferecida=flex+hibrido_indefinido; origem_producao=pendente"
+    com_p5 = _linha(propulsao_oferecida="flex+bev", propulsao_apos_regras="flex+mhev+bev",
+                    procedencia_propulsao="pendente", procedencia_origem="pendente",
+                    regras_aplicadas="P4+P5", decisao_humana=decisao)
+    final = fase2.linha_final(com_p5)
+    assert (final["propulsao_na_vigencia"], final["procedencia_propulsao"]) == ("flex+mhev",
+                                                                                "humana")
+    sem_p5 = com_p5.copy()
+    sem_p5["regras_aplicadas"] = "P4"
+    sem_p5["propulsao_apos_regras"] = "flex+hibrido_indefinido+bev"
+    assert fase2.linha_final(sem_p5)["propulsao_na_vigencia"] == "flex+hibrido_indefinido"
+
+
 def test_pendente_explicito_so_em_atributo_pendente():
     linha = _linha(decisao_humana="propulsao_oferecida=flex; origem_producao=pendente")
     with pytest.raises(fase2.DecisaoInvalida, match="nao esta' pendente"):
@@ -212,4 +228,5 @@ def test_decisoes_versionadas_estao_no_rascunho_e_no_dado():
                 esperado = "pendente" if valor == "pendente" else "humana"
                 assert linha[fase2.PROCEDENCIA_COLUNA[atributo]].item() == esperado
     peugeot = dim[(dim["marca"] == "PEUGEOT") & (dim["modelo"] == "2008")]
-    assert peugeot["propulsao_na_vigencia"].tolist() == ["flex"]
+    # rodada 12: sem bev, com o hibrido de 2026 do PBE, que a P5 rotula pela fonte
+    assert peugeot["propulsao_na_vigencia"].tolist() == ["flex+mhev"]

@@ -788,6 +788,16 @@ de entrada e um de saída, nas leituras longa e curta (rodadas de 2026-10-02 e
 - a guarda da saída (versão sem casamento do mesmo tipo não deixa a ausência
   virar saída) e a leitura curta da combustão até 2020 (segue a longa).
 
+**Fechado na rodada 12 (origem por país):**
+
+- o 2008 ficou `flex+hibrido_indefinido` por decisão (era só tirar o `bev`), e
+  a P5 o rotula `mhev` em 2026 pela mesma fonte do 208. Na decisão humana,
+  `hibrido_indefinido` passou a ser tipo não decidido, que a P5 resolve (há
+  teste). O teto de 2026 sobe 0,28 ponto;
+- os apelidos `AMG C`, `AMG GLA`, `AMG E` e `AMG GLC` passaram pelo teste de
+  inclusão e viraram `sem_evidencia`. O `AMG C 63S EP` de 2025 casa com a chave
+  própria `AMG C63S`; antes ia para CLASSE C.
+
 **Fica como limitação**, por decisão do pesquisador (pouco volume ou limite da
 Fenabrave; a banda entre as leituras longa e curta cobre parte disso):
 
@@ -807,20 +817,20 @@ Fenabrave; a banda entre as leituras longa e curta cobre parte disso):
    - 911 T-Hybrid: só imprensa geral, e o sistema de 400 V não é nem leve nem
      pleno. Está em `a_adjudicar` como aviso.
    - XC40 B4, Defender e X6: nenhuma fonte brasileira encontrada.
-5. **Treze famílias de variantes sem evidência** (`saidas/pbe_variantes_sem_evidencia.csv`):
+5. **Quinze famílias de variantes sem evidência** (eram treze; a rodada 12
+   acrescentou as dos apelidos AMG) (`saidas/pbe_variantes_sem_evidencia.csv`):
    iX1, eT3, Arrizo 5e (a planilha soma em 2019-09 e não soma em 2019-10),
    e-Jumpy, e-Scudo, e-Expert, ES 300h, AMG CLA 45 S, AMG GLC 43, AMG GLC 63 S,
    AMG GLE e RAV4 híbrido. Não casam; a guarda impede que virem saída.
-6. **Apelidos antigos sem o teste de variante.** `AMG C`, `AMG GLA`, `AMG E` e
-   `AMG GLC` casam com as chaves-base desde rodadas anteriores, sem evidência
-   de planilha. As versões `AMG GLC43` e `AMG GLC63S`, que só diferem pelo
-   espaço, ficaram `sem_evidencia` pelo teste novo. As duas coisas não são
-   coerentes entre si; decidir se os apelidos antigos passam pelo teste.
-7. **O 2008 de 2026.** O PBE de 2026 lista o `2008 GT HYBRID` (HIBRIDO), que a
-   P4 tornava `hibrido_indefinido`. A decisão "o 2008 fica `flex`" o tira. Se
-   a intenção era só tirar o `bev`, a decisão vira
-   `propulsao_oferecida=flex+hibrido_indefinido` e o teto de 2026 sobe 0,28
-   ponto.
+6. **CLASSE C (2021–2026) e GLC (2016–2025) ficaram `pendente`** depois do
+   teste dos apelidos AMG. O `phev` dos dois só tinha apoio no PBE pelas
+   versões AMG (AMG C 63S EP, AMG GLC 63S EP, de 2025), que não casam mais. Agora
+   o `phev` está só na proposta, e a P2 não decide. Pela regra do `pendente`,
+   o valor na dimensão é a proposta (`gasolina+phev`), sem o `mhev` que o PBE
+   dava. Sem datação, o `phev` entra no início da vigência: 2021 na Classe C e
+   2016 no GLC. O teto sobe de 0,02 a 0,05 ponto em 2016–2023. Decidir as duas
+   linhas no rascunho.
+7. **(fechado na rodada 12: o 2008 de 2026.)**
 8. **Decisão humana parcial.** A decisão do 2008 decide a propulsão e deixa a
    origem (contestada pela O3) `pendente` de propósito, com
    `origem_producao=pendente`. A regra da fase 2 recusava decisão humana com

@@ -115,6 +115,21 @@ def _validar_valor(campo: str, valor: str, texto: str) -> None:
         raise DecisaoInvalida(f"mes invalido {valor!r} em {texto!r}")
 
 
+def hibrido_pela_p5(valor: str, linha: pd.Series) -> str:
+    """Na decisao humana, `hibrido_indefinido` e' tipo nao decidido (rodada 12: o 2008
+    fica `flex+hibrido_indefinido`, e "se houver fonte que declare o tipo, a P5 o
+    resolve"). Se a P5 resolveu o tipo nesta linha, o rotulo dela entra no lugar."""
+    tipos = [t for t in valor.split("+") if t]
+    if ("hibrido_indefinido" not in tipos
+            or "P5" not in str(linha.get("regras_aplicadas", "")).split("+")):
+        return valor
+    resolvido = set(str(linha.get("propulsao_apos_regras", "")).split("+")) & {"mhev", "hev"}
+    if len(resolvido) != 1:
+        return valor
+    return classificacao.ordenar_propulsao(
+        "+".join(set(tipos) - {"hibrido_indefinido"} | resolvido))
+
+
 def linha_final(linha: pd.Series) -> dict:
     """A linha da dimensao a partir de uma linha do rascunho, pela precedencia."""
     humana = ler_decisao(linha["decisao_humana"])
@@ -129,6 +144,8 @@ def linha_final(linha: pd.Series) -> dict:
             valor, procedencia = linha[atributo], "pendente"
         elif atributo in humana:
             valor, procedencia = humana[atributo], "humana"
+            if atributo == "propulsao_oferecida":
+                valor = hibrido_pela_p5(valor, linha)
         elif humana.get("ok"):
             valor, procedencia = linha[apos_regras], "humana"
         elif atributo in regra:
@@ -238,6 +255,8 @@ def problemas_de_fidelidade(dim: pd.DataFrame, rascunho: pd.DataFrame) -> list[s
             procedencia = final[PROCEDENCIA_COLUNA[atributo]]
             if procedencia == "humana":
                 esperado = humana.get(atributo, linha[apos_regras])
+                if atributo == "propulsao_oferecida" and atributo in humana:
+                    esperado = hibrido_pela_p5(esperado, linha)
             elif humana.get(atributo) == PENDENTE_EXPLICITO:
                 esperado = linha[atributo]
             elif procedencia.startswith("regra_"):

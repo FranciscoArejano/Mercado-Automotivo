@@ -2618,7 +2618,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2016,15,KIA,CERATO,,nome,,,F,flex,25,KIA,CERATO,automoveis
 2016,15,KIA,CERATO,,nome,,,F,flex,25,KIA,CERATO,automoveis
 2016,15,KIA,CERATO,,nome,,,F,flex,25,KIA,CERATO,automoveis
-2016,15,MERCEDES-BENZ,AMG GLA 45 4M,,nome,,,G,gasolina,24,M.BENZ,CLASSE GLA,automoveis
 2016,15,MERCEDES-BENZ,CLA200 FF,,nome,,,F,flex,25,M.BENZ,CLA200,automoveis
 2016,16,MERCEDES-BENZ,CLA200 FF (2017),(CVT),nome,,,F,flex,25,M.BENZ,CLA200,automoveis
 2016,16,MERCEDES-BENZ,CLA250 4MATIC,,nome,,,G,gasolina,24,M.BENZ,CLA250,automoveis
@@ -2721,8 +2720,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2016,19,JAGUAR,XJ,"EXTRA 3,0SC",nome,,,G,gasolina,24,JAGUAR,XJ,automoveis
 2016,19,KIA,CADENZA,EXTRA,nome,,,G,gasolina,24,KIA,CADENZA,automoveis
 2016,19,KIA,OPTIMA,EXTRA,nome,,,G,gasolina,24,KIA,OPTIMA,automoveis
-2016,20,MERCEDES-BENZ,AMG C 63,EXTRA,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
-2016,20,MERCEDES-BENZ,AMG C 63 S,EXTRA,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2016,20,MERCEDES-BENZ,C180,EXTRA,nome,,,G,gasolina,24,M.BENZ,C180,automoveis
 2016,20,MERCEDES-BENZ,C180,EXTRA,nome,,,G,gasolina,24,M.BENZ,C180,automoveis
 2016,20,MERCEDES-BENZ,C180 FF,EXTRA,nome,,,F,flex,25,M.BENZ,C180,automoveis
@@ -3420,7 +3417,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2017,12,MERCEDES-BENZ,CLA200 FF,(CVT),nome,,,F,flex,25,M.BENZ,CLA200,automoveis
 2017,12,MERCEDES-BENZ,,CLA250,linha_acima,,,G,gasolina,24,M.BENZ,CLA250,automoveis
 2017,12,MERCEDES-BENZ,GLA250 4M SPORT,4MATIC,nome,,,G,gasolina,24,M.BENZ,CLASSE GLA,automoveis
-2017,12,MERCEDES-BENZ,,AMG GLA 45,linha_acima,,,G,gasolina,24,M.BENZ,CLASSE GLA,automoveis
 2017,12,MERCEDES-BENZ,GLA200 FF BR,4M,nome,,,F,flex,25,M.BENZ,CLASSE GLA,automoveis
 2017,12,MERCEDES-BENZ,GLA250 BR,,nome,,,G,gasolina,24,M.BENZ,CLASSE GLA,automoveis
 2017,12,MERCEDES-BENZ,GLA200 FF BR STYLE,,nome,,,F,flex,25,M.BENZ,CLASSE GLA,automoveis
@@ -3455,7 +3451,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2017,13,HYUNDAI,ELANTRA,,nome,,,F,flex,25,HYUNDAI,ELANTRA,automoveis
 2017,13,HYUNDAI,ELANTRA B,,nome,,,F,flex,25,HYUNDAI,ELANTRA,automoveis
 2017,13,KIA,CERATO FF EX4/ LX4/ SX4 ATNB,,nome,,,F,flex,25,KIA,CERATO,automoveis
-2017,13,MERCEDES-BENZ,,AMG GLA 45,linha_acima,,,G,gasolina,24,M.BENZ,CLASSE GLA,automoveis
 2017,13,MERCEDES-BENZ,CLA200 FF,4M,nome,,,F,flex,25,M.BENZ,CLA200,automoveis
 2017,13,MERCEDES-BENZ,,CLA250,linha_acima,,,G,gasolina,24,M.BENZ,CLA250,automoveis
 2017,13,MERCEDES-BENZ,GLA200 FF,4MATIC,nome,,,F,flex,25,M.BENZ,CLASSE GLA,automoveis
@@ -3470,9 +3465,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2017,14,VW,CC,,nome,,,G,gasolina,24,VW,CC,automoveis
 2017,14,VW,TOUAREG V6,,nome,,,G,gasolina,24,VW,TOUAREG,automoveis
 2017,14,VW,TOUAREG V8,,nome,,,G,gasolina,24,VW,TOUAREG,automoveis
-2017,14,MERCEDES-BENZ,,AMG C 43,linha_acima,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
-2017,14,MERCEDES-BENZ,AMG C 63,4MATIC,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
-2017,14,MERCEDES-BENZ,AMG C 63 S,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2017,14,MERCEDES-BENZ,C180 ESTATE,,nome,,,G,gasolina,24,M.BENZ,C180,automoveis
 2017,14,MERCEDES-BENZ,E250 EXCLUSIVE,,nome,,,G,gasolina,24,M.BENZ,CLASSE E,automoveis
 2017,14,MERCEDES-BENZ,E250 AVANTGARDE,,nome,,,G,gasolina,24,M.BENZ,CLASSE E,automoveis
@@ -3528,9 +3520,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2017,17,HYUNDAI,AZERA,,nome,,,G,gasolina,24,HYUNDAI,AZERA,automoveis
 2017,18,KIA,CADENZA EX / LX GDI,(CVT),nome,,,G,gasolina,24,KIA,CADENZA,automoveis
 2017,18,KIA,OPTIMA EX3 / LX3,,nome,,,G,gasolina,24,KIA,OPTIMA,automoveis
-2017,18,MERCEDES-BENZ,,AMG C 43,linha_acima,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
-2017,18,MERCEDES-BENZ,AMG C 63,4MATIC,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
-2017,18,MERCEDES-BENZ,AMG C 63 S,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2017,18,MERCEDES-BENZ,C180 COUPE,4MATIC+,nome,,,G,gasolina,24,M.BENZ,C180,automoveis
 2017,18,MERCEDES-BENZ,C180 FF,,nome,,,F,flex,25,M.BENZ,C180,automoveis
 2017,18,MERCEDES-BENZ,C250,,nome,,,G,gasolina,24,M.BENZ,C 250,automoveis
@@ -3784,7 +3773,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2017,43,FORD,XLS,RANGER 4X2 C.,linha_acima,,,D,diesel,26,FORD,RANGER,comerciais_leves
 2017,43,FORD,XLS,RANGER 4X2 C.,linha_acima,,,D,diesel,26,FORD,RANGER,comerciais_leves
 2017,43,MERCEDES-BENZ,C250 COUPE,,nome,,,G,gasolina,24,M.BENZ,C 250,automoveis
-2017,43,MERCEDES-BENZ,AMG C 63 S COUPE,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2017,43,MERCEDES-BENZ,C300 CABRIO,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2017,44,MERCEDES-BENZ,SLC 300,(CVT),nome,,,G,gasolina,24,M.BENZ,SLC 300,automoveis
 2017,44,MERCEDES-BENZ,SL 400,,nome,,,G,gasolina,24,M.BENZ,SL,automoveis
@@ -3811,7 +3799,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2017,45,AUDI,TTS COUPE,,nome,,,G,gasolina,24,AUDI,TTS,automoveis
 2017,45,AUDI,TTS ROADSTER,,nome,,,G,gasolina,24,AUDI,TTS,automoveis
 2017,45,FORD,MUSTANG GT,,nome,,,G,gasolina,24,FORD,MUSTANG,automoveis
-2017,46,MERCEDES-BENZ,AMG C 63 S COUPE,(CVT),nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2017,46,MERCEDES-BENZ,AMG GT R,,nome,,,G,gasolina,24,M.BENZ,AMG GT,automoveis
 2017,46,MERCEDES-BENZ,C250 COUPE,,nome,,,G,gasolina,24,M.BENZ,C 250,automoveis
 2017,46,MERCEDES-BENZ,C300 CABRIO,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
@@ -4094,7 +4081,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2018,14,HYUNDAI,ELANTRA,,nome,,,F,flex,25,HYUNDAI,ELANTRA,automoveis
 2018,14,HYUNDAI,ELANTRA B,,nome,,,F,flex,25,HYUNDAI,ELANTRA,automoveis
 2018,14,KIA,CERATO FF EX4/ LX4/ SX4 ATNB,,nome,,,F,flex,25,KIA,CERATO,automoveis
-2018,14,MERCEDES-BENZ,,AMG GLA 45,linha_acima,,,G,gasolina,24,M.BENZ,CLASSE GLA,automoveis
 2018,14,MERCEDES-BENZ,CLA200 FF,4M,nome,,,F,flex,25,M.BENZ,CLA200,automoveis
 2018,14,MERCEDES-BENZ,,CLA250,linha_acima,,,G,gasolina,24,M.BENZ,CLA250,automoveis
 2018,14,MERCEDES-BENZ,GLA200 FF,4MATIC,nome,,,F,flex,25,M.BENZ,CLASSE GLA,automoveis
@@ -4156,9 +4142,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2018,18,HYUNDAI,AZERA,,nome,,,G,gasolina,24,HYUNDAI,AZERA,automoveis
 2018,18,KIA,CADENZA EX / LX GDI,,nome,,,G,gasolina,24,KIA,CADENZA,automoveis
 2018,18,KIA,OPTIMA EX3 / LX3,,nome,,,G,gasolina,24,KIA,OPTIMA,automoveis
-2018,19,MERCEDES-BENZ,,AMG C 43,linha_acima,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
-2018,19,MERCEDES-BENZ,AMG C 63,4MATIC,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
-2018,19,MERCEDES-BENZ,AMG C 63 S,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2018,19,MERCEDES-BENZ,C180 COUPE,4MATIC+,nome,,,G,gasolina,24,M.BENZ,C180,automoveis
 2018,19,MERCEDES-BENZ,C180 FF,,nome,,,F,flex,25,M.BENZ,C180,automoveis
 2018,19,MERCEDES-BENZ,C250,,nome,,,G,gasolina,24,M.BENZ,C 250,automoveis
@@ -4519,7 +4502,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2018,50,CHEVROLET,CAMARO 2SS / 50TH,6.2L -,nome,,,G,gasolina,24,GM,CAMARO,automoveis
 2018,50,CHEVROLET,CAMARO 2SS CONV,6.2L -,nome,,,G,gasolina,24,GM,CAMARO,automoveis
 2018,50,FORD,MUSTANG GT,16V,nome,,,G,gasolina,24,FORD,MUSTANG,automoveis
-2018,51,MERCEDES-BENZ,AMG C 63 S COUPE,(CVT),nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2018,51,MERCEDES-BENZ,AMG GT R,,nome,,,G,gasolina,24,M.BENZ,AMG GT,automoveis
 2018,51,MERCEDES-BENZ,C250 COUPE,,nome,,,G,gasolina,24,M.BENZ,C 250,automoveis
 2018,51,MERCEDES-BENZ,C300 CABRIO,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
@@ -4733,7 +4715,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2019,12,MERCEDES-BENZ,CLA200 FF,4MATIC,nome,,,F,flex,25,M.BENZ,CLA200,automoveis
 2019,12,MERCEDES-BENZ,,CLA250,linha_acima,,,G,gasolina,24,M.BENZ,CLA250,automoveis
 2019,12,MERCEDES-BENZ,CLA180,4MATIC,nome,,,G,gasolina,24,M.BENZ,CLA180,automoveis
-2019,12,MERCEDES-BENZ,,AMG GLA 45,linha_acima,,,G,gasolina,24,M.BENZ,CLASSE GLA,automoveis
 2019,12,MERCEDES-BENZ,GLA200 FF,4M,nome,,,F,flex,25,M.BENZ,CLASSE GLA,automoveis
 2019,12,MERCEDES-BENZ,GLA200 FF STYLE,,nome,,,F,flex,25,M.BENZ,CLASSE GLA,automoveis
 2019,12,MERCEDES-BENZ,GLA250,,nome,,,G,gasolina,24,M.BENZ,CLASSE GLA,automoveis
@@ -4796,7 +4777,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2019,16,DODGE,DURANGO LIMITED,,nome,,,G,gasolina,24,DODGE,DURANGO,automoveis
 2019,16,MERCEDES-BENZ,C200,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2019,16,MERCEDES-BENZ,C300,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
-2019,16,MERCEDES-BENZ,,AMG C 43,linha_acima,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2019,16,MERCEDES-BENZ,C180 COUPE,4MATIC,nome,,,G,gasolina,24,M.BENZ,C180,automoveis
 2019,16,MERCEDES-BENZ,C300 ESTATE,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2019,16,MERCEDES-BENZ,E250 AVANTGARDE,,nome,,,G,gasolina,24,M.BENZ,CLASSE E,automoveis
@@ -5118,7 +5098,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2019,46,BMW,M240I -,,nome,,,G,gasolina,24,BMW,M240I,automoveis
 2019,46,MINI,COOPER S,,nome,,,G,gasolina,24,MINI,COOPER,automoveis
 2019,46,BMW,M2 COMPETITION,,nome,,,G,gasolina,24,BMW,M2,automoveis
-2019,46,MERCEDES-BENZ,AMG C 63 S COUPE,,nome,,,G,gasolina,24,M.BENZ,CLASSE C,automoveis
 2019,46,MERCEDES-BENZ,CLS 400,,nome,,,G,gasolina,24,M.BENZ,CLS,automoveis
 2019,46,MERCEDES-BENZ,AMG GT R,,nome,,,G,gasolina,24,M.BENZ,AMG GT,automoveis
 2019,46,MERCEDES-BENZ,AMG GT C ROADSTER,,nome,,,G,gasolina,24,M.BENZ,AMG GT,automoveis
@@ -6453,7 +6432,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2021,7,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLASSE E,automoveis
 2021,7,MERCEDES-BENZ,E300 SPORT,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLASSE E,automoveis
 2021,7,MERCEDES-BENZ,C180 FF,,nome,COMBUSTAO,,F,flex,10,M.BENZ,C180,automoveis
-2021,7,MERCEDES-BENZ,AMG C 63 S,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLASSE C,automoveis
 2021,7,MERCEDES-BENZ,AMG GT63S 4MATIC,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,AMG GT63S,automoveis
 2021,7,MERCEDES-BENZ,CLA250 L7,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLA250,automoveis
 2021,7,TOYOTA,CAMRY XLE,,nome,COMBUSTAO,,G,gasolina,9,TOYOTA,CAMRY,automoveis
@@ -7100,7 +7078,6 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2021,19,JAGUAR,F-TYPE 300 CP,,nome,COMBUSTAO,,G,gasolina,9,JAGUAR,F-TYPE,automoveis
 2021,19,JAGUAR,F-TYPE 300RD CB,,nome,COMBUSTAO,,G,gasolina,9,JAGUAR,F-TYPE,automoveis
 2021,19,JAGUAR,F-TYPE 300RD CP,,nome,COMBUSTAO,,G,gasolina,9,JAGUAR,F-TYPE,automoveis
-2021,19,MERCEDES-BENZ,AMG C 63 S COUPE,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLASSE C,automoveis
 2021,19,MERCEDES-BENZ,C300 CABRIO,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLASSE C,automoveis
 2021,19,MINI,COOPER S CABRIO,,nome,COMBUSTAO,,G,gasolina,9,MINI,COOPER,automoveis
 2021,19,MINI,JCW 3 PORTAS,,nome,COMBUSTAO,,G,gasolina,9,MINI,JCW,automoveis
@@ -9905,16 +9882,11 @@ ano_pbe,pagina,marca_pbe,modelo_versao,linha_acima,casou_por,tipo_propulsao,marc
 2025,5,MERCEDES-BENZ,C 200 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2025,5,MERCEDES-BENZ,C 300 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
 2025,5,MERCEDES-BENZ,C 300 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
-2025,5,MERCEDES-BENZ,AMG C 63S EP F1,,nome,PLUG-IN,,G,phev,6,M.BENZ,CLASSE C,automoveis
-2025,5,MERCEDES-BENZ,AMG C 63S EP,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE C,automoveis
+2025,5,MERCEDES-BENZ,AMG C 63S EP F1,,nome,PLUG-IN,,G,phev,6,M.BENZ,AMG C63S,automoveis
+2025,5,MERCEDES-BENZ,AMG C 63S EP,,nome,HIBRIDO,,G,hev,4,M.BENZ,AMG C63S,automoveis
 2025,5,MERCEDES-BENZ,CLA 200 AMG LINE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA200,automoveis
 2025,5,MERCEDES-BENZ,CLA 200 PROGRESSIVE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA200,automoveis
 2025,5,MERCEDES-BENZ,AMG CLA35 4M,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLA35,automoveis
-2025,5,MERCEDES-BENZ,AMG GLC 43,,nome,HIBRIDO,,G,hev,4,M.BENZ,GLC,automoveis
-2025,5,MERCEDES-BENZ,AMG GLC 43 COUPE,,nome,PLUG-IN,,G,phev,6,M.BENZ,GLC,automoveis
-2025,5,MERCEDES-BENZ,AMG GLC 63S EP,,nome,HIBRIDO,,G,hev,4,M.BENZ,GLC,automoveis
-2025,5,MERCEDES-BENZ,AMG GLC 43 CO,,nome,HIBRIDO,,G,hev,4,M.BENZ,GLC,automoveis
-2025,5,MERCEDES-BENZ,AMG GLC 43,,nome,HIBRIDO,,G,hev,4,M.BENZ,GLC,automoveis
 2025,5,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,HIBRIDO,,G,hev,4,M.BENZ,CLASSE E,automoveis
 2025,5,MERCEDES-BENZ,E300 EXCLUSIVE,,nome,COMBUSTAO,,G,gasolina,9,M.BENZ,CLASSE E,automoveis
 2025,6,MERCEDES-BENZ,AMG S63 EP,,nome,HIBRIDO,,G,hev,4,M.BENZ,S63,automoveis

@@ -896,10 +896,13 @@ são só as que o próprio ato fixa.
 5. **O Decreto 10.923/2021 (a TIPI de 2022)** não foi guardado. As alíquotas de
    8703.40/60/80 sob as reduções gerais de 2022 (10.979, 11.055, 11.158) não
    estão registradas.
+6. **2003 a 2007.** As pistas da rodada começam em 2008, e nenhum ato anterior
+   foi procurado. A tabela mensal começa em 2008-01; um mês sem ato antes disso
+   não quer dizer mês sem política.
 
 **Inferido, com a inferência na observação do ato:**
 
-6. **O fim da Camex 97 em 31/12/2023.** A Gecex 532 tira os eletrificados do
+7. **O fim da Camex 97 em 31/12/2023.** A Gecex 532 tira os eletrificados do
    Anexo V da Gecex 272/2021 a partir de 1/1/2024; a passagem dos Ex da Camex 97
    para a Gecex 272 (e a mudança de NCM de 2017) não foi aberta.
 

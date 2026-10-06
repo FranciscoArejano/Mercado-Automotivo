@@ -5,7 +5,27 @@ do trabalho que ele descreve.
 
 ## Em uma frase
 
-__RESUMO__
+- **PBE:** o e-208 casa com o 208, pela soma da planilha; o e-2008 tem chave
+  própria e não casa com o 2008. A auditoria das 578 versões eletrificadas sem
+  casamento resolveu as que tinham evidência; as sem evidência estão em
+  `saidas/pbe_variantes_sem_evidencia.csv` e seguram a saída do seu tipo (a
+  guarda). A leitura curta da combustão segue a longa até 2020: 37 tipos
+  mudaram, nenhum nível de eletrificação.
+- **Comex:** `unidades_ajustadas` estima pelo peso as 2.035 linhas com menos de
+  500 kg por unidade (4,23 milhões de unidades publicadas viram 168.672). O
+  agregado de carros perde o 8703.10. Os três uso-testes foram refeitos com as
+  ajustadas, e o salto de 2019 do BEV some.
+- **Calendário de políticas:** 50 atos de 2008 a 2026 e 216 alíquotas, cada um
+  com trecho literal de uma das 55 páginas oficiais guardadas;
+  `politicas_mensal.parquet` junta ao painel pelo mês. Três pistas não se
+  confirmaram em página oficial e ficaram fora (fim da quota de carros de 2023,
+  protocolo argentino de 2013–2014, nada procurado antes de 2008).
+- **Uso-teste das datas:** 25 das 61 datas não mostram movimento além do
+  sazonal. A que mais pede conferência é a do desconto de junho de 2023, cuja
+  janela de comparação (junho de 2022) vem logo depois do corte de IPI de maio
+  de 2022.
+- **Motorização:** registrada em `QUESTOES_ABERTAS.md` como próxima dimensão.
+  Não construída.
 
 ---
 
@@ -441,4 +461,304 @@ ajustado.
   uso do Comex. Restaurei antes do commit e passei a conferir o fim de linha de
   todos os arquivos tocados.
 
-__PARTE3__
+---
+
+## Parte 3 — o calendário de políticas
+
+### Fontes
+
+**Só página oficial**, aberta nesta rodada e guardada em
+`dados/bruto/politicas_paginas/` com URL e SHA-256 do texto no manifesto. São 55
+páginas, comitadas em cinco lotes à medida que eram guardadas, e não uma por
+commit (`e7f3062`, `ed1334d`, `7058e6c`, `516b224`, `ffb5133`):
+
+- **Planalto** (41): decretos, medidas provisórias e leis;
+- **Diário Oficial da União** (6): as resoluções Camex 86/2014 e 97/2015 e a
+  Portaria GM/MDIC 151/2023, pelo visualizador de PDF da Imprensa Nacional;
+- **gov.br** (5): as resoluções Gecex 532/2023, 774/2025 e 927/2026 (MDIC) e as
+  resoluções Contran 311 e 312/2009 (Ministério dos Transportes);
+- **Banco Central** (2): circulares 3.515/2010 e 3.563/2011;
+- **Conama** (1): resolução 492/2018.
+
+`tipo_fonte` é `oficial` em todos os 50 atos, pelo domínio, e há teste.
+
+**O que não abriu:**
+
+- matéria do DOU em `in.gov.br/materia/`: 403;
+- notícias do gov.br: pedem autenticação ("Conteúdo Restrito");
+- archive.org: 429.
+
+O DOU veio pelo visualizador de PDF da Imprensa Nacional. As páginas antigas têm
+duas ou três colunas, e o texto de colunas misturadas não serve para trecho. A
+ferramenta de guardar páginas ganhou `--colunas`, que corta a página antes de
+extrair. Notícia ajudou a achar ato em alguns casos e não é citada em lugar
+nenhum.
+
+### As duas tabelas
+
+**`dados/referencia/politicas_atos.csv`: 50 atos.** São as suas colunas, mais
+`tipo_fonte`, depois de `fonte_url`. `instrumento` fica numa lista fechada (lei,
+medida provisória, decreto, resolução, circular, portaria).
+
+| tema | atos | de | até |
+|---|---:|---|---|
+| IPI | 18 | 12/12/2008 | 01/11/2025 |
+| regime automotivo | 6 | 01/01/2013 | 28/06/2024 |
+| imposto de importação | 5 | 19/09/2014 | 01/07/2026 |
+| acordo automotivo | 7 | 03/07/2008 | 01/07/2020 |
+| crédito | 8 | 03/01/2008 | 22/01/2015 |
+| desconto patrocinado | 2 | 06/06/2023 | 07/06/2023 |
+| regulação | 4 | 01/01/2014 | 01/01/2025 |
+
+**`dados/referencia/politicas_aliquotas.csv`: 216 linhas** (IPI 124, II 86, IOF
+6). Só as alíquotas que o ato fixa. Acrescentei `pagina_salva`, porque várias
+tabelas estão no anexo e não na página do decreto.
+
+- **NCM:** com os pontos da TIPI e o Ex. Os dígitos sem pontos são prefixo da
+  NCM do Comex Stat.
+- **IPI de 2012 a 2017:** a alíquota da TIPI já inclui os 30 pontos do
+  Inovar-Auto (37 = 7 + 30). A empresa habilitada tinha a redução.
+- **IPI dos híbridos e elétricos em 2018:** uma linha por faixa de eficiência e
+  de massa, para 8703.40, 8703.60 e 8703.80.
+- **II:** os Ex-tarifários lidos das tabelas dos atos, com a quota quando há.
+- **IOF:** a alíquota diária do crédito a pessoa física.
+
+**A regra de uma alíquota por período.** Mesma NCM e categoria não têm dois
+períodos que se cruzam. Quando um ato posterior fixa de novo a mesma linha, a do
+anterior vale até a véspera do posterior. Se nem chegou a valer, sai. A etapa 13
+falha se houver cruzamento. Três casos:
+
+- a TIPI cheia de 16/12/2011 (Decreto 7.567) para em 21/05/2012, quando o 7.725
+  reduz;
+- a Gecex 774/2025 repete quatro Ex de desmontado da Gecex 532 com fim em
+  31/12/2026 (era 30/06/2028). A linha da 532 para em 30/07/2025, e a da 774
+  começa em 31/07/2025, quando ela entra em vigor, embora a tabela dela diga
+  01/07/2025;
+- o degrau de 14% do elétrico desmontado (8703.80.00 Ex 007), que a 532 marcava
+  para 01/07/2026, sai: a 774 o antecipou antes de ele valer.
+
+O Decreto 11.047/2022 está guardado e não é citado. Ele foi revogado pelo
+11.055 antes de produzir efeito: os dois valiam a partir de 01/05/2022.
+
+**`dados/processado/politicas_mensal.parquet`:** uma linha por mês e ato em
+vigor, de 2008-01 a 2026-08 (1.924 linhas). Tem `comeca_no_mes`,
+`termina_no_mes`, `dias_em_vigor` e `fracao_do_mes`. Junta ao painel pelo
+`mes_ref`. Ato sem `vigencia_fim` vai até o último mês.
+
+**A etapa 13** (`src/etapa13_politicas.py`, no pipeline antes da 6) confere:
+
+- a página: arquivo, SHA-256 e URL;
+- o ato: campos nas listas, datas, `altera_id`, URL igual à da página, fonte
+  oficial e trecho literal;
+- a alíquota: NCM no formato da TIPI, ato existente, trecho literal e uma por
+  período.
+
+Zero falhas. `testes/test_politicas.py` repete as guardas e testa as regras com
+casos pequenos.
+
+### As suas pistas, conferidas pelo ato
+
+**Confirmadas:**
+
+- **IPI 2008–2010:** decretos 6.687 (de 12/12/2008 a 31/03/2009), 6.809, 6.890
+  (alta mês a mês de outubro a dezembro de 2009) e 7.017 (flex até 31/03/2010).
+- **+30 pontos em 2011:** MP 540 e Decreto 7.567. O efeito começa em
+  16/12/2011, pela redação do Decreto 7.604, e não na publicação (16/09/2011).
+- **Ciclo de 2012:** decretos 7.725 (22/05/2012), 7.796, 7.834, 7.879, 7.971,
+  8.168 e 8.279. A redução vai até 31/12/2014, e a alíquota cheia volta em
+  01/01/2015.
+- **IPI de 2022:** decretos 10.979 (25/02), 11.055 (01/05) e 11.158 (01/08).
+- **Híbridos e elétricos em 2018:** Decreto 9.442, em vigor em 01/11/2018 (o
+  quarto mês depois da publicação).
+- **IPI Verde do Mover:** Decreto 12.549, em vigor em 01/11/2025.
+- **Regimes:** Inovar-Auto (Lei 12.715 e Decreto 7.819, de 2013 a 2017), Rota
+  2030 (MP 843 e Lei 13.755) e Mover (MP 1.205 e Lei 14.902).
+- **II de eletrificados por volta de 2015:** são dois atos. A Camex 86, de
+  setembro de 2014, cuida dos híbridos; a Camex 97, de outubro de 2015, põe o
+  elétrico a 0%.
+- **Gecex de novembro de 2023:** a 532 foi assinada em 20/11/2023 e vale a
+  partir de 01/01/2024. Os degraus do montado são janeiro de 2024, julho de 2024
+  e julho de 2025, com TEC de 35% a partir de julho de 2026. Vieram depois a 774
+  (2025: desmontado e quotas) e a 927 (2026: quotas de julho a dezembro).
+- **Quotas do México em 2012:** Decreto 7.706, com quotas desde 19/03/2012, e o
+  8.419, que leva as quotas até 2019 e o livre comércio a 19/03/2019.
+- **Flex com a Argentina:** decretos 6.500 (2008, até 30/06/2013), 8.278
+  (2014), 8.477 (2015), 8.797 (2016 a 2020) e 10.343 (2020 a 2029).
+- **IOF:** decretos 6.339 (03/01/2008, alta), 6.691 (12/12/2008, baixa), 7.458
+  (09/04/2011, alta), 7.632 (02/12/2011, baixa) e 7.726 (23/05/2012, baixa).
+  Acrescentei o 8.392 (22/01/2015, alta para 0,0082% ao dia).
+- **Banco Central:** Circular 3.515 (crédito contratado desde 06/12/2010) e
+  Circular 3.563 (11/11/2011). A 3.563 não é reversão inteira: isenta o veículo
+  de até 60 meses e não revoga a 3.515, que fica sem fim.
+- **Desconto de junho de 2023:** MP 1.175 (de 06/06/2023, por 120 dias, até
+  03/10/2023) e Portaria GM/MDIC 151.
+- **Air bag e ABS a 100% em 01/01/2014:** resoluções Contran 311 e 312, de 2009.
+- **Proconve:** Conama 492/2018, uma linha por fase. L7 em 01/01/2022, L8 em
+  01/01/2025.
+
+**Não confirmadas, e fora:**
+
+1. **O fim da quota de carros do desconto de 2023** (7/7/2023 na notícia do
+   MDIC). Nenhuma página oficial aberta o dá. O ato fica com o prazo da MP.
+2. **O protocolo com a Argentina de 01/07/2013 a 30/06/2014.** Não foi aberto.
+3. **2003 a 2007.** As pistas começam em 2008, e eu não procurei atos antes
+   disso. A tabela não tem nada nesses cinco anos, e isso não quer dizer que não
+   houve política.
+
+**Inferido, com a inferência na observação:**
+
+- **O fim da Camex 97 em 31/12/2023.** A Gecex 532 tira os eletrificados do
+  Anexo V da Gecex 272/2021 a partir de 01/01/2024. A passagem dos Ex da Camex
+  97 para a Gecex 272 não foi aberta.
+
+**Fins que tirei do próprio texto:**
+
+- MP 540: 31/07/2016, o prazo da redução no texto original;
+- MP 843 e MP 1.205: a data da lei de conversão;
+- Camex 86: 26/10/2015, porque a Camex 97 dá nova redação aos mesmos Ex.
+
+**Sem fim:** dez atos. Estão em vigor ou o fim não foi confirmado, e a
+observação diz qual. O Decreto 9.442 é um deles. As alíquotas dele valem até
+24/02/2022; daí em diante a estrutura segue com as reduções gerais de 2022, que
+não registrei para 8703.40/60/80.
+
+**Registrado e não feito:**
+
+- as alíquotas de gasolina e de 8704 em 2013–2014;
+- o IOF depois de 2015;
+- o Decreto 10.923/2021 (a TIPI de 2022).
+
+### 3.5 Uso-teste das datas
+
+`saidas/politicas_uso_teste.csv` tem uma linha por data de efeito. São 61 datas:
+o início de cada ato e cada mudança de alíquota que o próprio ato fixa depois
+(degraus, volta da alíquota cheia).
+
+**A série:**
+
+- vendas do painel (automóveis e comerciais leves);
+- no imposto de importação, a importação das NCMs do ato, em unidades ajustadas;
+- no acordo automotivo, a importação do agregado de carros vinda do país
+  parceiro.
+
+**As colunas:** média dos 3 meses antes, o mês da data, média dos 3 meses
+depois, e as mesmas janelas um ano antes.
+
+**A marca de movimento é minha.** Você pediu para eu dizer onde a data não casa
+com movimento, e a venda mensal tem sazonalidade forte: janeiro sempre cai
+contra outubro–dezembro. Por isso comparo com o ano anterior. `movimento = sim`
+quando a variação do mês, ou a dos três meses seguintes, contra os três
+anteriores, difere da do ano anterior em 10 pontos ou mais.
+
+Isso não estima efeito. `sim` não quer dizer que foi o ato, e o limiar pega
+ruído também.
+
+**Onde a data não casa com movimento (25 de 61): o lugar de conferir a data.**
+
+| data | ato | série | 3 meses antes | mês | 3 meses depois | mês / antes | depois / antes | idem, ano anterior |
+|---|---|---|---:|---:|---:|---:|---:|---|
+| 03/01/2008 | decreto 6.339 | vendas | 228.540 | 203.880 | 218.714 | −10,8 | −4,3 | −18,8 / −8,1 |
+| 09/04/2011 | decreto 7.458 | vendas | 255.068 | 268.463 | 286.761 | +5,3 | +12,4 | +4,8 / +2,5 |
+| 11/11/2011 | circular BCB 3.563 | vendas | 283.009 | 299.813 | 266.889 | +5,9 | −5,7 | +6,8 / −3,3 |
+| 02/12/2011 | decreto 7.632 | vendas | 282.054 | 321.114 | 252.938 | +13,8 | −10,3 | +21,3 / −13,0 |
+| 16/12/2011 | decreto 7.567 | vendas | 282.054 | 321.114 | 252.938 | +13,8 | −10,3 | +21,3 / −13,0 |
+| 01/01/2013 | decreto 7.879, lei 12.715, decreto 7.819 | vendas | 317.430 | 292.099 | 264.720 | −8,0 | −16,6 | −15,5 / −14,6 |
+| 01/01/2014 | decreto 8.168, Contran 311 e 312 | vendas | 307.575 | 294.915 | 247.722 | −4,1 | −19,5 | −8,0 / −16,6 |
+| 01/07/2014 | decreto 8.278 | importação da Argentina | 28.355 | 24.506 | 23.654 | −13,6 | −16,6 | −9,8 / −17,2 |
+| 01/07/2014 | decreto 8.279 | vendas | 265.885 | 276.416 | 274.204 | +4,0 | +3,1 | +5,8 / +0,0 |
+| 01/07/2015 | decreto 8.477 | importação da Argentina | 20.091 | 16.390 | 16.430 | −18,4 | −18,2 | −13,6 / −16,6 |
+| 01/01/2018 | decreto 8.279 (degrau) | vendas | 197.795 | 174.591 | 186.160 | −11,7 | −5,9 | −18,1 / −10,9 |
+| 06/07/2018 | MP 843 | vendas | 198.425 | 206.949 | 227.815 | +4,3 | +14,8 | +0,9 / +12,6 |
+| 01/11/2018 | decreto 9.442 | vendas | 227.815 | 219.624 | 200.098 | −3,6 | −12,2 | −1,4 / −11,2 |
+| 11/12/2018 | lei 13.755 | vendas | 221.895 | 222.782 | 191.724 | +0,4 | −13,6 | +4,7 / −9,9 |
+| 01/01/2022 | Conama 492 (L7) | vendas | 166.540 | 115.608 | 129.300 | −30,6 | −22,4 | −25,1 / −23,3 |
+| 06/06/2023 | MP 1.175, portaria 151 | vendas | 166.590 | 178.300 | 197.826 | +7,0 | +18,7 | +11,4 / +21,9 |
+| 30/12/2023 | MP 1.205 | vendas | 196.334 | 233.853 | 158.958 | +19,1 | −19,0 | +12,0 / −19,3 |
+| 28/06/2024 | lei 14.902 | vendas | 186.528 | 200.098 | 221.895 | +7,3 | +19,0 | +7,0 / +18,7 |
+| 01/01/2025 | Conama 492 (L8) | vendas | 241.985 | 157.349 | 182.368 | −35,0 | −24,6 | −29,5 / −16,6 |
+| 01/11/2025 | decreto 12.549 | vendas | 226.211 | 222.717 | 196.918 | −1,5 | −12,9 | +4,0 / −17,2 |
+
+(A tabela agrupa as datas iguais com a mesma série; as 25 linhas estão no CSV.)
+
+**O que eu leio nela, sem explicar efeito:**
+
+- **A data de junho de 2023 é a que mais pede conferência.** O desconto não
+  aparece contra 2022. Mas junho de 2022 é o mês seguinte ao corte de IPI de
+  01/05/2022 (o 11.055 dá +34% no mês): a janela de comparação está contaminada
+  por outra política.
+- **A série não é o grupo afetado** em vários casos:
+  - o +30 do Decreto 7.567 recai sobre a empresa não habilitada (sem 65% de
+    conteúdo regional), e a série é a venda total;
+  - os regimes (Inovar-Auto, Rota 2030, Mover) e o IPI Verde não mudam preço na
+    data de início.
+- **Prorrogação sem mudança de alíquota** não deveria mexer: 8.279 em julho de
+  2014, 8.477 com a Argentina.
+- **As datas de regulação** (air bag e ABS em 2014, L7, L8) caem em janeiro, e
+  janeiro cai igual no ano anterior.
+
+**Onde há movimento** (35 datas, no CSV). Alguns casos ajudam a ler a marca:
+
+- **Batem com a data:**
+  - 7.725 (22/05/2012): +44,2% nos três meses seguintes, contra +7,5% no ano
+    anterior;
+  - 11.055 (01/05/2022): +34,1% no mês, contra +5,2%;
+  - a volta do IPI cheio em 01/01/2015: −33,3% contra −19,5% (no mesmo mês da
+    alta do IOF do 8.392);
+  - os degraus de julho de 2024 e julho de 2025 da Gecex 532: a importação das
+    NCMs de eletrificados cai mais de 80% no mês do degrau, depois de três meses
+    acima de 37 mil unidades;
+  - as quotas do México de 2012: −26,4% contra +29,7%.
+- **Mexe, mas não pelo ato:**
+  - dezembro de 2008 (6.687 e 6.691): a janela anterior é a crise de
+    outubro–novembro;
+  - julho de 2020 com a Argentina (10.343): +231,7%, saída do fundo da
+    pandemia;
+  - a MP 540 (agosto de 2011): não muda alíquota na data, e a marca dá `sim` —
+    é o ruído do limiar.
+- **A data é a prorrogação, e o movimento fica em volta da data que ela
+  adiou:** o 7.796 (01/09/2012) dá −24,3% no mês. A média de junho a agosto de
+  2012 (361 mil) é a maior da tabela, e 31/08 era o fim que o 7.725 previa.
+- **A série não vê o Ex:** Camex 86 e 97. Antes de 2017 a NCM não separa o
+  híbrido nem o elétrico, e a série é a importação inteira de 8703.22.10 e
+  8703.23.10 (e 8703.90.00), quase toda a combustão.
+
+**Fora da série:** a Gecex 927 (01/07/2026). O Comex vai até 2026-08, e a janela
+pede até 2026-10.
+
+### 3.6 A próxima dimensão
+
+A motorização (cilindrada pela coluna `motor` do PBE) está em
+`QUESTOES_ABERTAS.md`, com o que já se sabe da coluna. Não construí nada.
+
+### Erros e correções desta parte
+
+- **Dois decretos fora do assunto guardados** (6.996/2009 e 8.035/2013). Saíram
+  do manifesto e da pasta antes do commit.
+- **PDF do DOU com colunas misturadas.** Resolvido com `--colunas`. O corte
+  dava `ValueError` fora da caixa da página, e passou a usar a caixa da página
+  com `strict=False`.
+- **Leitura das tabelas da Camex:**
+  - a tabela continua na página seguinte do DOU;
+  - "Ex 002 -Automóvel" vem sem espaço;
+  - o recorte do 8703.90 tem de parar em "III - Os Ex-tarifários".
+- **Gecex:** o padrão com um hífen só juntava linhas. Corrigido.
+- **Data do Decreto 7.632:** produz efeito no dia seguinte à publicação
+  (02/12/2011), e não na data do ato.
+- **Fim da MP 540.** Eu tinha anotado 31/12/2012, que é o prazo do Reintegra no
+  art. 3º, não do IPI. O certo, pelo texto, é 31/07/2016 (art. 5º).
+- **Fim do Decreto 6.691** (08/04/2011): o ato e a linha de IOF divergiam em um
+  dia. Igualei.
+- **Cruzamentos de alíquota.** A etapa 13 os apontou:
+  - as linhas "a partir de 2010" e "a partir de 2018" não tinham fim;
+  - a TIPI cheia de 2011 cruzava o ciclo de 2012.
+  Fechei cada uma na véspera do ato seguinte e acrescentei a gasolina até 1.000
+  cm³ dos decretos de 2012 (NC 87-7), que faltava.
+- **Circular 3.515:** eu a tinha encerrado em 11/11/2011. A 3.563 não a revoga,
+  e ela fica sem fim.
+
+---
+
+## Fechamento
+
+`saidas/validacao.md` e `CATALOGO.md` foram regerados em árvore limpa, com os
+testes passando, e comitados. A linha `rodada-11` está em `tags_pendentes.csv`.

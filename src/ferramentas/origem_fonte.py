@@ -47,7 +47,8 @@ MANIFESTO = DIR_PAGINAS / "manifesto.csv"
 # `--pasta`: outra pasta de paginas guardadas, com manifesto proprio (o calendario
 # de politicas guarda em `dados/bruto/politicas_paginas/`)
 PASTAS = {"origem_paginas": DIR_PAGINAS,
-          "politicas_paginas": config.POLITICAS_PAGINAS}
+          "politicas_paginas": config.POLITICAS_PAGINAS,
+          "fabricas_paginas": config.FABRICAS_PAGINAS}
 CAMPOS = ["nome", "url", "sha256_texto", "caracteres", "data_acesso"]
 IGNORAR = {"script", "style", "noscript", "svg", "head", "nav", "footer", "form"}
 BLOCO = {"p", "div", "br", "li", "h1", "h2", "h3", "h4", "h5", "tr", "section",

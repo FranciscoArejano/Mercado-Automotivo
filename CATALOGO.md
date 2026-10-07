@@ -1,8 +1,8 @@
-# Catalogo do repositorio -- dado do commit `290bacf`
+# Catalogo do repositorio -- dado do commit `9c2b96a`
 
 Gerado por `src/etapa10_catalogo.py` a cada execucao do pipeline. **Nao editar a mao**: janelas, linhas e contagens saem dos arquivos. O texto de usos esta' em `config/catalogo_usos.csv` e as fontes candidatas em `config/fontes_candidatas.csv`; edite la' e rode `python src/etapa10_catalogo.py`.
 
-O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/processado`, `dados/referencia`, `dados/bruto/manifesto.csv`, `dados/bruto/pbe`, `dados/bruto/origem_paginas`, `dados/bruto/comex`, `dados/bruto/politicas_paginas`, `config`, `regras.csv`, `saidas/classificacao_rascunho.xlsx`); `-sujo` quer dizer que ha' alteracao nao comitada nesses caminhos, e o catalogo nao corresponde exatamente a nenhum commit.
+O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/processado`, `dados/referencia`, `dados/bruto/manifesto.csv`, `dados/bruto/pbe`, `dados/bruto/origem_paginas`, `dados/bruto/comex`, `dados/bruto/politicas_paginas`, `dados/bruto/fabricas_paginas`, `dados/bruto/anfavea`, `dados/bruto/ibge`, `config`, `regras.csv`, `saidas/classificacao_rascunho.xlsx`); `-sujo` quer dizer que ha' alteracao nao comitada nesses caminhos, e o catalogo nao corresponde exatamente a nenhum commit.
 
 ## Indice
 
@@ -14,7 +14,8 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 | macro_mensal | `dados/processado/macro_mensal.parquet` | 284 | 2003-01..2026-08 |
 | classificacao | `dados/processado/classificacao.parquet` | 962 | 2003-01 a 2026-08 |
 | comex_veiculos | `dados/processado/comex_veiculos.parquet` | 73.316 | 1997-01 a 2026-08 |
-| politicas_mensal | `dados/processado/politicas_mensal.parquet` | 1.924 | 2008-01 a 2026-08 |
+| politicas_mensal | `dados/processado/politicas_mensal.parquet` | 2.725 | 2003-01 a 2026-08 |
+| classificacao_origem | `dados/processado/classificacao_origem.parquet` | 1.938 | 2003-01 a 2026-08 |
 
 ## Parte A -- o que existe
 
@@ -91,13 +92,13 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 | `nao_classificado` | 0,1% | 0,1% | 0,1% |
 | `pendente` | 3,2% | 0,0% | 6,6% |
 | `proposta` | 0,5% | 20,4% | 81,1% |
-| `regra_fonte_forte` | 92,0% | 79,4% | 4,9% |
+| `regra_fonte_forte` | 91,9% | 79,4% | 4,9% |
 | `regra_fonte_fraca` | 4,1% | 0,0% | 7,3% |
 
 - **Advertencia:** um artigo que use propulsao ou origem como variavel de tratamento deve restringir-se as procedencias `humana` e `regra_fonte_forte`, e declarar a fracao do volume que ficou de fora.
-- **Pendentes:** 98 linhas em `a_adjudicar`; o dado as mostra com a proposta original e procedencia `pendente`.
+- **Pendentes:** 100 linhas em `a_adjudicar`; o dado as mostra com a proposta original e procedencia `pendente`.
 - **Montagem local:** `dados/processado/classificacao_montagem.parquet`, 968 periodos, 6 deles com modo declarado por fonte (`fabricacao`, `ckd`, `skd`); o resto e' `desconhecido` ou `nao_se_aplica`.
-- **Serie temporal de propulsao:** `dados/processado/classificacao_propulsao_anual.parquet`, 5.912 linhas `(marca, modelo, segmento, vigencia_inicio, ano)` com os tipos oferecidos no ano em duas leituras (`propulsao_no_ano` longa, `propulsao_no_ano_curta`). `propulsao_na_vigencia` e `eletrificacao_na_vigencia` sao o conjunto de tudo que foi oferecido em algum momento da vigencia -- nao usar em serie temporal. Dos 89 tipos eletrificados (vigencia x tipo), 3 entram sem datacao (`vigencia_sem_datacao`); 95 tipos tem evidencia de saida. Banda da eletrificacao (piso e tres tetos) em `saidas/eletrificacao_banda.csv`; uso-teste em `saidas/classificacao_uso_teste.csv`.
+- **Serie temporal de propulsao:** `dados/processado/classificacao_propulsao_anual.parquet`, 5.912 linhas `(marca, modelo, segmento, vigencia_inicio, ano)` com os tipos oferecidos no ano em duas leituras (`propulsao_no_ano` longa, `propulsao_no_ano_curta`). `propulsao_na_vigencia` e `eletrificacao_na_vigencia` sao o conjunto de tudo que foi oferecido em algum momento da vigencia -- nao usar em serie temporal. Dos 88 tipos eletrificados (vigencia x tipo), 5 entram sem datacao (`vigencia_sem_datacao`); 92 tipos tem evidencia de saida. Banda da eletrificacao (piso e tres tetos) em `saidas/eletrificacao_banda.csv`; uso-teste em `saidas/classificacao_uso_teste.csv`.
 - **Arquivos:** dicionario em `saidas/classificacao_dicionario.md`; procedencia por atributo em `saidas/classificacao_procedencia.csv`; regras em `config/regras_classificacao.csv` e `config/regras_adjudicacao.csv`; mapeamento do PBE em `config/pbe_propulsao.csv` e `config/pbe_modelos.csv`; tipo de fonte em `config/tipo_fonte_dominio.csv`.
 - **Ressalvas principais:** Dimensao gravada (etapa 11) a partir do rascunho adjudicado. Origem ainda e' quase toda `proposta`; um artigo que use propulsao ou origem como tratamento deve restringir-se as procedencias `humana` e `regra_fonte_forte` e declarar a fracao que ficou de fora.
 
@@ -114,13 +115,24 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 
 ### `politicas_mensal`
 
-- **Estado: dimensao gravada** pela etapa 13, a partir de duas tabelas de referencia escritas a' mao (`dados/referencia/politicas_atos.csv`, `politicas_aliquotas.csv`), cada linha com trecho literal de uma das 55 paginas oficiais guardadas em `dados/bruto/politicas_paginas/` (Planalto, Diario Oficial, gov.br, Banco Central), com SHA-256 no manifesto.
+- **Estado: dimensao gravada** pela etapa 13, a partir de duas tabelas de referencia escritas a' mao (`dados/referencia/politicas_atos.csv`, `politicas_aliquotas.csv`), cada linha com trecho literal de uma das 74 paginas oficiais guardadas em `dados/bruto/politicas_paginas/` (Planalto, Diario Oficial, gov.br, Banco Central), com SHA-256 no manifesto.
 - **Unidade de observacao:** mes x ato em vigor; junta ao painel pelo `mes_ref`.
-- **Atos:** 50 -- acordo_automotivo 7, credito 8, imposto_importacao 5, ipi 18, programa_desconto 2, regime_automotivo 6, regulacao 4.
-- **Aliquotas:** 216 linhas, so' as que o proprio ato fixa (ii 86, iof 6, ipi 124); NCM com os pontos da TIPI, prefixo da NCM do Comex Stat.
+- **Atos:** 65 -- acordo_automotivo 12, credito 10, imposto_importacao 5, ipi 26, programa_desconto 2, regime_automotivo 6, regulacao 4.
+- **Aliquotas:** 422 linhas, so' as que o proprio ato fixa (ii 86, iof 8, ipi 328); NCM com os pontos da TIPI, prefixo da NCM do Comex Stat.
 - **Ressalvas:** nao e' a TIPI inteira; `vigencia_fim` vazia quer dizer em vigor ou fim nao confirmado em pagina aberta; o uso-teste (`saidas/politicas_uso_teste.csv`) marca datas sem movimento, nao estima efeito.
 - **Conferencias:** 0 falhas em `saidas/politicas_validacao.csv`; dicionario em `saidas/politicas_dicionario.md`.
-- **Ressalvas principais:** vigencia_fim vazia quer dizer em vigor ou fim nao confirmado em pagina aberta. O fim da Camex 97 (31/12/2023) e' inferido da Gecex 532. Nenhum ato antes de 2008 foi procurado. Faltam as aliquotas de gasolina e de 8704 em 2013-2014, o protocolo argentino de 2013-2014, o IOF depois de 2015 e o fim da quota de carros do desconto de 2023 (noticia do MDIC, sem pagina oficial aberta).
+- **Ressalvas principais:** vigencia_fim vazia quer dizer em vigor ou fim nao confirmado em pagina aberta. O fim da Camex 97 (31/12/2023) e o inicio do ACE-55 sao inferidos. Cinco aliquotas de 2022 sao derivadas (18,5% do Decreto 10.979). Faltam o 8704, o protocolo argentino de 2013-2014 e o fim da quota de carros do desconto de 2023 (noticia do MDIC, sem pagina oficial aberta).
+
+### `classificacao_origem`
+
+- **Estado: dimensao gravada** pela etapa 14, ao lado de `classificacao.parquet` (que nao muda): pais de producao por vigencia e periodo, a partir da proposta do assistente (`dados/referencia/origem_pais_proposta.csv`) confirmada por fonte (`fabricas.csv`, `fabrica_modelos.csv`), cada linha de fonte com trecho literal de pagina guardada (128 em `dados/bruto/fabricas_paginas/`, mais as de `origem_paginas/`).
+- **Unidade de observacao:** vigencia x periodo x pais de producao; dois paises no mesmo periodo sao duas linhas.
+- **Fabricas:** 55 (35 no Brasil, com municipio, UF e codigo IBGE); 861 linhas de fabrica x modelo (abastece_o_brasil 107, producao_local 335, producao_no_exterior 419).
+- **Procedencia** (linhas classificadas): `pendente` 20, `proposta` 626, `regra_fonte_forte` 768.
+- **Cobertura por fonte forte** (unidades do painel): 2003 89,7%, 2004 89,4%, 2005 89,4%, 2006 88,9%, 2007 85,9%, 2008 88,2%, 2009 89,1%, 2010 87,7%, 2011 82,3%, 2012 85,0%, 2013 84,7%, 2014 84,1%, 2015 84,9%, 2016 86,0%, 2017 86,3%, 2018 87,6%, 2019 84,4%, 2020 84,5%, 2021 81,8%, 2022 83,6%, 2023 78,1%, 2024 67,5%, 2025 64,2%, 2026 27,4%. Abaixo da meta de 80%: 2023, 2024, 2025, 2026.
+- **Divergencias ao rascunho:** 49 (`saidas/origem_divergencias.csv`, aba `origem_pais`).
+- **Conferencias:** 0 falhas em `saidas/origem_validacao.csv`; dicionario em `saidas/origem_dicionario.md`; uso-testes em `saidas/origem_uso_teste_*.csv` e `saidas/origem_mapa_uf.csv`.
+- **Ressalvas principais:** Cobertura por fonte forte acima de 80% das unidades em cada ano de 2003 a 2022; abaixo em 2023 a 2026 (pagina so' cobre ate' a sua data, e ha' poucas paginas recentes). A ADEFA confirma pais ja' proposto, nao diz que o carro abastece o Brasil. Ano sem mes na fonte vira janeiro no inicio e dezembro no fim. `classificacao.parquet` nao foi sobrescrita: as divergencias estao em saidas/origem_divergencias.csv e na aba `origem_pais` do rascunho.
 
 ### Outros arquivos
 
@@ -129,7 +141,10 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 | `dados/bruto/pdf/` | 284 informes originais da Fenabrave, hash em `dados/bruto/manifesto.csv` |
 | `dados/bruto/pbe/` | 18 tabelas do PBE Veicular (Inmetro), com manifesto SHA-256; extracao em `saidas/pbe_versoes.csv` |
 | `dados/bruto/origem_paginas/` | 137 paginas de fonte de origem, abertas e guardadas, com SHA-256 |
-| `dados/bruto/politicas_paginas/` | 55 paginas oficiais do calendario de politicas, abertas e guardadas, com SHA-256 |
+| `dados/bruto/politicas_paginas/` | 74 paginas oficiais do calendario de politicas, abertas e guardadas, com SHA-256 |
+| `dados/bruto/fabricas_paginas/` | 128 paginas de fabrica e de fabrica x modelo (Anfavea, ADEFA, INEGI, montadoras, imprensa), com SHA-256 |
+| `dados/bruto/anfavea/` | 3 paginas dos anuarios da Anfavea (licenciamento de nacionais e importados), com SHA-256 |
+| `dados/bruto/ibge/` | tabela de municipios do IBGE (codigo do municipio das fabricas), com SHA-256 |
 | `regras.csv` | 0 regras de harmonizacao (rebatismo, desdobramento) |
 | `config/mapa_grupos.csv` | 148 linhas marca-grupo com vigencia |
 | `dados/referencia/Vendas_Geral.xlsx` | controle independente (ESPEC sec.7), nao fonte |
@@ -149,7 +164,8 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 | `macro_mensal` | Controles e choques mensais para o painel: credito (juros, prazo, inadimplencia, saldo, concessoes), cambio, Selic, inflacao e atividade; preco relativo do automovel novo, do usado e dos combustiveis. | Preco por modelo ou por versao. Qualquer mes fora da janela efetiva de cada serie. |
 | `classificacao` | Eletrificacao da oferta por ano (classificacao_propulsao_anual, leituras longa e curta, e a banda piso-teto em saidas/eletrificacao_banda.csv), SUVizacao por carroceria, nacional contra importado, e as regras de elegibilidade de politica que dependem desses atributos. | Unidades por versao ou por propulsao: a fonte nao separa. Eletrificacao 'parcial' nao diz quantas unidades foram eletrificadas. Serie temporal pela propulsao da vigencia (propulsao_na_vigencia): e' o conjunto do que foi oferecido em algum momento dela. |
 | `comex_veiculos` | Importacao e exportacao mensal de automoveis (8703) e veiculos de carga (8704) por NCM e pais desde 1997: origem do que se importa, peso de cada pais, exportacoes como proxy de producao exportada, e, desde 2017 (8703) e 2022 (8704), a separacao entre combustao, hibrido, plug-in e eletrico puro na fronteira. | Vendas: importado entra no estoque antes de ser emplacado. Modelo ou marca: a NCM nao identifica o veiculo. Hibrido leve: nao tem NCM propria. Comerciais leves no sentido da Fenabrave: `leve` segue o peso em carga maxima da NCM. |
-| `politicas_mensal` | Calendario dos atos que mexem no mercado de carros novos desde 2008: IPI (ciclos de 2008-2010, 2012-2014, 2022, hibridos e eletricos em 2018, IPI Verde em 2025), regimes automotivos (Inovar-Auto, Rota 2030, Mover), imposto de importacao de eletrificados (Camex 2014-2015, Gecex 2023-2026), acordos com Mexico e Argentina, credito (IOF, Banco Central 2010-2011), o desconto patrocinado de 2023 e a regulacao (air bag e ABS em 2014, Proconve L7 e L8). Junta ao painel pelo mes; as aliquotas juntam ao Comex Stat pela NCM. | Efeito de politica: o uso-teste so' marca onde a data nao casa com movimento. A TIPI inteira: so' as aliquotas que o proprio ato fixa. A aliquota paga por cada empresa (habilitacao no Inovar-Auto, quotas por empresa). |
+| `politicas_mensal` | Calendario dos atos que mexem no mercado de carros novos desde 2003: IPI (TIPI de 2003, 2007, 2017 e 2022; cortes de 2003-2004, 2008-2010, 2012-2014 e 2022; hibridos e eletricos em 2018; IPI Verde em 2025), regimes automotivos (Inovar-Auto, Rota 2030, Mover), imposto de importacao de eletrificados (Camex 2014-2015, Gecex 2023-2026), acordos com Mexico (ACE-55, quotas de 2012) e Argentina (protocolos do ACE-14 desde 2002), credito (IOF, Banco Central 2010-2011), o desconto patrocinado de 2023 e a regulacao (air bag e ABS em 2014, Proconve L7 e L8). O IPI das categorias principais esta' completo mes a mes, com a aliquota efetiva da empresa habilitada em 2011-2017. Junta ao painel pelo mes; as aliquotas juntam ao Comex Stat pela NCM. | Efeito de politica: o uso-teste so' marca onde a data nao casa com movimento. A TIPI inteira: so' as categorias principais de automovel e as aliquotas que o proprio ato fixa. A aliquota paga por cada empresa (habilitacao, credito presumido, quotas por empresa): a efetiva da habilitada e' o piso que o ato permite. |
+| `classificacao_origem` | Pais de producao (e fabrica, municipio, UF e codigo IBGE no Brasil) de cada modelo classificado, por periodo dentro da vigencia, de 2003 a 2026: separar nacional de importado mes a mes, juntar a' importacao do Comex Stat pelo pais, mapear a producao por UF, acompanhar trocas de origem (Argentina, Mexico, China, montagem em ckd/skd com o pais do kit). Cada pais confirmado leva a fonte (pagina guardada, trecho literal) e a forca dela. | Volume por fabrica quando o modelo sai de mais de uma (a divisao nao e' conhecida). Modelos abaixo do piso de classificacao (sem pais). Origem confirmada onde a procedencia e' `proposta` ou `pendente`: e' a proposta do assistente, nao fonte. |
 
 ### Series macro
 
@@ -179,10 +195,12 @@ O commit da primeira linha e' o ultimo que alterou o dado descrito (`dados/proce
 |---|---|---|
 | Comex Stat (importação por NCM e origem) | construída | Dimensão comex_veiculos.parquet (etapa 12, rodada propulsão e comex): importação e exportação mensal de 8703 e 8704 por NCM e país, 1997 a 2026-08, bruto em dados/bruto/comex com SHA-256. A quantidade só vem com ncm nos details, e o período filtra ano e mês separadamente (uma consulta por ano). A API limita o ritmo (HTTP 429). |
 | Frota e idade do estoque (Senatran) | não testado |  |
-| Produção, exportação, emprego (Anfavea) | não testado |  |
+| Produção, exportação, emprego (Anfavea) | testado em 2026-10-07: anuários de 2023 e 2026 abrem (PDF); de antes de 2023, 404; a página de edições em Excel monta os links por script e a série mensal não abriu | Do anuário guardadas, com SHA-256: unidades industriais (fábricas, em dados/bruto/fabricas_paginas) e licenciamento de nacionais e importados, total e por país de origem (dados/bruto/anfavea). Uso-teste da origem por país (rodada 12): só registro e comparação, nenhuma dimensão construída a partir dele. |
 | PBE Veicular (consumo, CO₂) | adquirido (18 tabelas, 2009-2026, em dados/bruto/pbe/) e lido para o tipo de propulsão por versão; consumo e CO₂ não extraídos; crosswalk modelo–versão não feito | Usado na validação da propulsão do rascunho de classificação (2026-10-01). As tabelas de 2025 e 2026 estão no site com rótulo de máscara. |
 | Preços por versão (FIPE) | não testado; exige o mesmo crosswalk |  |
 | Emplacamento por UF (Fenabrave, Dados Regionais) | granularidade não verificada |  |
-| Calendário de política (IPI, MP 1175, tarifa de eletrificados) | construída | Dimensão politicas_mensal.parquet (etapa 13, rodada 11): 50 atos de 2008 a 2026 e as alíquotas que eles fixam, escritos à mão a partir de 55 páginas oficiais (Planalto, DOU, gov.br, Banco Central) guardadas em dados/bruto/politicas_paginas com SHA-256. As matérias de in.gov.br e as notícias do gov.br não abrem (403, conteúdo restrito); o DOU vem pelo visualizador de PDF da Imprensa Nacional. |
+| Calendário de política (IPI, MP 1175, tarifa de eletrificados) | construída | Dimensão politicas_mensal.parquet (etapa 13, rodadas 11 e 12): 65 atos de 2003 a 2026 e as alíquotas que eles fixam (IPI completo mês a mês), escritos à mão a partir de 74 páginas oficiais (Planalto, DOU, gov.br, Banco Central) guardadas em dados/bruto/politicas_paginas com SHA-256. As matérias de in.gov.br e as notícias do gov.br não abrem (403, conteúdo restrito); o DOU vem pelo visualizador de PDF da Imprensa Nacional. |
 | Emplacamento de eletrificados por tipo de propulsão (ABVE) | testado em 2026-10-02: abve.org.br acessível; a série completa (desde 2012, por tecnologia, mensal) está só no painel Power BI do ABVE Data, que não se lê sem navegador; os comunicados mensais e anuais trazem em texto as unidades do ano por tecnologia e a participação. Série anual 2016-2026 registrada em dados/referencia/abve_serie_anual.csv; comparação em saidas/abve_comparacao.csv | É a única saída para contar unidades por propulsão, que a Fenabrave não separa. Sugerida pelo assistente, aceita em 2026-10-01. A definição de eletrificado muda: 2024 inclui MHEV (e 3.828 micro-híbridos), 2025 exclui. Nenhuma dimensão construída a partir dela (rodada propulsão no tempo). |
+| Produção por modelo na Argentina (ADEFA, anuários) | usada (rodada 12) | Anuários de 2006, 2013, 2017 e 2025 lidos como fonte de fábrica x modelo (producao_no_exterior); os de 2007 a 2011 são Flash e não abrem: falta 2007. |
+| Exportação de veículos leves por modelo e país destino (INEGI, México) | usada (rodada 12) | Série mensal filtrada para o Brasil, de 2005 em diante, lida como fonte de fábrica x modelo (abastece_o_brasil). |
 

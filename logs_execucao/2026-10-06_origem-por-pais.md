@@ -145,7 +145,7 @@ Procedência das linhas classificadas:
 **A regra, mês a mês** (`src/comum/origem_pais.py`):
 
 1. P = os países que eu propus para o mês
-   (`dados/referencia/origem_pais_proposta.csv`, 502 linhas).
+   (`dados/referencia/origem_pais_proposta.csv`, 501 linhas).
 2. Fonte `producao_local` confirma o Brasil. Fonte `abastece_o_brasil` confirma
    o seu país. Fonte `producao_no_exterior` só confirma país que já está em P:
    produção na Argentina não prova que o carro vendido aqui venha de lá.

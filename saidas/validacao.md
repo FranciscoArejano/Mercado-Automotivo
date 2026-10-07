@@ -1,8 +1,8 @@
 # Validacao do painel de vendas de veiculos 0 km
 
-**Commit: `290bacf`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
+**Commit: `d6c7669`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
 
-Gerado em 2026-10-06T02:27:45+00:00 (UTC) por `src/etapa06_validacao.py`.
+Gerado em 2026-10-07T00:30:14+00:00 (UTC) por `src/etapa06_validacao.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: painel bruto 54,183 / painel 54,179 / visao por modelo 53,700
@@ -1057,17 +1057,37 @@ Tabela de fatos **separada**: `comex_veiculos.parquet`, gravada pela etapa 12 a 
 
 ## 14. Calendario de politicas
 
-Tabela **separada**: `politicas_mensal.parquet` (um ato em vigor por mes), gravada pela etapa 13 a partir de `dados/referencia/politicas_atos.csv` e `politicas_aliquotas.csv`, cada linha com trecho literal de pagina oficial guardada em `dados/bruto/politicas_paginas/`. 50 atos, 2008-01 a 2026-08, 1,924 linhas.
+Tabela **separada**: `politicas_mensal.parquet` (um ato em vigor por mes), gravada pela etapa 13 a partir de `dados/referencia/politicas_atos.csv` e `politicas_aliquotas.csv`, cada linha com trecho literal de pagina oficial guardada em `dados/bruto/politicas_paginas/`. 64 atos, 2003-01 a 2026-08, 2,725 linhas.
 
 | conferencia                                                                                                                    |   casos |   falhas |
 |:-------------------------------------------------------------------------------------------------------------------------------|--------:|---------:|
-| pagina guardada: arquivo presente, SHA-256 do manifesto, primeira linha com a URL                                              |      55 |        0 |
-| ato: campos nas listas, datas validas, altera_id existente, pagina no manifesto com a mesma URL, fonte oficial, trecho literal |      50 |        0 |
-| aliquota: tributo, NCM no formato da TIPI, ato existente, trecho literal, uma aliquota por periodo (NCM x categoria)           |     216 |        0 |
-| ato sem nenhum mes na janela 2003-01 a 2026-08: nenhum                                                                         |      50 |        0 |
-| registro, nao falha: paginas guardadas que nenhum ato ou aliquota cita: dec_11047_2022                                         |      55 |        0 |
-| registro, nao falha: atos sem vigencia_fim (em vigor, ou fim nao confirmado): 11                                               |      50 |        0 |
+| pagina guardada: arquivo presente, SHA-256 do manifesto, primeira linha com a URL                                              |      74 |        0 |
+| ato: campos nas listas, datas validas, altera_id existente, pagina no manifesto com a mesma URL, fonte oficial, trecho literal |      65 |        0 |
+| aliquota: tributo, NCM no formato da TIPI, ato existente, trecho literal, uma aliquota por periodo (NCM x categoria)           |     422 |        0 |
+| ato sem nenhum mes na janela 2003-01 a 2026-08: nenhum                                                                         |      65 |        0 |
+| IPI: categoria principal sem aliquota em algum mes (de 2003-01 ou do inicio da categoria a 2026-08): nenhuma                   |      11 |        0 |
+| registro, nao falha: aliquotas derivadas (o ato fixa uma reducao percentual, nao a aliquota): 5                                |     422 |        0 |
+| registro, nao falha: atos antecedentes (acabam antes da janela): ipi_2002_dec4317                                              |      65 |        0 |
+| registro, nao falha: paginas guardadas que nenhum ato ou aliquota cita: dec_10923_2021_anexo_cap87, dec_11047_2022             |      74 |        0 |
+| registro, nao falha: atos sem vigencia_fim (em vigor, ou fim nao confirmado): 12                                               |      65 |        0 |
 
-## 15. Situacao
+## 15. Origem por pais e por fabrica
+
+Tabela **separada**: `classificacao_origem.parquet` (vigencia x periodo x pais de producao), gravada pela etapa 14 a partir de `dados/referencia/fabricas.csv`, `fabrica_modelos.csv` e `origem_pais_proposta.csv`, cada fonte com trecho literal de pagina guardada. 1,938 linhas.
+
+| conferencia                                                                                                                                                                                                                                                        |   casos |   falhas |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------:|---------:|
+| pagina guardada (fabricas_paginas e anfavea inteiras, origem_paginas citadas): arquivo presente, SHA-256 do manifesto, primeira linha com a URL                                                                                                                    |     268 |        0 |
+| fabrica: id unico, pais e codigo do Comex, municipio/UF/codigo IBGE no Brasil, datas de operacao, fonte com URL do manifesto, tipo pelo dominio e trecho literal                                                                                                   |      55 |        0 |
+| fabrica x modelo: fabrica existente e do mesmo pais, chave do painel, vinculo e regra nas listas e coerentes, datas AAAA-MM, fonte e trecho literal                                                                                                                |     861 |        0 |
+| proposta: pais e pais do kit do Comex, fabrica do mesmo pais, periodos, chave classificada, todo mes de vigencia classificada coberto                                                                                                                              |     501 |        0 |
+| Anfavea: segmentos somam o total, anos 2003-2025 completos, trecho na pagina, paises da 2.2.5 somam o TOTAL e batem com a 2.2.4                                                                                                                                    |     506 |        0 |
+| produto: todo mes de vigencia classificada com pais, periodos sem sobreposicao, codigo do pais, procedencia, regra com fonte, fabrica e UF so' no Brasil, kit so' em ckd/skd, origem derivada coerente                                                             |    1938 |        0 |
+| registro, nao falha: linhas do produto por procedencia: nao_classificado 524, pendente 20, proposta 626, regra_fonte_forte 768                                                                                                                                     |    1938 |        0 |
+| registro, nao falha: anos abaixo da meta de 80% de unidades com fonte forte: 2023 (78.1%), 2024 (67.5%), 2025 (64.2%), 2026 (27.4%)                                                                                                                                |      24 |        0 |
+| registro, nao falha: divergencias ao rascunho (origem derivada difere da atual; fonte contradiz a proposta): fonte_contradiz_proposta 15, origem_derivada_difere_da_atual 34                                                                                       |      49 |        0 |
+| registro, nao falha: fabricas sem pagina guardada: nissan_sjp, mahindra_manaus, ar_toyota, ar_ford, ar_vw, ar_fiat, ar_gm, ar_psa, ar_renault, ar_nissan, ar_mb, ar_honda, mx_audi, mx_bmw, mx_chrysler, mx_ford, mx_gm, mx_honda, mx_kia, mx_mb, mx_nissan, mx_vw |      55 |        0 |
+
+## 16. Situacao
 
 Todas as verificacoes obrigatorias passaram.

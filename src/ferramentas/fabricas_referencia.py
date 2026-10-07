@@ -978,6 +978,44 @@ linha("", "KIA|SOUL|a", "2009-07", "2019-12", AB, DEC, "2025-09", "kia_soul_10fa
       "só teve opção automática no mercado brasileiro até 2019, quando deixou de ser vendido.",
       "A origem e' dada na chegada; o periodo vai ate' o fim das vendas.", pais="Coreia do Sul")
 
+# ---- GM 2003 a 2013: linha do tempo da AutoData e fichas de carro usado (lote 10)
+SJC65 = "gm_sjc_65anos_autodata_revista411"
+linha("gm_sjc", "GM|CORSA|a", "1994-01", "2012-12", PL, DEC, "2024-06", SJC65,
+      "1994 Início da produção do Chevrolet Corsa, que nos dois anos seguintes fez a produção da "
+      "GMB crescer 42%. [...] 2012 SUV Blazer sai de linha e dá lugar à Trailblazer. Encerramento "
+      "da produção do Corsa hatch")
+linha("gm_sjc", "GM|CLASSIC|a", "1995-11", "2013-12", PL, DEC, "2024-06", SJC65,
+      "1994 Início da produção do Chevrolet Corsa [...] Encerramento da produção do Corsa hatch e, "
+      "no ano seguinte, da versão sedã Classic, fechando assim a linha de fabricação de veículos "
+      "leves na unidade.",
+      "Fim em Sao Jose dos Campos: 2013. Inicio: lancamento do Corsa Sedan, 'anos depois rebatizado "
+      "Classic', em 11 de novembro [de 1995], na pagina gm_100anos_autodata_revista418_p87.")
+linha("gm_sjc", "GM|BLAZER|a", "1995-01", "2012-12", PL, DEC, "2024-06", SJC65,
+      "1995 Início da produção da S10, primeira picape média nacional, e do derivado Blazer, "
+      "primeiro SUV nacional. [...] 2012 SUV Blazer sai de linha e dá lugar à Trailblazer.")
+linha("", ["GM|CORSA|a", "GM|CORSA SEDAN|a"], "2002-01", "2012-12", PL, DEC, "2021-04",
+      "carros_trocas_geracoes_autopapo",
+      "No embalo, a GM lançou, em 2002, a nova geração do hatch – a segunda no Brasil – com "
+      "promessa de uma arquitetura mais avançada e melhor acerto dinâmico. Viveu até a era das "
+      "estreias dos motores flex, deu crias sedã e picape [...] a linha nova deixou de ser feita "
+      "em 2012",
+      "A pagina nao nomeia a fabrica. A 'linha nova' e' a segunda geracao (hatch e sedã).")
+linha("", "GM|VECTRA|a", "1993-01", "2011-06", PL, DEC, "2021-12", "gm_vectra_10fatos_autopapo",
+      "O Vectra foi um caso emblemático. Projeto Opel do fim dos anos 1980, começou a ser produzido "
+      "por aqui em 1993 com várias inovações. [...] Em junho de 2011, o Vectra deixou de ser "
+      "produzido", "A pagina nao nomeia a fabrica.")
+linha("", "GM|VECTRA HATCH|a", "2007-01", "2011-06", PL, DEC, "2021-12",
+      "gm_vectra_10fatos_autopapo",
+      "Em 2007, surgiu a derivação hatch do Astrão, ou melhor, do Vectra. Era o Vectra GT [...] "
+      "deixou de ser fabricado juntamente com o sedã, em junho de 2011, para dar lugar à linha "
+      "Cruze.", "A pagina trata da producao brasileira do Vectra e nao nomeia a fabrica.")
+linha("gm_scs", "GM|MERIVA|a", "2002-12", "2012-12", PL, DEC, "2024-10",
+      "gm_meriva_10fatos_autopapo",
+      "O monovolume compacto surgiu sob a bandeira da Opel [...] no primeiro semestre de 2002. Em "
+      "questão de meses começou a ser produzida em São Caetano do Sul (SP) e vendida como "
+      "Chevrolet Meriva por aqui. [...] No último ano da Chevrolet Meriva, 2012",
+      "Inicio 'em questao de meses' depois do 1o semestre de 2002: lido como 2002-12.")
+
 # ---- paginas de origem_paginas (rodadas anteriores), relidas como fabrica x modelo
 linha("byd_camacari", "BYD|DOLPHIN MINI|a", "2025-10", "2025-11", PL, INI, "2025-11",
       "byd_camacari_autodata_96403",

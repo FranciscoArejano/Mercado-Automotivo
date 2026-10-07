@@ -1016,6 +1016,23 @@ linha("gm_scs", "GM|MERIVA|a", "2002-12", "2012-12", PL, DEC, "2024-10",
       "Chevrolet Meriva por aqui. [...] No último ano da Chevrolet Meriva, 2012",
       "Inicio 'em questao de meses' depois do 1o semestre de 2002: lido como 2002-12.")
 
+# ---- pontos de 2012, 2023 e 2026 (lote 11)
+linha("gm_scs", ["GM|SPIN|a", "GM|CRUZE SEDAN|a"], "2012-01", "2012-12", PL, DEC, "2025-02",
+      "gm_100anos_autodata_revista418_p90",
+      "Chega ao mercado o Cruze Sport6, versão hatch do modelo fabricado em São Caetano, que também "
+      "começa a produzir o monovolume Spin.", "O ano tratado e' 2012.")
+linha("gm_scs", ["GM|MONTANA|c", "GM|TRACKER|a", "GM|SPIN|a"], "2023-01", "2023-01", PL, PTO,
+      "2023-01", "gm_scs_montana_inicio_autodata_50290",
+      "começou a sair das linhas de uma transformada fábrica de São Caetano do Sul, SP: as "
+      "primeiras unidades da Nova Chevrolet Montana destinadas aos consumidores já estão sendo "
+      "produzidas. [...] a Nova Montana demandou mais de um ano de obras na unidade São Caetano, em "
+      "paralelo com a produção de Tracker e de Spin.")
+linha("renault_sjp", ["RENAULT|KWID|a", "RENAULT|KARDIAN|a", "RENAULT|DUSTER|a",
+                      "RENAULT|BOREAL|a", "RENAULT|MASTER|c", "RENAULT|OROCH|c"], "2026-04",
+      "2026-04", PL, PTO, "2026-04", "renault_sjp_acordo_autodata_102716",
+      "Atualmente saem das linhas de produção de São José dos Pinhais os modelos Kwid, Kardian, "
+      "Duster, Boreal, Master e Oroch.")
+
 # ---- paginas de origem_paginas (rodadas anteriores), relidas como fabrica x modelo
 linha("byd_camacari", "BYD|DOLPHIN MINI|a", "2025-10", "2025-11", PL, INI, "2025-11",
       "byd_camacari_autodata_96403",

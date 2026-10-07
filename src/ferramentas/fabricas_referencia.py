@@ -884,6 +884,100 @@ linha("gwm_iracemapolis", "GWM|HAVAL H6|a", "2025-11", "2025-11", PL, PTO, "2025
       "gwm_h6_transicao_autoindustria",
       "o novo Haval H6 já está em processo de montagem na fábrica da GWM em Iracemápolis, SP.")
 
+# ---- 2009 e 2024 a 2026 (lote 8)
+linha("gm_sjc", ["GM|CORSA|a", "GM|CORSA SEDAN|a", "GM|MERIVA|a", "GM|ZAFIRA|a", "GM|MONTANA|c",
+                 "GM|S10|c", "GM|BLAZER|a"], "2009-03", "2009-03", PL, PTO, "2009-03",
+      "gm_sjc_50anos_omecanico",
+      "Os modelos produzidos são: Corsa hatchback e sedã, com motores de 1.0 VHC Flexpower e 1.4 "
+      "Econo.Flex litro, os monovolumes Meriva com motores 1.4 Econo.Flex e 1.8 Flexpower litro e "
+      "Zafira 2.0 litros, a picape Montana 1.4 Econo.Flex e 1.8 Flexpower, a picape média S10 e o "
+      "utilitário esportivo Blazer.",
+      "'Corsa sedã' lido como a chave CORSA SEDAN; a pagina nao separa o Classic.")
+linha("stellantis_goiana", "JEEP|COMPASS|a", "2016-10", "2025-11", PL, INI, "2025-11",
+      "jeep_compass_600mil_autodata_96712",
+      "O Jeep Compass chegou a 600 mil unidades produzidas na fábrica de Goiana, PE, desde outubro "
+      "de 2016.")
+linha("stellantis_goiana", "RAM|RAMPAGE|c", "2023-01", "2025-08", PL, INI, "2025-08",
+      "stellantis_goiana_2milhoes_autodata_92708",
+      "O veículo que registrou este recorde foi a picape Ram Rampage, que é produzida na unidade "
+      "desde 2023.", "So' o ano de inicio: lido como 2023-01 (convencao da fase 2).")
+linha("stellantis_goiana", ["JEEP|RENEGADE|a", "FIAT|TORO|c", "JEEP|COMPASS|a",
+                            "JEEP|COMMANDER|a"], "2025-08", "2025-08", PL, PTO, "2025-08",
+      "stellantis_goiana_2milhoes_autodata_92708",
+      "Atualmente, junto com a Rampage e o Renegade, a unidade também produz a Fiat Toro, o Jeep "
+      "Compass e o Jeep Commander")
+linha("caoa_anapolis", ["CAOA CHERY|TIGGO 5X|a", "CAOA CHERY|TIGGO 7|a", "CAOA CHERY|TIGGO 8|a"],
+      "2025-01", "2025-07", PL, DEC, "2025-08", "caoa_200mil_autodata_91833",
+      "Em 2025 os modelos Caoa Chery produzidos em Anápolis, os SUVs Tiggo 5, Tiggo 7 e Tiggo 8, "
+      "somaram 35 mil emplacamentos até julho",
+      "Periodo tratado: janeiro a julho de 2025. 'Tiggo 5' lido como a chave TIGGO 5X.")
+linha("caoa_anapolis", ["CAOA CHERY|TIGGO 5X|a", "CAOA CHERY|TIGGO 7|a", "CAOA CHERY|TIGGO 8|a"],
+      "2026-02", "2026-02", PL, PTO, "2026-02", "caoa_anapolis_pintura_mecanicaonline",
+      "A Dürr Brasil concluiu a primeira etapa da ampliação da planta de pintura da CAOA em "
+      "Anápolis (GO), modernizando processos e dobrando a capacidade produtiva dos SUVs Tiggo 5, "
+      "Tiggo 7 e Tiggo 8.", "'Tiggo 5' lido como a chave TIGGO 5X.")
+linha("caoa_anapolis", "CAOA CHERY|TIGGO 5X|a", "2026-02", "2026-02", PL, PTO, "2026-02",
+      "caoa_tiggo5x_2027_mecanicaonline",
+      "Fabricado em Anápolis (GO), o modelo chega em duas versões, Sport e Pro")
+linha("hyundai_piracicaba", ["HYUNDAI|HB20|a", "HYUNDAI|CRETA|a"], "2026-03", "2026-03", PL, PTO,
+      "2026-03", "hyundai_terceiro_modelo_mecanicaonline",
+      "A estratégia reforça o papel da fábrica de Piracicaba como base do sucesso da Hyundai no "
+      "Brasil desde 2012, responsável por dois pilares da marca: o HB20, competitivo entre "
+      "compactos, e o Creta")
+linha("", "BYD|DOLPHIN MINI|a", "2024-02", "2024-02", AB, PTO, "2024-02",
+      "byd_dolphin_mini_lancamento_autoindustria",
+      "A BYD lançou nesta quarta-feira, 28, o Dolphin Mini. O modelo importado da China e lá fora "
+      "conhecido como Seagull é oferecido por R$ 115.800,00.", pais="China")
+linha("", ["BYD|DOLPHIN|a", "BYD|DOLPHIN MINI|a", "BYD|SONG|a", "BYD|YUAN|a"], "2025-02",
+      "2025-02", AB, PTO, "2025-03", "byd_navio_5500_autopapo",
+      "Na última quinta-feira (27), 5.500 carros elétricos e híbridos da BYD desembarcaram em "
+      "Aracruz no Espírito Santo vindos diretamente da China. [...] Ele trouxe os automóveis das "
+      "famílias Dolphin, Song e Yuan",
+      "Desembarque de 27 de fevereiro de 2025. Familias lidas como as chaves DOLPHIN, DOLPHIN MINI, "
+      "SONG e YUAN.", pais="China")
+
+# ---- 2007 a 2012: fichas de carro usado (lote 9)
+linha("fiat_betim", "FIAT|PUNTO|a", "2007-01", "2017-01", PL, DEC, "2026-03",
+      "fiat_punto_10fatos_autopapo",
+      "Lançado na Europa em 2005 e no Brasil dois anos depois, o Fiat Punto rapidamente virou "
+      "figurinha carimbada nas ruas. Produzido em Betim (MG) [...] o hatch seguiu firme até "
+      "janeiro de 2017, quando saiu de linha após 270 mil unidades produzidas",
+      "Inicio so' com o ano (2005 + dois anos): lido como 2007-01.")
+linha("", "GM|ASTRA|a", "1998-01", "2011-12", PL, DEC, "2021-06", "gm_astra_10verdades_autopapo",
+      "O modelo estreou no Brasil em sua primeira geração entre 1994 e 1996, vindo da Bélgica nas "
+      "configurações hatch e station wagon. Dois anos depois, a segunda geração passou a ser "
+      "produzida no Brasil [...] O último ano de produção do Chevrolet Astra, 2011",
+      "A pagina nao nomeia a fabrica. Inicio: 1996 + dois anos.")
+linha("", "GM|ASTRA SEDAN|a", "1999-01", "2011-12", PL, DEC, "2021-06",
+      "gm_astra_10verdades_autopapo",
+      "a segunda geração passou a ser produzida no Brasil, inicialmente como um hatch duas portas "
+      "e, em 1999, como sedã. [...] O último ano de produção do Chevrolet Astra, 2011",
+      "A pagina nao nomeia a fabrica.")
+linha("", "HYUNDAI|I30|a", "2009-03", "2016-12", AB, DEC, "2025-03", "hyundai_i30_10fatos_autopapo",
+      "Importado da Coreia do Sul, o Hyundai i30 [...] O Hyundai i30 começou a ser importado para o "
+      "Brasil em março de 2009 com motor 2.0 16V. [...] Deixou de ser vendido em 2016",
+      pais="Coreia do Sul")
+linha("caoa_anapolis", "HYUNDAI|TUCSON|a", "2010-01", "2018-12", PL, DEC, "2024-12",
+      "hyundai_tucson_9fatos_autopapo",
+      "Em 2010, o Hyundai Tucson começou a ser montado no Brasil. [...] até ser descontinuado em "
+      "2018. [...] Foi naquele ano em que a planta do Grupo Caoa em Anápolis (GO), que já fazia o "
+      "caminhãozinho HR, iniciou a linha de montagem do SUV médio.",
+      "A primeira geracao; a pagina diz que as tres geracoes conviveram em Anapolis.")
+linha("caoa_anapolis", "HYUNDAI|HR|c", "2010-01", "2010-12", PL, DEC, "2024-12",
+      "hyundai_tucson_9fatos_autopapo",
+      "Foi naquele ano em que a planta do Grupo Caoa em Anápolis (GO), que já fazia o "
+      "caminhãozinho HR, iniciou a linha de montagem do SUV médio.", "O ano tratado e' 2010.")
+linha("renault_sjp", "NISSAN|LIVINA|a", "2009-03", "2014-12", PL, DEC, "2024-12",
+      "nissan_livina_10fatos_autopapo",
+      "O lançamento oficial por aqui foi em março de 2009 [...] A gama Nissan Livina foi produzida "
+      "sobre a plataforma B da fabricante japonesa, só que na planta da Renault em São José dos "
+      "Pinhais (PR). [...] Os dois modelos deixaram de ser produzidos em 2014.",
+      "A chave LIVINA agrega Livina e Grand Livina.")
+linha("", "KIA|SOUL|a", "2009-07", "2019-12", AB, DEC, "2025-09", "kia_soul_10fatos_autopapo",
+      "Desembarcou no Brasil em julho de 2009, importado da Coreia do Sul. [...] o crossover coreano "
+      "só teve opção automática no mercado brasileiro até 2019, quando deixou de ser vendido.",
+      "A origem e' dada na chegada; o periodo vai ate' o fim das vendas.", pais="Coreia do Sul")
+
 # ---- paginas de origem_paginas (rodadas anteriores), relidas como fabrica x modelo
 linha("byd_camacari", "BYD|DOLPHIN MINI|a", "2025-10", "2025-11", PL, INI, "2025-11",
       "byd_camacari_autodata_96403",

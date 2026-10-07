@@ -750,7 +750,10 @@ def uso_teste_comex(por_pais: pd.DataFrame, comex_ano: pd.DataFrame, inicio: int
 
 
 def _modelos(g: pd.DataFrame, n: int = 3) -> str:
-    top = (g.groupby(CHAVE + ["procedencia"], as_index=False)["unidades"].sum()
+    """Os `n` modelos de mais unidades, com as procedencias dos seus meses."""
+    top = (g.groupby(CHAVE, as_index=False)
+           .agg(unidades=("unidades", "sum"),
+                procedencia=("procedencia", lambda s: "+".join(sorted(set(s)))))
            .sort_values("unidades", ascending=False).head(n))
     return "; ".join(f"{r.marca} {r.modelo} ({r.unidades:,}, {r.procedencia})"
                      for r in top.itertuples())

@@ -564,7 +564,7 @@ linha("", "FORD|FIESTA|a", "1996-01", "2019-12", PL, DEC, "2019-11", "ford_sbc_i
 linha("", "FORD|KA|a", "1997-01", "2017-04", PL, INI, "2017-04", "ford_ka_1milhao_motorshow",
       "O Ka começou a ser produzido no Brasil em 1997, um ano após o lançamento do modelo no "
       "mercado europeu.", "Pais sem fabrica para a segunda geracao.")
-linha("ford_sbc", "FORD|KA|a", "1997-01", "1997-12", PL, PTO, "2017-04",
+linha("ford_sbc", "FORD|KA|a", "1997-01", "1997-12", PL, DEC, "2017-04",
       "ford_ka_1milhao_motorshow",
       "O Ka começou a ser produzido no Brasil em 1997 [...] Montado na fábrica da Ford em São "
       "Bernardo do Campo (SP).", "So' o inicio da primeira geracao tem fabrica na pagina.")

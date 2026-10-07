@@ -1,0 +1,11 @@
+conferencia,casos,falhas
+"pagina guardada (fabricas_paginas e anfavea inteiras, origem_paginas citadas): arquivo presente, SHA-256 do manifesto, primeira linha com a URL",268,0
+"fabrica: id unico, pais e codigo do Comex, municipio/UF/codigo IBGE no Brasil, datas de operacao, fonte com URL do manifesto, tipo pelo dominio e trecho literal",55,0
+"fabrica x modelo: fabrica existente e do mesmo pais, chave do painel, vinculo e regra nas listas e coerentes, datas AAAA-MM, fonte e trecho literal",861,0
+"proposta: pais e pais do kit do Comex, fabrica do mesmo pais, periodos, chave classificada, todo mes de vigencia classificada coberto",501,0
+"Anfavea: segmentos somam o total, anos 2003-2025 completos, trecho na pagina, paises da 2.2.5 somam o TOTAL e batem com a 2.2.4",506,0
+"produto: todo mes de vigencia classificada com pais, periodos sem sobreposicao, codigo do pais, procedencia, regra com fonte, fabrica e UF so' no Brasil, kit so' em ckd/skd, origem derivada coerente",1938,0
+"registro, nao falha: linhas do produto por procedencia: nao_classificado 524, pendente 20, proposta 626, regra_fonte_forte 768",1938,0
+"registro, nao falha: anos abaixo da meta de 80% de unidades com fonte forte: 2023 (78.1%), 2024 (67.5%), 2025 (64.2%), 2026 (27.4%)",24,0
+"registro, nao falha: divergencias ao rascunho (origem derivada difere da atual; fonte contradiz a proposta): fonte_contradiz_proposta 15, origem_derivada_difere_da_atual 34",49,0
+"registro, nao falha: fabricas sem pagina guardada: nissan_sjp, mahindra_manaus, ar_toyota, ar_ford, ar_vw, ar_fiat, ar_gm, ar_psa, ar_renault, ar_nissan, ar_mb, ar_honda, mx_audi, mx_bmw, mx_chrysler, mx_ford, mx_gm, mx_honda, mx_kia, mx_mb, mx_nissan, mx_vw",55,0

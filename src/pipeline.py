@@ -42,6 +42,8 @@ ETAPAS = [
     (12, "etapa12_comex", "comercio exterior de veiculos (Comex Stat)"),
     # O calendario de politicas le, no uso-teste, o painel e o comercio exterior.
     (13, "etapa13_politicas", "calendario de politicas"),
+    # A origem por pais le a classificacao, a montagem, o painel e, no uso-teste, o comex.
+    (14, "etapa14_origem", "origem por pais e por fabrica"),
     (6, "etapa06_validacao", "validacao"),
     (7, "etapa07_referencia_cruzada", "referencia cruzada"),
     # O catalogo descreve o que as outras produziram: vem por ultimo.

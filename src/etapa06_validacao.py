@@ -1361,7 +1361,24 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
         partes.append("\n## 14. Calendario de politicas\n\n"
                       "_Nao disponivel: rode `python src/etapa13_politicas.py`._\n")
 
-    partes.append("\n## 15. Situacao\n\n")
+    # ------------------------------------------- 15. origem por pais
+    if config.ORIGEM_VALIDACAO.exists() and config.CLASSIFICACAO_ORIGEM.exists():
+        conferencias = pd.read_csv(config.ORIGEM_VALIDACAO)
+        origem = pd.read_parquet(config.CLASSIFICACAO_ORIGEM, columns=["procedencia"])
+        partes.append(
+            "\n## 15. Origem por pais e por fabrica\n\n"
+            "Tabela **separada**: `classificacao_origem.parquet` (vigencia x periodo x pais de "
+            "producao), gravada pela etapa 14 a partir de `dados/referencia/fabricas.csv`, "
+            "`fabrica_modelos.csv` e `origem_pais_proposta.csv`, cada fonte com trecho literal "
+            "de pagina guardada. "
+            f"{len(origem):,} linhas.\n\n" + _tabela(conferencias))
+        if int(conferencias["falhas"].sum()):
+            falhas.append("conferencias da origem por pais com falha")
+    else:
+        partes.append("\n## 15. Origem por pais e por fabrica\n\n"
+                      "_Nao disponivel: rode `python src/etapa14_origem.py`._\n")
+
+    partes.append("\n## 16. Situacao\n\n")
     if falhas:
         partes.append("**Validacao FALHOU:**\n\n" + "".join(f"- {f}\n" for f in falhas))
     else:

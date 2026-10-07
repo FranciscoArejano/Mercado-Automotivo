@@ -37,9 +37,10 @@ Parametros ficam em `src/comum/config.py` e aceitam variavel de ambiente
 
 ## As etapas
 
-Rodam na ordem de dependencia, nao na numerica: 8, 9, 11, 12 e 13 antes de 6,
+Rodam na ordem de dependencia, nao na numerica: 8, 9, 11, 12, 13 e 14 antes de 6,
 que as valida (11 depois do painel; 12 depois de 11, que o uso-teste do comercio
-exterior usa; 13 depois de 12, que o uso-teste do calendario usa); 10 por ultimo,
+exterior usa; 13 depois de 12, que o uso-teste do calendario usa; 14 depois de 13,
+porque le a classificacao e, no uso-teste, o comercio exterior); 10 por ultimo,
 porque descreve todas.
 
 | # | Script | O que faz | Produto |
@@ -56,6 +57,7 @@ porque descreve todas.
 | 11 | `etapa11_classificacao.py` | Dimensao de classificacao de modelo (fase 2): le o rascunho adjudicado, aplica a precedencia e valida; deriva a propulsao por vigencia e ano (leituras longa e curta) e grava o uso-teste e a banda da eletrificacao | `classificacao.parquet`, `classificacao_montagem.parquet`, `classificacao_propulsao_anual.parquet`, `saidas/classificacao_dicionario.md`, `saidas/classificacao_uso_teste.csv`, `saidas/eletrificacao_banda.csv`, `saidas/pbe_variantes_sem_evidencia.csv` |
 | 12 | `etapa12_comex.py` | Importacao e exportacao mensal de veiculos por NCM e pais (Comex Stat), com conferencias e uso-teste; o bruto vem de `src/ferramentas/comex_baixar.py` e a tabela de NCMs de `src/ferramentas/comex_ncm.py` | `comex_veiculos.parquet`, `config/ncm_veiculos.csv`, `saidas/comex_dicionario.md` |
 | 13 | `etapa13_politicas.py` | Calendario de politicas: confere as tabelas de atos e aliquotas contra as paginas oficiais guardadas e grava a tabela mensal e o uso-teste das datas; as tabelas vem de `src/ferramentas/politicas_referencia.py` | `politicas_mensal.parquet`, `saidas/politicas_validacao.csv`, `saidas/politicas_uso_teste.csv`, `saidas/politicas_dicionario.md` |
+| 14 | `etapa14_origem.py` | Origem por pais e por fabrica: confere as tabelas de fabricas e de fabrica x modelo e a proposta de pais contra as paginas guardadas, deriva o pais de producao mes a mes em cada vigencia classificada e grava as divergencias, a cobertura por fonte forte e os uso-testes (Comex, Anfavea, mapa por UF); as tabelas vem de `src/ferramentas/fabricas_referencia.py` | `classificacao_origem.parquet`, `saidas/origem_validacao.csv`, `saidas/origem_cobertura.csv`, `saidas/origem_divergencias.csv`, `saidas/origem_uso_teste_*.csv`, `saidas/origem_mapa_uf.csv`, `saidas/origem_dicionario.md` |
 | 10 | `etapa10_catalogo.py` | Indice do repositorio, calculado do dado | `CATALOGO.md` |
 
 ## Arquivos que o humano escreve

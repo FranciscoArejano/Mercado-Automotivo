@@ -294,6 +294,15 @@ LEIA_ME = [
      "literalmente (testado). `origem_confronto` (confirma, complementa, ajusta_data, "
      "contradiz, inconclusivo) e' a LEITURA DO ASSISTENTE da fonte contra a proposta -- "
      "confira o trecho antes de aceitar. Aba `origem_fontes` com todas as linhas."),
+    ("origem_pais",
+     "Aba `origem_pais` (de saidas/origem_divergencias.csv, gravado pela etapa 14): o que a "
+     "origem por pais (rodada 12) nao sobrescreve em silencio. `origem_derivada_difere_da_atual`: "
+     "a origem derivada dos paises propostos e das fontes (Brasil -> nacional, outro pais -> "
+     "importado, os dois -> ambos) difere da `origem_producao` de classificacao.parquet. "
+     "`fonte_contradiz_proposta`: periodo em que fonte com vinculo ao Brasil (fabrica brasileira, "
+     "exportacao ao Brasil, materia sobre o importado) nomeia pais fora da proposta; o valor "
+     "ficou o proposto (`pendente`) e a fonte que contradiz esta' nas colunas `fonte_contra_*`. "
+     "A decisao vai em `decisao_humana`. Regerar a etapa antes: python src/etapa14_origem.py."),
     ("regerar",
      "python src/ferramentas/classificacao_rascunho.py. O script recusa sobrescrever "
      "um rascunho que ja' tenha decisao preenchida."),
@@ -338,6 +347,15 @@ def _questoes(rascunho: pd.DataFrame) -> pd.DataFrame:
             "decisao_humana": decisao,
         })
     return pd.DataFrame(linhas)
+
+
+def origem_pais() -> pd.DataFrame:
+    """Divergencias da origem por pais (etapa 14), com a coluna de decisao do pesquisador."""
+    if not config.ORIGEM_DIVERGENCIAS.exists():
+        return pd.DataFrame({"aviso": ["sem saidas/origem_divergencias.csv: rode "
+                                       "python src/etapa14_origem.py"]})
+    div = pd.read_csv(config.ORIGEM_DIVERGENCIAS, dtype=str, keep_default_na=False)
+    return div.assign(decisao_humana="")
 
 
 def _decisoes_existentes() -> int:
@@ -483,7 +501,8 @@ def escrever(saida: dict, questoes: pd.DataFrame, volume_painel: int) -> None:
                                                    keep_default_na=False)),
                 ("pbe_mapeamento", validacao.regras_propulsao()),
                 ("pbe_nao_casados", _nao_casados(casado, rascunho)),
-                ("regras", regras), ("nao_classificados", fora)]
+                ("regras", regras), ("nao_classificados", fora),
+                ("origem_pais", origem_pais())]
         for nome, quadro in abas:
             quadro.to_excel(escritor, sheet_name=nome, index=False)
             folha = escritor.sheets[nome]

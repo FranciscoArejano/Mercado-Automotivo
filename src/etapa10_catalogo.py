@@ -33,7 +33,8 @@ ETAPA = "etapa10_catalogo"
 # Caminhos cujo ultimo commit e' o "commit do dado".
 CAMINHOS_DE_DADO = ("dados/processado", "dados/referencia", "dados/bruto/manifesto.csv",
                     "dados/bruto/pbe", "dados/bruto/origem_paginas", "dados/bruto/comex",
-                    "dados/bruto/politicas_paginas",
+                    "dados/bruto/politicas_paginas", "dados/bruto/fabricas_paginas",
+                    "dados/bruto/anfavea", "dados/bruto/ibge",
                     "config", "regras.csv",
                     "saidas/classificacao_rascunho.xlsx")
 
@@ -363,6 +364,51 @@ def _politicas() -> tuple[dict, str]:
              "linhas": len(mensal), "janela": janela}, corpo)
 
 
+def _origem() -> tuple[dict, str]:
+    """A origem por pais e por fabrica (etapa 14)."""
+    if not config.CLASSIFICACAO_ORIGEM.exists():
+        return ({"produto": "classificacao_origem", "arquivo": "--", "linhas": 0,
+                 "janela": "nao construida"},
+                "- **Estado:** nao construida; rode `python src/etapa14_origem.py`.\n")
+    prod = pd.read_parquet(config.CLASSIFICACAO_ORIGEM)
+    fabricas = pd.read_csv(config.FABRICAS, dtype=str, keep_default_na=False)
+    fm = pd.read_csv(config.FABRICA_MODELOS, dtype=str, keep_default_na=False)
+    validacao = pd.read_csv(config.ORIGEM_VALIDACAO)
+    cobertura = pd.read_csv(config.ORIGEM_COBERTURA)
+    divergencias = pd.read_csv(config.ORIGEM_DIVERGENCIAS, dtype=str, keep_default_na=False)
+    paginas = len(list(config.FABRICAS_PAGINAS.glob("*.txt")))
+    classif = prod[prod["procedencia"] != "nao_classificado"]
+    no_brasil = int((fabricas["pais"] == "Brasil").sum())
+    abaixo = cobertura[cobertura["atinge_meta_80"] == "nao"]
+    janela = f"{classif['periodo_inicio'].min()} a {classif['periodo_fim'].max()}"
+    corpo = (
+        "- **Estado: dimensao gravada** pela etapa 14, ao lado de `classificacao.parquet` (que "
+        "nao muda): pais de producao por vigencia e periodo, a partir da proposta do "
+        "assistente (`dados/referencia/origem_pais_proposta.csv`) confirmada por fonte "
+        "(`fabricas.csv`, `fabrica_modelos.csv`), cada linha de fonte com trecho literal de "
+        f"pagina guardada ({paginas} em `dados/bruto/fabricas_paginas/`, mais as de "
+        "`origem_paginas/`).\n"
+        "- **Unidade de observacao:** vigencia x periodo x pais de producao; dois paises no "
+        "mesmo periodo sao duas linhas.\n"
+        f"- **Fabricas:** {len(fabricas)} ({no_brasil} no Brasil, com municipio, UF e codigo "
+        f"IBGE); {len(fm)} linhas de fabrica x modelo ("
+        + ", ".join(f"{k} {v}" for k, v in fm.groupby("vinculo").size().items()) + ").\n"
+        f"- **Procedencia** (linhas classificadas): "
+        + ", ".join(f"`{k}` {v}" for k, v in classif.groupby("procedencia").size().items())
+        + ".\n"
+        "- **Cobertura por fonte forte** (unidades do painel): "
+        + ", ".join(f"{r.ano} {_pct(r.pct_fonte_forte, 1)}%" for r in cobertura.itertuples())
+        + f". Abaixo da meta de 80%: {', '.join(str(a) for a in abaixo['ano']) or 'nenhum'}.\n"
+        f"- **Divergencias ao rascunho:** {len(divergencias)} "
+        "(`saidas/origem_divergencias.csv`, aba `origem_pais`).\n"
+        f"- **Conferencias:** {int(validacao['falhas'].sum())} falhas em "
+        "`saidas/origem_validacao.csv`; dicionario em `saidas/origem_dicionario.md`; "
+        "uso-testes em `saidas/origem_uso_teste_*.csv` e `saidas/origem_mapa_uf.csv`.\n")
+    return ({"produto": "classificacao_origem",
+             "arquivo": "dados/processado/classificacao_origem.parquet", "linhas": len(prod),
+             "janela": janela}, corpo)
+
+
 def _classificacao() -> tuple[dict, str]:
     if config.CLASSIFICACAO.exists():
         return _dimensao_classificacao()
@@ -444,6 +490,14 @@ def _outros() -> str:
         ["`dados/bruto/politicas_paginas/`",
          f"{len(list(config.POLITICAS_PAGINAS.glob('*.txt')))} paginas oficiais do calendario "
          "de politicas, abertas e guardadas, com SHA-256"],
+        ["`dados/bruto/fabricas_paginas/`",
+         f"{len(list(config.FABRICAS_PAGINAS.glob('*.txt')))} paginas de fabrica e de fabrica "
+         "x modelo (Anfavea, ADEFA, INEGI, montadoras, imprensa), com SHA-256"],
+        ["`dados/bruto/anfavea/`",
+         f"{len(list(config.ANFAVEA_LICENCIAMENTO.glob('*.txt')))} paginas dos anuarios da "
+         "Anfavea (licenciamento de nacionais e importados), com SHA-256"],
+        ["`dados/bruto/ibge/`", "tabela de municipios do IBGE (codigo do municipio das "
+                                "fabricas), com SHA-256"],
         ["`regras.csv`", f"{len(regras)} regras de harmonizacao (rebatismo, desdobramento)"],
         ["`config/mapa_grupos.csv`", f"{len(mapa)} linhas marca-grupo com vigencia"],
         ["`dados/referencia/Vendas_Geral.xlsx`",
@@ -482,6 +536,9 @@ def gerar() -> str:
     resumo_politicas, corpo_politicas = _politicas()
     resumos.append(resumo_politicas)
     secoes.append(("politicas_mensal", resumo_politicas["arquivo"], corpo_politicas))
+    resumo_origem, corpo_origem = _origem()
+    resumos.append(resumo_origem)
+    secoes.append(("classificacao_origem", resumo_origem["arquivo"], corpo_origem))
 
     texto = [
         f"# Catalogo do repositorio -- dado do commit `{commit_do_dado()}`\n\n",

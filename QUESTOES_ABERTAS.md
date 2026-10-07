@@ -738,30 +738,82 @@ descarta como *quem sai*. Um modelo vivo no primeiro mês continua podendo sair
 
 ---
 
-## Classificação de modelo: a origem é a próxima frente
+## Origem por país: o que a rodada 12 deixou aberto
 
-A fase 2 gravou `dados/processado/classificacao.parquet` com a procedência de
-cada atributo (ver `saidas/classificacao_dicionario.md`). A propulsão está 92%
-do volume em `regra_fonte_forte` (o PBE confirma), mas a **origem da produção
-está 81% em `proposta`** — nunca checada.
+A abordagem por fábrica foi executada na rodada 12 (`classificacao_origem.parquet`,
+etapa 14; ver `saidas/origem_dicionario.md`). Cada vigência classificada tem
+país de produção mês a mês; no Brasil, a fábrica, o município e o código IBGE.
+O país vem da proposta do assistente, confirmada por 861 linhas de fábrica x
+modelo, cada uma com trecho literal de página guardada. `classificacao.parquet`
+não foi sobrescrita.
 
-- Os maiores casos são Gol, Strada, Uno, Palio, Onix, Fox, Celta, HB20: carros
-  nacionais além de dúvida razoável, mas sem fonte.
-- Hoje, um artigo que use origem com procedência forte fica com cerca de 5% do
-  volume (4,9% na dimensão gravada em 2026-10-02).
+**Cobertura por fonte forte** (unidades do painel; meta: 80% em cada ano):
 
-**Abordagem proposta pelo pesquisador, não executada:** fonte por fábrica, não
-por modelo.
+- acima da meta de 2003 a 2022 (de 81,8% em 2021 a 89,7% em 2003);
+- abaixo em 2023 (78,1%), 2024 (67,5%), 2025 (64,2%) e 2026 (27,4%).
 
-- Uns 20 a 25 complexos industriais respondem por quase toda a produção
-  nacional, e cada um tem histórico publicado listando os modelos que produziu.
-  A linha do tempo de Anchieta, já usada, é um exemplo.
-- Uma fonte forte por fábrica confirma a origem de dezenas de modelos de uma
-  vez. É a mesma ideia das regras de adjudicação: subir do caso para o critério.
+Uma página só cobre até a sua data, e há poucas páginas recentes que digam onde
+o modelo é feito "desde" quando. Os maiores buracos de 2023 a 2026 são HB20 e
+Creta depois de 2023-10, Tracker, HR-V, Montana, Spin, Kicks, Haval H6, Tiggo 7,
+as importações da BYD e quase todo 2026.
 
-Para executar, a fonte da fábrica entraria em `origem_fontes.csv` uma vez por
-modelo que ela cita, com o período de produção. A regra de cobertura
-(`vigencias_cobertas`) já restringe cada fonte às vigências do período dela.
+**Para o pesquisador decidir** (aba `origem_pais` do rascunho,
+`saidas/origem_divergencias.csv`):
+
+1. **15 períodos em que a fonte contradiz a proposta** (`pendente`). O valor
+   ficou o proposto:
+   - **Haval H6:** a proposta diz Tailândia; a fonte de 2025-11 diz China. Os
+     dois uso-testes vão no mesmo sentido: em 2024 e 2025 o painel põe na
+     Tailândia 3 a 4 vezes o que a Anfavea e o Comex registram de lá.
+   - **INEGI contra a proposta:** Cerato 2016, Frontier 2016 e 2018, Kicks 2017,
+     March 2014, CR-V 2017 e Tiguan 2017. O México exportou o modelo ao Brasil
+     nesses meses.
+   - **Produção local antes do proposto:** ix35 2013, ASX 2013, Lancer 2014,
+     2008 em 2024-04.
+   - **Outros:**
+     - Kangoo 2024-05 (Argentina contra França);
+     - Pajero 2025-01 (Tailândia);
+     - Tracker 2020-01 e 2020-02. Este é efeito da convenção do ano sem mês: "estreou em
+       2020" vira 2020-01.
+2. **34 vigências em que a origem derivada difere da atual.** Em 26 delas a
+   atual está vazia. As de BYD (Dolphin Mini, King, Song) passam de importado a
+   ambos com a montagem em Camaçari.
+3. **A convenção do ano sem mês** (janeiro no início, dezembro no fim) vem da
+   fase 2. Ela gera os falsos pendentes de borda, como o Tracker de 2020.
+
+**Limitações registradas:**
+
+- **ADEFA.** Confirma país já proposto, nunca diz que o carro abastece o Brasil.
+  Falta 2007: os anuários de 2007 a 2011 são Flash.
+- **Modelo em mais de uma fábrica.** Gol, Saveiro, Polo, Virtus, Corsa, Meriva,
+  Montana: o volume por fábrica não é conhecido. A UF fica `A+B` quando as
+  fábricas estão em UFs diferentes.
+- **A chave FIESTA junta o Fiesta Rocam e o New Fiesta.** O Rocam saiu de
+  Camaçari até 2014; o New Fiesta, de São Bernardo desde 2013. No mapa por UF
+  a chave inteira passa da BA para SP em 2013. Do mesmo modo, FIESTA SEDAN e o
+  New Fiesta sedã mexicano.
+- **Fontes que não abriram:**
+  - o site de imprensa da Stellantis (403);
+  - os anuários da Anfavea antes de 2023 (404);
+  - a página de séries em Excel da Anfavea (links montados por script);
+  - o web.archive.org (429).
+
+**O que os uso-testes registram** (só registro; nada foi reclassificado por
+eles):
+
+- **Participação do importado no painel.** Fica de 1 a 4,5 pontos abaixo da
+  da Anfavea em todos os anos de 2003 a 2025. A sobra é parte do que o painel
+  põe no Brasil ou deixa sem classificar.
+- **Por país, contra a Anfavea (2016-2025):**
+  - Alemanha: o painel registra de 16% a 42% da Anfavea;
+  - Reino Unido: zero no painel em 2024 (JLR posta no Brasil);
+  - Itália (comerciais leves de 2023 a 2025): não aparece no painel.
+- **Comex acima do painel na Argentina** de 2003 a 2015 (16% a 62%). Os
+  modelos que o explicariam são os que a ADEFA põe lá e a proposta põe no
+  Brasil: Palio, Siena, Classic.
+- **Mapa por UF.** Os alertas são de fábrica fora do período de operação: a
+  cauda de emplacamento depois de fechar Ford São Bernardo e Camaçari, e
+  Indaiatuba em 2026.
 
 ## Propulsão no tempo: o que a tabela anual ainda não resolve
 

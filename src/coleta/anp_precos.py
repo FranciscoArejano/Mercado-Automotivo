@@ -135,7 +135,7 @@ def main() -> int:
             cc.registrar(FONTE, manifesto, nome, linha["url"], conteudo,
                          observacao=f"{linha['tipo']} {linha['periodo']}".strip())
             print(f"{nome}: {len(conteudo)} bytes", flush=True)
-        if manifesto[nome]["no_git"] == "nao" and not manifesto[nome]["sha256_reduzido"]:
+        if manifesto[nome]["no_git"] == "nao" and not manifesto[nome].get("sha256_reduzido"):
             reduzido = destino / "reduzido" / (Path(nome).stem + ".parquet")
             conteudo = cc.gravar_reduzido(ler_posto(cc.caminho_do_original(
                 FONTE, manifesto[nome])), reduzido)

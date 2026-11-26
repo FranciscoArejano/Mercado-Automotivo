@@ -77,22 +77,40 @@ def agora() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def baixar(url: str, tentativas: int = 4, timeout: float = 600) -> bytes:
-    """Um pedido por vez, com pausa e espera crescente entre tentativas."""
-    erro = None
-    for tentativa in range(tentativas):
+def baixar(url: str, tentativas: int = 8, timeout: float = 600) -> bytes:
+    """Um pedido por vez, com pausa; download em blocos, retomado por `Range` quando a
+    conexao cai no meio (arquivos de centenas de MB da ANP)."""
+    erro, recebido, total = None, bytearray(), None
+    tentativa = 0
+    while tentativa < tentativas:  # so' conta a tentativa que nao trouxe nenhum byte
+        antes = len(recebido)
+        cabecalho = {"User-Agent": config.USER_AGENT}
+        if recebido:
+            cabecalho["Range"] = f"bytes={len(recebido)}-"
         try:
-            resposta = requests.get(url, headers={"User-Agent": config.USER_AGENT},
-                                    timeout=timeout)
-            if resposta.status_code == 200 and resposta.content:
+            with requests.get(url, headers=cabecalho, timeout=timeout, stream=True) as resposta:
+                if resposta.status_code in (401, 403, 404):
+                    erro = f"HTTP {resposta.status_code}"
+                    break  # bloqueio ou ausencia: nao insistir nem contornar
+                if recebido and resposta.status_code != 206:
+                    recebido = bytearray()  # o servidor ignorou o Range: recomeca
+                elif resposta.status_code not in (200, 206):
+                    raise requests.RequestException(f"HTTP {resposta.status_code}")
+                if total is None and "Content-Length" in resposta.headers:
+                    total = int(resposta.headers["Content-Length"]) + len(recebido)
+                for bloco in resposta.iter_content(1 << 20):
+                    recebido.extend(bloco)
+            if recebido and (total is None or len(recebido) == total):
                 time.sleep(config.PAUSA_SEGUNDOS)
-                return resposta.content
-            erro = f"HTTP {resposta.status_code}"
-            if resposta.status_code in (401, 403, 404):
-                break  # bloqueio ou ausencia: nao insistir nem contornar
+                return bytes(recebido)
+            erro = f"incompleto: {len(recebido)} de {total} bytes"
         except requests.RequestException as excecao:
             erro = f"{type(excecao).__name__}: {excecao}"[:300]
-        time.sleep(10 * (tentativa + 1))
+        if len(recebido) > antes:
+            time.sleep(2)
+            continue
+        tentativa += 1
+        time.sleep(10 * tentativa)
     raise RuntimeError(f"{url}: {erro}")
 
 

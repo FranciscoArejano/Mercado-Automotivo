@@ -1,0 +1,64 @@
+dimensao,rotulo_original,rotulo_harmonizado,ano_inicial,ano_final,observacao
+combustivel,ALCOOL,etanol,2013,2026,
+combustivel,ALCOOL/GASOLINA,flex,2013,2026,etanol e gasolina
+combustivel,GASOLINA,gasolina,2013,2026,
+combustivel,DIESEL,diesel,2013,2026,
+combustivel,GASOLINA/ALCOOL/GAS NATURAL,flex_gnv,2013,2026,"tetracombustivel: etanol, gasolina e gas natural"
+combustivel,GASOLINA/GAS NATURAL VEICULAR,gnv,2013,2026,gas natural com outro combustivel
+combustivel,ALCOOL/GAS NATURAL VEICULAR,gnv,2013,2026,gas natural com outro combustivel
+combustivel,DIESEL/GAS NATURAL VEICULAR,gnv,2013,2026,gas natural com outro combustivel
+combustivel,GASOL/GAS NATURAL COMBUSTIVEL,gnv,2013,2026,"gas natural com outro combustivel; 'COMBUSTIVEL' em vez de 'VEICULAR' na fonte, sem definicao publicada da diferenca"
+combustivel,ALCOOL/GAS NATURAL COMBUSTIVEL,gnv,2013,2026,idem
+combustivel,DIESEL/GAS NATURAL COMBUSTIVEL,gnv,2013,2026,idem
+combustivel,GAS METANO,gnv,2013,2026,gas natural dedicado
+combustivel,GAS NATURAL VEICULAR,gnv,2013,2026,gas natural dedicado
+combustivel,GAS/NATURAL/LIQUEFEITO,gnv,2019,2026,gas natural liquefeito
+combustivel,ELETRICO/FONTE EXTERNA,eletrico,2013,2026,eletrico recarregado na rede
+combustivel,ELETRICO,eletrico,2022,2026,"rotulo que aparece em 2022, sem a qualificacao de fonte"
+combustivel,ELETRICO/FONTE INTERNA,eletrico_fonte_interna,2013,2026,"AMBIGUO: energia gerada a bordo; a fonte nao define se e' hibrido sem recarga, celula a combustivel ou outro. Fica separado (QUESTOES_ABERTAS, rodada 13)"
+combustivel,GASOLINA/ELETRICO,hibrido,2013,2026,hibrido a gasolina; a fonte nao separa plug-in de sem recarga
+combustivel,GASOLINA/ALCOOL/ELETRICO,hibrido,2019,2026,hibrido flex; idem
+combustivel,DIESEL/ELETRICO,hibrido,2021,2026,hibrido a diesel; idem
+combustivel,ETANOL/ELETRICO,hibrido,2022,2026,hibrido a etanol; idem
+combustivel,HIBRIDO,hibrido,2023,2026,rotulo que aparece em 2023
+combustivel,HIBRIDO/GAS NATURAL VEICULAR,hibrido,2023,2026,hibrido a gas natural
+combustivel,HIBRIDO PLUG-IN,hibrido_plug_in,2022,2026,rotulo que aparece em 2022
+combustivel,CELULA COMBUSTIVEL,celula_combustivel,2022,2026,
+combustivel,GASOGENIO,outros,2013,2026,
+combustivel,VIDE/CAMPO/OBSERVACAO,outros,2013,2026,combustivel descrito em campo de observacao
+combustivel,Sem Informação,sem_informacao,2013,2026,
+combustivel,Sem InformaÃ§Ã£o,sem_informacao,2017,2018,mesma categoria com acentuacao corrompida na fonte (2017-2018)
+combustivel,Não Identificado,nao_identificado,2019,2026,
+combustivel,NÃ£o Identificado,nao_identificado,2013,2018,mesma categoria com acentuacao corrompida na fonte (2013-2018)
+tipo,AUTOMOVEL,automovel,2003,2026,
+tipo,AUTOMÓVEL,automovel,2003,2026,
+tipo,BONDE,bonde,2003,2026,
+tipo,CAMINHAO,caminhao,2003,2026,
+tipo,CAMINHÃO,caminhao,2003,2026,
+tipo,CAMINHAO TRATOR,caminhao_trator,2003,2026,
+tipo,CAMINHÃO TRATOR,caminhao_trator,2003,2026,
+tipo,CAMINHONETE,caminhonete,2003,2026,
+tipo,CAMIONETA,camioneta,2003,2026,
+tipo,CHASSI PLATAF,chassi_plataforma,2003,2026,abreviado na fonte
+tipo,CHASSI PLATAFAFORMA,chassi_plataforma,2003,2026,grafia da fonte (2003-2008)
+tipo,CHASSI PLATAFORMA,chassi_plataforma,2003,2026,
+tipo,CICLOMOTOR,ciclomotor,2003,2026,
+tipo,MICRO-ONIBUS,micro_onibus,2003,2026,
+tipo,MICRO-ÔNIBUS,micro_onibus,2003,2026,
+tipo,MICROÔNIBUS,micro_onibus,2003,2026,
+tipo,MOTOCICLETA,motocicleta,2003,2026,
+tipo,MOTONETA,motoneta,2003,2026,
+tipo,ONIBUS,onibus,2003,2026,
+tipo,ÔNIBUS,onibus,2003,2026,
+tipo,OUTROS,outros,2003,2026,
+tipo,QUADRICICLO,quadriciclo,2003,2026,
+tipo,REBOQUE,reboque,2003,2026,
+tipo,SEMI-REBOQUE,semi_reboque,2003,2026,
+tipo,SIDE-CAR,side_car,2003,2026,
+tipo,TRATOR ESTEI,trator_esteira,2003,2026,abreviado na fonte
+tipo,TRATOR ESTEIRA,trator_esteira,2003,2026,
+tipo,TRATOR RODAS,trator_rodas,2003,2026,
+tipo,TRICICLO,triciclo,2003,2026,
+tipo,UTILITARIO,utilitario,2003,2026,
+tipo,UTILITÁRIO,utilitario,2003,2026,
+tipo,TOTAL,total,2003,2026,so' na planilha UF x tipo (a coluna TOTAL da planilha municipal nao entra como tipo)

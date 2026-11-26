@@ -1,0 +1,11 @@
+conferencia,casos,falhas,observacao
+"soma dos municipios (mais os 'MUNICIPIO NAO INFORMADO' da UF) = total da UF na planilha UF x tipo (mes x UF; diferenca registrada, nao e' falha)",2646,0,27 casos com diferenca; maior |diferenca| 31700698; meses sem planilha de UF legivel: 2017-12
+"soma das UFs = Brasil, na planilha UF x tipo",98,0,0 meses com diferenca; maior |diferenca| 0
+soma dos municipios (mais os nao informados) = total Brasil impresso na planilha municipio x tipo,96,0,0 meses com diferenca
+linha do municipio: coluna TOTAL = soma dos tipos,99,0,0 linhas com diferenca no conjunto
+"recorte por combustivel contra recorte por tipo, por UF e mes (diferenca relativa acima de 0,5%; registrada)",2268,0,"27 casos acima de 0,5%; maior 900.00%"
+"recorte combustivel fora de escala (total nacional mais de 10% longe do recorte tipo): linhas com alerta_fonte, valor da fonte mantido",1,0,2021-11
+"mes declarado no titulo da planilha diferente do mes do arquivo (registrado, nao corrigido)",1,0,2003-12 uf_tipo: titulo diz 2003-11
+planilha UF x tipo ilegivel (so' a conferencia fica sem ela),0,0,nenhuma
+tracos (formato contabil) lidos como zero na planilha municipio x tipo,0,0,
+"chave unica (mes, municipio, recorte, tipo, combustivel)",11306332,0,

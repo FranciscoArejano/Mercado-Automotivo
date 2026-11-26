@@ -48,6 +48,7 @@ ETAPAS = [
     # bruto em dados/bruto/<fonte>/. A coleta (src/coleta/) nao entra no pipeline.
     (15, "etapa15_fator_sin", "fator medio de emissao do SIN (MCTI)"),
     (16, "etapa16_emissoes", "emissoes por UF, setor e gas (SEEG)"),
+    (17, "etapa17_frota", "frota de veiculos por municipio (Senatran)"),
     (6, "etapa06_validacao", "validacao"),
     (7, "etapa07_referencia_cruzada", "referencia cruzada"),
     # O catalogo descreve o que as outras produziram: vem por ultimo.

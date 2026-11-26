@@ -111,7 +111,7 @@ a conferência). **Tipo e combustível nunca se cruzam**: a frota elétrica é d
 todos os tipos (Q-E2).
 
 **Recorte:** dezembro de 2003 a 2019 e todos os meses desde 2020-01 (99 meses de
-tipo; 83 de combustível, de 2013-12 a 2026-10). Bruto: 270 arquivos, 215 MB, todos
+tipo; 84 de combustível, de 2013-12 a 2026-10). Bruto: 270 arquivos, 215 MB, todos
 abaixo de 50 MB, no git como vieram. Produto: 11.306.332 linhas, 5.571 municípios,
 35,7 MB.
 

@@ -604,7 +604,7 @@ def _frota() -> tuple[dict, str]:
         f"- **Linhas:** {_mil(len(d))}; {d['cod_ibge_municipio'].nunique()} municipios. Janela "
         f"efetiva: tipo {tipo.nunique()} meses ({janela}; dezembro ate' 2019, todos os meses "
         f"desde 2020-01); combustivel {comb.nunique()} meses ({comb.min()} a {comb.max()}).\n"
-        f"- **Alertas da fonte:** {int((d['alerta_fonte'] != '').sum()):,} linhas marcadas "
+        f"- **Alertas da fonte:** {_mil(int((d['alerta_fonte'] != '').sum()))} linhas marcadas "
         "(`combustivel_fora_de_escala`: 2021-11 vem x10 na fonte; valor mantido).\n"
         f"- **No repositorio:** {_tamanho('senatran_frota', config.FROTA_MUNICIPAL)}.\n"
         f"- **Conferencias:** {_falhas(config.FROTA_VALIDACAO)}; por UF e mes em "

@@ -35,6 +35,8 @@ CAMINHOS_DE_DADO = ("dados/processado", "dados/referencia", "dados/bruto/manifes
                     "dados/bruto/pbe", "dados/bruto/origem_paginas", "dados/bruto/comex",
                     "dados/bruto/politicas_paginas", "dados/bruto/fabricas_paginas",
                     "dados/bruto/anfavea", "dados/bruto/ibge",
+                    "dados/bruto/senatran_frota", "dados/bruto/anp_precos", "dados/bruto/seeg",
+                    "dados/bruto/mcti_fator", "dados/bruto/acesso_fontes_energia.csv",
                     "config", "regras.csv",
                     "saidas/classificacao_rascunho.xlsx")
 
@@ -498,6 +500,17 @@ def _outros() -> str:
          "Anfavea (licenciamento de nacionais e importados), com SHA-256"],
         ["`dados/bruto/ibge/`", "tabela de municipios do IBGE (codigo do municipio das "
                                 "fabricas), com SHA-256"],
+        ["`dados/bruto/acesso_fontes_energia.csv`", "testes de acesso das fontes da rodada 13 "
+                                                    "(cada tentativa, com o resultado)"],
+        ["`dados/bruto/senatran_frota/`", "planilhas de frota da Senatran (municipio x tipo, "
+                                          "municipio x combustivel, UF x tipo), com SHA-256"],
+        ["`dados/bruto/anp_precos/`", "serie por posto do LPC da ANP (originais ate' 50 MB; os "
+                                      "maiores como bruto reduzido em parquet) e a sintese "
+                                      "mensal por estado, com SHA-256"],
+        ["`dados/bruto/seeg/`", "tabela geral do SEEG 14.0 como bruto reduzido (original fora "
+                                "do git), com os dois SHA-256"],
+        ["`dados/bruto/mcti_fator/`", "planilha do fator medio de emissao do SIN (MCTI), com "
+                                      "SHA-256"],
         ["`regras.csv`", f"{len(regras)} regras de harmonizacao (rebatismo, desdobramento)"],
         ["`config/mapa_grupos.csv`", f"{len(mapa)} linhas marca-grupo com vigencia"],
         ["`dados/referencia/Vendas_Geral.xlsx`",
@@ -508,6 +521,124 @@ def _outros() -> str:
         ["`saidas/referencia_cruzada.md`", "confronto com o controle independente"],
     ]
     return _tabela(["arquivo", "conteudo"], linhas)
+
+
+# ------------------------------------------------ energia, frota e emissoes (rodada 13)
+
+
+def _mb(n: int) -> str:
+    return f"{n / 1e6:,.1f} MB".replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+def _tamanho(fonte: str, *produtos) -> str:
+    from comum import energia
+    bruto = energia.tamanho_no_repositorio(config.DIR_BRUTO / fonte)
+    proc = energia.tamanho_no_repositorio(*produtos)
+    return (f"{_mb(bruto)} de bruto em `dados/bruto/{fonte}/` (sem `fora_do_git/`) e "
+            f"{_mb(proc)} de produto")
+
+
+def _falhas(caminho) -> str:
+    v = pd.read_csv(caminho)
+    return f"{int(v['falhas'].sum())} falhas em `{log.caminho_relativo(caminho)}`"
+
+
+def _nao_construida(nome: str, etapa: str) -> tuple[dict, str]:
+    return ({"produto": nome, "arquivo": "--", "linhas": 0, "janela": "nao construida"},
+            f"- **Estado:** nao construida; rode `python src/{etapa}.py`.\n")
+
+
+def _fator_sin() -> tuple[dict, str]:
+    if not config.FATOR_SIN.exists():
+        return _nao_construida("fator_emissao_sin_mensal", "etapa15_fator_sin")
+    d = pd.read_parquet(config.FATOR_SIN)
+    janela = f"{d['mes'].min()} a {d['mes'].max()}"
+    corpo = (
+        "- **Estado: gravada** pela etapa 15, da planilha do MCTI (fator medio, metodo para "
+        "inventarios) guardada em `dados/bruto/mcti_fator/` com SHA-256.\n"
+        "- **Unidade de observacao:** o mes (tCO2/MWh da geracao do SIN).\n"
+        f"- **Linhas:** {_mil(len(d))}; janela efetiva {janela} (o MCTI comeca em 2006-01: "
+        "2003-2005 ficam vazios).\n"
+        f"- **No repositorio:** {_tamanho('mcti_fator', config.FATOR_SIN)}.\n"
+        f"- **Conferencias:** {_falhas(config.FATOR_SIN_VALIDACAO)}; dicionario em "
+        "`saidas/fator_emissao_sin_mensal_dicionario.md`.\n")
+    return ({"produto": "fator_emissao_sin_mensal",
+             "arquivo": "dados/processado/fator_emissao_sin_mensal.parquet", "linhas": len(d),
+             "janela": janela}, corpo)
+
+
+def _emissoes() -> tuple[dict, str]:
+    if not config.EMISSOES_UF_ANUAL.exists():
+        return _nao_construida("emissoes_uf_anual", "etapa16_emissoes")
+    d = pd.read_parquet(config.EMISSOES_UF_ANUAL, columns=["ano", "uf", "gas", "colecao_seeg"])
+    janela = f"{d['ano'].min()} a {d['ano'].max()}"
+    corpo = (
+        f"- **Estado: gravada** pela etapa 16, do bruto reduzido da tabela geral do SEEG "
+        f"(colecao {d['colecao_seeg'].iloc[0]}), original de 206 MB fora do git, SHA-256 do "
+        "original e do reduzido no manifesto.\n"
+        "- **Unidade de observacao:** tipo (emissao, remocao, bunker, NCI) x UF x ano x setor x "
+        "categoria x subcategoria x produto x gas; `uf` vazia e' a parcela nao alocada.\n"
+        f"- **Linhas:** {_mil(len(d))}; janela efetiva {janela} (anual; o SEEG publica desde "
+        "1970, o reduzido guarda de 2003 em diante); "
+        f"{d['gas'].nunique()} gases, incluindo `CO2e_GWP_AR5`.\n"
+        f"- **No repositorio:** {_tamanho('seeg', config.EMISSOES_UF_ANUAL)}.\n"
+        f"- **Conferencias:** {_falhas(config.EMISSOES_VALIDACAO)}; dicionario em "
+        "`saidas/emissoes_uf_anual_dicionario.md`.\n")
+    return ({"produto": "emissoes_uf_anual", "arquivo": "dados/processado/emissoes_uf_anual.parquet",
+             "linhas": len(d), "janela": janela}, corpo)
+
+
+def _frota() -> tuple[dict, str]:
+    if not config.FROTA_MUNICIPAL.exists():
+        return _nao_construida("frota_municipal", "etapa17_frota")
+    d = pd.read_parquet(config.FROTA_MUNICIPAL, columns=["mes", "recorte", "cod_ibge_municipio",
+                                                         "alerta_fonte"])
+    tipo = d[d["recorte"] == "tipo"]["mes"]
+    comb = d[d["recorte"] == "combustivel"]["mes"]
+    janela = f"{tipo.min()} a {tipo.max()}"
+    corpo = (
+        "- **Estado: gravada** pela etapa 17, das planilhas da Senatran guardadas em "
+        "`dados/bruto/senatran_frota/` (todas abaixo de 50 MB, como vieram) com SHA-256.\n"
+        "- **Unidade de observacao:** municipio x mes x tipo de veiculo **ou** combustivel "
+        "(a fonte nao cruza os dois: `recorte` diz qual; nao somar entre recortes).\n"
+        f"- **Linhas:** {_mil(len(d))}; {d['cod_ibge_municipio'].nunique()} municipios. Janela "
+        f"efetiva: tipo {tipo.nunique()} meses ({janela}; dezembro ate' 2019, todos os meses "
+        f"desde 2020-01); combustivel {comb.nunique()} meses ({comb.min()} a {comb.max()}).\n"
+        f"- **Alertas da fonte:** {int((d['alerta_fonte'] != '').sum()):,} linhas marcadas "
+        "(`combustivel_fora_de_escala`: 2021-11 vem x10 na fonte; valor mantido).\n"
+        f"- **No repositorio:** {_tamanho('senatran_frota', config.FROTA_MUNICIPAL)}.\n"
+        f"- **Conferencias:** {_falhas(config.FROTA_VALIDACAO)}; por UF e mes em "
+        "`saidas/frota_conferencia_uf.csv`; rotulos em `config/frota_rotulos.csv`; municipios "
+        "fora da tipografia em `config/frota_municipios.csv`; dicionario em "
+        "`saidas/frota_municipal_dicionario.md`.\n")
+    return ({"produto": "frota_municipal", "arquivo": "dados/processado/frota_municipal.parquet",
+             "linhas": len(d), "janela": janela}, corpo)
+
+
+def _precos() -> tuple[dict, str]:
+    if not config.PRECOS_COMBUSTIVEIS.exists():
+        return _nao_construida("precos_combustiveis_mensal", "etapa18_precos")
+    d = pd.read_parquet(config.PRECOS_COMBUSTIVEIS, columns=["mes", "produto"])
+    m = pd.read_parquet(config.PRECOS_COMBUSTIVEIS_MUNICIPAL,
+                        columns=["mes", "cod_ibge_municipio"])
+    janela = f"{d['mes'].min()} a {d['mes'].max()}"
+    corpo = (
+        "- **Estado: gravada** pela etapa 18, da serie historica por posto do LPC da ANP "
+        "(`dados/bruto/anp_precos/`: originais de ate' 50 MB como vieram; os maiores fora do "
+        "git, com bruto reduzido em parquet e os dois SHA-256 no manifesto).\n"
+        "- **Unidade de observacao:** UF x mes x produto (gasolina comum, etanol hidratado, "
+        "diesel S10, GNV); e, em `precos_combustiveis_municipal_mensal.parquet`, municipio x mes "
+        "x produto.\n"
+        f"- **Linhas:** {_mil(len(d))} (UF) e {_mil(len(m))} (municipio, "
+        f"{m['cod_ibge_municipio'].nunique()} municipios); janela efetiva {janela} (a serie "
+        "por posto comeca em 2004-05).\n"
+        f"- **No repositorio:** {_tamanho('anp_precos', config.PRECOS_COMBUSTIVEIS, config.PRECOS_COMBUSTIVEIS_MUNICIPAL)}.\n"
+        f"- **Conferencias:** {_falhas(config.PRECOS_VALIDACAO)}; contra a sintese mensal da ANP "
+        "em `saidas/precos_combustiveis_conferencia_sintese.csv`; dicionario em "
+        "`saidas/precos_combustiveis_mensal_dicionario.md`.\n")
+    return ({"produto": "precos_combustiveis_mensal",
+             "arquivo": "dados/processado/precos_combustiveis_mensal.parquet", "linhas": len(d),
+             "janela": janela}, corpo)
 
 
 # ------------------------------------------------------------------ montagem
@@ -539,6 +670,12 @@ def gerar() -> str:
     resumo_origem, corpo_origem = _origem()
     resumos.append(resumo_origem)
     secoes.append(("classificacao_origem", resumo_origem["arquivo"], corpo_origem))
+    for nome, construir in (("fator_emissao_sin_mensal", _fator_sin),
+                            ("emissoes_uf_anual", _emissoes), ("frota_municipal", _frota),
+                            ("precos_combustiveis_mensal", _precos)):
+        resumo, corpo = construir()
+        resumos.append(resumo)
+        secoes.append((nome, resumo["arquivo"], corpo))
 
     texto = [
         f"# Catalogo do repositorio -- dado do commit `{commit_do_dado()}`\n\n",

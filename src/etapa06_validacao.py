@@ -1378,7 +1378,32 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
         partes.append("\n## 15. Origem por pais e por fabrica\n\n"
                       "_Nao disponivel: rode `python src/etapa14_origem.py`._\n")
 
-    partes.append("\n## 16. Situacao\n\n")
+    # ------------------------------------------- 16. energia, frota e emissoes (rodada 13)
+    partes.append("\n## 16. Energia, frota e emissoes (rodada 13)\n\n"
+                  "Tabelas **separadas**, cada uma do seu bruto em `dados/bruto/<fonte>/`; juntam ao "
+                  "painel so' na analise, por mes, UF ou municipio.\n")
+    for titulo, produto, validacao_csv, etapa in (
+            ("Fator medio de emissao do SIN (MCTI)", config.FATOR_SIN,
+             config.FATOR_SIN_VALIDACAO, "etapa15_fator_sin"),
+            ("Emissoes por UF (SEEG)", config.EMISSOES_UF_ANUAL, config.EMISSOES_VALIDACAO,
+             "etapa16_emissoes"),
+            ("Frota municipal (Senatran)", config.FROTA_MUNICIPAL, config.FROTA_VALIDACAO,
+             "etapa17_frota"),
+            ("Precos de combustiveis (ANP)", config.PRECOS_COMBUSTIVEIS,
+             config.PRECOS_VALIDACAO, "etapa18_precos")):
+        if validacao_csv.exists() and produto.exists():
+            conferencias = pd.read_csv(validacao_csv)
+            partes.append(f"\n### {titulo}\n\n`{log.caminho_relativo(produto)}`.\n\n"
+                          + _tabela(conferencias))
+            if int(conferencias["falhas"].sum()):
+                falhas.append(f"conferencias de {titulo} com falha")
+        else:
+            partes.append(f"\n### {titulo}\n\n_Nao disponivel: rode `python src/{etapa}.py`._\n")
+    partes.append("\nGeracao distribuida e tarifas de energia (ANEEL): **nao construidas** -- o "
+                  "dominio da ANEEL bloqueou o acesso nesta rodada (`dados/bruto/"
+                  "acesso_fontes_energia.csv`).\n")
+
+    partes.append("\n## 17. Situacao\n\n")
     if falhas:
         partes.append("**Validacao FALHOU:**\n\n" + "".join(f"- {f}\n" for f in falhas))
     else:

@@ -121,26 +121,46 @@ def redutores() -> dict:
             if linha["observacao"].startswith("posto")}
 
 
+TRABALHADORES = 3  # tres downloads por vez: cada conexao do gov.br fica em ~0,8 MB/s
+
+
 def main() -> int:
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+
     tabela = links()
     destino = cc.dir_fonte(FONTE)
     destino.mkdir(parents=True, exist_ok=True)
     tabela.to_csv(destino / "inventario_links.csv", index=False)
     manifesto = cc.ler_manifesto(FONTE)
-    for _, linha in tabela.iterrows():
+    trava = threading.Lock()
+
+    def um(linha) -> None:
         nome = linha["arquivo"]
-        presente = nome in manifesto and cc.caminho_do_original(FONTE, manifesto[nome]).exists()
+        with trava:
+            presente = nome in manifesto and cc.caminho_do_original(
+                FONTE, manifesto[nome]).exists()
         if not presente:
             conteudo = cc.baixar(linha["url"])
-            cc.registrar(FONTE, manifesto, nome, linha["url"], conteudo,
-                         observacao=f"{linha['tipo']} {linha['periodo']}".strip())
+            with trava:
+                cc.registrar(FONTE, manifesto, nome, linha["url"], conteudo,
+                             observacao=f"{linha['tipo']} {linha['periodo']}".strip())
             print(f"{nome}: {len(conteudo)} bytes", flush=True)
-        if manifesto[nome]["no_git"] == "nao" and not manifesto[nome].get("sha256_reduzido"):
+            del conteudo
+        with trava:
+            falta_reduzir = (manifesto[nome]["no_git"] == "nao"
+                             and not manifesto[nome].get("sha256_reduzido"))
+            original = cc.caminho_do_original(FONTE, manifesto[nome])
+        if falta_reduzir:
             reduzido = destino / "reduzido" / (Path(nome).stem + ".parquet")
-            conteudo = cc.gravar_reduzido(ler_posto(cc.caminho_do_original(
-                FONTE, manifesto[nome])), reduzido)
-            cc.registrar_reduzido(FONTE, manifesto, nome, reduzido, conteudo)
+            conteudo = cc.gravar_reduzido(ler_posto(original), reduzido)
+            with trava:
+                cc.registrar_reduzido(FONTE, manifesto, nome, reduzido, conteudo)
             print(f"  reduzido {reduzido.name}: {len(conteudo)} bytes", flush=True)
+
+    with ThreadPoolExecutor(TRABALHADORES) as executor:
+        for resultado in executor.map(um, [l for _, l in tabela.iterrows()]):
+            pass
     return 0
 
 

@@ -32,6 +32,19 @@ Cada etapa tambem roda isolada e recebe `--inicio` / `--fim`:
 .venv/bin/python src/etapa02_parsing.py --forcar
 ```
 
+As bases de energia, frota e emissoes (rodada 13) tem coleta propria em
+`src/coleta/` (fora do pipeline: a etapa le o bruto guardado). Duas dependencias de
+sistema, so' para a frota da Senatran: `mdbtools` (o combustivel de 2013-12 vem num
+banco Access) e `bsdtar` (`libarchive-tools`; os arquivos de 2015 e 2016 vem em rar).
+
+```bash
+.venv/bin/python src/coleta/testar_acesso.py   # registra o acesso as cinco fontes
+.venv/bin/python src/coleta/senatran_frota.py  # frota (todos abaixo de 50 MB)
+.venv/bin/python src/coleta/anp_precos.py      # precos: baixa e refaz o bruto reduzido
+.venv/bin/python src/coleta/seeg.py            # SEEG: idem (original de 206 MB)
+.venv/bin/python src/coleta/mcti_fator.py      # fator do SIN
+```
+
 Parametros ficam em `src/comum/config.py` e aceitam variavel de ambiente
 (`PERIODO_INICIO`, `PERIODO_FIM`, `PICO_MOVEL_MODO`, `PAUSA_SEGUNDOS`).
 
@@ -58,6 +71,11 @@ porque descreve todas.
 | 12 | `etapa12_comex.py` | Importacao e exportacao mensal de veiculos por NCM e pais (Comex Stat), com conferencias e uso-teste; o bruto vem de `src/ferramentas/comex_baixar.py` e a tabela de NCMs de `src/ferramentas/comex_ncm.py` | `comex_veiculos.parquet`, `config/ncm_veiculos.csv`, `saidas/comex_dicionario.md` |
 | 13 | `etapa13_politicas.py` | Calendario de politicas: confere as tabelas de atos e aliquotas contra as paginas oficiais guardadas e grava a tabela mensal e o uso-teste das datas; as tabelas vem de `src/ferramentas/politicas_referencia.py` | `politicas_mensal.parquet`, `saidas/politicas_validacao.csv`, `saidas/politicas_uso_teste.csv`, `saidas/politicas_dicionario.md` |
 | 14 | `etapa14_origem.py` | Origem por pais e por fabrica: confere as tabelas de fabricas e de fabrica x modelo e a proposta de pais contra as paginas guardadas, deriva o pais de producao mes a mes em cada vigencia classificada e grava as divergencias, a cobertura por fonte forte e os uso-testes (Comex, Anfavea, mapa por UF); as tabelas vem de `src/ferramentas/fabricas_referencia.py` | `classificacao_origem.parquet`, `saidas/origem_validacao.csv`, `saidas/origem_cobertura.csv`, `saidas/origem_divergencias.csv`, `saidas/origem_uso_teste_*.csv`, `saidas/origem_mapa_uf.csv`, `saidas/origem_dicionario.md` |
+| 15 | `etapa15_fator_sin.py` | Fator medio mensal de emissao de CO2 do SIN (MCTI, inventarios), com a conferencia contra o anual publicado | `fator_emissao_sin_mensal.parquet`, `saidas/fator_emissao_sin_*` |
+| 16 | `etapa16_emissoes.py` | Emissoes por UF, ano, setor, subsetor e gas (SEEG 14.0, do bruto reduzido), com o total Brasil conferido contra a soma das UFs mais o nao alocado | `emissoes_uf_anual.parquet`, `saidas/emissoes_uf_anual_*` |
+| 17 | `etapa17_frota.py` | Frota da Senatran por municipio, tipo e combustivel (dois recortes: a fonte nao os cruza), rotulos por `config/frota_rotulos.csv`, municipios pelo IBGE, conferencias contra UF e Brasil | `frota_municipal.parquet`, `saidas/frota_*` |
+| 18 | `etapa18_precos.py` | Precos de combustiveis por UF e municipio (serie por posto da ANP), preco real pelo IPCA, paridade etanol/gasolina, conferencia contra a sintese da ANP | `precos_combustiveis_mensal.parquet`, `precos_combustiveis_municipal_mensal.parquet`, `saidas/precos_combustiveis_*` |
+| 19 | `etapa19_energia_uso_teste.py` | Uso-teste das bases de energia: frota contra vendas, paridade, solar e eletricos por UF, emissoes do transporte | `saidas/uso_teste_energia_*.csv` |
 | 10 | `etapa10_catalogo.py` | Indice do repositorio, calculado do dado | `CATALOGO.md` |
 
 ## Arquivos que o humano escreve

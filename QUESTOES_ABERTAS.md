@@ -1014,6 +1014,112 @@ O que se sabe da coluna:
 - a versão casa com a chave do painel pelo mesmo casamento da propulsão, então
   herda a cobertura e as famílias sem evidência dele.
 
+## Bases de energia, frota e emissões (rodada 13): o que exige decisão
+
+Registro de 26/11/2026. Nenhuma das questões abaixo foi decidida em silêncio:
+onde o código precisou de uma escolha para andar, a escolha está dita e é
+reversível.
+
+### Q-E1. ANEEL bloqueada: geração distribuída e tarifas não construídas
+
+`dadosabertos.aneel.gov.br` reseta a conexão TLS (seis tentativas, entre 01:20 e
+01:45 UTC) e `www.aneel.gov.br` e `portalrelatorios.aneel.gov.br` respondem 403
+do Cloudflare. Pela regra da rodada, registrei e não contornei
+(`dados/bruto/acesso_fontes_energia.csv`). Ficam de fora
+`gd_municipal_mensal.parquet`, `tarifa_energia.parquet`,
+`tarifa_energia_mensal` e, no uso-teste 3, a potência solar e a tarifa (colunas
+vazias). Opções:
+
+1. **Repetir o teste em outra sessão** (o bloqueio pode ser da faixa de IP do
+   ambiente, não da ANEEL). Custo zero; `python src/coleta/testar_acesso.py`
+   registra a nova tentativa ao lado das antigas.
+2. **O pesquisador baixa à mão** os dois CSV (empreendimentos de GD; tarifas
+   homologadas) no navegador e os põe em `dados/bruto/aneel_gd/` e
+   `dados/bruto/aneel_tarifas/`; a próxima rodada escreve o manifesto, o
+   reduzido e as etapas. É a mesma fonte oficial, só o caminho muda.
+3. **Fonte alternativa** (EPE, painel de GD; ONS): outra fonte, outra
+   metodologia. Exige decisão, não recomendo sem ela.
+
+### Q-E2. Senatran não cruza tipo de veículo com combustível
+
+Em nenhum nível (município, UF, Brasil) e em nenhum ano. O recorte por
+combustível soma todos os tipos: motocicleta, motoneta, ciclomotor, ônibus,
+caminhão e automóvel. A "frota elétrica de automóveis e camionetas" pedida na
+§1.2 **não existe** nesta fonte. O produto guarda os dois recortes lado a lado
+(`recorte = tipo` ou `combustivel`). Opções para um artigo que precise do
+automóvel elétrico: (a) usar o recorte combustível como teto e declarar;
+(b) a tabela por marca e modelo da Senatran (arquivo `I_`, por município, desde
+2014) cruzada com a classificação de propulsão do painel — trabalho de uma rodada
+própria, não feito.
+
+### Q-E3. Rótulos de combustível ambíguos
+
+Em `config/frota_rotulos.csv`:
+
+- `ELETRICO/FONTE INTERNA` (de 1.635 veículos em 2013-12 a 16.396 em 2025-12)
+  ficou com rótulo próprio, `eletrico_fonte_interna`, fora de `eletrico`. A fonte
+  não define o termo: pode ser híbrido sem recarga, célula a combustível ou
+  elétrico com gerador. Decisão: fundir com `eletrico`, com `hibrido`, ou manter
+  à parte (como está).
+- `GASOLINA/ELETRICO`, `GASOLINA/ALCOOL/ELETRICO`, `DIESEL/ELETRICO` e
+  `ETANOL/ELETRICO` foram para `hibrido`, sem separar plug-in: a fonte só passa a
+  ter `HIBRIDO PLUG-IN` em 2022. Antes de 2022, `hibrido_plug_in` é zero por
+  construção, não por ausência.
+- As variantes `... GAS NATURAL COMBUSTIVEL` e `... GAS NATURAL VEICULAR` foram
+  para `gnv`, sem definição publicada da diferença.
+
+### Q-E4. Defeitos da fonte na Senatran, mantidos e marcados
+
+- **2021-11, combustível ×10:** todas as quantidades do arquivo de combustível
+  de novembro de 2021 vêm multiplicadas por dez (Acrelândia: 600 de álcool,
+  contra ~60 nos outros meses). Não corrigi; as linhas do mês têm
+  `alerta_fonte = combustivel_fora_de_escala`. Decisão: manter marcado (como
+  está), dividir por dez com registro, ou excluir o mês do recorte combustível.
+- **Planilha UF × tipo de 2024-02:** traz o total de dez/2023 com as linhas
+  embaralhadas (Amapá com 2,6 milhões). Só afeta a conferência; o portal tem uma
+  cópia (`copy_of_FrotaporUFeTipodeVeculoFEV2024.xlsx`) que a regra de escolha
+  deixou de lado por ser cópia.
+- **Planilha UF × tipo de 2003-12:** o título diz novembro de 2003.
+- **Nomes fora do IBGE:** 72 grafias e nomes antigos casados por
+  `config/frota_municipios.csv`, cada um com motivo; as renomeações foram
+  conferidas pela regra "o nome antigo e o novo nunca aparecem no mesmo mês".
+  `MUNICIPIO NAO INFORMADO` (de 1 a 14 veículos por mês) e `IBITIUVA` (distrito
+  de Pitangueiras-SP, 1 veículo) ficam fora do produto, somados em
+  `saidas/frota_sem_municipio.csv`. Decisão possível: atribuir IBITIUVA a
+  Pitangueiras.
+
+### Q-E5. Frota eletrificada acima das vendas acumuladas da ABVE
+
+No uso-teste 1, a frota eletrificada da Senatran (elétrico + híbrido +
+plug-in, todos os tipos) passa das vendas acumuladas de eletrificados leves da
+ABVE em todos os anos de 2016 a 2025 (razão de 4,1 em 2016 a 1,05 em 2024; 1,14
+em 2025) e fica abaixo do teto da banda (razão de 0,15 a 0,44). Três causas
+possíveis, nenhuma separável aqui: a ABVE só está registrada desde 2016 (as
+vendas anteriores somem do acumulado, o que explica sobretudo 2016-2018); a
+frota inclui motos, ônibus e caminhões elétricos que a ABVE "leves" não conta;
+e importação independente ou rótulo trocado. A §1.2 pedia registrar; está
+registrado.
+
+### Q-E6. Preços de combustíveis: início em 2004-05 e mistura de arquivos
+
+- A série por posto começa em **2004-05** (o arquivo do primeiro semestre de 2004
+  só tem maio e junho). A síntese mensal da ANP tem 2001-07 a 2003-12. Decisão:
+  deixar 2003 e 2004-01..04 vazios (como está) ou completar com a síntese,
+  declarando a mudança de fonte.
+- Os meses de 2026-07 em diante vêm dos arquivos mensais (`dsan`), porque o
+  semestre 2026-2 ainda não foi publicado; quando for, a coleta o baixa e os
+  mensais saem (regra em `src/coleta/anp_precos.py`).
+- O preço real está em R$ de 2026-08, último mês do IPCA em `macro_mensal`; os
+  meses seguintes ficam sem preço real. Estender o IPCA é atualizar a etapa 8.
+
+### Q-E7. SEEG: coleção e métrica
+
+O produto é da coleção **14.0** (9/11/2026), em CO2e pelo GWP-AR5. A próxima
+coleção recalcula a série inteira: atualizar é decisão, não rotina. A tabela
+municipal do SEEG (Google Drive) não foi baixada.
+
+---
+
 ## O que continua aberto
 
 1. **Adjudicação de `regras.csv`** — por decisão da Parte 0, para quando o

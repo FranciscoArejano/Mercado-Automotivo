@@ -233,3 +233,5 @@ POPULACAO_IBGE = DIR_BRUTO / "ibge" / "populacao_uf_2025.json"
 EMISSOES_UF_ANUAL = DIR_PROCESSADO / "emissoes_uf_anual.parquet"
 EMISSOES_VALIDACAO = DIR_SAIDAS / "emissoes_uf_anual_validacao.csv"
 EMISSOES_DICIONARIO = DIR_SAIDAS / "emissoes_uf_anual_dicionario.md"
+ANP_MUNICIPIOS = DIR_CONFIG / "anp_municipios.csv"
+IPCA_BASE_PRECOS = os.environ.get("IPCA_BASE_PRECOS", "2026-08")

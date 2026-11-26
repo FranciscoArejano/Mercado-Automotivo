@@ -1,0 +1,7 @@
+conferencia,casos,falhas,observacao
+"preco medio por UF e mes contra a sintese mensal da ANP: diferenca acima de 1% (registrada, nao e' falha)",23688,0,8012 casos acima de 1% (33.8%); mediana da |diferenca| 0.60%
+"chave unica (mes, UF, produto)",23681,0,
+"chave unica (mes, municipio, produto)",378808,0,
+preco positivo,23681,0,
+"meses sem nenhuma coleta, por produto (lacuna, nao preenchida)",270,0,"gasolina_comum: 2020-09 (1); etanol_hidratado: 2020-09 (1); diesel_s10: 2004-05, 2004-06, 2004-07, 2004-08, 2004-09, 2004-10, 2004-11, 2004-12, 2005-01, 2005-02, 2005-03, 2005-04 ... (104); gnv: 2020-09 (1)"
+unidades de medida no bruto,3,0,R$ / litro; R$ / m³; R$ / m3

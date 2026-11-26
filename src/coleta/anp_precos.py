@@ -97,7 +97,10 @@ def _texto_csv(conteudo: bytes) -> str:
 
 
 def _csvs(caminho: Path) -> list[bytes]:
-    if caminho.suffix.lower() == ".zip":
+    # zip pelos bytes iniciais, nao pela extensao: ca-2014-01.csv e' um zip com nome de csv
+    with caminho.open("rb") as fluxo:
+        zipado = fluxo.read(2) == b"PK"
+    if zipado:
         with zipfile.ZipFile(caminho) as z:
             return [z.read(n) for n in sorted(z.namelist()) if n.lower().endswith(".csv")]
     return [caminho.read_bytes()]

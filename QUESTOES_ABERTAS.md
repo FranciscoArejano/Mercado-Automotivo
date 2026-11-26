@@ -1109,6 +1109,14 @@ registrado.
 - Os meses de 2026-07 em diante vêm dos arquivos mensais (`dsan`), porque o
   semestre 2026-2 ainda não foi publicado; quando for, a coleta o baixa e os
   mensais saem (regra em `src/coleta/anp_precos.py`).
+- **A síntese da ANP não se reproduz.** O número de coletas do bruto bate
+  exatamente com o "número de postos pesquisados" da síntese (que conta posto ×
+  semana), mas o preço médio difere em mais de 1% em 34% dos casos (UF × mês ×
+  produto), com mediana de 0,6% e o nosso quase sempre acima. Testei, num
+  semestre, a média das semanas, a dos municípios e a mediana: nenhuma chega
+  mais perto que a média simples das coletas, que ficou no produto. A síntese de
+  2014-08 traz o GNV duplicado em sete UFs. Decisão possível: usar a síntese como
+  preço por UF (perde-se o município e a reprodução a partir do bruto) ou manter.
 - O preço real está em R$ de 2026-08, último mês do IPCA em `macro_mensal`; os
   meses seguintes ficam sem preço real. Estender o IPCA é atualizar a etapa 8.
 

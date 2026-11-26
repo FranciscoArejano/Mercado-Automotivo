@@ -74,7 +74,8 @@ def preparar(quadro: pd.DataFrame, chave: str) -> pd.DataFrame:
     return pd.DataFrame({
         "mes": data.dt.strftime("%Y-%m"), "uf": quadro["Estado - Sigla"].str.strip(),
         "municipio_fonte": quadro["Municipio"].str.strip(),
-        "cnpj": quadro["CNPJ da Revenda"].str.strip(),
+        # so' os digitos: o CNPJ perde a pontuacao em 2025 (04431113000100)
+        "cnpj": quadro["CNPJ da Revenda"].str.replace(r"\D", "", regex=True),
         "produto": quadro["Produto"].map(PRODUTOS), "preco": preco,
         "unidade_fonte": quadro["Unidade de Medida"].str.strip(), "arquivo_fonte": chave})
 
@@ -255,9 +256,13 @@ def escrever_dicionario(uf, municipio, comparacao) -> None:
          "houve pesquisa de 18/8/2020 a 17/10/2020). Municipio fora da amostra nao tem linha.",
          "**Diesel S10 so' existe a partir de 2012-2013** no bruto; o diesel comum (S500) nao "
          "entra no recorte.",
-         "**Media de coletas, nao de postos:** posto com mais coletas no mes pesa mais. A sintese "
-         f"da ANP difere em mais de 1% em {len(acima)} de {len(comparacao)} casos (UF x mes x "
-         "produto); a tabela de diferencas esta' em "
+         "**Media de coletas, nao de postos:** posto com mais coletas no mes pesa mais. O numero "
+         "de coletas bate com o 'numero de postos pesquisados' da sintese da ANP (que conta posto "
+         "x semana), mas o preco medio da sintese nao e' reproduzivel: difere em mais de 1% em "
+         f"{len(acima)} de {len(comparacao)} casos (UF x mes x produto), com mediana da diferenca "
+         f"de {100 * comparacao['diferenca_relativa'].abs().median():.2f}% e o nosso quase sempre "
+         "acima. Testadas num semestre (2019-01), a media das semanas, a dos municipios e a "
+         "mediana ficam iguais ou mais longe. Diferencas em "
          "`saidas/precos_combustiveis_conferencia_sintese.csv`.",
          f"**Preco real em R$ de {config.IPCA_BASE_PRECOS}** (ultimo mes do IPCA em "
          "`macro_mensal`); os meses posteriores ficam com `preco_real` vazio."],

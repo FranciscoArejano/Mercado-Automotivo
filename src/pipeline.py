@@ -49,6 +49,9 @@ ETAPAS = [
     (15, "etapa15_fator_sin", "fator medio de emissao do SIN (MCTI)"),
     (16, "etapa16_emissoes", "emissoes por UF, setor e gas (SEEG)"),
     (17, "etapa17_frota", "frota de veiculos por municipio (Senatran)"),
+    (18, "etapa18_precos", "precos de combustiveis por UF e municipio (ANP)"),
+    # o uso-teste le as quatro bases, o painel e a banda de eletrificacao (etapa 11)
+    (19, "etapa19_energia_uso_teste", "uso-teste das bases de energia"),
     (6, "etapa06_validacao", "validacao"),
     (7, "etapa07_referencia_cruzada", "referencia cruzada"),
     # O catalogo descreve o que as outras produziram: vem por ultimo.

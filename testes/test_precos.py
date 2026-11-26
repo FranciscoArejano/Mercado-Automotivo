@@ -22,7 +22,7 @@ def test_le_latin1_sem_bom_e_utf8_com_bom(tmp_path):
 
 def test_agregar_media_de_coletas_e_postos_distintos():
     q = pd.DataFrame({"Estado - Sigla": ["SP"] * 3, "Municipio": ["X"] * 3,
-                      "CNPJ da Revenda": ["a", "a", "b"], "Produto": ["ETANOL"] * 3,
+                      "CNPJ da Revenda": [" 00.231.792/0001-05", "00231792000105", " 05.397.086/0001-51"], "Produto": ["ETANOL"] * 3,
                       "Data da Coleta": ["01/01/2024", "08/01/2024", "01/01/2024"],
                       "Valor de Venda": ["3,00", "4,00", "5,00"],
                       "Unidade de Medida": ["R$ / litro"] * 3})

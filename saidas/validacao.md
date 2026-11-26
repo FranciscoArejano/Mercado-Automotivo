@@ -1,8 +1,8 @@
 # Validacao do painel de vendas de veiculos 0 km
 
-**Commit: `d6c7669`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
+**Commit: `363e3f4`.** Os numeros deste relatorio saem desse commit, e sao conferiveis nele sem reprocessar os informes (ESPEC sec.10.3).
 
-Gerado em 2026-10-07T00:30:14+00:00 (UTC) por `src/etapa06_validacao.py`.
+Gerado em 2026-11-26T04:53:09+00:00 (UTC) por `src/etapa06_validacao.py`.
 
 - Periodo: **2003-01 a 2026-08** (284 meses)
 - Linhas: painel bruto 54,183 / painel 54,179 / visao por modelo 53,700
@@ -1088,6 +1088,63 @@ Tabela **separada**: `classificacao_origem.parquet` (vigencia x periodo x pais d
 | registro, nao falha: divergencias ao rascunho (origem derivada difere da atual; fonte contradiz a proposta): fonte_contradiz_proposta 15, origem_derivada_difere_da_atual 34                                                                                       |      49 |        0 |
 | registro, nao falha: fabricas sem pagina guardada: nissan_sjp, mahindra_manaus, ar_toyota, ar_ford, ar_vw, ar_fiat, ar_gm, ar_psa, ar_renault, ar_nissan, ar_mb, ar_honda, mx_audi, mx_bmw, mx_chrysler, mx_ford, mx_gm, mx_honda, mx_kia, mx_mb, mx_nissan, mx_vw |      55 |        0 |
 
-## 16. Situacao
+## 16. Energia, frota e emissoes (rodada 13)
+
+Tabelas **separadas**, cada uma do seu bruto em `dados/bruto/<fonte>/`; juntam ao painel so' na analise, por mes, UF ou municipio.
+
+### Fator medio de emissao do SIN (MCTI)
+
+`dados/processado/fator_emissao_sin_mensal.parquet`.
+
+| conferencia                                                                                                 |   casos |   falhas | observacao   |
+|:------------------------------------------------------------------------------------------------------------|--------:|---------:|:-------------|
+| meses faltando entre 2006-01 e 2026-10                                                                      |     250 |        0 | nenhum       |
+| fator fora de (0, 1) tCO2/MWh                                                                               |     250 |        0 |              |
+| ano completo com fator anual publicado                                                                      |      20 |        0 |              |
+| media simples dos 12 meses contra o fator anual publicado: diferenca acima de 1% (registrada, nao e' falha) |      20 |        0 | nenhuma      |
+
+### Emissoes por UF (SEEG)
+
+`dados/processado/emissoes_uf_anual.parquet`.
+
+| conferencia                                                                                                                            |   casos |   falhas | observacao                                                   |
+|:---------------------------------------------------------------------------------------------------------------------------------------|--------:|---------:|:-------------------------------------------------------------|
+| total Brasil do SEEG (tabela dinamica 'Consulta Série Histórica', Emissão, CO2e GWP-AR5) = soma das UFs + nao alocado, por setor e ano |     138 |        0 | tolerancia relativa 1e-06; maior diferenca relativa 3.17e-15 |
+| 27 UFs presentes                                                                                                                       |      27 |        0 |                                                              |
+| chave unica (tipo, estado, ano, setor, categoria, subcategoria, produto, gas)                                                          |  552713 |        0 |                                                              |
+
+### Frota municipal (Senatran)
+
+`dados/processado/frota_municipal.parquet`.
+
+| conferencia                                                                                                                                      |    casos |   falhas | observacao                                                                                    |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------|---------:|---------:|:----------------------------------------------------------------------------------------------|
+| soma dos municipios (mais os 'MUNICIPIO NAO INFORMADO' da UF) = total da UF na planilha UF x tipo (mes x UF; diferenca registrada, nao e' falha) |     2646 |        0 | 27 casos com diferenca; maior |diferenca| 31700698; meses sem planilha de UF legivel: 2017-12 |
+| soma das UFs = Brasil, na planilha UF x tipo                                                                                                     |       98 |        0 | 0 meses com diferenca; maior |diferenca| 0                                                    |
+| soma dos municipios (mais os nao informados) = total Brasil impresso na planilha municipio x tipo                                                |       96 |        0 | 0 meses com diferenca                                                                         |
+| linha do municipio: coluna TOTAL = soma dos tipos                                                                                                |       99 |        0 | 0 linhas com diferenca no conjunto                                                            |
+| recorte por combustivel contra recorte por tipo, por UF e mes (diferenca relativa acima de 0,5%; registrada)                                     |     2268 |        0 | 27 casos acima de 0,5%; maior 900.00%                                                         |
+| recorte combustivel fora de escala (total nacional mais de 10% longe do recorte tipo): linhas com alerta_fonte, valor da fonte mantido           |        1 |        0 | 2021-11                                                                                       |
+| mes declarado no titulo da planilha diferente do mes do arquivo (registrado, nao corrigido)                                                      |        1 |        0 | 2003-12 uf_tipo: titulo diz 2003-11                                                           |
+| planilha UF x tipo ilegivel (so' a conferencia fica sem ela)                                                                                     |        0 |        0 | nenhuma                                                                                       |
+| tracos (formato contabil) lidos como zero na planilha municipio x tipo                                                                           |        0 |        0 |                                                                                               |
+| chave unica (mes, municipio, recorte, tipo, combustivel)                                                                                         | 11306332 |        0 |                                                                                               |
+
+### Precos de combustiveis (ANP)
+
+`dados/processado/precos_combustiveis_mensal.parquet`.
+
+| conferencia                                                                                               |   casos |   falhas | observacao                                                                                                                                                                                                     |
+|:----------------------------------------------------------------------------------------------------------|--------:|---------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| preco medio por UF e mes contra a sintese mensal da ANP: diferenca acima de 1% (registrada, nao e' falha) |   23688 |        0 | 8012 casos acima de 1% (33.8%); mediana da |diferenca| 0.60%                                                                                                                                                   |
+| chave unica (mes, UF, produto)                                                                            |   23681 |        0 |                                                                                                                                                                                                                |
+| chave unica (mes, municipio, produto)                                                                     |  378808 |        0 |                                                                                                                                                                                                                |
+| preco positivo                                                                                            |   23681 |        0 |                                                                                                                                                                                                                |
+| meses sem nenhuma coleta, por produto (lacuna, nao preenchida)                                            |     270 |        0 | gasolina_comum: 2020-09 (1); etanol_hidratado: 2020-09 (1); diesel_s10: 2004-05, 2004-06, 2004-07, 2004-08, 2004-09, 2004-10, 2004-11, 2004-12, 2005-01, 2005-02, 2005-03, 2005-04 ... (104); gnv: 2020-09 (1) |
+| unidades de medida no bruto                                                                               |       3 |        0 | R$ / litro; R$ / m³; R$ / m3                                                                                                                                                                                   |
+
+Geracao distribuida e tarifas de energia (ANEEL): **nao construidas** -- o dominio da ANEEL bloqueou o acesso nesta rodada (`dados/bruto/acesso_fontes_energia.csv`).
+
+## 17. Situacao
 
 Todas as verificacoes obrigatorias passaram.

@@ -1120,6 +1120,17 @@ registrado.
 - O preço real está em R$ de 2026-08, último mês do IPCA em `macro_mensal`; os
   meses seguintes ficam sem preço real. Estender o IPCA é atualizar a etapa 8.
 
+### Q-E8. O conjunto derivado passou de 50 MB (ESPEC §10.2)
+
+`dados/processado/` tem 67 MB depois da rodada 13 (era ~16 MB):
+`frota_municipal.parquet` 35,7 MB, `precos_combustiveis_municipal_mensal.parquet`
+9,4 MB, `emissoes_uf_anual.parquet` 3,7 MB. A §10.2 manda reportar e pedir decisão
+em vez de voltar a ignorar: os arquivos **continuam versionados**, cada um abaixo
+de 50 MB. Opções: (a) manter como está; (b) dividir a frota por ano (o maior
+arquivo cai para ~4 MB, a soma não muda); (c) guardar só a frota de dezembro
+antes de 2020 e um subconjunto de tipos. O bruto da rodada, à parte, soma 514 MB
+no git (215 MB da Senatran, 286 MB da ANP, 13 MB do SEEG).
+
 ### Q-E7. SEEG: coleção e métrica
 
 O produto é da coleção **14.0** (9/11/2026), em CO2e pelo GWP-AR5. A próxima

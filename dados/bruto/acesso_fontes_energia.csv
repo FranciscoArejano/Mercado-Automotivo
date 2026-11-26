@@ -15,3 +15,15 @@ data_teste,fonte,metodo,url,resultado,bytes,observacao
 2026-11-26T01:35:45+00:00,seeg,GET,https://plataforma.seeg.eco.br/,HTTP 200,3481,
 2026-11-26T01:37:16+00:00,seeg,POST,https://api.plataforma.seeg.eco.br/graphql,erro de conexao,0,"ReadTimeout: HTTPSConnectionPool(host='api.plataforma.seeg.eco.br', port=443): Read timed out. (read timeout=90)"
 2026-11-26T01:37:17+00:00,mcti_fator,GET,https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/sirene/dados-e-ferramentas/fatores-de-emissao,HTTP 200,220896,
+2026-11-26T04:44:36+00:00,aneel_gd,GET,https://dadosabertos.aneel.gov.br/api/3/action/package_show?id=relacao-de-empreendimentos-de-geracao-distribuida,erro de conexao,0,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+2026-11-26T04:44:37+00:00,aneel_gd,GET,https://www.aneel.gov.br/,HTTP 403,5662,"bloqueio do Cloudflare ('Sorry, you have been blocked')"
+2026-11-26T04:44:47+00:00,aneel_tarifas,GET,https://dadosabertos.aneel.gov.br/api/3/action/package_show?id=tarifas-distribuidoras-energia-eletrica,erro de conexao,0,"ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+2026-11-26T04:44:48+00:00,aneel_tarifas,GET,https://portalrelatorios.aneel.gov.br/,HTTP 403,5662,"bloqueio do Cloudflare ('Sorry, you have been blocked')"
+2026-11-26T04:44:50+00:00,senatran_frota,GET,https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-Senatran/estatisticas-frota-de-veiculos-senatran,HTTP 200,304393,
+2026-11-26T04:44:51+00:00,anp_precos,GET,https://www.gov.br/anp/pt-br/centrais-de-conteudo/dados-abertos/serie-historica-de-precos-de-combustiveis,HTTP 200,355062,
+2026-11-26T04:44:52+00:00,anp_precos,GET,https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/precos-revenda-e-de-distribuicao-combustiveis/serie-historica-do-levantamento-de-precos,HTTP 200,302438,
+2026-11-26T04:44:53+00:00,seeg,GET,https://seeg.eco.br/dados/,HTTP 200,70317,
+2026-11-26T04:44:54+00:00,seeg,HEAD,https://seeg.obass.haus/wp-content/uploads/2026/11/Dados-nacionais-14.0.xlsx,HTTP 200,0,
+2026-11-26T04:44:56+00:00,seeg,GET,https://plataforma.seeg.eco.br/,HTTP 200,3481,
+2026-11-26T04:46:28+00:00,seeg,POST,https://api.plataforma.seeg.eco.br/graphql,erro de conexao,0,"ReadTimeout: HTTPSConnectionPool(host='api.plataforma.seeg.eco.br', port=443): Read timed out. (read timeout=90)"
+2026-11-26T04:46:30+00:00,mcti_fator,GET,https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/sirene/dados-e-ferramentas/fatores-de-emissao,HTTP 200,220225,

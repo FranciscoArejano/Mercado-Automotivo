@@ -162,3 +162,91 @@ abaixo de 50 MB, no git como vieram. Produto: 11.306.332 linhas, 5.571 municípi
 - recorte combustível contra recorte tipo: 27 casos acima de 0,5%, **todos de
   2021-11**, o mês em que a fonte vem ×10 (Q-E4). As linhas levam
   `alerta_fonte`; o valor não mudou.
+
+## Parte 6 — preços de combustíveis (ANP), etapa 18
+
+**Bruto.** 45 semestres por posto (2004-1 a 2026-1; o 2022-1 só existe em
+`precos-semestrais-ca.zip`, listado à parte na página), os quatro meses de
+2026-07 a 2026-10 dos arquivos mensais (o semestre 2026-2 ainda não saiu) e as
+duas sínteses mensais por estado. 3,8 GB de originais; 33 acima de 50 MB ficaram
+fora do git, com reduzido em parquet (55 MB no total, de 1,9 a 2,2 MB por
+semestre); 22 no git como vieram (244 MB). No repositório: 286 MB.
+
+**Erros e achados, na ordem:**
+
+1. **O servidor corta a conexão a cada poucos MB.** A primeira coleta morreu no
+   segundo arquivo (158 MB) depois de quatro tentativas inteiras. Passei a baixar
+   em blocos, retomando por `Range`, e a só contar como tentativa a que não traz
+   nenhum byte. A 0,8 MB/s por conexão, os 42 arquivos restantes levariam ~4 h:
+   passei a três downloads simultâneos, com trava no manifesto.
+2. **Um `KeyError` meu** (o manifesto não tinha a coluna do reduzido para
+   original grande recém-registrado) parou a coleta uma vez; corrigido e retomado
+   sem rebaixar nada.
+3. **Codificação:** com BOM é UTF-8, sem BOM é Latin-1 (2021-2 é Latin-1).
+4. **`ca-2014-01.csv` é um zip** com nome de csv. O leitor passou a reconhecer
+   zip pelos bytes iniciais.
+5. **O CNPJ perde a pontuação em 2025**; os postos são contados pelos dígitos.
+6. **A série começa em 2004-05**, não em 2004-01: o primeiro semestre só tem maio
+   e junho. Diesel S10 começa em 2012-12. Sem coleta em 2020-09 (a ANP avisa que
+   não houve pesquisa de 18/8 a 17/10/2020): lacuna, não preenchida.
+7. Dois municípios fora da tipografia do IBGE (`config/anp_municipios.csv`).
+
+**Produto:** 18,9 milhões de coletas; 23.681 linhas UF × mês × produto e 378.808
+município × mês × produto. Preço real em R$ de 2026-08 pelo IPCA de
+`macro_mensal` (que vai até 2026-08; os dois meses seguintes ficam sem preço
+real).
+
+**Conferência contra a síntese da ANP:** o número de coletas do bruto é
+exatamente o "número de postos pesquisados" da síntese (razão mediana 1,00 em
+todos os anos: a síntese conta posto × semana). O preço médio, não: 34% dos
+casos acima de 1%, mediana 0,6%, o nosso quase sempre acima. Testei num
+semestre a média das semanas, a dos municípios e a mediana, e nenhuma chega
+mais perto. Ficou a média simples das coletas, com a diferença registrada
+(Q-E6). A síntese de 2014-08 traz o GNV duplicado em sete UFs.
+
+## Parte 7 — uso-teste (`saidas/uso_teste_energia_*.csv`)
+
+1. **Frota contra vendas** (Brasil, 2012-2025). A frota eletrificada da Senatran
+   (elétrico + híbrido + plug-in, todos os tipos) vai de 1.689 (2013) a 708.517
+   (2025); a elétrica pura, de 894 a 199.075. Ela fica **acima das vendas
+   acumuladas da ABVE em todos os anos de 2016 a 2025** (razão de 4,1 em 2016,
+   1,05 a 1,17 de 2019 a 2025) e **abaixo do teto da banda** (0,15 a 0,44). A
+   §1.2 pedia "frota elétrica ≤ vendas acumuladas de elétricos": não há venda de
+   elétrico puro separada no repositório, então comparei eletrificada com
+   eletrificada; a passagem sobre a ABVE está registrada com as três causas
+   possíveis (Q-E5). 2012 fica vazio: não há combustível na Senatran antes de
+   2013-12, e a banda só começa em 2015.
+2. **Paridade etanol/gasolina abaixo de 0,7.** Nenhuma UF ficou abaixo em 90%
+   dos meses (o limiar que usei para "quase sempre"): as mais frequentes são
+   **MT (82%), SP (78%) e GO (73%)**, seguidas de PR (59%) e MG (46%). Em PA, PI e
+   AP o etanol nunca foi vantajoso pela regra dos 70%. No tempo: vantajoso na
+   maior parte do Centro-Sul de 2004 a 2009 (com 2006 fraco em MG e RS); em MG, PR e RJ some de 2011 a 2014
+   (SP, GO e MT resistem); cai em toda parte em 2016-2017 e quase desaparece em
+   2021-2022; volta em 2024 no Centro-Sul. As mudanças coincidem com os ciclos
+   conhecidos de preço do etanol, sem degrau sem evento.
+3. **Solar e elétricos por UF, 2025.** Sem a ANEEL, as colunas de GD solar e de
+   tarifa ficam vazias, e a tabela foi ordenada pela frota elétrica por mil
+   habitantes (não pela potência solar, como pedido). DF (5,9) lidera com folga,
+   seguido de SC, PR, SP e RS (1,2 a 1,4); PA (0,24), MA e AC no fim. Gasolina
+   real em 2025: de R$ 6,19 (PI) a R$ 8,02 (AC). População: IBGE, SIDRA 6579,
+   estimativa de 2025.
+4. **Transporte rodoviário nas emissões brutas** (CO2e GWP-AR5): Brasil 4,7%
+   (2005), 8,7% (2015), 10,1% (2025) — sobe porque o desmatamento cai. Nas UFs
+   sem fronteira agrícola grande o peso é outro: DF 34%, SP 27%, SC 25%, PR 23%
+   em 2025; no Norte (salvo o Amapá, 15,6%) e em MT e MS, de 1,3% a 5,4%. Nada
+   muda de patamar sem evento: as séries conversam entre si.
+
+## Parte 8 — o que ficou em aberto
+
+- **Geração distribuída e tarifas de energia não foram construídas**: a ANEEL
+  bloqueou o acesso em todas as tentativas (01:20 a 04:45 UTC). Q-E1 traz as três
+  saídas; a mais barata é repetir o teste noutra sessão.
+- As decisões do pesquisador estão em `QUESTOES_ABERTAS.md`, Q-E1 a Q-E8:
+  ANEEL; frota sem cruzamento tipo × combustível; rótulos ambíguos; defeitos da
+  fonte na Senatran (2021-11 ×10, UF de 2024-02); frota acima da ABVE; início
+  dos preços e síntese não reproduzível; coleção do SEEG; e o conjunto derivado
+  acima de 50 MB (ESPEC §10.2).
+- Não usados, mas existentes: idade e marca/modelo da frota, tabela municipal
+  do SEEG, fator de margem de operação do MCTI.
+- Dependências de sistema novas (README): `mdbtools` e `bsdtar`; e
+  `xlrd`/`python-calamine` em `requirements.txt`.

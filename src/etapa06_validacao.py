@@ -1392,7 +1392,7 @@ def executar() -> int:  # noqa: C901 -- relatorio longo por natureza
             ("Precos de combustiveis (ANP)", config.PRECOS_COMBUSTIVEIS,
              config.PRECOS_VALIDACAO, "etapa18_precos")):
         if validacao_csv.exists() and produto.exists():
-            conferencias = pd.read_csv(validacao_csv)
+            conferencias = pd.read_csv(validacao_csv).fillna("")
             partes.append(f"\n### {titulo}\n\n`{log.caminho_relativo(produto)}`.\n\n"
                           + _tabela(conferencias))
             if int(conferencias["falhas"].sum()):

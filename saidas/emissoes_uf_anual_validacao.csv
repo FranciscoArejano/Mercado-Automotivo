@@ -1,0 +1,4 @@
+conferencia,casos,falhas,observacao
+"total Brasil do SEEG (tabela dinamica 'Consulta Série Histórica', Emissão, CO2e GWP-AR5) = soma das UFs + nao alocado, por setor e ano",138,0,tolerancia relativa 1e-06; maior diferenca relativa 3.17e-15
+27 UFs presentes,27,0,
+"chave unica (tipo, estado, ano, setor, categoria, subcategoria, produto, gas)",552713,0,

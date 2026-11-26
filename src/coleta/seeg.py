@@ -97,6 +97,11 @@ def ler_serie_historica(caminho: Path) -> pa.Table:
     return pa.table(colunas)
 
 
+def redutores() -> dict:
+    """Chave do manifesto -> funcao que refaz o reduzido a partir do original."""
+    return {NOME: ler_dados, f"{NOME}#{ABA_SERIE}": ler_serie_historica}
+
+
 def reduzir(manifesto: dict) -> None:
     original = cc.caminho_do_original(FONTE, manifesto[NOME])
     if cc.sha256_arquivo(original) != manifesto[NOME]["sha256"]:

@@ -121,18 +121,23 @@ def registrar(fonte: str, manifesto: dict[str, dict], nome: str, url: str, conte
 
 
 def caminho_do_original(fonte: str, linha: dict) -> Path:
+    """`arquivo#parte` (uma aba de um original) aponta para o proprio original."""
     base = dir_fonte(fonte)
-    return base / linha["arquivo"] if linha["no_git"] == "sim" else (
-        base / "fora_do_git" / linha["arquivo"])
+    nome = linha["arquivo"].split("#", 1)[0]
+    return base / nome if linha["no_git"] == "sim" else base / "fora_do_git" / nome
 
 
-def gravar_reduzido(tabela: pa.Table, caminho: Path) -> bytes:
-    """Parquet deterministico (zstd, sem metadado de pandas)."""
+def bytes_parquet(tabela: pa.Table) -> bytes:
+    """Parquet deterministico (zstd, sem metadado de pandas): mesma tabela, mesmos bytes."""
     tabela = tabela.replace_schema_metadata(None)
     buffer = io.BytesIO()
     pq.write_table(tabela, buffer, compression="zstd", compression_level=9,
                    use_dictionary=True, write_statistics=False)
-    conteudo = buffer.getvalue()
+    return buffer.getvalue()
+
+
+def gravar_reduzido(tabela: pa.Table, caminho: Path) -> bytes:
+    conteudo = bytes_parquet(tabela)
     if len(conteudo) > config.LIMITE_GIT_BYTES:
         raise RuntimeError(f"{caminho.name}: reduzido com {len(conteudo)} bytes, acima de "
                            "50 MB; divida por ano")

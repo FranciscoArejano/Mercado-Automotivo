@@ -29,3 +29,8 @@ __pycache__/
 #
 # `logs/` continua ignorado: e' ruido de execucao, nao produto.
 logs/
+
+# Rodada 13: original acima de 50 MB fica fora do git; o git guarda o bruto
+# reduzido em parquet (dados/bruto/<fonte>/reduzido/) e o manifesto guarda URL,
+# data, tamanho e SHA-256 do original e do reduzido. Sem Git LFS.
+dados/bruto/*/fora_do_git/

@@ -208,3 +208,25 @@ SUSPEITO_MESES_MAXIMO = int(os.environ.get("SUSPEITO_MESES_MAXIMO", "2"))
 
 # ------------------------------------------------------------------- geral
 SEMENTE = 20240101
+
+# ---------------------------------------------- energia, frota e emissoes (rodada 13)
+# Bruto por fonte em dados/bruto/<fonte>/, com manifesto proprio. Arquivo acima de
+# LIMITE_GIT_BYTES fica fora do git (em <fonte>/fora_do_git/, no .gitignore) e entra
+# no git como bruto reduzido em parquet (<fonte>/reduzido/), decisao do pesquisador.
+LIMITE_GIT_BYTES = 50 * 1024 * 1024
+FONTES_ENERGIA = ("aneel_gd", "senatran_frota", "anp_precos", "aneel_tarifas", "seeg",
+                  "mcti_fator")
+ACESSO_FONTES_ENERGIA = DIR_BRUTO / "acesso_fontes_energia.csv"
+FROTA_ROTULOS = DIR_CONFIG / "frota_rotulos.csv"
+FROTA_MUNICIPIOS = DIR_CONFIG / "frota_municipios.csv"
+FROTA_MUNICIPAL = DIR_PROCESSADO / "frota_municipal.parquet"
+FROTA_VALIDACAO = DIR_SAIDAS / "frota_validacao.csv"
+FROTA_DICIONARIO = DIR_SAIDAS / "frota_municipal_dicionario.md"
+PRECOS_COMBUSTIVEIS = DIR_PROCESSADO / "precos_combustiveis_mensal.parquet"
+PRECOS_COMBUSTIVEIS_MUNICIPAL = DIR_PROCESSADO / "precos_combustiveis_municipal_mensal.parquet"
+PRECOS_VALIDACAO = DIR_SAIDAS / "precos_combustiveis_validacao.csv"
+PRECOS_DICIONARIO = DIR_SAIDAS / "precos_combustiveis_mensal_dicionario.md"
+FATOR_SIN = DIR_PROCESSADO / "fator_emissao_sin_mensal.parquet"
+FATOR_SIN_VALIDACAO = DIR_SAIDAS / "fator_emissao_sin_validacao.csv"
+FATOR_SIN_DICIONARIO = DIR_SAIDAS / "fator_emissao_sin_mensal_dicionario.md"
+POPULACAO_IBGE = DIR_BRUTO / "ibge" / "populacao_uf_2025.json"

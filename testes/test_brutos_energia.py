@@ -10,6 +10,7 @@ Para cada fonte com manifesto:
   original e o produto se reproduz a partir do que esta' no git).
 """
 
+import os
 import subprocess
 
 import pytest
@@ -55,13 +56,27 @@ def test_bruto_guardado_bate_com_o_manifesto(fonte, chave, linha):
         assert cc.sha256_arquivo(reduzido) == linha["sha256_reduzido"]
 
 
-@pytest.mark.parametrize("fonte,chave,linha",
-                         [p for p in _linhas() if p.values[2]["no_git"] == "nao"])
-def test_reduzido_refeito_do_original_da_os_mesmos_bytes(fonte, chave, linha):
+def _amostra():
+    """Todos os reduzidos com TESTE_REDUZIDO_TODOS=1; senao, os dois primeiros de cada fonte
+    (refazer os ~40 da ANP leva ~20 minutos). O SHA-256 do original e' conferido em todos."""
+    todos = os.environ.get("TESTE_REDUZIDO_TODOS") == "1"
+    vistos: dict[str, int] = {}
+    for p in _linhas():
+        fonte, _, linha = p.values
+        if linha["no_git"] != "nao":
+            continue
+        vistos[fonte] = vistos.get(fonte, 0) + 1
+        yield pytest.param(*p.values, todos or vistos[fonte] <= 2, id=p.id)
+
+
+@pytest.mark.parametrize("fonte,chave,linha,refazer", list(_amostra()))
+def test_reduzido_refeito_do_original_da_os_mesmos_bytes(fonte, chave, linha, refazer):
     original = cc.caminho_do_original(fonte, linha)
     if not original.exists():
         pytest.skip("original fora do git e ausente nesta copia (baixe com src/coleta/)")
     assert cc.sha256_arquivo(original) == linha["sha256"]
+    if not refazer:
+        return
     refeito = cc.bytes_parquet(_redutores(fonte)[chave](original))
     assert cc.sha256_bytes(refeito) == linha["sha256_reduzido"]
 

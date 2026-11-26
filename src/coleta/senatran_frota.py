@@ -28,11 +28,13 @@ import sys
 from pathlib import Path
 
 import pandas as pd
+import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from coleta import comum_coleta as cc  # noqa: E402
 from coleta import senatran_inventario as inv  # noqa: E402
+from comum import config  # noqa: E402
 
 FONTE = "senatran_frota"
 PRIMEIRO_ANO_MENSAL = 2020
@@ -45,12 +47,26 @@ def no_recorte(ano: int, mes: int) -> bool:
     return ano >= PRIMEIRO_ANO_MENSAL or mes == 12
 
 
+def url_do_arquivo(caminho: str) -> str:
+    """O `resolveuid` leva a' pagina de visualizacao do arquivo (HTML), nao ao arquivo:
+    resolve-se o endereco e pede-se o `@@download/file` dele."""
+    if "resolveuid" not in caminho:
+        return inv.BASE + caminho + "/@@download/file"
+    final = requests.get(inv.BASE + caminho, headers={"User-Agent": config.USER_AGENT},
+                         timeout=120, allow_redirects=True).url
+    return final.rstrip("/") + "/@@download/file"
+
+
+def nao_e_html(conteudo: bytes, nome: str) -> None:
+    inicio = conteudo[:200].lstrip().lower()
+    if inicio.startswith(b"<!doctype html") or inicio.startswith(b"<html"):
+        raise RuntimeError(f"{nome}: o servidor devolveu uma pagina HTML, nao o arquivo")
+
+
 def inventario(ultimo_ano: int) -> pd.DataFrame:
     linhas = []
     for ano, caminho in inv.ZIPS_ANUAIS.items():
-        linhas.append({"ano": ano, "arquivo": f"frota{ano}.zip",
-                       "url": inv.BASE + caminho + ("" if "resolveuid" in caminho
-                                                    else "/@@download/file"),
+        linhas.append({"ano": ano, "arquivo": f"frota{ano}.zip", "url": url_do_arquivo(caminho),
                        "tipo": "zip_anual", "mes": 12, "copia": False})
     for ano in range(2013, ultimo_ano + 1):
         linhas += inv.links_do_ano(ano)
@@ -85,6 +101,7 @@ def main() -> int:
         if nome in manifesto and cc.caminho_do_original(FONTE, manifesto[nome]).exists():
             continue
         conteudo = cc.baixar(linha["url"])
+        nao_e_html(conteudo, nome)
         cc.registrar(FONTE, manifesto, nome, linha["url"], conteudo,
                      observacao=f"{linha['tipo']} {int(linha['ano'])}-{int(linha['mes']):02d}")
         print(f"{nome}: {len(conteudo)} bytes", flush=True)

@@ -44,6 +44,9 @@ ETAPAS = [
     (13, "etapa13_politicas", "calendario de politicas"),
     # A origem por pais le a classificacao, a montagem, o painel e, no uso-teste, o comex.
     (14, "etapa14_origem", "origem por pais e por fabrica"),
+    # Bases de energia, frota e emissoes (rodada 13): tabelas separadas, cada uma do seu
+    # bruto em dados/bruto/<fonte>/. A coleta (src/coleta/) nao entra no pipeline.
+    (15, "etapa15_fator_sin", "fator medio de emissao do SIN (MCTI)"),
     (6, "etapa06_validacao", "validacao"),
     (7, "etapa07_referencia_cruzada", "referencia cruzada"),
     # O catalogo descreve o que as outras produziram: vem por ultimo.

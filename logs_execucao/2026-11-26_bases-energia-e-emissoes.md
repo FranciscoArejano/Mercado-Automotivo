@@ -67,10 +67,10 @@ projeto continua bloqueado, e lá parei.
 - **Teste dos dois SHA-256** (`testes/test_brutos_energia.py`): todo arquivo no
   git bate com o manifesto; todo reduzido existe, tem até 50 MB e bate; quando o
   original está presente, o SHA-256 dele bate e refazer o reduzido dá os mesmos
-  bytes. Refazer os ~40 reduzidos da ANP leva ~20 minutos, então o padrão confere
-  o SHA-256 de todos os originais e refaz uma amostra fixa (os dois primeiros de
-  cada fonte); `TESTE_REDUZIDO_TODOS=1` refaz todos. Rodei com todos uma vez no
-  fechamento (resultado na Parte 6).
+  bytes. Eu estimei ~20 minutos para refazer todos e pus no padrão uma amostra
+  fixa (os dois primeiros de cada fonte, com o SHA-256 de todos os originais
+  conferido); `TESTE_REDUZIDO_TODOS=1` refaz todos. Na prática os 35 levam uns
+  5 minutos. Rodei com todos no fechamento (Parte 9).
 - Sem Git LFS.
 
 ## Parte 3 — fator de emissão do SIN (MCTI), etapa 15
@@ -250,3 +250,18 @@ mais perto. Ficou a média simples das coletas, com a diferença registrada
   do SEEG, fator de margem de operação do MCTI.
 - Dependências de sistema novas (README): `mdbtools` e `bsdtar`; e
   `xlrd`/`python-calamine` em `requirements.txt`.
+
+## Parte 9 — fechamento
+
+- `TESTE_REDUZIDO_TODOS=1 pytest testes`: os 35 reduzidos (33 da ANP, 2 do SEEG)
+  refeitos a partir do original dão o mesmo SHA-256 do manifesto; 809 testes
+  passaram e o único que falhou foi o do `CATALOGO.md` desatualizado, que é o
+  que o fechamento regera.
+- `validacao.md` e `CATALOGO.md` regerados sobre a árvore limpa (commit
+  `03c0e15`), com 0 falhas de validação; depois, `pytest testes`: **810 passados**.
+- `tags_pendentes.csv`: linha da `rodada-13` apontando para `03c0e15`. A tag em si
+  não foi empurrada (o push de tag é recusado neste ambiente, como nas rodadas
+  anteriores).
+- Commits da rodada, na ordem pedida: testes de acesso; brutos (MCTI, SEEG,
+  Senatran em dois blocos, ANP em dois blocos); um produto por commit (fator do
+  SIN, emissões, frota, preços); uso-teste; fechamento.
